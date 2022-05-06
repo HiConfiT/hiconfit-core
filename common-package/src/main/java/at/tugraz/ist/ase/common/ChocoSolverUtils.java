@@ -6,6 +6,8 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
+package at.tugraz.ist.ase.common;
+
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.chocosolver.solver.Model;

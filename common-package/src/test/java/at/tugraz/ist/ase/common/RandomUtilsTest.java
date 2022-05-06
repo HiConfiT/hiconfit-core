@@ -1,11 +1,12 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2021-2022
+ * Copyright (c) 2022
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
+package at.tugraz.ist.ase.common;import at.tugraz.ist.ase.common.RandomUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

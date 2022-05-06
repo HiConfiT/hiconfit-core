@@ -1,12 +1,12 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2021-2022
+ * Copyright (c) 2022
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-import lombok.Getter;
+package at.tugraz.ist.ase.common;import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;

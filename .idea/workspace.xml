@@ -4,30 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/ca_cdr_v2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/main/java/ChocoSolverUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/main/java/CmdLineOptionsBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/main/java/IOUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/main/java/LoggerUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/main/java/MailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/main/java/RandomUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/test/java/CmdLineOptionsBaseTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/test/java/IOUtilsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/test/java/RandomUtilsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/test/resources/FM_10_0_c5_0.testcases" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/src/test/resources/logback-test.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add csp2choco-package">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/CSP2ChocoTranslator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2Choco.g4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2Choco.interp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2Choco.tokens" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoBaseListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoBaseVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoLexer.interp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoLexer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoLexer.tokens" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoParser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoVisitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CommonLexer.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/ChocoSolverUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/ChocoSolverUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/CmdLineOptionsBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/CmdLineOptionsBase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/LoggerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/MailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/RandomUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/RandomUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/test/java/CmdLineOptionsBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/test/java/at/tugraz/ist/ase/common/CmdLineOptionsBaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/test/java/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/test/java/at/tugraz/ist/ase/common/IOUtilsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/test/java/RandomUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/test/java/at/tugraz/ist/ase/common/RandomUtilsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csp2choco/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,22 +72,44 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "temurin-17",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/common-package/src/test/resources",
+    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/common-package/src/test/java",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/csp2choco/src/main/java/at/tugraz/ist/ase/csp2choco/antlr",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "copyright"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/csp2choco/src/main/java/at/tugraz/ist/ase/csp2choco/antlr" />
       <recent name="$PROJECT_DIR$/common-package/src/test/resources" />
       <recent name="$PROJECT_DIR$/common-package/src/test/java" />
       <recent name="$PROJECT_DIR$/common-package/src/main/java" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.common" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
   </component>
-  <component name="RunManager">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn install" />
+    </option>
+  </component>
+  <component name="RunManager" selected="JUnit.All in common-package (1)">
+    <configuration name="All in common-package (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="common-package" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in common-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="common-package" />
       <option name="PACKAGE_NAME" value="" />
@@ -92,6 +120,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in common-package (1)" />
         <item itemvalue="JUnit.All in common-package" />
       </list>
     </recent_temporary>
@@ -104,12 +133,23 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651870068020</updated>
-      <workItem from="1651870069445" duration="1540000" />
+      <workItem from="1651870069445" duration="7027000" />
     </task>
+    <task id="LOCAL-00001" summary="First commit with common-package">
+      <created>1651871782693</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1651871782693</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UpdateCopyrightCheckinHandler">
+    <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -121,5 +161,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit with common-package" />
+    <MESSAGE value="Add csp2choco-package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add csp2choco-package" />
   </component>
 </project>

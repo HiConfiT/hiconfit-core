@@ -6,6 +6,9 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
+package at.tugraz.ist.ase.common;
+
+import at.tugraz.ist.ase.common.CmdLineOptionsBase;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

@@ -6,7 +6,7 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-import lombok.Getter;
+package at.tugraz.ist.ase.common;import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.kohsuke.args4j.CmdLineException;
