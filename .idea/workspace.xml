@@ -4,28 +4,29 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add KBStatistics">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/main/java/at/tugraz/ist/ase/kb/app/KBStatistics.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/main/java/at/tugraz/ist/ase/kb/app/cli/KBStatistics_CmdLineOptions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/main/resources/logback.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/java/at/tugraz/ist/ase/kb/app/KBStatisticsTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike.fm4conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike.gfm.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike.xmi" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike_featureide.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike_splot.sxfm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/smartwatch.sxfm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/ubuntu.splx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/logback-test.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/smartwatch.sxfm" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add FMGenerator">
+      <change afterPath="$PROJECT_DIR$/ca-cdr-package/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cdrmodel-package/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-package/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csp2choco-package/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/eval-package/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/fm-package/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-package/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FMFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FMFormat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +78,7 @@
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "temurin-17",
     "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/app-KBStatistics",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -86,16 +87,16 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "copyright"
+    "settings.editor.selected.configurable": "project.propGUI"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/app-KBStatistics" />
-      <recent name="$PROJECT_DIR$/app-KBStatistics/src/test/resources" />
-      <recent name="$PROJECT_DIR$/app-KBStatistics/src/main/resources" />
-      <recent name="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs" />
-      <recent name="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/ca-cdr-package" />
+      <recent name="$PROJECT_DIR$/cdrmodel-package" />
+      <recent name="$PROJECT_DIR$/chocokb-package" />
+      <recent name="$PROJECT_DIR$/eval-package" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="at.tugraz.ist.ase.fm.parser" />
@@ -103,11 +104,11 @@
       <recent name="at.tugraz.ist.ase.common" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.fm.app.cli" />
+      <recent name="at.tugraz.ist.ase.fm.app" />
       <recent name="at.tugraz.ist.ase.kb.app" />
       <recent name="at.tugraz.ist.ase.kb.app.cli" />
       <recent name="at.tugraz.ist.ase.cacdr.eval" />
-      <recent name="at.tugraz.ist.ase.cdrmodel.test.model" />
-      <recent name="at.tugraz.ist.ase.cdrmodel.test.csp" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -115,7 +116,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.All in app-KBStatistics">
+  <component name="RunManager" selected="JUnit.CSP2ChocoTranslatorTest">
     <configuration name="All in app-KBStatistics" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="app-KBStatistics" />
       <option name="PACKAGE_NAME" value="" />
@@ -140,10 +141,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in test-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test-package" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+    <configuration name="CSP2ChocoTranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="csp2choco-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.csp2choco.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.csp2choco" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslatorTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,11 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
         <item itemvalue="JUnit.All in app-KBStatistics" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
         <item itemvalue="JUnit.All in cdrmodel-package" />
         <item itemvalue="JUnit.All in chocokb-package" />
-        <item itemvalue="JUnit.All in test-package" />
       </list>
     </recent_temporary>
   </component>
@@ -180,7 +188,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651870068020</updated>
-      <workItem from="1651870069445" duration="17824000" />
+      <workItem from="1651870069445" duration="18613000" />
+      <workItem from="1651921499327" duration="650000" />
+      <workItem from="1651922163866" duration="130000" />
+      <workItem from="1651922305065" duration="51000" />
+      <workItem from="1651922365918" duration="105000" />
+      <workItem from="1651935367845" duration="3844000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -252,7 +265,21 @@
       <option name="project" value="LOCAL" />
       <updated>1651919474750</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add KBStatistics">
+      <created>1651920766918</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1651920766918</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Add FMGenerator">
+      <created>1651921106531</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1651921106531</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,6 +312,7 @@
     <MESSAGE value="Add crdmodel-package" />
     <MESSAGE value="Add ca-cdr-package" />
     <MESSAGE value="Add KBStatistics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add KBStatistics" />
+    <MESSAGE value="Add FMGenerator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add FMGenerator" />
   </component>
 </project>
