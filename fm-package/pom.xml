@@ -33,6 +33,7 @@
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>common-v2</artifactId>
             <version>1.2.5</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

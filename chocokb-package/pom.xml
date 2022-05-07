@@ -17,7 +17,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>chocokb-v2</artifactId>
+    <artifactId>choco-kb-v2</artifactId>
     <version>1.2.16</version>
     <packaging>jar</packaging>
 
@@ -33,12 +33,14 @@
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>fm-v2</artifactId>
             <version>1.2.10</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>eval-v2</artifactId>
             <version>1.2.9</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
