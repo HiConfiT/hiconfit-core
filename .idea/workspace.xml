@@ -4,49 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add crdmodel-package">
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiag.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/AbstractHSConstructor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Node.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/NodeStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Utils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/FastDiagV2Labeler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/FastDiagV3Labeler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/FlexDiagLabeler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/IHSLabelable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/QuickXPlainLabeler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/AbstractHSParameters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/FastDiagV2Parameters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/FastDiagV3Parameters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/FlexDiagParameters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/QuickXPlainParameters.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/IConsistencyChecker.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/eval/CAEvaluator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebugTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiagTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXplainTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAGTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTreeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/FM_10_0.splx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/FM_10_0.testcases" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/FM_10_1.splx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/FM_10_1.testcases" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/FM_10_2.splx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/FM_10_2.testcases" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/logback-test.xml" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add KBStatistics">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/main/java/at/tugraz/ist/ase/kb/app/KBStatistics.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/main/java/at/tugraz/ist/ase/kb/app/cli/KBStatistics_CmdLineOptions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/main/resources/logback.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/java/at/tugraz/ist/ase/kb/app/KBStatisticsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike.fm4conf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike.gfm.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike.xmi" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike_featureide.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/bamboobike_splot.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/smartwatch.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/fms/ubuntu.splx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/logback-test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app-KBStatistics/src/test/resources/smartwatch.sxfm" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FMFormat.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FMFormat.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,6 +47,11 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
     <option name="enabledProfiles">
       <list>
         <option value="maven" />
@@ -94,22 +77,25 @@
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "temurin-17",
     "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/app-KBStatistics",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
     "settings.editor.selected.configurable": "copyright"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/app-KBStatistics" />
+      <recent name="$PROJECT_DIR$/app-KBStatistics/src/test/resources" />
+      <recent name="$PROJECT_DIR$/app-KBStatistics/src/main/resources" />
       <recent name="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs" />
       <recent name="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms" />
-      <recent name="$PROJECT_DIR$/ca-cdr-package/src/test/resources" />
-      <recent name="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters" />
-      <recent name="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="at.tugraz.ist.ase.fm.parser" />
@@ -117,11 +103,11 @@
       <recent name="at.tugraz.ist.ase.common" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.kb.app" />
+      <recent name="at.tugraz.ist.ase.kb.app.cli" />
       <recent name="at.tugraz.ist.ase.cacdr.eval" />
       <recent name="at.tugraz.ist.ase.cdrmodel.test.model" />
       <recent name="at.tugraz.ist.ase.cdrmodel.test.csp" />
-      <recent name="at.tugraz.ist.ase.cdrmodel.test" />
-      <recent name="at.tugraz.ist.ase.cdrmodel.fm" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -129,7 +115,15 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package">
+  <component name="RunManager" selected="JUnit.All in app-KBStatistics">
+    <configuration name="All in app-KBStatistics" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="app-KBStatistics" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="All in cdrmodel-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cdrmodel-package" />
       <option name="PACKAGE_NAME" value="" />
@@ -154,21 +148,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PerformanceEvaluatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eval-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.eval.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.eval" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.eval.PerformanceEvaluatorTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ca-cdr-package" />
       <extension name="coverage">
@@ -185,11 +164,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in app-KBStatistics" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
         <item itemvalue="JUnit.All in cdrmodel-package" />
         <item itemvalue="JUnit.All in chocokb-package" />
         <item itemvalue="JUnit.All in test-package" />
-        <item itemvalue="JUnit.PerformanceEvaluatorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -201,7 +180,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651870068020</updated>
-      <workItem from="1651870069445" duration="16393000" />
+      <workItem from="1651870069445" duration="17824000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -266,7 +245,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651918179722</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Add ca-cdr-package">
+      <created>1651919474750</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1651919474750</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -297,6 +283,8 @@
     <MESSAGE value="Update common-package" />
     <MESSAGE value="Add chocokb-package" />
     <MESSAGE value="Add crdmodel-package" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add crdmodel-package" />
+    <MESSAGE value="Add ca-cdr-package" />
+    <MESSAGE value="Add KBStatistics" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add KBStatistics" />
   </component>
 </project>

@@ -29,4 +29,19 @@ public enum FMFormat {
             default -> FMFormat.NONE;
         };
     }
+
+    public static String getFMFormatString(String filename) {
+        if (filename.endsWith(".sxfm") || filename.endsWith(".splx")) {
+            return "sxfm";
+        } else if (filename.endsWith(".xml")) {
+            return "xml";
+        } else if (filename.endsWith(".xmi")) {
+            return "xmi";
+        } else if (filename.endsWith(".json")) {
+            return "json";
+        } else if (filename.endsWith(".fm4conf")) {
+            return "fm4conf";
+        }
+        return null;
+    }
 }

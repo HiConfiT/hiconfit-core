@@ -26,6 +26,8 @@
         <module>chocokb-package</module>
         <module>cdrmodel-package</module>
         <module>ca-cdr-package</module>
+        <module>app-KBStatistics</module>
+        <module>app-KBStatistics</module>
     </modules>
 
     <properties>
