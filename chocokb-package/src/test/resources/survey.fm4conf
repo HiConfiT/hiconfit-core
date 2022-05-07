@@ -1,0 +1,24 @@
+FM4Conf-v1.0
+MODEL:
+survey
+FEATURES:
+survey,
+pay,
+ABtesting,
+statistics,
+qa,
+license,
+nonlicense,
+multiplechoice,
+singlechoice
+RELATIONSHIPS:
+mandatory(survey, pay),
+mandatory(survey, ABtesting),
+optional(statistics, survey),
+mandatory(survey, qa),
+alternative(pay, license, nonlicense),
+or(qa, multiplechoice, singlechoice)
+CONSTRAINTS:
+requires(ABtesting, statistics),
+excludes(ABtesting, nonlicense)
+

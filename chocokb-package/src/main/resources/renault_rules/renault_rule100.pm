@@ -1,0 +1,31 @@
+or(
+Var1 = S64  and Var29 = DRA  and Var48 = SSLVAR
+Var1 = S64  and Var29 = DRA  and Var48 = LVARMA
+Var1 = S64  and Var29 = DRA  and Var48 = LVAREL
+Var1 = S64  and Var29 = CUI  and Var48 = LVAREL
+Var1 = L64  and Var29 = DRA  and Var48 = SSLVAR
+Var1 = L64  and Var29 = DRA  and Var48 = LVARMA
+Var1 = L64  and Var29 = DRA  and Var48 = LVAREL
+Var1 = L64  and Var29 = CUI  and Var48 = LVAREL
+Var1 = E64  and Var29 = DRA  and Var48 = SSLVAR
+Var1 = E64  and Var29 = DRA  and Var48 = LVAREL
+Var1 = E64  and Var29 = CUI  and Var48 = LVAREL
+Var1 = D64  and Var29 = DRA  and Var48 = SSLVAR
+Var1 = D64  and Var29 = DRA  and Var48 = LVAREL
+Var1 = D64  and Var29 = CUI  and Var48 = SSLVAR
+Var1 = D64  and Var29 = CUI  and Var48 = LVAREL
+Var1 = J64  and Var29 = DRA  and Var48 = LVARMA
+Var1 = J64  and Var29 = DRA  and Var48 = LVAREL
+Var1 = J64  and Var29 = CUI  and Var48 = LVAREL
+Var1 = B64  and Var29 = DRA  and Var48 = SSLVAR
+Var1 = B64  and Var29 = DRA  and Var48 = LVARMA
+Var1 = B64  and Var29 = DRA  and Var48 = LVAREL
+Var1 = B64  and Var29 = CUI  and Var48 = LVAREL
+Var1 = F64  and Var29 = DRA  and Var48 = LVARMA
+Var1 = F64  and Var29 = DRA  and Var48 = LVAREL
+Var1 = F64  and Var29 = CUI  and Var48 = LVAREL
+Var1 = K25  and Var29 = DRA  and Var48 = SSLVAR
+Var1 = K25  and Var29 = DRA  and Var48 = LVARMA
+Var1 = V25  and Var29 = DRA  and Var48 = SSLVAR
+Var1 = V25  and Var29 = DRA  and Var48 = LVARMA
+or)

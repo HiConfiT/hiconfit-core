@@ -4,41 +4,175 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add csp2choco-package">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/CSP2ChocoTranslator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2Choco.g4" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2Choco.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2Choco.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoBaseListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoBaseVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoLexer.interp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoLexer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoLexer.tokens" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoParser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2ChocoVisitor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CommonLexer.g4" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add chocokb-package">
+      <change afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/common/ConstraintUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/BoolVariable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Constraint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Domain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/DomainType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/IntVariable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/KB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Variable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/fm/FMKB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/pc/PCKB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/renault/RenaultKB.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/linux-2.6.33.3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/REAL-FM-4.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/android.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/banking.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/bigdata.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/fqa.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/investment.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/printers.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/subseaCS.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/ubuntu.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/windows7.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/windows8.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule001.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule002.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule003.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule004.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule005.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule006.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule007.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule008.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule009.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule010.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule011.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule012.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule013.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule014.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule015.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule016.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule017.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule018.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule019.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule020.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule021.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule022.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule023.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule024.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule025.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule026.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule027.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule028.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule029.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule030.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule031.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule032.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule033.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule034.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule035.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule036.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule037.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule038.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule039.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule040.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule041.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule042.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule043.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule044.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule045.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule046.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule047.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule048.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule049.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule050.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule051.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule052.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule053.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule054.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule055.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule056.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule057.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule058.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule059.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule060.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule061.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule062.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule063.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule064.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule065.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule066.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule067.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule068.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule069.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule070.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule071.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule072.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule073.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule074.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule075.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule076.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule077.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule078.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule079.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule080.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule081.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule082.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule083.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule084.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule085.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule086.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule087.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule088.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule089.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule090.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule091.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule092.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule093.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule094.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule095.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule096.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule097.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule098.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule099.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule100.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule101.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule102.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule103.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule104.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule105.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule106.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule107.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule108.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule109.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule110.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule111.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule112.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/renault_rules/renault_rule113.pm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/common/ConstraintUtilsTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/ConstraintTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/DomainTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/VariableTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/fm/FMKBTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/fm/FMKBTest1.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/fm/FMKBTest2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/fm/FMKBTest3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc/PCKBTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc/SolveErrorTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/renault/RenaultKBTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/resources/linux-2.6.33.3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/resources/linux-2.6.33.3_simple.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/resources/logback-test.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/resources/smartwatch.sxfm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/test/resources/survey.fm4conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/ChocoSolverUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/ChocoSolverUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/CmdLineOptionsBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/CmdLineOptionsBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/LoggerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/MailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/RandomUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/RandomUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/test/java/CmdLineOptionsBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/test/java/at/tugraz/ist/ase/common/CmdLineOptionsBaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/test/java/IOUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/test/java/at/tugraz/ist/ase/common/IOUtilsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/test/java/RandomUtilsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/test/java/at/tugraz/ist/ase/common/RandomUtilsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco/pom.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="module" />
+    </option>
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
@@ -60,7 +194,9 @@
     <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="28o5OkohKdwjRcEn2TP9rwHS9uR" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -72,8 +208,8 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "temurin-17",
-    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/common-package/src/test/java",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/csp2choco/src/main/java/at/tugraz/ist/ase/csp2choco/antlr",
+    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -84,16 +220,23 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/csp2choco/src/main/java/at/tugraz/ist/ase/csp2choco/antlr" />
-      <recent name="$PROJECT_DIR$/common-package/src/test/resources" />
-      <recent name="$PROJECT_DIR$/common-package/src/test/java" />
-      <recent name="$PROJECT_DIR$/common-package/src/main/java" />
+      <recent name="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc" />
+      <recent name="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/fm" />
+      <recent name="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core" />
+      <recent name="$PROJECT_DIR$/chocokb-package/src/test/resources" />
+      <recent name="$PROJECT_DIR$/chocokb-package/src/main/resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.fm.parser" />
+      <recent name="at.tugraz.ist.ase.fm.core" />
       <recent name="at.tugraz.ist.ase.common" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="" />
+      <recent name="at.tugraz.ist.ase.kb.renault" />
+      <recent name="at.tugraz.ist.ase.common" />
+      <recent name="at.tugraz.ist.ase.kb.pc" />
+      <recent name="at.tugraz.ist.ase.kb.fm" />
+      <recent name="at.tugraz.ist.ase.test.builder.fm" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -101,18 +244,62 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.All in common-package (1)">
-    <configuration name="All in common-package (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="common-package" />
+  <component name="RunManager" selected="JUnit.All in chocokb-package">
+    <configuration name="All in chocokb-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chocokb-package" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in common-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="common-package" />
+    <configuration name="All in test-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-package" />
       <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CSP2ChocoTranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="csp2choco-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.csp2choco.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.csp2choco" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslatorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PerformanceEvaluatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="eval-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.eval.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.eval" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.eval.PerformanceEvaluatorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="at.tugraz.ist.ase.fm in fm-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -120,8 +307,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in common-package (1)" />
-        <item itemvalue="JUnit.All in common-package" />
+        <item itemvalue="JUnit.All in chocokb-package" />
+        <item itemvalue="JUnit.All in test-package" />
+        <item itemvalue="JUnit.PerformanceEvaluatorTest" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.fm in fm-package" />
+        <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -133,7 +323,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651870068020</updated>
-      <workItem from="1651870069445" duration="7027000" />
+      <workItem from="1651870069445" duration="14045000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -142,7 +332,49 @@
       <option name="project" value="LOCAL" />
       <updated>1651871782693</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add csp2choco-package">
+      <created>1651879769370</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1651879769370</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add fm-package">
+      <created>1651911400565</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1651911400565</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update csp2choco-package">
+      <created>1651911433069</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1651911433069</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Add eval-package">
+      <created>1651911447214</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1651911447214</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add test-package">
+      <created>1651911455757</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1651911455757</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update common-package">
+      <created>1651911471470</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1651911471470</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,6 +397,13 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="First commit with common-package" />
     <MESSAGE value="Add csp2choco-package" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add csp2choco-package" />
+    <MESSAGE value="Add fm-package, eval-package, test-package, chocokb-package" />
+    <MESSAGE value="Add fm-package" />
+    <MESSAGE value="Update csp2choco-package" />
+    <MESSAGE value="Add eval-package" />
+    <MESSAGE value="Add test-package" />
+    <MESSAGE value="Update common-package" />
+    <MESSAGE value="Add chocokb-package" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add chocokb-package" />
   </component>
 </project>

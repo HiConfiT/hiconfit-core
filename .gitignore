@@ -36,4 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/common-package/logs.log
+logs.log
