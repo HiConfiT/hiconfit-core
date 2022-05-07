@@ -10,23 +10,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cacdr-v2</artifactId>
+        <groupId>at.tugraz.ist.ase</groupId>
+        <version>1.3-test</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>at.tugraz.ist.ase</groupId>
-    <artifactId>cacdr-v2</artifactId>
-    <packaging>pom</packaging>
-    <version>1.3-test</version>
-
-    <modules>
-        <module>common-package</module>
-        <module>csp2choco-package</module>
-        <module>fm-package</module>
-        <module>eval-package</module>
-        <module>test-package</module>
-        <module>chocokb-package</module>
-        <module>cdrmodel-package</module>
-        <module>ca-cdr-package</module>
-    </modules>
+    <artifactId>ca-cdr-v2</artifactId>
+    <packaging>jar</packaging>
+    <version>1.2.22</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,5 +27,21 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>at.tugraz.ist.ase</groupId>
+            <artifactId>cdrmodel-v2</artifactId>
+            <version>1.2.15</version>
+        </dependency>
+    </dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>CA-CDR</name>
+            <url>https://maven.pkg.github.com/manleviet/CA-CDR</url>
+        </repository>
+    </distributionManagement>
 
 </project>

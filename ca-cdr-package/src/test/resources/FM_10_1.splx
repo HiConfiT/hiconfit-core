@@ -1,0 +1,32 @@
+<!-- This model was created online using SPLOT's Feature Model Editor (http://www.splot-research.org) on Thu, Apr 29, 2021 - 4:35 PM  -->
+<feature_model name="CheckR">
+<meta>
+<data name="description">CheckR</data>
+<data name="creator">Viet-Man Le</data>
+<data name="address"></data>
+<data name="email">vietman.le@ist.tugraz.at</data>
+<data name="phone"></data>
+<data name="website"></data>
+<data name="organization">TU Graz</data>
+<data name="department"></data>
+<data name="date"></data>
+<data name="reference"></data>
+</meta>
+<feature_tree>
+:r CheckR(_r)
+	:m RecEng(_r_1)
+		:g (_r_1_2) [1,1] 
+			: UBRec(_r_1_2_3)
+			: CBRec(_r_1_2_4)
+	:m SDC(_r_5)
+	:o Stat(_r_6)
+	:m QType(_r_7)
+		:g (_r_7_8) [1,*] 
+			: MulChoice(_r_7_8_9)
+			: ImgAnaTask(_r_7_8_10)
+</feature_tree>
+<constraints>
+constraint_1:~_r_1_2_4 or ~_r_5
+constraint_2:~_r_5 or _r_6
+</constraints>
+</feature_model>

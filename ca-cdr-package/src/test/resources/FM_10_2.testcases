@@ -1,0 +1,6 @@
+5
+gui_builder & uml & sdi & ~mdi
+~gui_builder & ~diagram_builder & uml
+~interface & ~gui_builder & diagram_builder & ~uml & sdi
+~interface & ~diagram_builder & uml & mdi
+mdi & sdi
