@@ -17,9 +17,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>at.tugraz.ist.ase.kb</groupId>
-    <artifactId>kbstatistics</artifactId>
-    <version>1.1</version>
+    <groupId>at.tugraz.ist.ase.fm</groupId>
+    <artifactId>fm-gen</artifactId>
+    <version>1.0</version>
     <packaging>jar</packaging>
 
     <properties>
@@ -34,6 +34,49 @@
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>choco-kb-v2</artifactId>
             <version>1.2.16</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.11</version>
+        </dependency>
+
+        <!-- Betty framework -->
+        <dependency>
+            <groupId>es.us.isa</groupId>
+            <artifactId>Betty</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>es.us.isa</groupId>
+            <artifactId>commons-math</artifactId>
+            <version>2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>es.us.isa</groupId>
+            <artifactId>FaMaAttributedModel</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>es.us.isa</groupId>
+            <artifactId>FaMaFeatureModel</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>es.us.isa</groupId>
+            <artifactId>FaMaSDK</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>es.us.isa</groupId>
+            <artifactId>javacsv</artifactId>
+            <version>1.0</version>
         </dependency>
     </dependencies>
 
@@ -69,7 +112,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        at.tugraz.ist.ase.knowledgebases.app.KBStatistics
+                                        at.tugraz.ist.ase.fm.app.FMGenerator
                                     </mainClass>
                                 </manifest>
                             </archive>

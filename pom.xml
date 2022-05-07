@@ -28,6 +28,7 @@
         <module>ca-cdr-package</module>
         <module>app-KBStatistics</module>
         <module>app-KBStatistics</module>
+        <module>app-FMGenerator</module>
     </modules>
 
     <properties>
