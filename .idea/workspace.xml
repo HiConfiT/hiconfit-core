@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add FMGenerator">
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cdrmodel-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chocokb-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eval-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fm-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-package/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add README.md and build new releases">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
@@ -70,26 +60,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "temurin-17",
-    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "project.propGUI"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.profiles&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -193,7 +184,20 @@
       <workItem from="1651922163866" duration="130000" />
       <workItem from="1651922305065" duration="51000" />
       <workItem from="1651922365918" duration="105000" />
-      <workItem from="1651935367845" duration="3844000" />
+      <workItem from="1651935367845" duration="4623000" />
+      <workItem from="1651944309985" duration="1000" />
+      <workItem from="1652102632234" duration="610000" />
+      <workItem from="1652170621503" duration="9000" />
+      <workItem from="1652187511076" duration="176000" />
+      <workItem from="1652280266763" duration="103000" />
+      <workItem from="1652346998269" duration="1219000" />
+      <workItem from="1652351858257" duration="14000" />
+      <workItem from="1652353118812" duration="23000" />
+      <workItem from="1652353654649" duration="622000" />
+      <workItem from="1652359613754" duration="817000" />
+      <workItem from="1652361111425" duration="1355000" />
+      <workItem from="1652369750867" duration="1927000" />
+      <workItem from="1652425210233" duration="1681000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -279,7 +283,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651921106531</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add README.md and build new releases">
+      <created>1651939345068</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1651939345068</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,6 +324,7 @@
     <MESSAGE value="Add ca-cdr-package" />
     <MESSAGE value="Add KBStatistics" />
     <MESSAGE value="Add FMGenerator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add FMGenerator" />
+    <MESSAGE value="Add README.md and build new releases" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add README.md and build new releases" />
   </component>
 </project>
