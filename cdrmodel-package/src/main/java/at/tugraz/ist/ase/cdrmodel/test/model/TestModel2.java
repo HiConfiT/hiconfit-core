@@ -133,6 +133,7 @@ public class TestModel2 extends CDRModel implements IChocoModel, ITestModel {
         return allConflicts;
     }
 
+    @Override
     public Object clone() throws CloneNotSupportedException {
         TestModel2 clone = (TestModel2) super.clone();
 

@@ -109,6 +109,7 @@ public class TestModel4 extends CDRModel implements IChocoModel, ITestModel {
         return allConflicts;
     }
 
+    @Override
     public Object clone() throws CloneNotSupportedException {
         TestModel4 clone = (TestModel4) super.clone();
 

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Corrects the Maven packages">
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Support to clone TestSuite, and FMDebuggingModel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
@@ -21,8 +19,6 @@
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
@@ -30,13 +26,6 @@
       <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/ITestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/ITestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/AssignmentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/AssignmentTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestCaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestCaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestSuiteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestSuiteTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,7 +239,7 @@
       <workItem from="1652460040681" duration="31000" />
       <workItem from="1652478184327" duration="742000" />
       <workItem from="1652610876331" duration="1140000" />
-      <workItem from="1652655363282" duration="12644000" />
+      <workItem from="1652655363282" duration="15748000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -350,7 +339,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652431343207</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Support to clone TestSuite, and FMDebuggingModel">
+      <created>1652694841940</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1652694841940</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -386,7 +382,8 @@
     <MESSAGE value="Add FMGenerator" />
     <MESSAGE value="Add README.md and build new releases" />
     <MESSAGE value="Corrects the Maven packages" />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrects the Maven packages" />
+    <MESSAGE value="Support to clone TestSuite, and FMDebuggingModel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Support to clone TestSuite, and FMDebuggingModel" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

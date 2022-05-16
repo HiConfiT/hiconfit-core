@@ -147,6 +147,7 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         }
     }
 
+    @Override
     public Object clone() throws CloneNotSupportedException {
         FMDebuggingModel clone = (FMDebuggingModel) super.clone();
 
