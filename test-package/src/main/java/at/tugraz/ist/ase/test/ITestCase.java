@@ -12,7 +12,7 @@ import org.chocosolver.solver.constraints.Constraint;
 
 import java.util.List;
 
-public interface ITestCase {
+public interface ITestCase extends Cloneable {
     List<Assignment> getAssignments();
 
     List<Constraint> getChocoConstraints();

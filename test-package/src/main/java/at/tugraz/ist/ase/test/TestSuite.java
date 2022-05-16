@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.test;
 
 import lombok.*;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,7 @@ import java.util.stream.Collectors;
 @Builder
 @Getter @Setter
 @EqualsAndHashCode
-public class TestSuite {
+public class TestSuite implements Cloneable {
     private @NonNull List<ITestCase> testCases; // list of test cases
 
     /**
@@ -49,5 +50,17 @@ public class TestSuite {
         return testCases.stream()
                 .map(ITestCase::toString)
                 .collect(Collectors.joining("\n"));
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        TestSuite clone = (TestSuite) super.clone();
+        // copy test cases
+        List<ITestCase> testCases = new LinkedList<>();
+        for (ITestCase testCase : this.testCases) {
+            ITestCase cloneTestCase = (ITestCase) ((TestCase)testCase).clone();
+            testCases.add(cloneTestCase);
+        }
+        clone.setTestCases(testCases);
+        return clone;
     }
 }

@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.Constraint;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 @Builder
 @Getter @Setter
 @EqualsAndHashCode
-public class TestCase implements ITestCase, Cloneable {
+public class TestCase implements ITestCase {
     private @NonNull String testcase; // a test case
     private @NonNull List<Assignment> assignments; // the list of assignments
     private List<Constraint> chocoConstraints; // the list of Choco constraints which are translated from this test case
@@ -107,32 +106,32 @@ public class TestCase implements ITestCase, Cloneable {
         return testcase;
     }
 
-    @Override
-    public TestCase clone() {
-        try {
-            TestCase clone = (TestCase) super.clone();
-            // copy assignments, constraints and negConstraints
-            List<Assignment> assignments = new ArrayList<>();
-            for (Assignment assignment : this.assignments) {
-                Assignment cloneAssignment = assignment.clone();
-                assignments.add(cloneAssignment);
-            }
-            clone.setAssignments(assignments);
-
-            List<Constraint> constraints = null;
-            if (this.chocoConstraints != null) {
-                constraints = new ArrayList<>(this.chocoConstraints);
-            }
-            List<Constraint> negConstraints = null;
-            if (this.negChocoConstraints != null) {
-                negConstraints = new ArrayList<>(this.negChocoConstraints);
-            }
-
-            clone.setChocoConstraints(constraints);
-            clone.setNegChocoConstraints(negConstraints);
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+    public Object clone() throws CloneNotSupportedException {
+        TestCase clone = (TestCase) super.clone();
+        // copy assignments, constraints and negConstraints
+        List<Assignment> assignments = new LinkedList<>();
+        for (Assignment assignment : this.assignments) {
+            Assignment cloneAssignment = (Assignment) assignment.clone();
+            assignments.add(cloneAssignment);
         }
+        clone.setAssignments(assignments);
+
+        clone.setChocoConstraints(null);
+        clone.setNegChocoConstraints(null);
+
+        // should not clone chocoConstraints and negChocoConstraints
+        // should add new generated chocoConstraints and negChocoConstraints
+//            List<Constraint> constraints = null;
+//            if (this.chocoConstraints != null) {
+//                constraints = new ArrayList<>(this.chocoConstraints);
+//            }
+//            List<Constraint> negConstraints = null;
+//            if (this.negChocoConstraints != null) {
+//                negConstraints = new ArrayList<>(this.negChocoConstraints);
+//            }
+
+//            clone.setChocoConstraints(constraints);
+//            clone.setNegChocoConstraints(negConstraints);
+        return clone;
     }
 }

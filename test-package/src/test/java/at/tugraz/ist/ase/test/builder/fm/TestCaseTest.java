@@ -70,14 +70,28 @@ class TestCaseTest {
     }
 
     @Test
-    public void shouldCloneable() {
+    public void shouldCloneable() throws CloneNotSupportedException {
         TestCase tc = testsuite.get(0);
+
         assertDoesNotThrow(tc::clone);
 
-        TestCase tc2 = tc.clone();
+        TestCase tc2 = (TestCase) tc.clone();
 
         assertAll(() -> assertEquals(tc.getTestcase(), tc2.getTestcase(), "Testcase"),
-                () -> assertEquals(tc.getAssignments().get(0), tc2.getAssignments().get(0), "Assignments"));
+                () -> assertNotSame(tc.getAssignments(), tc2.getAssignments(), "Assignments"),
+                () -> assertNotSame(tc.getAssignments().get(0), tc2.getAssignments().get(0), "Assignments"),
+                () -> assertNotSame(tc.getAssignments().get(1), tc2.getAssignments().get(1), "Assignments"),
+                () -> assertNotSame(tc.getAssignments().get(2), tc2.getAssignments().get(2), "Assignments"),
+                () -> assertNotSame(tc.getAssignments().get(3), tc2.getAssignments().get(3), "Assignments"),
+                () -> assertEquals(tc.getAssignments().size(), tc2.getAssignments().size(), "Assignment size"),
+                () -> assertEquals(tc.getAssignments().get(0), tc2.getAssignments().get(0), "Assignments"),
+                () -> assertEquals(tc.getAssignments().get(1), tc2.getAssignments().get(1), "Assignments"),
+                () -> assertEquals(tc.getAssignments().get(2), tc2.getAssignments().get(2), "Assignments"),
+                () -> assertEquals(tc.getAssignments().get(3), tc2.getAssignments().get(3), "Assignments"),
+                () -> assertEquals(tc.isViolated(), tc2.isViolated(), "isViolated"));
+
+        tc2.setTestcase("new testcase");
+        assertNotEquals(tc.getTestcase(), tc2.getTestcase());
 
         tc2.setAssignments(Collections.emptyList());
 

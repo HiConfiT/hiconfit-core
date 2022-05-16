@@ -10,6 +10,6 @@ package at.tugraz.ist.ase.cdrmodel;
 
 import org.chocosolver.solver.Model;
 
-public interface IChocoModel {
+public interface IChocoModel extends Cloneable {
     Model getModel();
 }

@@ -110,4 +110,15 @@ public class TestModel6 extends CDRModel implements IChocoModel, ITestModel {
     public List<Set<Constraint>> getExpectedAllConflicts() {
         return null;
     }
+
+    public Object clone() throws CloneNotSupportedException {
+        TestModel6 clone = (TestModel6) super.clone();
+
+        try {
+            clone.initialize();
+            return clone;
+        } catch (Exception e) {
+            throw new CloneNotSupportedException(e.getMessage());
+        }
+    }
 }

@@ -35,9 +35,10 @@ import static at.tugraz.ist.ase.common.ChocoSolverUtils.getVariable;
 public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggingModel {
 
     @Getter
-    private final Model model;
-    private final FMKB fmkb;
-    private final TestSuite testSuite;
+    private Model model;
+    private final FeatureModel featureModel;
+    private FMKB fmkb;
+    private TestSuite testSuite;
     private final ITestCaseTranslatable translator;
 
     @Getter
@@ -50,7 +51,7 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
      * The set of test cases.
      */
     @Getter
-    private final Set<ITestCase> testcases = new LinkedHashSet<>();
+    private Set<ITestCase> testcases = new LinkedHashSet<>();
 
     /**
      * A constructor
@@ -67,6 +68,8 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
                             @NonNull ITestCaseTranslatable translator,
                             boolean rootConstraints, boolean reversedConstraintsOrder) {
         super(fm.getName());
+
+        this.featureModel = fm;
 
         this.testSuite = testSuite;
         this.fmkb = new FMKB(fm, false);
@@ -142,5 +145,18 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         for (ITestCase testcase : testSuite.getTestCases()) {
             translator.translate(testcase, model);
         }
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        FMDebuggingModel clone = (FMDebuggingModel) super.clone();
+
+        clone.testSuite = (TestSuite) testSuite.clone();
+        clone.fmkb = new FMKB(this.featureModel, false);
+        clone.model = clone.fmkb.getModelKB();
+        clone.testcases = new LinkedHashSet<>();
+
+        clone.initialize();
+
+        return clone;
     }
 }
