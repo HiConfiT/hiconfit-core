@@ -4,22 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add FMGenerator">
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cdrmodel-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/chocokb-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/csp2choco-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/eval-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fm-package/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-package/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Support to clone TestSuite, and FMDebuggingModel">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/CDRModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/CDRModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/IChocoModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/IChocoModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
@@ -42,6 +41,11 @@
     <option name="done" value="true" />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -72,13 +76,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "jdk.selected.JAVA_MODULE": "temurin-17",
     "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/cdrmodel-package/src/test/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -87,16 +92,16 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "project.propGUI"
+    "settings.editor.selected.configurable": "copyright.profiles"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ca-cdr-package" />
       <recent name="$PROJECT_DIR$/cdrmodel-package" />
       <recent name="$PROJECT_DIR$/chocokb-package" />
-      <recent name="$PROJECT_DIR$/eval-package" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="at.tugraz.ist.ase.fm.parser" />
@@ -116,55 +121,79 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CSP2ChocoTranslatorTest">
-    <configuration name="All in app-KBStatistics" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="app-KBStatistics" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in cdrmodel-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.TestModel1Test.shouldCloneable">
+    <configuration name="FMDebuggingModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cdrmodel-package" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in chocokb-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chocokb-package" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CSP2ChocoTranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="csp2choco-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.csp2choco.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.csp2choco" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslatorTest" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="FMDebuggingModelTest.shouldCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
+      <option name="METHOD_NAME" value="shouldCloneable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FMDebuggingModelTest.testFMDebuggingModel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
+      <option name="METHOD_NAME" value="testFMDebuggingModel" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestModel1Test.shouldCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.test.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.test.model" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.test.model.TestModel1Test" />
+      <option name="METHOD_NAME" value="shouldCloneable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="at.tugraz.ist.ase.test in test-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.test" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -172,11 +201,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
-        <item itemvalue="JUnit.All in app-KBStatistics" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
-        <item itemvalue="JUnit.All in cdrmodel-package" />
-        <item itemvalue="JUnit.All in chocokb-package" />
+        <item itemvalue="JUnit.TestModel1Test.shouldCloneable" />
+        <item itemvalue="JUnit.FMDebuggingModelTest.shouldCloneable" />
+        <item itemvalue="JUnit.FMDebuggingModelTest" />
+        <item itemvalue="JUnit.FMDebuggingModelTest.testFMDebuggingModel" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.test in test-package" />
       </list>
     </recent_temporary>
   </component>
@@ -193,7 +222,24 @@
       <workItem from="1651922163866" duration="130000" />
       <workItem from="1651922305065" duration="51000" />
       <workItem from="1651922365918" duration="105000" />
-      <workItem from="1651935367845" duration="3844000" />
+      <workItem from="1651935367845" duration="4623000" />
+      <workItem from="1651944309985" duration="1000" />
+      <workItem from="1652102632234" duration="610000" />
+      <workItem from="1652170621503" duration="9000" />
+      <workItem from="1652187511076" duration="176000" />
+      <workItem from="1652280266763" duration="103000" />
+      <workItem from="1652346998269" duration="1219000" />
+      <workItem from="1652351858257" duration="14000" />
+      <workItem from="1652353118812" duration="23000" />
+      <workItem from="1652353654649" duration="622000" />
+      <workItem from="1652359613754" duration="817000" />
+      <workItem from="1652361111425" duration="1355000" />
+      <workItem from="1652369750867" duration="1927000" />
+      <workItem from="1652425210233" duration="2512000" />
+      <workItem from="1652460040681" duration="31000" />
+      <workItem from="1652478184327" duration="742000" />
+      <workItem from="1652610876331" duration="1140000" />
+      <workItem from="1652655363282" duration="15748000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -279,7 +325,28 @@
       <option name="project" value="LOCAL" />
       <updated>1651921106531</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add README.md and build new releases">
+      <created>1651939345068</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1651939345068</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Corrects the Maven packages">
+      <created>1652431343206</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1652431343207</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Support to clone TestSuite, and FMDebuggingModel">
+      <created>1652694841940</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1652694841940</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,6 +380,16 @@
     <MESSAGE value="Add ca-cdr-package" />
     <MESSAGE value="Add KBStatistics" />
     <MESSAGE value="Add FMGenerator" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add FMGenerator" />
+    <MESSAGE value="Add README.md and build new releases" />
+    <MESSAGE value="Corrects the Maven packages" />
+    <MESSAGE value="Support to clone TestSuite, and FMDebuggingModel" />
+    <option name="LAST_COMMIT_MESSAGE" value="Support to clone TestSuite, and FMDebuggingModel" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="at.tugraz.ist.ase.test.TestSuite" memberName="testCases" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

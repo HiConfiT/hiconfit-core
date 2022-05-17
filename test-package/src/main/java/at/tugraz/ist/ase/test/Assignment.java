@@ -20,21 +20,23 @@ import lombok.*;
 @Builder
 @Getter @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
 public class Assignment implements Cloneable {
     private @NonNull String variable;
     private @NonNull String value;
+
+    // a copy constructor
+//    public Assignment(Assignment assignment) {
+//        this.variable = assignment.variable;
+//        this.value = assignment.value;
+//    }
 
     @Override
     public String toString() {
         return variable + "=" + value;
     }
 
-    @Override
-    public Assignment clone() {
-        try {
-            return (Assignment) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+    public Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }
