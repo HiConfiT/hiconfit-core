@@ -417,8 +417,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -456,8 +456,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -495,8 +495,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -534,8 +534,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -573,8 +573,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -612,8 +612,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -651,8 +651,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -690,8 +690,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -729,8 +729,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -768,8 +768,8 @@ class HSTreeTest {
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");

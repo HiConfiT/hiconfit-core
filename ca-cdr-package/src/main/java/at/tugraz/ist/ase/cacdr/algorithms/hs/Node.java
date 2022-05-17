@@ -67,7 +67,7 @@ public class Node {
     /**
      * Labels of the path to here
      */
-    private final Set<Constraint> pathLabels = new LinkedHashSet<>();
+    private final Set<Constraint> pathLabel = new LinkedHashSet<>();
 
     /**
      * The node's children
@@ -113,12 +113,12 @@ public class Node {
         this.arcLabel = arcLabel;
         this.parameters = parameters;
 
-        this.pathLabels.addAll(parent.pathLabels);
-        this.pathLabels.add(arcLabel);
+        this.pathLabel.addAll(parent.pathLabel);
+        this.pathLabel.add(arcLabel);
 
         parent.children.put(arcLabel, this);
 
-        log.trace("{}Created child node with [parent={}, arcLabel={}]", LoggerUtils.tab, parent, pathLabels);
+        log.trace("{}Created child node with [parent={}, arcLabel={}]", LoggerUtils.tab, parent, pathLabel);
     }
 
     /**
@@ -162,7 +162,7 @@ public class Node {
                 ", label=" + label +
                 ", parameter=" + parameters +
                 ", arcLabel=" + arcLabel +
-                ", pathLabels=" + pathLabels +
+                ", pathLabels=" + pathLabel +
                 '}';
     }
 }

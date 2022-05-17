@@ -40,6 +40,14 @@ public class QuickXPlainLabeler extends QuickXPlain implements IHSLabelable {
     }
 
     /**
+     * Returns the reasoning type of the algorithm
+     * @return {@link LabelerType}
+     */
+    public LabelerType getType() {
+        return LabelerType.CONFLICT;
+    }
+
+    /**
      * Identifies a conflict.
      * @param parameters the current parameters
      * @return a conflict

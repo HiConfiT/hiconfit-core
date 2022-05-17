@@ -419,8 +419,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -458,8 +458,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -497,8 +497,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -536,8 +536,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -575,8 +575,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -614,8 +614,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -653,8 +653,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -692,8 +692,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -731,8 +731,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -770,8 +770,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -811,8 +811,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -852,8 +852,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -893,8 +893,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -934,8 +934,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -975,8 +975,8 @@ class HSDAGTest {
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
