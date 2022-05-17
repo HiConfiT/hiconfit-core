@@ -26,8 +26,14 @@ import java.util.Set;
 public interface IHSLabelable {
 
     /**
+     * Returns the reasoning type of the labeler.
+     * @return {@link LabelerType}
+     */
+    LabelerType getType();
+
+    /**
      * Returns the initial parameters
-     * @return the initial parameters
+     * @return the initial parameters {@link AbstractHSParameters}
      */
     AbstractHSParameters getInitialParameters();
 

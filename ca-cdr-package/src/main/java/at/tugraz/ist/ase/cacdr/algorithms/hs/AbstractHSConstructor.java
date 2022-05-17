@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.cacdr.algorithms.hs;
 
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.IHSLabelable;
+import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.LabelerType;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.Getter;
@@ -29,13 +30,13 @@ import java.util.Set;
 public abstract class AbstractHSConstructor {
     // for evaluation
     public static final String TIMER_HS_CONSTRUCTION_SESSION = "Timer for HS construction session:";
-    public static final String TIMER_CONFLICT = "Timer for conflict:";
-    public static final String TIMER_DIAGNOSIS = "Timer for diagnosis:";
+    public static final String TIMER_NODE_LABEL = "Timer for node labels (conflict/diagnosis):"; // conflict/diagnosis
+    public static final String TIMER_PATH_LABEL = "Timer for path labels (diagnosis/conflict):";
 
     public static final String COUNTER_CONSTRUCTED_NODES = "The number of constructed nodes:";
     public static final String COUNTER_CLOSE_1 = "The number of 3.i closed nodes:";
     public static final String COUNTER_CLOSE_2 = "The number of 3.ii closed nodes:";
-    public static final String COUNTER_REUSE_CONFLICT = "The number of reused conflicts:";
+    public static final String COUNTER_REUSE_LABELS = "The number of reused labels:";
     public static final String COUNTER_REUSE_NODES = "The number of reused nodes:";
     public static final String COUNTER_PRUNING = "The number of pruning paths:";
     public static final String COUNTER_CLEANED_NODES = "The number of cleaned nodes:";
@@ -52,8 +53,8 @@ public abstract class AbstractHSConstructor {
      * Use setter to preset known conflicts
      */
     @Setter
-    private List<Set<Constraint>> conflicts = new LinkedList<>(); // labels/F
-    private final List<Set<Constraint>> diagnoses = new LinkedList<>();
+    private List<Set<Constraint>> nodeLabels = new LinkedList<>(); // conflict/diagnosis
+    private final List<Set<Constraint>> pathLabels = new LinkedList<>(); // diagnosis/conflict
 
     private IHSLabelable labeler;
     private ChocoConsistencyChecker checker;
@@ -61,6 +62,30 @@ public abstract class AbstractHSConstructor {
     public AbstractHSConstructor(IHSLabelable labeler, ChocoConsistencyChecker checker) {
         this.labeler = labeler;
         this.checker = checker;
+    }
+
+    /**
+     * Returns identified conflicts.
+     * @return list of conflicts
+     */
+    public List<Set<Constraint>> getConflicts() {
+        if (labeler.getType() == LabelerType.CONFLICT) {
+            return nodeLabels;
+        } else {
+            return pathLabels;
+        }
+    }
+
+    /**
+     * Returns identified diagnoses.
+     * @return list of diagnoses
+     */
+    public List<Set<Constraint>> getDiagnoses() {
+        if (labeler.getType() == LabelerType.CONFLICT) {
+            return pathLabels;
+        } else {
+            return nodeLabels;
+        }
     }
 
     /**
@@ -82,21 +107,20 @@ public abstract class AbstractHSConstructor {
         return condition1 || condition2;
     }
 
-    protected abstract void addConflicts(Collection<Set<Constraint>> cs);
-    protected abstract void addItemToCSNodesMap(Set<Constraint> cs, Node node);
-//    protected abstract void addConflicts(Collection<Set<Constraint>> cs);
+    protected abstract void addNodeLabels(Collection<Set<Constraint>> labels);
+    protected abstract void addItemToLabelNodesMap(Set<Constraint> label, Node node);
 
     /**
      * Reverts the state of the engine to how it was when first instantiated
      */
     public void resetEngine() {
-        conflicts.clear();
-        diagnoses.clear();
+        nodeLabels.clear();
+        pathLabels.clear();
     }
 
     public void dispose() {
-        this.diagnoses.clear();
-        this.conflicts.clear();
+        this.pathLabels.clear();
+        this.nodeLabels.clear();
         this.checker = null;
         this.labeler = null;
     }

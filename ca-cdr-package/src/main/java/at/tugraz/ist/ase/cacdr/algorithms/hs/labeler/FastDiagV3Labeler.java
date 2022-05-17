@@ -43,6 +43,14 @@ public class FastDiagV3Labeler extends FastDiagV3 implements IHSLabelable {
     }
 
     /**
+     * Returns the reasoning type of the algorithm
+     * @return {@link LabelerType}
+     */
+    public LabelerType getType() {
+        return LabelerType.DIAGNOSIS;
+    }
+
+    /**
      * Identifies a diagnosis.
      * @param parameters the current parameters
      * @return a diagnosis
