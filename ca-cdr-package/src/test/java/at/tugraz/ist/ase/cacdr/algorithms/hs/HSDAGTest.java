@@ -52,7 +52,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -92,7 +92,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfDiagnoses(1);
 
         CAEvaluator.reset();
@@ -132,7 +132,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfDiagnoses(2);
 
         CAEvaluator.reset();
@@ -172,7 +172,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfConflicts(1);
 
         CAEvaluator.reset();
@@ -213,7 +213,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfConflicts(2);
 
         CAEvaluator.reset();
@@ -254,7 +254,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -294,7 +294,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -334,7 +334,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -374,7 +374,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -414,7 +414,7 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -453,7 +453,7 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -492,7 +492,7 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -531,7 +531,7 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -570,7 +570,7 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -609,7 +609,7 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -648,7 +648,7 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -687,7 +687,7 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -726,7 +726,7 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -765,7 +765,7 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -806,7 +806,7 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -847,7 +847,7 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -888,7 +888,7 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -929,7 +929,7 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -970,7 +970,7 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();

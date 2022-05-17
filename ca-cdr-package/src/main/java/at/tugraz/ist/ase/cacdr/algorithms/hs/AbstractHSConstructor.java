@@ -57,11 +57,9 @@ public abstract class AbstractHSConstructor {
     private final List<Set<Constraint>> pathLabels = new LinkedList<>(); // diagnosis/conflict
 
     private IHSLabelable labeler;
-    private ChocoConsistencyChecker checker;
 
-    public AbstractHSConstructor(IHSLabelable labeler, ChocoConsistencyChecker checker) {
+    public AbstractHSConstructor(IHSLabelable labeler) {
         this.labeler = labeler;
-        this.checker = checker;
     }
 
     /**
@@ -121,7 +119,6 @@ public abstract class AbstractHSConstructor {
     public void dispose() {
         this.pathLabels.clear();
         this.nodeLabels.clear();
-        this.checker = null;
         this.labeler = null;
     }
 }

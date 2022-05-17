@@ -11,7 +11,6 @@ package at.tugraz.ist.ase.cacdr.algorithms.hs;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.IHSLabelable;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.LabelerType;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.AbstractHSParameters;
-import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Sets;
@@ -40,8 +39,8 @@ public class HSTree extends AbstractHSConstructor {
     // Map of <label, list of nodes which have the label as its label>
     protected Map<Set<Constraint>, List<Node>> label_nodesMap = new LinkedHashMap<>();
 
-    public HSTree(IHSLabelable labeler, ChocoConsistencyChecker checker) {
-        super(labeler, checker);
+    public HSTree(IHSLabelable labeler) {
+        super(labeler);
     }
 
     /**

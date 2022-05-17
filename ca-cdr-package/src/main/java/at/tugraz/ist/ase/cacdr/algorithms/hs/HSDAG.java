@@ -10,7 +10,6 @@ package at.tugraz.ist.ase.cacdr.algorithms.hs;
 
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.IHSLabelable;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.AbstractHSParameters;
-import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Sets;
@@ -33,8 +32,8 @@ public class HSDAG extends HSTree {
     // Map of <pathLabel, Node>
     private final Map<Set<Constraint>, Node> nodesLookup = new HashMap<>();
 
-    public HSDAG(IHSLabelable labeler, ChocoConsistencyChecker checker) {
-        super(labeler, checker);
+    public HSDAG(IHSLabelable labeler) {
+        super(labeler);
     }
 
     @Override
