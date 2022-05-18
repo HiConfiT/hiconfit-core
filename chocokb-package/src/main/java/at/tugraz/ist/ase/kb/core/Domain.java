@@ -88,7 +88,7 @@ public class Domain implements Cloneable {
             this.chocoValues = List.of(0, 1);
         }
 
-        log.trace("{}Created Domain [domain={}]", LoggerUtils.tab, this);
+        log.trace("{}Created Domain [domain={}]", LoggerUtils.tab(), this);
     }
 
     private void initChocoValuesWithDefaultValues() {
@@ -98,7 +98,7 @@ public class Domain implements Cloneable {
             this.chocoValues.add(i);
         }*/
 
-        log.trace("{}Initialized Choco values for Domain [domain={}]", LoggerUtils.tab, this);
+        log.trace("{}Initialized Choco values for Domain [domain={}]", LoggerUtils.tab(), this);
     }
 
     public int size() {

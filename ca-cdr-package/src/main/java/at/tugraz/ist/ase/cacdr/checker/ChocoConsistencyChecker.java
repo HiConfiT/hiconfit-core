@@ -20,9 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.*;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
@@ -31,7 +33,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @Slf4j
 public class ChocoConsistencyChecker implements IConsistencyChecker {
-    public static final String TIMER_SOLVER = "Timer for solver:";
+    public static final String TIMER_SOLVER = "Timer for solver ";
 
     /**
      * An internal models
@@ -49,7 +51,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
         this.cdrModel = diagModel;
         model = ((IChocoModel)diagModel).getModel();
 
-        log.debug("{}Created ChocoConsistencyChecker for {}", LoggerUtils.tab, diagModel);
+        log.debug("{}Created ChocoConsistencyChecker for {}", LoggerUtils.tab(), diagModel);
     }
 
     /**
@@ -57,17 +59,30 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * @param C       set of {@link Constraint}s
      * @return true if the given set of constraints are consistent, and false otherwise.
      */
+    @Override
     public boolean isConsistent(@NonNull Collection<Constraint> C) {
         checkArgument(!C.isEmpty(), "Cannot check the consistency with an empty set of constraints");
 
-        log.debug("{}Checking consistency for [C={}] >>>", LoggerUtils.tab, C);
+        log.debug("{}Checking consistency for [C={}] >>>", LoggerUtils.tab(), C);
         LoggerUtils.indent();
 
         // post constraints of the parameter C
+        if (cdrModel.isClone()) { // if the model is a clone model, we need to get the corresponding constraints from the clone model
+            C = getConstraintFromCloneModel(C);
+        }
         postConstraints(C, model);
 
         // Call solve()
         return check();
+    }
+
+    protected Set<Constraint> getConstraintFromCloneModel(Collection<Constraint> C) {
+        /* for (Constraint c : cdrModel.getAllConstraints()) {
+            if (C.contains(c)) {
+                C_clone.add(c);
+            }
+        }*/
+        return cdrModel.getAllConstraints().parallelStream().filter(C::contains).collect(Collectors.toCollection(LinkedHashSet::new));
     }
 
     /**
@@ -76,22 +91,45 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * @param testcase a {@link ITestCase}
      * @return true if the given test case isn't violated to the set of constraints, and false otherwise.
      */
+    @Override
     public boolean isConsistent(@NonNull Collection<Constraint> C, @NonNull ITestCase testcase) {
         checkState(cdrModel instanceof IDebuggingModel, "Cannot check the consistency with a test case if the model is not debugging model");
         checkArgument(!C.isEmpty(), "Cannot check the consistency with an empty set of constraints");
         checkArgument(testcase instanceof TestCase, "Cannot check the consistency with a non-TestCase object");
 
-        log.debug("{}Checking consistency for [C={}, testcase={}] >>>", LoggerUtils.tab, C, testcase);
+        log.debug("{}Checking consistency for [C={}, testcase={}] >>>", LoggerUtils.tab(), C, testcase);
         LoggerUtils.indent();
 
         // post constraints of the parameter C
+        if (cdrModel.isClone()) { // if the model is a clone model, we need to get the corresponding constraints from the clone model
+            C = getConstraintFromCloneModel(C);
+        }
         postConstraints(C, model);
 
         // post test case's constraints
+        if (cdrModel.isClone()) { // if the model is a clone model, we need to get the corresponding testcase from the clone model
+            testcase = getTestCaseFromCloneModel(testcase);
+        }
+        assert testcase != null;
         postTestCase((TestCase) testcase, false);
 
         // Call solve()
         return check();
+    }
+
+    protected ITestCase getTestCaseFromCloneModel(ITestCase testcase) {
+        ITestCase testcase_clone = ((IDebuggingModel) cdrModel).getTestcases().parallelStream().filter(tc -> tc.equals(testcase)).findFirst().orElse(null);;
+        /* for (ITestCase tc : ((IDebuggingModel) cdrModel).getTestcases()) {
+            if (tc.equals(testcase)) {
+                testcase_clone = tc;
+                break;
+            }
+        }*/
+
+        if (testcase_clone == null) {
+            log.error("{}Test case {} not found in the clone model", LoggerUtils.tab(), testcase);
+        }
+        return testcase_clone;
     }
 
     /**
@@ -106,18 +144,27 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * @param neg_testcase a {@link ITestCase}
      * @return true if the given test cases are not contradict, and false otherwise.
      */
+    @Override
     public boolean isConsistent(@NonNull ITestCase testcase, @NonNull ITestCase neg_testcase) {
         checkState(cdrModel instanceof IDebuggingModel, "Cannot check the consistency with a test case if the model is not debugging model");
         checkArgument(testcase instanceof TestCase, "Cannot check the consistency with a non-TestCase object");
         checkArgument(neg_testcase instanceof TestCase, "Cannot check the consistency with a non-TestCase object");
 
-        log.debug("{}Checking consistency for [testcase={}, neg_testcase={}] >>>", LoggerUtils.tab, testcase, neg_testcase);
+        log.debug("{}Checking consistency for [testcase={}, neg_testcase={}] >>>", LoggerUtils.tab(), testcase, neg_testcase);
         LoggerUtils.indent();
 
         // post test case's constraints
+        if (cdrModel.isClone()) { // if the model is a clone model, we need to get the corresponding testcase from the clone model
+            testcase = getTestCaseFromCloneModel(testcase);
+        }
+        assert testcase != null;
         postTestCase((TestCase) testcase, false);
 
         // post neg test case's constraints
+        if (cdrModel.isClone()) { // if the model is a clone model, we need to get the corresponding testcase from the clone model
+            neg_testcase = getTestCaseFromCloneModel(neg_testcase);
+        }
+        assert neg_testcase != null;
         postTestCase((TestCase) neg_testcase, true);
 
         // Call solve()
@@ -136,11 +183,17 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * @param cstr a {@link Constraint}
      * @return true if the given test cases are not contradict, and false otherwise.
      */
+    @Override
     public boolean isConsistent(@NonNull Collection<Constraint> C, @NonNull Constraint cstr) {
         checkArgument(!C.isEmpty(), "Cannot check the consistency with an empty set of constraints");
 
-        log.debug("{}Checking consistency for [C={}, cstr={}] >>>", LoggerUtils.tab, C, cstr);
+        log.debug("{}Checking consistency for [C={}, cstr={}] >>>", LoggerUtils.tab(), C, cstr);
         LoggerUtils.indent();
+
+        if (cdrModel.isClone()) { // if the model is a clone model, we need to get the corresponding constraints from the clone model
+            C = getConstraintFromCloneModel(C);
+            cstr = getConstraintFromCloneModel(Collections.singleton(cstr)).iterator().next();
+        }
 
         List<Constraint> CF = new LinkedList<>(C);
         // C - {cstr}
@@ -176,7 +229,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
         checkArgument(!C.isEmpty(), "Cannot check the consistency with an empty set of constraints");
         checkArgument(!TC.isEmpty(), "Cannot check the consistency with an empty test case set");
 
-        log.debug("{}Checking consistency [C={}, TC={}] >>>", LoggerUtils.tab, C, TC);
+        log.debug("{}Checking consistency [C={}, TC={}] >>>", LoggerUtils.tab(), C, TC);
         LoggerUtils.indent();
 
         boolean consistent = true;
@@ -189,7 +242,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
         }
 
         LoggerUtils.outdent();
-        log.debug("{}Checked [consistent={}, TCp={}]", LoggerUtils.tab, consistent, TCp);
+        log.debug("{}Checked [consistent={}, TCp={}]", LoggerUtils.tab(), consistent, TCp);
 
         return consistent;
     }
@@ -204,12 +257,13 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * @param onlyOne true - to get only one inconsistent test case, false - to get all inconsistent test cases
      * @return remaining inconsistent {@link ITestCase}s.
      */
+    @Override
     public Set<ITestCase> isConsistent(@NonNull Collection<Constraint> C, @NonNull Collection<ITestCase> TC, boolean onlyOne) {
         checkState(cdrModel instanceof IDebuggingModel, "Cannot check the consistency with a test case if the model is not debugging model");
         checkArgument(!C.isEmpty(), "Cannot check the consistency with an empty set of constraints");
         checkArgument(!TC.isEmpty(), "Cannot check the consistency with an empty test case set");
 
-        log.debug("{}Checking consistency [C={}, TC={}] >>>", LoggerUtils.tab, C, TC);
+        log.debug("{}Checking consistency [C={}, TC={}] >>>", LoggerUtils.tab(), C, TC);
         LoggerUtils.indent();
 
         Set<ITestCase> TCp = new LinkedHashSet<>();
@@ -224,7 +278,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
         }
 
         LoggerUtils.outdent();
-        log.debug("{}Checked [TCp={}]", LoggerUtils.tab, TCp);
+        log.debug("{}Checked [TCp={}]", LoggerUtils.tab(), TCp);
 
         return TCp;
     }
@@ -239,7 +293,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
         incrementCounter(COUNTER_UNPOST_CONSTRAINT, model.getNbCstrs());
         model.unpost(model.getCstrs()); // unpost all constraints
 
-        log.trace("{}Reset model", LoggerUtils.tab);
+        log.trace("{}Reset model", LoggerUtils.tab());
     }
 
     @Override
@@ -255,12 +309,12 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
     protected boolean check() {
         try {
             incrementCounter(COUNTER_CHOCO_SOLVER_CALLS);
-            log.trace("{}Checking...", LoggerUtils.tab);
+            log.trace("{}Checking...", LoggerUtils.tab());
             incrementCounter(COUNTER_SIZE_CONSISTENCY_CHECKS, model.getNbCstrs());
 
-            start(TIMER_SOLVER);
+            start(TIMER_SOLVER + getThreadString() + ": ");
             boolean isFeasible = model.getSolver().solve();
-            stop(TIMER_SOLVER);
+            stop(TIMER_SOLVER + getThreadString() + ": ");
 
             if (isFeasible) {
                 incrementCounter(COUNTER_FEASIBLE);
@@ -289,11 +343,11 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
             reset();
 
             LoggerUtils.outdent();
-            log.debug("{}<<< Checked [consistency={}]", LoggerUtils.tab, isFeasible);
+            log.debug("{}<<< Checked [consistency={}]", LoggerUtils.tab(), isFeasible);
 
             return isFeasible;
         } catch (Exception e) {
-            log.error("{}Error occurred while checking consistency: {}", LoggerUtils.tab, e.getMessage());
+            log.error("{}Error occurred while checking consistency: {}", LoggerUtils.tab(), e.getMessage());
             LoggerUtils.outdent();
 
             return false;
@@ -308,11 +362,11 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
         if (!negative) {
             testcase.getChocoConstraints().forEach(model::post);
             incrementCounter(COUNTER_POST_CONSTRAINT, testcase.getChocoConstraints().size());
-            log.trace("{}Added test case's constraints", LoggerUtils.tab);
+            log.trace("{}Added test case's constraints", LoggerUtils.tab());
         } else {
             testcase.getNegChocoConstraints().forEach(model::post);
             incrementCounter(COUNTER_POST_CONSTRAINT, testcase.getNegChocoConstraints().size());
-            log.trace("{}Added neg test case's constraints", LoggerUtils.tab);
+            log.trace("{}Added neg test case's constraints", LoggerUtils.tab());
         }
     }
 }

@@ -22,18 +22,16 @@ public class Utils {
     // Only for testing
     public void printInfo(Node root, List<Set<Constraint>> conflicts, List<Set<Constraint>> diagnoses) {
         printNode(root);
-        log.trace("{}conflicts: {}", LoggerUtils.tab, conflicts);
-        log.trace("{}diagnoses: {}", LoggerUtils.tab, diagnoses);
+        log.trace("{}conflicts: {}", LoggerUtils.tab(), conflicts);
+        log.trace("{}diagnoses: {}", LoggerUtils.tab(), diagnoses);
     }
 
     public void printNode(Node node) {
         if (node != null) {
-            log.trace("{}[node={}]", LoggerUtils.tab, node);
+            log.trace("{}[node={}]", LoggerUtils.tab(), node);
             LoggerUtils.indent();
 
-            for (Node child : node.getChildren().values()) {
-                printNode(child);
-            }
+            node.getChildren().values().forEach(Utils::printNode);
 
             LoggerUtils.outdent();
         }

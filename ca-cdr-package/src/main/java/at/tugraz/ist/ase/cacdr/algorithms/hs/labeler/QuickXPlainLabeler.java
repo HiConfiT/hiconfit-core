@@ -13,6 +13,8 @@ import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.AbstractHSParameters;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.FastDiagV2Parameters;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.QuickXPlainParameters;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
+import at.tugraz.ist.ase.cdrmodel.CDRModel;
+import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.Getter;
 import lombok.NonNull;

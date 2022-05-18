@@ -41,7 +41,7 @@ public class RenaultKB extends KB {
 
     @Override
     public void reset(boolean hasNegativeConstraints) {
-        log.trace("{}Creating RenaultKB >>>", LoggerUtils.tab);
+        log.trace("{}Creating RenaultKB >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         modelKB = new Model(name);
@@ -53,7 +53,7 @@ public class RenaultKB extends KB {
         defineConstraints(hasNegativeConstraints);
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created RenaultKB", LoggerUtils.tab);
+        log.debug("{}<<< Created RenaultKB", LoggerUtils.tab());
     }
 
     List<String> ruleFiles = List.of("001.pm", "002.pm", "003.pm", "004.pm", "005.pm", "006.pm", "007.pm", "008.pm", "009.pm", "010.pm",
@@ -70,7 +70,7 @@ public class RenaultKB extends KB {
             "111.pm", "112.pm", "113.pm");
 
     private void defineDomains() {
-        log.trace("{}Creating domains >>>", LoggerUtils.tab);
+        log.trace("{}Creating domains >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // 1
@@ -669,11 +669,11 @@ public class RenaultKB extends KB {
                 .build());
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created domains", LoggerUtils.tab);
+        log.trace("{}<<< Created domains", LoggerUtils.tab());
     }
 
     public void defineVariables (){
-        log.trace("{}Creating variables >>>", LoggerUtils.tab);
+        log.trace("{}Creating variables >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         List<String> varNames = List.of("Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10",
@@ -698,16 +698,16 @@ public class RenaultKB extends KB {
         });
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created variables", LoggerUtils.tab);
+        log.trace("{}<<< Created variables", LoggerUtils.tab());
     }
 
     public void defineConstraints(boolean hasNegativeConstraints) {
-        log.trace("{}Creating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Creating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         ClassLoader classLoader = getClass().getClassLoader();
         for (String ruleFile : ruleFiles) {
-            log.trace("{}Reading rule file {}", LoggerUtils.tab, ruleFile);
+            log.trace("{}Reading rule file {}", LoggerUtils.tab(), ruleFile);
             LoggerUtils.indent();
 
             try {
@@ -734,14 +734,14 @@ public class RenaultKB extends KB {
                 }
 
             } catch (IOException e) {
-                log.error("{}Error while reading rule file {} - {}", LoggerUtils.tab, ruleFile, e.getMessage());
+                log.error("{}Error while reading rule file {} - {}", LoggerUtils.tab(), ruleFile, e.getMessage());
             }
 
             LoggerUtils.outdent();
         }
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created constraints", LoggerUtils.tab);
+        log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
     @SneakyThrows
@@ -759,7 +759,7 @@ public class RenaultKB extends KB {
 
 
         while (!line.equals("or)")) {
-            log.trace("{}Reading rule {}", LoggerUtils.tab, line);
+            log.trace("{}Reading rule {}", LoggerUtils.tab(), line);
             if (line.equals("or(")) {
                 constraints.add(or(reader));
             } else {

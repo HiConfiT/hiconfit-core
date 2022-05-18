@@ -46,7 +46,7 @@ public class Clause {
             literal = clause;
         }
 
-        log.trace("{}Added clause [clause={}]", LoggerUtils.tab, this);
+        log.trace("{}Added clause [clause={}]", LoggerUtils.tab(), this);
     }
 
     public String getClause() {

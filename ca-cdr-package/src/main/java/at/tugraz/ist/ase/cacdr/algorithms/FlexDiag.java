@@ -21,6 +21,7 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of FlexDiag algorithm.
@@ -49,15 +50,13 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
-public class FlexDiag {
+public class FlexDiag extends IConsistencyAlgorithm {
     // for evaluation
-    public static final String TIMER_FLEXDIAG = "Timer for FlexDiag:";
+    public static final String TIMER_FLEXDIAG = "Timer for FlexDiag ";
     public static final String COUNTER_FLEXDIAG_CALLS = "The number of FlexDiag calls:";
 
-    protected final ChocoConsistencyChecker checker;
-
     public FlexDiag(@NonNull ChocoConsistencyChecker checker) {
-        this.checker = checker;
+        super(checker);
     }
 
     /**
@@ -74,7 +73,7 @@ public class FlexDiag {
      * @return a diagnosis or an empty set
      */
     public Set<Constraint> findDiagnosis(@NonNull Set<Constraint> S, @NonNull Set<Constraint> AC, int m) {
-        log.debug("{}Identifying diagnosis for [S={}, AC={}, {}] >>>", LoggerUtils.tab, S, AC, m);
+        log.debug("{}Identifying diagnosis for [S={}, AC={}, {}] >>>", LoggerUtils.tab(), S, AC, m);
         LoggerUtils.indent();
 
         Set<Constraint> ACwithoutS = Sets.difference(AC, S); incrementCounter(COUNTER_DIFFERENT_OPERATOR);
@@ -84,17 +83,17 @@ public class FlexDiag {
                 (!ACwithoutS.isEmpty() && !checker.isConsistent(ACwithoutS))) {
 
             LoggerUtils.outdent();
-            log.debug("{}<<< No diagnosis found", LoggerUtils.tab);
+            log.debug("{}<<< No diagnosis found", LoggerUtils.tab());
 
             return Collections.emptySet();
         } else { // else return FlexD(Φ, C, AC, m)
             incrementCounter(COUNTER_FLEXDIAG_CALLS);
-            start(TIMER_FLEXDIAG);
+            start(TIMER_FLEXDIAG + getThreadString() + ": ");
             Set<Constraint> Δ = flexd(Collections.emptySet(), S, AC, m);
-            stop(TIMER_FLEXDIAG);
+            stop(TIMER_FLEXDIAG + getThreadString() + ": ");
 
             LoggerUtils.outdent();
-            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab, Δ);
+            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab(), Δ);
 
             return Δ;
         }
@@ -119,14 +118,14 @@ public class FlexDiag {
      * @return a diagnosis or an empty set
      */
     private Set<Constraint> flexd(Set<Constraint> D, Set<Constraint> S, Set<Constraint> AC, int m) {
-        log.trace("{}FlexD [D={}, S={}, AC={}, m={}] >>>", LoggerUtils.tab, D, S, AC, m);
+        log.trace("{}FlexD [D={}, S={}, AC={}, m={}] >>>", LoggerUtils.tab(), D, S, AC, m);
         LoggerUtils.indent();
 
         // if D != Φ and consistent(AC) return Φ;
         if ( !D.isEmpty() ) {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(AC)) {
-                log.trace("{}<<< return Φ", LoggerUtils.tab);
+                log.trace("{}<<< return Φ", LoggerUtils.tab());
                 LoggerUtils.outdent();
 
                 return Collections.emptySet();
@@ -137,7 +136,7 @@ public class FlexDiag {
         int q = S.size();
         if (q <= m) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return [{}]", LoggerUtils.tab, S);
+            log.trace("{}<<< return [{}]", LoggerUtils.tab(), S);
 
             return S;
         }
@@ -146,7 +145,7 @@ public class FlexDiag {
         Set<Constraint> S1 = new LinkedHashSet<>();
         Set<Constraint> S2 = new LinkedHashSet<>();
         split(S, S1, S2);
-        log.trace("{}Split S into [S1={}, S2={}]", LoggerUtils.tab, S1, S2);
+        log.trace("{}Split S into [S1={}, S2={}]", LoggerUtils.tab(), S1, S2);
 
         // D1 = FlexD(S2, S1, AC - S2, m);
         Set<Constraint> ACwithoutS2 = Sets.difference(AC, S2); incrementCounter(COUNTER_DIFFERENT_OPERATOR);
@@ -161,7 +160,7 @@ public class FlexDiag {
         Set<Constraint> D2 = flexd(D1, S2, ACwithoutD1, m);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab, D1, D2);
+        log.trace("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
 
         // return(D1 ∪ D2);
         incrementCounter(COUNTER_UNION_OPERATOR);

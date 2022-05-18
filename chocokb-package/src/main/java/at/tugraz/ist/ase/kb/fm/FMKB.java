@@ -38,7 +38,7 @@ public class FMKB extends KB {
 
     @Override
     public void reset(boolean hasNegativeConstraints) {
-        log.trace("{}Creating FMKB for feature model [fm={}] >>>", LoggerUtils.tab, name);
+        log.trace("{}Creating FMKB for feature model [fm={}] >>>", LoggerUtils.tab(), name);
         LoggerUtils.indent();
 
         modelKB = new Model(name);
@@ -50,11 +50,11 @@ public class FMKB extends KB {
         defineConstraints(hasNegativeConstraints);
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab, name);
+        log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab(), name);
     }
 
     public void defineVariables (){
-        log.trace("{}Creating variables >>>", LoggerUtils.tab);
+        log.trace("{}Creating variables >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         IntStream.range(0, featureModel.getNumOfFeatures()).mapToObj(i -> featureModel.getFeature(i).getName()).forEachOrdered(varName -> {
@@ -73,11 +73,11 @@ public class FMKB extends KB {
         });
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created variables", LoggerUtils.tab);
+        log.trace("{}<<< Created variables", LoggerUtils.tab());
     }
 
     public void defineConstraints(boolean hasNegativeConstraints) {
-        log.trace("{}Creating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Creating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         int startIdx;
@@ -190,7 +190,7 @@ public class FMKB extends KB {
         }
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created constraints", LoggerUtils.tab);
+        log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
     private void addConstraintsToModel(boolean hasNegativeConstraints, int startIdx, LogOp logOp, LogOp negLogOp, Relationship relationship) {

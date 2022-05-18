@@ -87,11 +87,11 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
      */
     @Override
     public void initialize() {
-        log.debug("{}Initializing FMDebuggingModel for {} >>>", LoggerUtils.tab, getName());
+        log.debug("{}Initializing FMDebuggingModel for {} >>>", LoggerUtils.tab(), getName());
         LoggerUtils.indent();
 
         // sets possibly faulty constraints to super class
-        log.trace("{}Adding possibly faulty constraints", LoggerUtils.tab);
+        log.trace("{}Adding possibly faulty constraints", LoggerUtils.tab());
         List<Constraint> C = new LinkedList<>(fmkb.getConstraintList());
         if (isReversedConstraintsOrder()) {
             Collections.reverse(C); // in default, this shouldn't happen
@@ -100,7 +100,7 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
 
         // sets correct constraints to super class
         if (isRootConstraints()) {
-            log.trace("{}Adding correct constraints", LoggerUtils.tab);
+            log.trace("{}Adding correct constraints", LoggerUtils.tab());
             // {f0 = true}
             int startIdx = model.getNbCstrs();
             String f0 = fmkb.getVariable(0).getName();
@@ -114,7 +114,7 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         }
 
         // translates test cases to Choco constraints
-        log.trace("{}Translating test cases to Choco constraints", LoggerUtils.tab);
+        log.trace("{}Translating test cases to Choco constraints", LoggerUtils.tab());
         if (testSuite != null) {
             createTestCases();
 
@@ -126,7 +126,7 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         model.unpost(model.getCstrs());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Model {} initialized", LoggerUtils.tab, getName());
+        log.debug("{}<<< Model {} initialized", LoggerUtils.tab(), getName());
     }
 
     /**

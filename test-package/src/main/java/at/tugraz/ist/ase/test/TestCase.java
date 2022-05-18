@@ -85,7 +85,7 @@ public class TestCase implements ITestCase {
         }
         chocoConstraints.add(constraint);
 
-        log.trace("{}Added a Choco constraint to TestCase [choco_cstr={}, testcase={}]", LoggerUtils.tab, constraint, this);
+        log.trace("{}Added a Choco constraint to TestCase [choco_cstr={}, testcase={}]", LoggerUtils.tab(), constraint, this);
     }
 
     /**
@@ -98,7 +98,7 @@ public class TestCase implements ITestCase {
         }
         negChocoConstraints.add(neg_constraint);
 
-        log.trace("{}Added a negative Choco constraint to TestCase [choco_cstr={}, testcase={}]", LoggerUtils.tab, neg_constraint, this);
+        log.trace("{}Added a negative Choco constraint to TestCase [choco_cstr={}, testcase={}]", LoggerUtils.tab(), neg_constraint, this);
     }
 
     @Override

@@ -61,7 +61,7 @@ public class FeatureModel {
         Feature f = new Feature(fname, id);
         this.bfFeatures.add(f);
 
-        log.trace("{}Added feature [feature={}]", LoggerUtils.tab, f);
+        log.trace("{}Added feature [feature={}]", LoggerUtils.tab(), f);
     }
 
     private boolean isUniqueFeatureName(String fname) {
@@ -308,7 +308,7 @@ public class FeatureModel {
         Relationship r = new BasicRelationship(type, leftSide, rightSide);
         this.relationships.add(r);
 
-        log.trace("{}Added relationship [relationship={}]", LoggerUtils.tab, r);
+        log.trace("{}Added relationship [relationship={}]", LoggerUtils.tab(), r);
     }
 
 //    /**
@@ -362,7 +362,7 @@ public class FeatureModel {
         Relationship r = new BasicRelationship(type, leftSide, rightSide);
         this.constraints.add(r);
 
-        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab, r);
+        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab(), r);
     }
 
     /**
@@ -374,7 +374,7 @@ public class FeatureModel {
         Relationship r = new ThreeCNFConstraint(type, constraint3CNF);
         this.constraints.add(r);
 
-        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab, r);
+        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab(), r);
     }
 
     /**

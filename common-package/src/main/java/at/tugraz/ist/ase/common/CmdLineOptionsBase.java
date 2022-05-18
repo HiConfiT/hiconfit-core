@@ -47,7 +47,7 @@ public class CmdLineOptionsBase {
         try {
             parser.parseArgument(args);
         } catch (CmdLineException clEx) {
-            log.error("{}Unable to parse command-line options: {}", LoggerUtils.tab, clEx.getMessage());
+            log.error("{}Unable to parse command-line options: {}", LoggerUtils.tab(), clEx.getMessage());
             printUsage();
             System.exit(-1);
         }

@@ -29,7 +29,7 @@ public class TestSuiteBuilder implements ITestSuiteBuildable {
 
     @Override
     public TestSuite buildTestSuite(@NonNull InputStream is, @NonNull ITestCaseBuildable testCaseBuilder) throws IOException {
-        log.trace("{}Building test suite from input stream >>>", LoggerUtils.tab);
+        log.trace("{}Building test suite from input stream >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         @Cleanup BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
@@ -50,7 +50,7 @@ public class TestSuiteBuilder implements ITestSuiteBuildable {
                 .build();
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Built test suite [testsuite={}]", LoggerUtils.tab, testSuite);
+        log.debug("{}<<< Built test suite [testsuite={}]", LoggerUtils.tab(), testSuite);
         return testSuite;
     }
 }

@@ -27,7 +27,7 @@ public class IntVariable extends Variable implements Cloneable {
         super(name, domain);
         this.chocoVar = chocoVar;
 
-        log.trace("{}Created IntVariable [var={}]", LoggerUtils.tab, this);
+        log.trace("{}Created IntVariable [var={}]", LoggerUtils.tab(), this);
     }
 
     public String getValue() {
@@ -43,7 +43,7 @@ public class IntVariable extends Variable implements Cloneable {
         IntVariable clone = (IntVariable) super.clone();
         clone.chocoVar = chocoVar;
 
-        log.trace("{}Cloned IntVariable [var={}]", LoggerUtils.tab, clone);
+        log.trace("{}Cloned IntVariable [var={}]", LoggerUtils.tab(), clone);
         return clone;
     }
 }

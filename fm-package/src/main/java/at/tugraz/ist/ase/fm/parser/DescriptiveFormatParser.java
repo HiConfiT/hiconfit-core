@@ -82,7 +82,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not a Descriptive format or there are errors in the file!");
 
-        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab, filePath.getName());
+        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
         try {
@@ -106,7 +106,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab, filePath.getName(), featureModel);
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
         return featureModel;
     }
 
@@ -124,7 +124,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         try {
             addRelationship(RelationshipType.MANDATORY, ctx.identifier());
         } catch (FeatureModelException e) {
-            log.error("{}Error while adding mandatory relationship [relationship={}]", LoggerUtils.tab, ctx.getText());
+            log.error("{}Error while adding mandatory relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
 
@@ -133,7 +133,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         try {
             addRelationship(RelationshipType.OPTIONAL, ctx.identifier());
         } catch (FeatureModelException e) {
-            log.error("{}Error while adding optional relationship [relationship={}]", LoggerUtils.tab, ctx.getText());
+            log.error("{}Error while adding optional relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
 
@@ -142,7 +142,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         try {
             addRelationship(RelationshipType.ALTERNATIVE, ctx.identifier());
         } catch (FeatureModelException e) {
-            log.error("{}Error while adding alternative relationship [relationship={}]", LoggerUtils.tab, ctx.getText());
+            log.error("{}Error while adding alternative relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
 
@@ -151,7 +151,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         try {
             addRelationship(RelationshipType.OR, ctx.identifier());
         } catch (FeatureModelException e) {
-            log.error("{}Error while adding or relationship [relationship={}]", LoggerUtils.tab, ctx.getText());
+            log.error("{}Error while adding or relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
 
@@ -160,7 +160,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         try {
             addConstraint(RelationshipType.REQUIRES, ctx.identifier());
         } catch (FeatureModelException e) {
-            log.error("{}Error while adding requires constraint [constraint={}]", LoggerUtils.tab, ctx.getText());
+            log.error("{}Error while adding requires constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
 
@@ -169,7 +169,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         try {
             addConstraint(RelationshipType.EXCLUDES, ctx.identifier());
         } catch (FeatureModelException e) {
-            log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab, ctx.getText());
+            log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
 

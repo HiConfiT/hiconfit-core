@@ -86,7 +86,7 @@ public class SXFMParser implements FeatureModelParser {
     public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not SPLOT format or there are errors in the file!");
 
-        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab, filePath.getName());
+        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
         FeatureModel featureModel;
@@ -117,7 +117,7 @@ public class SXFMParser implements FeatureModelParser {
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab, filePath.getName(), featureModel);
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
         return featureModel;
     }
 
@@ -127,7 +127,7 @@ public class SXFMParser implements FeatureModelParser {
      * @param sxfm - a {@link fm.FeatureModel}
      */
     private void convertFeatures(fm.FeatureModel sxfm, FeatureModel fm) {
-        log.trace("{}Generating features >>>", LoggerUtils.tab);
+        log.trace("{}Generating features >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         Queue<FeatureTreeNode> queue = new LinkedList<>();
@@ -169,7 +169,7 @@ public class SXFMParser implements FeatureModelParser {
      * @throws FeatureModelParserException a ParserException
      */
     private void convertRelationships(fm.FeatureModel sxfm, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating relationships >>>", LoggerUtils.tab);
+        log.trace("{}Generating relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         try {
@@ -226,7 +226,7 @@ public class SXFMParser implements FeatureModelParser {
      * @throws FeatureModelParserException a ParserException
      */
     private void convertConstraints(fm.FeatureModel sxfm, FeatureModel fm) throws FeatureModelParserException, at.tugraz.ist.ase.fm.core.FeatureModelException {
-        log.trace("{}Generating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         for (PropositionalFormula formula : sxfm.getConstraints()) {

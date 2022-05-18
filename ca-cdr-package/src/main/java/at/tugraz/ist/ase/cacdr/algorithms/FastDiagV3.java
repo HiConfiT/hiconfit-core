@@ -21,6 +21,7 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of an MSS-based FastDiag algorithm.
@@ -48,7 +49,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class FastDiagV3 {
 
     // for evaluation
-    public static final String TIMER_FASTDIAGV3 = "Timer for FD V3:";
+    public static final String TIMER_FASTDIAGV3 = "Timer for FD V3 ";
     public static final String COUNTER_FASTDIAGV3_CALLS = "The number of FD V3 calls:";
 
     protected final ChocoConsistencyChecker checker;
@@ -70,7 +71,7 @@ public class FastDiagV3 {
      * @return a diagnosis or an empty set
      */
     public Set<Constraint> findDiagnosis(@NonNull Set<Constraint> C, @NonNull Set<Constraint> B) {
-        log.debug("{}Identifying diagnosis for [C={}, B={}] >>>", LoggerUtils.tab, C, B);
+        log.debug("{}Identifying diagnosis for [C={}, B={}] >>>", LoggerUtils.tab(), C, B);
         LoggerUtils.indent();
 
         Set<Constraint> BwithC = Sets.union(B, C); incrementCounter(COUNTER_UNION_OPERATOR);
@@ -80,20 +81,20 @@ public class FastDiagV3 {
                 || checker.isConsistent(BwithC)) {
 
             LoggerUtils.outdent();
-            log.debug("{}<<< No diagnosis found", LoggerUtils.tab);
+            log.debug("{}<<< No diagnosis found", LoggerUtils.tab());
 
             return Collections.emptySet();
         } else { // else return C \ FD(C, B, Φ)
             incrementCounter(COUNTER_FASTDIAGV3_CALLS);
-            start(TIMER_FASTDIAGV3);
+            start(TIMER_FASTDIAGV3 + getThreadString() + ": ");
             Set<Constraint> mss = fd(Collections.emptySet(), C, B);
-            stop(TIMER_FASTDIAGV3);
+            stop(TIMER_FASTDIAGV3 + getThreadString() + ": ");
 
             incrementCounter(COUNTER_DIFFERENT_OPERATOR);
             Set<Constraint> diag = Sets.difference(C, mss);
 
             LoggerUtils.outdent();
-            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab, diag);
+            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab(), diag);
 
             return diag;
         }
@@ -118,7 +119,7 @@ public class FastDiagV3 {
      * @return a maximal satisfiable subset MSS of C U B.
      */
     private Set<Constraint> fd(Set<Constraint> Δ, Set<Constraint> C, Set<Constraint> B) {
-        log.trace("{}FD [Δ={}, C={}, B={}] >>>", LoggerUtils.tab, Δ, C, B);
+        log.trace("{}FD [Δ={}, C={}, B={}] >>>", LoggerUtils.tab(), Δ, C, B);
         LoggerUtils.indent();
 
         // if Δ != Φ and consistent(B U C) return C;
@@ -128,7 +129,7 @@ public class FastDiagV3 {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(BwithC)) {
                 LoggerUtils.outdent();
-                log.trace("{}<<< return [{}]", LoggerUtils.tab, C);
+                log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
 
                 return C;
             }
@@ -138,7 +139,7 @@ public class FastDiagV3 {
         int n = C.size();
         if (n == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return Φ", LoggerUtils.tab);
+            log.trace("{}<<< return Φ", LoggerUtils.tab());
 
             return Collections.emptySet();
         }
@@ -147,7 +148,7 @@ public class FastDiagV3 {
         Set<Constraint> C1 = new LinkedHashSet<>();
         Set<Constraint> C2 = new LinkedHashSet<>();
         split(C, C1, C2);
-        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab, C1, C2);
+        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab(), C1, C2);
 
         // Δ1 = FD(C2, C1, B);
         incrementCounter(COUNTER_LEFT_BRANCH_CALLS);
@@ -162,7 +163,7 @@ public class FastDiagV3 {
         Set<Constraint> Δ2 = fd(C1withoutΔ1, C2, BwithΔ1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [Δ1={} ∪ Δ2={}]", LoggerUtils.tab, Δ1, Δ2);
+        log.trace("{}<<< return [Δ1={} ∪ Δ2={}]", LoggerUtils.tab(), Δ1, Δ2);
 
         // return Δ1 ∪ Δ2;
         incrementCounter(COUNTER_UNION_OPERATOR);

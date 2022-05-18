@@ -36,7 +36,7 @@ public class TestModel1 extends CDRModel implements IChocoModel, ITestModel {
 
     @Override
     public void initialize() throws Exception {
-        log.trace("{}Initializing CDRModel for {} >>>", LoggerUtils.tab, getName());
+        log.trace("{}Initializing CDRModel for {} >>>", LoggerUtils.tab(), getName());
         LoggerUtils.indent();
 
         model = CSPModels.createModel1();
@@ -51,14 +51,14 @@ public class TestModel1 extends CDRModel implements IChocoModel, ITestModel {
         }
         Collections.reverse(C);
         this.setPossiblyFaultyConstraints(C);
-        log.trace("{}Added constraints to the possibly faulty constraints [C={}]", LoggerUtils.tab, C);
+        log.trace("{}Added constraints to the possibly faulty constraints [C={}]", LoggerUtils.tab(), C);
 
         identifyExpectedResults();
 
         model.unpost(model.getCstrs());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Initialized CDRModel for {}", LoggerUtils.tab, getName());
+        log.debug("{}<<< Initialized CDRModel for {}", LoggerUtils.tab(), getName());
     }
 
     private void identifyExpectedResults() {
@@ -100,7 +100,7 @@ public class TestModel1 extends CDRModel implements IChocoModel, ITestModel {
         allConflicts.add(cs1);
         allConflicts.add(cs2);
 
-        log.trace("{}Generated expected results", LoggerUtils.tab);
+        log.trace("{}Generated expected results", LoggerUtils.tab());
     }
 
     @Override

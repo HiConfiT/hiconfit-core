@@ -84,7 +84,7 @@ public class GLENCOEParser implements FeatureModelParser {
     public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not Glencoe format or there are errors in the file!");
 
-        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab, filePath.getName());
+        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
         FeatureModel featureModel;
@@ -114,7 +114,7 @@ public class GLENCOEParser implements FeatureModelParser {
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab, filePath.getName(), featureModel);
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
         return featureModel;
     }
 
@@ -128,7 +128,7 @@ public class GLENCOEParser implements FeatureModelParser {
      * @throws FeatureModelParserException when error occurs in parsing
      */
     private void convertTree(JSONObject tree, JSONObject features, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating features and relationships >>>", LoggerUtils.tab);
+        log.trace("{}Generating features and relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         try {
@@ -240,7 +240,7 @@ public class GLENCOEParser implements FeatureModelParser {
      * @param fm - a {@link FeatureModel}
      */
     private void convertConstraints(JSONObject constraints, JSONObject features, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         for (Iterator<String> it = constraints.keys(); it.hasNext(); ) {

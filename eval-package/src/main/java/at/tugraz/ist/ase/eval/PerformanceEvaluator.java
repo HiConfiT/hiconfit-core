@@ -12,9 +12,11 @@ import at.tugraz.ist.ase.common.LoggerUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 public class PerformanceEvaluator {
@@ -23,6 +25,8 @@ public class PerformanceEvaluator {
 
     private static ConcurrentHashMap<String, Counter> counters = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Timer> timers = new ConcurrentHashMap<>();
+
+    private static List<String> commonTimers = new LinkedList<>();
 
     /**
      * Returns a counter with the given name. If counter does not exist, it will be created by the method and added
@@ -98,6 +102,23 @@ public class PerformanceEvaluator {
         return getTimer(name).total();
     }
 
+    public static void setCommonTimer(String name) {
+        if (!commonTimers.contains(name)) {
+            commonTimers.add(name);
+        }
+    }
+
+    public static long totalCommon(String name) {
+        AtomicLong total = new AtomicLong();
+        timers.forEach((key, timer) -> {
+            if (key.contains(name)) {
+                total.addAndGet(timer.total());
+            }
+        });
+
+        return total.get();
+    }
+
     /**
      * @return an unmodifiable map of counters
      */
@@ -118,8 +139,9 @@ public class PerformanceEvaluator {
     public static void reset() {
         counters = new ConcurrentHashMap<>();
         timers = new ConcurrentHashMap<>();
+        commonTimers = new LinkedList<>();
 
-        log.debug("{}Reset PerformanceEvaluator", LoggerUtils.tab);
+        log.debug("{}Reset PerformanceEvaluator", LoggerUtils.tab());
     }
 
     /**
@@ -146,6 +168,12 @@ public class PerformanceEvaluator {
             }
         }
 
+        st.append("\n");
+
+        for (String key: commonTimers) {
+            st.append(key).append(": ").append( (double)totalCommon(key) / 1000000000.0).append("\n");
+        }
+
         return st.toString();
     }
 
@@ -165,6 +193,12 @@ public class PerformanceEvaluator {
 
         for (String key: timers.keySet()) {
             st.append(key).append(" ").append((double)getTimer(key).total() / 1000000000.0 / numIteration).append("\n");
+        }
+
+        st.append("\n");
+
+        for (String key: commonTimers) {
+            st.append(key).append(": ").append( (double)totalCommon(key) / 1000000000.0 / numIteration).append("\n");
         }
 
         return st.toString();
