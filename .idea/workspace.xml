@@ -4,74 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix clone &amp; remove ConstraintSet.java">
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/IConsistencyAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/ThreadTimerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/AbstractHSConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/AbstractHSConstructor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Node.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/IHSLabelable.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/IHSLabelable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/QuickXPlainLabeler.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/QuickXPlainLabeler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/AbstractHSParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/AbstractHSParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/IConsistencyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/IConsistencyChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/csp/CSPModels.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/csp/CSPModels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/common/ConstraintUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/common/ConstraintUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/BoolVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/BoolVariable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Constraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Constraint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Domain.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Domain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/IntVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/IntVariable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/fm/FMKB.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/fm/FMKB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/pc/PCKB.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/pc/PCKB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/renault/RenaultKB.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/renault/RenaultKB.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/CmdLineOptionsBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/CmdLineOptionsBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/MailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/RandomUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/RandomUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/CSP2ChocoTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/src/main/java/at/tugraz/ist/ase/csp2choco/CSP2ChocoTranslator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Counter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Timer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Clause.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Clause.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/FeatureModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/FeatureModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/DescriptiveFormatParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/DescriptiveFormatParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/GLENCOEParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/GLENCOEParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/SXFMParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/SXFMParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/XMIParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/XMIParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/TestSuiteBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/TestSuiteBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/fm/FMTestCaseBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/fm/FMTestCaseBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMTestCaseTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMTestCaseTranslator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -418,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1652876570406</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
+      <created>1652893586907</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1652893586907</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +422,8 @@
     <MESSAGE value="Use Java stream &amp; Add equals, hashCode" />
     <MESSAGE value="Use Java stream" />
     <MESSAGE value="Fix clone &amp; remove ConstraintSet.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix clone &amp; remove ConstraintSet.java" />
+    <MESSAGE value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>
