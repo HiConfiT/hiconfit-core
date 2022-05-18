@@ -24,7 +24,7 @@ import static at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslator.loadConstraints;
 @Slf4j
 public class CSPModels {
     public Model createModel1() throws IOException {
-        log.trace("{}Creating model from csp1.mzn >>>", LoggerUtils.tab);
+        log.trace("{}Creating model from csp1.mzn >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // create a model
@@ -33,22 +33,22 @@ public class CSPModels {
         // Decision variables
         model.intVar("x", -10, 10);
         model.intVar("y", -10, 10);
-        log.trace("{}Created variables", LoggerUtils.tab);
+        log.trace("{}Created variables", LoggerUtils.tab());
 
         ClassLoader classLoader = CSPModels.class.getClassLoader();
         @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp1.mzn");
 
         loadConstraints(inputStream, model);
-        log.trace("{}Created constraints", LoggerUtils.tab);
+        log.trace("{}Created constraints", LoggerUtils.tab());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created model from csp1.mzn", LoggerUtils.tab);
+        log.debug("{}<<< Created model from csp1.mzn", LoggerUtils.tab());
 
         return model;
     }
 
     public Model createModel2() throws IOException {
-        log.trace("{}Creating model from csp2.mzn >>>", LoggerUtils.tab);
+        log.trace("{}Creating model from csp2.mzn >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // create a model
@@ -58,22 +58,22 @@ public class CSPModels {
         model.intVar("v1", 1, 3);
         model.intVar("v2", 1, 3);
         model.intVar("v3", 1, 3);
-        log.trace("{}Created variables", LoggerUtils.tab);
+        log.trace("{}Created variables", LoggerUtils.tab());
 
         ClassLoader classLoader = CSPModels.class.getClassLoader();
         @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp2.mzn");
 
         loadConstraints(inputStream, model);
-        log.trace("{}Created constraints", LoggerUtils.tab);
+        log.trace("{}Created constraints", LoggerUtils.tab());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created model from csp2.mzn", LoggerUtils.tab);
+        log.debug("{}<<< Created model from csp2.mzn", LoggerUtils.tab());
 
         return model;
     }
 
     public Model createModel3() throws IOException {
-        log.trace("{}Creating model from csp3.mzn >>>", LoggerUtils.tab);
+        log.trace("{}Creating model from csp3.mzn >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // create a model
@@ -83,22 +83,22 @@ public class CSPModels {
         model.intVar("v1", 1, 3);
         model.intVar("v2", 1, 3);
         model.intVar("v3", 1, 3);
-        log.trace("{}Created variables", LoggerUtils.tab);
+        log.trace("{}Created variables", LoggerUtils.tab());
 
         ClassLoader classLoader = CSPModels.class.getClassLoader();
         @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp3.mzn");
 
         loadConstraints(inputStream, model);
-        log.trace("{}Created constraints", LoggerUtils.tab);
+        log.trace("{}Created constraints", LoggerUtils.tab());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created model from csp3.mzn", LoggerUtils.tab);
+        log.debug("{}<<< Created model from csp3.mzn", LoggerUtils.tab());
 
         return model;
     }
 
     public Model createModel4() throws IOException {
-        log.trace("{}Creating model from csp4.mzn >>>", LoggerUtils.tab);
+        log.trace("{}Creating model from csp4.mzn >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // create a model
@@ -108,22 +108,22 @@ public class CSPModels {
         model.intVar("v1", 1, 3);
         model.intVar("v2", 1, 3);
         model.intVar("v3", 1, 3);
-        log.trace("{}Created variables", LoggerUtils.tab);
+        log.trace("{}Created variables", LoggerUtils.tab());
 
         ClassLoader classLoader = CSPModels.class.getClassLoader();
         @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp4.mzn");
 
         loadConstraints(inputStream, model);
-        log.trace("{}Created constraints", LoggerUtils.tab);
+        log.trace("{}Created constraints", LoggerUtils.tab());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created model from csp4.mzn", LoggerUtils.tab);
+        log.debug("{}<<< Created model from csp4.mzn", LoggerUtils.tab());
 
         return model;
     }
 
     public Model createModel5() throws IOException {
-        log.trace("{}Creating model from csp5.mzn >>>", LoggerUtils.tab);
+        log.trace("{}Creating model from csp5.mzn >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // create a model
@@ -133,22 +133,22 @@ public class CSPModels {
         model.intVar("v1", 1, 3);
         model.intVar("v2", 1, 3);
         model.intVar("v3", 1, 3);
-        log.trace("{}Created variables", LoggerUtils.tab);
+        log.trace("{}Created variables", LoggerUtils.tab());
 
         ClassLoader classLoader = CSPModels.class.getClassLoader();
         @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp5.mzn");
 
         loadConstraints(inputStream, model);
-        log.trace("{}Created constraints", LoggerUtils.tab);
+        log.trace("{}Created constraints", LoggerUtils.tab());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created model from csp5.mzn", LoggerUtils.tab);
+        log.debug("{}<<< Created model from csp5.mzn", LoggerUtils.tab());
 
         return model;
     }
 
     public Model createModel6() throws IOException {
-        log.trace("{}Creating model from csp6.mzn >>>", LoggerUtils.tab);
+        log.trace("{}Creating model from csp6.mzn >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // create a model
@@ -158,16 +158,16 @@ public class CSPModels {
         model.intVar("v1", 1, 3);
         model.intVar("v2", 1, 3);
         model.intVar("v3", 1, 3);
-        log.trace("{}Created variables", LoggerUtils.tab);
+        log.trace("{}Created variables", LoggerUtils.tab());
 
         ClassLoader classLoader = CSPModels.class.getClassLoader();
         @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp6.mzn");
 
         loadConstraints(inputStream, model);
-        log.trace("{}Created constraints", LoggerUtils.tab);
+        log.trace("{}Created constraints", LoggerUtils.tab());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created model from csp6.mzn", LoggerUtils.tab);
+        log.debug("{}<<< Created model from csp6.mzn", LoggerUtils.tab());
 
         return model;
     }

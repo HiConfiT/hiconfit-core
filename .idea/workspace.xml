@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Publish new packages - version 1.3.5">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
@@ -39,14 +39,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="24-transparent-between-conflicts-and-diagnoses-in-the-hstree-and-hsdag-algorithms" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,27 +78,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "temurin-17",
-    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/cdrmodel-package/src/test/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Facets",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.30601093",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/cdrmodel-package/src/test/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.profiles&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
@@ -124,91 +125,81 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.HSDAGTest">
-    <configuration name="FMDebuggingModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-package" />
+  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package">
+    <configuration name="All in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadTimerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FMDebuggingModelTest.shouldCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-package" />
+    <configuration name="ThreadTimerTest.testFindDiagnosis1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
-      <option name="METHOD_NAME" value="shouldCloneable" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
+      <option name="METHOD_NAME" value="testFindDiagnosis1" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSDAGTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="at.tugraz.ist.ase.common in common-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="common-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.common.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSTreeTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestModel1Test.shouldCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.test.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.test.model" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.test.model.TestModel1Test" />
-      <option name="METHOD_NAME" value="shouldCloneable" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.common" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.HSDAGTest" />
-        <item itemvalue="JUnit.HSTreeTest" />
-        <item itemvalue="JUnit.TestModel1Test.shouldCloneable" />
-        <item itemvalue="JUnit.FMDebuggingModelTest.shouldCloneable" />
-        <item itemvalue="JUnit.FMDebuggingModelTest" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.common in common-package" />
+        <item itemvalue="JUnit.ThreadTimerTest" />
+        <item itemvalue="JUnit.ThreadTimerTest.testFindDiagnosis1" />
+        <item itemvalue="JUnit.All in ca-cdr-package" />
       </list>
     </recent_temporary>
   </component>
@@ -349,21 +340,42 @@
       <option name="project" value="LOCAL" />
       <updated>1652694841940</updated>
     </task>
-    <task id="LOCAL-00016" summary="Makes a transparent between conflicts and diagnoses in the HSTree and HSDAG algorithms">
-      <created>1652777804632</created>
+    <task id="LOCAL-00016" summary="Use Java stream">
+      <created>1652874948669</created>
       <option name="number" value="00016" />
       <option name="presentableId" value="LOCAL-00016" />
       <option name="project" value="LOCAL" />
-      <updated>1652777804632</updated>
+      <updated>1652874948669</updated>
     </task>
-    <task id="LOCAL-00017" summary="Publish new packages - version 1.3.5">
-      <created>1652785143841</created>
+    <task id="LOCAL-00017" summary="Use Java stream &amp; Add equals, hashCode">
+      <created>1652875176126</created>
       <option name="number" value="00017" />
       <option name="presentableId" value="LOCAL-00017" />
       <option name="project" value="LOCAL" />
-      <updated>1652785143841</updated>
+      <updated>1652875176126</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Use Java stream">
+      <created>1652876434972</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1652876434972</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Fix clone &amp; remove ConstraintSet.java">
+      <created>1652876570406</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1652876570406</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
+      <created>1652893586907</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1652893586907</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,7 +389,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="22-support-to-clone-cdrmodels" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -400,9 +424,11 @@
     <MESSAGE value="Add README.md and build new releases" />
     <MESSAGE value="Corrects the Maven packages" />
     <MESSAGE value="Support to clone TestSuite, and FMDebuggingModel" />
-    <MESSAGE value="Makes a transparent between conflicts and diagnoses in the HSTree and HSDAG algorithms" />
-    <MESSAGE value="Publish new packages - version 1.3.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Publish new packages - version 1.3.5" />
+    <MESSAGE value="Use Java stream &amp; Add equals, hashCode" />
+    <MESSAGE value="Use Java stream" />
+    <MESSAGE value="Fix clone &amp; remove ConstraintSet.java" />
+    <MESSAGE value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
   </component>
   <component name="XDebuggerManager">
     <pin-to-top-manager>

@@ -23,7 +23,7 @@ import java.util.Set;
  * @author David - source: <a href="https://github.com/jaccovs/Master-project">https://github.com/jaccovs/Master-project</a>
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
-public interface IHSLabelable {
+public interface IHSLabelable extends Cloneable {
 
     /**
      * Returns the reasoning type of the labeler.

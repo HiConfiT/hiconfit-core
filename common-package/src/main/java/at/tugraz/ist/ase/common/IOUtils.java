@@ -54,4 +54,8 @@ public class IOUtils {
             folder.mkdir(); // if not, create it
         }
     }
+
+    public String getThreadString() {
+        return "[thread=" + Thread.currentThread().getId() + "]";
+    }
 }

@@ -26,6 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
 
@@ -40,7 +41,7 @@ public class RenaultKB extends KB {
 
     @Override
     public void reset(boolean hasNegativeConstraints) {
-        log.trace("{}Creating RenaultKB >>>", LoggerUtils.tab);
+        log.trace("{}Creating RenaultKB >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         modelKB = new Model(name);
@@ -52,7 +53,7 @@ public class RenaultKB extends KB {
         defineConstraints(hasNegativeConstraints);
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created RenaultKB", LoggerUtils.tab);
+        log.debug("{}<<< Created RenaultKB", LoggerUtils.tab());
     }
 
     List<String> ruleFiles = List.of("001.pm", "002.pm", "003.pm", "004.pm", "005.pm", "006.pm", "007.pm", "008.pm", "009.pm", "010.pm",
@@ -69,7 +70,7 @@ public class RenaultKB extends KB {
             "111.pm", "112.pm", "113.pm");
 
     private void defineDomains() {
-        log.trace("{}Creating domains >>>", LoggerUtils.tab);
+        log.trace("{}Creating domains >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         // 1
@@ -668,11 +669,11 @@ public class RenaultKB extends KB {
                 .build());
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created domains", LoggerUtils.tab);
+        log.trace("{}<<< Created domains", LoggerUtils.tab());
     }
 
     public void defineVariables (){
-        log.trace("{}Creating variables >>>", LoggerUtils.tab);
+        log.trace("{}Creating variables >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         List<String> varNames = List.of("Var1", "Var2", "Var3", "Var4", "Var5", "Var6", "Var7", "Var8", "Var9", "Var10",
@@ -686,7 +687,7 @@ public class RenaultKB extends KB {
                 "Var83", "Var84", "Var85", "Var86", "Var87", "Var88", "Var89", "Var90", "Var91", "Var92",
                 "Var93", "Var94", "Var95", "Var96", "Var97", "Var98", "Var99", "Var100", "Var101");
 
-        for (int i = 0; i < varNames.size(); i++) {
+        IntStream.range(0, varNames.size()).forEachOrdered(i -> {
             String varName = varNames.get(i);
             IntVar intVar = this.modelKB.intVar(varName, domainList.get(i).getIntValues());
             Variable var = IntVariable.builder()
@@ -694,19 +695,19 @@ public class RenaultKB extends KB {
                     .domain(domainList.get(i))
                     .chocoVar(intVar).build();
             variableList.add(var);
-        }
+        });
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created variables", LoggerUtils.tab);
+        log.trace("{}<<< Created variables", LoggerUtils.tab());
     }
 
     public void defineConstraints(boolean hasNegativeConstraints) {
-        log.trace("{}Creating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Creating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         ClassLoader classLoader = getClass().getClassLoader();
         for (String ruleFile : ruleFiles) {
-            log.trace("{}Reading rule file {}", LoggerUtils.tab, ruleFile);
+            log.trace("{}Reading rule file {}", LoggerUtils.tab(), ruleFile);
             LoggerUtils.indent();
 
             try {
@@ -733,14 +734,14 @@ public class RenaultKB extends KB {
                 }
 
             } catch (IOException e) {
-                log.error("{}Error while reading rule file {} - {}", LoggerUtils.tab, ruleFile, e.getMessage());
+                log.error("{}Error while reading rule file {} - {}", LoggerUtils.tab(), ruleFile, e.getMessage());
             }
 
             LoggerUtils.outdent();
         }
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created constraints", LoggerUtils.tab);
+        log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
     @SneakyThrows
@@ -758,7 +759,7 @@ public class RenaultKB extends KB {
 
 
         while (!line.equals("or)")) {
-            log.trace("{}Reading rule {}", LoggerUtils.tab, line);
+            log.trace("{}Reading rule {}", LoggerUtils.tab(), line);
             if (line.equals("or(")) {
                 constraints.add(or(reader));
             } else {
@@ -777,16 +778,13 @@ public class RenaultKB extends KB {
         String[] tokens = line.split(" and ");
 
         List<org.chocosolver.solver.constraints.Constraint> constraints = new LinkedList<>();
-        for (String token : tokens) {
-            String[] var_val = token.split(" = ");
-
+        Arrays.stream(tokens).map(token -> token.split(" = ")).forEachOrdered(var_val -> {
             String variable = var_val[0].trim();
             IntVar intvar = getIntVar(variable);
             String value = var_val[1].trim();
             int chocovalue = getIntValue(variable, value);
-
             constraints.add(modelKB.arithm(intvar, "=", chocovalue));
-        }
+        });
 
         org.chocosolver.solver.constraints.Constraint[] arrConstraints = constraints.toArray(new org.chocosolver.solver.constraints.Constraint[0]);
         return modelKB.and(arrConstraints);

@@ -53,7 +53,7 @@ public class MailService {
 
             Transport.send(message);
 
-            log.info("{}Sent an email successfully [from={}, to={}]", LoggerUtils.tab, from, to);
+            log.info("{}Sent an email successfully [from={}, to={}]", LoggerUtils.tab(), from, to);
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }

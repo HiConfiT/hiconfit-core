@@ -33,7 +33,7 @@ public class Constraint {
         chocoConstraints = new LinkedList<>();
         negChocoConstraints = new LinkedList<>();
 
-        log.trace("{}Created Constraint [cstr={}]", LoggerUtils.tab, constraint);
+        log.trace("{}Created Constraint [cstr={}]", LoggerUtils.tab(), constraint);
     }
 
     public void addChocoConstraints(@NonNull Model model, int startIdx, int endIdx, boolean hasNegativeConstraints) {
@@ -67,13 +67,13 @@ public class Constraint {
     public void addChocoConstraint(@NonNull org.chocosolver.solver.constraints.Constraint constraint) {
         chocoConstraints.add(constraint);
 
-        log.trace("{}Added a Choco constraint to Constraint [choco_cstr={}, cstr={}]", LoggerUtils.tab, constraint, this);
+        log.trace("{}Added a Choco constraint to Constraint [choco_cstr={}, cstr={}]", LoggerUtils.tab(), constraint, this);
     }
 
     public void addNegChocoConstraint(@NonNull org.chocosolver.solver.constraints.Constraint constraint) {
         negChocoConstraints.add(constraint);
 
-        log.trace("{}Added a negative Choco constraint to Constraint [choco_cstr={}, cstr={}]", LoggerUtils.tab, constraint, this);
+        log.trace("{}Added a negative Choco constraint to Constraint [choco_cstr={}, cstr={}]", LoggerUtils.tab(), constraint, this);
     }
 
     public boolean contains(@NonNull org.chocosolver.solver.constraints.Constraint constraint) {

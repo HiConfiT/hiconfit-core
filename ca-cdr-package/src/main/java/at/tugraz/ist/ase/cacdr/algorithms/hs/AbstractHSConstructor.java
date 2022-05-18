@@ -29,9 +29,9 @@ import java.util.Set;
 @Getter
 public abstract class AbstractHSConstructor {
     // for evaluation
-    public static final String TIMER_HS_CONSTRUCTION_SESSION = "Timer for HS construction session:";
-    public static final String TIMER_NODE_LABEL = "Timer for node labels (conflict/diagnosis):"; // conflict/diagnosis
-    public static final String TIMER_PATH_LABEL = "Timer for path labels (diagnosis/conflict):";
+    public static final String TIMER_HS_CONSTRUCTION_SESSION = "Timer for HS construction session ";
+    public static final String TIMER_NODE_LABEL = "Timer for label ";
+    public static final String TIMER_PATH_LABEL = "Timer for path label ";
 
     public static final String COUNTER_CONSTRUCTED_NODES = "The number of constructed nodes:";
     public static final String COUNTER_CLOSE_1 = "The number of 3.i closed nodes:";

@@ -21,6 +21,7 @@ import java.util.*;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.hasIntersection;
+import static at.tugraz.ist.ase.common.IOUtils.getThreadString;
 
 /**
  * Implementation of the HS-tree algorithm.
@@ -49,17 +50,17 @@ public class HSTree extends AbstractHSConstructor {
     public void construct() {
         AbstractHSParameters param = getLabeler().getInitialParameters();
 
-        log.debug("{}Constructing the HS-tree for [C={}] >>>", LoggerUtils.tab, param.getC());
+        log.debug("{}Constructing the HS-tree for [C={}] >>>", LoggerUtils.tab(), param.getC());
         LoggerUtils.indent();
 
-        start(TIMER_HS_CONSTRUCTION_SESSION);
-        start(TIMER_PATH_LABEL);
+        start(TIMER_HS_CONSTRUCTION_SESSION  + getThreadString() + ": ");
+        start(TIMER_PATH_LABEL  + getThreadString() + ": ");
 
         // generate root if there is none
         if (!hasRoot()) {
-            start(TIMER_NODE_LABEL);
-            List<Set<Constraint>> labels = getLabeler().getLabel(param);
-            stop(TIMER_NODE_LABEL);
+            start(TIMER_LABEL  + getThreadString() + ": ");
+            List<Set<Constraint>> conflicts = getLabeler().getLabel(param);
+            stop(TIMER_LABEL  + getThreadString() + ": ");
 
             if (labels.isEmpty()) {
                 endConstruction();
@@ -85,7 +86,7 @@ public class HSTree extends AbstractHSConstructor {
         while (hasNodesToExpand()) {
             Node node = getNextNode();
             if (skipNode(node)) continue;
-            log.trace("{}Processing [node={}]", LoggerUtils.tab, node);
+            log.trace("{}Processing [node={}]", LoggerUtils.tab(), node);
             LoggerUtils.indent();
 
             label(node);
@@ -108,11 +109,11 @@ public class HSTree extends AbstractHSConstructor {
 
     protected void endConstruction() {
         LoggerUtils.outdent();
-        log.debug("{}<<< return [conflicts={}]", LoggerUtils.tab, getConflicts());
-        log.debug("{}<<< return [diagnoses={}]", LoggerUtils.tab, getDiagnoses());
+        log.debug("{}<<< return [conflicts={}]", LoggerUtils.tab(), getConflicts());
+        log.debug("{}<<< return [diagnoses={}]", LoggerUtils.tab(), getDiagnoses());
 
-        stop(TIMER_HS_CONSTRUCTION_SESSION);
-        stop(TIMER_PATH_LABEL, false);
+        stop(TIMER_HS_CONSTRUCTION_SESSION  + getThreadString() + ": ");
+        stop(TIMER_PATH_LABEL  + getThreadString() + ": ", false);
 
         if (log.isTraceEnabled()) {
             Utils.printInfo(root, getConflicts(), getDiagnoses());
@@ -130,14 +131,12 @@ public class HSTree extends AbstractHSConstructor {
             }
             if (labels.isEmpty()) {
                 node.setStatus(NodeStatus.Checked);
-                Set<Constraint> pathLabel = new LinkedHashSet<>(node.getPathLabel());
-                getPathLabels().add(pathLabel);
-                log.debug("{}{} #{} is found: {}", LoggerUtils.tab,
-                        getLabeler().getType() == LabelerType.CONFLICT ? "Diagnosis" : "Conflict",
-                        getDiagnoses().size(), node.getPathLabel());
+                Set<Constraint> diag = new LinkedHashSet<>(node.getPathLabels());
+                getDiagnoses().add(diag);
+                log.debug("{}Diagnosis #{} is found: {}", LoggerUtils.tab(), getDiagnoses().size(), node.getPathLabels());
 
-                stop(TIMER_PATH_LABEL);
-                start(TIMER_PATH_LABEL);
+                stop(TIMER_PATH_LABEL  + getThreadString() + ": ");
+                start(TIMER_PATH_LABEL  + getThreadString() + ": ");
                 return;
             }
             Set<Constraint> label = selectLabel(labels);
@@ -150,11 +149,11 @@ public class HSTree extends AbstractHSConstructor {
         List<Set<Constraint>> labels = new LinkedList<>();
         for (Set<Constraint> label : getNodeLabels()) {
             // H(node) ∩ S = {}
-            if (!hasIntersection(node.getPathLabel(), label)) {
-                labels.add(label);
-                incrementCounter(COUNTER_REUSE_LABELS);
-                log.trace("{}Reuse [label={}, node={}]", LoggerUtils.tab, label, node);
-                return labels;
+            if (!hasIntersection(node.getPathLabels(), conflict)) {
+                conflicts.add(conflict);
+                incrementCounter(COUNTER_REUSE_CONFLICT);
+                log.trace("{}Reuse [conflict={}, node={}]", LoggerUtils.tab(), conflict, node);
+                return conflicts;
             }
         }
         return labels;
@@ -163,38 +162,38 @@ public class HSTree extends AbstractHSConstructor {
     protected List<Set<Constraint>> computeLabel(Node node) {
         AbstractHSParameters param = node.getParameters();
 
-        start(TIMER_NODE_LABEL);
-        List<Set<Constraint>> labels = getLabeler().getLabel(param);
+        start(TIMER_NODE_LABEL  + getThreadString() + ": ");
+        List<Set<Constraint>> conflicts = getLabeler().getLabel(param);
 
-        if (!labels.isEmpty()) {
-            stop(TIMER_NODE_LABEL);
+        if (!conflicts.isEmpty()) {
+            stop(TIMER_NODE_LABEL  + getThreadString() + ": ");
 
             addNodeLabels(labels);
         } else {
             // stop TIMER_CONFLICT without saving the time
-            stop(TIMER_NODE_LABEL, false);
+            stop(TIMER_NODE_LABEL  + getThreadString() + ": ", false);
         }
         return labels;
     }
 
     protected void addNodeLabels(Collection<Set<Constraint>> labels) {
-        for (Set<Constraint> label : labels) {
+        labels.forEach(label -> {
             getNodeLabels().add(label);
-            log.debug("{}{} #{} is found: {}", LoggerUtils.tab,
+            log.debug("{}{} #{} is found: {}", LoggerUtils.tab(),
                     getLabeler().getType() == LabelerType.CONFLICT ? "Conflict" : "Diagnosis",
                     getNodeLabels().size(), label);
-        }
+        });
     }
 
     protected void addItemToLabelNodesMap(Set<Constraint> label, Node node) {
-        log.trace("{}addItemToLabelNodesMap [label_nodesMap.size={}, label={}, node={}]", LoggerUtils.tab, label_nodesMap.size(), label, node);
+        log.trace("{}addItemToLabelNodesMap [label_nodesMap.size={}, label={}, node={}]", LoggerUtils.tab(), label_nodesMap.size(), label, node);
         LoggerUtils.indent();
         if (!label_nodesMap.containsKey(label)) {
             label_nodesMap.put(label, new LinkedList<>());
-            log.trace("{}Add new item", LoggerUtils.tab);
+            log.trace("{}Add new item", LoggerUtils.tab());
         }
         label_nodesMap.get(label).add(node);
-        log.trace("{}Updated [label_nodesMap.size={}]", LoggerUtils.tab, label_nodesMap.size());
+        log.trace("{}Updated [label_nodesMap.size={}]", LoggerUtils.tab(), label_nodesMap.size()); 
         LoggerUtils.outdent();
     }
 
@@ -222,10 +221,10 @@ public class HSTree extends AbstractHSConstructor {
     }
 
     protected void expand(Node nodeToExpand) {
-        log.trace("{}Generating the children nodes of [node={}]", LoggerUtils.tab, nodeToExpand);
+        log.trace("{}Generating the children nodes of [node={}]", LoggerUtils.tab(), nodeToExpand);
         LoggerUtils.indent();
 
-        for (Constraint arcLabel : nodeToExpand.getLabel()) {
+        nodeToExpand.getLabel().forEach(arcLabel -> {
             AbstractHSParameters param_parentNode = nodeToExpand.getParameters();
             AbstractHSParameters new_param = getLabeler().createParameter(param_parentNode, arcLabel);
 
@@ -239,7 +238,7 @@ public class HSTree extends AbstractHSConstructor {
             if (!canPrune(node)) {
                 openNodes.add(node);
             }
-        }
+        });
 
         LoggerUtils.outdent();
     }
@@ -252,7 +251,7 @@ public class HSTree extends AbstractHSConstructor {
                 node.setStatus(NodeStatus.Closed);
                 incrementCounter(COUNTER_CLOSE_1);
 
-                log.trace("{}Closed [node={}]", LoggerUtils.tab, node);
+                log.trace("{}Closed [node={}]", LoggerUtils.tab(), node);
 
                 return true;
             }
@@ -265,7 +264,7 @@ public class HSTree extends AbstractHSConstructor {
                 node.setStatus(NodeStatus.Closed);
                 incrementCounter(COUNTER_CLOSE_2);
 
-                log.trace("{}Closed [node={}]", LoggerUtils.tab, node);
+                log.trace("{}Closed [node={}]", LoggerUtils.tab(), node);
 
                 return true;
             }

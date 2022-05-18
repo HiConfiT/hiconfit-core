@@ -27,7 +27,7 @@ public class BoolVariable extends Variable implements Cloneable {
         super(name, domain);
         this.chocoVar = chocoVar;
 
-        log.trace("{}Created BoolVariable [var={}]", LoggerUtils.tab, this);
+        log.trace("{}Created BoolVariable [var={}]", LoggerUtils.tab(), this);
     }
 
     public String getValue() {
@@ -43,7 +43,7 @@ public class BoolVariable extends Variable implements Cloneable {
         BoolVariable clone = (BoolVariable) super.clone();
         clone.chocoVar = chocoVar;
 
-        log.trace("{}Cloned BoolVariable [var={}]", LoggerUtils.tab, clone);
+        log.trace("{}Cloned BoolVariable [var={}]", LoggerUtils.tab(), clone);
         return clone;
     }
 }

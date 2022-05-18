@@ -96,7 +96,7 @@ public class Node {
         root.label = label;
         root.parameters = parameters;
 
-        log.trace("{}Created root node with [label={}]", LoggerUtils.tab, label);
+        log.trace("{}Created root node with [label={}]", LoggerUtils.tab(), label);
         return root;
     }
 
@@ -118,7 +118,7 @@ public class Node {
 
         parent.children.put(arcLabel, this);
 
-        log.trace("{}Created child node with [parent={}, arcLabel={}]", LoggerUtils.tab, parent, pathLabel);
+        log.trace("{}Created child node with [parent={}, arcLabel={}]", LoggerUtils.tab(), parent, pathLabels);
     }
 
     /**
@@ -130,7 +130,7 @@ public class Node {
         } else {
             parents.add(parent);
 
-            log.trace("{}Added parent node with [parent={}, child={}]", LoggerUtils.tab, parent, this);
+            log.trace("{}Added parent node with [parent={}, child={}]", LoggerUtils.tab(), parent, this);
         }
     }
 
@@ -141,7 +141,7 @@ public class Node {
         this.children.put(arcLabel, child);
         child.addParent(this);
 
-        log.trace("{}Added child node with [parent={}, arcLabel={}, child={}]", LoggerUtils.tab, this, arcLabel, child);
+        log.trace("{}Added child node with [parent={}, arcLabel={}, child={}]", LoggerUtils.tab(), this, arcLabel, child);
     }
 
     /**

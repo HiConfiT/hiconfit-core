@@ -26,10 +26,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.IntStream;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
@@ -88,7 +86,7 @@ public class SXFMParser implements FeatureModelParser {
     public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not SPLOT format or there are errors in the file!");
 
-        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab, filePath.getName());
+        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
         FeatureModel featureModel;
@@ -119,7 +117,7 @@ public class SXFMParser implements FeatureModelParser {
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab, filePath.getName(), featureModel);
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
         return featureModel;
     }
 
@@ -129,7 +127,7 @@ public class SXFMParser implements FeatureModelParser {
      * @param sxfm - a {@link fm.FeatureModel}
      */
     private void convertFeatures(fm.FeatureModel sxfm, FeatureModel fm) {
-        log.trace("{}Generating features >>>", LoggerUtils.tab);
+        log.trace("{}Generating features >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         Queue<FeatureTreeNode> queue = new LinkedList<>();
@@ -155,10 +153,12 @@ public class SXFMParser implements FeatureModelParser {
     }
 
     private void exploreChildren(Queue<FeatureTreeNode> queue, FeatureTreeNode node) {
-        for (int i = 0; i < node.getChildCount(); i++) {
+        IntStream.range(0, node.getChildCount()).mapToObj(i -> (FeatureTreeNode) node.getChildAt(i))
+                .forEachOrdered(queue::add);
+        /*for (int i = 0; i < node.getChildCount(); i++) {
             FeatureTreeNode child = (FeatureTreeNode) node.getChildAt(i);
             queue.add(child);
-        }
+        }*/
     }
 
     /**
@@ -169,7 +169,7 @@ public class SXFMParser implements FeatureModelParser {
      * @throws FeatureModelParserException a ParserException
      */
     private void convertRelationships(fm.FeatureModel sxfm, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating relationships >>>", LoggerUtils.tab);
+        log.trace("{}Generating relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         try {
@@ -226,7 +226,7 @@ public class SXFMParser implements FeatureModelParser {
      * @throws FeatureModelParserException a ParserException
      */
     private void convertConstraints(fm.FeatureModel sxfm, FeatureModel fm) throws FeatureModelParserException, at.tugraz.ist.ase.fm.core.FeatureModelException {
-        log.trace("{}Generating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         for (PropositionalFormula formula : sxfm.getConstraints()) {
@@ -258,13 +258,13 @@ public class SXFMParser implements FeatureModelParser {
 
                 List<String> threecnf_constraints = new LinkedList<>();
 
-                for (BooleanVariable variable : variables) {
+                Arrays.stream(variables).forEachOrdered(variable -> {
                     if (variable.isPositive()) {
                         threecnf_constraints.add(sxfm.getNodeByID(variable.getID()).getName());
                     } else {
                         threecnf_constraints.add("~" + sxfm.getNodeByID(variable.getID()).getName());
                     }
-                }
+                });
 
                 fm.addConstraint(type, String.join(" | ", threecnf_constraints));
             }

@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import static at.tugraz.ist.ase.eval.PerformanceEvaluator.*;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of the HS-dag algorithm.
@@ -40,65 +41,69 @@ public class HSDAG extends HSTree {
     protected List<Set<Constraint>> computeLabel(Node node) {
         AbstractHSParameters param = node.getParameters();
 
-        start(TIMER_NODE_LABEL);
-        List<Set<Constraint>> labels = getLabeler().getLabel(param);
+        start(TIMER_NODE_LABEL + getThreadString() + ": ");
+        List<Set<Constraint>> conflicts = getLabeler().getLabel(param);
 
-        if (!labels.isEmpty()) {
-            stop(TIMER_NODE_LABEL);
+        if (!conflicts.isEmpty()) {
+            stop(TIMER_NODE_LABEL + getThreadString() + ": ");
 
             // check existing and obtained labels for subset-relations
             List<Set<Constraint>> nonMinLabels = new LinkedList<>();
 
-            for (Set<Constraint> fs : getNodeLabels()) {
-                if (nonMinLabels.contains(fs)) {
-                    continue;
-                }
-                for (Set<Constraint> l : labels) {
-                    if (nonMinLabels.contains(l)) {
+            getConflicts().parallelStream().filter(fs -> !nonMinConflicts.contains(fs)).forEachOrdered(fs -> {
+                /*for (Set<Constraint> fs : getConflicts()) {
+                    if (nonMinConflicts.contains(fs)) {
                         continue;
-                    }
-                    Set<Constraint> greater = (fs.size() > l.size()) ? fs : l;
-                    Set<Constraint> smaller = (fs.size() > l.size()) ? l : fs;
+                    }*/
+
+                conflicts.parallelStream().filter(cs -> !nonMinConflicts.contains(cs)).forEachOrdered(cs -> {
+                    /*for (Set<Constraint> cs : conflicts) {
+                        if (nonMinConflicts.contains(cs)) {
+                            continue;
+                        }*/
+
+                    Set<Constraint> greater = (fs.size() > cs.size()) ? fs : cs;
+                    Set<Constraint> smaller = (fs.size() > cs.size()) ? cs : fs;
 
                     if (greater.containsAll(smaller)) {
-                        nonMinLabels.add(greater);
+                        nonMinConflicts.add(greater);
+
                         // update the DAG
                         List<Node> nodes = this.label_nodesMap.get(greater);
 
                         if (nodes != null) {
-                            for (Node nd : nodes) {
+                            nodes.forEach(nd -> {
                                 incrementCounter(COUNTER_PRUNING);
 
                                 nd.setLabel(smaller); // relabel the node with smaller
                                 addItemToLabelNodesMap(smaller, nd); // add new label to the map
 
                                 Set<Constraint> delete = Sets.difference(greater, smaller);
-                                for (Constraint label : delete) {
+                                delete.forEach(label -> {
                                     Node child = nd.getChildren().get(label);
 
                                     if (child != null) {
                                         child.getParents().remove(nd);
                                     }
+
                                     nd.getChildren().remove(label);
 
                                     cleanUpNodes(nd);
-                                }
-                            }
+                                });
+                            });
                         }
                     }
-                }
-            }
-            // remove the known non-minimal labels
-            labels.removeAll(nonMinLabels);
-            for (Set<Constraint> label : nonMinLabels) {
-                this.label_nodesMap.remove(label);
-            }
+                });
+            });
+            // remove the known non-minimal conflicts
+            conflicts.removeAll(nonMinConflicts);
+            nonMinConflicts.forEach(cs -> this.cs_nodesMap.remove(cs));
 
             // add new labels to the list of labels
             addNodeLabels(labels);
         } else {
             // stop TIMER_CONFLICT without saving the time
-            stop(TIMER_NODE_LABEL, false);
+            stop(TIMER_NODE_LABEL  + getThreadString() + ": ", false);
         }
 
         return labels;
@@ -116,15 +121,18 @@ public class HSDAG extends HSTree {
         }
 
         // downward clean up
-        for (Constraint arcLabel : node.getChildren().keySet()) {
+        node.getChildren().keySet().parallelStream()
+                .map(arcLabel -> node.getChildren().get(arcLabel))
+                .forEachOrdered(this::cleanUpNodes);
+        /*for (Constraint arcLabel : node.getChildren().keySet()) {
             Node child = node.getChildren().get(arcLabel);
             cleanUpNodes(child);
-        }
+        }*/
     }
 
     @Override
     protected void expand(Node nodeToExpand) {
-        log.trace("{}Generating the children nodes of [node={}]", LoggerUtils.tab, nodeToExpand);
+        log.trace("{}Generating the children nodes of [node={}]", LoggerUtils.tab(), nodeToExpand);
         LoggerUtils.indent();
 
         for (Constraint arcLabel : nodeToExpand.getLabel()) {
@@ -137,7 +145,7 @@ public class HSDAG extends HSTree {
                 node.addParent(nodeToExpand);
 
                 incrementCounter(COUNTER_REUSE_NODES);
-                log.trace("{}Reusing [node={}]", LoggerUtils.tab, node);
+                log.trace("{}Reusing [node={}]", LoggerUtils.tab(), node);
             } else { // rule 1.b - generate a new node
                 node = Node.builder()
                         .parent(nodeToExpand)
