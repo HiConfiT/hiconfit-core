@@ -16,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkElementIndex;
@@ -64,21 +65,23 @@ public class FeatureModel {
     }
 
     private boolean isUniqueFeatureName(String fname) {
-        for (Feature f: bfFeatures) {
+        return bfFeatures.parallelStream().noneMatch(f -> f.isNameDuplicate(fname));
+        /*for (Feature f: bfFeatures) {
             if (f.isNameDuplicate(fname)) {
                 return false;
             }
         }
-        return true;
+        return true;*/
     }
 
     private boolean isUniqueFeatureId(String id) {
-        for (Feature f: bfFeatures) {
+        return bfFeatures.parallelStream().noneMatch(f -> f.isIdDuplicate(id));
+        /*for (Feature f: bfFeatures) {
             if (f.isIdDuplicate(id)) {
                 return false;
             }
         }
-        return true;
+        return true;*/
     }
 
     /**
@@ -122,14 +125,15 @@ public class FeatureModel {
      * @return true if the given {@link Feature} is mandatory, false otherwise.
      */
     public boolean isMandatoryFeature(@NonNull Feature feature) {
-        for (Relationship r : relationships) {
+        return relationships.parallelStream().filter(r -> r.getType() == RelationshipType.MANDATORY).anyMatch(r -> r.presentAtRightSide(feature));
+        /*for (Relationship r : relationships) {
             if (r.getType() == RelationshipType.MANDATORY) {
                 if (r.presentAtRightSide(feature)) {
                     return true;
                 }
             }
         }
-        return false;
+        return false;*/
     }
 
     /**
@@ -273,12 +277,13 @@ public class FeatureModel {
      * @return an array of {@link Relationship}s.
      */
     public List<Relationship> getRelationshipsWith(@NonNull Feature feature) {
-        List<Relationship> rs = new LinkedList<>();
-        for (Relationship r : relationships) {
+        List<Relationship> rs = relationships.parallelStream().filter(r -> r.presentAtRightSide(feature) || r.presentAtLeftSide(feature))
+                .collect(Collectors.toCollection(LinkedList::new));
+        /*for (Relationship r : relationships) {
             if (r.presentAtRightSide(feature) || r.presentAtLeftSide(feature)) {
                 rs.add(r);
             }
-        }
+        }*/
         for (Relationship r : constraints) {
             if (!r.isType(RelationshipType.ThreeCNF)) {
                 if (r.presentAtRightSide(feature) || r.presentAtLeftSide(feature)) {
@@ -328,19 +333,21 @@ public class FeatureModel {
      * @return number of relationships with the specific type.
      */
     public int getNumOfRelationships(RelationshipType type) {
-        int count = 0;
+        int count;
         if (type == RelationshipType.REQUIRES || type == RelationshipType.EXCLUDES) {
-            for (Relationship relationship : constraints) {
+            count = (int) constraints.parallelStream().filter(relationship -> relationship.isType(type)).count();
+            /*for (Relationship relationship : constraints) {
                 if (relationship.isType(type)) {
                     count++;
                 }
-            }
+            }*/
         } else {
-            for (Relationship relationship : relationships) {
+            count = (int) relationships.stream().filter(relationship -> relationship.isType(type)).count();
+            /*for (Relationship relationship : relationships) {
                 if (relationship.isType(type)) {
                     count++;
                 }
-            }
+            }*/
         }
         return count;
     }
@@ -385,19 +392,13 @@ public class FeatureModel {
         StringBuilder st = new StringBuilder();
 
         st.append("FEATURES:\n");
-        for (Feature feature : bfFeatures) {
-            st.append(String.format("\t%s\n", feature));
-        }
+        bfFeatures.parallelStream().map(feature -> String.format("\t%s\n", feature)).forEachOrdered(st::append);
 
         st.append("RELATIONSHIPS:\n");
-        for (Relationship relationship: relationships) {
-            st.append(String.format("\t%s\n", relationship));
-        }
+        relationships.parallelStream().map(relationship -> String.format("\t%s\n", relationship)).forEachOrdered(st::append);
 
         st.append("CONSTRAINTS:\n");
-        for (Relationship constraint: constraints) {
-            st.append(String.format("\t%s\n", constraint));
-        }
+        constraints.parallelStream().map(constraint -> String.format("\t%s\n", constraint)).forEachOrdered(st::append);
 
         return st.toString();
     }

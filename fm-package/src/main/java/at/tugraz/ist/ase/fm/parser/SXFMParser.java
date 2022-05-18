@@ -26,10 +26,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.IntStream;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
@@ -155,10 +153,12 @@ public class SXFMParser implements FeatureModelParser {
     }
 
     private void exploreChildren(Queue<FeatureTreeNode> queue, FeatureTreeNode node) {
-        for (int i = 0; i < node.getChildCount(); i++) {
+        IntStream.range(0, node.getChildCount()).mapToObj(i -> (FeatureTreeNode) node.getChildAt(i))
+                .forEachOrdered(queue::add);
+        /*for (int i = 0; i < node.getChildCount(); i++) {
             FeatureTreeNode child = (FeatureTreeNode) node.getChildAt(i);
             queue.add(child);
-        }
+        }*/
     }
 
     /**
@@ -258,13 +258,13 @@ public class SXFMParser implements FeatureModelParser {
 
                 List<String> threecnf_constraints = new LinkedList<>();
 
-                for (BooleanVariable variable : variables) {
+                Arrays.stream(variables).forEachOrdered(variable -> {
                     if (variable.isPositive()) {
                         threecnf_constraints.add(sxfm.getNodeByID(variable.getID()).getName());
                     } else {
                         threecnf_constraints.add("~" + sxfm.getNodeByID(variable.getID()).getName());
                     }
-                }
+                });
 
                 fm.addConstraint(type, String.join(" | ", threecnf_constraints));
             }

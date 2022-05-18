@@ -12,6 +12,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,10 +54,11 @@ public class ThreeCNFConstraint extends Relationship {
     private void parse3CNFConstraint(String constraint3CNF) {
         String[] clauses = constraint3CNF.split(" \\| ");
 
-        for (String c: clauses) {
+        Arrays.stream(clauses).map(Clause::new).forEachOrdered(this.clauses::add);
+        /*for (String c: clauses) {
             Clause clause = new Clause(c);
             this.clauses.add(clause);
-        }
+        }*/
     }
 
     private void convertToConfRule() {

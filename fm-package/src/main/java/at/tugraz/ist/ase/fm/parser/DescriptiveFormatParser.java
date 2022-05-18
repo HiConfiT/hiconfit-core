@@ -113,9 +113,10 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitFeature(FM4ConfParser.FeatureContext ctx) {
         List<FM4ConfParser.IdentifierContext> ids = ctx.identifier();
-        for (FM4ConfParser.IdentifierContext idCx : ids) {
+        ids.forEach(idCx -> featureModel.addFeature(idCx.getText(), idCx.getText()));
+        /*for (FM4ConfParser.IdentifierContext idCx : ids) {
             featureModel.addFeature(idCx.getText(), idCx.getText());
-        }
+        }*/
     }
 
     @Override
