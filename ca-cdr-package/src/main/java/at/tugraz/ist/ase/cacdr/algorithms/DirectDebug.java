@@ -22,6 +22,7 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of DirectDebug.
@@ -56,7 +57,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class DirectDebug {
 
     // for evaluation
-    public static final String TIMER_DIRECTDEBUG = "Timer for DirectDebug:";
+    public static final String TIMER_DIRECTDEBUG = "Timer for DirectDebug ";
     public static final String COUNTER_DIRECTDEBUG_CALLS = "The number of DirectDebug calls:";
 
     protected final ChocoConsistencyChecker checker;
@@ -82,7 +83,7 @@ public class DirectDebug {
      */
     public Set<Constraint> findDiagnosis(@NonNull Set<Constraint> C, @NonNull Set<Constraint> B, @NonNull Set<ITestCase> TC)
     {
-        log.debug("{}Identifying diagnosis for [C={}, B={}, TC={}] >>>", LoggerUtils.tab, C, B, TC);
+        log.debug("{}Identifying diagnosis for [C={}, B={}, TC={}] >>>", LoggerUtils.tab(), C, B, TC);
         LoggerUtils.indent();
 
         Set<Constraint> BwithC = Sets.union(B, C); incrementCounter(COUNTER_UNION_OPERATOR);
@@ -92,20 +93,20 @@ public class DirectDebug {
         if (C.isEmpty() || TCp.isEmpty()) {
 
             LoggerUtils.outdent();
-            log.debug("{}<<< No diagnosis found", LoggerUtils.tab);
+            log.debug("{}<<< No diagnosis found", LoggerUtils.tab());
 
             return Collections.emptySet();
         } else{ // else return C \ directDebug(Φ, C, B, T'π)
             incrementCounter(COUNTER_DIRECTDEBUG_CALLS);
-            start(TIMER_DIRECTDEBUG);
+            start(TIMER_DIRECTDEBUG + getThreadString() + ": ");
             Set<Constraint> mss = directDebug(Collections.emptySet(), C, B, TCp);
-            stop(TIMER_DIRECTDEBUG);
+            stop(TIMER_DIRECTDEBUG + getThreadString() + ": ");
 
             incrementCounter(COUNTER_DIFFERENT_OPERATOR);
             Set<Constraint> diag = Sets.difference(C, mss);
 
             LoggerUtils.outdent();
-            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab, diag);
+            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab(), diag);
 
             return diag;
         }
@@ -132,7 +133,7 @@ public class DirectDebug {
      * @return a maximal satisfiable subset MSS of C U B U TC.
      */
     private Set<Constraint> directDebug(Set<Constraint> δ, Set<Constraint> C, Set<Constraint> B, Set<ITestCase> TC) {
-        log.trace("{}directDebug [δ={}, C={}, B={}, TC{}] >>>", LoggerUtils.tab, δ, C, B, TC);
+        log.trace("{}directDebug [δ={}, C={}, B={}, TC{}] >>>", LoggerUtils.tab(), δ, C, B, TC);
         LoggerUtils.indent();
 
         // T'π <- Tπ
@@ -146,7 +147,7 @@ public class DirectDebug {
             TCp = checker.isConsistent(BwithC, TC, false);
             if (TCp.isEmpty()) {
                 LoggerUtils.outdent();
-                log.trace("{}<<< return [{}]", LoggerUtils.tab, C);
+                log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
 
                 return C;
             }
@@ -156,7 +157,7 @@ public class DirectDebug {
         int n = C.size();
         if (n == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return Φ", LoggerUtils.tab);
+            log.trace("{}<<< return Φ", LoggerUtils.tab());
 
             return Collections.emptySet();
         }
@@ -165,7 +166,7 @@ public class DirectDebug {
         Set<Constraint> C1 = new LinkedHashSet<>();
         Set<Constraint> C2 = new LinkedHashSet<>();
         split(C, C1, C2);
-        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab, C1, C2);
+        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab(), C1, C2);
 
         // Γ1 = DirectDebug(δ=C1, C1, B, T'π);
         incrementCounter(COUNTER_LEFT_BRANCH_CALLS);
@@ -180,7 +181,7 @@ public class DirectDebug {
         Set<Constraint> Γ2 = directDebug(C1minusΓ1, C2, BwithΓ1, TCp);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [Γ1={} ∪ Γ2={}]", LoggerUtils.tab, Γ1, Γ2);
+        log.trace("{}<<< return [Γ1={} ∪ Γ2={}]", LoggerUtils.tab(), Γ1, Γ2);
 
         // return Γ1 ∪ Γ2;
         incrementCounter(COUNTER_UNION_OPERATOR);

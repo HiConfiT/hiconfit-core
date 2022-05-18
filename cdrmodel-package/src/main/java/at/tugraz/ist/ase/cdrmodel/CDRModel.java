@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.cdrmodel;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Sets;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -20,9 +21,11 @@ import java.util.Set;
  * Contains the knowledge base for constraint problems.
  *
  * Supports two types of constraints: Choco constraints (String) and representative constraints ({@link Constraint}).
+ *
+ * We don't have a clone method here, since all the data in this class needs to be initialized by overriding initialize() method.
  */
 @Getter
-public abstract class CDRModel {
+public abstract class CDRModel implements Cloneable {
 
     private final String name;
 
@@ -45,6 +48,9 @@ public abstract class CDRModel {
      * The set of constraints which could be faulty = KB (knowledge base).
      */
     private Set<String> possiblyFaultyChocoConstraints = new LinkedHashSet<>();
+
+    @Setter
+    private boolean clone = false;
 
     /**
      * Creates an empty diagnosis model.
@@ -115,5 +121,13 @@ public abstract class CDRModel {
                 ", correctChocoConstraints=" + correctChocoConstraints +
                 ", possiblyFaultyChocoConstraints=" + possiblyFaultyChocoConstraints +
                 '}';
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        CDRModel clone = (CDRModel) super.clone();
+
+        clone.clone = true;
+
+        return clone;
     }
 }

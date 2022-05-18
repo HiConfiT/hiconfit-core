@@ -21,6 +21,7 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of FastDiag algorithm using Set structures.
@@ -57,7 +58,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class FastDiagV2 {
 
     // for evaluation
-    public static final String TIMER_FASTDIAGV2 = "Timer for FD V2:";
+    public static final String TIMER_FASTDIAGV2 = "Timer for FD V2 ";
     public static final String COUNTER_FASTDIAGV2_CALLS = "The number of FD V2 calls:";
 
     protected final ChocoConsistencyChecker checker;
@@ -79,7 +80,7 @@ public class FastDiagV2 {
      * @return a diagnosis or an empty set
      */
     public Set<Constraint> findDiagnosis(@NonNull Set<Constraint> C, @NonNull Set<Constraint> AC) {
-        log.debug("{}Identifying diagnosis for [C={}, AC={}] >>>", LoggerUtils.tab, C, AC);
+        log.debug("{}Identifying diagnosis for [C={}, AC={}] >>>", LoggerUtils.tab(), C, AC);
         LoggerUtils.indent();
 
         Set<Constraint> ACwithoutC = Sets.difference(AC, C); incrementCounter(COUNTER_DIFFERENT_OPERATOR);
@@ -89,17 +90,17 @@ public class FastDiagV2 {
                 (!ACwithoutC.isEmpty() && !checker.isConsistent(ACwithoutC))) {
 
             LoggerUtils.outdent();
-            log.debug("{}<<< No diagnosis found", LoggerUtils.tab);
+            log.debug("{}<<< No diagnosis found", LoggerUtils.tab());
 
             return Collections.emptySet();
         } else { // else return FD(Φ, C, AC)
             incrementCounter(COUNTER_FASTDIAGV2_CALLS);
-            start(TIMER_FASTDIAGV2);
+            start(TIMER_FASTDIAGV2 + getThreadString() + ": ");
             Set<Constraint> Δ = fd(Collections.emptySet(), C, AC);
-            stop(TIMER_FASTDIAGV2);
+            stop(TIMER_FASTDIAGV2 + getThreadString() + ": ");
 
             LoggerUtils.outdent();
-            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab, Δ);
+            log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab(), Δ);
 
             return Δ;
         }
@@ -123,14 +124,14 @@ public class FastDiagV2 {
      * @return a diagnosis or an empty set
      */
     private Set<Constraint> fd(Set<Constraint> D, Set<Constraint> C, Set<Constraint> AC) {
-        log.trace("{}FD [D={}, C={}, AC={}] >>>", LoggerUtils.tab, D, C, AC);
+        log.trace("{}FD [D={}, C={}, AC={}] >>>", LoggerUtils.tab(), D, C, AC);
         LoggerUtils.indent();
 
         // if D != Φ and consistent(AC) return Φ;
         if ( !D.isEmpty() ) {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(AC)) {
-                log.trace("{}<<< return Φ", LoggerUtils.tab);
+                log.trace("{}<<< return Φ", LoggerUtils.tab());
                 LoggerUtils.outdent();
 
                 return Collections.emptySet();
@@ -141,7 +142,7 @@ public class FastDiagV2 {
         int q = C.size();
         if (q == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return [{}]", LoggerUtils.tab, C);
+            log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
 
             return C;
         }
@@ -150,7 +151,7 @@ public class FastDiagV2 {
         Set<Constraint> C1 = new LinkedHashSet<>();
         Set<Constraint> C2 = new LinkedHashSet<>();
         split(C, C1, C2);
-        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab, C1, C2);
+        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab(), C1, C2);
 
         // D1 = FD(C2, C1, AC - C2);
         Set<Constraint> ACwithoutC2 = Sets.difference(AC, C2); incrementCounter(COUNTER_DIFFERENT_OPERATOR);
@@ -165,7 +166,7 @@ public class FastDiagV2 {
         Set<Constraint> D2 = fd(D1, C2, ACwithoutD1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab, D1, D2);
+        log.trace("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
 
         // return(D1 ∪ D2);
         incrementCounter(COUNTER_UNION_OPERATOR);

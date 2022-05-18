@@ -21,6 +21,7 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of QuickXplain algorithm using Set structures.
@@ -50,16 +51,14 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
-public class QuickXPlain {
+public class QuickXPlain extends IConsistencyAlgorithm {
 
     // for evaluation
-    public static final String TIMER_QUICKXPLAIN = "Timer for QX:";
+    public static final String TIMER_QUICKXPLAIN = "Timer for QX ";
     public static final String COUNTER_QUICKXPLAIN_CALLS = "The number of QX calls:";
 
-    protected final ChocoConsistencyChecker checker;
-
     public QuickXPlain(@NonNull ChocoConsistencyChecker checker) {
-        this.checker = checker;
+        super(checker);
     }
 
     /**
@@ -73,7 +72,7 @@ public class QuickXPlain {
      * @return a conflict set or an empty set
      */
     public Set<Constraint> findConflictSet(@NonNull Set<Constraint> C, @NonNull Set<Constraint> B) {
-        log.debug("{}Identifying conflict for [C={}, B={}] >>>", LoggerUtils.tab, C, B);
+        log.debug("{}Identifying conflict for [C={}, B={}] >>>", LoggerUtils.tab(), C, B);
         LoggerUtils.indent();
 
         Set<Constraint> BwithC = Sets.union(B, C); incrementCounter(COUNTER_UNION_OPERATOR);
@@ -82,17 +81,17 @@ public class QuickXPlain {
         if (C.isEmpty() || checker.isConsistent(BwithC)) {
 
             LoggerUtils.outdent();
-            log.debug("{}<<< No conflict found", LoggerUtils.tab);
+            log.debug("{}<<< No conflict found", LoggerUtils.tab());
 
             return Collections.emptySet();
         } else { //ELSE return QX(Φ, C, B)
             incrementCounter(COUNTER_QUICKXPLAIN_CALLS);
-            start(TIMER_QUICKXPLAIN);
+            start(TIMER_QUICKXPLAIN + getThreadString() + ": ");
             Set<Constraint> cs = qx(Collections.emptySet(), C, B);
-            stop(TIMER_QUICKXPLAIN);
+            stop(TIMER_QUICKXPLAIN + getThreadString() + ": ");
 
             LoggerUtils.outdent();
-            log.debug("{}<<< Found conflict [conflict={}]", LoggerUtils.tab, cs);
+            log.debug("{}<<< Found conflict [conflict={}]", LoggerUtils.tab(), cs);
 
             return cs;
         }
@@ -114,7 +113,7 @@ public class QuickXPlain {
      * @return a conflict set or an empty set
      */
     private Set<Constraint> qx(Set<Constraint> D, Set<Constraint> C, Set<Constraint> B) {
-        log.trace("{}QX [D={}, C={}, B={}] >>>", LoggerUtils.tab, D, C, B);
+        log.trace("{}QX [D={}, C={}, B={}] >>>", LoggerUtils.tab(), D, C, B);
         LoggerUtils.indent();
 
         //IF (Δ != Φ AND inconsistent(B)) return Φ;
@@ -122,7 +121,7 @@ public class QuickXPlain {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (!checker.isConsistent(B)) {
                 LoggerUtils.outdent();
-                log.trace("{}<<< return Φ", LoggerUtils.tab);
+                log.trace("{}<<< return Φ", LoggerUtils.tab());
 
                 return Collections.emptySet();
             }
@@ -132,7 +131,7 @@ public class QuickXPlain {
         int q = C.size();
         if (q == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return [{}]", LoggerUtils.tab, C);
+            log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
 
             return C;
         }
@@ -141,7 +140,7 @@ public class QuickXPlain {
         Set<Constraint> C1 = new LinkedHashSet<>();
         Set<Constraint> C2 = new LinkedHashSet<>();
         split(C, C1, C2);
-        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab, C1, C2);
+        log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab(), C1, C2);
 
         // CS1 <-- QX(C2, C1, B ∪ C2);
         Set<Constraint> BwithC2 = Sets.union(B, C2); incrementCounter(COUNTER_UNION_OPERATOR);
@@ -156,7 +155,7 @@ public class QuickXPlain {
         Set<Constraint> CS2 = qx(CS1, C2, BwithCS1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [CS1={} ∪ CS2={}]", LoggerUtils.tab, CS1, CS2);
+        log.trace("{}<<< return [CS1={} ∪ CS2={}]", LoggerUtils.tab(), CS1, CS2);
 
         //return (CS1 ∪ CS2)
         incrementCounter(COUNTER_UNION_OPERATOR);

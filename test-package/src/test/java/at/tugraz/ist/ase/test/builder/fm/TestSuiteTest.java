@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestSuiteTest {
     private static TestSuite testSuite;
@@ -47,5 +47,25 @@ class TestSuiteTest {
                 ~mdi & interface""";
 
         assertEquals(expected, testSuite.toString());
+    }
+
+    @Test
+    void shouldCloneable() throws CloneNotSupportedException {
+        TestSuite clone = (TestSuite) testSuite.clone();
+        assertEquals(testSuite.toString(), clone.toString());
+        assertEquals(testSuite.size(), clone.size());
+
+        for (int i = 0; i < testSuite.size(); i++) {
+            assertNotSame(clone.getTestCases().get(i), testSuite.getTestCases().get(i));
+            assertEquals(clone.getTestCases().get(i).toString(), testSuite.getTestCases().get(i).toString());
+
+            assertNotSame(clone.getTestCases().get(i).getAssignments(), testSuite.getTestCases().get(i).getAssignments());
+            assertEquals(clone.getTestCases().get(i).getAssignments().size(), testSuite.getTestCases().get(i).getAssignments().size());
+
+            for (int j = 0; j < clone.getTestCases().get(i).getAssignments().size(); j++) {
+                assertNotSame(clone.getTestCases().get(i).getAssignments().get(j), testSuite.getTestCases().get(i).getAssignments().get(j));
+                assertEquals(clone.getTestCases().get(i).getAssignments().get(j).toString(), testSuite.getTestCases().get(i).getAssignments().get(j).toString());
+            }
+        }
     }
 }

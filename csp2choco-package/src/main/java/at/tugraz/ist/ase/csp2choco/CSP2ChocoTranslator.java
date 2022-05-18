@@ -48,7 +48,7 @@ public class CSP2ChocoTranslator extends CSP2ChocoBaseListener {
     }
 
     public void translate(@NonNull InputStream inputFile) throws IOException {
-        log.trace("{}Translating CSP to Choco model >>>", LoggerUtils.tab);
+        log.trace("{}Translating CSP to Choco model >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         CharStream input = CharStreams.fromStream(inputFile);
@@ -63,12 +63,12 @@ public class CSP2ChocoTranslator extends CSP2ChocoBaseListener {
         walker.walk(this, tree);        // walk parse tree
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Translated CSP to Choco model", LoggerUtils.tab);
+        log.debug("{}<<< Translated CSP to Choco model", LoggerUtils.tab());
     }
 
     public void exitConstraint(CSP2ChocoParser.ConstraintContext ctx) {
         String key = ctx.expr().getText();
-        log.trace("{}Parsing the constraint [cstr={}] >>>", LoggerUtils.tab, key);
+        log.trace("{}Parsing the constraint [cstr={}] >>>", LoggerUtils.tab(), key);
         LoggerUtils.indent();
 
         ParserRuleContext leftContext = (ParserRuleContext) ctx.expr().getChild(0);
@@ -88,7 +88,7 @@ public class CSP2ChocoTranslator extends CSP2ChocoBaseListener {
         constraint.post();
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed the constraint [cstr={}, choco_cstr={}]", LoggerUtils.tab, key, constraint);
+        log.debug("{}<<< Parsed the constraint [cstr={}, choco_cstr={}]", LoggerUtils.tab(), key, constraint);
     }
 
     private String opNodeTranslate(TerminalNode node) {
@@ -101,7 +101,7 @@ public class CSP2ChocoTranslator extends CSP2ChocoBaseListener {
     }
 
     private IntVar leftContextTranslate(Model model, ParserRuleContext leftContext) {
-        checkArgument(leftContext instanceof CSP2ChocoParser.IdContext, "{}Unsupported context [context={}]", LoggerUtils.tab, leftContext);
+        checkArgument(leftContext instanceof CSP2ChocoParser.IdContext, "{}Unsupported context [context={}]", LoggerUtils.tab(), leftContext);
 
         CSP2ChocoParser.IdContext id = (CSP2ChocoParser.IdContext) leftContext;
         return (IntVar) getVariable(model, id.getText());
@@ -109,7 +109,7 @@ public class CSP2ChocoTranslator extends CSP2ChocoBaseListener {
 
     private Pair<IntVar, Integer> rightContextTranslate(Model model, ParserRuleContext rightContext) {
         checkArgument(rightContext instanceof CSP2ChocoParser.IntContext || rightContext instanceof CSP2ChocoParser.IdContext,
-                "{}Unsupported context [context={}]", LoggerUtils.tab, rightContext);
+                "{}Unsupported context [context={}]", LoggerUtils.tab(), rightContext);
 
         if (rightContext instanceof CSP2ChocoParser.IdContext id) {
             return Pair.with((IntVar) getVariable(model, id.getText()), Integer.MIN_VALUE);

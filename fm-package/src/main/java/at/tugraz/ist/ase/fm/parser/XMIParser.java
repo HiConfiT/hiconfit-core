@@ -87,7 +87,7 @@ public class XMIParser implements FeatureModelParser {
     public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not XMI format or there are errors in the file!");
 
-        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab, filePath.getName());
+        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
         FeatureModel featureModel;
@@ -118,7 +118,7 @@ public class XMIParser implements FeatureModelParser {
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab, filePath.getName(), featureModel);
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
         return featureModel;
     }
 
@@ -130,7 +130,7 @@ public class XMIParser implements FeatureModelParser {
      * @param fm - a {@link FeatureModel}
      */
     private void convertModelsNode(Element rootEle, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating features and relationships >>>", LoggerUtils.tab);
+        log.trace("{}Generating features and relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         NodeList models = rootEle.getElementsByTagName("models");
@@ -279,7 +279,7 @@ public class XMIParser implements FeatureModelParser {
      * @throws FeatureModelParserException - if there exists errors in the feature model file
      */
     private void convertConstraintsNodes(Element rootEle, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         NodeList constraints = rootEle.getElementsByTagName("constraints");

@@ -31,11 +31,11 @@ public class FMTestCaseTranslator implements ITestCaseTranslatable {
     public void translate(@NonNull ITestCase testCase, @NonNull Model model) {
 
         if (testCase instanceof TestCase tc) {
-            log.trace("{}Translating test case [testcase={}] >>>", LoggerUtils.tab, testCase);
+            log.trace("{}Translating test case [testcase={}] >>>", LoggerUtils.tab(), testCase);
             createTestCase(tc, model);
         }
 //        else if (testCase instanceof AggregatedTestCase atc) {
-//            log.trace("{}Translating aggregated test case [testcase={}] >>>", LoggerUtils.tab, testCase);
+//            log.trace("{}Translating aggregated test case [testcase={}] >>>", LoggerUtils.tab(), testCase);
 //            for (ITestCase tc : atc.getTestcases()) {
 //                createTestCase((TestCase) tc, model);
 //            }
@@ -70,7 +70,7 @@ public class FMTestCaseTranslator implements ITestCaseTranslatable {
         lastCstrIdx = model.getNbCstrs();
         setConstraintsToTestCase(tc, model, startIdx, lastCstrIdx - 1, true);
 
-        log.debug("{}Translated test case [testcase={}] >>>", LoggerUtils.tab, tc);
+        log.debug("{}Translated test case [testcase={}] >>>", LoggerUtils.tab(), tc);
     }
 
     /**

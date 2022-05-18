@@ -21,6 +21,7 @@ import org.chocosolver.solver.variables.IntVar;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Slf4j
 public class FMKB extends KB {
@@ -37,7 +38,7 @@ public class FMKB extends KB {
 
     @Override
     public void reset(boolean hasNegativeConstraints) {
-        log.trace("{}Creating FMKB for feature model [fm={}] >>>", LoggerUtils.tab, name);
+        log.trace("{}Creating FMKB for feature model [fm={}] >>>", LoggerUtils.tab(), name);
         LoggerUtils.indent();
 
         modelKB = new Model(name);
@@ -49,34 +50,34 @@ public class FMKB extends KB {
         defineConstraints(hasNegativeConstraints);
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab, name);
+        log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab(), name);
     }
 
     public void defineVariables (){
-        log.trace("{}Creating variables >>>", LoggerUtils.tab);
+        log.trace("{}Creating variables >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
-        for (int i = 0; i < featureModel.getNumOfFeatures(); i++) {
-            String varName = featureModel.getFeature(i).getName();
+        IntStream.range(0, featureModel.getNumOfFeatures()).mapToObj(i -> featureModel.getFeature(i).getName()).forEachOrdered(varName -> {
+            /*for (int i = 0; i < featureModel.getNumOfFeatures(); i++) {
+                String varName = featureModel.getFeature(i).getName();*/
             Domain domain = Domain.builder()
                     .name(varName)
                     .build();
             domainList.add(domain);
-
             BoolVar boolVar = modelKB.boolVar(varName);
             Variable var = BoolVariable.builder()
                     .name(varName)
                     .domain(domain)
                     .chocoVar(boolVar).build();
             variableList.add(var);
-        }
+        });
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created variables", LoggerUtils.tab);
+        log.trace("{}<<< Created variables", LoggerUtils.tab());
     }
 
     public void defineConstraints(boolean hasNegativeConstraints) {
-        log.trace("{}Creating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Creating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         int startIdx;
@@ -189,7 +190,7 @@ public class FMKB extends KB {
         }
 
         LoggerUtils.outdent();
-        log.trace("{}<<< Created constraints", LoggerUtils.tab);
+        log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
     private void addConstraintsToModel(boolean hasNegativeConstraints, int startIdx, LogOp logOp, LogOp negLogOp, Relationship relationship) {
@@ -291,10 +292,10 @@ public class FMKB extends KB {
     private LogOp getLogOpOfAlternativeRelationship(Relationship relationship, boolean negative) throws IllegalArgumentException {
         LogOp logOp = LogOp.or(); // an LogOp of OR operators
         BasicRelationship basicRelationship = (BasicRelationship) relationship;
-        BoolVar[] vars = new BoolVar[basicRelationship.getRightSide().size()];
-        for (int i = 0; i < basicRelationship.getRightSide().size(); i++) {
+        BoolVar[] vars = basicRelationship.getRightSide().parallelStream().map(feature -> getVarWithName(feature.getName())).toArray(BoolVar[]::new);
+        /*for (int i = 0; i < basicRelationship.getRightSide().size(); i++) {
             vars[i] = getVarWithName(basicRelationship.getRightSide().get(i).getName());
-        }
+        }*/
 
         BoolVar leftVar = getVarWithName(basicRelationship.getLeftSide().getName());
         if (negative) { // negative constraint
@@ -312,9 +313,10 @@ public class FMKB extends KB {
             // LogOp.or(LogOp.and(A.not(), B.not(), C.not(), D.not()),
             //          LogOp.and(A, equalVar));
             LogOp rule1 = LogOp.and(leftVar.not());
-            for (BoolVar var : vars) {
+            Arrays.stream(vars).map(BoolVar::not).forEachOrdered(rule1::addChild);
+            /*for (BoolVar var : vars) {
                 rule1.addChild(var.not());
-            }
+            }*/
 
             logOp.addChild(rule1);
             logOp.addChild(LogOp.and(leftVar, equalVar));
@@ -335,11 +337,15 @@ public class FMKB extends KB {
     private LogOp getRightSideOfAlternativeRelationship(String leftSide, List<Feature> rightSide, int removedIndex) throws IllegalArgumentException {
         BoolVar leftVar = getVarWithName(leftSide);
         LogOp op = LogOp.and(leftVar);
-        for (int i = 0; i < rightSide.size(); i++) {
+        IntStream.range(0, rightSide.size())
+                .filter(i -> i != removedIndex)
+                .mapToObj(i -> LogOp.nor(getVarWithName(rightSide.get(i).getName())))
+                .forEachOrdered(op::addChild);
+        /*for (int i = 0; i < rightSide.size(); i++) {
             if (i != removedIndex) {
                 op.addChild(LogOp.nor(getVarWithName(rightSide.get(i).getName())));
             }
-        }
+        }*/
         return op;
     }
 
@@ -354,10 +360,12 @@ public class FMKB extends KB {
     private LogOp getRightSideOfOrRelationship(List<Feature> rightSide) throws IllegalArgumentException {
         if (rightSide.size() == 0) return null;
         LogOp op = LogOp.or(); // create a LogOp of OR operators
-        for (Feature feature : rightSide) {
+        rightSide.parallelStream().map(feature -> getVarWithName(feature.getName()))
+                .forEachOrdered(op::addChild);
+        /*for (Feature feature : rightSide) {
             BoolVar var = getVarWithName(feature.getName());
             op.addChild(var);
-        }
+        }*/
         return op;
     }
 

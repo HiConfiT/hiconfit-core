@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add README.md and build new releases">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
@@ -31,7 +31,20 @@
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="24-transparent-between-conflicts-and-diagnoses-in-the-hstree-and-hsdag-algorithms" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -69,7 +82,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
     &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/cdrmodel-package/src/test/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -83,11 +96,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ca-cdr-package" />
       <recent name="$PROJECT_DIR$/cdrmodel-package" />
       <recent name="$PROJECT_DIR$/chocokb-package" />
-      <recent name="$PROJECT_DIR$/eval-package" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="at.tugraz.ist.ase.fm.parser" />
@@ -107,42 +120,42 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CSP2ChocoTranslatorTest">
-    <configuration name="All in app-KBStatistics" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="app-KBStatistics" />
+  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package">
+    <configuration name="All in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in cdrmodel-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-package" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in chocokb-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chocokb-package" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CSP2ChocoTranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="csp2choco-package" />
+    <configuration name="ThreadTimerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.csp2choco.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.csp2choco" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslatorTest" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ThreadTimerTest.testFindDiagnosis1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
+      <option name="METHOD_NAME" value="testFindDiagnosis1" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -161,13 +174,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="at.tugraz.ist.ase.common in common-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="common-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.common.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.common" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
-        <item itemvalue="JUnit.All in app-KBStatistics" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
-        <item itemvalue="JUnit.All in cdrmodel-package" />
-        <item itemvalue="JUnit.All in chocokb-package" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.common in common-package" />
+        <item itemvalue="JUnit.ThreadTimerTest" />
+        <item itemvalue="JUnit.ThreadTimerTest.testFindDiagnosis1" />
+        <item itemvalue="JUnit.All in ca-cdr-package" />
       </list>
     </recent_temporary>
   </component>
@@ -197,7 +224,11 @@
       <workItem from="1652359613754" duration="817000" />
       <workItem from="1652361111425" duration="1355000" />
       <workItem from="1652369750867" duration="1927000" />
-      <workItem from="1652425210233" duration="1681000" />
+      <workItem from="1652425210233" duration="2512000" />
+      <workItem from="1652460040681" duration="31000" />
+      <workItem from="1652478184327" duration="742000" />
+      <workItem from="1652610876331" duration="1140000" />
+      <workItem from="1652655363282" duration="15748000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -290,7 +321,56 @@
       <option name="project" value="LOCAL" />
       <updated>1651939345068</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Corrects the Maven packages">
+      <created>1652431343206</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1652431343207</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Support to clone TestSuite, and FMDebuggingModel">
+      <created>1652694841940</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1652694841940</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Use Java stream">
+      <created>1652874948669</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1652874948669</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Use Java stream &amp; Add equals, hashCode">
+      <created>1652875176126</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1652875176126</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Use Java stream">
+      <created>1652876434972</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1652876434972</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Fix clone &amp; remove ConstraintSet.java">
+      <created>1652876570406</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1652876570406</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
+      <created>1652893586907</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1652893586907</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -304,7 +384,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="22-support-to-clone-cdrmodels" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -325,6 +417,23 @@
     <MESSAGE value="Add KBStatistics" />
     <MESSAGE value="Add FMGenerator" />
     <MESSAGE value="Add README.md and build new releases" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add README.md and build new releases" />
+    <MESSAGE value="Corrects the Maven packages" />
+    <MESSAGE value="Support to clone TestSuite, and FMDebuggingModel" />
+    <MESSAGE value="Use Java stream &amp; Add equals, hashCode" />
+    <MESSAGE value="Use Java stream" />
+    <MESSAGE value="Fix clone &amp; remove ConstraintSet.java" />
+    <MESSAGE value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="at.tugraz.ist.ase.test.TestSuite" memberName="testCases" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -35,7 +35,7 @@ public class TestModel6 extends CDRModel implements IChocoModel, ITestModel {
 
     @Override
     public void initialize() throws Exception {
-        log.trace("{}Initializing CDRModel for {} >>>", LoggerUtils.tab, getName());
+        log.trace("{}Initializing CDRModel for {} >>>", LoggerUtils.tab(), getName());
         LoggerUtils.indent();
 
         model = CSPModels.createModel6();
@@ -50,14 +50,14 @@ public class TestModel6 extends CDRModel implements IChocoModel, ITestModel {
         }
         Collections.reverse(C);
         this.setPossiblyFaultyConstraints(C);
-        log.trace("{}Added constraints to the possibly faulty constraints [C={}]", LoggerUtils.tab, C);
+        log.trace("{}Added constraints to the possibly faulty constraints [C={}]", LoggerUtils.tab(), C);
 
         identifyExpectedResults();
 
         model.unpost(model.getCstrs());
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Initialized CDRModel for {}", LoggerUtils.tab, getName());
+        log.debug("{}<<< Initialized CDRModel for {}", LoggerUtils.tab(), getName());
     }
 
     private void identifyExpectedResults() {
@@ -88,7 +88,7 @@ public class TestModel6 extends CDRModel implements IChocoModel, ITestModel {
         allDiagnoses.add(diag3);
         allDiagnoses.add(diag4);
 
-        log.trace("{}Generated expected results", LoggerUtils.tab);
+        log.trace("{}Generated expected results", LoggerUtils.tab());
     }
 
     @Override
@@ -109,5 +109,17 @@ public class TestModel6 extends CDRModel implements IChocoModel, ITestModel {
     @Override
     public List<Set<Constraint>> getExpectedAllConflicts() {
         return null;
+    }
+
+    @Override
+    public Object clone() throws CloneNotSupportedException {
+        TestModel6 clone = (TestModel6) super.clone();
+
+        try {
+            clone.initialize();
+            return clone;
+        } catch (Exception e) {
+            throw new CloneNotSupportedException(e.getMessage());
+        }
     }
 }

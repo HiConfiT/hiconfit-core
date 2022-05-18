@@ -84,7 +84,7 @@ public class FeatureIDEParser implements FeatureModelParser {
     public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not FeatureIDE format or there are errors in the file!");
 
-        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab, filePath.getName());
+        log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
         FeatureModel featureModel;
@@ -114,7 +114,7 @@ public class FeatureIDEParser implements FeatureModelParser {
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab, filePath.getName(), featureModel);
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
         return featureModel;
     }
 
@@ -126,7 +126,7 @@ public class FeatureIDEParser implements FeatureModelParser {
      * @param fm - a {@link FeatureModel}
      */
     private void convertStructNodes(Element rootEle, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating features and relationships >>>", LoggerUtils.tab);
+        log.trace("{}Generating features and relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         NodeList struct = rootEle.getElementsByTagName("struct");
@@ -279,7 +279,7 @@ public class FeatureIDEParser implements FeatureModelParser {
      * @param fm - a {@link FeatureModel}
      */
     private void convertConstraintNodes(Element rootEle, FeatureModel fm) throws FeatureModelParserException {
-        log.trace("{}Generating constraints >>>", LoggerUtils.tab);
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
         NodeList rules = rootEle.getElementsByTagName("rule");
