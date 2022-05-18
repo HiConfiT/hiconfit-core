@@ -16,6 +16,7 @@ import org.chocosolver.solver.constraints.Constraint;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkElementIndex;
@@ -26,7 +27,6 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 @Slf4j
 @Builder
 @Getter @Setter
-@EqualsAndHashCode
 public class TestCase implements ITestCase {
     private @NonNull String testcase; // a test case
     private @NonNull List<Assignment> assignments; // the list of assignments
@@ -99,6 +99,18 @@ public class TestCase implements ITestCase {
         negChocoConstraints.add(neg_constraint);
 
         log.trace("{}Added a negative Choco constraint to TestCase [choco_cstr={}, testcase={}]", LoggerUtils.tab, neg_constraint, this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TestCase that)) return false;
+        return Objects.equals(testcase, that.testcase);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(testcase);
     }
 
     @Override

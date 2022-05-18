@@ -22,6 +22,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 public class TestSuiteBuilder implements ITestSuiteBuildable {
@@ -33,16 +34,16 @@ public class TestSuiteBuilder implements ITestSuiteBuildable {
 
         @Cleanup BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
-        List<ITestCase>  testCases = new LinkedList<>();
+        List<ITestCase>  testCases;
 
         br.readLine(); // omit first line
 
         // Read all test cases
-        String line;
-        while ((line = br.readLine()) != null) {
+        testCases = br.lines().map(testCaseBuilder::buildTestCase).collect(Collectors.toCollection(LinkedList::new));
+        /*while ((line = br.readLine()) != null) {
             ITestCase testCase = testCaseBuilder.buildTestCase(line);
             testCases.add(testCase);
-        }
+        }*/
 
         TestSuite testSuite = TestSuite.builder()
                 .testCases(testCases)
