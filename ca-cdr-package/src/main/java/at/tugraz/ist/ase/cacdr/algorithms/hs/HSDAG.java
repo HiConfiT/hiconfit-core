@@ -42,21 +42,21 @@ public class HSDAG extends HSTree {
         AbstractHSParameters param = node.getParameters();
 
         start(TIMER_NODE_LABEL + getThreadString() + ": ");
-        List<Set<Constraint>> conflicts = getLabeler().getLabel(param);
+        List<Set<Constraint>> labels = getLabeler().getLabel(param);
 
-        if (!conflicts.isEmpty()) {
+        if (!labels.isEmpty()) {
             stop(TIMER_NODE_LABEL + getThreadString() + ": ");
 
             // check existing and obtained labels for subset-relations
             List<Set<Constraint>> nonMinLabels = new LinkedList<>();
 
-            getConflicts().parallelStream().filter(fs -> !nonMinConflicts.contains(fs)).forEachOrdered(fs -> {
-                /*for (Set<Constraint> fs : getConflicts()) {
+            getNodeLabels().parallelStream().filter(fs -> !nonMinLabels.contains(fs)).forEachOrdered(fs -> {
+                /*for (Set<Constraint> fs : getNodeLabels()) {
                     if (nonMinConflicts.contains(fs)) {
                         continue;
                     }*/
 
-                conflicts.parallelStream().filter(cs -> !nonMinConflicts.contains(cs)).forEachOrdered(cs -> {
+                labels.parallelStream().filter(cs -> !nonMinLabels.contains(cs)).forEachOrdered(cs -> {
                     /*for (Set<Constraint> cs : conflicts) {
                         if (nonMinConflicts.contains(cs)) {
                             continue;
@@ -66,7 +66,7 @@ public class HSDAG extends HSTree {
                     Set<Constraint> smaller = (fs.size() > cs.size()) ? cs : fs;
 
                     if (greater.containsAll(smaller)) {
-                        nonMinConflicts.add(greater);
+                        nonMinLabels.add(greater);
 
                         // update the DAG
                         List<Node> nodes = this.label_nodesMap.get(greater);
@@ -96,8 +96,8 @@ public class HSDAG extends HSTree {
                 });
             });
             // remove the known non-minimal conflicts
-            conflicts.removeAll(nonMinConflicts);
-            nonMinConflicts.forEach(cs -> this.cs_nodesMap.remove(cs));
+            labels.removeAll(nonMinLabels);
+            nonMinLabels.forEach(label -> this.label_nodesMap.remove(label));
 
             // add new labels to the list of labels
             addNodeLabels(labels);

@@ -118,7 +118,7 @@ public class Node {
 
         parent.children.put(arcLabel, this);
 
-        log.trace("{}Created child node with [parent={}, arcLabel={}]", LoggerUtils.tab(), parent, pathLabels);
+        log.trace("{}Created child node with [parent={}, arcLabel={}]", LoggerUtils.tab(), parent, arcLabel);
     }
 
     /**

@@ -6,22 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/AbstractHSConstructor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/AbstractHSConstructor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAGTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAGTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTreeTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Node.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/Node.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,10 +115,32 @@
     </option>
   </component>
   <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package">
-    <configuration name="All in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="HSDAGTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ca-cdr-package" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HSTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSTreeTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -145,22 +156,6 @@
       <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ThreadTimerTest.testFindDiagnosis1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
-      <option name="METHOD_NAME" value="testFindDiagnosis1" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,10 +191,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
+        <item itemvalue="JUnit.HSTreeTest" />
+        <item itemvalue="JUnit.HSDAGTest" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.common in common-package" />
         <item itemvalue="JUnit.ThreadTimerTest" />
-        <item itemvalue="JUnit.ThreadTimerTest.testFindDiagnosis1" />
-        <item itemvalue="JUnit.All in ca-cdr-package" />
       </list>
     </recent_temporary>
   </component>

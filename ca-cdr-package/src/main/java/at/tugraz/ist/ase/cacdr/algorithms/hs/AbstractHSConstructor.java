@@ -30,7 +30,7 @@ import java.util.Set;
 public abstract class AbstractHSConstructor {
     // for evaluation
     public static final String TIMER_HS_CONSTRUCTION_SESSION = "Timer for HS construction session ";
-    public static final String TIMER_NODE_LABEL = "Timer for label ";
+    public static final String TIMER_NODE_LABEL = "Timer for node label ";
     public static final String TIMER_PATH_LABEL = "Timer for path label ";
 
     public static final String COUNTER_CONSTRUCTED_NODES = "The number of constructed nodes:";

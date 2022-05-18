@@ -58,9 +58,9 @@ public class HSTree extends AbstractHSConstructor {
 
         // generate root if there is none
         if (!hasRoot()) {
-            start(TIMER_LABEL  + getThreadString() + ": ");
-            List<Set<Constraint>> conflicts = getLabeler().getLabel(param);
-            stop(TIMER_LABEL  + getThreadString() + ": ");
+            start(TIMER_NODE_LABEL  + getThreadString() + ": ");
+            List<Set<Constraint>> labels = getLabeler().getLabel(param);
+            stop(TIMER_NODE_LABEL  + getThreadString() + ": ");
 
             if (labels.isEmpty()) {
                 endConstruction();
@@ -131,9 +131,11 @@ public class HSTree extends AbstractHSConstructor {
             }
             if (labels.isEmpty()) {
                 node.setStatus(NodeStatus.Checked);
-                Set<Constraint> diag = new LinkedHashSet<>(node.getPathLabels());
-                getDiagnoses().add(diag);
-                log.debug("{}Diagnosis #{} is found: {}", LoggerUtils.tab(), getDiagnoses().size(), node.getPathLabels());
+                Set<Constraint> pathLabel = new LinkedHashSet<>(node.getPathLabel());
+                getPathLabels().add(pathLabel);
+                log.debug("{}{} #{} is found: {}", LoggerUtils.tab(),
+                        getLabeler().getType() == LabelerType.CONFLICT ? "Diagnosis" : "Conflict",
+                        getDiagnoses().size(), node.getPathLabel());
 
                 stop(TIMER_PATH_LABEL  + getThreadString() + ": ");
                 start(TIMER_PATH_LABEL  + getThreadString() + ": ");
@@ -149,11 +151,11 @@ public class HSTree extends AbstractHSConstructor {
         List<Set<Constraint>> labels = new LinkedList<>();
         for (Set<Constraint> label : getNodeLabels()) {
             // H(node) ∩ S = {}
-            if (!hasIntersection(node.getPathLabels(), conflict)) {
-                conflicts.add(conflict);
-                incrementCounter(COUNTER_REUSE_CONFLICT);
-                log.trace("{}Reuse [conflict={}, node={}]", LoggerUtils.tab(), conflict, node);
-                return conflicts;
+            if (!hasIntersection(node.getPathLabel(), label)) {
+                labels.add(label);
+                incrementCounter(COUNTER_REUSE_LABELS);
+                log.trace("{}Reuse [label={}, node={}]", LoggerUtils.tab(), label, node);
+                return labels;
             }
         }
         return labels;
@@ -163,14 +165,14 @@ public class HSTree extends AbstractHSConstructor {
         AbstractHSParameters param = node.getParameters();
 
         start(TIMER_NODE_LABEL  + getThreadString() + ": ");
-        List<Set<Constraint>> conflicts = getLabeler().getLabel(param);
+        List<Set<Constraint>> labels = getLabeler().getLabel(param);
 
-        if (!conflicts.isEmpty()) {
+        if (!labels.isEmpty()) {
             stop(TIMER_NODE_LABEL  + getThreadString() + ": ");
 
             addNodeLabels(labels);
         } else {
-            // stop TIMER_CONFLICT without saving the time
+            // stop TIMER_NODE_LABEL without saving the time
             stop(TIMER_NODE_LABEL  + getThreadString() + ": ", false);
         }
         return labels;
