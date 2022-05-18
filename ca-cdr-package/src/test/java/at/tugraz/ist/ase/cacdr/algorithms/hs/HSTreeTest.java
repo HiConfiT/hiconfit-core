@@ -50,7 +50,7 @@ class HSTreeTest {
                                                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -90,7 +90,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
         hsTree.setMaxNumberOfDiagnoses(1);
 
         CAEvaluator.reset();
@@ -130,7 +130,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
         hsTree.setMaxNumberOfDiagnoses(2);
 
         CAEvaluator.reset();
@@ -170,7 +170,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
         hsTree.setMaxNumberOfConflicts(1);
 
         CAEvaluator.reset();
@@ -211,7 +211,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
         hsTree.setMaxNumberOfConflicts(2);
 
         CAEvaluator.reset();
@@ -252,7 +252,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -292,7 +292,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -332,7 +332,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -372,7 +372,7 @@ class HSTreeTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSTree hsTree = new HSTree(quickXplain, checker);
+        HSTree hsTree = new HSTree(quickXplain);
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -412,13 +412,13 @@ class HSTreeTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -451,13 +451,13 @@ class HSTreeTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -490,13 +490,13 @@ class HSTreeTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -529,13 +529,13 @@ class HSTreeTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -568,13 +568,13 @@ class HSTreeTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -607,13 +607,13 @@ class HSTreeTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -646,13 +646,13 @@ class HSTreeTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -685,13 +685,13 @@ class HSTreeTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -724,13 +724,13 @@ class HSTreeTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -763,13 +763,13 @@ class HSTreeTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSTree hsTree = new HSTree(fastDiag, checker);
+        HSTree hsTree = new HSTree(fastDiag);
 
         CAEvaluator.reset();
         hsTree.construct();
 
-        List<Set<Constraint>> allConflictSets = hsTree.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsTree.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsTree.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsTree.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");

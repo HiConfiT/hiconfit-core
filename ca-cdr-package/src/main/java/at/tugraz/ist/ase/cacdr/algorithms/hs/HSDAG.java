@@ -10,7 +10,6 @@ package at.tugraz.ist.ase.cacdr.algorithms.hs;
 
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.IHSLabelable;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.AbstractHSParameters;
-import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Sets;
@@ -31,25 +30,25 @@ import static at.tugraz.ist.ase.common.IOUtils.*;
 @Slf4j
 public class HSDAG extends HSTree {
 
-    // Map of <pathLabels, Node>
+    // Map of <pathLabel, Node>
     private final Map<Set<Constraint>, Node> nodesLookup = new HashMap<>();
 
-    public HSDAG(IHSLabelable labeler, ChocoConsistencyChecker checker) {
-        super(labeler, checker);
+    public HSDAG(IHSLabelable labeler) {
+        super(labeler);
     }
 
     @Override
     protected List<Set<Constraint>> computeLabel(Node node) {
         AbstractHSParameters param = node.getParameters();
 
-        start(TIMER_LABEL + getThreadString() + ": ");
+        start(TIMER_NODE_LABEL + getThreadString() + ": ");
         List<Set<Constraint>> conflicts = getLabeler().getLabel(param);
 
         if (!conflicts.isEmpty()) {
-            stop(TIMER_LABEL + getThreadString() + ": ");
+            stop(TIMER_NODE_LABEL + getThreadString() + ": ");
 
-            // check existing and obtained conflicts for subset-relations
-            List<Set<Constraint>> nonMinConflicts = new LinkedList<>();
+            // check existing and obtained labels for subset-relations
+            List<Set<Constraint>> nonMinLabels = new LinkedList<>();
 
             getConflicts().parallelStream().filter(fs -> !nonMinConflicts.contains(fs)).forEachOrdered(fs -> {
                 /*for (Set<Constraint> fs : getConflicts()) {
@@ -70,14 +69,14 @@ public class HSDAG extends HSTree {
                         nonMinConflicts.add(greater);
 
                         // update the DAG
-                        List<Node> nodes = this.cs_nodesMap.get(greater);
+                        List<Node> nodes = this.label_nodesMap.get(greater);
 
                         if (nodes != null) {
                             nodes.forEach(nd -> {
                                 incrementCounter(COUNTER_PRUNING);
 
                                 nd.setLabel(smaller); // relabel the node with smaller
-                                addItemToCSNodesMap(smaller, nd); // add new label to the map
+                                addItemToLabelNodesMap(smaller, nd); // add new label to the map
 
                                 Set<Constraint> delete = Sets.difference(greater, smaller);
                                 delete.forEach(label -> {
@@ -100,14 +99,14 @@ public class HSDAG extends HSTree {
             conflicts.removeAll(nonMinConflicts);
             nonMinConflicts.forEach(cs -> this.cs_nodesMap.remove(cs));
 
-            // add new conflicts to the list of conflicts
-            addConflicts(conflicts);
+            // add new labels to the list of labels
+            addNodeLabels(labels);
         } else {
             // stop TIMER_CONFLICT without saving the time
-            stop(TIMER_LABEL  + getThreadString() + ": ", false);
+            stop(TIMER_NODE_LABEL  + getThreadString() + ": ", false);
         }
 
-        return conflicts;
+        return labels;
     }
 
     private void cleanUpNodes(Node node) {
@@ -115,7 +114,7 @@ public class HSDAG extends HSTree {
             return;
         }
 
-        nodesLookup.remove(node.getPathLabels());
+        nodesLookup.remove(node.getPathLabel());
         if (node.getStatus() == NodeStatus.Open) {
             node.setStatus(NodeStatus.Pruned);
             incrementCounter(COUNTER_CLEANED_NODES);
@@ -141,7 +140,7 @@ public class HSDAG extends HSTree {
             AbstractHSParameters new_param = getLabeler().createParameter(param_parentNode, arcLabel);
 
             // rule 1.a - reuse node
-            Node node = getReusableNode(nodeToExpand.getPathLabels(), arcLabel);
+            Node node = getReusableNode(nodeToExpand.getPathLabel(), arcLabel);
             if (node != null) {
                 node.addParent(nodeToExpand);
 
@@ -153,7 +152,7 @@ public class HSDAG extends HSTree {
                         .parameters(new_param)
                         .arcLabel(arcLabel)
                         .build();
-                this.nodesLookup.put(node.getPathLabels(), node);
+                this.nodesLookup.put(node.getPathLabel(), node);
                 incrementCounter(COUNTER_CONSTRUCTED_NODES);
 
                 if (!canPrune(node)) {

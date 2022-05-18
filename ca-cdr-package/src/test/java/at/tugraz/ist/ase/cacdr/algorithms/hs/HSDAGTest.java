@@ -52,7 +52,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -92,7 +92,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfDiagnoses(1);
 
         CAEvaluator.reset();
@@ -132,7 +132,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfDiagnoses(2);
 
         CAEvaluator.reset();
@@ -172,7 +172,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfConflicts(1);
 
         CAEvaluator.reset();
@@ -213,7 +213,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
         hsdag.setMaxNumberOfConflicts(2);
 
         CAEvaluator.reset();
@@ -254,7 +254,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -294,7 +294,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -334,7 +334,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -374,7 +374,7 @@ class HSDAGTest {
                 .B(B).build();
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
-        HSDAG hsdag = new HSDAG(quickXplain, checker);
+        HSDAG hsdag = new HSDAG(quickXplain);
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -414,13 +414,13 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -453,13 +453,13 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -492,13 +492,13 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -531,13 +531,13 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -570,13 +570,13 @@ class HSDAGTest {
                 .AC(AC).build();
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -609,13 +609,13 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -648,13 +648,13 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -687,13 +687,13 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -726,13 +726,13 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -765,13 +765,13 @@ class HSDAGTest {
                 .B(B).build();
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(fastDiag, checker);
+        HSDAG hsdag = new HSDAG(fastDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -806,13 +806,13 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -847,13 +847,13 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -888,13 +888,13 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -929,13 +929,13 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
@@ -970,13 +970,13 @@ class HSDAGTest {
                 .build();
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
-        HSDAG hsdag = new HSDAG(flexDiag, checker);
+        HSDAG hsdag = new HSDAG(flexDiag);
 
         CAEvaluator.reset();
         hsdag.construct();
 
-        List<Set<Constraint>> allConflictSets = hsdag.getDiagnoses();
-        List<Set<Constraint>> allDiagnoses = hsdag.getConflicts();
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
