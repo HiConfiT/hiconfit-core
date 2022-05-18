@@ -8,12 +8,10 @@
 
 package at.tugraz.ist.ase.cdrmodel;
 
-import at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModel;
 import at.tugraz.ist.ase.kb.core.Constraint;
-import at.tugraz.ist.ase.kb.fm.FMKB;
-import at.tugraz.ist.ase.test.TestSuite;
 import com.google.common.collect.Sets;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
@@ -50,6 +48,9 @@ public abstract class CDRModel implements Cloneable {
      * The set of constraints which could be faulty = KB (knowledge base).
      */
     private Set<String> possiblyFaultyChocoConstraints = new LinkedHashSet<>();
+
+    @Setter
+    private boolean clone = false;
 
     /**
      * Creates an empty diagnosis model.
@@ -123,6 +124,10 @@ public abstract class CDRModel implements Cloneable {
     }
 
     public Object clone() throws CloneNotSupportedException {
-        return (CDRModel) super.clone();
+        CDRModel clone = (CDRModel) super.clone();
+
+        clone.clone = true;
+
+        return clone;
     }
 }
