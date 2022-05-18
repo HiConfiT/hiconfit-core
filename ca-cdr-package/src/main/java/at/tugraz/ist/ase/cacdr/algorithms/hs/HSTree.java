@@ -21,7 +21,6 @@ import java.util.*;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.hasIntersection;
-import static at.tugraz.ist.ase.common.IOUtils.getThreadString;
 
 /**
  * Implementation of the HS-tree algorithm.
@@ -53,14 +52,14 @@ public class HSTree extends AbstractHSConstructor {
         log.debug("{}Constructing the HS-tree for [C={}] >>>", LoggerUtils.tab(), param.getC());
         LoggerUtils.indent();
 
-        start(TIMER_HS_CONSTRUCTION_SESSION  + getThreadString() + ": ");
-        start(TIMER_PATH_LABEL  + getThreadString() + ": ");
+        start(TIMER_HS_CONSTRUCTION_SESSION);
+        start(TIMER_PATH_LABEL);
 
         // generate root if there is none
         if (!hasRoot()) {
-            start(TIMER_NODE_LABEL  + getThreadString() + ": ");
+            start(TIMER_NODE_LABEL);
             List<Set<Constraint>> labels = getLabeler().getLabel(param);
-            stop(TIMER_NODE_LABEL  + getThreadString() + ": ");
+            stop(TIMER_NODE_LABEL);
 
             if (labels.isEmpty()) {
                 endConstruction();
@@ -112,8 +111,8 @@ public class HSTree extends AbstractHSConstructor {
         log.debug("{}<<< return [conflicts={}]", LoggerUtils.tab(), getConflicts());
         log.debug("{}<<< return [diagnoses={}]", LoggerUtils.tab(), getDiagnoses());
 
-        stop(TIMER_HS_CONSTRUCTION_SESSION  + getThreadString() + ": ");
-        stop(TIMER_PATH_LABEL  + getThreadString() + ": ", false);
+        stop(TIMER_HS_CONSTRUCTION_SESSION);
+        stop(TIMER_PATH_LABEL, false);
 
         if (log.isTraceEnabled()) {
             Utils.printInfo(root, getConflicts(), getDiagnoses());
@@ -137,8 +136,8 @@ public class HSTree extends AbstractHSConstructor {
                         getLabeler().getType() == LabelerType.CONFLICT ? "Diagnosis" : "Conflict",
                         getDiagnoses().size(), node.getPathLabel());
 
-                stop(TIMER_PATH_LABEL  + getThreadString() + ": ");
-                start(TIMER_PATH_LABEL  + getThreadString() + ": ");
+                stop(TIMER_PATH_LABEL);
+                start(TIMER_PATH_LABEL);
                 return;
             }
             Set<Constraint> label = selectLabel(labels);
@@ -164,16 +163,16 @@ public class HSTree extends AbstractHSConstructor {
     protected List<Set<Constraint>> computeLabel(Node node) {
         AbstractHSParameters param = node.getParameters();
 
-        start(TIMER_NODE_LABEL  + getThreadString() + ": ");
+        start(TIMER_NODE_LABEL);
         List<Set<Constraint>> labels = getLabeler().getLabel(param);
 
         if (!labels.isEmpty()) {
-            stop(TIMER_NODE_LABEL  + getThreadString() + ": ");
+            stop(TIMER_NODE_LABEL);
 
             addNodeLabels(labels);
         } else {
             // stop TIMER_NODE_LABEL without saving the time
-            stop(TIMER_NODE_LABEL  + getThreadString() + ": ", false);
+            stop(TIMER_NODE_LABEL, false);
         }
         return labels;
     }

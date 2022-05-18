@@ -18,7 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import static at.tugraz.ist.ase.eval.PerformanceEvaluator.*;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of the HS-dag algorithm.
@@ -41,11 +40,11 @@ public class HSDAG extends HSTree {
     protected List<Set<Constraint>> computeLabel(Node node) {
         AbstractHSParameters param = node.getParameters();
 
-        start(TIMER_NODE_LABEL + getThreadString() + ": ");
+        start(TIMER_NODE_LABEL);
         List<Set<Constraint>> labels = getLabeler().getLabel(param);
 
         if (!labels.isEmpty()) {
-            stop(TIMER_NODE_LABEL + getThreadString() + ": ");
+            stop(TIMER_NODE_LABEL);
 
             // check existing and obtained labels for subset-relations
             List<Set<Constraint>> nonMinLabels = new LinkedList<>();
@@ -103,7 +102,7 @@ public class HSDAG extends HSTree {
             addNodeLabels(labels);
         } else {
             // stop TIMER_CONFLICT without saving the time
-            stop(TIMER_NODE_LABEL  + getThreadString() + ": ", false);
+            stop(TIMER_NODE_LABEL);
         }
 
         return labels;

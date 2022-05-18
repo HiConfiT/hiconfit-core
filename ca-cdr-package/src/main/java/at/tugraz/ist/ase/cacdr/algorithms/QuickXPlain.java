@@ -21,7 +21,6 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of QuickXplain algorithm using Set structures.
@@ -86,9 +85,9 @@ public class QuickXPlain extends IConsistencyAlgorithm {
             return Collections.emptySet();
         } else { //ELSE return QX(Φ, C, B)
             incrementCounter(COUNTER_QUICKXPLAIN_CALLS);
-            start(TIMER_QUICKXPLAIN + getThreadString() + ": ");
+            start(TIMER_QUICKXPLAIN);
             Set<Constraint> cs = qx(Collections.emptySet(), C, B);
-            stop(TIMER_QUICKXPLAIN + getThreadString() + ": ");
+            stop(TIMER_QUICKXPLAIN);
 
             LoggerUtils.outdent();
             log.debug("{}<<< Found conflict [conflict={}]", LoggerUtils.tab(), cs);

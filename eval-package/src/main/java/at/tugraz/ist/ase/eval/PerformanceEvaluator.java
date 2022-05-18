@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static at.tugraz.ist.ase.common.IOUtils.getThreadString;
+
 @Slf4j
 public class PerformanceEvaluator {
 
@@ -25,7 +27,6 @@ public class PerformanceEvaluator {
 
     private static ConcurrentHashMap<String, Counter> counters = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Timer> timers = new ConcurrentHashMap<>();
-
     private static List<String> commonTimers = new LinkedList<>();
 
     /**
@@ -77,6 +78,8 @@ public class PerformanceEvaluator {
      * @param name of the counter
      */
     public static void start(String name) {
+        name = name + getThreadString() + ": ";
+
         getTimer(name).start();
     }
 
@@ -87,10 +90,14 @@ public class PerformanceEvaluator {
      * @return elapsed time since the timer was started
      */
     public static long stop(String name, boolean isSave) {
+        name = name + getThreadString() + ": ";
+
         return getTimer(name).stop(isSave);
     }
 
     public static long stop(String name) {
+        name = name + getThreadString() + ": ";
+
         return getTimer(name).stop();
     }
 
@@ -131,6 +138,10 @@ public class PerformanceEvaluator {
      */
     public static Map<String, Timer> getTimers() {
         return Collections.unmodifiableMap(timers);
+    }
+
+    public static List<String> commonTimers() {
+        return Collections.unmodifiableList(commonTimers);
     }
 
     /**

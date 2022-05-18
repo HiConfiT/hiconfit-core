@@ -22,7 +22,6 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of DirectDebug.
@@ -98,9 +97,9 @@ public class DirectDebug {
             return Collections.emptySet();
         } else{ // else return C \ directDebug(Φ, C, B, T'π)
             incrementCounter(COUNTER_DIRECTDEBUG_CALLS);
-            start(TIMER_DIRECTDEBUG + getThreadString() + ": ");
+            start(TIMER_DIRECTDEBUG);
             Set<Constraint> mss = directDebug(Collections.emptySet(), C, B, TCp);
-            stop(TIMER_DIRECTDEBUG + getThreadString() + ": ");
+            stop(TIMER_DIRECTDEBUG);
 
             incrementCounter(COUNTER_DIFFERENT_OPERATOR);
             Set<Constraint> diag = Sets.difference(C, mss);

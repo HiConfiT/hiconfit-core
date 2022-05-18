@@ -21,7 +21,6 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of an MSS-based FastDiag algorithm.
@@ -86,9 +85,9 @@ public class FastDiagV3 {
             return Collections.emptySet();
         } else { // else return C \ FD(C, B, Φ)
             incrementCounter(COUNTER_FASTDIAGV3_CALLS);
-            start(TIMER_FASTDIAGV3 + getThreadString() + ": ");
+            start(TIMER_FASTDIAGV3);
             Set<Constraint> mss = fd(Collections.emptySet(), C, B);
-            stop(TIMER_FASTDIAGV3 + getThreadString() + ": ");
+            stop(TIMER_FASTDIAGV3);
 
             incrementCounter(COUNTER_DIFFERENT_OPERATOR);
             Set<Constraint> diag = Sets.difference(C, mss);

@@ -21,7 +21,6 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of FlexDiag algorithm.
@@ -88,9 +87,9 @@ public class FlexDiag extends IConsistencyAlgorithm {
             return Collections.emptySet();
         } else { // else return FlexD(Φ, C, AC, m)
             incrementCounter(COUNTER_FLEXDIAG_CALLS);
-            start(TIMER_FLEXDIAG + getThreadString() + ": ");
+            start(TIMER_FLEXDIAG);
             Set<Constraint> Δ = flexd(Collections.emptySet(), S, AC, m);
-            stop(TIMER_FLEXDIAG + getThreadString() + ": ");
+            stop(TIMER_FLEXDIAG);
 
             LoggerUtils.outdent();
             log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab(), Δ);

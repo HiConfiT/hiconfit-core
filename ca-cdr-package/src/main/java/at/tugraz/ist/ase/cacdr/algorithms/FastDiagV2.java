@@ -21,7 +21,6 @@ import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 
 /**
  * Implementation of FastDiag algorithm using Set structures.
@@ -95,9 +94,9 @@ public class FastDiagV2 {
             return Collections.emptySet();
         } else { // else return FD(Φ, C, AC)
             incrementCounter(COUNTER_FASTDIAGV2_CALLS);
-            start(TIMER_FASTDIAGV2 + getThreadString() + ": ");
+            start(TIMER_FASTDIAGV2);
             Set<Constraint> Δ = fd(Collections.emptySet(), C, AC);
-            stop(TIMER_FASTDIAGV2 + getThreadString() + ": ");
+            stop(TIMER_FASTDIAGV2);
 
             LoggerUtils.outdent();
             log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab(), Δ);

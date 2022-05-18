@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.*;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
@@ -118,7 +117,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
     }
 
     protected ITestCase getTestCaseFromCloneModel(ITestCase testcase) {
-        ITestCase testcase_clone = ((IDebuggingModel) cdrModel).getTestcases().parallelStream().filter(tc -> tc.equals(testcase)).findFirst().orElse(null);;
+        ITestCase testcase_clone = ((IDebuggingModel) cdrModel).getTestcases().parallelStream().filter(tc -> tc.equals(testcase)).findFirst().orElse(null);
         /* for (ITestCase tc : ((IDebuggingModel) cdrModel).getTestcases()) {
             if (tc.equals(testcase)) {
                 testcase_clone = tc;
@@ -312,9 +311,9 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
             log.trace("{}Checking...", LoggerUtils.tab());
             incrementCounter(COUNTER_SIZE_CONSISTENCY_CHECKS, model.getNbCstrs());
 
-            start(TIMER_SOLVER + getThreadString() + ": ");
+            start(TIMER_SOLVER);
             boolean isFeasible = model.getSolver().solve();
-            stop(TIMER_SOLVER + getThreadString() + ": ");
+            stop(TIMER_SOLVER);
 
             if (isFeasible) {
                 incrementCounter(COUNTER_FEASIBLE);
