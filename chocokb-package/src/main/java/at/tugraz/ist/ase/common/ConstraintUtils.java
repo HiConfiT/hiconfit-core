@@ -52,10 +52,10 @@ public final class ConstraintUtils {
     }
 
     public void postConstraints(Collection<Constraint> C, Model toModel) {
-        for (Constraint c : C) {
+        C.forEach(c -> {
             c.getChocoConstraints().forEach(toModel::post);
             incrementCounter(COUNTER_POST_CONSTRAINT, c.getChocoConstraints().size());
-        }
+        });
         log.trace("{}Posted constraints", LoggerUtils.tab);
     }
 

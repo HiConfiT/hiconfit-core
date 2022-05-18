@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Getter
 @EqualsAndHashCode
@@ -92,9 +93,10 @@ public class Domain implements Cloneable {
 
     private void initChocoValuesWithDefaultValues() {
         this.chocoValues = new LinkedList<>();
-        for (int i = 0; i < this.values.size(); i++) {
+        IntStream.range(0, this.values.size()).forEachOrdered(i -> this.chocoValues.add(i));
+        /*for (int i = 0; i < this.values.size(); i++) {
             this.chocoValues.add(i);
-        }
+        }*/
 
         log.trace("{}Initialized Choco values for Domain [domain={}]", LoggerUtils.tab, this);
     }

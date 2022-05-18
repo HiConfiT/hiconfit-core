@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Slf4j
 public class PCKB extends KB {
@@ -283,7 +285,7 @@ public class PCKB extends KB {
                 "ram2_slotD", "ram2_capacityD", "ram3_idD", "ram3_slotD", "ram3_capacityD", "ram4_idD", "ram4_slotD", "ram4_capacityD",
                 "graphics_idD", "graphics_slotD", "pc_clockD", "pc_memoryD", "ram1_presentD", "ram2_presentD", "ram3_presentD", "ram4_presentD");
 
-        for (int i = 0; i < varNames.size(); i++) {
+        IntStream.range(0, varNames.size()).forEachOrdered(i -> {
             String varName = varNames.get(i);
             IntVar intVar = this.modelKB.intVar(varName, domainList.get(i).getIntValues());
             Variable var = IntVariable.builder()
@@ -291,7 +293,7 @@ public class PCKB extends KB {
                     .domain(domainList.get(i))
                     .chocoVar(intVar).build();
             variableList.add(var);
-        }
+        });
 
         LoggerUtils.outdent();
         log.trace("{}<<< Created variables", LoggerUtils.tab);
@@ -526,13 +528,18 @@ public class PCKB extends KB {
         kbReqList.add(this.modelKB.arithm(((IntVariable)variableList.get(9)).getChocoVar(),"=", 0));
         kbReqList.add(this.modelKB.arithm(((IntVariable)variableList.get(10)).getChocoVar(),"=", 0));
 
-        List<org.chocosolver.solver.constraints.Constraint> configurationList = new ArrayList<>();
-        for(int counter = 0; counter <= kbReqList.size() - 16; counter = counter + 16) {
+        List<org.chocosolver.solver.constraints.Constraint> configurationList = IntStream.iterate(0, counter -> counter <= kbReqList.size() - 16, counter -> counter + 16)
+                .mapToObj(counter -> this.modelKB.and(kbReqList.get(counter), kbReqList.get(1 + counter), kbReqList.get(2 + counter),
+                        kbReqList.get(3 + counter), kbReqList.get(4 + counter), kbReqList.get(5 + counter), kbReqList.get(6 + counter),
+                        kbReqList.get(7 + counter), kbReqList.get(8 + counter), kbReqList.get(9 + counter), kbReqList.get(10 + counter),
+                        kbReqList.get(11 + counter), kbReqList.get(12 + counter), kbReqList.get(13 + counter), kbReqList.get(14 + counter),
+                        kbReqList.get(15 + counter))).toList();
+        /*for (int counter = 0; counter <= kbReqList.size() - 16; counter = counter + 16) {
             configurationList.add(this.modelKB.and(kbReqList.get(counter), kbReqList.get(1 + counter), kbReqList.get(2 + counter),
                     kbReqList.get(3 + counter), kbReqList.get(4 + counter), kbReqList.get(5 + counter), kbReqList.get(6 + counter), kbReqList.get(7 + counter),
                     kbReqList.get(8 + counter), kbReqList.get(9 + counter), kbReqList.get(10 + counter), kbReqList.get(11 + counter), kbReqList.get(12 + counter),
                     kbReqList.get(13 + counter), kbReqList.get(14 + counter), kbReqList.get(15 + counter)));
-        }
+        }*/
 
         org.chocosolver.solver.constraints.Constraint chocoConstraint = this.modelKB.or(configurationList.get(0), configurationList.get(1), configurationList.get(2), configurationList.get(3), configurationList.get(4),
                 configurationList.get(5), configurationList.get(6), configurationList.get(7), configurationList.get(8), configurationList.get(9), configurationList.get(10),

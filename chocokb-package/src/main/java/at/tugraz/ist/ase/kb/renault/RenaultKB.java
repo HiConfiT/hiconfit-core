@@ -26,6 +26,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
 
@@ -686,7 +687,7 @@ public class RenaultKB extends KB {
                 "Var83", "Var84", "Var85", "Var86", "Var87", "Var88", "Var89", "Var90", "Var91", "Var92",
                 "Var93", "Var94", "Var95", "Var96", "Var97", "Var98", "Var99", "Var100", "Var101");
 
-        for (int i = 0; i < varNames.size(); i++) {
+        IntStream.range(0, varNames.size()).forEachOrdered(i -> {
             String varName = varNames.get(i);
             IntVar intVar = this.modelKB.intVar(varName, domainList.get(i).getIntValues());
             Variable var = IntVariable.builder()
@@ -694,7 +695,7 @@ public class RenaultKB extends KB {
                     .domain(domainList.get(i))
                     .chocoVar(intVar).build();
             variableList.add(var);
-        }
+        });
 
         LoggerUtils.outdent();
         log.trace("{}<<< Created variables", LoggerUtils.tab);
@@ -777,16 +778,13 @@ public class RenaultKB extends KB {
         String[] tokens = line.split(" and ");
 
         List<org.chocosolver.solver.constraints.Constraint> constraints = new LinkedList<>();
-        for (String token : tokens) {
-            String[] var_val = token.split(" = ");
-
+        Arrays.stream(tokens).map(token -> token.split(" = ")).forEachOrdered(var_val -> {
             String variable = var_val[0].trim();
             IntVar intvar = getIntVar(variable);
             String value = var_val[1].trim();
             int chocovalue = getIntValue(variable, value);
-
             constraints.add(modelKB.arithm(intvar, "=", chocovalue));
-        }
+        });
 
         org.chocosolver.solver.constraints.Constraint[] arrConstraints = constraints.toArray(new org.chocosolver.solver.constraints.Constraint[0]);
         return modelKB.and(arrConstraints);
