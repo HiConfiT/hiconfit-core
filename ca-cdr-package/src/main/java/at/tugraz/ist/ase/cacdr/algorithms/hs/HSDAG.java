@@ -30,6 +30,7 @@ import static at.tugraz.ist.ase.eval.PerformanceEvaluator.*;
 public class HSDAG extends HSTree {
 
     // Map of <pathLabel, Node>
+    // shouldn't use hashcode for pathLabel, since pathLabel's hashcode is not unique in some cases
     private final Map<Set<Constraint>, Node> nodesLookup = new HashMap<>();
 
     public HSDAG(IHSLabelable labeler) {
@@ -68,7 +69,7 @@ public class HSDAG extends HSTree {
                         nonMinLabels.add(greater);
 
                         // update the DAG
-                        List<Node> nodes = this.label_nodesMap.get(greater);
+                        List<Node> nodes = this.label_nodesMap.get(greater.hashCode());
 
                         if (nodes != null) {
                             nodes.forEach(nd -> {
@@ -96,7 +97,7 @@ public class HSDAG extends HSTree {
             });
             // remove the known non-minimal conflicts
             labels.removeAll(nonMinLabels);
-            nonMinLabels.forEach(label -> this.label_nodesMap.remove(label));
+            nonMinLabels.forEach(label -> this.label_nodesMap.remove(label.hashCode()));
 
             // add new labels to the list of labels
             addNodeLabels(labels);
