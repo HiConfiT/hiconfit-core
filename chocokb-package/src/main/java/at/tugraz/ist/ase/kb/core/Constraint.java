@@ -89,6 +89,8 @@ public class Constraint {
 
     @Override
     public int hashCode() {
+        // shouldn't add choco constraints to hashcode
+        // since in a multi-thread scenario, a clone constraint will have different choco constraint objects
         return Objects.hash(constraint);
     }
 
