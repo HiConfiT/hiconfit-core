@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static at.tugraz.ist.ase.common.IOUtils.*;
@@ -28,6 +29,8 @@ public class PerformanceEvaluator {
     private static ConcurrentHashMap<String, Counter> counters = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Timer> timers = new ConcurrentHashMap<>();
     private static List<String> commonTimers = new LinkedList<>();
+
+    private static final Semaphore semaphore = new Semaphore(1);
 
     /**
      * Returns a counter with the given name. If counter does not exist, it will be created by the method and added
@@ -123,6 +126,10 @@ public class PerformanceEvaluator {
      */
     public static void startSharedTimer(String name) {
         getTimer(name).start();
+
+        if (semaphore.availablePermits() == 0) {
+            semaphore.release();
+        }
     }
 
     /**
@@ -132,7 +139,10 @@ public class PerformanceEvaluator {
      * @param isSave whether to save the timing or not
      * @return elapsed time since the timer was started
      */
-    public static long stopSharedTimer(String name, boolean isSave) {
+    public static long stopSharedTimer(String name, boolean willStopSoon, boolean isSave) throws InterruptedException {
+        if (willStopSoon) {
+            semaphore.acquire();
+        }
         return getTimer(name).stop(isSave);
     }
 
@@ -142,8 +152,8 @@ public class PerformanceEvaluator {
      * @param name of the timer
      * @return elapsed time since the timer was started
      */
-    public static long stopSharedTimer(String name) {
-        return stopSharedTimer(name, true);
+    public static long stopSharedTimer(String name, boolean willStopSoon) throws InterruptedException {
+        return stopSharedTimer(name, willStopSoon, true);
     }
 
     /**
