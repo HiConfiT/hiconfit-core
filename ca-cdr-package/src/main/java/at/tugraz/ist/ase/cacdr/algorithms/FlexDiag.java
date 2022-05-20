@@ -51,8 +51,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 @Slf4j
 public class FlexDiag extends IConsistencyAlgorithm {
     // for evaluation
-    public static final String TIMER_FLEXDIAG = "Timer for FlexDiag ";
-    public static final String COUNTER_FLEXDIAG_CALLS = "The number of FlexDiag calls:";
+    public static final String TIMER_FLEXDIAG = "Timer for FlexDiag";
+    public static final String COUNTER_FLEXDIAG_CALLS = "The number of FlexDiag calls";
 
     public FlexDiag(@NonNull ChocoConsistencyChecker checker) {
         super(checker);

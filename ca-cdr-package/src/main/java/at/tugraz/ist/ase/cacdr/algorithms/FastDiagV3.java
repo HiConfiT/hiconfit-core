@@ -48,8 +48,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class FastDiagV3 {
 
     // for evaluation
-    public static final String TIMER_FASTDIAGV3 = "Timer for FD V3 ";
-    public static final String COUNTER_FASTDIAGV3_CALLS = "The number of FD V3 calls:";
+    public static final String TIMER_FASTDIAGV3 = "Timer for FD V3";
+    public static final String COUNTER_FASTDIAGV3_CALLS = "The number of FD V3 calls";
 
     protected final ChocoConsistencyChecker checker;
 

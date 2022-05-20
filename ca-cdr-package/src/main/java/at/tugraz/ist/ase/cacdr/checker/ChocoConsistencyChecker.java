@@ -32,7 +32,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @Slf4j
 public class ChocoConsistencyChecker implements IConsistencyChecker {
-    public static final String TIMER_SOLVER = "Timer for solver ";
+    public static final String TIMER_SOLVER = "Timer for solver";
 
     /**
      * An internal models

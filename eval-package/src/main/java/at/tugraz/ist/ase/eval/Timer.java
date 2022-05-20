@@ -48,6 +48,7 @@ public class Timer extends AbstractEvaluator {
     /**
      * Stop the timer.
      *
+     * @param isSave whether to save the timing or not
      * @return return the time elapsed since the start in nanoseconds.
      */
     public long stop(boolean isSave) {
@@ -63,6 +64,11 @@ public class Timer extends AbstractEvaluator {
         return this.time;
     }
 
+    /**
+     * Stop the timer and save the timing.
+     *
+     * @return return the time elapsed since the start in nanoseconds.
+     */
     public long stop() {
         return stop(true);
     }

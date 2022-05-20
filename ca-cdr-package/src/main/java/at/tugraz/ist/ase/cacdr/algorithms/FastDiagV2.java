@@ -57,8 +57,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class FastDiagV2 {
 
     // for evaluation
-    public static final String TIMER_FASTDIAGV2 = "Timer for FD V2 ";
-    public static final String COUNTER_FASTDIAGV2_CALLS = "The number of FD V2 calls:";
+    public static final String TIMER_FASTDIAGV2 = "Timer for FD V2";
+    public static final String COUNTER_FASTDIAGV2_CALLS = "The number of FD V2 calls";
 
     protected final ChocoConsistencyChecker checker;
 

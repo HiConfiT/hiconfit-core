@@ -56,8 +56,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class DirectDebug {
 
     // for evaluation
-    public static final String TIMER_DIRECTDEBUG = "Timer for DirectDebug ";
-    public static final String COUNTER_DIRECTDEBUG_CALLS = "The number of DirectDebug calls:";
+    public static final String TIMER_DIRECTDEBUG = "Timer for DirectDebug";
+    public static final String COUNTER_DIRECTDEBUG_CALLS = "The number of DirectDebug calls";
 
     protected final ChocoConsistencyChecker checker;
 

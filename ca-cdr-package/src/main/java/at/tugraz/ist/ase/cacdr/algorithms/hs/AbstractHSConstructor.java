@@ -29,17 +29,17 @@ import java.util.Set;
 @Getter
 public abstract class AbstractHSConstructor {
     // for evaluation
-    public static final String TIMER_HS_CONSTRUCTION_SESSION = "Timer for HS construction session ";
-    public static final String TIMER_NODE_LABEL = "Timer for node label ";
-    public static final String TIMER_PATH_LABEL = "Timer for path label ";
+    public static final String TIMER_HS_CONSTRUCTION_SESSION = "Timer for HS construction session";
+    public static final String TIMER_NODE_LABEL = "Timer for node label";
+    public static final String TIMER_PATH_LABEL = "Timer for path label";
 
-    public static final String COUNTER_CONSTRUCTED_NODES = "The number of constructed nodes:";
-    public static final String COUNTER_CLOSE_1 = "The number of 3.i closed nodes:";
-    public static final String COUNTER_CLOSE_2 = "The number of 3.ii closed nodes:";
-    public static final String COUNTER_REUSE_LABELS = "The number of reused labels:";
-    public static final String COUNTER_REUSE_NODES = "The number of reused nodes:";
-    public static final String COUNTER_PRUNING = "The number of pruning paths:";
-    public static final String COUNTER_CLEANED_NODES = "The number of cleaned nodes:";
+    public static final String COUNTER_CONSTRUCTED_NODES = "The number of constructed nodes";
+    public static final String COUNTER_CLOSE_1 = "The number of 3.i closed nodes";
+    public static final String COUNTER_CLOSE_2 = "The number of 3.ii closed nodes";
+    public static final String COUNTER_REUSE_LABELS = "The number of reused labels";
+    public static final String COUNTER_REUSE_NODES = "The number of reused nodes";
+    public static final String COUNTER_PRUNING = "The number of pruning paths";
+    public static final String COUNTER_CLEANED_NODES = "The number of cleaned nodes";
 
     @Setter
     private int maxNumberOfDiagnoses = -1; // -1 - all diagnoses

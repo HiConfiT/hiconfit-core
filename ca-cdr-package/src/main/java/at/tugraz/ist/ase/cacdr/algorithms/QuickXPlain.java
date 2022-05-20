@@ -53,8 +53,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class QuickXPlain extends IConsistencyAlgorithm {
 
     // for evaluation
-    public static final String TIMER_QUICKXPLAIN = "Timer for QX ";
-    public static final String COUNTER_QUICKXPLAIN_CALLS = "The number of QX calls:";
+    public static final String TIMER_QUICKXPLAIN = "Timer for QX";
+    public static final String COUNTER_QUICKXPLAIN_CALLS = "The number of QX calls";
 
     public QuickXPlain(@NonNull ChocoConsistencyChecker checker) {
         super(checker);
