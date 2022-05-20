@@ -18,7 +18,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static at.tugraz.ist.ase.common.IOUtils.getThreadString;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 @Slf4j
 public class PerformanceEvaluator {

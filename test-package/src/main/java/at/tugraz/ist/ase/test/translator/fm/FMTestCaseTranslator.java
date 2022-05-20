@@ -20,7 +20,7 @@ import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.nary.cnf.LogOp;
 import org.chocosolver.solver.variables.BoolVar;
 
-import static at.tugraz.ist.ase.common.ChocoSolverUtils.getVariable;
+import static at.tugraz.ist.ase.common.ChocoSolverUtils.*;
 
 @Slf4j
 public class FMTestCaseTranslator implements ITestCaseTranslatable {

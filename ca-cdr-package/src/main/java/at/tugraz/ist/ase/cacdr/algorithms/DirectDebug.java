@@ -21,7 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.split;
+import static at.tugraz.ist.ase.common.ConstraintUtils.*;
 
 /**
  * Implementation of DirectDebug.

@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.hasIntersection;
+import static at.tugraz.ist.ase.common.ConstraintUtils.*;
 
 /**
  * Implementation of the HS-tree algorithm.

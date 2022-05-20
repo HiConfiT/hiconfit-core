@@ -26,7 +26,7 @@ import org.chocosolver.solver.variables.BoolVar;
 
 import java.util.*;
 
-import static at.tugraz.ist.ase.common.ChocoSolverUtils.getVariable;
+import static at.tugraz.ist.ase.common.ChocoSolverUtils.*;
 
 /**
  * An extension class of {@link CDRModel} for a debugging task of feature models.

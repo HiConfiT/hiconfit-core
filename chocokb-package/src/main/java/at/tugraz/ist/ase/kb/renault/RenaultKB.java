@@ -28,7 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
+import static at.tugraz.ist.ase.common.IOUtils.*;
 
 @Slf4j
 public class RenaultKB extends KB {

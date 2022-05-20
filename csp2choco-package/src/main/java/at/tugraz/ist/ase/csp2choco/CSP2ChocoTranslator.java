@@ -27,7 +27,7 @@ import org.javatuples.Pair;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static at.tugraz.ist.ase.common.ChocoSolverUtils.getVariable;
+import static at.tugraz.ist.ase.common.ChocoSolverUtils.*;
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Slf4j
