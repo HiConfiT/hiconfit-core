@@ -40,6 +40,10 @@ public class LoggerUtils {
         }
     }
 
+    public void reset() {
+        tabs.clear();
+    }
+
     public synchronized void logMethodInfoWithSession(@NonNull String nameMethod, @NonNull String sessionId, int timeout, @NonNull String requestUri, @NonNull String level) {
         String logMessage = "{}[method={}, sessionId={}, timeout={}, request={}]";
         switch (level) {
