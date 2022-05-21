@@ -20,11 +20,8 @@ public class LoggerUtils {
     public ConcurrentHashMap<Long, String> tabs = new ConcurrentHashMap<>();
 
     public String tab() {
-//        if (!tabs.containsKey(threadId)) {
-//            tabs.put(threadId, "");
-//        }
         long threadId = Thread.currentThread().getId();
-        return tabs.computeIfAbsent(threadId, k -> "");
+        return "|thread=" + threadId + "|" + tabs.computeIfAbsent(threadId, k -> "");
     }
 
     public void indent() {

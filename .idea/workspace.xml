@@ -7,8 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix startSharedTimer, stopSharedTimer">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add thread information into LoggerUtils">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +127,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.CSP2ChocoTranslatorTest">
+  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package">
     <configuration name="CSP2ChocoTranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="csp2choco-package" />
       <extension name="coverage">
@@ -126,6 +138,21 @@
       </extension>
       <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.csp2choco" />
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslatorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FastDiagV3Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.FastDiagV3Test" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -175,27 +202,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
+        <item itemvalue="JUnit.FastDiagV3Test" />
+        <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
         <item itemvalue="JUnit.ThreadTimerTest" />
         <item itemvalue="JUnit.PerformanceEvaluatorTest" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package" />
       </list>
     </recent_temporary>
   </component>
@@ -236,7 +249,7 @@
       <workItem from="1653039066121" duration="86000" />
       <workItem from="1653042655658" duration="77000" />
       <workItem from="1653054022149" duration="6334000" />
-      <workItem from="1653087676601" duration="740000" />
+      <workItem from="1653087676601" duration="2872000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -413,7 +426,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653058139239</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Ignore inspections for Non-ASCII characters">
+      <created>1653126326530</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1653126326530</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -446,8 +466,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add csp2choco-package" />
-    <MESSAGE value="Add fm-package, eval-package, test-package, chocokb-package" />
     <MESSAGE value="Add fm-package" />
     <MESSAGE value="Update csp2choco-package" />
     <MESSAGE value="Add eval-package" />
@@ -471,7 +489,10 @@
     <MESSAGE value="Uses hashcode for label_nodesMap" />
     <MESSAGE value="Add startSharedTimer, stopSharedTimer + Remove &quot;:&quot; from the messages of counters and timers" />
     <MESSAGE value="Add javadocs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add javadocs" />
+    <MESSAGE value="Ignore inspections for Non-ASCII characters" />
+    <MESSAGE value="Add thread information into LoggerUtils" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add thread information into LoggerUtils" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
