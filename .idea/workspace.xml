@@ -9,10 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix startSharedTimer, stopSharedTimer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc/PCKBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc/PCKBTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc/SolveErrorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/pc/SolveErrorTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/renault/RenaultKBTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/renault/RenaultKBTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,6 +236,7 @@
       <workItem from="1653039066121" duration="86000" />
       <workItem from="1653042655658" duration="77000" />
       <workItem from="1653054022149" duration="6334000" />
+      <workItem from="1653087676601" duration="740000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
