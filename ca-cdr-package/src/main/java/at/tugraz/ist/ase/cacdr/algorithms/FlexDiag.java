@@ -20,7 +20,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.*;
+import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 
 /**
  * Implementation of FlexDiag algorithm.
@@ -117,14 +117,14 @@ public class FlexDiag extends IConsistencyAlgorithm {
      * @return a diagnosis or an empty set
      */
     private Set<Constraint> flexd(Set<Constraint> D, Set<Constraint> S, Set<Constraint> AC, int m) {
-        log.trace("{}FlexD [D={}, S={}, AC={}, m={}] >>>", LoggerUtils.tab(), D, S, AC, m);
+        log.debug("{}FlexD [D={}, S={}, AC={}, m={}] >>>", LoggerUtils.tab(), D, S, AC, m);
         LoggerUtils.indent();
 
         // if D != Φ and consistent(AC) return Φ;
         if ( !D.isEmpty() ) {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(AC)) {
-                log.trace("{}<<< return Φ", LoggerUtils.tab());
+                log.debug("{}<<< return Φ", LoggerUtils.tab());
                 LoggerUtils.outdent();
 
                 return Collections.emptySet();
@@ -135,7 +135,7 @@ public class FlexDiag extends IConsistencyAlgorithm {
         int q = S.size();
         if (q <= m) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return [{}]", LoggerUtils.tab(), S);
+            log.debug("{}<<< return [{}]", LoggerUtils.tab(), S);
 
             return S;
         }
@@ -159,7 +159,7 @@ public class FlexDiag extends IConsistencyAlgorithm {
         Set<Constraint> D2 = flexd(D1, S2, ACwithoutD1, m);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
+        log.debug("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
 
         // return(D1 ∪ D2);
         incrementCounter(COUNTER_UNION_OPERATOR);

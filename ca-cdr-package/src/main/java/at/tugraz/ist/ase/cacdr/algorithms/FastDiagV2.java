@@ -20,7 +20,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.*;
+import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 
 /**
  * Implementation of FastDiag algorithm using Set structures.
@@ -123,14 +123,14 @@ public class FastDiagV2 {
      * @return a diagnosis or an empty set
      */
     private Set<Constraint> fd(Set<Constraint> D, Set<Constraint> C, Set<Constraint> AC) {
-        log.trace("{}FD [D={}, C={}, AC={}] >>>", LoggerUtils.tab(), D, C, AC);
+        log.debug("{}FD [D={}, C={}, AC={}] >>>", LoggerUtils.tab(), D, C, AC);
         LoggerUtils.indent();
 
         // if D != Φ and consistent(AC) return Φ;
         if ( !D.isEmpty() ) {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(AC)) {
-                log.trace("{}<<< return Φ", LoggerUtils.tab());
+                log.debug("{}<<< return Φ", LoggerUtils.tab());
                 LoggerUtils.outdent();
 
                 return Collections.emptySet();
@@ -141,7 +141,7 @@ public class FastDiagV2 {
         int q = C.size();
         if (q == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
+            log.debug("{}<<< return [{}]", LoggerUtils.tab(), C);
 
             return C;
         }
@@ -165,7 +165,7 @@ public class FastDiagV2 {
         Set<Constraint> D2 = fd(D1, C2, ACwithoutD1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
+        log.debug("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
 
         // return(D1 ∪ D2);
         incrementCounter(COUNTER_UNION_OPERATOR);

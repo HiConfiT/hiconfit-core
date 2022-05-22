@@ -20,7 +20,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.*;
+import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 
 /**
  * Implementation of an MSS-based FastDiag algorithm.
@@ -118,7 +118,7 @@ public class FastDiagV3 {
      * @return a maximal satisfiable subset MSS of C U B.
      */
     private Set<Constraint> fd(Set<Constraint> Δ, Set<Constraint> C, Set<Constraint> B) {
-        log.trace("{}FD [Δ={}, C={}, B={}] >>>", LoggerUtils.tab(), Δ, C, B);
+        log.debug("{}FD [Δ={}, C={}, B={}] >>>", LoggerUtils.tab(), Δ, C, B);
         LoggerUtils.indent();
 
         // if Δ != Φ and consistent(B U C) return C;
@@ -128,7 +128,7 @@ public class FastDiagV3 {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(BwithC)) {
                 LoggerUtils.outdent();
-                log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
+                log.debug("{}<<< return [{}]", LoggerUtils.tab(), C);
 
                 return C;
             }
@@ -138,7 +138,7 @@ public class FastDiagV3 {
         int n = C.size();
         if (n == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return Φ", LoggerUtils.tab());
+            log.debug("{}<<< return Φ", LoggerUtils.tab());
 
             return Collections.emptySet();
         }
@@ -162,7 +162,7 @@ public class FastDiagV3 {
         Set<Constraint> Δ2 = fd(C1withoutΔ1, C2, BwithΔ1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [Δ1={} ∪ Δ2={}]", LoggerUtils.tab(), Δ1, Δ2);
+        log.debug("{}<<< return [Δ1={} ∪ Δ2={}]", LoggerUtils.tab(), Δ1, Δ2);
 
         // return Δ1 ∪ Δ2;
         incrementCounter(COUNTER_UNION_OPERATOR);

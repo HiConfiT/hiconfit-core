@@ -10,8 +10,8 @@ package at.tugraz.ist.ase.cacdr.algorithms;
 
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.kb.core.Constraint;
+import at.tugraz.ist.ase.test.ITestCase;
 import com.google.common.collect.Sets;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.*;
+import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 
 /**
  * Implementation of DirectDebug.
@@ -132,7 +132,7 @@ public class DirectDebug {
      * @return a maximal satisfiable subset MSS of C U B U TC.
      */
     private Set<Constraint> directDebug(Set<Constraint> δ, Set<Constraint> C, Set<Constraint> B, Set<ITestCase> TC) {
-        log.trace("{}directDebug [δ={}, C={}, B={}, TC{}] >>>", LoggerUtils.tab(), δ, C, B, TC);
+        log.debug("{}directDebug [δ={}, C={}, B={}, TC{}] >>>", LoggerUtils.tab(), δ, C, B, TC);
         LoggerUtils.indent();
 
         // T'π <- Tπ
@@ -146,7 +146,7 @@ public class DirectDebug {
             TCp = checker.isConsistent(BwithC, TC, false);
             if (TCp.isEmpty()) {
                 LoggerUtils.outdent();
-                log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
+                log.debug("{}<<< return [{}]", LoggerUtils.tab(), C);
 
                 return C;
             }
@@ -156,7 +156,7 @@ public class DirectDebug {
         int n = C.size();
         if (n == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return Φ", LoggerUtils.tab());
+            log.debug("{}<<< return Φ", LoggerUtils.tab());
 
             return Collections.emptySet();
         }
@@ -180,7 +180,7 @@ public class DirectDebug {
         Set<Constraint> Γ2 = directDebug(C1minusΓ1, C2, BwithΓ1, TCp);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [Γ1={} ∪ Γ2={}]", LoggerUtils.tab(), Γ1, Γ2);
+        log.debug("{}<<< return [Γ1={} ∪ Γ2={}]", LoggerUtils.tab(), Γ1, Γ2);
 
         // return Γ1 ∪ Γ2;
         incrementCounter(COUNTER_UNION_OPERATOR);

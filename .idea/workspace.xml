@@ -7,9 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add thread information into LoggerUtils">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add reset to LoggerUtils">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/logback-test.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/resources/logback-test.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Counter.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Counter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Timer.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/Timer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +123,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package">
+  <component name="RunManager" selected="JUnit.FastDiagV3Test.testFindDiagnosis1">
     <configuration name="CSP2ChocoTranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="csp2choco-package" />
       <extension name="coverage">
@@ -147,17 +154,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PerformanceEvaluatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="eval-package" />
+    <configuration name="FastDiagV3Test.testFindDiagnosis1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.eval.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.eval" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.eval.PerformanceEvaluatorTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.FastDiagV3Test" />
+      <option name="METHOD_NAME" value="testFindDiagnosis1" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -193,11 +201,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FastDiagV3Test.testFindDiagnosis1" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
         <item itemvalue="JUnit.FastDiagV3Test" />
         <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
         <item itemvalue="JUnit.ThreadTimerTest" />
-        <item itemvalue="JUnit.PerformanceEvaluatorTest" />
       </list>
     </recent_temporary>
   </component>
@@ -238,7 +246,7 @@
       <workItem from="1653039066121" duration="86000" />
       <workItem from="1653042655658" duration="77000" />
       <workItem from="1653054022149" duration="6334000" />
-      <workItem from="1653087676601" duration="4452000" />
+      <workItem from="1653087676601" duration="5777000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -429,7 +437,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653137562767</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Add reset to LoggerUtils">
+      <created>1653145235747</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1653145235747</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -462,7 +477,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add fm-package" />
     <MESSAGE value="Update csp2choco-package" />
     <MESSAGE value="Add eval-package" />
     <MESSAGE value="Add test-package" />
@@ -487,7 +501,8 @@
     <MESSAGE value="Add javadocs" />
     <MESSAGE value="Ignore inspections for Non-ASCII characters" />
     <MESSAGE value="Add thread information into LoggerUtils" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add thread information into LoggerUtils" />
+    <MESSAGE value="Add reset to LoggerUtils" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add reset to LoggerUtils" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

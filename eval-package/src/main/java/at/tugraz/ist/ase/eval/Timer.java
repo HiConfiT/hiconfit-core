@@ -31,7 +31,7 @@ public class Timer extends AbstractEvaluator {
     public Timer(String name) {
         super(name);
 
-        log.debug("{}Created a timer [timer={}]", LoggerUtils.tab(), name);
+        log.trace("{}Created a timer [timer={}]", LoggerUtils.tab(), name);
     }
 
     /**
@@ -42,7 +42,7 @@ public class Timer extends AbstractEvaluator {
         this.running = true;
         this.time = System.nanoTime();
 
-        log.debug("{}Started the timer [timer={}]", LoggerUtils.tab(), name);
+        log.trace("{}Started the timer [timer={}]", LoggerUtils.tab(), name);
     }
 
     /**
@@ -59,7 +59,7 @@ public class Timer extends AbstractEvaluator {
             this.timings.add(this.time);
         }
 
-        log.debug("{}Stopped the timer [timer={}]", LoggerUtils.tab(), name);
+        log.trace("{}Stopped the timer [timer={}]", LoggerUtils.tab(), name);
 
         return this.time;
     }
