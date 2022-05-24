@@ -15,8 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Set;
 
-import static at.tugraz.ist.ase.common.ConstraintUtils.containsAll;
-import static at.tugraz.ist.ase.common.ConstraintUtils.isMinimal;
+import static at.tugraz.ist.ase.common.ConstraintUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConstraintUtilsTest {
@@ -31,6 +30,8 @@ class ConstraintUtilsTest {
     static Set<Constraint> diag4;
     static Set<Constraint> diag5;
     static Set<Constraint> diag6;
+
+    static Set<Constraint> diag7;
 
     static List<Set<Constraint>> allDiag;
 
@@ -50,6 +51,8 @@ class ConstraintUtilsTest {
         diag4 = Set.of(c1, c3); // no way
         diag5 = Set.of(c2, c4);
         diag6 = Set.of(c1, c2, c3, c4); // no new diagnosis, new conflict set
+
+        diag7 = Set.of(c1, c4);
     }
 
     @Test
@@ -81,5 +84,8 @@ class ConstraintUtilsTest {
 
         assertAll(() -> assertFalse(containsAll(allDiag, diag6)), // no new diagnosis, new conflict set
                 () -> assertFalse(isMinimal(diag6, allDiag)));
+
+        assertAll(() -> assertTrue(hasIntersection(diag1, diag2)),
+                () -> assertFalse(hasIntersection(diag2, diag7)));
     }
 }
