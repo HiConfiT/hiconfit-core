@@ -45,8 +45,8 @@ public class BasicRelationship extends Relationship {
         switch (type) {
             case MANDATORY -> checkArgument(rightSide.size() == 1, "Mandatory relationship's right side must have exactly one feature");
             case OPTIONAL -> checkArgument(rightSide.size() == 1, "Optional relationship's right side must have exactly one feature");
-            case OR -> checkArgument(rightSide.size() > 1, "OR relationship's right side must have more than one feature");
-            case ALTERNATIVE -> checkArgument(rightSide.size() > 1, "Alternative relationship's right side must have more than one feature");
+            case OR -> checkArgument(rightSide.size() >= 1, "OR relationship's right side must have more than one feature");
+            case ALTERNATIVE -> checkArgument(rightSide.size() >= 1, "Alternative relationship's right side must have more than one feature");
             case REQUIRES -> checkArgument(rightSide.size() == 1, "Requires relationship's right side must have exactly one feature");
             case EXCLUDES -> checkArgument(rightSide.size() == 1, "Excludes relationship's right side must have exactly one feature");
         }

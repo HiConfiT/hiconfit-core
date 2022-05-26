@@ -7,8 +7,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix the level of logs">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix BasicRelationship to support some feature models from SPLOT + Add some new feature models to ChocoKB + New KBStatistics">
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/WeaFQAs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/busybox-1.18.0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/ea2468.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/embtoolkit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/mobilemedia2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/pizzas.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/statistics.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE/uClinux-distribution.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/SPLOT/statistics.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
@@ -19,6 +27,8 @@
       <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/BasicRelationship.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/BasicRelationship.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/src/test/java/at/tugraz/ist/ase/fm/core/RelationshipTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/test/java/at/tugraz/ist/ase/fm/core/RelationshipTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
     </list>
@@ -77,34 +87,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/cdrmodel-package/src/test/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "temurin-17",
+    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/chocokb-package/src/main/resources/fms/FeatureIDE",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "editor.preferences.appearance"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE" />
       <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ca-cdr-package" />
       <recent name="$PROJECT_DIR$/cdrmodel-package" />
-      <recent name="$PROJECT_DIR$/chocokb-package" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docs/apidocs" />
@@ -127,22 +137,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FastDiagV3Test.testFindDiagnosis1">
-    <configuration name="CSP2ChocoTranslatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="csp2choco-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.csp2choco.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.csp2choco" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslatorTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.RelationshipTest.testException">
     <configuration name="FastDiagV3Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ca-cdr-package" />
       <extension name="coverage">
@@ -174,17 +169,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ThreadTimerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="RelationshipTest.testException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.core" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.core.RelationshipTest" />
+      <option name="METHOD_NAME" value="testException" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -203,13 +199,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="at.tugraz.ist.ase.fm in fm-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RelationshipTest.testException" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.fm in fm-package" />
         <item itemvalue="JUnit.FastDiagV3Test.testFindDiagnosis1" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
         <item itemvalue="JUnit.FastDiagV3Test" />
-        <item itemvalue="JUnit.CSP2ChocoTranslatorTest" />
-        <item itemvalue="JUnit.ThreadTimerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -475,7 +485,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="22-support-to-clone-cdrmodels" />
+                        <option value="28-support-multi-threading-in-abstracthsconstructor-hstree-and-hsdag" />
                       </list>
                     </value>
                   </entry>
@@ -488,7 +498,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add eval-package" />
     <MESSAGE value="Add test-package" />
     <MESSAGE value="Update common-package" />
     <MESSAGE value="Add chocokb-package" />
@@ -513,7 +522,8 @@
     <MESSAGE value="Add thread information into LoggerUtils" />
     <MESSAGE value="Add reset to LoggerUtils" />
     <MESSAGE value="Fix the level of logs" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the level of logs" />
+    <MESSAGE value="Fix BasicRelationship to support some feature models from SPLOT + Add some new feature models to ChocoKB + New KBStatistics" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix BasicRelationship to support some feature models from SPLOT + Add some new feature models to ChocoKB + New KBStatistics" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

@@ -1,0 +1,152 @@
+1
+Name: uClinux-distribution.xml
+Source: SPLOT
+#variables: 1580
+#constraints: 1793
+#Choco variables: 3182
+#Choco constraints: 1929
+Consistency: true
+
+CTC ratio: 0.1377579475738985
+#features: 1580
+#relationships: 1546
+#constraints: 247
+#MANDATORY: 40
+#OPTIONAL: 1496
+#ALTERNATIVE: 10
+#OR: 0
+#REQUIRES: 231
+#EXCLUDES: 4
+2
+Name: ea2468.xml
+Source: SPLOT
+#variables: 1408
+#constraints: 2670
+#Choco variables: 2842
+#Choco constraints: 3238
+Consistency: true
+
+CTC ratio: 0.4797752808988764
+#features: 1408
+#relationships: 1389
+#constraints: 1281
+#MANDATORY: 496
+#OPTIONAL: 881
+#ALTERNATIVE: 12
+#OR: 0
+#REQUIRES: 1154
+#EXCLUDES: 29
+3
+Name: mobilemedia2.xml
+Source: SPLOT
+#variables: 43
+#constraints: 32
+#Choco variables: 94
+#Choco constraints: 76
+Consistency: true
+
+CTC ratio: 0.09375
+#features: 43
+#relationships: 29
+#constraints: 3
+#MANDATORY: 12
+#OPTIONAL: 10
+#ALTERNATIVE: 3
+#OR: 4
+#REQUIRES: 3
+#EXCLUDES: 0
+4
+Name: linux-2.6.33.3.xml
+Source: SPLOT
+#variables: 6467
+#constraints: 13972
+#Choco variables: 13014
+#Choco constraints: 14612
+Consistency: true
+
+CTC ratio: 0.5475236186659033
+#features: 6467
+#relationships: 6322
+#constraints: 7650
+#MANDATORY: 244
+#OPTIONAL: 6037
+#ALTERNATIVE: 39
+#OR: 2
+#REQUIRES: 7108
+#EXCLUDES: 205
+5
+Name: pizzas.xml
+Source: SPLOT
+#variables: 12
+#constraints: 8
+#Choco variables: 30
+#Choco constraints: 24
+Consistency: true
+
+CTC ratio: 0.125
+#features: 12
+#relationships: 7
+#constraints: 1
+#MANDATORY: 3
+#OPTIONAL: 1
+#ALTERNATIVE: 2
+#OR: 1
+#REQUIRES: 1
+#EXCLUDES: 0
+6
+Name: embtoolkit.xml
+Source: SPLOT
+#variables: 1179
+#constraints: 1029
+#Choco variables: 2507
+#Choco constraints: 2149
+Consistency: true
+
+CTC ratio: 0.16229348882410108
+#features: 1179
+#relationships: 862
+#constraints: 167
+#MANDATORY: 271
+#OPTIONAL: 521
+#ALTERNATIVE: 70
+#OR: 0
+#REQUIRES: 118
+#EXCLUDES: 5
+7
+Name: WeaFQAs.xml
+Source: SPLOT
+#variables: 179
+#constraints: 100
+#Choco variables: 406
+#Choco constraints: 354
+Consistency: true
+
+CTC ratio: 0.07
+#features: 179
+#relationships: 93
+#constraints: 7
+#MANDATORY: 40
+#OPTIONAL: 17
+#ALTERNATIVE: 23
+#OR: 13
+#REQUIRES: 6
+#EXCLUDES: 1
+8
+Name: busybox-1.18.0.xml
+Source: SPLOT
+#variables: 854
+#constraints: 905
+#Choco variables: 1726
+#Choco constraints: 1001
+Consistency: true
+
+CTC ratio: 0.07403314917127071
+#features: 854
+#relationships: 838
+#constraints: 67
+#MANDATORY: 42
+#OPTIONAL: 788
+#ALTERNATIVE: 8
+#OR: 0
+#REQUIRES: 44
+#EXCLUDES: 14
