@@ -6,7 +6,9 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.common;import lombok.Getter;
+package at.tugraz.ist.ase.common;
+
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
