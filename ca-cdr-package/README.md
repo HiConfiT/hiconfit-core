@@ -7,6 +7,7 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 *If you use my implementations in your research, please cite the papers listed in the References.*
 
 ## List of algorithms:
+
 1. [QuickXPlain](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java) [1]
 2. [FastDiag](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java) [2]
 3. [MSS-based FastDiag](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java)
@@ -15,13 +16,15 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 6. [HSDAG](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hsdag/HSDAG.java) [9]
 7. [DirectDebug]() [4, 5, 6, 7]
 8. (coming soon) KBDiag
-9. (coming soon) WipeOutR_T (the related paper published at SPLC'22)
-10. (coming soon) WipeOutR_FM (the related paper published at SPLC'22)
+9. (coming soon) WipeOutR_T [12]
+10. (coming soon) WipeOutR_FM [12]
 11. (coming soon) AggregatedTest (the related paper submitted in June 2022)
 12. (coming soon) InformedQX
 13. (coming soon) LevelWiseParallelHSDAG [10, 11]
 14. (coming soon) FullParallelHSDAG [10, 11]
 15. (coming soon) FastDiagP
+
+This package also provides a [Choco Consistency Checker](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java), supporting the consistency checks for sets of constraints or sets of test cases.
 
 ## Examples
 
@@ -85,3 +88,4 @@ Replacing USERNAME with your GitHub username, and TOKEN with your personal acces
 9. R. Greiner, B. A. Smith, and R. W. Wilkerson, A correction to the algorithm in reiter’s theory of diagnosis, Artif Intell, vol. 41, no. 1, pp. 79–88, 1989, https://doi.org/10.1016/0004-3702(89)90079-9.
 10. Jannach, Dietmar, Thomas Schmitz, and Kostyantyn Shchekotykhin. "Parallel model-based diagnosis on multi-core computers." Journal of Artificial Intelligence Research 55 (2016): 835-887. https://doi.org/10.1613/jair.5001.
 11. Jannach, D., Schmitz, T., & Shchekotykhin, K. (2015). Parallelized Hitting Set Computation for Model-Based Diagnosis. Proceedings of the AAAI Conference on Artificial Intelligence, 29(1). https://doi.org/10.1609/aaai.v29i1.9389.
+12. V.M. Le, A. Felfernig, M. Uta, T.N.T. Tran, and C. Vidal, WipeOutR: Automated Redundancy Detection For Feature Models, 26th ACM International Systems and Software Product Line Conference (SPLC 2022), 2022.
