@@ -1,8 +1,19 @@
 # common-package
 
-A Maven package for utility functions
+A Maven package provides utility functions.
+
+## Features
+
+- Utility functions for Choco Solver
+- Utility functions for input and output
+- Utility functions for logging
+- Utility functions for generating random numbers
+- Utility functions for parsing command line argurments
+- Utility functions for a mail service
 
 ## How to get this package
+
+The information of the stable latest release is in [here](https://github.com/manleviet/CA-CDR-V2/packages/1408257?version=1.3.8).
 
 Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
 
