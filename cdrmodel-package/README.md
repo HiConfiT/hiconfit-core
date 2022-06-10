@@ -1,6 +1,6 @@
 # cdrmodel-package
 
-This package provides an programmatic approach to manage CDRModels which are used to manage/prepare the constraints/test cases for [consistency-based algorithms](https://github.com/manleviet/CA-CDR-V2/tree/main/ca-cdr-package).
+This package provides an programmatic approach to manage/prepare the input constraints/test cases for [consistency-based algorithms](https://github.com/manleviet/CA-CDR-V2/tree/main/ca-cdr-package).
 
 ## Features
 
