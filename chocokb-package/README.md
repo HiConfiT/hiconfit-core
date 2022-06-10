@@ -1,28 +1,28 @@
-# ChocoKB - at.tugraz.ist.ase.choco-kb
+# chocokb-package
 
-A Maven package for Configuration Knowledge Bases in Choco Solver
+A Maven package for Configuration Knowledge Bases in Choco Solver.
 
-Knowledge bases:
+This package provides classes managing CSP (Choco) representations of a knowlege base.
 
-1. [PC](https://www.itu.dk/research/cla/externals/clib/)
-2. [Renault](https://www.itu.dk/research/cla/externals/clib/)
-3. [Feature Models](http://www.splot-research.org)
+## Features
 
-## How to use
+- Provides an abstract **KB** class managing variables, variable domains, and constraints of a knowledge base/feature model
+- Provides the following Configuration Knowledge Bases:
+  1. **FMKB** - an implementation for the CSP representation of feature models. The input of **FMKB** is a **FeatureModel** object (from [fm-package](https://github.com/manleviet/CA-CDR-V2/tree/main/fm-package)). So you can use **FMKB** for all feature models you have, i.e., no need to implement a specific **KB** class.
+  2. **PCKB** - an implementation of [PC Configuration Knowledge Base](https://www.itu.dk/research/cla/externals/clib/).
+  3. **RenaultKB** - an implementation of [Renault Configuration Knowledge Base](https://www.itu.dk/research/cla/externals/clib/).
+- Provides utility functions for constraints
 
-Add the below script in your pom file:
+## How to get this package
 
-```
-<dependency>
-  <groupId>at.tugraz.ist.ase</groupId>
-  <artifactId>choco-kb</artifactId>
-  <version>1.2</version>
-</dependency>
-```
+| *version* | *status* |
+|---|---|
+| [1.3.9-alpha-15](https://github.com/manleviet/CA-CDR-V2/packages/1408660)| latest |
+| [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1408660?version=1.3.8) | stable |
 
-And the below script in the settings.xml file:
+Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -46,5 +46,16 @@ And the below script in the settings.xml file:
             </repositories>
         </profile>
     </profiles>
+    
+    <servers>
+        <server>
+            <id>github</id>
+            <username>USERNAME</username>
+            <password>TOKEN</password>
+        </server>
+    </servers>
 </settings>
 ```
+Replacing USERNAME with your GitHub username, and TOKEN with your personal access token 
+(see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)).
+
