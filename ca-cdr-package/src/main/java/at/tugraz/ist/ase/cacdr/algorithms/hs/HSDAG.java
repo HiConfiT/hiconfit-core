@@ -73,7 +73,7 @@ public class HSDAG extends HSTree {
 
                         if (nodes != null) {
                             nodes.forEach(nd -> {
-                                incrementCounter(COUNTER_PRUNING);
+
 
                                 nd.setLabel(smaller); // relabel the node with smaller
                                 addItemToLabelNodesMap(smaller, nd); // add new label to the map
@@ -83,13 +83,13 @@ public class HSDAG extends HSTree {
                                     Node child = nd.getChildren().get(label);
 
                                     if (child != null) {
+                                        incrementCounter(COUNTER_PRUNING);
                                         child.getParents().remove(nd);
+                                        nd.getChildren().remove(label);
+                                        cleanUpNodes(child);
                                     }
-
-                                    nd.getChildren().remove(label);
-
-                                    cleanUpNodes(nd);
                                 });
+//                                cleanUpNodes(nd);
                             });
                         }
                     }
@@ -109,25 +109,27 @@ public class HSDAG extends HSTree {
         return labels;
     }
 
+    /**
+     * Removes the subtree from a lookup table starting from the given node.
+     * @param node from which the conflictsearch should start
+     */
     private void cleanUpNodes(Node node) {
-        if (!node.getParents().isEmpty()) {
-            return;
-        }
+//        if (node.getParents().isEmpty()) {
+            nodesLookup.remove(node.getPathLabel());
+            if (node.getStatus() == NodeStatus.Open) {
+                node.setStatus(NodeStatus.Pruned);
+                incrementCounter(COUNTER_CLEANED_NODES);
+            }
 
-        nodesLookup.remove(node.getPathLabel());
-        if (node.getStatus() == NodeStatus.Open) {
-            node.setStatus(NodeStatus.Pruned);
-            incrementCounter(COUNTER_CLEANED_NODES);
-        }
-
-        // downward clean up
-        node.getChildren().keySet().parallelStream()
-                .map(arcLabel -> node.getChildren().get(arcLabel))
-                .forEachOrdered(this::cleanUpNodes);
-        /*for (Constraint arcLabel : node.getChildren().keySet()) {
-            Node child = node.getChildren().get(arcLabel);
-            cleanUpNodes(child);
-        }*/
+            // downward clean up
+            node.getChildren().keySet().parallelStream()
+                    .map(arcLabel -> node.getChildren().get(arcLabel))
+                    .forEachOrdered(this::cleanUpNodes);
+            /*for (Constraint arcLabel : node.getChildren().keySet()) {
+                Node child = node.getChildren().get(arcLabel);
+                cleanUpNodes(child);
+            }*/
+//        }
     }
 
     @Override

@@ -7,21 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix BasicRelationship to support some feature models from SPLOT + Add some new feature models to ChocoKB + New KBStatistics">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="New package 1.3.9-alpha-15">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/LoggerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-FMGenerator/src/main/java/at/tugraz/ist/ase/fm/app/FMGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/src/main/java/at/tugraz/ist/ase/fm/app/FMGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +117,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.ThreadTimerTest">
+  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package">
     <configuration name="FastDiagV3Test.testFindDiagnosis1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ca-cdr-package" />
       <extension name="coverage">
@@ -145,18 +134,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RelationshipTest.testException" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fm-package" />
+    <configuration name="HSDAGTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.fm.core.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.core" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.core.RelationshipTest" />
-      <option name="METHOD_NAME" value="testException" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -190,15 +178,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.fm in fm-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fm-package" />
+    <configuration name="at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -206,11 +194,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.ThreadTimerTest" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
+        <item itemvalue="JUnit.HSDAGTest" />
+        <item itemvalue="JUnit.ThreadTimerTest" />
         <item itemvalue="JUnit.FastDiagV3Test.testFindDiagnosis1" />
-        <item itemvalue="JUnit.RelationshipTest.testException" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.fm in fm-package" />
       </list>
     </recent_temporary>
   </component>
@@ -256,6 +244,12 @@
       <workItem from="1653644933150" duration="15107000" />
       <workItem from="1653859043956" duration="1202000" />
       <workItem from="1653918788905" duration="1520000" />
+      <workItem from="1653991969391" duration="3829000" />
+      <workItem from="1654087314530" duration="598000" />
+      <workItem from="1654155653205" duration="426000" />
+      <workItem from="1654612983056" duration="7136000" />
+      <workItem from="1654778790105" duration="578000" />
+      <workItem from="1654851205699" duration="8222000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -467,7 +461,14 @@
       <option name="project" value="LOCAL" />
       <updated>1653586640155</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="New package 1.3.9-alpha-15">
+      <created>1653992089854</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1653992089854</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -500,7 +501,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add test-package" />
     <MESSAGE value="Update common-package" />
     <MESSAGE value="Add chocokb-package" />
     <MESSAGE value="Add crdmodel-package" />
@@ -525,7 +525,8 @@
     <MESSAGE value="Add reset to LoggerUtils" />
     <MESSAGE value="Fix the level of logs" />
     <MESSAGE value="Fix BasicRelationship to support some feature models from SPLOT + Add some new feature models to ChocoKB + New KBStatistics" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix BasicRelationship to support some feature models from SPLOT + Add some new feature models to ChocoKB + New KBStatistics" />
+    <MESSAGE value="New package 1.3.9-alpha-15" />
+    <option name="LAST_COMMIT_MESSAGE" value="New package 1.3.9-alpha-15" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

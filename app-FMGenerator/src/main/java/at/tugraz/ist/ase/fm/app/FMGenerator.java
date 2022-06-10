@@ -94,6 +94,7 @@ public class FMGenerator {
         int maxGenerations = options.getMaxGenerations();
         String outDir = options.getOutFolder();
 
+        // TODO: multi-threading
         for (int i = 0; i < numGenFM; i++) {
             String modelName = "FM_" + numConstraints + "_" + i;
             String filename = modelName + ".splx";
