@@ -1,5 +1,5 @@
 # CA-CDR
-A Maven packages for Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR).
+Maven packages for Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR).
 
 Conflict Detection and Resolution is a substantial task in Knowledge Base Engineering (KBE). Intelligent mechanisms are urgently needed, especially in large-scale knowledge bases. This repository publishes our implementations for some/our consistency-based algorithms, which can be utilized in all three phases of KBE, i.e., design, testing and debugging, and configuration.
 
