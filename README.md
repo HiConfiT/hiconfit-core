@@ -1,9 +1,15 @@
 # CA-CDR
-A Maven package for Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR).
+A Maven packages for Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR).
 
 Conflict Detection and Resolution is a substantial task in Knowledge Base Engineering (KBE). Intelligent mechanisms are urgently needed, especially in large-scale knowledge bases. This repository publishes our implementations for some/our consistency-based algorithms, which can be utilized in all three phases of KBE, i.e., design, testing and debugging, and configuration.
 
 *If you use my implementations in your research, please cite the papers listed in the References.*
+
+## Table of Contents
+
+- [List of algorithms](#list-of-algorithms)
+- [How to use these algorithms](#how-to-use-these-algorithms)
+- [References](#references)
 
 ## List of algorithms:
 1. [QuickXPlain](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java) [1]
@@ -13,14 +19,16 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 5. [HS-tree](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hsdag/HSTree.java) [8]
 6. [HSDAG](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hsdag/HSDAG.java) [9]
 7. [DirectDebug]() [4, 5, 6, 7]
-8. (coming soon) KBDiag (the related paper submitted in January 2022)
-9. (coming soon) WipeOutR_T (the related paper submitted in October 2021)
-10. (coming soon) WipeOutR_FM (the related paper submitted in October 2021)
-11. (coming soon) AggregatedTest (the related paper submitted in November 2021)
+8. (coming soon) KBDiag
+9. (coming soon) WipeOutR_T (the related paper published at SPLC'22)
+10. (coming soon) WipeOutR_FM (the related paper published at SPLC'22)
+11. (coming soon) AggregatedTest (the related paper submitted in June 2022)
 12. (coming soon) InformedQX
-13. (coming soon) FastDiagP
+13. (coming soon) LevelWiseParallelHSDAG [10, 11]
+14. (coming soon) FullParallelHSDAG [10, 11]
+15. (coming soon) FastDiagP
 
-## Examples
+## How to use these algorithms
 
 There are some test models in [here](https://github.com/manleviet/CDRModel/tree/main/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model) and some examples, showing how to use these algorithms, in [here](https://github.com/manleviet/CA-CDR/tree/main/src/test/java/at/tugraz/ist/ase/cacdr/algorithms).
 
@@ -34,3 +42,5 @@ There are some test models in [here](https://github.com/manleviet/CDRModel/tree/
 7. An executable evaluation of DirectDebug on CodeOcean [https://codeocean.com/capsule/5824065/tree/v1](https://codeocean.com/capsule/5824065/tree/v1)
 8. R. Reiter, A theory of diagnosis from first principles, Artificial Intelligence, Volume 32, Issue 1, 1987, pp. 57-95, ISSN 0004-3702, https://doi.org/10.1016/0004-3702(87)90062-2.
 9. R. Greiner, B. A. Smith, and R. W. Wilkerson, A correction to the algorithm in reiter’s theory of diagnosis, Artif Intell, vol. 41, no. 1, pp. 79–88, 1989, https://doi.org/10.1016/0004-3702(89)90079-9.
+10. Jannach, Dietmar, Thomas Schmitz, and Kostyantyn Shchekotykhin. "Parallel model-based diagnosis on multi-core computers." Journal of Artificial Intelligence Research 55 (2016): 835-887. https://doi.org/10.1613/jair.5001.
+11. Jannach, D., Schmitz, T., & Shchekotykhin, K. (2015). Parallelized Hitting Set Computation for Model-Based Diagnosis. Proceedings of the AAAI Conference on Artificial Intelligence, 29(1). https://doi.org/10.1609/aaai.v29i1.9389.
