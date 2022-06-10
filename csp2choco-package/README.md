@@ -10,6 +10,11 @@ A translator, using the ANTLR4 runtime for parsing, enables converting CSP const
  
 ## How to get this package
 
+| *version* | *status* |
+|---|---|
+| [1.3.9-alpha-15](https://github.com/manleviet/CA-CDR-V2/packages/1408654?version=1.3.9-alpha-15)| latest |
+| [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1408654?version=1.3.8) | stable |
+
 Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
 
 ```xml
@@ -51,9 +56,4 @@ Replacing USERNAME with your GitHub username, and TOKEN with your personal acces
 
 ## TODOs:
 
-- Try the annotator of ANTLR4 to share information among event methods
-- Catching errors
-- Extending the form of constraints
-- Support relative operators: !, &&, ||
-- Support implication
-- Take a look at https://github.com/manleviet/choco-exppar
+- Migrating source code from other projects (exteding the form of constraints, support relative operators: !, &&, ||, support the imply operator)
