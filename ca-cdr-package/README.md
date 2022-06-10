@@ -13,16 +13,64 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 5. [HS-tree](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hsdag/HSTree.java) [8]
 6. [HSDAG](https://github.com/manleviet/CA-CDR/blob/main/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hsdag/HSDAG.java) [9]
 7. [DirectDebug]() [4, 5, 6, 7]
-8. (coming soon) KBDiag (the related paper submitted in January 2022)
-9. (coming soon) WipeOutR_T (the related paper submitted in October 2021)
-10. (coming soon) WipeOutR_FM (the related paper submitted in October 2021)
-11. (coming soon) AggregatedTest (the related paper submitted in November 2021)
+8. (coming soon) KBDiag
+9. (coming soon) WipeOutR_T (the related paper published at SPLC'22)
+10. (coming soon) WipeOutR_FM (the related paper published at SPLC'22)
+11. (coming soon) AggregatedTest (the related paper submitted in June 2022)
 12. (coming soon) InformedQX
-13. (coming soon) FastDiagP
+13. (coming soon) LevelWiseParallelHSDAG [10, 11]
+14. (coming soon) FullParallelHSDAG [10, 11]
+15. (coming soon) FastDiagP
 
 ## Examples
 
 There are some test models in [here](https://github.com/manleviet/CDRModel/tree/main/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model) and some examples, showing how to use these algorithms, in [here](https://github.com/manleviet/CA-CDR/tree/main/src/test/java/at/tugraz/ist/ase/cacdr/algorithms).
+
+## How to get this package
+
+| *version* | *status* |
+|---|---|
+| [1.3.9-alpha-15](https://github.com/manleviet/CA-CDR-V2/packages/1417091)| latest |
+| [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1417091?version=1.3.8) | stable |
+
+Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <activeProfiles>
+        <activeProfile>github</activeProfile>
+    </activeProfiles>
+
+    <profiles>
+        <profile>
+            <id>github</id>
+            <repositories>
+                <repository>
+                    <id>central</id>
+                    <url>https://repo1.maven.org/maven2</url>
+                </repository>
+                <repository>
+                    <id>github</id>
+                    <url>https://maven.pkg.github.com/manleviet/*</url>
+                </repository>
+            </repositories>
+        </profile>
+    </profiles>
+    
+    <servers>
+        <server>
+            <id>github</id>
+            <username>USERNAME</username>
+            <password>TOKEN</password>
+        </server>
+    </servers>
+</settings>
+```
+Replacing USERNAME with your GitHub username, and TOKEN with your personal access token 
+(see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)).
 
 ## References
 1. U. Junker. 2004. QuickXPlain: preferred explanations and relaxations for over-constrained problems. In Proceedings of the 19th national conference on Artificial intelligence (AAAI'04). AAAI Press, 167–172. https://dl.acm.org/doi/abs/10.5555/1597148.1597177
@@ -34,3 +82,5 @@ There are some test models in [here](https://github.com/manleviet/CDRModel/tree/
 7. An executable evaluation of DirectDebug on CodeOcean [https://codeocean.com/capsule/5824065/tree/v1](https://codeocean.com/capsule/5824065/tree/v1)
 8. R. Reiter, A theory of diagnosis from first principles, Artificial Intelligence, Volume 32, Issue 1, 1987, pp. 57-95, ISSN 0004-3702, https://doi.org/10.1016/0004-3702(87)90062-2.
 9. R. Greiner, B. A. Smith, and R. W. Wilkerson, A correction to the algorithm in reiter’s theory of diagnosis, Artif Intell, vol. 41, no. 1, pp. 79–88, 1989, https://doi.org/10.1016/0004-3702(89)90079-9.
+10. Jannach, Dietmar, Thomas Schmitz, and Kostyantyn Shchekotykhin. "Parallel model-based diagnosis on multi-core computers." Journal of Artificial Intelligence Research 55 (2016): 835-887. https://doi.org/10.1613/jair.5001.
+11. Jannach, D., Schmitz, T., & Shchekotykhin, K. (2015). Parallelized Hitting Set Computation for Model-Based Diagnosis. Proceedings of the AAAI Conference on Artificial Intelligence, 29(1). https://doi.org/10.1609/aaai.v29i1.9389.
