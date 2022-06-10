@@ -1,4 +1,4 @@
-# CSP2ChocoTranslator
+# csp2choco-package
 
 A translator, using the ANTLR4 runtime for parsing, enables converting CSP constraints into Choco Solver commands.
 
@@ -8,20 +8,16 @@ A translator, using the ANTLR4 runtime for parsing, enables converting CSP const
 - Support IntVar variables (either positive or negative)
 - Support comparative operators: =, !=, >, >=, <, <=
  
-## How to use
+## How to get this package
 
-Add the below script in your pom file:
+| *version* | *status* |
+|---|---|
+| [1.3.9-alpha-15](https://github.com/manleviet/CA-CDR-V2/packages/1408654?version=1.3.9-alpha-15)| latest |
+| [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1408654?version=1.3.8) | stable |
 
-```
-<dependency>
-  <groupId>at.tugraz.ist.ase</groupId>
-  <artifactId>csp2choco</artifactId>
-  <version>1.2</version>
-</dependency>
-```
-And the below script in the settings.xml file:
+Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -45,14 +41,19 @@ And the below script in the settings.xml file:
             </repositories>
         </profile>
     </profiles>
+    
+    <servers>
+        <server>
+            <id>github</id>
+            <username>USERNAME</username>
+            <password>TOKEN</password>
+        </server>
+    </servers>
 </settings>
 ```
+Replacing USERNAME with your GitHub username, and TOKEN with your personal access token 
+(see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)).
 
 ## TODOs:
 
-- Try the annotator of ANTLR4 to share information among event methods
-- Catching errors
-- Extending the form of constraints
-- Support relative operators: !, &&, ||
-- Support implication
-- Take a look at https://github.com/manleviet/choco-exppar
+- Migrating source code from other projects (exteding the form of constraints, support relative operators: !, &&, ||, support the imply operator)
