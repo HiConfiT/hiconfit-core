@@ -9,7 +9,7 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 ## Table of Contents
 
 - [List of algorithms](#list-of-algorithms)
-- [What the CA-CDR library provide](#what-the-ca-cdr-library-provide)
+- [What the CA-CDR library provides](#what-the-ca-cdr-library-provides)
 - [How to get the CA-CDR packages](#how-to-get-the-ca-cdr-packages)
 - [References](#references)
 
@@ -32,11 +32,11 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 
 ### Examples
 
-There are some test models in [here](https://github.com/manleviet/CDRModel/tree/main/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model) and some examples, showing how to use these algorithms, in [here](https://github.com/manleviet/CA-CDR/tree/main/src/test/java/at/tugraz/ist/ase/cacdr/algorithms).
+There are some test models in [here](https://github.com/manleviet/CDRModel/tree/main/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model) and some examples showing how to use these algorithms in [here](https://github.com/manleviet/CA-CDR/tree/main/src/test/java/at/tugraz/ist/ase/cacdr/algorithms).
 
-## What the CA-CDR library provide
+## What the CA-CDR library provides
 
-In this repository, I published eight Maven packages, and two apps as the followings:
+In this repository, I published eight Maven packages and two apps as the followings:
 
 | *Maven packages*                                       | *description*                            |
 |----------------------------------------------|------------------------------------------|
@@ -56,7 +56,7 @@ In this repository, I published eight Maven packages, and two apps as the follow
 
 ## How to get the CA-CDR packages
 
-Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
+Please add the script below in the *settings.xml* file to download the Maven dependencies from the GitHub repository.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
