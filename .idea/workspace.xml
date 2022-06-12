@@ -8,9 +8,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="New package 1.3.9-alpha-15">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-FMGenerator/src/main/java/at/tugraz/ist/ase/fm/app/FMGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/src/main/java/at/tugraz/ist/ase/fm/app/FMGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +48,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="24-transparent-between-conflicts-and-diagnoses-in-the-hstree-and-hsdag-algorithms" />
+        <entry key="$PROJECT_DIR$" value="33-downgrade-source-code-to-18" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -67,27 +79,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/chocokb-package/src/main/resources/fms/FeatureIDE&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.appearance&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "temurin-17",
+    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/chocokb-package/src/main/resources/fms/FeatureIDE",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.30601093",
+    "settings.editor.selected.configurable": "editor.preferences.appearance"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE" />
@@ -117,76 +129,80 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package">
-    <configuration name="FastDiagV3Test.testFindDiagnosis1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+  <component name="RunManager" selected="JUnit.FeatureIDEParserTest.test">
+    <configuration name="DescriptiveFormatParserTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.parser.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.FastDiagV3Test" />
-      <option name="METHOD_NAME" value="testFindDiagnosis1" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.parser" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.parser.DescriptiveFormatParserTest" />
+      <option name="METHOD_NAME" value="test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSDAGTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="FeatureIDEParserTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.parser.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.parser" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.parser.FeatureIDEParserTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ThreadTimerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="SXFMParserTest.testBamboo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.parser.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.ThreadTimerTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.parser" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.parser.SXFMParserTest" />
+      <option name="METHOD_NAME" value="testBamboo" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="XMIParserTest.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.parser.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.parser" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.parser.XMIParserTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="at.tugraz.ist.ase.fm in fm-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -194,11 +210,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms.hs in ca-cdr-package" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
-        <item itemvalue="JUnit.HSDAGTest" />
-        <item itemvalue="JUnit.ThreadTimerTest" />
-        <item itemvalue="JUnit.FastDiagV3Test.testFindDiagnosis1" />
+        <item itemvalue="JUnit.FeatureIDEParserTest.test" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.fm in fm-package" />
+        <item itemvalue="JUnit.SXFMParserTest.testBamboo" />
+        <item itemvalue="JUnit.DescriptiveFormatParserTest.test" />
+        <item itemvalue="JUnit.XMIParserTest.test" />
       </list>
     </recent_temporary>
   </component>
@@ -539,5 +555,10 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CA_CDR_V2$GLENCOEParserTest.ic" NAME="GLENCOEParserTest Coverage Results" MODIFIED="1655046004265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>at.tugraz.ist.ase.fm.parser.*</FILTER>
+    </SUITE>
   </component>
 </project>

@@ -15,9 +15,9 @@ This package provides classes managing CSP (Choco) representations of a knowlege
 
 ## How to get this package
 
-| *version* | *status* |
-|---|---|
-| [1.3.9-alpha-15](https://github.com/manleviet/CA-CDR-V2/packages/1408660)| latest |
+| *version*                                                                      | *status* |
+|--------------------------------------------------------------------------------|---|
+| [1.3.9-alpha-16](https://github.com/manleviet/CA-CDR-V2/packages/1408660)      | latest |
 | [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1408660?version=1.3.8) | stable |
 
 Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
