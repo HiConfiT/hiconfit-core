@@ -50,6 +50,16 @@ public abstract class KB {
         this.hasNegativeConstraints = hasNegativeConstraints;
     }
 
+    public void dispose() {
+        modelKB = null;
+        variableList.clear();
+        variableList = null;
+        domainList.clear();
+        domainList = null;
+        constraintList.clear();
+        constraintList = null;
+    }
+
     public abstract void reset(boolean hasNegativeConstraints);
 
     public abstract void defineVariables();

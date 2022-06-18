@@ -64,4 +64,9 @@ public class ThreeCNFConstraint extends Relationship {
     private void convertToConfRule() {
         confRule = String.format("3cnf(%s)", clauses.stream().map(Clause::getClause).collect(Collectors.joining(", ")));
     }
+
+    @Override
+    public void dispose() {
+        clauses.clear();
+    }
 }

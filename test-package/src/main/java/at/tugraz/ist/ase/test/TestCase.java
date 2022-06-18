@@ -9,7 +9,10 @@
 package at.tugraz.ist.ase.test;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NonNull;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.Constraint;
@@ -25,17 +28,25 @@ import static com.google.common.base.Preconditions.checkElementIndex;
  * Represents a test case.
  */
 @Slf4j
-@Builder
 @Getter @Setter
 public class TestCase implements ITestCase {
-    private @NonNull String testcase; // a test case
-    private @NonNull List<Assignment> assignments; // the list of assignments
+    private String testcase; // a test case
+    private List<Assignment> assignments; // the list of assignments
     private List<Constraint> chocoConstraints; // the list of Choco constraints which are translated from this test case
     private List<Constraint> negChocoConstraints; // a list of NEGATIVE Choco constraints
 
     private boolean isViolated; // represents the violation of this test case with the knowledge base
 
-    // TODO: intergrate the aggregated test cases
+    @Builder
+    public TestCase(@NonNull String testcase, @NonNull List<Assignment> assignments) {
+        this.testcase = testcase;
+        this.assignments = assignments;
+        this.chocoConstraints = null;
+        this.negChocoConstraints = null;
+        this.isViolated = false;
+    }
+
+    // TODO: integrate the aggregated test cases
 
     /**
      * Adds a set of Choco constraints to the {@link TestCase} object.
@@ -145,5 +156,15 @@ public class TestCase implements ITestCase {
 //            clone.setChocoConstraints(constraints);
 //            clone.setNegChocoConstraints(negConstraints);
         return clone;
+    }
+
+    public void dispose() {
+        if (chocoConstraints != null) {
+            chocoConstraints.clear();
+        }
+        if (negChocoConstraints != null) {
+            negChocoConstraints.clear();
+        }
+        assignments = null;
     }
 }

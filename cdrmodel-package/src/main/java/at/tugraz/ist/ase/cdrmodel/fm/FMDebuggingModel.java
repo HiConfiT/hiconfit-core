@@ -12,12 +12,12 @@ import at.tugraz.ist.ase.cdrmodel.CDRModel;
 import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.cdrmodel.IDebuggingModel;
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.test.ITestCase;
-import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.translator.ITestCaseTranslatable;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import at.tugraz.ist.ase.kb.fm.FMKB;
+import at.tugraz.ist.ase.test.ITestCase;
+import at.tugraz.ist.ase.test.TestSuite;
+import at.tugraz.ist.ase.test.translator.ITestCaseTranslatable;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ import org.chocosolver.solver.variables.BoolVar;
 
 import java.util.*;
 
-import static at.tugraz.ist.ase.common.ChocoSolverUtils.*;
+import static at.tugraz.ist.ase.common.ChocoSolverUtils.getVariable;
 
 /**
  * An extension class of {@link CDRModel} for a debugging task of feature models.
@@ -36,10 +36,10 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
 
     @Getter
     private Model model;
-    private final FeatureModel featureModel;
+    private FeatureModel featureModel;
     private FMKB fmkb;
     private TestSuite testSuite;
-    private final ITestCaseTranslatable translator;
+    private ITestCaseTranslatable translator;
 
     @Getter
     private final boolean rootConstraints;
@@ -159,5 +159,17 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         clone.initialize();
 
         return clone;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        testcases.clear();
+        model = null;
+        featureModel = null;
+        fmkb.dispose();
+        fmkb = null;
+        testSuite = null;
+        translator = null;
     }
 }

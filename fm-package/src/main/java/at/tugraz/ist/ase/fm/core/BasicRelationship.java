@@ -28,8 +28,8 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 @Getter
 public class BasicRelationship extends Relationship {
-    private final Feature leftSide;
-    private final List<Feature> rightSide;
+    private Feature leftSide;
+    private List<Feature> rightSide;
 
     /**
      * A constructor
@@ -86,5 +86,11 @@ public class BasicRelationship extends Relationship {
             case OR -> confRule = String.format("or(%s, %s)", leftSide, rightSide.stream().map(Feature::getName).collect(Collectors.joining(", ")));
             case EXCLUDES -> confRule = String.format("excludes(%s, %s)", leftSide, rightSide.get(0));
         }
+    }
+
+    @Override
+    public void dispose() {
+        leftSide = null;
+        rightSide = null;
     }
 }

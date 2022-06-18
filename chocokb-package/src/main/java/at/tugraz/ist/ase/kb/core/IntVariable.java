@@ -46,4 +46,10 @@ public class IntVariable extends Variable implements Cloneable {
         log.trace("{}Cloned IntVariable [var={}]", LoggerUtils.tab(), clone);
         return clone;
     }
+
+    @Override
+    public void dispose() {
+        chocoVar = null;
+        super.dispose();
+    }
 }

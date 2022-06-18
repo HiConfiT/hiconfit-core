@@ -30,7 +30,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Getter
 public class FastDiagV3Labeler extends FastDiagV3 implements IHSLabelable {
 
-    private final FastDiagV3Parameters initialParameters;
+    private FastDiagV3Parameters initialParameters;
 
     /**
      * Constructor with parameters which contain C, and B
@@ -88,5 +88,11 @@ public class FastDiagV3Labeler extends FastDiagV3 implements IHSLabelable {
         return FastDiagV3Parameters.builder()
                 .C(C)
                 .B(B).build();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        initialParameters = null;
     }
 }

@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Getter
 public class FlexDiagLabeler extends FlexDiag implements IHSLabelable {
 
-    private final FlexDiagParameters initialParameters;
+    private FlexDiagParameters initialParameters;
 
     /**
      * Constructor with parameters which contain C, and AC
@@ -86,5 +86,11 @@ public class FlexDiagLabeler extends FlexDiag implements IHSLabelable {
                 .AC(AC)
                 .m(params.getM())
                 .build();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        initialParameters = null;
     }
 }

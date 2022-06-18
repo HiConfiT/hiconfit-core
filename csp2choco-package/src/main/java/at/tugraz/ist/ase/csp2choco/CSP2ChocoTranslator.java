@@ -15,7 +15,10 @@ import at.tugraz.ist.ase.csp2choco.antlr.CSP2ChocoParser;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
@@ -27,14 +30,14 @@ import org.javatuples.Pair;
 import java.io.IOException;
 import java.io.InputStream;
 
-import static at.tugraz.ist.ase.common.ChocoSolverUtils.*;
+import static at.tugraz.ist.ase.common.ChocoSolverUtils.getVariable;
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Slf4j
 public class CSP2ChocoTranslator extends CSP2ChocoBaseListener {
 
     @Getter
-    private final Model model;
+    private Model model;
 
     public CSP2ChocoTranslator(@NonNull Model model) {
         this.model = model;
@@ -117,5 +120,9 @@ public class CSP2ChocoTranslator extends CSP2ChocoBaseListener {
             CSP2ChocoParser.IntContext valueContext = (CSP2ChocoParser.IntContext) rightContext;
             return Pair.with(null, Integer.parseInt(valueContext.getText()));
         }
+    }
+
+    public void dispose() {
+        model = null;
     }
 }

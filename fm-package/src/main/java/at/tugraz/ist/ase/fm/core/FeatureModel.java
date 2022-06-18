@@ -31,9 +31,9 @@ public class FeatureModel {
     @Setter
     private String name;
 
-    private final List<Feature> bfFeatures; // breadth-first order
-    private final List<Relationship> relationships;
-    private final List<Relationship> constraints;
+    private List<Feature> bfFeatures; // breadth-first order
+    private List<Relationship> relationships;
+    private List<Relationship> constraints;
 
     @Setter
     private boolean consistency;
@@ -401,6 +401,15 @@ public class FeatureModel {
         constraints.parallelStream().map(constraint -> String.format("\t%s\n", constraint)).forEachOrdered(st::append);
 
         return st.toString();
+    }
+
+    public void dispose() {
+        bfFeatures.clear();
+        bfFeatures = null;
+        relationships.clear();
+        relationships = null;
+        constraints.clear();
+        constraints = null;
     }
 }
 

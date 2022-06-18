@@ -44,4 +44,8 @@ public abstract class Variable implements Cloneable {
             throw new AssertionError();
         }
     }
+
+    public void dispose() {
+        domain = null;
+    }
 }

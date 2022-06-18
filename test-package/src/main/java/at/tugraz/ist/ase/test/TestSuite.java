@@ -17,11 +17,15 @@ import java.util.stream.Collectors;
 /***
  * Represents a test suite, i.e., a list of test cases.
  */
-@Builder
 @Getter @Setter
 @EqualsAndHashCode
 public class TestSuite implements Cloneable {
-    private @NonNull List<ITestCase> testCases; // list of test cases
+    private List<ITestCase> testCases; // list of test cases
+
+    @Builder
+    public TestSuite(@NonNull List<ITestCase> testCases) {
+        this.testCases = testCases;
+    }
 
     /**
      * Gets the number of test cases.
@@ -62,5 +66,9 @@ public class TestSuite implements Cloneable {
         }
         clone.setTestCases(testCases);
         return clone;
+    }
+
+    public void dispose() {
+        testCases = null;
     }
 }

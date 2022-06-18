@@ -87,5 +87,9 @@ public class Relationship {
     public String toString() {
         return confRule;
     }
+
+    public void dispose() {
+        constraints.clear();
+    }
 }
 

@@ -155,4 +155,15 @@ public class Domain implements Cloneable {
             throw new AssertionError();
         }
     }
+
+    public void dispose() {
+        if (values != null) {
+            values.clear();
+            values = null;
+        }
+        if (chocoValues != null) {
+            chocoValues.clear();
+            chocoValues = null;
+        }
+    }
 }

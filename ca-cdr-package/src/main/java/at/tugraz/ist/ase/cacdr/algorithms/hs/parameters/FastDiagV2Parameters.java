@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Getter
 public class FastDiagV2Parameters extends AbstractHSParameters {
-    private final Set<Constraint> AC;
+    private Set<Constraint> AC;
 
     @Builder
     public FastDiagV2Parameters(@NonNull Set<Constraint> C, @NonNull Set<Constraint> AC) {
@@ -31,5 +31,11 @@ public class FastDiagV2Parameters extends AbstractHSParameters {
                 "C=" + getC() +
                 ", B=" + AC +
                 "}";
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        AC = null;
     }
 }

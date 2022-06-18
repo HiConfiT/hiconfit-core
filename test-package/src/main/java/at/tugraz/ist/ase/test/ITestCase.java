@@ -19,4 +19,6 @@ public interface ITestCase extends Cloneable {
     List<Constraint> getNegChocoConstraints();
 
     boolean isViolated();
+
+    void dispose();
 }

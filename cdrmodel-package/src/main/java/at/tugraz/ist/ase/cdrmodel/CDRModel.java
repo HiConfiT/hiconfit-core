@@ -130,4 +130,11 @@ public abstract class CDRModel implements Cloneable {
 
         return clone;
     }
+
+    public void dispose() {
+        correctConstraints.clear();
+        possiblyFaultyConstraints.clear();
+        correctChocoConstraints.clear();
+        possiblyFaultyChocoConstraints.clear();
+    }
 }

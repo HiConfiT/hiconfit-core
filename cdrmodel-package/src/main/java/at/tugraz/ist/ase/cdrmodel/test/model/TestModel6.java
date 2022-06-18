@@ -122,4 +122,11 @@ public class TestModel6 extends CDRModel implements IChocoModel, ITestModel {
             throw new CloneNotSupportedException(e.getMessage());
         }
     }
+
+    @Override
+    public void dispose() {
+        model = null;
+        allDiagnoses.clear();
+        allConflicts.clear();
+    }
 }

@@ -46,4 +46,10 @@ public class BoolVariable extends Variable implements Cloneable {
         log.trace("{}Cloned BoolVariable [var={}]", LoggerUtils.tab(), clone);
         return clone;
     }
+
+    @Override
+    public void dispose() {
+        chocoVar = null;
+        super.dispose();
+    }
 }

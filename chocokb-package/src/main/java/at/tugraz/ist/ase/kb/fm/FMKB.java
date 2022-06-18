@@ -26,7 +26,7 @@ import java.util.stream.IntStream;
 @Slf4j
 public class FMKB extends KB {
 
-    private final FeatureModel featureModel;
+    private FeatureModel featureModel;
 
     public FMKB(FeatureModel featureModel, boolean hasNegativeConstraints) {
         super(featureModel.getName(), "SPLOT", hasNegativeConstraints);
@@ -52,6 +52,8 @@ public class FMKB extends KB {
         LoggerUtils.outdent();
         log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab(), name);
     }
+
+
 
     public void defineVariables (){
         log.trace("{}Creating variables >>>", LoggerUtils.tab());
@@ -421,5 +423,11 @@ public class FMKB extends KB {
         Domain domain = getDomain(var);
 
         return domain.getChocoValue(value) != 0;
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        featureModel = null;
     }
 }

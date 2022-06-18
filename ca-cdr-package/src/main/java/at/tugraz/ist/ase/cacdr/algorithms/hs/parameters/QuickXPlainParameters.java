@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Getter
 public class QuickXPlainParameters extends AbstractHSParameters {
-    private final Set<Constraint> B;
+    private Set<Constraint> B;
 
     @Builder
     public QuickXPlainParameters(@NonNull Set<Constraint> C, @NonNull Set<Constraint> B) {
@@ -31,5 +31,11 @@ public class QuickXPlainParameters extends AbstractHSParameters {
                 "C=" + getC() +
                 ", B=" + B +
                 "}";
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        B = null;
     }
 }

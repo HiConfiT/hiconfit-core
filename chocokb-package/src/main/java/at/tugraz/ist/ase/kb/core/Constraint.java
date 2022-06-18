@@ -25,8 +25,8 @@ import static com.google.common.base.Preconditions.checkElementIndex;
 @Slf4j
 public class Constraint {
     private final String constraint;
-    private final List<org.chocosolver.solver.constraints.Constraint> chocoConstraints;
-    private final List<org.chocosolver.solver.constraints.Constraint> negChocoConstraints;
+    private List<org.chocosolver.solver.constraints.Constraint> chocoConstraints;
+    private List<org.chocosolver.solver.constraints.Constraint> negChocoConstraints;
 
     public Constraint(@NonNull String constraint) {
         this.constraint = constraint;
@@ -97,5 +97,16 @@ public class Constraint {
     @Override
     public String toString() {
         return constraint;
+    }
+
+    public void dispose() {
+        if (chocoConstraints != null) {
+            chocoConstraints.clear();
+            chocoConstraints = null;
+        }
+        if (negChocoConstraints != null) {
+            negChocoConstraints.clear();
+            negChocoConstraints = null;
+        }
     }
 }
