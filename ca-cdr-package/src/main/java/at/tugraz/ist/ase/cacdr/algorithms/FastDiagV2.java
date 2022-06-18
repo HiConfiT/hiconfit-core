@@ -54,16 +54,17 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
-public class FastDiagV2 {
+public class FastDiagV2 extends IConsistencyAlgorithm {
 
     // for evaluation
     public static final String TIMER_FASTDIAGV2 = "Timer for FD V2";
     public static final String COUNTER_FASTDIAGV2_CALLS = "The number of FD V2 calls";
 
-    protected final ChocoConsistencyChecker checker;
+//    protected final ChocoConsistencyChecker checker;
 
     public FastDiagV2(@NonNull ChocoConsistencyChecker checker) {
-        this.checker = checker;
+        super(checker);
+//        this.checker = checker;
     }
 
     /**

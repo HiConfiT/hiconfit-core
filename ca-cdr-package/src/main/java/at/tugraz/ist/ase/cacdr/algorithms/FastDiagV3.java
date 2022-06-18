@@ -45,16 +45,17 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // return Δ1 ∪ Δ2;
  */
 @Slf4j
-public class FastDiagV3 {
+public class FastDiagV3 extends IConsistencyAlgorithm {
 
     // for evaluation
     public static final String TIMER_FASTDIAGV3 = "Timer for FD V3";
     public static final String COUNTER_FASTDIAGV3_CALLS = "The number of FD V3 calls";
 
-    protected final ChocoConsistencyChecker checker;
+//    protected final ChocoConsistencyChecker checker;
 
     public FastDiagV3(@NonNull ChocoConsistencyChecker checker) {
-        this.checker = checker;
+        super(checker);
+//        this.checker = checker;
     }
 
     /**

@@ -53,20 +53,21 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
-public class DirectDebug {
+public class DirectDebug extends IConsistencyAlgorithm {
 
     // for evaluation
     public static final String TIMER_DIRECTDEBUG = "Timer for DirectDebug";
     public static final String COUNTER_DIRECTDEBUG_CALLS = "The number of DirectDebug calls";
 
-    protected final ChocoConsistencyChecker checker;
+//    protected final ChocoConsistencyChecker checker;
 
     /**
      * A constructor with a checker of {@link ChocoConsistencyChecker}.
      * @param checker a checker of {@link ChocoConsistencyChecker}
      */
     public DirectDebug(@NonNull ChocoConsistencyChecker checker) {
-        this.checker = checker;
+        super(checker);
+//        this.checker = checker;
     }
 
     /**
