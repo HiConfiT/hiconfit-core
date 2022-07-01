@@ -32,7 +32,9 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 
 ### Examples
 
-There are some test models in [here](https://github.com/manleviet/CDRModel/tree/main/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model) and some examples showing how to use these algorithms in [here](https://github.com/manleviet/CA-CDR/tree/main/src/test/java/at/tugraz/ist/ase/cacdr/algorithms).
+A good example in [here](https://github.com/manleviet/FlexDiagTest).
+
+Besides, there are some test models in [here](https://github.com/manleviet/CDRModel/tree/main/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model) and some examples showing how to use these algorithms in [here](https://github.com/manleviet/CA-CDR/tree/main/src/test/java/at/tugraz/ist/ase/cacdr/algorithms).
 
 ## What the CA-CDR library provides
 
