@@ -53,8 +53,6 @@ public class FMKB extends KB {
         log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab(), name);
     }
 
-
-
     public void defineVariables (){
         log.trace("{}Creating variables >>>", LoggerUtils.tab());
         LoggerUtils.indent();
