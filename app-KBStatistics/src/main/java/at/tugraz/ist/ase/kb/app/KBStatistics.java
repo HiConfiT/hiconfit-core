@@ -15,6 +15,7 @@ import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.app.cli.KBStatistics_CmdLineOptions;
+import at.tugraz.ist.ase.kb.camera.CameraKB;
 import at.tugraz.ist.ase.kb.core.KB;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import at.tugraz.ist.ase.kb.pc.PCKB;
@@ -127,6 +128,9 @@ public class KBStatistics {
                 } else if (nameKb.equals("Renault")) { // if Renault, then calculate the statistics of Renault
                     System.out.println("\nCalculating statistics for Renault...");
                     kb = new RenaultKB(false);
+                } else if (nameKb.equals("Camera")) { // if Camera, then calculate the statistics of Camera
+                    System.out.println("\nCalculating statistics for Camera...");
+                    kb = new CameraKB(false);
                 }
 
                 checkArgument(kb != null, "The knowledge base is not supported.");
