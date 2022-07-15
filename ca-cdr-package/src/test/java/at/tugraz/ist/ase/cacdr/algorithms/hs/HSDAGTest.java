@@ -8,14 +8,8 @@
 
 package at.tugraz.ist.ase.cacdr.algorithms.hs;
 
-import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.FastDiagV2Labeler;
-import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.FastDiagV3Labeler;
-import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.FlexDiagLabeler;
-import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.QuickXPlainLabeler;
-import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.FastDiagV2Parameters;
-import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.FastDiagV3Parameters;
-import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.FlexDiagParameters;
-import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.QuickXPlainParameters;
+import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.*;
+import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.*;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.cacdr.eval.CAEvaluator;
 import at.tugraz.ist.ase.cdrmodel.test.model.*;
@@ -980,6 +974,201 @@ class HSDAGTest {
 
         System.out.println("=========================================");
         System.out.println("Diagnoses found by FastDiag:");
+        System.out.println(convertToStringWithMessage(allDiagnoses, "Diagnosis"));
+        System.out.println("Conflict sets found by HS-dag:");
+        System.out.println(convertToStringWithMessage(allConflictSets, "Conflict set"));
+        printPerformance();
+
+        assertEquals(testModel.getExpectedAllDiagnoses(), allDiagnoses);
+    }
+
+    @Test
+    void test1_DD() throws Exception {
+        TestModel1 testModel = new TestModel1();
+        testModel.initialize();
+
+        System.out.println("=========================================");
+        System.out.println("Choco's commands translated from the text file:");
+        System.out.println(convertToString(testModel.getPossiblyFaultyConstraints()));
+        System.out.println("=========================================");
+
+        ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel);
+
+        Set<Constraint> C = testModel.getPossiblyFaultyConstraints();
+        Set<Constraint> B = testModel.getCorrectConstraints();
+
+        // run the hstree to find diagnoses
+        DirectDiagParameters params = DirectDiagParameters.builder()
+                .C(C)
+                .B(B).build();
+        DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
+
+        HSDAG hsdag = new HSDAG(directDiag);
+
+        CAEvaluator.reset();
+        hsdag.construct();
+
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
+
+        System.out.println("=========================================");
+        System.out.println("Diagnoses found by DirectDiag:");
+        System.out.println(convertToStringWithMessage(allDiagnoses, "Diagnosis"));
+        System.out.println("Conflict sets found by HS-dag:");
+        System.out.println(convertToStringWithMessage(allConflictSets, "Conflict set"));
+        printPerformance();
+
+        assertEquals(testModel.getExpectedAllDiagnoses(), allDiagnoses);
+    }
+
+    @Test
+    void test2_DD() throws Exception {
+        TestModel2 testModel = new TestModel2();
+        testModel.initialize();
+
+        System.out.println("=========================================");
+        System.out.println("Choco's commands translated from the text file:");
+        System.out.println(convertToString(testModel.getPossiblyFaultyConstraints()));
+        System.out.println("=========================================");
+
+        ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel);
+
+        Set<Constraint> C = testModel.getPossiblyFaultyConstraints();
+        Set<Constraint> B = testModel.getCorrectConstraints();
+
+        // run the hstree to find diagnoses
+        DirectDiagParameters params = DirectDiagParameters.builder()
+                .C(C)
+                .B(B).build();
+        DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
+
+        HSDAG hsdag = new HSDAG(directDiag);
+
+        CAEvaluator.reset();
+        hsdag.construct();
+
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
+
+        System.out.println("=========================================");
+        System.out.println("Diagnoses found by DirectDiag:");
+        System.out.println(convertToStringWithMessage(allDiagnoses, "Diagnosis"));
+        System.out.println("Conflict sets found by HS-dag:");
+        System.out.println(convertToStringWithMessage(allConflictSets, "Conflict set"));
+        printPerformance();
+
+        assertEquals(testModel.getExpectedAllDiagnoses(), allDiagnoses);
+    }
+
+    @Test
+    void test3_DD() throws Exception {
+        TestModel3 testModel = new TestModel3();
+        testModel.initialize();
+
+        System.out.println("=========================================");
+        System.out.println("Choco's commands translated from the text file:");
+        System.out.println(convertToString(testModel.getPossiblyFaultyConstraints()));
+        System.out.println("=========================================");
+
+        ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel);
+
+        Set<Constraint> C = testModel.getPossiblyFaultyConstraints();
+        Set<Constraint> B = testModel.getCorrectConstraints();
+
+        // run the hstree to find diagnoses
+        DirectDiagParameters params = DirectDiagParameters.builder()
+                .C(C)
+                .B(B).build();
+        DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
+
+        HSDAG hsdag = new HSDAG(directDiag);
+
+        CAEvaluator.reset();
+        hsdag.construct();
+
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
+
+        System.out.println("=========================================");
+        System.out.println("Diagnoses found by DirectDiag:");
+        System.out.println(convertToStringWithMessage(allDiagnoses, "Diagnosis"));
+        System.out.println("Conflict sets found by HS-dag:");
+        System.out.println(convertToStringWithMessage(allConflictSets, "Conflict set"));
+        printPerformance();
+
+        assertEquals(testModel.getExpectedAllDiagnoses(), allDiagnoses);
+    }
+
+    @Test
+    void test4_DD() throws Exception {
+        TestModel4 testModel = new TestModel4();
+        testModel.initialize();
+
+        System.out.println("=========================================");
+        System.out.println("Choco's commands translated from the text file:");
+        System.out.println(convertToString(testModel.getPossiblyFaultyConstraints()));
+        System.out.println("=========================================");
+
+        ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel);
+
+        Set<Constraint> C = testModel.getPossiblyFaultyConstraints();
+        Set<Constraint> B = testModel.getCorrectConstraints();
+
+        // run the hstree to find diagnoses
+        DirectDiagParameters params = DirectDiagParameters.builder()
+                .C(C)
+                .B(B).build();
+        DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
+
+        HSDAG hsdag = new HSDAG(directDiag);
+
+        CAEvaluator.reset();
+        hsdag.construct();
+
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
+
+        System.out.println("=========================================");
+        System.out.println("Diagnoses found by DirectDiag:");
+        System.out.println(convertToStringWithMessage(allDiagnoses, "Diagnosis"));
+        System.out.println("Conflict sets found by HS-dag:");
+        System.out.println(convertToStringWithMessage(allConflictSets, "Conflict set"));
+        printPerformance();
+
+        assertEquals(testModel.getExpectedAllDiagnoses(), allDiagnoses);
+    }
+
+    @Test
+    void test5_DD() throws Exception {
+        TestModel5 testModel = new TestModel5();
+        testModel.initialize();
+
+        System.out.println("=========================================");
+        System.out.println("Choco's commands translated from the text file:");
+        System.out.println(convertToString(testModel.getPossiblyFaultyConstraints()));
+        System.out.println("=========================================");
+
+        ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel);
+
+        Set<Constraint> C = testModel.getPossiblyFaultyConstraints();
+        Set<Constraint> B = testModel.getCorrectConstraints();
+
+        // run the hstree to find diagnoses
+        DirectDiagParameters params = DirectDiagParameters.builder()
+                .C(C)
+                .B(B).build();
+        DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
+
+        HSDAG hsdag = new HSDAG(directDiag);
+
+        CAEvaluator.reset();
+        hsdag.construct();
+
+        List<Set<Constraint>> allDiagnoses = hsdag.getDiagnoses();
+        List<Set<Constraint>> allConflictSets = hsdag.getConflicts();
+
+        System.out.println("=========================================");
+        System.out.println("Diagnoses found by DirectDiag:");
         System.out.println(convertToStringWithMessage(allDiagnoses, "Diagnosis"));
         System.out.println("Conflict sets found by HS-dag:");
         System.out.println(convertToStringWithMessage(allConflictSets, "Conflict set"));

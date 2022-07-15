@@ -179,6 +179,7 @@ public class KBStatistics {
     private void saveStatistics(BufferedWriter writer, int counter, KB kb) throws IOException {
         boolean consistent = kb.getModelKB().getSolver().solve();
 
+        // TODO - use writer.newLine();
         writer.write(counter + "\n");
         writer.write("Name: " + kb.getName() + "\n");
         writer.write("Source: " + kb.getSource() + "\n");

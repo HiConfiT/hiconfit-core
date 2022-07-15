@@ -60,11 +60,8 @@ public class FastDiagV2 extends IConsistencyAlgorithm {
     public static final String TIMER_FASTDIAGV2 = "Timer for FD V2";
     public static final String COUNTER_FASTDIAGV2_CALLS = "The number of FD V2 calls";
 
-//    protected final ChocoConsistencyChecker checker;
-
     public FastDiagV2(@NonNull ChocoConsistencyChecker checker) {
         super(checker);
-//        this.checker = checker;
     }
 
     /**
@@ -131,8 +128,8 @@ public class FastDiagV2 extends IConsistencyAlgorithm {
         if ( !D.isEmpty() ) {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(AC)) {
-                log.debug("{}<<< return Φ", LoggerUtils.tab());
                 LoggerUtils.outdent();
+                log.debug("{}<<< return Φ", LoggerUtils.tab());
 
                 return Collections.emptySet();
             }

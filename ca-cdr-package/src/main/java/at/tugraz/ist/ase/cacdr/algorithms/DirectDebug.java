@@ -59,15 +59,12 @@ public class DirectDebug extends IConsistencyAlgorithm {
     public static final String TIMER_DIRECTDEBUG = "Timer for DirectDebug";
     public static final String COUNTER_DIRECTDEBUG_CALLS = "The number of DirectDebug calls";
 
-//    protected final ChocoConsistencyChecker checker;
-
     /**
      * A constructor with a checker of {@link ChocoConsistencyChecker}.
      * @param checker a checker of {@link ChocoConsistencyChecker}
      */
     public DirectDebug(@NonNull ChocoConsistencyChecker checker) {
         super(checker);
-//        this.checker = checker;
     }
 
     /**
