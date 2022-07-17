@@ -243,7 +243,7 @@ public class CameraKB extends KB {
         kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(2)).getChocoVar(),"=",0));
         kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(3)).getChocoVar(),"=",0));
         kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(4)).getChocoVar(),"=",0));
-        kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(5)).getChocoVar(),"=",0));
+        kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(5)).getChocoVar(),"=",1));
         kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(6)).getChocoVar(),"=",2));
         kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(7)).getChocoVar(),"=",30));
         kbReqList.add(this.modelKB.arithm( ((IntVariable)variableList.get(8)).getChocoVar(),"=",455));
