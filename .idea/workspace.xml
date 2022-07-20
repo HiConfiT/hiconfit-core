@@ -7,7 +7,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Added DirectDiag with unit tests">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix the unit test for linux-2.6.33.3.xml">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
@@ -136,7 +137,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package">
+  <component name="RunManager" selected="JUnit.FMKBTest1.testLinux">
     <configuration name="KBStatistics" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.app.KBStatistics" />
       <module name="app-KBStatistics" />
@@ -151,91 +152,91 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSDAGTest.test3_DD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="CameraKBTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chocokb-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.camera.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
-      <option name="METHOD_NAME" value="test3_DD" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.camera" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.camera.CameraKBTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CameraKBTest.testProduct7" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chocokb-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.camera.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.camera" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.camera.CameraKBTest" />
+      <option name="METHOD_NAME" value="testProduct7" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSDAGTest.test4_DD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="FMKBTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chocokb-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
-      <option name="METHOD_NAME" value="test4_DD" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.fm.FMKBTest1" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FMKBTest1.testLinux" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chocokb-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.fm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.fm.FMKBTest1" />
+      <option name="METHOD_NAME" value="testLinux" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSDAGTest.test5_DD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="FMKBTest1.testLinux1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="chocokb-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
-      <option name="METHOD_NAME" value="test5_DD" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.fm.FMKBTest1" />
+      <option name="METHOD_NAME" value="testLinux1" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HSTreeTest.test1_DD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSTreeTest" />
-      <option name="METHOD_NAME" value="test1_DD" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
-        <item itemvalue="JUnit.HSDAGTest.test3_DD" />
-        <item itemvalue="JUnit.HSDAGTest.test4_DD" />
-        <item itemvalue="JUnit.HSDAGTest.test5_DD" />
-        <item itemvalue="JUnit.HSTreeTest.test1_DD" />
+        <item itemvalue="JUnit.FMKBTest1.testLinux" />
+        <item itemvalue="JUnit.FMKBTest1" />
+        <item itemvalue="JUnit.FMKBTest1.testLinux1" />
+        <item itemvalue="JUnit.CameraKBTest" />
+        <item itemvalue="JUnit.CameraKBTest.testProduct7" />
       </list>
     </recent_temporary>
   </component>
@@ -299,6 +300,13 @@
       <workItem from="1657293521690" duration="30826000" />
       <workItem from="1657793253955" duration="1224000" />
       <workItem from="1657873949547" duration="4219000" />
+      <workItem from="1657891649837" duration="25000" />
+      <workItem from="1658073894324" duration="10501000" />
+      <workItem from="1658220667906" duration="299000" />
+      <workItem from="1658221004379" duration="42000" />
+      <workItem from="1658221059012" duration="2503000" />
+      <workItem from="1658316402949" duration="1095000" />
+      <workItem from="1658330624969" duration="1928000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -559,7 +567,28 @@
       <option name="project" value="LOCAL" />
       <updated>1657890937853</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="New packages 1.3.9-alpha-19">
+      <created>1657891670044</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1657891670044</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Add unit tests for CameraKB">
+      <created>1658077955507</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1658077955507</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Fix the unit test for linux-2.6.33.3.xml">
+      <created>1658332535751</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1658332535751</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -592,9 +621,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add README.md and build new releases" />
-    <MESSAGE value="Corrects the Maven packages" />
-    <MESSAGE value="Support to clone TestSuite, and FMDebuggingModel" />
     <MESSAGE value="Use Java stream &amp; Add equals, hashCode" />
     <MESSAGE value="Use Java stream" />
     <MESSAGE value="Fix clone &amp; remove ConstraintSet.java" />
@@ -617,7 +643,10 @@
     <MESSAGE value="Add CameraKB" />
     <MESSAGE value="Support CameraKB in KBStatistics" />
     <MESSAGE value="Added DirectDiag with unit tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added DirectDiag with unit tests" />
+    <MESSAGE value="New packages 1.3.9-alpha-19" />
+    <MESSAGE value="Add unit tests for CameraKB" />
+    <MESSAGE value="Fix the unit test for linux-2.6.33.3.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix the unit test for linux-2.6.33.3.xml" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
