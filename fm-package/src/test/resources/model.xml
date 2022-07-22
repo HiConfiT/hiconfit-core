@@ -8,9 +8,30 @@
   -->
 
 <featureModel>
+	<properties>
+		<graphics key="autolayoutconstraints" value="false"/>
+		<graphics key="legendautolayout" value="true"/>
+		<graphics key="showshortnames" value="false"/>
+		<graphics key="layout" value="horizontal"/>
+		<graphics key="showcollapsedconstraints" value="true"/>
+		<graphics key="legendhidden" value="false"/>
+		<graphics key="layoutalgorithm" value="1"/>
+	</properties>
 	<struct>
 		<and abstract="true" mandatory="true" name="dummy">
 			<feature name="Base"/>
+			<feature mandatory="true" name="NewFeature"/>
+			<feature mandatory="true" name="NewFeatureMandatory"/>
 		</and>
 	</struct>
+	<constraints>
+		<rule>
+			<imp>
+				<var>NewFeature</var>
+				<not>
+					<var>NewFeatureMandatory</var>
+				</not>
+			</imp>
+		</rule>
+	</constraints>
 </featureModel>

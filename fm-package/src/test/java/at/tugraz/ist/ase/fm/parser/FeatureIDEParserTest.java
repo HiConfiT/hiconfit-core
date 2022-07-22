@@ -77,7 +77,7 @@ class FeatureIDEParserTest {
 
     @Test
     void test3() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/model.xml");
+        File fileFM = new File("src/test/resources/model1.xml");
         FMParserFactory factory = FMParserFactory.getInstance();
         FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
         featureModel = parser.parse(fileFM);
