@@ -7,20 +7,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix the unit test for linux-2.6.33.3.xml">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="New package 1.3.9-alpha-20">
+      <change afterPath="$PROJECT_DIR$/fm-package/src/test/resources/model.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/src/test/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/test/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParserTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,36 +69,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/chocokb-package/src/main/resources/fms/FeatureIDE&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.30601093&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.profiles&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "jdk.selected.JAVA_MODULE": "temurin-17",
+    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/test/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.30601093",
+    "settings.editor.selected.configurable": "copyright.profiles"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/fm-package/src/test/resources" />
       <recent name="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE" />
       <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ca-cdr-package" />
-      <recent name="$PROJECT_DIR$/cdrmodel-package" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docs/apidocs" />
@@ -137,7 +128,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FMKBTest1.testLinux">
+  <component name="RunManager" selected="JUnit.FeatureIDEParserTest.test3">
     <configuration name="KBStatistics" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.app.KBStatistics" />
       <module name="app-KBStatistics" />
@@ -163,22 +154,6 @@
       <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.camera" />
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.camera.CameraKBTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CameraKBTest.testProduct7" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chocokb-package" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.camera.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.camera" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.camera.CameraKBTest" />
-      <option name="METHOD_NAME" value="testProduct7" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -230,13 +205,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="FeatureIDEParserTest.test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="fm-package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.parser.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.parser" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.parser.FeatureIDEParserTest" />
+      <option name="METHOD_NAME" value="test3" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.FeatureIDEParserTest.test3" />
         <item itemvalue="JUnit.FMKBTest1.testLinux" />
         <item itemvalue="JUnit.FMKBTest1" />
         <item itemvalue="JUnit.FMKBTest1.testLinux1" />
         <item itemvalue="JUnit.CameraKBTest" />
-        <item itemvalue="JUnit.CameraKBTest.testProduct7" />
       </list>
     </recent_temporary>
   </component>
@@ -306,7 +297,8 @@
       <workItem from="1658221004379" duration="42000" />
       <workItem from="1658221059012" duration="2503000" />
       <workItem from="1658316402949" duration="1095000" />
-      <workItem from="1658330624969" duration="1928000" />
+      <workItem from="1658330624969" duration="1962000" />
+      <workItem from="1658393745714" duration="7422000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -588,7 +580,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658332535751</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="New package 1.3.9-alpha-20">
+      <created>1658332591783</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1658332591783</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,7 +620,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Use Java stream &amp; Add equals, hashCode" />
     <MESSAGE value="Use Java stream" />
     <MESSAGE value="Fix clone &amp; remove ConstraintSet.java" />
     <MESSAGE value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
@@ -646,7 +644,8 @@
     <MESSAGE value="New packages 1.3.9-alpha-19" />
     <MESSAGE value="Add unit tests for CameraKB" />
     <MESSAGE value="Fix the unit test for linux-2.6.33.3.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the unit test for linux-2.6.33.3.xml" />
+    <MESSAGE value="New package 1.3.9-alpha-20" />
+    <option name="LAST_COMMIT_MESSAGE" value="New package 1.3.9-alpha-20" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

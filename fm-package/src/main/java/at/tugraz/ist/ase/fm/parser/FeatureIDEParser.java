@@ -59,12 +59,16 @@ public class FeatureIDEParser implements FeatureModelParser {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(filePath.toString());
+            doc.getDocumentElement().normalize();
             Element rootEle = doc.getDocumentElement();
 
-            // if it has three tag "featureModel", "struct" and "constraints"
+//             if it has three tags "featureModel", "struct" and "constraints"
+            // if it has two tags "featureModel", "struct"
+            checkState(rootEle != null, "DocumentBuilder couldn't parse the document! There are errors in the file.");
+
             if (rootEle.getTagName().equals("featureModel") &&
-                    rootEle.getElementsByTagName("struct").getLength() > 0 &&
-                    rootEle.getElementsByTagName("constraints").getLength() > 0) {
+                    rootEle.getElementsByTagName("struct").getLength() > 0) {
+//                    && rootEle.getElementsByTagName("constraints").getLength() > 0) {
                 return true;
             }
         } catch (SAXException | IOException | ParserConfigurationException e) {

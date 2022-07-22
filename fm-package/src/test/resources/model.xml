@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Consistency-based Algorithms for Conflict Detection and Resolution
+  ~
+  ~ Copyright (c) 2022
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<featureModel>
+	<struct>
+		<and abstract="true" mandatory="true" name="dummy">
+			<feature name="Base"/>
+		</and>
+	</struct>
+</featureModel>
