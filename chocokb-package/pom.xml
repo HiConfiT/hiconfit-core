@@ -13,7 +13,7 @@
     <parent>
         <artifactId>cacdr-v2</artifactId>
         <groupId>at.tugraz.ist.ase</groupId>
-        <version>1.3.9-alpha-20</version>
+        <version>1.3.9-alpha-21</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -23,14 +23,14 @@
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>fm-v2</artifactId>
-            <version>1.3.9-alpha-20</version>
+            <version>1.3.9-alpha-21</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>eval-v2</artifactId>
-            <version>1.3.9-alpha-20</version>
+            <version>1.3.9-alpha-21</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
