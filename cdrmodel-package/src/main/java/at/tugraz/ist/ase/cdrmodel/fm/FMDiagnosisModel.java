@@ -25,6 +25,8 @@ import java.util.List;
 
 /**
  * An extension class of {@link CDRModel} for a diagnosis task of feature models.
+ * C = CF
+ * B = { f0 = true }
  */
 @Slf4j
 public class FMDiagnosisModel extends CDRModel implements IChocoModel {

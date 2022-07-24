@@ -27,6 +27,8 @@ import java.util.*;
 
 /**
  * An extension class of {@link CDRModel} for a debugging task of feature models.
+ * B = { f0 = true }
+ * C = CF + test cases
  */
 @Slf4j
 public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggingModel {
