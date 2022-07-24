@@ -22,11 +22,8 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
-import org.chocosolver.solver.variables.BoolVar;
 
 import java.util.*;
-
-import static at.tugraz.ist.ase.common.ChocoSolverUtils.getVariable;
 
 /**
  * An extension class of {@link CDRModel} for a debugging task of feature models.
@@ -102,15 +99,19 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         if (isRootConstraints()) {
             log.trace("{}Adding correct constraints", LoggerUtils.tab());
             // {f0 = true}
-            int startIdx = model.getNbCstrs();
-            String f0 = fmkb.getVariable(0).getName();
-            BoolVar f0Var = (BoolVar) getVariable(model, f0);
-            model.addClauseTrue(f0Var);
+//            int startIdx = model.getNbCstrs();
+//            String f0 = fmkb.getVariable(0).getName();
+//            BoolVar f0Var = (BoolVar) getVariable(model, f0);
+//            model.addClauseTrue(f0Var);
+//
+//            Constraint constraint = new Constraint(f0 + " = true");
+//            constraint.addChocoConstraints(model, startIdx, model.getNbCstrs() - 1, false);
 
-            Constraint constraint = new Constraint(f0 + " = true");
-            constraint.addChocoConstraints(model, startIdx, model.getNbCstrs() - 1, false);
+            Constraint constraint = fmkb.getRootConstraint();
 
-            this.setCorrectConstraints(Collections.singletonList(constraint));
+            if (constraint != null) {
+                this.setCorrectConstraints(Collections.singletonList(constraint));
+            }
         }
 
         // translates test cases to Choco constraints

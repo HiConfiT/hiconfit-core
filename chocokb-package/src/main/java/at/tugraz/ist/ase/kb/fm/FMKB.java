@@ -8,9 +8,11 @@
 
 package at.tugraz.ist.ase.kb.fm;
 
+import at.tugraz.ist.ase.common.ChocoSolverUtils;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.*;
 import at.tugraz.ist.ase.kb.core.*;
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
@@ -27,6 +29,9 @@ import java.util.stream.IntStream;
 public class FMKB extends KB {
 
     private FeatureModel featureModel;
+
+    @Getter
+    private Constraint rootConstraint = null;
 
     public FMKB(FeatureModel featureModel, boolean hasNegativeConstraints) {
         super(featureModel.getName(), "SPLOT", hasNegativeConstraints);
@@ -48,6 +53,9 @@ public class FMKB extends KB {
 
         defineVariables();
         defineConstraints(hasNegativeConstraints);
+
+        // create the root constraint, remove created Choco constraints after this step
+        defineRootConstraint();
 
         LoggerUtils.outdent();
         log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab(), name);
@@ -214,13 +222,17 @@ public class FMKB extends KB {
 
         // unpost the negative constraint
         if (hasNegativeConstraints) {
-            int index = modelKB.getNbCstrs() - 1;
-            while (index >= startIdx) {
-                modelKB.unpost(modelKB.getCstrs()[index]);
-                index--;
-            }
+            ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
         }
     }
+
+//    private void unpostConstraintFrom(int startIdx) {
+//        int index = modelKB.getNbCstrs() - 1;
+//        while (index >= startIdx) {
+//            modelKB.unpost(modelKB.getCstrs()[index]);
+//            index--;
+//        }
+//    }
 
     private void addConstraint(Constraint constraint, Relationship relationship, int startIdx, int endIdx) {
         org.chocosolver.solver.constraints.Constraint[] constraints = modelKB.getCstrs();
@@ -245,6 +257,23 @@ public class FMKB extends KB {
 
             index++;
         }
+    }
+
+    /**
+     * Create the root constraint: f0 = true.
+     */
+    private void defineRootConstraint() {
+        // {f0 = true}
+        int startIdx = modelKB.getNbCstrs();
+        String f0 = this.getVariable(0).getName();
+        BoolVar f0Var = (BoolVar) ChocoSolverUtils.getVariable(modelKB, f0);
+        modelKB.addClauseTrue(f0Var);
+
+        this.rootConstraint = new Constraint(f0 + " = true");
+        this.rootConstraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, false);
+
+        // unpost the created Choco constraints
+        ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
     }
 
 //    /**

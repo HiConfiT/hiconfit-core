@@ -44,4 +44,16 @@ public class ChocoSolverUtils {
         List<Constraint> ac = Arrays.asList(model.getCstrs());
         ac.forEach(System.out::println);
     }
+
+    /**
+     * Unpost Choco constraints from the constraint with the start index to the end of the list of constraints.
+     * @param startIdx - the start index of the constraints to be unposted
+     */
+    public void unpostConstraintsFrom(int startIdx, @NonNull Model model) {
+        int index = model.getNbCstrs() - 1;
+        while (index >= startIdx) {
+            model.unpost(model.getCstrs()[index]);
+            index--;
+        }
+    }
 }

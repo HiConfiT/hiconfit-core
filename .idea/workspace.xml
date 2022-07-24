@@ -7,11 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="New package 1.3.9-alpha-20">
-      <change afterPath="$PROJECT_DIR$/fm-package/src/test/resources/model.xml" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add model1.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/src/test/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/src/test/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/fm/FMKB.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/fm/FMKB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/ChocoSolverUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/ChocoSolverUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +31,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -69,29 +70,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "jdk.selected.JAVA_MODULE": "temurin-17",
-    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/test/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.30601093",
-    "settings.editor.selected.configurable": "copyright.profiles"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/test/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.30601093&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.profiles&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/fm-package/src/test/resources" />
@@ -128,7 +129,20 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FeatureIDEParserTest.test3">
+  <component name="RunManager" selected="JUnit.DirectDebugTest">
+    <configuration name="FMGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.app.FMGenerator" />
+      <module name="app-FMGenerator" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="KBStatistics" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.app.KBStatistics" />
       <module name="app-KBStatistics" />
@@ -143,91 +157,85 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CameraKBTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chocokb-package" />
+    <configuration name="DirectDebugTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.camera.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.camera" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.camera.CameraKBTest" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.DirectDebugTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FMKBTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chocokb-package" />
+    <configuration name="FMDebuggingModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.fm.FMKBTest1" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FMKBTest1.testLinux" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="at.tugraz.ist.ase in chocokb-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="chocokb-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.fm.FMKBTest1" />
-      <option name="METHOD_NAME" value="testLinux" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FMKBTest1.testLinux1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="chocokb-package" />
+    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.fm.FMKBTest1" />
-      <option name="METHOD_NAME" value="testLinux1" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FeatureIDEParserTest.test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="fm-package" />
+    <configuration name="at.tugraz.ist.ase.cdrmodel.fm in cdrmodel-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-package" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.fm.parser.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.fm.parser" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.parser.FeatureIDEParserTest" />
-      <option name="METHOD_NAME" value="test3" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FeatureIDEParserTest.test3" />
-        <item itemvalue="JUnit.FMKBTest1.testLinux" />
-        <item itemvalue="JUnit.FMKBTest1" />
-        <item itemvalue="JUnit.FMKBTest1.testLinux1" />
-        <item itemvalue="JUnit.CameraKBTest" />
+        <item itemvalue="JUnit.DirectDebugTest" />
+        <item itemvalue="JUnit.FMDebuggingModelTest" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel.fm in cdrmodel-package" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase in chocokb-package" />
       </list>
     </recent_temporary>
   </component>
@@ -299,6 +307,14 @@
       <workItem from="1658316402949" duration="1095000" />
       <workItem from="1658330624969" duration="1962000" />
       <workItem from="1658393745714" duration="7422000" />
+      <workItem from="1658476359180" duration="6681000" />
+      <workItem from="1658495075317" duration="5160000" />
+      <workItem from="1658501502180" duration="40000" />
+      <workItem from="1658502166723" duration="1378000" />
+      <workItem from="1658503748606" duration="324000" />
+      <workItem from="1658505010614" duration="6000" />
+      <workItem from="1658505644645" duration="2513000" />
+      <workItem from="1658697235520" duration="2671000" />
     </task>
     <task id="LOCAL-00001" summary="First commit with common-package">
       <created>1651871782693</created>
@@ -587,7 +603,21 @@
       <option name="project" value="LOCAL" />
       <updated>1658332591783</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="Fix a bug in FeatureIDEParser">
+      <created>1658476412481</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1658476412481</updated>
+    </task>
+    <task id="LOCAL-00043" summary="Add model1.xml">
+      <created>1658495153858</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1658495153858</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -620,8 +650,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Use Java stream" />
-    <MESSAGE value="Fix clone &amp; remove ConstraintSet.java" />
     <MESSAGE value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
     <MESSAGE value="Fix the merged code" />
     <MESSAGE value="Fix start &amp; stop" />
@@ -645,7 +673,9 @@
     <MESSAGE value="Add unit tests for CameraKB" />
     <MESSAGE value="Fix the unit test for linux-2.6.33.3.xml" />
     <MESSAGE value="New package 1.3.9-alpha-20" />
-    <option name="LAST_COMMIT_MESSAGE" value="New package 1.3.9-alpha-20" />
+    <MESSAGE value="Fix a bug in FeatureIDEParser" />
+    <MESSAGE value="Add model1.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add model1.xml" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -660,6 +690,16 @@
           <url>file://$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java</url>
           <line>118</line>
           <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java</url>
+          <line>291</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java</url>
+          <line>109</line>
+          <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
