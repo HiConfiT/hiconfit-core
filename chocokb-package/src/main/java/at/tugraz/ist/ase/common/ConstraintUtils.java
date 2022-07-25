@@ -32,16 +32,18 @@ public final class ConstraintUtils {
     public final String COUNTER_CONSTAINS_CONSTRAINT = "The number of contains calls";
     public final String COUNTER_SPLIT_SET = "The number of split set";
 
-    public String convertToString(@NonNull Set<Constraint> ac, @NonNull String delimiter) {
-        return ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter));
+    public String convertToString(@NonNull Set<Constraint> ac, @NonNull String delimiter, boolean brackets) {
+        String ex = ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter));
+        return brackets ? "[" + ex + "]" : ex;
     }
 
+    @Deprecated
     public String convertToString(@NonNull Set<Constraint> ac) {
-        return convertToString(ac, "\n");
+        return convertToString(ac, "\n", false);
 //        return ac.stream().map(Constraint::toString).collect(Collectors.joining("\n"));
     }
 
-    public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess, String tabs, @NonNull String delimiter) {
+    public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess, String tabs, @NonNull String delimiter, boolean brackets) {
         if (allDiag.isEmpty()) return "";
 
         StringBuilder sb = new StringBuilder();
@@ -59,14 +61,15 @@ public final class ConstraintUtils {
                 sb.append(delimiter);
             }
 
-            sb.append(convertToString(diag, delimiter)).append("\n");
+            sb.append(convertToString(diag, delimiter, brackets)).append("\n");
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
     }
 
+    @Deprecated
     public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess) {
-        return convertToStringWithMessage(allDiag, mess, null, "\n");
+        return convertToStringWithMessage(allDiag, mess, null, "\n", false);
     }
 
     public void postConstraints(Collection<Constraint> C, Model toModel) {
