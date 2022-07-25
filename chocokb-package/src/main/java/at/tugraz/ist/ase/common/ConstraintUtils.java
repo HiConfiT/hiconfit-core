@@ -32,8 +32,13 @@ public final class ConstraintUtils {
     public final String COUNTER_CONSTAINS_CONSTRAINT = "The number of contains calls";
     public final String COUNTER_SPLIT_SET = "The number of split set";
 
+    public String convertToString(@NonNull Set<Constraint> ac, @NonNull String delimiter) {
+        return ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter));
+    }
+
     public String convertToString(@NonNull Set<Constraint> ac) {
-        return ac.stream().map(Constraint::toString).collect(Collectors.joining("\n"));
+        return convertToString(ac, "\n");
+//        return ac.stream().map(Constraint::toString).collect(Collectors.joining("\n"));
     }
 
     public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess, String tabs) {
@@ -48,7 +53,7 @@ public final class ConstraintUtils {
                 sb.append(tabs);
             }
 
-            sb.append(mess).append(" ").append(count).append(":\n");
+            sb.append(mess).append(" ").append(count).append(": ");
             sb.append(convertToString(diag)).append("\n");
         }
         sb.deleteCharAt(sb.length() - 1);
