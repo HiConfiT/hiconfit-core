@@ -58,11 +58,10 @@ public final class ConstraintUtils {
             sb.append(mess).append(" ").append(count).append(": ");
 
             if (delimiter.equals("\n")) {
+                delimiter = delimiter + (tabs != null ? tabs : "");
                 sb.append(delimiter);
-                sb.append(convertToString(diag, delimiter + tabs, brackets)).append("\n");
-            } else {
-                sb.append(convertToString(diag, delimiter, brackets)).append("\n");
             }
+            sb.append(convertToString(diag, delimiter, brackets)).append("\n");
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
