@@ -13,7 +13,7 @@
     <parent>
         <artifactId>cacdr-v2</artifactId>
         <groupId>at.tugraz.ist.ase</groupId>
-        <version>1.3.9-alpha-23</version>
+        <version>1.3.9-alpha-31</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>cdrmodel-v2</artifactId>
-            <version>1.3.9-alpha-23</version>
+            <version>1.3.9-alpha-31</version>
         </dependency>
     </dependencies>
 
