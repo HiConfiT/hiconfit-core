@@ -36,7 +36,7 @@ public final class ConstraintUtils {
         return ac.stream().map(Constraint::toString).collect(Collectors.joining("\n"));
     }
 
-    public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess) {
+    public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess, String tabs) {
         if (allDiag.isEmpty()) return "";
 
         StringBuilder sb = new StringBuilder();
@@ -44,11 +44,19 @@ public final class ConstraintUtils {
         for (Set<Constraint> diag : allDiag) {
             count++;
 
+            if (tabs != null) {
+                sb.append(tabs);
+            }
+
             sb.append(mess).append(" ").append(count).append(":\n");
             sb.append(convertToString(diag)).append("\n");
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();
+    }
+
+    public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess) {
+        return convertToStringWithMessage(allDiag, mess, null);
     }
 
     public void postConstraints(Collection<Constraint> C, Model toModel) {
