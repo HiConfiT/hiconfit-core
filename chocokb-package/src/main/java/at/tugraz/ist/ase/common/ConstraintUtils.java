@@ -37,7 +37,6 @@ public final class ConstraintUtils {
         return brackets ? "[" + ex + "]" : ex;
     }
 
-    @Deprecated
     public String convertToString(@NonNull Set<Constraint> ac) {
         return convertToString(ac, "\n", false);
 //        return ac.stream().map(Constraint::toString).collect(Collectors.joining("\n"));
@@ -67,7 +66,6 @@ public final class ConstraintUtils {
         return sb.toString();
     }
 
-    @Deprecated
     public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess) {
         return convertToStringWithMessage(allDiag, mess, null, "\n", false);
     }
