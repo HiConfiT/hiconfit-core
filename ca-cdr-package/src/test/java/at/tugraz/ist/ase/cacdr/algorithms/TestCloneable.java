@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.algorithms.DirectDebug.TIMER_DIRECTDEBUG;
@@ -358,9 +359,10 @@ public class TestCloneable {
         DirectDebug directDebug = new DirectDebug(checker);
 
         CAEvaluator.reset();
-        Set<Constraint> diag = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
+        Map.Entry<Set<ITestCase>, Set<Constraint>> result = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
                 debuggingModel.getCorrectConstraints(),
                 debuggingModel.getTestcases());
+        Set<Constraint> diag = result.getValue();
 
         if (!diag.isEmpty()) {
             System.out.println("\t\tDiag: " + diag);
@@ -403,9 +405,10 @@ public class TestCloneable {
         DirectDebug directDebug = new DirectDebug(checker);
 
         CAEvaluator.reset();
-        Set<Constraint> diag = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
+        Map.Entry<Set<ITestCase>, Set<Constraint>> result = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
                 debuggingModel.getCorrectConstraints(),
                 debuggingModel.getTestcases());
+        Set<Constraint> diag = result.getValue();
 
         if (!diag.isEmpty()) {
             System.out.println("\t\tDiag: " + diag);
@@ -450,9 +453,10 @@ public class TestCloneable {
         DirectDebug directDebug = new DirectDebug(checker);
 
         CAEvaluator.reset();
-        Set<Constraint> diag = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
+        Map.Entry<Set<ITestCase>, Set<Constraint>> result = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
                 debuggingModel.getCorrectConstraints(),
                 debuggingModel.getTestcases());
+        Set<Constraint> diag = result.getValue();
 
         if (!diag.isEmpty()) {
             System.out.println("\t\tDiag: " + diag);
