@@ -16,9 +16,7 @@ import com.google.common.collect.Sets;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
@@ -43,7 +41,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // Γ2 = DirectDebug(δ=C1, C1, B, T'π);
  * // Γ1 = DirectDebug(δ=C1-Γ2, C2, B U Γ2, T'π);
  * // return Γ1 ∪ Γ2;
- *
+ * <p>
  * There are two changes in the current version compared to the original algorithm in the paper:
  * // Γ1 = DirectDebug(δ=C1, C1, B, T'π);
  * // Γ2 = DirectDebug(δ=C1-Γ1, C2, B U Γ1, T'π);
@@ -70,15 +68,15 @@ public class DirectDebug extends IConsistencyAlgorithm {
     /**
      * This function will activate DirectDebug algorithm if there exists at least one positive test case,
      * which induces an inconsistency in C U B. Otherwise, it returns an empty set.
-     *
+     * <p>
      * Note: negative test cases in TΘ should be added (in negated form) to B before calling this function.
-     *
+     * TODO - negative tests
      * @param C a consideration set of constraints
      * @param B a background knowledge
      * @param TC a set of test cases
      * @return a diagnosis or an empty set
      */
-    public Set<Constraint> findDiagnosis(@NonNull Set<Constraint> C, @NonNull Set<Constraint> B, @NonNull Set<ITestCase> TC)
+    public Map.Entry<Set<ITestCase>, Set<Constraint>> findDiagnosis(@NonNull Set<Constraint> C, @NonNull Set<Constraint> B, @NonNull Set<ITestCase> TC)
     {
         log.debug("{}Identifying diagnosis for [C={}, B={}, TC={}] >>>", LoggerUtils.tab(), C, B, TC);
         LoggerUtils.indent();
@@ -92,7 +90,7 @@ public class DirectDebug extends IConsistencyAlgorithm {
             LoggerUtils.outdent();
             log.debug("{}<<< No diagnosis found", LoggerUtils.tab());
 
-            return Collections.emptySet();
+            return new AbstractMap.SimpleEntry<>(null, Collections.emptySet());
         } else{ // else return C \ directDebug(Φ, C, B, T'π)
             incrementCounter(COUNTER_DIRECTDEBUG_CALLS);
             start(TIMER_DIRECTDEBUG);
@@ -105,14 +103,14 @@ public class DirectDebug extends IConsistencyAlgorithm {
             LoggerUtils.outdent();
             log.debug("{}<<< Found diagnosis [diag={}]", LoggerUtils.tab(), diag);
 
-            return diag;
+            return new AbstractMap.SimpleEntry<>(TCp, diag);
         }
     }
 
     /**
      * The implementation of DirectDebug algorithm.
      * The algorithm determines a maximal satisfiable subset MSS (Γ) of C U B U TC.
-     *
+     * <p>
      * // Func DirectDebug(δ, C = {c1..cn}, B, Tπ) : Γ
      * // T'π <- Tπ
      * // if δ != Φ and IsConsistent(B U C, Tπ, T'π) return C;
