@@ -20,7 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.nary.cnf.LogOp;
 import org.chocosolver.solver.variables.BoolVar;
-import org.chocosolver.solver.variables.IntVar;
 
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -28,7 +27,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Slf4j
-public class FMKB extends KB {
+public class FMKB extends KB implements IBoolVarKB {
 
     private FeatureModel featureModel;
 
@@ -426,16 +425,6 @@ public class FMKB extends KB {
     }
 
     @Override
-    public IntVar[] getIntVars() {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
-    }
-
-    @Override
-    public IntVar getIntVar(@NonNull String variable) {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
-    }
-
-    @Override
     public BoolVar[] getBoolVars() {
         org.chocosolver.solver.variables.Variable[] vars = getModelKB().getVars();
 
@@ -450,11 +439,6 @@ public class FMKB extends KB {
     }
 
     // Choco value
-    @Override
-    public int getIntValue(@NonNull String var, @NonNull String value) {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
-    }
-
     @Override
     public boolean getBoolValue(@NonNull String var, @NonNull String value) {
         Domain domain = getDomain(var);

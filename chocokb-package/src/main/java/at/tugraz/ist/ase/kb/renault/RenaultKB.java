@@ -16,7 +16,6 @@ import lombok.NonNull;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
-import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.solver.variables.IntVar;
 
 import java.io.BufferedReader;
@@ -32,7 +31,7 @@ import java.util.stream.IntStream;
 import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
 
 @Slf4j
-public class RenaultKB extends KB {
+public class RenaultKB extends KB implements IIntVarKB {
 
     public RenaultKB(@NonNull IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
         super("RenaultConfigurationProblem", "https://www.itu.dk/research/cla/externals/clib/", constraintBuilder, hasNegativeConstraints);
@@ -809,27 +808,12 @@ public class RenaultKB extends KB {
         return ((IntVariable) var).getChocoVar();
     }
 
-    @Override
-    public BoolVar[] getBoolVars() {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
-    }
-
-    @Override
-    public BoolVar getBoolVar(@NonNull String variable) {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
-    }
-
     // Choco value
     @Override
     public int getIntValue(@NonNull String var, @NonNull String value) {
         Domain domain = getDomain(var);
 
         return domain.getChocoValue(value);
-    }
-
-    @Override
-    public boolean getBoolValue(@NonNull String var, @NonNull String value) {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
     }
 
 //    private int getIndexVariable(String var) {

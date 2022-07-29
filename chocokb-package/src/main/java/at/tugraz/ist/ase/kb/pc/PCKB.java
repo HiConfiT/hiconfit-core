@@ -14,7 +14,6 @@ import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
-import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.solver.variables.IntVar;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Slf4j
-public class PCKB extends KB {
+public class PCKB extends KB implements IIntVarKB {
 
     public PCKB(@NonNull IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
         super("PCConfigurationProblem", "https://www.itu.dk/research/cla/externals/clib/", constraintBuilder, hasNegativeConstraints);
@@ -946,26 +945,11 @@ public class PCKB extends KB {
         return ((IntVariable) var).getChocoVar();
     }
 
-    @Override
-    public BoolVar[] getBoolVars() {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
-    }
-
-    @Override
-    public BoolVar getBoolVar(@NonNull String variable) {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
-    }
-
     // Choco value
     @Override
     public int getIntValue(@NonNull String var, @NonNull String value) {
         Domain domain = getDomain(var);
 
         return domain.getChocoValue(value);
-    }
-
-    @Override
-    public boolean getBoolValue(@NonNull String var, @NonNull String value) {
-        throw new UnsupportedOperationException("Not supported by this knowledge base.");
     }
 }

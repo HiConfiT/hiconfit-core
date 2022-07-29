@@ -13,8 +13,6 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import org.chocosolver.solver.Model;
-import org.chocosolver.solver.variables.BoolVar;
-import org.chocosolver.solver.variables.IntVar;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -109,16 +107,6 @@ public abstract class KB {
     public int getNumChocoVars() {
         return getModelKB().getNbVars();
     }
-
-    public abstract IntVar[] getIntVars();
-    public abstract IntVar getIntVar(@NonNull String variable);
-
-    public abstract BoolVar[] getBoolVars();
-    public abstract BoolVar getBoolVar(@NonNull String variable);
-
-    // Choco value
-    public abstract int getIntValue(@NonNull String var, @NonNull String value);
-    public abstract boolean getBoolValue(@NonNull String var, @NonNull String value);
 
     public String getValue(@NonNull String var, int index) {
         Domain domain = getDomain(var);
