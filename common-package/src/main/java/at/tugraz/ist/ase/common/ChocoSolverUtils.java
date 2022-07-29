@@ -12,10 +12,16 @@ import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.Constraint;
+import org.chocosolver.solver.constraints.nary.cnf.LogOp;
+import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.solver.variables.Variable;
 
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkElementIndex;
 
 @UtilityClass
 public class ChocoSolverUtils {
@@ -54,6 +60,33 @@ public class ChocoSolverUtils {
         while (index >= startIdx) {
             model.unpost(model.getCstrs()[index]);
             index--;
+        }
+    }
+
+    public List<Constraint> getConstraints(@NonNull Model model, int startIdx, int endIdx) {
+        Constraint[] cstrs = model.getCstrs();
+
+        checkElementIndex(startIdx, cstrs.length, "startIdx must be within the range of constraints");
+        checkElementIndex(endIdx, cstrs.length, "endIdx must be within the range of constraints");
+        checkArgument(startIdx <= endIdx, "startIdx must be <= endIdx");
+
+        List<Constraint> constraints = new LinkedList<>();
+        int index = startIdx;
+        while (index <= endIdx) {
+            constraints.add(cstrs[index]);
+
+            index++;
+        }
+        return constraints;
+    }
+
+    public void addAssignmentToLogOp(@NonNull LogOp logOp, @NonNull Model model,
+                                     @NonNull String var, @NonNull String value) {
+        BoolVar v = (BoolVar) getVariable(model, var); // get the corresponding variable
+        if (value.equals("true")) { // true
+            logOp.addChild(v);
+        } else { // false
+            logOp.addChild(v.not());
         }
     }
 }
