@@ -24,23 +24,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * An extension class of {@link CDRModel} for a diagnosis task of feature models.
- * C = CF
- * B = { f0 = true }
+ * An extension class of {@link CDRModel} for a diagnosis task of feature models, in which:
+ * + C = CF
+ * + B = { f0 = true }
  */
 @Slf4j
 public class FMDiagnosisModel extends CDRModel implements IChocoModel {
 
     @Getter
-    private Model model;
-    private FeatureModel featureModel;
-    private FMKB fmkb;
+    protected Model model;
+    protected FeatureModel featureModel;
+    protected FMKB fmkb;
 
     @Getter
-    private final boolean rootConstraints;
+    protected final boolean rootConstraints;
 
     @Getter
-    private final boolean reversedConstraintsOrder;
+    protected final boolean reversedConstraintsOrder;
 
     /**
      * A constructor
@@ -64,14 +64,7 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
         this.reversedConstraintsOrder = reversedConstraintsOrder;
     }
 
-    /**
-     * This function adds constraints to the possibly faulty constraints set, the correct constraints set.
-     */
-    @Override
-    public void initialize() {
-        log.debug("{}Initializing FMDiagnosisModel for {} >>>", LoggerUtils.tab(), getName());
-        LoggerUtils.indent();
-
+    protected void initializeConstraintSets() {
         // sets possibly faulty constraints to super class
         log.trace("{}Adding possibly faulty constraints", LoggerUtils.tab());
         List<Constraint> C = new LinkedList<>(fmkb.getConstraintList());
@@ -98,6 +91,19 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
                 this.setCorrectConstraints(Collections.singletonList(constraint));
             }
         }
+    }
+
+    /**
+     * This function adds constraints to the possibly faulty constraints set, the correct constraints set.
+     */
+    @Override
+    public void initialize() {
+        log.debug("{}Initializing FMDiagnosisModel for {} >>>", LoggerUtils.tab(), getName());
+        LoggerUtils.indent();
+
+        // sets possibly faulty constraints to super class
+        // sets correct constraints to super class
+        initializeConstraintSets();
 
         // remove all Choco constraints, cause we just need variables and test cases
         model.unpost(model.getCstrs());
@@ -112,8 +118,6 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
 
         clone.fmkb = new FMKB(this.featureModel, false);
         clone.model = clone.fmkb.getModelKB();
-
-        clone.initialize();
 
         return clone;
     }

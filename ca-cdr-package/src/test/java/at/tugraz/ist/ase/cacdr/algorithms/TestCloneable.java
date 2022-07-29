@@ -59,6 +59,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel1 testModel1 = (TestModel1) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -92,6 +93,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel1 testModel1 = (TestModel1) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -142,6 +144,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel2 testModel1 = (TestModel2) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -194,6 +197,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel3 testModel1 = (TestModel3) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -246,6 +250,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel4 testModel1 = (TestModel4) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -298,6 +303,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel5 testModel1 = (TestModel5) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -354,6 +360,7 @@ public class TestCloneable {
 
         // cloneable
         FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
         DirectDebug directDebug = new DirectDebug(checker);
@@ -399,6 +406,7 @@ public class TestCloneable {
 
         // cloneable
         FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
         // KBDIAG
@@ -447,6 +455,7 @@ public class TestCloneable {
 
         // cloneable
         FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
         // KBDIAG

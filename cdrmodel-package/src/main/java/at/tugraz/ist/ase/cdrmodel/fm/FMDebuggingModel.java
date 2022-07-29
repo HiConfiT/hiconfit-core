@@ -9,42 +9,30 @@
 package at.tugraz.ist.ase.cdrmodel.fm;
 
 import at.tugraz.ist.ase.cdrmodel.CDRModel;
-import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.cdrmodel.IDebuggingModel;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.kb.core.Constraint;
-import at.tugraz.ist.ase.kb.fm.FMKB;
 import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestSuite;
 import at.tugraz.ist.ase.test.translator.ITestCaseTranslatable;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.chocosolver.solver.Model;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
- * An extension class of {@link CDRModel} for a debugging task of feature models.
- * B = { f0 = true }
- * C = CF + test cases
+ * An extension class of {@link CDRModel} for a debugging task of feature models, in which:
+ * + C = CF
+ * + B = { f0 = true }
+ * + Test cases
  */
 @Slf4j
-public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggingModel {
+public class FMDebuggingModel extends FMDiagnosisModel implements IDebuggingModel {
 
-    @Getter
-    private Model model;
-    private FeatureModel featureModel;
-    private FMKB fmkb;
     private TestSuite testSuite;
     private ITestCaseTranslatable translator;
-
-    @Getter
-    private final boolean rootConstraints;
-
-    @Getter
-    private final boolean reversedConstraintsOrder;
 
     /**
      * The set of test cases.
@@ -66,18 +54,10 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
     public FMDebuggingModel(@NonNull FeatureModel fm, @NonNull TestSuite testSuite,
                             @NonNull ITestCaseTranslatable translator,
                             boolean rootConstraints, boolean reversedConstraintsOrder) {
-        super(fm.getName());
-
-        this.featureModel = fm;
+        super(fm, rootConstraints, reversedConstraintsOrder);
 
         this.testSuite = testSuite;
-        this.fmkb = new FMKB(fm, false);
-        this.model = fmkb.getModelKB();
-
         this.translator = translator;
-
-        this.rootConstraints = rootConstraints;
-        this.reversedConstraintsOrder = reversedConstraintsOrder;
     }
 
     /**
@@ -90,31 +70,8 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         LoggerUtils.indent();
 
         // sets possibly faulty constraints to super class
-        log.trace("{}Adding possibly faulty constraints", LoggerUtils.tab());
-        List<Constraint> C = new LinkedList<>(fmkb.getConstraintList());
-        if (isReversedConstraintsOrder()) {
-            Collections.reverse(C); // in default, this shouldn't happen
-        }
-        this.setPossiblyFaultyConstraints(C);
-
         // sets correct constraints to super class
-        if (isRootConstraints()) {
-            log.trace("{}Adding correct constraints", LoggerUtils.tab());
-            // {f0 = true}
-//            int startIdx = model.getNbCstrs();
-//            String f0 = fmkb.getVariable(0).getName();
-//            BoolVar f0Var = (BoolVar) getVariable(model, f0);
-//            model.addClauseTrue(f0Var);
-//
-//            Constraint constraint = new Constraint(f0 + " = true");
-//            constraint.addChocoConstraints(model, startIdx, model.getNbCstrs() - 1, false);
-
-            Constraint constraint = fmkb.getRootConstraint();
-
-            if (constraint != null) {
-                this.setCorrectConstraints(Collections.singletonList(constraint));
-            }
-        }
+        initializeConstraintSets();
 
         // translates test cases to Choco constraints
         log.trace("{}Translating test cases to Choco constraints", LoggerUtils.tab());
@@ -155,11 +112,7 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
         FMDebuggingModel clone = (FMDebuggingModel) super.clone();
 
         clone.testSuite = (TestSuite) testSuite.clone();
-        clone.fmkb = new FMKB(this.featureModel, false);
-        clone.model = clone.fmkb.getModelKB();
         clone.testcases = new LinkedHashSet<>();
-
-        clone.initialize();
 
         return clone;
     }
@@ -168,10 +121,6 @@ public class FMDebuggingModel extends CDRModel implements IChocoModel, IDebuggin
     public void dispose() {
         super.dispose();
         testcases.clear();
-        model = null;
-        featureModel = null;
-        fmkb.dispose();
-        fmkb = null;
         testSuite = null;
         translator = null;
     }
