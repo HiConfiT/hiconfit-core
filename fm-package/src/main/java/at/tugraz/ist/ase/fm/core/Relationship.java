@@ -26,6 +26,7 @@ public class Relationship {
 
     protected String confRule;
 
+    @Deprecated
     @EqualsAndHashCode.Exclude
     private final List<String> constraints = new LinkedList<>();
 
@@ -79,6 +80,7 @@ public class Relationship {
      * Adds a textual Choco constraint.
      * @param constraint a textual Choco constraint.
      */
+    @Deprecated
     public void setConstraint(@NonNull String constraint) {
         constraints.add(constraint);
     }
@@ -89,7 +91,7 @@ public class Relationship {
     }
 
     public void dispose() {
-        constraints.clear();
+//        constraints.clear();
     }
 }
 
