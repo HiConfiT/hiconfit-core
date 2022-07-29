@@ -13,7 +13,7 @@ import org.chocosolver.solver.Model;
 
 public interface ITestCaseTranslatable {
     /**
-     * Translates test cases to Choco constraints.
+     * Translates a test case to Choco constraints.
      */
     void translate(ITestCase testCase, Model model);
 }

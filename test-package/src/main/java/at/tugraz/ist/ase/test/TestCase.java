@@ -41,8 +41,8 @@ public class TestCase implements ITestCase {
     public TestCase(@NonNull String testcase, @NonNull List<Assignment> assignments) {
         this.testcase = testcase;
         this.assignments = assignments;
-        this.chocoConstraints = null;
-        this.negChocoConstraints = null;
+        this.chocoConstraints = new LinkedList<>();
+        this.negChocoConstraints = new LinkedList<>();
         this.isViolated = false;
     }
 
@@ -53,6 +53,7 @@ public class TestCase implements ITestCase {
      * @param startIdx the index of the first constraint.
      * @param endIdx the index of the last constraint.
      */
+    @Deprecated
     public void addChocoConstraints(@NonNull Model model, int startIdx, int endIdx, boolean hasNegativeConstraints) {
         Constraint[] constraints = model.getCstrs();
 
@@ -91,9 +92,9 @@ public class TestCase implements ITestCase {
      * @param constraint a Choco constraint
      */
     public void addChocoConstraint(@NonNull Constraint constraint) {
-        if (chocoConstraints == null) {
-            chocoConstraints = new LinkedList<>();
-        }
+//        if (chocoConstraints == null) {
+//            chocoConstraints = new LinkedList<>();
+//        }
         chocoConstraints.add(constraint);
 
         log.trace("{}Added a Choco constraint to TestCase [choco_cstr={}, testcase={}]", LoggerUtils.tab(), constraint, this);
@@ -104,9 +105,9 @@ public class TestCase implements ITestCase {
      * @param neg_constraint a Choco constraint
      */
     public void addNegChocoConstraint(@NonNull Constraint neg_constraint) {
-        if (negChocoConstraints == null) {
-            negChocoConstraints = new LinkedList<>();
-        }
+//        if (negChocoConstraints == null) {
+//            negChocoConstraints = new LinkedList<>();
+//        }
         negChocoConstraints.add(neg_constraint);
 
         log.trace("{}Added a negative Choco constraint to TestCase [choco_cstr={}, testcase={}]", LoggerUtils.tab(), neg_constraint, this);
@@ -139,8 +140,8 @@ public class TestCase implements ITestCase {
         }
         clone.setAssignments(assignments);
 
-        clone.setChocoConstraints(null);
-        clone.setNegChocoConstraints(null);
+        clone.chocoConstraints = new LinkedList<>();
+        clone.negChocoConstraints = new LinkedList<>();
 
         // should not clone chocoConstraints and negChocoConstraints
         // should add new generated chocoConstraints and negChocoConstraints

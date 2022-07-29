@@ -9,23 +9,26 @@
 package at.tugraz.ist.ase.test.translator.fm;
 
 //import at.tugraz.ist.ase.debugging.testcases.AggregatedTestCase;
+
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.test.Assignment;
 import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestCase;
 import at.tugraz.ist.ase.test.translator.ITestCaseTranslatable;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
-import org.chocosolver.solver.constraints.nary.cnf.LogOp;
-import org.chocosolver.solver.variables.BoolVar;
-
-import static at.tugraz.ist.ase.common.ChocoSolverUtils.*;
 
 @Slf4j
 public class FMTestCaseTranslator implements ITestCaseTranslatable {
+
+    protected FMAssignmentsTranslator translator;
+
+    public FMTestCaseTranslator(FMAssignmentsTranslator translator) {
+        this.translator = translator;
+    }
+
     /**
-     * Translates test cases to Choco constraints.
+     * Translates a test case to Choco constraints.
      */
     @Override
     public void translate(@NonNull ITestCase testCase, @NonNull Model model) {
@@ -46,46 +49,47 @@ public class FMTestCaseTranslator implements ITestCaseTranslatable {
      * Translates a test case to Choco constraints.
      */
     private void createTestCase(TestCase tc, Model model) {
-        int startIdx = model.getNbCstrs();
-
-        LogOp logOp = LogOp.and(); // creates a AND LogOp
-        for (Assignment assignment : tc.getAssignments()) { // get each clause
-            BoolVar v = (BoolVar) getVariable(model, assignment.getVariable()); // get the corresponding variable
-            if (assignment.getValue().equals("true")) { // true
-                logOp.addChild(v);
-            } else { // false
-                logOp.addChild(v.not());
-            }
-        }
-        model.addClauses(logOp); // add the translated constraints to the Choco model
-        int lastCstrIdx = model.getNbCstrs();
-
-        // add the translated constraints to the TestCase object
-        setConstraintsToTestCase(tc, model, startIdx, lastCstrIdx - 1, false);
-
-        // Negative test cases
-        LogOp negLogOp = LogOp.nand(logOp);
-        startIdx = model.getNbCstrs();
-        model.addClauses(negLogOp);
-        lastCstrIdx = model.getNbCstrs();
-        setConstraintsToTestCase(tc, model, startIdx, lastCstrIdx - 1, true);
+//        int startIdx = model.getNbCstrs();
+//        LogOp logOp = translator.create(tc.getAssignments(), model);
+//        model.addClauses(logOp); // add the translated constraints to the Choco model
+//        int endIdx = model.getNbCstrs();
+//
+//        // add the translated constraints to the TestCase object
+//        setConstraintsToTestCase(tc, model, startIdx, endIdx - 1, false);
+//
+//        // Negative test cases
+//        LogOp negLogOp = translator.createNegation(logOp, model);
+//        startIdx = model.getNbCstrs();
+//        model.addClauses(negLogOp);
+//        endIdx = model.getNbCstrs();
+//        setConstraintsToTestCase(tc, model, startIdx, endIdx - 1, true);
+        translator.translate(tc.getAssignments(), model,
+                tc.getChocoConstraints(), tc.getNegChocoConstraints());
 
         log.debug("{}Translated test case [testcase={}] >>>", LoggerUtils.tab(), tc);
     }
 
-    /**
-     * Sets translated Choco constraints to the {@link TestCase} object.
-     */
-    private void setConstraintsToTestCase(TestCase testCase, Model model, int startIdx, int endIdx, boolean negative) {
-        org.chocosolver.solver.constraints.Constraint[] constraints = model.getCstrs();
-        int index = startIdx;
-        while (index <= endIdx) {
-            if (!negative) {
-                testCase.addChocoConstraint(constraints[index]);
-            } else {
-                testCase.addNegChocoConstraint(constraints[index]);
-            }
-            index++;
-        }
-    }
+//    /**
+//     * Sets translated Choco constraints to the {@link TestCase} object.
+//     */
+//    private void setConstraintsToTestCase(TestCase testCase, Model model, int startIdx, int endIdx, boolean hasNegativeConstraints) {
+//        List<Constraint> constraints = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
+//
+//        if (hasNegativeConstraints) {
+//            constraints.forEach(testCase::addNegChocoConstraint);
+//        } else {
+//            constraints.forEach(testCase::addChocoConstraint);
+//        }
+//
+////        org.chocosolver.solver.constraints.Constraint[] constraints = model.getCstrs();
+////        int index = startIdx;
+////        while (index <= endIdx) {
+////            if (hasNegativeConstraints) {
+////                testCase.addNegChocoConstraint(constraints[index]);
+////            } else {
+////                testCase.addChocoConstraint(constraints[index]);
+////            }
+////            index++;
+////        }
+//    }
 }

@@ -65,8 +65,8 @@ class TestCaseTest {
                 () -> assertEquals("false", testsuite.get(0).getAssignments().get(3).getValue()),
                 () -> assertEquals("~gui_builder & diagram_builder & ~uml", testsuite.get(1).toString()));
 
-        assertNull(testsuite.get(0).getChocoConstraints());
-        assertNull(testsuite.get(0).getNegChocoConstraints());
+        assertNotNull(testsuite.get(0).getChocoConstraints());
+        assertNotNull(testsuite.get(0).getNegChocoConstraints());
     }
 
     @Test

@@ -23,6 +23,7 @@ import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestSuite;
 import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
 import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.test.translator.fm.FMAssignmentsTranslator;
 import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
@@ -355,8 +356,9 @@ public class TestCloneable {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
+        FMTestCaseTranslator translator = new FMTestCaseTranslator(new FMAssignmentsTranslator());
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
-                testSuite, new FMTestCaseTranslator(),
+                testSuite, translator,
                 true, false);
         debuggingModel.initialize();
 
@@ -402,8 +404,9 @@ public class TestCloneable {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
+        FMTestCaseTranslator translator = new FMTestCaseTranslator(new FMAssignmentsTranslator());
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
-                testSuite, new FMTestCaseTranslator(),
+                testSuite, translator,
                 true, false);
         debuggingModel.initialize();
 
@@ -452,8 +455,9 @@ public class TestCloneable {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
+        FMTestCaseTranslator translator = new FMTestCaseTranslator(new FMAssignmentsTranslator());
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
-                testSuite, new FMTestCaseTranslator(),
+                testSuite, translator,
                 true, false);
         debuggingModel.initialize();
 
