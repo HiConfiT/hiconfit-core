@@ -7,12 +7,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Supported DirectDebug to identify all diagnoses">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add complex_featureide_model.xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/CDRModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/CDRModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDiagnosisModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDiagnosisModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
@@ -97,7 +102,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.30601093&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.profiles&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -136,7 +141,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.HSTreeTest.test5_DD">
+  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-v2">
     <configuration name="FMGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.app.FMGenerator" />
       <module name="app-FMGenerator" />
@@ -164,22 +169,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DirectDebugTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-v2" />
+    <configuration name="FMDebuggingModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.DirectDebugTest" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DirectDebugTest.testAllDiagnoses2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FMDebuggingModelTest.shouldCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-v2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
+      <option name="METHOD_NAME" value="shouldCloneable" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ca-cdr-v2" />
       <extension name="coverage">
         <pattern>
@@ -188,14 +209,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.DirectDebugTest" />
-      <option name="METHOD_NAME" value="testAllDiagnoses2" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.TestCloneable" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DirectDebugTest.testAllDiagnoses3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ca-cdr-v2" />
       <extension name="coverage">
         <pattern>
@@ -204,41 +224,21 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.DirectDebugTest" />
-      <option name="METHOD_NAME" value="testAllDiagnoses3" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FastDiagV3Test.testFindDiagnosis2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-v2" />
+    <configuration name="at.tugraz.ist.ase.cdrmodel.fm in cdrmodel-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.FastDiagV3Test" />
-      <option name="METHOD_NAME" value="testFindDiagnosis2" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HSTreeTest.test5_DD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-v2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSTreeTest" />
-      <option name="METHOD_NAME" value="test5_DD" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -258,11 +258,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.HSTreeTest.test5_DD" />
-        <item itemvalue="JUnit.FastDiagV3Test.testFindDiagnosis2" />
-        <item itemvalue="JUnit.DirectDebugTest" />
-        <item itemvalue="JUnit.DirectDebugTest.testAllDiagnoses3" />
-        <item itemvalue="JUnit.DirectDebugTest.testAllDiagnoses2" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-v2" />
+        <item itemvalue="JUnit.TestCloneable" />
+        <item itemvalue="JUnit.FMDebuggingModelTest" />
+        <item itemvalue="JUnit.FMDebuggingModelTest.shouldCloneable" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel.fm in cdrmodel-v2" />
       </list>
     </recent_temporary>
   </component>
@@ -347,13 +347,12 @@
       <workItem from="1658734288397" duration="8797000" />
       <workItem from="1658907420698" duration="4983000" />
       <workItem from="1658914630175" duration="2525000" />
-    </task>
-    <task id="LOCAL-00009" summary="Add crdmodel-package">
-      <created>1651918179721</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1651918179722</updated>
+      <workItem from="1658920767037" duration="181000" />
+      <workItem from="1658994692272" duration="145000" />
+      <workItem from="1659012221975" duration="1745000" />
+      <workItem from="1659023564423" duration="5771000" />
+      <workItem from="1659083240400" duration="701000" />
+      <workItem from="1659083956003" duration="2320000" />
     </task>
     <task id="LOCAL-00010" summary="Add ca-cdr-package">
       <created>1651919474750</created>
@@ -691,7 +690,14 @@
       <option name="project" value="LOCAL" />
       <updated>1658917150800</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="Add complex_featureide_model.xml">
+      <created>1658994832719</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1658994832719</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -724,7 +730,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add dispose() to ca-cdr algorithms and publish 1.3.9-alpha-17" />
     <MESSAGE value="Add dispose() to all projects and publish 1.3.9-alpha-18" />
     <MESSAGE value="Add CameraKB" />
     <MESSAGE value="Support CameraKB in KBStatistics" />
@@ -749,7 +754,8 @@
     <MESSAGE value="Fixed convertToStringWithMessage" />
     <MESSAGE value="Removed @Deprecated" />
     <MESSAGE value="Supported DirectDebug to identify all diagnoses" />
-    <option name="LAST_COMMIT_MESSAGE" value="Supported DirectDebug to identify all diagnoses" />
+    <MESSAGE value="Add complex_featureide_model.xml" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add complex_featureide_model.xml" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -769,6 +775,11 @@
           <url>file://$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebugTest.java</url>
           <line>48</line>
           <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java</url>
+          <line>127</line>
+          <option name="timeStamp" value="12" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
