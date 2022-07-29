@@ -84,21 +84,28 @@ public final class ConstraintUtils {
      */
     public void addChocoConstraintsToConstraint(boolean negative, @NonNull Constraint constraint,
                                                 @NonNull Model model, int startIdx, int endIdx) {
-        org.chocosolver.solver.constraints.Constraint[] cstrs = model.getCstrs();
+//        org.chocosolver.solver.constraints.Constraint[] cstrs = model.getCstrs();
+//
+//        checkElementIndex(startIdx, cstrs.length, "startIdx must be within the range of constraints");
+//        checkElementIndex(endIdx, cstrs.length, "endIdx must be within the range of constraints");
+//        checkArgument(startIdx <= endIdx, "startIdx must be <= endIdx");
+//
+//        int index = startIdx;
+//        while (index <= endIdx) {
+//            if (negative) {
+//                constraint.addNegChocoConstraint(cstrs[index]);
+//            } else {
+//                constraint.addChocoConstraint(cstrs[index]);
+//            }
+//
+//            index++;
+//        }
+        List<org.chocosolver.solver.constraints.Constraint> cstrs = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
 
-        checkElementIndex(startIdx, cstrs.length, "startIdx must be within the range of constraints");
-        checkElementIndex(endIdx, cstrs.length, "endIdx must be within the range of constraints");
-        checkArgument(startIdx <= endIdx, "startIdx must be <= endIdx");
-
-        int index = startIdx;
-        while (index <= endIdx) {
-            if (negative) {
-                constraint.addNegChocoConstraint(cstrs[index]);
-            } else {
-                constraint.addChocoConstraint(cstrs[index]);
-            }
-
-            index++;
+        if (negative) {
+            cstrs.forEach(constraint::addNegChocoConstraint);
+        } else {
+            cstrs.forEach(constraint::addChocoConstraint);
         }
     }
 
@@ -133,20 +140,37 @@ public final class ConstraintUtils {
         }
 
         // add c1, c2, c3 to two lists in the Constraint object
-        int index = startIdx;
-        while (index <= endIdx) {
-            constraint.addChocoConstraint(constraints[index]);
-            if (hasNegativeConstraints) {
-                constraint.addNegChocoConstraint(constraints[index]);
-            }
-            index++;
+        if (startIdx <= endIdx) {
+            List<org.chocosolver.solver.constraints.Constraint> cstrs = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
+
+            cstrs.forEach(cstr -> {
+                constraint.addChocoConstraint(cstr);
+                if (hasNegativeConstraints) {
+                    constraint.addNegChocoConstraint(cstr);
+                }
+            });
         }
 
         // add c4 to the list of chocoConstraints in the Constraint object
-        constraint.addChocoConstraint(constraints[index]);
+        constraint.addChocoConstraint(constraints[endIdx + 1]);
         if (hasNegativeConstraints) { // add c5 to the list of negChocoConstraints in the Constraint object
-            constraint.addNegChocoConstraint(constraints[index + 1]);
+            constraint.addNegChocoConstraint(constraints[endIdx + 2]);
         }
+
+//        int index = startIdx;
+//        while (index <= endIdx) {
+//            constraint.addChocoConstraint(constraints[index]);
+//            if (hasNegativeConstraints) {
+//                constraint.addNegChocoConstraint(constraints[index]);
+//            }
+//            index++;
+//        }
+//
+//        // add c4 to the list of chocoConstraints in the Constraint object
+//        constraint.addChocoConstraint(constraints[index]);
+//        if (hasNegativeConstraints) { // add c5 to the list of negChocoConstraints in the Constraint object
+//            constraint.addNegChocoConstraint(constraints[index + 1]);
+//        }
     }
 
     public void postConstraints(Collection<Constraint> C, Model toModel) {
