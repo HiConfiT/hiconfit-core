@@ -8,16 +8,17 @@
 
 package at.tugraz.ist.ase.cdrmodel.fm;
 
-import at.tugraz.ist.ase.test.ITestCase;
-import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
-import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
-import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
+import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
+import at.tugraz.ist.ase.test.ITestCase;
+import at.tugraz.ist.ase.test.TestSuite;
+import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
+import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import com.google.common.io.Files;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
@@ -53,7 +54,7 @@ class FMDebuggingModelTest1 {
 
         testSuite = factory.buildTestSuite(is, testCaseFactory);
 
-        debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(), testSuite, new FMTestCaseTranslator(),
                 true, false);
         debuggingModel.initialize();
     }

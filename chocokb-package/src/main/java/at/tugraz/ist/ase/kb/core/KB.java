@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.kb.core;
 
+import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
@@ -44,9 +45,13 @@ public abstract class KB {
     @ToString.Exclude
     protected List<Constraint> constraintList;
 
-    protected KB(String name, String source, boolean hasNegativeConstraints) {
+    @ToString.Exclude
+    protected IConstraintBuildable constraintBuilder;
+
+    protected KB(String name, String source, @NonNull IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
         this.name = name;
         this.source = source;
+        this.constraintBuilder = constraintBuilder;
         this.hasNegativeConstraints = hasNegativeConstraints;
     }
 
@@ -58,6 +63,7 @@ public abstract class KB {
         domainList = null;
         constraintList.clear();
         constraintList = null;
+        constraintBuilder = null;
     }
 
     public abstract void reset(boolean hasNegativeConstraints);

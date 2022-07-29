@@ -12,6 +12,7 @@ import at.tugraz.ist.ase.fm.app.cli.FMGenerator_CmdLineOptions;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.SXFMParser;
+import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import es.us.isa.FAMA.models.FAMAfeatureModel.FAMAFeatureModel;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
@@ -35,13 +36,13 @@ import java.util.List;
 /**
  * Generates synthesized feature models using the Betty framework.
  * For further details on Betty framework, we refer to <a href="https://www.isa.us.es/betty/welcome">https://www.isa.us.es/betty/welcome</a>
- *
+ * <p>
  * The number of features in each generated feature model is specified by the following formula:
  * numFeatures = numConstraints * 3 / 4;
- *
+ * <p>
  * for numFeatures < 10, using Random generation
  * for numFeatures >= 10, using an evolutionary generator
- *
+ * <p>
  * Generated feature models are saved using the SPLOT format (<a href="http://www.splot-research.org">http://www.splot-research.org</a>).
  */
 public class FMGenerator {
@@ -187,7 +188,7 @@ public class FMGenerator {
 
         File file = new File(filename);
         FeatureModel featureModel = parser.parse(file);
-        FMKB model = new FMKB(featureModel, false);
+        FMKB model = new FMKB(featureModel, new FMConstraintBuilder(), false);
 
         if (model.getModelKB().getSolver().solve()) { // if the model is consistent
             int numGenCstrs = featureModel.getNumOfRelationships() + featureModel.getNumOfConstraints();

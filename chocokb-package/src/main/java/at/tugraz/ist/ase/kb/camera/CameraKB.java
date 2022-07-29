@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.kb.camera;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.*;
+import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
@@ -24,8 +25,8 @@ import java.util.stream.IntStream;
 
 @Slf4j
 public class CameraKB extends KB {
-    public CameraKB(boolean hasNegativeConstraints) {
-        super("Camera Configuration Problem", "https://github.com/CSPHeuristix/CDBC/blob/master/CameraKB.java", hasNegativeConstraints);
+    public CameraKB(@NonNull IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
+        super("Camera Configuration Problem", "https://github.com/CSPHeuristix/CDBC/blob/master/CameraKB.java", constraintBuilder, hasNegativeConstraints);
 
         reset(hasNegativeConstraints);
     }
@@ -385,29 +386,32 @@ public class CameraKB extends KB {
                 configurationList.get(11), configurationList.get(12), configurationList.get(13), configurationList.get(14), configurationList.get(15), configurationList.get(16),
                 configurationList.get(17), configurationList.get(18), configurationList.get(19));
 
-        addConstraint("kb", chocoConstraint, startIdx, hasNegativeConstraints);
+//        addConstraint("kb", chocoConstraint, startIdx, hasNegativeConstraints);
+        Constraint constraint = constraintBuilder.buildConstraint("kb", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraintList.add(constraint);
 
         LoggerUtils.outdent();
         log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
-    private void addConstraint(String constraintName, org.chocosolver.solver.constraints.Constraint chocoConstraint, int startIdx, boolean hasNegativeConstraints) {
-        modelKB.post(chocoConstraint);
-
-        org.chocosolver.solver.constraints.Constraint negChocoConstraint = null;
-        if (hasNegativeConstraints) {
-            negChocoConstraint = chocoConstraint.getOpposite();
-            modelKB.post(negChocoConstraint);
-        }
-
-        Constraint constraint = new Constraint(constraintName);
-        constraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
-        constraintList.add(constraint);
-
-        if (hasNegativeConstraints && negChocoConstraint != null) {
-            modelKB.unpost(negChocoConstraint);
-        }
-    }
+//    private void addConstraint(String constraintName, org.chocosolver.solver.constraints.Constraint chocoConstraint, int startIdx, boolean hasNegativeConstraints) {
+//        modelKB.post(chocoConstraint);
+//
+//        org.chocosolver.solver.constraints.Constraint negChocoConstraint = null;
+//        if (hasNegativeConstraints) {
+//            negChocoConstraint = chocoConstraint.getOpposite();
+//            modelKB.post(negChocoConstraint);
+//        }
+//
+//        Constraint constraint = new Constraint(constraintName);
+//        ConstraintUtils.addChocoConstraints(constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
+////        constraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
+//        constraintList.add(constraint);
+//
+//        if (hasNegativeConstraints && negChocoConstraint != null) {
+//            modelKB.unpost(negChocoConstraint);
+//        }
+//    }
 
     @Override
     public IntVar[] getIntVars() {

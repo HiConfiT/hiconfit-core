@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.kb.renault;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.*;
+import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
 import lombok.Cleanup;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -28,13 +29,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static at.tugraz.ist.ase.common.IOUtils.*;
+import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
 
 @Slf4j
 public class RenaultKB extends KB {
 
-    public RenaultKB(boolean hasNegativeConstraints) {
-        super("RenaultConfigurationProblem", "https://www.itu.dk/research/cla/externals/clib/", hasNegativeConstraints);
+    public RenaultKB(@NonNull IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
+        super("RenaultConfigurationProblem", "https://www.itu.dk/research/cla/externals/clib/", constraintBuilder, hasNegativeConstraints);
 
         reset(hasNegativeConstraints);
     }
@@ -717,21 +718,25 @@ public class RenaultKB extends KB {
 
                 int startIdx = modelKB.getNbCstrs();
                 org.chocosolver.solver.constraints.Constraint chocoConstraint = readRule(reader);
-                modelKB.post(chocoConstraint);
 
-                org.chocosolver.solver.constraints.Constraint negChocoConstraint = null;
-                if (hasNegativeConstraints) {
-                    negChocoConstraint = chocoConstraint.getOpposite();
-                    this.modelKB.post(negChocoConstraint);
-                }
-
-                Constraint constraint = new Constraint(ruleFile);
-                constraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
+                Constraint constraint = constraintBuilder.buildConstraint(ruleFile, modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+//                modelKB.post(chocoConstraint);
+//
+//                org.chocosolver.solver.constraints.Constraint negChocoConstraint = null;
+//                if (hasNegativeConstraints) {
+//                    negChocoConstraint = chocoConstraint.getOpposite();
+//                    this.modelKB.post(negChocoConstraint);
+//                }
+//
+//                Constraint constraint = new Constraint(ruleFile);
+//                ConstraintUtils.addChocoConstraints(constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
+////                constraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
+//                constraintList.add(constraint);
+//
+//                if (hasNegativeConstraints && negChocoConstraint != null) {
+//                    modelKB.unpost(negChocoConstraint);
+//                }
                 constraintList.add(constraint);
-
-                if (hasNegativeConstraints && negChocoConstraint != null) {
-                    modelKB.unpost(negChocoConstraint);
-                }
 
             } catch (IOException e) {
                 log.error("{}Error while reading rule file {} - {}", LoggerUtils.tab(), ruleFile, e.getMessage());

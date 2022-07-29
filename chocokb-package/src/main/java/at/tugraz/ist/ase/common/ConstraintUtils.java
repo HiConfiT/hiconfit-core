@@ -21,6 +21,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static at.tugraz.ist.ase.eval.PerformanceEvaluator.incrementCounter;
+import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkElementIndex;
 
 @UtilityClass
 @Slf4j
@@ -68,6 +70,83 @@ public final class ConstraintUtils {
 
     public String convertToStringWithMessage(@NonNull List<Set<Constraint>> allDiag, @NonNull String mess) {
         return convertToStringWithMessage(allDiag, mess, null, "\n", false);
+    }
+
+    /**
+     * Add Choco constraints from the model to the corresponding list of Choco constraints in a {@link Constraint} object.
+     * The function is used when Choco constraints are generated for a feature model.
+     * It means that the Choco model uses LogOp and BoolVar.
+     * @param negative if true, add constraints to the list negChocoConstraints, otherwise add constraints to the list chocoConstraints.
+     * @param constraint a {@link Constraint} object
+     * @param model a Choco model
+     * @param startIdx the index of the first constraint to copy from the model
+     * @param endIdx the index of the last constraint to copy from the model
+     */
+    public void addChocoConstraintsToConstraint(boolean negative, @NonNull Constraint constraint,
+                                                @NonNull Model model, int startIdx, int endIdx) {
+        org.chocosolver.solver.constraints.Constraint[] cstrs = model.getCstrs();
+
+        checkElementIndex(startIdx, cstrs.length, "startIdx must be within the range of constraints");
+        checkElementIndex(endIdx, cstrs.length, "endIdx must be within the range of constraints");
+        checkArgument(startIdx <= endIdx, "startIdx must be <= endIdx");
+
+        int index = startIdx;
+        while (index <= endIdx) {
+            if (negative) {
+                constraint.addNegChocoConstraint(cstrs[index]);
+            } else {
+                constraint.addChocoConstraint(cstrs[index]);
+            }
+
+            index++;
+        }
+    }
+
+    /**
+     * Add Choco constraints from the model to a {@link Constraint} object.
+     * The function is used when Choco constraints are generated for an integer knowledge base.
+     * It means that the Choco model uses IntVar and Arithmetic constraints.
+     * @param constraint a {@link Constraint} object
+     * @param model a Choco model
+     * @param startIdx the index of the first constraint to copy from the model
+     * @param endIdx the index of the last constraint to copy from the model
+     * @param hasNegativeConstraints if true, there are negative constraints in the Choco constraints
+     */
+    public void addChocoConstraintsToConstraint(@NonNull Constraint constraint, @NonNull Model model,
+                                                int startIdx, int endIdx, boolean hasNegativeConstraints) {
+        org.chocosolver.solver.constraints.Constraint[] constraints = model.getCstrs();
+
+        checkElementIndex(startIdx, constraints.length, "startIdx must be within the range of constraints");
+        checkElementIndex(endIdx, constraints.length, "endIdx must be within the range of constraints");
+        checkArgument(startIdx <= endIdx, "startIdx must be <= endIdx");
+
+        // in case of hasNegativeConstraints is true
+        // after posting the negChocoConstraint
+        // Ex: there are five constraints in the modelKB: c1, c2, c3, c4, c5
+        // c1, c2, c3, c4 will be added to the list of chocoConstraints in the Constraint object
+        // c1, c2, c3, c5 will be added to the list of negChocoConstraints in the Constraint object
+
+        if (hasNegativeConstraints) {
+            endIdx = endIdx - 2;
+        } else {
+            endIdx = endIdx - 1;
+        }
+
+        // add c1, c2, c3 to two lists in the Constraint object
+        int index = startIdx;
+        while (index <= endIdx) {
+            constraint.addChocoConstraint(constraints[index]);
+            if (hasNegativeConstraints) {
+                constraint.addNegChocoConstraint(constraints[index]);
+            }
+            index++;
+        }
+
+        // add c4 to the list of chocoConstraints in the Constraint object
+        constraint.addChocoConstraint(constraints[index]);
+        if (hasNegativeConstraints) { // add c5 to the list of negChocoConstraints in the Constraint object
+            constraint.addNegChocoConstraint(constraints[index + 1]);
+        }
     }
 
     public void postConstraints(Collection<Constraint> C, Model toModel) {

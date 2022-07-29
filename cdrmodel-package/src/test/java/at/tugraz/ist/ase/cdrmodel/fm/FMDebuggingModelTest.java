@@ -13,6 +13,7 @@ import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
+import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import at.tugraz.ist.ase.test.TestSuite;
 import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
 import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
@@ -68,7 +69,7 @@ class FMDebuggingModelTest {
 
         testSuite = builder.buildTestSuite(is, testCaseFactory);
 
-        model = new FMDebuggingModel(fm, testSuite, new FMTestCaseTranslator(), true, false);
+        model = new FMDebuggingModel(fm, new FMConstraintBuilder(), testSuite, new FMTestCaseTranslator(), true, false);
         model.initialize();
     }
 

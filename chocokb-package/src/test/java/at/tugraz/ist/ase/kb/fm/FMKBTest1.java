@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.kb.fm;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FeatureIDEParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
+import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -24,7 +25,7 @@ public class FMKBTest1 {
         FeatureIDEParser parser = new FeatureIDEParser();
         FeatureModel featureModel = parser.parse(fileFM);
 
-        FMKB kb = new FMKB(featureModel, true);
+        FMKB kb = new FMKB(featureModel, new FMConstraintBuilder(), true);
 
         assertEquals(kb.getNumVariables(), 6467);
         assertEquals(featureModel.getNumOfRelationships(), 6322);
@@ -40,7 +41,7 @@ public class FMKBTest1 {
         FeatureIDEParser parser = new FeatureIDEParser();
         FeatureModel featureModel = parser.parse(fileFM);
 
-        FMKB kb = new FMKB(featureModel, true);
+        FMKB kb = new FMKB(featureModel, new FMConstraintBuilder(), true);
 
         assertEquals(kb.getNumVariables(), 6467);
         assertEquals(kb.getNumConstraints(), 13972);

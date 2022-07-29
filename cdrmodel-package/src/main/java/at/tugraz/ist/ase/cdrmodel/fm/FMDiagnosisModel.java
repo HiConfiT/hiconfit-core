@@ -13,6 +13,7 @@ import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.kb.core.Constraint;
+import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import lombok.Getter;
 import lombok.NonNull;
@@ -35,6 +36,7 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
     protected Model model;
     protected FeatureModel featureModel;
     protected FMKB fmkb;
+    protected IConstraintBuildable constraintBuilder;
 
     @Getter
     protected final boolean rootConstraints;
@@ -51,13 +53,14 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
      * @param rootConstraints true if the root constraint (f0 = true) should be added
      * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
-    public FMDiagnosisModel(@NonNull FeatureModel fm,
+    public FMDiagnosisModel(@NonNull FeatureModel fm, @NonNull IConstraintBuildable constraintBuilder,
                             boolean rootConstraints, boolean reversedConstraintsOrder) {
         super(fm.getName());
 
         this.featureModel = fm;
 
-        this.fmkb = new FMKB(fm, false);
+        this.constraintBuilder = constraintBuilder;
+        this.fmkb = new FMKB(fm, constraintBuilder, false);
         this.model = fmkb.getModelKB();
 
         this.rootConstraints = rootConstraints;
@@ -116,7 +119,7 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
     public Object clone() throws CloneNotSupportedException {
         FMDiagnosisModel clone = (FMDiagnosisModel) super.clone();
 
-        clone.fmkb = new FMKB(this.featureModel, false);
+        clone.fmkb = new FMKB(this.featureModel, constraintBuilder, false);
         clone.model = clone.fmkb.getModelKB();
 
         return clone;

@@ -11,6 +11,7 @@
 //import at.tugraz.ist.ase.kb.core.Constraint;
 //import at.tugraz.ist.ase.kb.core.IntVariable;
 //import at.tugraz.ist.ase.kb.core.Variable;
+//import at.tugraz.ist.ase.kb.core.builder.ConstraintBuilder;
 //import org.junit.jupiter.api.BeforeAll;
 //import org.junit.jupiter.api.Test;
 //
@@ -23,7 +24,7 @@
 //
 //    @BeforeAll
 //    static void init() {
-//        kb = new RenaultKB(true);
+//        kb = new RenaultKB(new ConstraintBuilder(), true);
 //    }
 //
 //    @Test

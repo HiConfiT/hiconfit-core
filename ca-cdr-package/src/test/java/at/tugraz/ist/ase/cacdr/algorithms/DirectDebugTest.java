@@ -20,6 +20,7 @@ import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
+import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestSuite;
 import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
@@ -57,7 +58,8 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
+                testSuite, new FMTestCaseTranslator(),
                 true, false);
         debuggingModel.initialize();
 
@@ -101,7 +103,8 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
+                testSuite, new FMTestCaseTranslator(),
                 true, false);
         debuggingModel.initialize();
 
@@ -162,7 +165,8 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
+                testSuite, new FMTestCaseTranslator(),
                 true, false);
         debuggingModel.initialize();
 
@@ -208,7 +212,8 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
+                testSuite, new FMTestCaseTranslator(),
                 true, false);
         debuggingModel.initialize();
 
@@ -275,7 +280,8 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
+                testSuite, new FMTestCaseTranslator(),
                 true, false);
         debuggingModel.initialize();
 
@@ -321,7 +327,8 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, new FMConstraintBuilder(),
+                testSuite, new FMTestCaseTranslator(),
                 true, false);
         debuggingModel.initialize();
 

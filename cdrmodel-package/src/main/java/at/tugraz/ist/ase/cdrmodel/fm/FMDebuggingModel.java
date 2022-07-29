@@ -12,6 +12,7 @@ import at.tugraz.ist.ase.cdrmodel.CDRModel;
 import at.tugraz.ist.ase.cdrmodel.IDebuggingModel;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestSuite;
 import at.tugraz.ist.ase.test.translator.ITestCaseTranslatable;
@@ -46,15 +47,16 @@ public class FMDebuggingModel extends FMDiagnosisModel implements IDebuggingMode
      * corresponding variables and constraints for the model.
      *
      * @param fm a {@link FeatureModel}
+     * @param constraintBuilder a {@link IConstraintBuildable}
      * @param testSuite a {@link TestSuite}
      * @param translator an implementation of {@link ITestCaseTranslatable} which translates test cases to Choco constraints
      * @param rootConstraints true if the root constraint (f0 = true) should be added
      * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
-    public FMDebuggingModel(@NonNull FeatureModel fm, @NonNull TestSuite testSuite,
-                            @NonNull ITestCaseTranslatable translator,
+    public FMDebuggingModel(@NonNull FeatureModel fm, @NonNull IConstraintBuildable constraintBuilder,
+                            @NonNull TestSuite testSuite, @NonNull ITestCaseTranslatable translator,
                             boolean rootConstraints, boolean reversedConstraintsOrder) {
-        super(fm, rootConstraints, reversedConstraintsOrder);
+        super(fm, constraintBuilder, rootConstraints, reversedConstraintsOrder);
 
         this.testSuite = testSuite;
         this.translator = translator;

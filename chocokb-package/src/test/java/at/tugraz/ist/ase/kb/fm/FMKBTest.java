@@ -13,6 +13,7 @@ import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.SXFMParser;
 import at.tugraz.ist.ase.kb.core.BoolVariable;
 import at.tugraz.ist.ase.kb.core.Variable;
+import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import org.chocosolver.solver.variables.BoolVar;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ class FMKBTest {
         SXFMParser parser = new SXFMParser();
         featureModel = parser.parse(fileFM);
 
-        kb = new FMKB(featureModel, true);
+        kb = new FMKB(featureModel, new FMConstraintBuilder(), true);
 
         kb.getConstraintList().forEach(c -> {
             System.out.println(c);

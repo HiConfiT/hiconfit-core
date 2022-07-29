@@ -9,9 +9,11 @@
 package at.tugraz.ist.ase.kb.fm;
 
 import at.tugraz.ist.ase.common.ChocoSolverUtils;
+import at.tugraz.ist.ase.common.ConstraintUtils;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.*;
 import at.tugraz.ist.ase.kb.core.*;
+import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -33,8 +35,8 @@ public class FMKB extends KB {
     @Getter
     private Constraint rootConstraint = null;
 
-    public FMKB(FeatureModel featureModel, boolean hasNegativeConstraints) {
-        super(featureModel.getName(), "SPLOT", hasNegativeConstraints);
+    public FMKB(FeatureModel featureModel, IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
+        super(featureModel.getName(), "SPLOT", constraintBuilder, hasNegativeConstraints);
 
         this.featureModel = featureModel;
 
@@ -141,7 +143,9 @@ public class FMKB extends KB {
                 default -> throw new IllegalStateException("Unexpected value: " + relationship.getType());
             }
 
-            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, basicRelationship);
+//            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, basicRelationship);
+            Constraint constraint = constraintBuilder.buildConstraint(basicRelationship, modelKB, logOp, negLogOp, startIdx, hasNegativeConstraints);
+            constraintList.add(constraint);
         }
 
         // second convert constraints of {@link FeatureModel} into ChocoSolver constraints
@@ -194,37 +198,42 @@ public class FMKB extends KB {
                 }
             }
 
-            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, relationship);
+//            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, relationship);
+            Constraint constraint = constraintBuilder.buildConstraint(relationship, modelKB, logOp, negLogOp, startIdx,hasNegativeConstraints);
+            constraintList.add(constraint);
         }
 
         LoggerUtils.outdent();
         log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
-    private void addConstraintsToModel(boolean hasNegativeConstraints, int startIdx, LogOp logOp, LogOp negLogOp, Relationship relationship) {
-        modelKB.addClauses(logOp);
-
-        Constraint constraint = new Constraint(relationship.getConfRule());
-        addConstraint(constraint, relationship, startIdx, modelKB.getNbCstrs() - 1);
-
-        if (hasNegativeConstraints) {
-            if (relationship.isType(RelationshipType.ALTERNATIVE)) {
-                addNegConstraint(constraint, startIdx + 1, startIdx + 1);
-            }
-
-            startIdx = modelKB.getNbCstrs();
-
-            modelKB.addClauses(negLogOp);
-            addNegConstraint(constraint, startIdx, modelKB.getNbCstrs() - 1);
-        }
-
-        constraintList.add(constraint);
-
-        // unpost the negative constraint
-        if (hasNegativeConstraints) {
-            ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
-        }
-    }
+//    private void addConstraintsToModel(boolean hasNegativeConstraints, int startIdx, LogOp logOp, LogOp negLogOp, Relationship relationship) {
+//        modelKB.addClauses(logOp);
+//
+//        Constraint constraint = new Constraint(relationship.getConfRule());
+//        ConstraintUtils.addChocoConstraintsToList(false, constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);
+////        addConstraint(constraint, relationship, startIdx, modelKB.getNbCstrs() - 1);
+//
+//        if (hasNegativeConstraints) {
+//            if (relationship.isType(RelationshipType.ALTERNATIVE)) {
+//                ConstraintUtils.addChocoConstraintsToList(true, constraint, modelKB, startIdx + 1, startIdx + 1);
+////                addNegConstraint(constraint, startIdx + 1, startIdx + 1);
+//            }
+//
+//            startIdx = modelKB.getNbCstrs();
+//
+//            modelKB.addClauses(negLogOp);
+//            ConstraintUtils.addChocoConstraintsToList(true, constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);
+////            addNegConstraint(constraint, startIdx, modelKB.getNbCstrs() - 1);
+//        }
+//
+//        constraintList.add(constraint);
+//
+//        // unpost the negative constraint
+//        if (hasNegativeConstraints) {
+//            ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
+//        }
+//    }
 
 //    private void unpostConstraintFrom(int startIdx) {
 //        int index = modelKB.getNbCstrs() - 1;
@@ -234,30 +243,30 @@ public class FMKB extends KB {
 //        }
 //    }
 
-    private void addConstraint(Constraint constraint, Relationship relationship, int startIdx, int endIdx) {
-        org.chocosolver.solver.constraints.Constraint[] constraints = modelKB.getCstrs();
+//    private void addConstraint(Constraint constraint, Relationship relationship, int startIdx, int endIdx) {
+//        org.chocosolver.solver.constraints.Constraint[] constraints = modelKB.getCstrs();
+//
+//        int index = startIdx;
+//        while (index <= endIdx) {
+//            // add to constraint
+//            constraint.addChocoConstraint(constraints[index]);
+//            // add to Relationship
+////            relationship.setConstraint(constraints[index].toString());
+//
+//            index++;
+//        }
+//    }
 
-        int index = startIdx;
-        while (index <= endIdx) {
-            // add to constraint
-            constraint.addChocoConstraint(constraints[index]);
-            // add to Relationship
-            relationship.setConstraint(constraints[index].toString());
-
-            index++;
-        }
-    }
-
-    private void addNegConstraint(Constraint constraint, int startIdx, int endIdx) {
-        org.chocosolver.solver.constraints.Constraint[] constraints = modelKB.getCstrs();
-
-        int index = startIdx;
-        while (index <= endIdx) {
-            constraint.addNegChocoConstraint(constraints[index]);
-
-            index++;
-        }
-    }
+//    private void addNegConstraint(Constraint constraint, int startIdx, int endIdx) {
+//        org.chocosolver.solver.constraints.Constraint[] constraints = modelKB.getCstrs();
+//
+//        int index = startIdx;
+//        while (index <= endIdx) {
+//            constraint.addNegChocoConstraint(constraints[index]);
+//
+//            index++;
+//        }
+//    }
 
     /**
      * Create the root constraint: f0 = true.
@@ -270,7 +279,8 @@ public class FMKB extends KB {
         modelKB.addClauseTrue(f0Var);
 
         this.rootConstraint = new Constraint(f0 + " = true");
-        this.rootConstraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, false);
+        ConstraintUtils.addChocoConstraintsToConstraint(false, this.rootConstraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);
+//        this.rootConstraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, false);
 
         // unpost the created Choco constraints
         ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
