@@ -7,19 +7,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Delete IConstraintBuildable.java">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="New package 1.3.9-alpha-36">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/IAssignmentsTranslatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/IAssignmentsTranslatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMAssignmentsTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMAssignmentsTranslator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -347,14 +338,7 @@
       <workItem from="1659012221975" duration="1745000" />
       <workItem from="1659023564423" duration="5771000" />
       <workItem from="1659083240400" duration="701000" />
-      <workItem from="1659083956003" duration="37710000" />
-    </task>
-    <task id="LOCAL-00019" summary="Fix clone &amp; remove ConstraintSet.java">
-      <created>1652876570406</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1652876570406</updated>
+      <workItem from="1659083956003" duration="38498000" />
     </task>
     <task id="LOCAL-00020" summary="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
       <created>1652893586907</created>
@@ -692,7 +676,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659142231094</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="New package 1.3.9-alpha-36">
+      <created>1659144920781</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1659144920781</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -725,7 +716,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fix a bug in FeatureIDEParser" />
     <MESSAGE value="Add model1.xml" />
     <MESSAGE value="Add rootConstraint to FMKB" />
     <MESSAGE value="Maven package 1.3.9-alpha-21" />
@@ -750,7 +740,8 @@
     <MESSAGE value="Add getConstraints and addAssignmentToLogOp" />
     <MESSAGE value="Add FMAssignmentsTranslator, IAssignmentsTranslatable, and ILogOpCreatable" />
     <MESSAGE value="Delete IConstraintBuildable.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete IConstraintBuildable.java" />
+    <MESSAGE value="New package 1.3.9-alpha-36" />
+    <option name="LAST_COMMIT_MESSAGE" value="New package 1.3.9-alpha-36" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

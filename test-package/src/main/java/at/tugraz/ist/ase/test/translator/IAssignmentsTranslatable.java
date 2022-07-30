@@ -24,7 +24,7 @@ public interface IAssignmentsTranslatable {
      * @param negChocoCstrs list of Choco constraints, to which the translated negative constraints are added
      */
     void translate(@NonNull List<Assignment> assignments, @NonNull Model model,
-                   @NonNull List<Constraint> chocoCstrs, @NonNull List<Constraint> negChocoCstrs);
+                   @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs);
 
     /**
      * Translates {@link at.tugraz.ist.ase.test.Assignment}s to Choco constraints.
@@ -34,5 +34,5 @@ public interface IAssignmentsTranslatable {
      * @param negChocoCstrs list of Choco constraints, to which the translated negative constraints are added
      */
     void translate(@NonNull Assignment assignment, @NonNull Model model,
-                   @NonNull List<Constraint> chocoCstrs, @NonNull List<Constraint> negChocoCstrs);
+                   @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs);
 }

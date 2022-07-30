@@ -30,7 +30,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
      */
     @Override
     public void translate(@NonNull List<Assignment> assignments, @NonNull Model model,
-                          @NonNull List<Constraint> chocoCstrs, @NonNull List<Constraint> negChocoCstrs) {
+                          @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs) {
         int startIdx = model.getNbCstrs();
         LogOp logOp = create(assignments, model);
         model.addClauses(logOp); // add the translated constraints to the Choco model
@@ -38,7 +38,9 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
         chocoCstrs.addAll(ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1));
 
         // Negation of the translated constraints
-        translateToNegation(logOp, model, negChocoCstrs);
+        if (negChocoCstrs != null) {
+            translateToNegation(logOp, model, negChocoCstrs);
+        }
     }
 
     /**
@@ -50,7 +52,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
      */
     @Override
     public void translate(@NonNull Assignment assignment, @NonNull Model model,
-                          @NonNull List<Constraint> chocoCstrs, @NonNull List<Constraint> negChocoCstrs) {
+                          @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs) {
         int startIdx = model.getNbCstrs();
         LogOp logOp = create(assignment, model);
         model.addClauses(logOp); // add the translated constraints to the Choco model
@@ -58,7 +60,9 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
         chocoCstrs.addAll(ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1));
 
         // Negation of the translated constraints
-        translateToNegation(logOp, model, negChocoCstrs);
+        if (negChocoCstrs != null) {
+            translateToNegation(logOp, model, negChocoCstrs);
+        }
     }
 
     private void translateToNegation(LogOp logOp, Model model, List<Constraint> negChocoCstrs) {
