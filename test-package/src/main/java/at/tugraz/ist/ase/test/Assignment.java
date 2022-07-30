@@ -12,7 +12,7 @@ import lombok.*;
 
 /**
  * Represents an assignment of a value to a variable.
- *
+ * <p>
  * Could represent:
  * + a CSP, SAT clause, e.g., F1 = true.
  * + a preference of a user requirement, e.g., Modell = limousine.
