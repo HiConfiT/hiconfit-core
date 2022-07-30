@@ -14,10 +14,12 @@ import at.tugraz.ist.ase.fm.core.Relationship;
 import at.tugraz.ist.ase.fm.core.RelationshipType;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.NonNull;
+import lombok.experimental.UtilityClass;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.nary.cnf.LogOp;
 
-public class FMConstraintBuilder implements IConstraintBuildable {
+@UtilityClass
+public class BoolVarConstraintBuilder {
     /**
      * Post Choco LogOps to the model and create a {@link Constraint} object with generated Choco constraints.
      * The generated Choco constraints will be added to the list chocoConstraints in the {@link Constraint} object.
@@ -31,10 +33,9 @@ public class FMConstraintBuilder implements IConstraintBuildable {
      * @param hasNegativeConstraints Whether the constraint has negative constraints.
      * @return The {@link Constraint} object.
      */
-    @Override
-    public Constraint buildConstraint(Relationship relationship, @NonNull Model modelKB,
-                                      @NonNull LogOp logOp, LogOp negLogOp,
-                                      int startIdx, boolean hasNegativeConstraints) {
+    public Constraint build(@NonNull Relationship relationship, @NonNull Model modelKB,
+                              @NonNull LogOp logOp, LogOp negLogOp,
+                              int startIdx, boolean hasNegativeConstraints) {
         modelKB.addClauses(logOp);
 
         Constraint constraint = new Constraint(relationship.getConfRule());
@@ -63,12 +64,5 @@ public class FMConstraintBuilder implements IConstraintBuildable {
         }
 
         return constraint;
-    }
-
-    @Override
-    public Constraint buildConstraint(String constraintName, @NonNull Model modelKB,
-                                      @NonNull org.chocosolver.solver.constraints.Constraint chocoConstraint,
-                                      int startIdx, boolean hasNegativeConstraints) {
-        throw new UnsupportedOperationException("Unsupported operation");
     }
 }

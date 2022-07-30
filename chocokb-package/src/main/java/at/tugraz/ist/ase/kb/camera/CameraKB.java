@@ -10,7 +10,7 @@ package at.tugraz.ist.ase.kb.camera;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.*;
-import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
+import at.tugraz.ist.ase.kb.core.builder.IntVarConstraintBuilder;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
@@ -24,8 +24,8 @@ import java.util.stream.IntStream;
 
 @Slf4j
 public class CameraKB extends KB implements IIntVarKB {
-    public CameraKB(@NonNull IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
-        super("Camera Configuration Problem", "https://github.com/CSPHeuristix/CDBC/blob/master/CameraKB.java", constraintBuilder, hasNegativeConstraints);
+    public CameraKB(boolean hasNegativeConstraints) {
+        super("Camera Configuration Problem", "https://github.com/CSPHeuristix/CDBC/blob/master/CameraKB.java", hasNegativeConstraints);
 
         reset(hasNegativeConstraints);
     }
@@ -386,7 +386,7 @@ public class CameraKB extends KB implements IIntVarKB {
                 configurationList.get(17), configurationList.get(18), configurationList.get(19));
 
 //        addConstraint("kb", chocoConstraint, startIdx, hasNegativeConstraints);
-        Constraint constraint = constraintBuilder.buildConstraint("kb", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        Constraint constraint = IntVarConstraintBuilder.build("kb", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         LoggerUtils.outdent();

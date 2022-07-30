@@ -17,8 +17,6 @@ import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.app.cli.KBStatistics_CmdLineOptions;
 import at.tugraz.ist.ase.kb.camera.CameraKB;
 import at.tugraz.ist.ase.kb.core.KB;
-import at.tugraz.ist.ase.kb.core.builder.ConstraintBuilder;
-import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import at.tugraz.ist.ase.kb.pc.PCKB;
 import at.tugraz.ist.ase.kb.renault.RenaultKB;
@@ -124,16 +122,15 @@ public class KBStatistics {
         if (options.getKb() != null) {
             for (String nameKb : options.getKb()) {
                 KB kb = null;
-                ConstraintBuilder constraintBuilder = new ConstraintBuilder();
                 if (nameKb.equals("PC")) { // if pc, then calculate the statistics of pc
                     System.out.println("\nCalculating statistics for PC...");
-                    kb = new PCKB(constraintBuilder, false);
+                    kb = new PCKB(false);
                 } else if (nameKb.equals("Renault")) { // if Renault, then calculate the statistics of Renault
                     System.out.println("\nCalculating statistics for Renault...");
-                    kb = new RenaultKB(constraintBuilder, false);
+                    kb = new RenaultKB(false);
                 } else if (nameKb.equals("Camera")) { // if Camera, then calculate the statistics of Camera
                     System.out.println("\nCalculating statistics for Camera...");
-                    kb = new CameraKB(constraintBuilder, false);
+                    kb = new CameraKB(false);
                 }
 
                 checkArgument(kb != null, "The knowledge base is not supported.");
@@ -171,7 +168,7 @@ public class KBStatistics {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
 
         FeatureModel fm = parser.parse(file);
-        FMKB fmkb = new FMKB(fm, new FMConstraintBuilder(), false);
+        FMKB fmkb = new FMKB(fm, false);
 
         System.out.println("Saving statistics to " + options.getOutFile() + "...");
         saveFMStatistics(writer, counter, fmkb, fm);

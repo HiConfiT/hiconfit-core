@@ -21,11 +21,7 @@ import org.chocosolver.solver.Model;
 @Slf4j
 public class FMTestCaseTranslator implements ITestCaseTranslatable {
 
-    protected FMAssignmentsTranslator translator;
-
-    public FMTestCaseTranslator(FMAssignmentsTranslator translator) {
-        this.translator = translator;
-    }
+    protected FMAssignmentsTranslator translator = new FMAssignmentsTranslator();
 
     /**
      * Translates a test case to Choco constraints.

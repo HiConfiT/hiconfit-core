@@ -48,6 +48,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
      * @param chocoCstrs list of Choco constraints, to which the translated constraints are added
      * @param negChocoCstrs list of Choco constraints, to which the translated negative constraints are added
      */
+    @Override
     public void translate(@NonNull Assignment assignment, @NonNull Model model,
                           @NonNull List<Constraint> chocoCstrs, @NonNull List<Constraint> negChocoCstrs) {
         int startIdx = model.getNbCstrs();

@@ -9,7 +9,6 @@
 package at.tugraz.ist.ase.kb.camera;
 
 import at.tugraz.ist.ase.kb.core.Variable;
-import at.tugraz.ist.ase.kb.core.builder.ConstraintBuilder;
 import org.chocosolver.solver.Model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +22,7 @@ class CameraKBTest {
 
     @BeforeEach
     void setUp() {
-        kb = new CameraKB(new ConstraintBuilder(), false);
+        kb = new CameraKB(false);
     }
 
     @Test

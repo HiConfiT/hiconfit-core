@@ -10,7 +10,7 @@ package at.tugraz.ist.ase.kb.renault;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.*;
-import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
+import at.tugraz.ist.ase.kb.core.builder.IntVarConstraintBuilder;
 import lombok.Cleanup;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -33,8 +33,8 @@ import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
 @Slf4j
 public class RenaultKB extends KB implements IIntVarKB {
 
-    public RenaultKB(@NonNull IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
-        super("RenaultConfigurationProblem", "https://www.itu.dk/research/cla/externals/clib/", constraintBuilder, hasNegativeConstraints);
+    public RenaultKB(boolean hasNegativeConstraints) {
+        super("RenaultConfigurationProblem", "https://www.itu.dk/research/cla/externals/clib/", hasNegativeConstraints);
 
         reset(hasNegativeConstraints);
     }
@@ -718,7 +718,7 @@ public class RenaultKB extends KB implements IIntVarKB {
                 int startIdx = modelKB.getNbCstrs();
                 org.chocosolver.solver.constraints.Constraint chocoConstraint = readRule(reader);
 
-                Constraint constraint = constraintBuilder.buildConstraint(ruleFile, modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+                Constraint constraint = IntVarConstraintBuilder.build(ruleFile, modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
 //                modelKB.post(chocoConstraint);
 //
 //                org.chocosolver.solver.constraints.Constraint negChocoConstraint = null;

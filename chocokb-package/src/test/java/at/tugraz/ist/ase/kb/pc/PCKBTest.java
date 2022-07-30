@@ -12,7 +12,6 @@ import at.tugraz.ist.ase.kb.core.Constraint;
 import at.tugraz.ist.ase.kb.core.Domain;
 import at.tugraz.ist.ase.kb.core.IntVariable;
 import at.tugraz.ist.ase.kb.core.Variable;
-import at.tugraz.ist.ase.kb.core.builder.ConstraintBuilder;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,12 +26,12 @@ class PCKBTest {
 
     @BeforeAll
     static void setUp() {
-        kb = new PCKB(new ConstraintBuilder(), true);
+        kb = new PCKB(true);
     }
 
     @Test
     void testSomeTestCases() {
-        PCKB kb = new PCKB(new ConstraintBuilder(), false);
+        PCKB kb = new PCKB(false);
         Model model = kb.getModelKB();
 
         // pro_freqD=200 -violated
@@ -76,7 +75,7 @@ class PCKBTest {
 
     @Test
     void shouldEmptyNegConstraints() {
-        PCKB kb = new PCKB(new ConstraintBuilder(), false);
+        PCKB kb = new PCKB(false);
         for (Constraint constraint : kb.getConstraintList()) {
             assertEquals(0, constraint.getNegChocoConstraints().size());
             assertTrue(constraint.getNegChocoConstraints().isEmpty());

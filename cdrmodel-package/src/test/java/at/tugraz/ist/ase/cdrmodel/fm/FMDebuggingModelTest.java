@@ -13,11 +13,9 @@ import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
-import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import at.tugraz.ist.ase.test.TestSuite;
 import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
 import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
-import at.tugraz.ist.ase.test.translator.fm.FMAssignmentsTranslator;
 import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
@@ -70,8 +68,8 @@ class FMDebuggingModelTest {
 
         testSuite = builder.buildTestSuite(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator(new FMAssignmentsTranslator());
-        model = new FMDebuggingModel(fm, new FMConstraintBuilder(), testSuite, translator, true, false);
+        FMTestCaseTranslator translator = new FMTestCaseTranslator();
+        model = new FMDebuggingModel(fm, testSuite, translator, true, false);
         model.initialize();
     }
 

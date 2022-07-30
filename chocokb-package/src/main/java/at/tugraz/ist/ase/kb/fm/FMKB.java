@@ -13,7 +13,7 @@ import at.tugraz.ist.ase.common.ConstraintUtils;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.*;
 import at.tugraz.ist.ase.kb.core.*;
-import at.tugraz.ist.ase.kb.core.builder.IConstraintBuildable;
+import at.tugraz.ist.ase.kb.core.builder.BoolVarConstraintBuilder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +34,8 @@ public class FMKB extends KB implements IBoolVarKB {
     @Getter
     private Constraint rootConstraint = null;
 
-    public FMKB(FeatureModel featureModel, IConstraintBuildable constraintBuilder, boolean hasNegativeConstraints) {
-        super(featureModel.getName(), "SPLOT", constraintBuilder, hasNegativeConstraints);
+    public FMKB(@NonNull FeatureModel featureModel, boolean hasNegativeConstraints) {
+        super(featureModel.getName(), "SPLOT", hasNegativeConstraints);
 
         this.featureModel = featureModel;
 
@@ -143,7 +143,7 @@ public class FMKB extends KB implements IBoolVarKB {
             }
 
 //            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, basicRelationship);
-            Constraint constraint = constraintBuilder.buildConstraint(basicRelationship, modelKB, logOp, negLogOp, startIdx, hasNegativeConstraints);
+            Constraint constraint = BoolVarConstraintBuilder.build(basicRelationship, modelKB, logOp, negLogOp, startIdx, hasNegativeConstraints);
             constraintList.add(constraint);
         }
 
@@ -198,7 +198,7 @@ public class FMKB extends KB implements IBoolVarKB {
             }
 
 //            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, relationship);
-            Constraint constraint = constraintBuilder.buildConstraint(relationship, modelKB, logOp, negLogOp, startIdx,hasNegativeConstraints);
+            Constraint constraint = BoolVarConstraintBuilder.build(relationship, modelKB, logOp, negLogOp, startIdx,hasNegativeConstraints);
             constraintList.add(constraint);
         }
 

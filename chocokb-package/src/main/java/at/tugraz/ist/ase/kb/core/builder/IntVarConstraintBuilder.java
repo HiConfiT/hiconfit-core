@@ -9,17 +9,17 @@
 package at.tugraz.ist.ase.kb.core.builder;
 
 import at.tugraz.ist.ase.common.ConstraintUtils;
-import at.tugraz.ist.ase.fm.core.Relationship;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.NonNull;
+import lombok.experimental.UtilityClass;
 import org.chocosolver.solver.Model;
-import org.chocosolver.solver.constraints.nary.cnf.LogOp;
 
 /**
  * This builder is used by {@link at.tugraz.ist.ase.kb.camera.CameraKB},
  * {@link at.tugraz.ist.ase.kb.pc.PCKB}, and {@link at.tugraz.ist.ase.kb.renault.RenaultKB}
  */
-public class ConstraintBuilder implements IConstraintBuildable {
+@UtilityClass
+public class IntVarConstraintBuilder {
     /**
      * Post a Choco constraint to the model and add generated Choco constraints to the {@link Constraint} object.
      * If hasNegativeConstraints is true, the function also post the negation of the Choco constraint.
@@ -30,10 +30,9 @@ public class ConstraintBuilder implements IConstraintBuildable {
      * @param hasNegativeConstraints Whether the constraint has negative constraints.
      * @return The {@link Constraint} object.
      */
-    @Override
-    public Constraint buildConstraint(String constraintName, @NonNull Model modelKB,
-                                      @NonNull org.chocosolver.solver.constraints.Constraint chocoConstraint,
-                                      int startIdx, boolean hasNegativeConstraints) {
+    public Constraint build(@NonNull String constraintName, @NonNull Model modelKB,
+                              @NonNull org.chocosolver.solver.constraints.Constraint chocoConstraint,
+                              int startIdx, boolean hasNegativeConstraints) {
         modelKB.post(chocoConstraint);
 
         org.chocosolver.solver.constraints.Constraint negChocoConstraint = null;
@@ -61,10 +60,5 @@ public class ConstraintBuilder implements IConstraintBuildable {
         }
 
         return constraint;
-    }
-
-    @Override
-    public Constraint buildConstraint(Relationship relationship, @NonNull Model modelKB, @NonNull LogOp logOp, LogOp negLogOp, int startIdx, boolean hasNegativeConstraints) {
-        throw new UnsupportedOperationException("Unsupported operation");
     }
 }

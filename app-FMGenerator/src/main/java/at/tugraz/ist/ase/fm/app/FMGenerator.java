@@ -12,7 +12,6 @@ import at.tugraz.ist.ase.fm.app.cli.FMGenerator_CmdLineOptions;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.SXFMParser;
-import at.tugraz.ist.ase.kb.core.builder.FMConstraintBuilder;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import es.us.isa.FAMA.models.FAMAfeatureModel.FAMAFeatureModel;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
@@ -188,7 +187,7 @@ public class FMGenerator {
 
         File file = new File(filename);
         FeatureModel featureModel = parser.parse(file);
-        FMKB model = new FMKB(featureModel, new FMConstraintBuilder(), false);
+        FMKB model = new FMKB(featureModel, false);
 
         if (model.getModelKB().getSolver().solve()) { // if the model is consistent
             int numGenCstrs = featureModel.getNumOfRelationships() + featureModel.getNumOfConstraints();
