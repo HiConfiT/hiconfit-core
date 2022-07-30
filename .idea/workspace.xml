@@ -7,17 +7,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add complex_featureide_model.xml">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Delete IConstraintBuildable.java">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/CDRModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/CDRModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDiagnosisModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDiagnosisModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
@@ -42,9 +37,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="JUnit5 Test Class" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -141,7 +136,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-v2">
+  <component name="RunManager" selected="JUnit.FMDebuggingModelTest.shouldCloneable">
     <configuration name="FMGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.app.FMGenerator" />
       <module name="app-FMGenerator" />
@@ -169,7 +164,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FMDebuggingModelTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="FMDebuggingModelTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cdrmodel-v2" />
       <extension name="coverage">
         <pattern>
@@ -178,7 +173,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest1" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -200,44 +195,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-v2" />
+    <configuration name="PCKBTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="choco-kb-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.pc.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.TestCloneable" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.pc" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.pc.PCKBTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-v2" />
+    <configuration name="at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.cdrmodel.fm in cdrmodel-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-v2" />
+    <configuration name="at.tugraz.ist.ase.test in test-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.test" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -258,11 +253,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-v2" />
-        <item itemvalue="JUnit.TestCloneable" />
-        <item itemvalue="JUnit.FMDebuggingModelTest" />
         <item itemvalue="JUnit.FMDebuggingModelTest.shouldCloneable" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel.fm in cdrmodel-v2" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" />
+        <item itemvalue="JUnit.FMDebuggingModelTest1" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.test in test-v2" />
+        <item itemvalue="JUnit.PCKBTest" />
       </list>
     </recent_temporary>
   </component>
@@ -352,70 +347,7 @@
       <workItem from="1659012221975" duration="1745000" />
       <workItem from="1659023564423" duration="5771000" />
       <workItem from="1659083240400" duration="701000" />
-      <workItem from="1659083956003" duration="2320000" />
-    </task>
-    <task id="LOCAL-00010" summary="Add ca-cdr-package">
-      <created>1651919474750</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1651919474750</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Add KBStatistics">
-      <created>1651920766918</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1651920766918</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Add FMGenerator">
-      <created>1651921106531</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1651921106531</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Add README.md and build new releases">
-      <created>1651939345068</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1651939345068</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Corrects the Maven packages">
-      <created>1652431343206</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1652431343207</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Support to clone TestSuite, and FMDebuggingModel">
-      <created>1652694841940</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1652694841940</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Use Java stream">
-      <created>1652874948669</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1652874948669</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Use Java stream &amp; Add equals, hashCode">
-      <created>1652875176126</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1652875176126</updated>
-    </task>
-    <task id="LOCAL-00018" summary="Use Java stream">
-      <created>1652876434972</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1652876434972</updated>
+      <workItem from="1659083956003" duration="37710000" />
     </task>
     <task id="LOCAL-00019" summary="Fix clone &amp; remove ConstraintSet.java">
       <created>1652876570406</created>
@@ -697,7 +629,70 @@
       <option name="project" value="LOCAL" />
       <updated>1658994832719</updated>
     </task>
-    <option name="localTasksCounter" value="59" />
+    <task id="LOCAL-00059" summary="FMDebuggingModel inherits FMDiagnosisModel">
+      <created>1659089977383</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1659089977383</updated>
+    </task>
+    <task id="LOCAL-00060" summary="New package 1.3.9-alpha-35">
+      <created>1659089999895</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1659089999895</updated>
+    </task>
+    <task id="LOCAL-00061" summary="#46 - Add IConstraintBuildable, ConstraintBuilder, and FMConstraintBuilder">
+      <created>1659121298169</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1659121298169</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Add @Deprecated to constraints">
+      <created>1659121329379</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1659121329379</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Add IIntVarKB and IBoolVarKB">
+      <created>1659132245678</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1659132245678</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Add getConstraints and addAssignmentToLogOp">
+      <created>1659138785741</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1659138785741</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Add getConstraints and addAssignmentToLogOp">
+      <created>1659138840465</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1659138840465</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Add FMAssignmentsTranslator, IAssignmentsTranslatable, and ILogOpCreatable">
+      <created>1659138881569</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1659138881569</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Delete IConstraintBuildable.java">
+      <created>1659142231094</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1659142231094</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -730,14 +725,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add dispose() to all projects and publish 1.3.9-alpha-18" />
-    <MESSAGE value="Add CameraKB" />
-    <MESSAGE value="Support CameraKB in KBStatistics" />
-    <MESSAGE value="Added DirectDiag with unit tests" />
-    <MESSAGE value="New packages 1.3.9-alpha-19" />
-    <MESSAGE value="Add unit tests for CameraKB" />
-    <MESSAGE value="Fix the unit test for linux-2.6.33.3.xml" />
-    <MESSAGE value="New package 1.3.9-alpha-20" />
     <MESSAGE value="Fix a bug in FeatureIDEParser" />
     <MESSAGE value="Add model1.xml" />
     <MESSAGE value="Add rootConstraint to FMKB" />
@@ -755,7 +742,15 @@
     <MESSAGE value="Removed @Deprecated" />
     <MESSAGE value="Supported DirectDebug to identify all diagnoses" />
     <MESSAGE value="Add complex_featureide_model.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add complex_featureide_model.xml" />
+    <MESSAGE value="FMDebuggingModel inherits FMDiagnosisModel" />
+    <MESSAGE value="New package 1.3.9-alpha-35" />
+    <MESSAGE value="#46 - Add IConstraintBuildable, ConstraintBuilder, and FMConstraintBuilder" />
+    <MESSAGE value="Add @Deprecated to constraints" />
+    <MESSAGE value="Add IIntVarKB and IBoolVarKB" />
+    <MESSAGE value="Add getConstraints and addAssignmentToLogOp" />
+    <MESSAGE value="Add FMAssignmentsTranslator, IAssignmentsTranslatable, and ILogOpCreatable" />
+    <MESSAGE value="Delete IConstraintBuildable.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete IConstraintBuildable.java" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
@@ -778,8 +773,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java</url>
-          <line>127</line>
+          <line>128</line>
           <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/fm/FMKBTest.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/pc/PCKB.java</url>
+          <line>690</line>
+          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
