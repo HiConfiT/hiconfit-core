@@ -7,115 +7,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Update pom files">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix FMAssignmentsTranslator and FMTestCaseTranslator">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/DirectDebugLabeler.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/labeler/DirectDebugLabeler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/DirectDebugParameters.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/parameters/DirectDebugParameters.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/IConsistencyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/IConsistencyChecker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebugTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebugTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDiagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDiagTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiagTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXplainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXplainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/ThreadTimerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/ThreadTimerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAGTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAGTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTreeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTreeTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/IDebuggingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/IDebuggingModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/ITestModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/ITestModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/csp/CSPModels.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/csp/CSPModels.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel6.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest1.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/csp/CSPModelsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test_model/csp/CSPModelsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel1Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Assignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/allclasses-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/allpackages-index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cacdr/checker/IConsistencyChecker.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cacdr/checker/IConsistencyChecker.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/CDRModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/CDRModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/IChocoModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/IChocoModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/class-use/CDRModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/class-use/CDRModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/class-use/IChocoModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/class-use/IChocoModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/fm/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/fm/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/package-use.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/ITestModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/ITestModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/class-use/ITestModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/class-use/ITestModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/CSPModels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/CSPModels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/class-use/CSPModels.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/class-use/CSPModels.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/csp/package-use.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel4.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel5.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/class-use/TestModel6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/package-use.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/package-summary.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/package-tree.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/package-use.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/fm/core/class-use/FeatureModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/fm/core/class-use/FeatureModel.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/kb/core/class-use/Constraint.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/kb/core/class-use/Constraint.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/kb/core/package-use.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/kb/core/package-use.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/TestCase.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/TestCase.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/TestSuite.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/TestSuite.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/ITestCase.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/ITestCase.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/TestCase.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/TestCase.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/TestSuite.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/TestSuite.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/translator/ITestCaseTranslatable.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/translator/ITestCaseTranslatable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/translator/class-use/ITestCaseTranslatable.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/translator/class-use/ITestCaseTranslatable.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/translator/fm/FMTestCaseTranslator.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/translator/fm/FMTestCaseTranslator.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-1.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-15.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-19.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-19.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-6.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-7.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-9.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/apidocs/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Constraint.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Constraint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/ConstraintTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/ConstraintTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/ITestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/ITestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/TestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestSuite.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/TestSuite.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/ITestCaseBuildable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/builder/ITestCaseBuildable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/fm/FMTestCaseBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/builder/fm/FMTestCaseBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/reader/ITestSuiteReadable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/reader/ITestSuiteReadable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/reader/TestSuiteReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/reader/TestSuiteReader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/ITestCaseTranslatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/translator/ITestCaseTranslatable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMTestCaseTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/translator/fm/FMTestCaseTranslator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestCaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/builder/fm/TestCaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestSuiteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/builder/fm/TestSuiteTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/test/resources/FM_10_0_c5_0.testcases" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/resources/FM_10_0_c5_0.testcases" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/test/resources/logback-test.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -212,11 +117,11 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.kb.fm" />
       <recent name="at.tugraz.ist.ase.cdrmodel.test.builder.fm" />
       <recent name="at.tugraz.ist.ase.kb.core" />
       <recent name="at.tugraz.ist.ase.fm.parser" />
       <recent name="at.tugraz.ist.ase.fm.core" />
-      <recent name="at.tugraz.ist.ase.common" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="at.tugraz.ist.ase.cacdr.algorithms" />
@@ -235,7 +140,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.test.builder.fm in test-v2">
+  <component name="RunManager" selected="JUnit.ConstraintTest.testConstraint">
     <configuration name="FMGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.app.FMGenerator" />
       <module name="app-FMGenerator" />
@@ -278,17 +183,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FMDebuggingModelTest1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-v2" />
+    <configuration name="ConstraintTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="choco-kb-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest1" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.core" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.core.ConstraintTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConstraintTest.testConstraint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="choco-kb-v2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.core" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.core.ConstraintTest" />
+      <option name="METHOD_NAME" value="testConstraint" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -305,20 +226,6 @@
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModelTest" />
       <option name="METHOD_NAME" value="shouldCloneable" />
       <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-v2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -352,11 +259,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ConstraintTest.testConstraint" />
+        <item itemvalue="JUnit.ConstraintTest" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.test.builder.fm in test-v2" />
         <item itemvalue="JUnit.AssignmentTest" />
         <item itemvalue="JUnit.FMDebuggingModelTest.shouldCloneable" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" />
-        <item itemvalue="JUnit.FMDebuggingModelTest1" />
       </list>
     </recent_temporary>
   </component>
@@ -446,21 +353,7 @@
       <workItem from="1659012221975" duration="1745000" />
       <workItem from="1659023564423" duration="5771000" />
       <workItem from="1659083240400" duration="701000" />
-      <workItem from="1659083956003" duration="60437000" />
-    </task>
-    <task id="LOCAL-00025" summary="Add startSharedTimer, stopSharedTimer + Remove &quot;:&quot; from the messages of counters and timers">
-      <created>1653058139239</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1653058139239</updated>
-    </task>
-    <task id="LOCAL-00026" summary="Ignore inspections for Non-ASCII characters">
-      <created>1653126326530</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1653126326530</updated>
+      <workItem from="1659083956003" duration="63980000" />
     </task>
     <task id="LOCAL-00027" summary="Add thread information into LoggerUtils">
       <created>1653137562767</created>
@@ -791,7 +684,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659263728645</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="Migrate TestSuite and TestCase from test-v2 to cdrmodel-v2 + Delete test-v2">
+      <created>1659265889531</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1659265889531</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Fix FMAssignmentsTranslator and FMTestCaseTranslator">
+      <created>1659266952585</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1659266952585</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -824,8 +731,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Add comments" />
-    <MESSAGE value="Add ConsoleColors" />
     <MESSAGE value="New package 1.3.9-alpha-23" />
     <MESSAGE value="Added convertToStringWithMessage with tabs" />
     <MESSAGE value="Added convertToString with delimiter" />
@@ -849,7 +754,9 @@
     <MESSAGE value="Updates pom files" />
     <MESSAGE value="Move Assignment to choco-kb-v2-package" />
     <MESSAGE value="Update pom files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update pom files" />
+    <MESSAGE value="Migrate TestSuite and TestCase from test-v2 to cdrmodel-v2 + Delete test-v2" />
+    <MESSAGE value="Fix FMAssignmentsTranslator and FMTestCaseTranslator" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix FMAssignmentsTranslator and FMTestCaseTranslator" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
