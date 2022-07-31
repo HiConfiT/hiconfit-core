@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.kb.core.translator.fm;
 
 import at.tugraz.ist.ase.common.ChocoSolverUtils;
 import at.tugraz.ist.ase.kb.core.Assignment;
+import at.tugraz.ist.ase.kb.core.KB;
 import at.tugraz.ist.ase.kb.core.translator.IAssignmentsTranslatable;
 import at.tugraz.ist.ase.kb.core.translator.ILogOpCreatable;
 import lombok.NonNull;
@@ -24,16 +25,18 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
     /**
      * Translates {@link Assignment}s to Choco constraints.
      * @param assignments the {@link Assignment}s to translate
-     * @param model the Choco model
+     * @param kb the {@link KB}
      * @param chocoCstrs list of Choco constraints, to which the translated constraints are added
      * @param negChocoCstrs list of Choco constraints, to which the translated negative constraints are added
      */
     @Override
-    public void translate(@NonNull List<Assignment> assignments, @NonNull Model model,
+    public void translate(@NonNull List<Assignment> assignments, @NonNull KB kb,
                           @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs) {
-        int startIdx = model.getNbCstrs();
-        LogOp logOp = create(assignments, model);
-        model.addClauses(logOp); // add the translated constraints to the Choco model
+        int startIdx = kb.getNumChocoConstraints();
+        Model model = kb.getModelKB();
+
+        LogOp logOp = create(assignments, kb);
+        model.addClauses(logOp); // add the translated constraints to the Choco kb
 
         chocoCstrs.addAll(ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1));
 
@@ -46,15 +49,17 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
     /**
      * Translates {@link Assignment}s to Choco constraints.
      * @param assignment the {@link Assignment} to translate
-     * @param model the Choco model
+     * @param kb the {@link KB}
      * @param chocoCstrs list of Choco constraints, to which the translated constraints are added
      * @param negChocoCstrs list of Choco constraints, to which the translated negative constraints are added
      */
     @Override
-    public void translate(@NonNull Assignment assignment, @NonNull Model model,
+    public void translate(@NonNull Assignment assignment, @NonNull KB kb,
                           @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs) {
-        int startIdx = model.getNbCstrs();
-        LogOp logOp = create(assignment, model);
+        int startIdx = kb.getNumChocoConstraints();
+        Model model = kb.getModelKB();
+
+        LogOp logOp = create(assignment, kb);
         model.addClauses(logOp); // add the translated constraints to the Choco model
 
         chocoCstrs.addAll(ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1));
@@ -66,7 +71,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
     }
 
     private void translateToNegation(LogOp logOp, Model model, List<Constraint> negChocoCstrs) {
-        LogOp negLogOp = createNegation(logOp, model);
+        LogOp negLogOp = createNegation(logOp);
         int startIdx = model.getNbCstrs();
         model.addClauses(negLogOp);
 
@@ -74,23 +79,23 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
     }
 
     @Override
-    public LogOp create(@NonNull List<Assignment> assignments, @NonNull Model model) {
+    public LogOp create(@NonNull List<Assignment> assignments, @NonNull KB kb) {
         LogOp logOp = LogOp.and(); // creates a AND LogOp
         for (Assignment assignment : assignments) { // get each clause
-            ChocoSolverUtils.addAssignmentToLogOp(logOp, model, assignment.getVariable(), assignment.getValue());
+            ChocoSolverUtils.addAssignmentToLogOp(logOp, kb.getModelKB(), assignment.getVariable(), assignment.getValue());
         }
         return logOp;
     }
 
     @Override
-    public LogOp create(@NonNull Assignment assignment, @NonNull Model model) {
+    public LogOp create(@NonNull Assignment assignment, @NonNull KB kb) {
         LogOp logOp = LogOp.and(); // creates a AND LogOp
-        ChocoSolverUtils.addAssignmentToLogOp(logOp, model, assignment.getVariable(), assignment.getValue());
+        ChocoSolverUtils.addAssignmentToLogOp(logOp, kb.getModelKB(), assignment.getVariable(), assignment.getValue());
         return logOp;
     }
 
     @Override
-    public LogOp createNegation(@NonNull LogOp logOp, @NonNull Model model) {
+    public LogOp createNegation(@NonNull LogOp logOp) {
         return LogOp.nand(logOp);
     }
 }

@@ -9,11 +9,12 @@
 package at.tugraz.ist.ase.cdrmodel.test.translator;
 
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import org.chocosolver.solver.Model;
+import at.tugraz.ist.ase.kb.core.KB;
+import lombok.NonNull;
 
 public interface ITestCaseTranslatable {
     /**
      * Translates a test case to Choco constraints.
      */
-    void translate(ITestCase testCase, Model model);
+    void translate(@NonNull ITestCase testCase, @NonNull KB kb);
 }

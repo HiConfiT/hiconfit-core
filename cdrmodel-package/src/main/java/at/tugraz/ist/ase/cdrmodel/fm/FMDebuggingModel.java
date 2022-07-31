@@ -102,7 +102,7 @@ public class FMDebuggingModel extends FMDiagnosisModel implements IDebuggingMode
      */
     private void createTestCases() {
         for (ITestCase testcase : testSuite.getTestCases()) {
-            translator.translate(testcase, model);
+            translator.translate(testcase, fmkb);
         }
     }
 

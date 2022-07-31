@@ -14,10 +14,10 @@ import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.cdrmodel.test.translator.ITestCaseTranslatable;
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.kb.core.KB;
 import at.tugraz.ist.ase.kb.core.translator.fm.FMAssignmentsTranslator;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.chocosolver.solver.Model;
 
 @Slf4j
 public class FMTestCaseTranslator implements ITestCaseTranslatable {
@@ -28,11 +28,11 @@ public class FMTestCaseTranslator implements ITestCaseTranslatable {
      * Translates a test case to Choco constraints.
      */
     @Override
-    public void translate(@NonNull ITestCase testCase, @NonNull Model model) {
+    public void translate(@NonNull ITestCase testCase, @NonNull KB kb) {
 
         if (testCase instanceof TestCase tc) {
             log.trace("{}Translating test case [testcase={}] >>>", LoggerUtils.tab(), testCase);
-            createTestCase(tc, model);
+            createTestCase(tc, kb);
         }
 //        else if (testCase instanceof AggregatedTestCase atc) {
 //            log.trace("{}Translating aggregated test case [testcase={}] >>>", LoggerUtils.tab(), testCase);
@@ -45,7 +45,7 @@ public class FMTestCaseTranslator implements ITestCaseTranslatable {
     /**
      * Translates a test case to Choco constraints.
      */
-    private void createTestCase(TestCase tc, Model model) {
+    private void createTestCase(TestCase tc, KB kb) {
 //        int startIdx = model.getNbCstrs();
 //        LogOp logOp = translator.create(tc.getAssignments(), model);
 //        model.addClauses(logOp); // add the translated constraints to the Choco model
@@ -60,7 +60,7 @@ public class FMTestCaseTranslator implements ITestCaseTranslatable {
 //        model.addClauses(negLogOp);
 //        endIdx = model.getNbCstrs();
 //        setConstraintsToTestCase(tc, model, startIdx, endIdx - 1, true);
-        translator.translate(tc.getAssignments(), model,
+        translator.translate(tc.getAssignments(), kb,
                 tc.getChocoConstraints(), tc.getNegChocoConstraints());
 
         log.debug("{}Translated test case [testcase={}] >>>", LoggerUtils.tab(), tc);
