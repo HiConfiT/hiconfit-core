@@ -6,7 +6,7 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.test;
+package at.tugraz.ist.ase.kb.core;
 
 import lombok.*;
 

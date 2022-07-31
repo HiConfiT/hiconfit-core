@@ -20,8 +20,8 @@ import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
 import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
@@ -348,11 +348,11 @@ public class TestCloneable {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel featureModel = parser.parse(fileFM);
 
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(DirectDebugTest.class.getClassLoader(), "FM_10_0.testcases");
 
-        TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
+        TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
@@ -395,11 +395,11 @@ public class TestCloneable {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel featureModel = parser.parse(fileFM);
 
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(DirectDebugTest.class.getClassLoader(), "FM_10_1.testcases");
 
-        TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
+        TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
@@ -445,11 +445,11 @@ public class TestCloneable {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel featureModel = parser.parse(fileFM);
 
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(DirectDebugTest.class.getClassLoader(), "FM_10_2.testcases");
 
-        TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
+        TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,

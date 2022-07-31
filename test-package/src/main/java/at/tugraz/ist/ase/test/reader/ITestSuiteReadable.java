@@ -6,14 +6,15 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.test.builder;
+package at.tugraz.ist.ase.test.reader;
 
 import at.tugraz.ist.ase.test.TestSuite;
+import at.tugraz.ist.ase.test.builder.ITestCaseBuildable;
 import lombok.NonNull;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-public interface ITestSuiteBuildable {
-    TestSuite buildTestSuite(@NonNull InputStream is, @NonNull ITestCaseBuildable testCaseBuilder) throws IOException;
+public interface ITestSuiteReadable {
+    TestSuite read(@NonNull InputStream is, @NonNull ITestCaseBuildable testCaseBuilder) throws IOException;
 }

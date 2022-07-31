@@ -6,11 +6,12 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.test.builder;
+package at.tugraz.ist.ase.test.reader;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestSuite;
+import at.tugraz.ist.ase.test.builder.ITestCaseBuildable;
 import lombok.Cleanup;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -25,10 +26,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Slf4j
-public class TestSuiteBuilder implements ITestSuiteBuildable {
+public class TestSuiteReader implements ITestSuiteReadable {
 
     @Override
-    public TestSuite buildTestSuite(@NonNull InputStream is, @NonNull ITestCaseBuildable testCaseBuilder) throws IOException {
+    public TestSuite read(@NonNull InputStream is, @NonNull ITestCaseBuildable testCaseBuilder) throws IOException {
         log.trace("{}Building test suite from input stream >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 

@@ -14,8 +14,8 @@ import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
 import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
@@ -62,11 +62,11 @@ class FMDebuggingModelTest {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel fm = parser.parse(fileFM);
 
-        TestSuiteBuilder builder = new TestSuiteBuilder();
+        TestSuiteReader builder = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(FMDebuggingModelTest.class.getClassLoader(), "survey.testcases");
 
-        testSuite = builder.buildTestSuite(is, testCaseFactory);
+        testSuite = builder.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         model = new FMDebuggingModel(fm, testSuite, translator, true, false);

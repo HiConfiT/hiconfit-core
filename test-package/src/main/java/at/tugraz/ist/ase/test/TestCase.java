@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.test;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;

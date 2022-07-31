@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.test;
 
+import at.tugraz.ist.ase.kb.core.Assignment;
 import org.chocosolver.solver.constraints.Constraint;
 
 import java.util.List;

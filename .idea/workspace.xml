@@ -7,20 +7,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="New package 1.3.9-alpha-37">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Updates pom files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebugTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebugTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/TestCloneable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest1.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/Assignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/Assignment.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/Assignment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/builder/TestSuiteBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/builder/TestSuiteBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/builder/class-use/ITestSuiteBuildable.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/builder/class-use/ITestSuiteBuildable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/builder/class-use/TestSuiteBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/builder/class-use/TestSuiteBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/Assignment.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/test/class-use/Assignment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/Assignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Assignment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/ITestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/ITestCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/TestCase.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/ITestSuiteBuildable.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/reader/ITestSuiteReadable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/TestSuiteBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/reader/TestSuiteReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/fm/FMTestCaseBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/builder/fm/FMTestCaseBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/IAssignmentsTranslatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/translator/IAssignmentsTranslatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/ILogOpCreatable.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/translator/ILogOpCreatable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMAssignmentsTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/translator/fm/FMAssignmentsTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMTestCaseTranslator.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/main/java/at/tugraz/ist/ase/test/translator/fm/FMTestCaseTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/AssignmentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/AssignmentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestSuiteTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/src/test/java/at/tugraz/ist/ase/test/builder/fm/TestSuiteTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +128,7 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.kb.core" />
       <recent name="at.tugraz.ist.ase.fm.parser" />
       <recent name="at.tugraz.ist.ase.fm.core" />
       <recent name="at.tugraz.ist.ase.common" />
@@ -137,7 +150,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FMDebuggingModelTest.shouldCloneable">
+  <component name="RunManager" selected="JUnit.at.tugraz.ist.ase.test.builder.fm in test-v2">
     <configuration name="FMGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.app.FMGenerator" />
       <module name="app-FMGenerator" />
@@ -161,6 +174,21 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AssignmentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="choco-kb-v2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.core" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.core.AssignmentTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,21 +224,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PCKBTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="choco-kb-v2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.pc.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.pc" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.pc.PCKBTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="cdrmodel-v2" />
       <extension name="coverage">
@@ -225,15 +238,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.test in test-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="at.tugraz.ist.ase.test.builder.fm in test-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.test.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.test.builder.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.test" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.test.builder.fm" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -254,11 +267,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.at.tugraz.ist.ase.test.builder.fm in test-v2" />
+        <item itemvalue="JUnit.AssignmentTest" />
         <item itemvalue="JUnit.FMDebuggingModelTest.shouldCloneable" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" />
         <item itemvalue="JUnit.FMDebuggingModelTest1" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.test in test-v2" />
-        <item itemvalue="JUnit.PCKBTest" />
       </list>
     </recent_temporary>
   </component>
@@ -348,14 +361,7 @@
       <workItem from="1659012221975" duration="1745000" />
       <workItem from="1659023564423" duration="5771000" />
       <workItem from="1659083240400" duration="701000" />
-      <workItem from="1659083956003" duration="52964000" />
-    </task>
-    <task id="LOCAL-00022" summary="Fix start &amp; stop">
-      <created>1652913027423</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1652913027423</updated>
+      <workItem from="1659083956003" duration="58966000" />
     </task>
     <task id="LOCAL-00023" summary="Add a comment">
       <created>1652950073054</created>
@@ -693,7 +699,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659145593059</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Updates pom files">
+      <created>1659199578160</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1659199578160</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -726,7 +739,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Maven package 1.3.9-alpha-21" />
     <MESSAGE value="Add FMDiagnosisModel" />
     <MESSAGE value="Maven package 1.3.9-alpha-22" />
     <MESSAGE value="Add comments" />
@@ -751,7 +763,8 @@
     <MESSAGE value="New package 1.3.9-alpha-36" />
     <MESSAGE value="Remove @NonNull of negChocoCstrs" />
     <MESSAGE value="New package 1.3.9-alpha-37" />
-    <option name="LAST_COMMIT_MESSAGE" value="New package 1.3.9-alpha-37" />
+    <MESSAGE value="Updates pom files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updates pom files" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

@@ -9,7 +9,7 @@
 package at.tugraz.ist.ase.test.builder.fm;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.test.Assignment;
+import at.tugraz.ist.ase.kb.core.Assignment;
 import at.tugraz.ist.ase.test.TestCase;
 import at.tugraz.ist.ase.test.builder.ITestCaseBuildable;
 import lombok.NonNull;

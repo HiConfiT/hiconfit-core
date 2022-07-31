@@ -6,9 +6,9 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.test.translator;
+package at.tugraz.ist.ase.kb.core.translator;
 
-import at.tugraz.ist.ase.test.Assignment;
+import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.nary.cnf.LogOp;

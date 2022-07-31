@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.test.translator.fm;
 //import at.tugraz.ist.ase.debugging.testcases.AggregatedTestCase;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.kb.core.translator.fm.FMAssignmentsTranslator;
 import at.tugraz.ist.ase.test.ITestCase;
 import at.tugraz.ist.ase.test.TestCase;
 import at.tugraz.ist.ase.test.translator.ITestCaseTranslatable;

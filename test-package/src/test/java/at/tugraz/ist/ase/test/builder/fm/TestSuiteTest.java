@@ -9,7 +9,7 @@
 package at.tugraz.ist.ase.test.builder.fm;
 
 import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
+import at.tugraz.ist.ase.test.reader.TestSuiteReader;
 import lombok.Cleanup;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -18,18 +18,19 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 class TestSuiteTest {
     private static TestSuite testSuite;
 
     @BeforeAll
     static void setUp() throws IOException {
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(TestSuiteTest.class.getClassLoader(), "FM_10_0_c5_0.testcases");
 
-        testSuite = factory.buildTestSuite(is, testCaseFactory);
+        testSuite = factory.read(is, testCaseFactory);
     }
 
     @Test

@@ -6,12 +6,12 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.test.translator.fm;
+package at.tugraz.ist.ase.kb.core.translator.fm;
 
 import at.tugraz.ist.ase.common.ChocoSolverUtils;
-import at.tugraz.ist.ase.test.Assignment;
-import at.tugraz.ist.ase.test.translator.IAssignmentsTranslatable;
-import at.tugraz.ist.ase.test.translator.ILogOpCreatable;
+import at.tugraz.ist.ase.kb.core.Assignment;
+import at.tugraz.ist.ase.kb.core.translator.IAssignmentsTranslatable;
+import at.tugraz.ist.ase.kb.core.translator.ILogOpCreatable;
 import lombok.NonNull;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.Constraint;
@@ -22,8 +22,8 @@ import java.util.List;
 public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOpCreatable {
 
     /**
-     * Translates {@link at.tugraz.ist.ase.test.Assignment}s to Choco constraints.
-     * @param assignments the {@link at.tugraz.ist.ase.test.Assignment}s to translate
+     * Translates {@link Assignment}s to Choco constraints.
+     * @param assignments the {@link Assignment}s to translate
      * @param model the Choco model
      * @param chocoCstrs list of Choco constraints, to which the translated constraints are added
      * @param negChocoCstrs list of Choco constraints, to which the translated negative constraints are added
@@ -44,8 +44,8 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
     }
 
     /**
-     * Translates {@link at.tugraz.ist.ase.test.Assignment}s to Choco constraints.
-     * @param assignment the {@link at.tugraz.ist.ase.test.Assignment} to translate
+     * Translates {@link Assignment}s to Choco constraints.
+     * @param assignment the {@link Assignment} to translate
      * @param model the Choco model
      * @param chocoCstrs list of Choco constraints, to which the translated constraints are added
      * @param negChocoCstrs list of Choco constraints, to which the translated negative constraints are added
