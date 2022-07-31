@@ -96,8 +96,8 @@ class VariableTest {
     }
 
     @Test
-    void testCloneable() {
-        Variable v3 = v1.clone();
+    void testCloneable() throws CloneNotSupportedException {
+        Variable v3 = (Variable) v1.clone();
         assertAll(() -> assertEquals("mb_cpuslotD", v3.getName()),
                 () -> assertEquals("mb_cpuslotD", v3.getDomain().getName()),
                 () -> assertEquals(List.of("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"), v3.getDomain().getValues()),

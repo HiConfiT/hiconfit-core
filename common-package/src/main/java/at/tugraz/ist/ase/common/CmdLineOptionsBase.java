@@ -40,10 +40,6 @@ public class CmdLineOptionsBase {
     public void parseArgument(@NonNull String[] args) {
         checkState(parser != null, "CmdLineParser not initialized");
 
-//        if (args.length < 1) {
-//            printUsage();
-//            System.exit(-1);
-//        }
         try {
             parser.parseArgument(args);
         } catch (CmdLineException clEx) {

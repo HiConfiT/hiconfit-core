@@ -38,9 +38,9 @@ public class IntVariable extends Variable implements Cloneable {
         return chocoVar.getValue();
     }
 
-    @Override
-    public IntVariable clone() {
+    public IntVariable clone() throws CloneNotSupportedException {
         IntVariable clone = (IntVariable) super.clone();
+
         clone.chocoVar = chocoVar;
 
         log.trace("{}Cloned IntVariable [var={}]", LoggerUtils.tab(), clone);

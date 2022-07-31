@@ -63,6 +63,13 @@ public class ChocoSolverUtils {
         }
     }
 
+    /**
+     * Get constraints which have the index in the given range.
+     * @param model - a Choco model
+     * @param startIdx - the start index of the constraints to be returned
+     * @param endIdx - the end index of the constraints to be returned
+     * @return a list of constraints
+     */
     public List<Constraint> getConstraints(@NonNull Model model, int startIdx, int endIdx) {
         Constraint[] cstrs = model.getCstrs();
 
@@ -80,6 +87,13 @@ public class ChocoSolverUtils {
         return constraints;
     }
 
+    /**
+     * Add an assignment to a LogOp constraint.
+     * @param logOp - a LogOp constraint, which the assignment is assigned to
+     * @param model - a Choco model
+     * @param var - a variable to be assigned
+     * @param value - a value to be assigned to the variable
+     */
     public void addAssignmentToLogOp(@NonNull LogOp logOp, @NonNull Model model,
                                      @NonNull String var, @NonNull String value) {
         BoolVar v = (BoolVar) getVariable(model, var); // get the corresponding variable

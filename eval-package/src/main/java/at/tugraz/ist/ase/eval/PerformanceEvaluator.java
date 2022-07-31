@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.eval;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.common.ThreadUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
@@ -18,8 +19,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static at.tugraz.ist.ase.common.IOUtils.*;
 
 @Slf4j
 public class PerformanceEvaluator {
@@ -81,7 +80,7 @@ public class PerformanceEvaluator {
      * @param name of the timer
      */
     public static void start(String name) {
-        name = name + getThreadString();
+        name = name + ThreadUtils.getThreadString();
 
         getTimer(name).start();
     }
@@ -94,7 +93,7 @@ public class PerformanceEvaluator {
      * @return elapsed time since the timer was started
      */
     public static long stop(String name, boolean isSave) {
-        name = name + getThreadString();
+        name = name + ThreadUtils.getThreadString();
 
         return getTimer(name).stop(isSave);
     }

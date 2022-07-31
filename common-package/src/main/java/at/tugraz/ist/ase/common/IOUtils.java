@@ -46,18 +46,15 @@ public class IOUtils {
                 .withCSVParser(csvParser).build();
     }
 
-    public void checkAndCreateFolder(@NonNull String path) {
+    public boolean checkAndCreateFolder(@NonNull String path) {
         checkArgument(!path.isEmpty(), "Path is empty!");
 
         File folder = new File(path);
 
-        // check whether the fms folder does not exist
+        // check whether the folder does not exist
         if (Files.notExists(Paths.get(path))) {
-            folder.mkdir(); // if not, create it
+            return folder.mkdir(); // if not, create it
         }
-    }
-
-    public String getThreadString() {
-        return "[thread=" + Thread.currentThread().getId() + "]";
+        return false;
     }
 }

@@ -115,8 +115,8 @@ class DomainTest {
     }
 
     @Test
-    void testClone() {
-        Domain d7 = d1.clone();
+    void testClone() throws CloneNotSupportedException {
+        Domain d7 = (Domain) d1.clone();
 
         assertAll(() -> assertEquals(d1, d7),
                 () -> assertEquals("mb_cpuslotD", d7.getName()),

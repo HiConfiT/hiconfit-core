@@ -144,16 +144,13 @@ public class Domain implements Cloneable {
         return name + " = [ " + String.join(", ", values) + " ]";
     }
 
-    @Override
-    public Domain clone() {
-        try {
-            Domain clone = (Domain) super.clone();
-            clone.values = new LinkedList<>(values);
-            clone.chocoValues = new LinkedList<>(chocoValues);
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+    public Object clone() throws CloneNotSupportedException {
+        Domain clone = (Domain) super.clone();
+
+        clone.values = new LinkedList<>(values);
+        clone.chocoValues = new LinkedList<>(chocoValues);
+
+        return clone;
     }
 
     public void dispose() {

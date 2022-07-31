@@ -18,7 +18,7 @@ import lombok.ToString;
 @Getter
 public abstract class Variable implements Cloneable {
 
-    protected final String name;
+    protected String name;
     protected Domain domain;
 
     public Variable(@NonNull String name, @NonNull Domain domain) {
@@ -34,18 +34,16 @@ public abstract class Variable implements Cloneable {
         return domain.contains(value) || value.equals("NULL") || value.isEmpty();
     }
 
-    @Override
-    public Variable clone() {
-        try {
-            Variable clone = (Variable) super.clone();
-            clone.domain = domain.clone();
-            return clone;
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
-        }
+    public Object clone() throws CloneNotSupportedException {
+        Variable clone = (Variable) super.clone();
+
+        clone.domain = (Domain) domain.clone();
+
+        return clone;
     }
 
     public void dispose() {
+        name = null;
         domain = null;
     }
 }

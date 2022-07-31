@@ -19,27 +19,22 @@ import java.util.stream.IntStream;
 import static com.google.common.base.Preconditions.checkElementIndex;
 
 @Getter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 public abstract class KB {
+    @ToString.Include
     protected final String name;
+    @ToString.Include
     protected final String source;
 
-    @ToString.Exclude
     protected final boolean hasNegativeConstraints;
 
-    @ToString.Exclude
     protected Model modelKB;
 
     // Variables
-    @ToString.Exclude
     protected List<Variable> variableList;
-
     // Domains
-    @ToString.Exclude
     protected List<Domain> domainList;
-
     // Constraints
-    @ToString.Exclude
     protected List<Constraint> constraintList;
 
     protected KB(String name, String source, boolean hasNegativeConstraints) {
