@@ -29,7 +29,6 @@
         <module>csp2choco-package</module>
         <module>fm-package</module>
         <module>eval-package</module>
-        <module>test-package</module>
         <module>chocokb-package</module>
         <module>cdrmodel-package</module>
         <module>ca-cdr-package</module>

@@ -18,7 +18,7 @@ import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.FastDiagV3Parameters;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.QuickXPlainParameters;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.cacdr.eval.CAEvaluator;
-import at.tugraz.ist.ase.cdrmodel.test.model.*;
+import at.tugraz.ist.ase.cdrmodel.test_model.model.*;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import org.junit.jupiter.api.Test;
 

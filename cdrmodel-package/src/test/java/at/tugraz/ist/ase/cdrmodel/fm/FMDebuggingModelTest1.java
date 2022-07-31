@@ -8,16 +8,16 @@
 
 package at.tugraz.ist.ase.cdrmodel.fm;
 
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
+import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
-import at.tugraz.ist.ase.test.ITestCase;
-import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
-import at.tugraz.ist.ase.test.reader.TestSuiteReader;
-import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import com.google.common.io.Files;
 import lombok.Cleanup;
 import lombok.SneakyThrows;

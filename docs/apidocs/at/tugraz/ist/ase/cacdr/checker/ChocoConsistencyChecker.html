@@ -160,10 +160,10 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConstraintFromCloneModel(java.util.Collection)" class="member-name-link">getConstraintFromCloneModel</a><wbr>(<a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../../kb/core/Constraint.html" title="class in at.tugraz.ist.ase.kb.core">Constraint</a>&gt;&nbsp;C)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a></code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTestCaseFromCloneModel(at.tugraz.ist.ase.test.ITestCase)" class="member-name-link">getTestCaseFromCloneModel</a><wbr>(<a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;testcase)</code></div>
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTestCaseFromCloneModel(at.tugraz.ist.ase.cdrmodel.test.ITestCase)" class="member-name-link">getTestCaseFromCloneModel</a><wbr>(<a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;testcase)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isConsistent(at.tugraz.ist.ase.test.ITestCase,at.tugraz.ist.ase.test.ITestCase)" class="member-name-link">isConsistent</a><wbr>(@NonNull <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;testcase,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isConsistent(at.tugraz.ist.ase.cdrmodel.test.ITestCase,at.tugraz.ist.ase.cdrmodel.test.ITestCase)" class="member-name-link">isConsistent</a><wbr>(@NonNull <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;testcase,
  @NonNull <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;neg_testcase)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">consistent(tα ∧ ¬tγ)
@@ -184,7 +184,7 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
  Checks the consistency of (C - {cstr} ∪ {¬cstr}) to identify the redundant constraints.</div>
 </div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>boolean</code></div>
-<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isConsistent(java.util.Collection,at.tugraz.ist.ase.test.ITestCase)" class="member-name-link">isConsistent</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../../kb/core/Constraint.html" title="class in at.tugraz.ist.ase.kb.core">Constraint</a>&gt;&nbsp;C,
+<div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#isConsistent(java.util.Collection,at.tugraz.ist.ase.cdrmodel.test.ITestCase)" class="member-name-link">isConsistent</a><wbr>(@NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../../kb/core/Constraint.html" title="class in at.tugraz.ist.ase.kb.core">Constraint</a>&gt;&nbsp;C,
  @NonNull <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;testcase)</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Checks the consistency of a set of constraints with a test case.</div>
@@ -205,7 +205,7 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
 <div class="block"><span class="deprecated-label">Deprecated.</span></div>
 </div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>protected void</code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#postTestCase(at.tugraz.ist.ase.test.TestCase,boolean)" class="member-name-link">postTestCase</a><wbr>(<a href="../../test/TestCase.html" title="class in at.tugraz.ist.ase.test">TestCase</a>&nbsp;testcase,
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#postTestCase(at.tugraz.ist.ase.cdrmodel.test.TestCase,boolean)" class="member-name-link">postTestCase</a><wbr>(<a href="../../test/TestCase.html" title="class in at.tugraz.ist.ase.test">TestCase</a>&nbsp;testcase,
  boolean&nbsp;negative)</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">
 <div class="block">Posts the corresponding constraints of a textual test case to the model.</div>
@@ -310,7 +310,7 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
 </section>
 </li>
 <li>
-<section class="detail" id="isConsistent(java.util.Collection,at.tugraz.ist.ase.test.ITestCase)">
+<section class="detail" id="isConsistent(java.util.Collection,at.tugraz.ist.ase.cdrmodel.test.ITestCase)">
 <h3>isConsistent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isConsistent</span><wbr><span class="parameters">(@NonNull
  @NonNull <a href="https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Collection.html" title="class or interface in java.util" class="external-link">Collection</a>&lt;<a href="../../kb/core/Constraint.html" title="class in at.tugraz.ist.ase.kb.core">Constraint</a>&gt;&nbsp;C,
@@ -319,7 +319,7 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
 <div class="block">Checks the consistency of a set of constraints with a test case.</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="IConsistencyChecker.html#isConsistent(java.util.Collection,at.tugraz.ist.ase.test.ITestCase)">isConsistent</a></code>&nbsp;in interface&nbsp;<code><a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.ase.cacdr.checker">IConsistencyChecker</a></code></dd>
+<dd><code><a href="IConsistencyChecker.html#isConsistent(java.util.Collection,at.tugraz.ist.ase.cdrmodel.test.ITestCase)">isConsistent</a></code>&nbsp;in interface&nbsp;<code><a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.ase.cacdr.checker">IConsistencyChecker</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>C</code> - set of <a href="../../kb/core/Constraint.html" title="class in at.tugraz.ist.ase.kb.core"><code>Constraint</code></a>s</dd>
 <dd><code>testcase</code> - a <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test"><code>ITestCase</code></a></dd>
@@ -329,13 +329,13 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
 </section>
 </li>
 <li>
-<section class="detail" id="getTestCaseFromCloneModel(at.tugraz.ist.ase.test.ITestCase)">
+<section class="detail" id="getTestCaseFromCloneModel(at.tugraz.ist.ase.cdrmodel.test.ITestCase)">
 <h3>getTestCaseFromCloneModel</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type"><a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a></span>&nbsp;<span class="element-name">getTestCaseFromCloneModel</span><wbr><span class="parameters">(<a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;testcase)</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="isConsistent(at.tugraz.ist.ase.test.ITestCase,at.tugraz.ist.ase.test.ITestCase)">
+<section class="detail" id="isConsistent(at.tugraz.ist.ase.cdrmodel.test.ITestCase,at.tugraz.ist.ase.cdrmodel.test.ITestCase)">
 <h3>isConsistent</h3>
 <div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">boolean</span>&nbsp;<span class="element-name">isConsistent</span><wbr><span class="parameters">(@NonNull
  @NonNull <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test">ITestCase</a>&nbsp;testcase,
@@ -349,7 +349,7 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
  Used by WipeOutR_T algorithm</div>
 <dl class="notes">
 <dt>Specified by:</dt>
-<dd><code><a href="IConsistencyChecker.html#isConsistent(at.tugraz.ist.ase.test.ITestCase,at.tugraz.ist.ase.test.ITestCase)">isConsistent</a></code>&nbsp;in interface&nbsp;<code><a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.ase.cacdr.checker">IConsistencyChecker</a></code></dd>
+<dd><code><a href="IConsistencyChecker.html#isConsistent(at.tugraz.ist.ase.cdrmodel.test.ITestCase,at.tugraz.ist.ase.cdrmodel.test.ITestCase)">isConsistent</a></code>&nbsp;in interface&nbsp;<code><a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.ase.cacdr.checker">IConsistencyChecker</a></code></dd>
 <dt>Parameters:</dt>
 <dd><code>testcase</code> - a <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test"><code>ITestCase</code></a></dd>
 <dd><code>neg_testcase</code> - a <a href="../../test/ITestCase.html" title="interface in at.tugraz.ist.ase.test"><code>ITestCase</code></a></dd>
@@ -469,7 +469,7 @@ implements <a href="IConsistencyChecker.html" title="interface in at.tugraz.ist.
 </section>
 </li>
 <li>
-<section class="detail" id="postTestCase(at.tugraz.ist.ase.test.TestCase,boolean)">
+<section class="detail" id="postTestCase(at.tugraz.ist.ase.cdrmodel.test.TestCase,boolean)">
 <h3>postTestCase</h3>
 <div class="member-signature"><span class="modifiers">protected</span>&nbsp;<span class="return-type">void</span>&nbsp;<span class="element-name">postTestCase</span><wbr><span class="parameters">(<a href="../../test/TestCase.html" title="class in at.tugraz.ist.ase.test">TestCase</a>&nbsp;testcase,
  boolean&nbsp;negative)</span></div>

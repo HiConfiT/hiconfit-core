@@ -8,8 +8,8 @@
 
 package at.tugraz.ist.ase.cacdr.checker;
 
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.kb.core.Constraint;
-import at.tugraz.ist.ase.test.ITestCase;
 import lombok.NonNull;
 
 import java.util.Collection;

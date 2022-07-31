@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.cdrmodel;
 
-import at.tugraz.ist.ase.test.ITestCase;
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 
 import java.util.Set;
 
