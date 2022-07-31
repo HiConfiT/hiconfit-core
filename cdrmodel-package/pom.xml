@@ -20,12 +20,12 @@
     <artifactId>cdrmodel-v2</artifactId>
 
     <dependencies>
-        <dependency>
-            <groupId>at.tugraz.ist.ase</groupId>
-            <artifactId>choco-kb-v2</artifactId>
-            <version>1.3.9-alpha-37</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>at.tugraz.ist.ase</groupId>-->
+<!--            <artifactId>choco-kb-v2</artifactId>-->
+<!--            <version>1.3.9-alpha-37</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
