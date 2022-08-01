@@ -19,6 +19,9 @@ import at.tugraz.ist.ase.kb.core.translator.fm.FMAssignmentsTranslator;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * No remove the translated Choco constraints.
+ */
 @Slf4j
 public class FMTestCaseTranslator implements ITestCaseTranslatable {
 

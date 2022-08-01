@@ -20,6 +20,9 @@ import org.chocosolver.solver.constraints.nary.cnf.LogOp;
 
 import java.util.List;
 
+/**
+ * No remove the translated constraints from the Choco model
+ */
 public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOpCreatable {
 
     /**
