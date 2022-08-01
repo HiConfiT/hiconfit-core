@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.common;
 
+import com.google.common.base.Joiner;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.chocosolver.solver.Model;
@@ -49,6 +50,12 @@ public class ChocoSolverUtils {
     public void printConstraintsWithoutFormat(@NonNull Model model) {
         List<Constraint> ac = Arrays.asList(model.getCstrs());
         ac.forEach(System.out::println);
+    }
+
+    public String convertToString(@NonNull List<List<org.chocosolver.solver.constraints.Constraint>> ac, @NonNull String delimiter, boolean brackets) {
+        String ex = Joiner.on(delimiter).join(ac);
+//        String ex = ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter));
+        return brackets ? "[" + ex + "]" : ex;
     }
 
     /**

@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.common;
 
 import at.tugraz.ist.ase.kb.core.Constraint;
+import com.google.common.base.Joiner;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +19,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static at.tugraz.ist.ase.eval.PerformanceEvaluator.incrementCounter;
 import static com.google.common.base.Preconditions.checkArgument;
@@ -35,7 +35,8 @@ public final class ConstraintUtils {
     public final String COUNTER_SPLIT_SET = "The number of split set";
 
     public String convertToString(@NonNull Set<Constraint> ac, @NonNull String delimiter, boolean brackets) {
-        String ex = ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter));
+        String ex = Joiner.on(delimiter).join(ac);
+//        String ex = ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter));
         return brackets ? "[" + ex + "]" : ex;
     }
 
@@ -211,12 +212,12 @@ public final class ConstraintUtils {
         incrementCounter(COUNTER_SPLIT_SET);
     }
 
-    public boolean isMinimal(Set<Constraint> diag, List<Set<Constraint>> allDiag) {
-        return allDiag.parallelStream().noneMatch(diag::containsAll);
+    public boolean isMinimal(Set<Constraint> cstrSet, List<Set<Constraint>> allCstrSets) {
+        return allCstrSets.parallelStream().noneMatch(cstrSet::containsAll);
     }
 
-    public boolean containsAll(List<Set<Constraint>> allDiag, Set<Constraint> diag) {
-        return allDiag.parallelStream().anyMatch(adiag -> adiag.containsAll(diag));
+    public boolean containsAll(List<Set<Constraint>> allCstrSets, Set<Constraint> cstrSet) {
+        return allCstrSets.parallelStream().anyMatch(adiag -> adiag.containsAll(cstrSet));
     }
 
     public boolean hasIntersection(Collection<Constraint> col1, Collection<Constraint> col2) {
