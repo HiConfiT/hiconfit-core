@@ -13,7 +13,7 @@
     <parent>
         <artifactId>ca-cdr-v2-root</artifactId>
         <groupId>at.tugraz.ist.ase</groupId>
-        <version>1.3.9-alpha-38</version>
+        <version>1.3.9-alpha-40</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

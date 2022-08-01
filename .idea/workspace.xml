@@ -7,24 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Clean up the code in Constraint">
-      <change afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/ThreadUtils.java" afterDir="false" />
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/ThreadTimerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/ThreadTimerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/TestCase.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test/TestCase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/builder/fm/TestCaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/test/builder/fm/TestCaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/BoolVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/BoolVariable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Domain.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Domain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/IntVariable.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/IntVariable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/KB.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/KB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Variable.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/core/Variable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/DomainTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/DomainTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/VariableTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/core/VariableTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/ChocoSolverUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/ChocoSolverUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/CmdLineOptionsBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/CmdLineOptionsBase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/RandomUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/RandomUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exportToHTML/common-package.uml.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +33,11 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -82,29 +82,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "jdk.selected.JAVA_MODULE": "temurin-17",
-    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
-    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/test/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.30601093",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.uml"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
+    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/test/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.30601093&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/fm-package/src/test/resources" />
@@ -114,8 +114,11 @@
       <recent name="$PROJECT_DIR$/ca-cdr-package" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
-      <recent name="$PROJECT_DIR$/docs/apidocs" />
+      <recent name="$PROJECT_DIR$/fm-package" />
+      <recent name="$PROJECT_DIR$/eval-package" />
+      <recent name="$PROJECT_DIR$/common-package" />
+      <recent name="$PROJECT_DIR$/chocokb-package" />
+      <recent name="$PROJECT_DIR$/cdrmodel-package" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -356,28 +359,9 @@
       <workItem from="1659012221975" duration="1745000" />
       <workItem from="1659023564423" duration="5771000" />
       <workItem from="1659083240400" duration="701000" />
-      <workItem from="1659083956003" duration="70039000" />
-    </task>
-    <task id="LOCAL-00029" summary="Fix the level of logs">
-      <created>1653244847437</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1653244847437</updated>
-    </task>
-    <task id="LOCAL-00030" summary="Fix BasicRelationship to support some feature models from SPLOT + Add some new feature models to ChocoKB + New KBStatistics">
-      <created>1653586640155</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1653586640155</updated>
-    </task>
-    <task id="LOCAL-00031" summary="New package 1.3.9-alpha-15">
-      <created>1653992089854</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1653992089854</updated>
+      <workItem from="1659083956003" duration="80659000" />
+      <workItem from="1659338507104" duration="3537000" />
+      <workItem from="1659347303507" duration="5918000" />
     </task>
     <task id="LOCAL-00032" summary="Publish 1.3.9-alpha-16">
       <created>1655050208601</created>
@@ -701,7 +685,28 @@
       <option name="project" value="LOCAL" />
       <updated>1659279650295</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="Clean up the code">
+      <created>1659285645227</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1659285645227</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Add Class diagrams">
+      <created>1659342271100</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1659342271100</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map...">
+      <created>1659353227141</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1659353227142</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -734,9 +739,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added convertToString with delimiter" />
-    <MESSAGE value="Fixed convertToStringWithMessage supporting new convertToString" />
-    <MESSAGE value="Fixed convertToStringWithMessage supporting brackets" />
     <MESSAGE value="Fixed convertToStringWithMessage" />
     <MESSAGE value="Removed @Deprecated" />
     <MESSAGE value="Supported DirectDebug to identify all diagnoses" />
@@ -759,7 +761,10 @@
     <MESSAGE value="Fix FMAssignmentsTranslator and FMTestCaseTranslator" />
     <MESSAGE value="New package 1.3.9-alpha-38" />
     <MESSAGE value="Clean up the code in Constraint" />
-    <option name="LAST_COMMIT_MESSAGE" value="Clean up the code in Constraint" />
+    <MESSAGE value="Clean up the code" />
+    <MESSAGE value="Add Class diagrams" />
+    <MESSAGE value="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map..." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
