@@ -33,7 +33,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * //--------------------
  * // Func FastDiag(C, B) : Δ
  * // if isEmpty(C) or consistent(B U C) return Φ
- * // else return C \ FD(C, B, Φ)
+ * // else return C \ FD(Φ, C, B)
  *
  * // Func FD(Δ, C = {c1..cn}, B) : MSS
  * // if Δ != Φ and consistent(B U C) return C;
