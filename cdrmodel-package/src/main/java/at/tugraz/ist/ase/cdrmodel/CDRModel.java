@@ -19,9 +19,9 @@ import java.util.Set;
 
 /**
  * Contains the knowledge base for constraint problems.
- *
+ * <p>
  * Supports two types of constraints: Choco constraints (String) and representative constraints ({@link Constraint}).
- *
+ * <p>
  * We don't have a clone method here, since all the data in this class needs to be initialized by overriding initialize() method.
  */
 @Getter
@@ -129,5 +129,12 @@ public abstract class CDRModel implements Cloneable {
         clone.clone = true;
 
         return clone;
+    }
+
+    public void dispose() {
+        correctConstraints.clear();
+        possiblyFaultyConstraints.clear();
+        correctChocoConstraints.clear();
+        possiblyFaultyChocoConstraints.clear();
     }
 }

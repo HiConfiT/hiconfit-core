@@ -1,0 +1,2642 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Consistency-based Algorithms for Conflict Detection and Resolution
+  ~
+  ~ Copyright (c) 2022
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<featureModel>
+	<struct>
+		<and mandatory="true" name="root">
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_CXX_TESTS"/>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_31_7_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_14"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_13"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_12"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_11"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_10"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_9"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_8"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_7"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_6"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31"/>
+			</alt>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_27_25_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_52"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_51"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_50"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_49"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_48"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_47"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_46"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_45"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_44"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_43"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_42"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_41"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_40"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_38"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_37"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_36"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_35"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_34"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_33"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_32"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_31"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_30"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_29"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_28"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_27"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_26"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_25"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_24"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_23"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_22"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_21"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_20"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_19"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_18"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_17"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_16"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_15"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_14"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_13"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_12"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_11"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_10"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_9"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_8"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_7"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_6"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27"/>
+			</alt>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_GLOB">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GNU_GLOB"/>
+			</and>
+			<alt mandatory="true" name="EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM940T_alt">
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM7TDMI"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM7TDMI_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM710T"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM720T"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM740T"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA_110"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA_1100"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA_1110"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM8_ARM810"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM9TDMI"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM920T"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM922T"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM940T"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM946E_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM966E_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM968E_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM926EJ_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM10E_ARM1020E"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM10E_ARM1022E"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM10E_ARM1026EJ_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_XSCALE_XSCALE"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1136J_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1136JF_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1156T2_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1176JZ_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1176JZF_S"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM11_MPCORE"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_A8"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_A9"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_R4"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_R4F"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_M3"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_M1"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_IWMMXT_IWMMXT"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_IWMMXT_IWMMXT2"/>
+			</alt>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_32_9_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_20"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_19"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_18"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_17"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_16"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_15"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_14"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_13"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_12"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_11"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_10"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_9"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_8"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_7"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_6"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_UCLINUX_BROKEN_MUNMAP"/>
+			<alt mandatory="true" name="EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_alt">
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM7TDMI"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_STRONGARM"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM8"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9TDMI"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM9E"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM10E"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_XSCALE"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_ARM11"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_CORTEX"/>
+				<feature name="EMBTK_ARCH_ARM_FAMILY_IWMMXT"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_WCHAR"/>
+			<alt mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_8192_alt">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_NONE"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_256"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_512"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_1024"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_2048"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_4096"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUFSIZ_8192"/>
+			</alt>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_CTYPE_TABLES">
+				<alt mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_HAS_CTYPE_ENFORCED_alt">
+					<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_CTYPE_UNSAFE"/>
+					<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_CTYPE_CHECKED"/>
+					<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_CTYPE_ENFORCED"/>
+				</alt>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_CTYPE_SIGNED"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_ISA_MIPS32R2"/>
+			<feature name="EMBTK_CACHE_PATCHES"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM720T"/>
+			<alt mandatory="true" name="EMBTK_ARCH_MIPS_MIPS3_LITTLE_alt">
+				<feature name="EMBTK_ARCH_MIPS_MIPS1_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS1_BIG"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS2_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS2_BIG"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS3_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS3_BIG"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS4_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS4_BIG"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS32_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS32_BIG"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS32R2_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS32R2_BIG"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS64_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS64_BIG"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS64R2_LITTLE"/>
+				<feature name="EMBTK_ARCH_MIPS_MIPS64R2_BIG"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_LDSO_GNU_HASH_SUPPORT"/>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_28_4_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_10"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_9"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_8"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_7"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_6"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28"/>
+			</alt>
+			<and name="EMBTK_GCC_HAVE_MIRROR">
+				<feature mandatory="true" name="EMBTK_GCC_HAVE_MIRROR_SITE"/>
+			</and>
+			<and name="KEMBTK_EGLIBC_OPTION_POSIX_C_LANG_WIDE_CHAR">
+				<feature name="KEMBTK_EGLIBC_OPTION_POSIX_WIDE_CHAR_DEVICE_IO"/>
+				<and name="KEMBTK_EGLIBC_OPTION_EGLIBC_LOCALE_CODE">
+					<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_CATGETS"/>
+				</and>
+			</and>
+			<feature name="KEMBTK_UCLIBC_TARGET_frv"/>
+			<feature mandatory="true" name="EMBTK_BINUTILS_VERSION_STRING"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_BSD_SPECIFIC"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_ISA_3"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_LONG_DOUBLE_MATH"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_PROFILING"/>
+			<and name="KEMBTK_UCLIBC_ARCH_HAS_MMU">
+				<feature name="KEMBTK_UCLIBC_ARCH_USE_MMU"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_XLOCALE"/>
+			<feature name="KEMBTK_UCLIBC_ARCH_WANTS_BIG_ENDIAN"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_NTP_LEGACY"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_PUTC_MACRO"/>
+			<alt mandatory="true" name="EMBTK_EGLIBC_VERSION_2_11_alt">
+				<feature name="EMBTK_EGLIBC_VERSION_2_12"/>
+				<feature name="EMBTK_EGLIBC_VERSION_2_11"/>
+				<feature name="EMBTK_EGLIBC_VERSION_2_10"/>
+				<feature name="EMBTK_EGLIBC_VERSION_2_9"/>
+				<feature name="EMBTK_EGLIBC_VERSION_TRUNK"/>
+			</alt>
+			<feature name="EMBTK_64BITS_FS_COMPAT32"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_GENERIC_ARM"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_LINUX_SPECIFIC"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_FCVT"/>
+			<alt mandatory="true" name="EMBTK_ARCH_ARM_BIG_ENDIAN_alt">
+				<feature name="EMBTK_ARCH_ARM_LITTLE_ENDIAN"/>
+				<feature name="EMBTK_ARCH_ARM_BIG_ENDIAN"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_TARGET_xtensa"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_CTOR_DTOR"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_REGEX">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_REGEX_OLD"/>
+			</and>
+			<and name="KEMBTK_EGLIBC_OPTION_EGLIBC_MEMUSAGE">
+				<feature mandatory="true" name="EMBTK_EGLIBC_OPTION_EGLIBC_MEMUSAGE_DEFAULT_BUFFER_SIZE"/>
+				<feature mandatory="true" name="KEMBTK_EGLIBC_OPTION_EGLIBC_MEMUSAGE_DEFAULT_BUFFER_SIZE"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_ARCH_HAS_NO_SHARED"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_ISA_MIPS32"/>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_29_5_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_29_6"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_29_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_29_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_29_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_29_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_29_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_29"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_IWMMXT"/>
+			<feature mandatory="true" name="EMBTK_UCLIBC_VERSION_STRING"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_sh64"/>
+			<feature name="KEMBTK_UCLIBC_DOPIC"/>
+			<alt mandatory="true" name="EMBTK_MPFR_HOST_VERSION_2_4_0_alt">
+				<feature name="EMBTK_MPFR_HOST_VERSION_2_4_2"/>
+				<feature name="EMBTK_MPFR_HOST_VERSION_2_4_1"/>
+				<feature name="EMBTK_MPFR_HOST_VERSION_2_4_0"/>
+			</alt>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_RTLD_DEBUG"/>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_28_X_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_35_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_34_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_32_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_31_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_29_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_28_X"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_27_X"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_LINUX_MODULE_24"/>
+			<alt mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_FORMAT_ELF_alt">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_FORMAT_ELF"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_FORMAT_FDPIC_ELF"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_FORMAT_FLAT"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_FORMAT_FLAT_SEP_DATA"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_FORMAT_SHARED_FLAT"/>
+			</alt>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_34_5_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_34_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_34_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_34_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_34_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_34_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_34"/>
+			</alt>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_30_2_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_10"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_9"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_8"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_7"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_6"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_30"/>
+			</alt>
+			<alt mandatory="true" name="EMBTK_GCC_VERSION_4_4_3_alt">
+				<feature name="EMBTK_GCC_VERSION_4_4_4"/>
+				<feature name="EMBTK_GCC_VERSION_4_4_3"/>
+				<feature name="EMBTK_GCC_VERSION_4_4_2"/>
+				<feature name="EMBTK_GCC_VERSION_4_4_1"/>
+			</alt>
+			<feature mandatory="true" name="EMBTK_NUMBER_BUILD_JOBS"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_EABI"/>
+			<alt mandatory="true" name="EMBTK_ARCH_MIPS_ABI_N64_alt">
+				<feature name="EMBTK_ARCH_MIPS_ABI_O32"/>
+				<feature name="EMBTK_ARCH_MIPS_ABI_N32"/>
+				<feature name="EMBTK_ARCH_MIPS_ABI_N64"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_FORCE_OPTIONS_FOR_ARCH"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_nios2"/>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_35_3_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_35_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_35_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_35_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_35"/>
+			</alt>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_CHARSETS"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_i386"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_SA1100"/>
+			<alt mandatory="true" name="EMBTK_GCC_VERSION_4_1_X_alt">
+				<feature name="EMBTK_GCC_VERSION_4_5_X"/>
+				<feature name="EMBTK_GCC_VERSION_4_4_X"/>
+				<feature name="EMBTK_GCC_VERSION_4_3_X"/>
+				<feature name="EMBTK_GCC_VERSION_4_2_X"/>
+				<feature name="EMBTK_GCC_VERSION_4_1_X"/>
+			</alt>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_FNMATCH">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_FNMATCH_OLD"/>
+			</and>
+			<feature mandatory="true" name="EMBTK_TARGET_COMPILER_CFLAGS"/>
+			<feature name="EMBTK_TARGET_ARCH_64BITS"/>
+			<feature name="EMBTK_UCLIBC_NEED_PATCH"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_avr32"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_ARCH_CFLAGS"/>
+			<alt mandatory="true" name="EMBTK_LINUX_VERSION_2_6_33_4_alt">
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_7"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_6"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_5"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_4"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_3"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_2"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33_1"/>
+				<feature name="EMBTK_LINUX_VERSION_2_6_33"/>
+			</alt>
+			<feature name="EMBTK_32BITS_FS"/>
+			<feature name="EMBTK_ARCH_MIPS_BIG_ENDIAN"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_SHARED_LIB_LOADER_PREFIX"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_DEVEL_PREFIX"/>
+			<feature name="EMBTK_HAVE_GDB_ON_HOST"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_ISA_4"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SHADOW"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_CORTEX_M3"/>
+			<and mandatory="true" name="EMBTK_GCC_VERSION_4_1_2_alt">
+				<feature mandatory="true" name="EMBTK_GCC_VERSION_4_1_2"/>
+			</and>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_FSTAB"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM1176JZ_S"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_THREADS"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_LIBRESOLV_STUB"/>
+			<feature mandatory="true" name="EMBTK_ARM_MCU_STRING"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_DIGIT_GROUPING">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SCANF_LENIENT_DIGIT_GROUPING"/>
+			</and>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_ERRNO_MESSAGES">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SYS_ERRLIST"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_TARGET_x86_64"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_cris"/>
+			<feature name="KEMBTK_UCLIBC_DODEBUG_PT"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_SUSV3_LEGACY"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_WORDEXP"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_WORDEXP"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_DB_ALIASES"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_PWD_BUFFER_SIZE"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_BSD_RES_CLOSE"/>
+			<alt mandatory="true" name="KEMBTK_UCLIBC_HAS_NO_THREADS_alt">
+				<feature name="KEMBTK_UCLIBC_LINUXTHREADS_OLD"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_THREADS_NATIVE"/>
+				<feature name="KEMBTK_UCLIBC_HAS_NO_THREADS"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_USE_OLD_VFPRINTF"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM1136JF_S"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_MJN3_ONLY"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_EPOLL"/>
+			<alt mandatory="true" name="EMBTK_ARCH_MIPS_alt">
+				<feature name="EMBTK_ARCH_ARM"/>
+				<feature name="EMBTK_ARCH_MIPS"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_FOPEN_EXCLUSIVE_MODE"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_LOCALE">
+				<alt mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_BUILD_ALL_LOCALE_alt">
+					<feature name="KEMBTK_UCLIBC_UCLIBC_BUILD_ALL_LOCALE"/>
+					<feature name="KEMBTK_UCLIBC_UCLIBC_BUILD_MINIMAL_LOCALE"/>
+					<feature name="KEMBTK_UCLIBC_UCLIBC_PREGENERATED_LOCALE_DATA"/>
+				</alt>
+			</and>
+			<alt mandatory="true" name="EMBTK_GCC_VERSION_4_3_4_alt">
+				<feature name="EMBTK_GCC_VERSION_4_3_5"/>
+				<feature name="EMBTK_GCC_VERSION_4_3_4"/>
+				<feature name="EMBTK_GCC_VERSION_4_3_3"/>
+				<feature name="EMBTK_GCC_VERSION_4_3_2"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_CORTEX_M1"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_COMPAT_RES_STATE"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_mips"/>
+			<feature name="KEMBTK_UCLIBC_MALLOC_GLIBC_COMPAT"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_hppa"/>
+			<feature mandatory="true" name="EMBTK_EGLIBC_BRANCH_STRING"/>
+			<alt mandatory="true" name="EMBTK_GCC_VERSION_4_5_0_alt">
+				<feature name="EMBTK_GCC_VERSION_4_5_1"/>
+				<feature name="EMBTK_GCC_VERSION_4_5_0"/>
+			</alt>
+			<feature name="EMBTK_OLDPACKAGES"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GNU_GETSUBOPT"/>
+			<feature name="EMBTK_BINUTILS_NEED_PATCH"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_SA110"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_MALLOC_DEBUGGING"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_IDN"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_SUSV3_LEGACY_MACROS"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_SUSV4_LEGACY"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM7TDMI"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_PRINTF_M_SPEC"/>
+			<alt mandatory="true" name="KEMBTK_UCLIBC_MALLOC_alt">
+				<feature name="KEMBTK_UCLIBC_MALLOC"/>
+				<feature name="KEMBTK_UCLIBC_MALLOC_SIMPLE"/>
+				<feature name="KEMBTK_UCLIBC_MALLOC_STANDARD"/>
+			</alt>
+			<and name="KEMBTK_EGLIBC_OPTION_EGLIBC_INET">
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_RCMD"/>
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_SUNRPC"/>
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_ADVANCED_INET6"/>
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_INET_ANL"/>
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_NIS"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_DOSTRIP"/>
+			<feature mandatory="true" name="EMBTK_UCLIBC_GIT_BRANCH"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_FLOATS">
+				<feature name="KEMBTK_UCLIBC_DO_XSI_MATH"/>
+				<feature name="KEMBTK_UCLIBC_DO_C99_MATH"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SOFT_FLOAT"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_FENV"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_FPU"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM926T"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM922T"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_TARGET_ARCH"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_NETWORK_SUPPORT">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SOCKET"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_IPV4"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_IPV6"/>
+				<and name="KEMBTK_UCLIBC_UCLIBC_HAS_RPC">
+					<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_FULL_RPC"/>
+					<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_REENTRANT_RPC"/>
+				</and>
+			</and>
+			<and name="EMBTK_HAVE_GDB">
+				<alt mandatory="true" name="EMBTK_GDB_VERSION_6_8_alt">
+					<feature name="EMBTK_GDB_VERSION_7_1"/>
+					<feature name="EMBTK_GDB_VERSION_7_0_1"/>
+					<feature name="EMBTK_GDB_VERSION_7_0"/>
+					<feature name="EMBTK_GDB_VERSION_6_8"/>
+				</alt>
+			</and>
+			<feature name="KEMBTK_UCLIBC_TARGET_arm"/>
+			<feature mandatory="true" name="EMBTK_GDB_VERSION_STRING"/>
+			<feature mandatory="true" name="KEMBTK_EGLIBC_OPTION_EGLIBC_NSSWITCH_FIXED_FUNCTIONS"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_ENVZ"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_AUTO_RW_TRANSITION"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_SHARED_FLAT_ID"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM710"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_BUILD_NOW"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM920T"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_N32_ABI"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_CROSS_COMPILER_PREFIX"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_REALTIME">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_ADVANCED_REALTIME"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STUBS"/>
+			<feature name="EMBTK_MPC_NEED_PATCH"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_TLS"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SYSLOG"/>
+			<and name="EMBTK_GCC_MORE_LANGUAGES">
+				<feature name="EMBTK_GCC_LANGUAGE_OBJECTIVEC"/>
+				<feature name="EMBTK_GCC_LANGUAGE_FORTRAN"/>
+				<feature name="EMBTK_GCC_LANGUAGE_CPP"/>
+				<feature name="EMBTK_GCC_LANGUAGE_OBJECTIVECPP"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_TARGET_nios"/>
+			<feature mandatory="true" name="KEMBTK_EGLIBC_OPTION_EGLIBC_NSSWITCH_FIXED_CONFIG"/>
+			<and name="KEMBTK_EGLIBC_OPTION_POSIX_REGEXP">
+				<feature name="KEMBTK_EGLIBC_OPTION_POSIX_REGEXP_GLIBC"/>
+			</and>
+			<alt mandatory="true" name="EMBTK_GMP_HOST_VERSION_4_3_2_alt">
+				<feature name="EMBTK_GMP_HOST_VERSION_4_3_2"/>
+				<feature name="EMBTK_GMP_HOST_VERSION_4_3_1"/>
+				<feature name="EMBTK_GMP_HOST_VERSION_4_3_0"/>
+				<feature name="EMBTK_GMP_HOST_VERSION_4_2_4"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_LINUXTHREADS_NEW"/>
+			<feature name="EMBTK_ARCH_MIPS_LITTLE_ENDIAN"/>
+			<feature name="KEMBTK_UCLIBC_ARCH_BIG_ENDIAN"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_m68k"/>
+			<feature name="EMBTK_UCLIBC_VERSION_SERIES_0_9_30_X"/>
+			<feature name="EMBTK_DOTCONFIG"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_TZ_CACHING"/>
+			<feature mandatory="true" name="EMBTK_LINUX_VERSION_STRING"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_sh"/>
+			<feature name="KEMBTK_UCLIBC_ARCH_HAS_NO_LDSO"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_MULTILIB_DIR"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_e1"/>
+			<feature mandatory="true" name="EMBTK_EGLIBC_VERSION_STRING"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_NFTW"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_WARNINGS"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_SSP">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_BUILD_SSP"/>
+				<alt mandatory="true" name="KEMBTK_UCLIBC_PROPOLICE_BLOCK_SEGV_alt">
+					<feature name="KEMBTK_UCLIBC_PROPOLICE_BLOCK_ABRT"/>
+					<feature name="KEMBTK_UCLIBC_PROPOLICE_BLOCK_SEGV"/>
+				</alt>
+				<feature name="KEMBTK_UCLIBC_SSP_QUICK_CANARY"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SSP_COMPAT"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_TARGET_powerpc"/>
+			<feature name="KEMBTK_UCLIBC_HAVE_DOT_CONFIG"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_ia64"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM610"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_TARGET_SUBARCH"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_vax"/>
+			<feature name="EMBTK_EGLIBC_OPTION_EGLIBC_NSSWITCH"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_OABI"/>
+			<feature name="EMBTK_UCLIBC_VERSION_SERIES_0_9_31_X"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GETPT"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_KERNEL_HEADERS"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_BUILD_MINIMAL_LOCALES"/>
+			<feature name="KEMBTK_UCLIBC_DOASSERTS"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM10T"/>
+			<feature name="EMBTK_EGLIBC_NEED_PATCH"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_GETC_MACRO"/>
+			<and name="KEMBTK_EGLIBC_OPTION_EGLIBC_CRYPT">
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_CRYPT_UFC"/>
+			</and>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_PTY">
+				<feature name="KEMBTK_UCLIBC_UNIX98PTY_ONLY"/>
+				<feature name="KEMBTK_UCLIBC_ASSUME_DEVPTS"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_FOPEN_LARGEFILE_MODE"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_FTW"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_EXTRA_COMPAT_RES_STATE"/>
+			<feature name="EMBTK_64BITS_FS"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_LIBUTIL"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_TZ_FILE">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_TZ_FILE_READ_MANY"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_FALLBACK_TO_ETC_LOCALTIME"/>
+				<feature mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_TZ_FILE_PATH"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_CUSTOM_PRINTF"/>
+			<feature mandatory="true" name="EMBTK_GCC_VERSION_STRING"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_LIBNSL_STUB"/>
+			<alt mandatory="true" name="EMBTK_UCLIBC_VERSION_0_9_30_alt">
+				<feature name="EMBTK_UCLIBC_VERSION_0_9_30_1"/>
+				<feature name="EMBTK_UCLIBC_VERSION_0_9_30"/>
+				<feature name="EMBTK_UCLIBC_VERSION_GIT"/>
+			</alt>
+			<alt mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUILTIN_BUFFER_4_alt">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUILTIN_BUFFER_NONE"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUILTIN_BUFFER_4"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_BUILTIN_BUFFER_8"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_O32_ABI"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_BUILD_RELRO"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_SPAWN"/>
+			<feature mandatory="true" name="EMBTK_GMP_HOST_VERSION_STRING"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_FTRAVERSE"/>
+			<feature name="KEMBTK_UCLIBC_ARCH_ANY_ENDIAN"/>
+			<feature mandatory="true" name="EMBTK_UCLIBC_GIT_REVISION"/>
+			<feature name="KEMBTK_UCLIBC_DODEBUG"/>
+			<feature name="KEMBTK_UCLIBC_ARCH_WANTS_LITTLE_ENDIAN"/>
+			<feature name="KEMBTK_UCLIBC_EXCLUDE_BRK"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_N64_ABI"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_bfin"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_BSD_ERR"/>
+			<and name="KEMBTK_UCLIBC_HAVE_SHARED">
+				<feature name="KEMBTK_UCLIBC_LDSO_RUNPATH"/>
+				<feature name="KEMBTK_UCLIBC_LDSO_CACHE_SUPPORT"/>
+				<feature name="KEMBTK_UCLIBC_FORCE_SHAREABLE_TEXT_SEGMENTS"/>
+				<feature name="KEMBTK_UCLIBC_LDSO_PRELOAD_ENV_SUPPORT"/>
+				<and name="KEMBTK_UCLIBC_LDSO_PRELOAD_FILE_SUPPORT">
+					<feature mandatory="true" name="KEMBTK_UCLIBC_LDSO_BASE_FILENAME"/>
+				</and>
+				<feature name="KEMBTK_UCLIBC_LDSO_SEARCH_INTERP_PATH"/>
+				<feature name="KEMBTK_UCLIBC_LDSO_LDD_SUPPORT"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_STATIC_LDCONFIG"/>
+			</and>
+			<and name="KEMBTK_UCLIBC_UCLIBC_USE_NETLINK">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_SUPPORT_AI_ADDRCONFIG"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_ISA_2"/>
+			<and name="KEMBTK_EGLIBC_OPTION_EGLIBC_LIBM">
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_LIBM_BIG"/>
+			</and>
+			<feature mandatory="true" name="EMBTK_MPC_HOST_VERSION_STRING"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_DOWNLOAD_PREGENERATED_LOCALE_DATA"/>
+			<and name="EMBTK_LINUX_HAVE_MIRROR">
+				<feature mandatory="true" name="EMBTK_LINUX_HAVE_MIRROR_SITE"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_HAVE_NO_PIC"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_v850"/>
+			<feature name="KEMBTK_UCLIBC_HAVE_NO_SSP"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_TM_EXTENSIONS"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_GRP_BUFFER_SIZE"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_LFS"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_BSD"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_microblaze"/>
+			<feature name="KEMBTK_UCLIBC_USE_BX"/>
+			<alt mandatory="true" name="EMBTK_BINUTILS_VERSION_2_19_1_alt">
+				<feature name="EMBTK_BINUTILS_VERSION_2_20_1"/>
+				<feature name="EMBTK_BINUTILS_VERSION_2_20"/>
+				<feature name="EMBTK_BINUTILS_VERSION_2_19_1"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_ARCH_LITTLE_ENDIAN"/>
+			<alt mandatory="true" name="EMBTK_HAVE_GDBSERVER_ON_TARGET_alt">
+				<feature name="EMBTK_HAVE_GDBSERVER_ON_TARGET"/>
+				<feature name="EMBTK_HAVE_GDB_ON_TARGET"/>
+			</alt>
+			<feature name="KEMBTK_UCLIBC_EXTRA_WARNINGS"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_BUILD_NOEXECSTACK"/>
+			<and name="EMBTK_HAVE_ROOTFS">
+				<feature name="EMBTK_HAVE_NLS_HI"/>
+				<feature name="EMBTK_LUA_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_ET"/>
+				<feature name="EMBTK_HAVE_NLS_IT"/>
+				<feature mandatory="true" name="EMBTK_UTILLINUXNG_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_SR_LATIN"/>
+				<feature mandatory="true" name="EMBTK_XTRANS_VERSION_STRING"/>
+				<feature name="EMBTK_ATK_VERSION_1_28_X_AND_GREATER"/>
+				<feature name="EMBTK_HAVE_NLS_PS"/>
+				<feature name="EMBTK_TSLIB_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_UR"/>
+				<feature name="EMBTK_HAVE_NLS_OC"/>
+				<feature mandatory="true" name="EMBTK_LIBXML2_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_PANGO">
+					<alt mandatory="true" name="EMBTK_PANGO_VERSION_1_28_1_alt">
+						<feature name="EMBTK_PANGO_VERSION_1_28_1"/>
+						<feature name="EMBTK_PANGO_VERSION_1_26_2"/>
+					</alt>
+					<feature name="EMBTK_HAVE_PANGO_WITH_X"/>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_EN_CA"/>
+				<feature name="EMBTK_HAVE_NLS_SR_IJE"/>
+				<feature name="EMBTK_HAVE_NLS_PT_BR"/>
+				<feature name="EMBTK_HAVE_NLS_GU"/>
+				<and name="EMBTK_HAVE_LIBXRANDR">
+					<and mandatory="true" name="EMBTK_LIBXRANDR_VERSION_1_3_0_alt">
+						<feature mandatory="true" name="EMBTK_LIBXRANDR_VERSION_1_3_0"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_OR"/>
+				<and name="EMBTK_HAVE_XCMISCPROTO">
+					<and mandatory="true" name="EMBTK_XCMISCPROTO_VERSION_1_2_0_alt">
+						<feature mandatory="true" name="EMBTK_XCMISCPROTO_VERSION_1_2_0"/>
+					</and>
+				</and>
+				<feature mandatory="true" name="EMBTK_XPROTO_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_EXPAT_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBXFONT_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_IMLIB2">
+					<and mandatory="true" name="EMBTK_IMLIB2_VERSION_1_4_4_alt">
+						<feature mandatory="true" name="EMBTK_IMLIB2_VERSION_1_4_4"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_LIBPTHREADSTUBS">
+					<and mandatory="true" name="EMBTK_LIBPTHREADSTUBS_VERSION_0_3_alt">
+						<feature mandatory="true" name="EMBTK_LIBPTHREADSTUBS_VERSION_0_3"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_PA"/>
+				<feature name="EMBTK_HAVE_NLS_MI"/>
+				<feature mandatory="true" name="EMBTK_UTILMACROS_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBXEXT_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBELF_VERSION_STRING"/>
+				<feature name="EMBTK_DBUS_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_SV"/>
+				<and name="EMBTK_HAVE_LIBXML2">
+					<alt mandatory="true" name="EMBTK_LIBXML2_VERSION_2_7_7_alt">
+						<feature name="EMBTK_LIBXML2_VERSION_2_7_7"/>
+						<feature name="EMBTK_LIBXML2_VERSION_2_7_6"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_SL"/>
+				<feature name="EMBTK_HAVE_NLS_RU"/>
+				<feature name="EMBTK_UTILLINUXNG_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_EN_GB"/>
+				<feature mandatory="true" name="EMBTK_UTILLINUXNG_MAJOR_VERSION_STRING"/>
+				<feature name="EMBTK_ATK_VERSION_ALL"/>
+				<feature mandatory="true" name="EMBTK_LIBXRANDR_VERSION_STRING"/>
+				<feature name="EMBTK_LIBPCIACCESS_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_RO"/>
+				<feature mandatory="true" name="EMBTK_DIRECTFB_BRANCH_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBJPEG_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_FONTSPROTO">
+					<and mandatory="true" name="EMBTK_FONTSPROTO_VERSION_2_1_0_alt">
+						<feature mandatory="true" name="EMBTK_FONTSPROTO_VERSION_2_1_0"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_EO"/>
+				<feature mandatory="true" name="EMBTK_PERL_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_XEXTPROTO_VERSION_STRING"/>
+				<and mandatory="true" name="EMBTK_MTDUTILS_VERSION_1_3_1_alt">
+					<feature mandatory="true" name="EMBTK_MTDUTILS_VERSION_1_3_1"/>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_GL"/>
+				<feature mandatory="true" name="EMBTK_LIBXFT_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_FR"/>
+				<and name="EMBTK_HAVE_KBPROTO">
+					<alt mandatory="true" name="EMBTK_KBPROTO_VERSION_1_0_4_alt">
+						<feature name="EMBTK_KBPROTO_VERSION_1_0_5"/>
+						<feature name="EMBTK_KBPROTO_VERSION_1_0_4"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_ML"/>
+				<feature name="EMBTK_HAVE_NLS_CA_VALENCIA"/>
+				<and name="EMBTK_HAVE_PIXMAN">
+					<alt mandatory="true" name="EMBTK_PIXMAN_VERSION_0_18_2_alt">
+						<feature name="EMBTK_PIXMAN_VERSION_0_18_4"/>
+						<feature name="EMBTK_PIXMAN_VERSION_0_18_2"/>
+						<feature name="EMBTK_PIXMAN_VERSION_0_18_1"/>
+						<feature name="EMBTK_PIXMAN_VERSION_0_18_0"/>
+						<feature name="EMBTK_PIXMAN_VERSION_0_16_6"/>
+						<feature name="EMBTK_PIXMAN_VERSION_0_16_5"/>
+						<feature name="EMBTK_PIXMAN_VERSION_0_16_4"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_LIBX11">
+					<alt mandatory="true" name="EMBTK_LIBX11_VERSION_1_3_3_alt">
+						<feature name="EMBTK_LIBX11_VERSION_1_3_4"/>
+						<feature name="EMBTK_LIBX11_VERSION_1_3_3"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_EL"/>
+				<feature name="EMBTK_HAVE_NLS_BN_IN"/>
+				<and name="EMBTK_HAVE_LIBXRENDER">
+					<alt mandatory="true" name="EMBTK_LIBXRENDER_VERSION_0_9_5_alt">
+						<feature name="EMBTK_LIBXRENDER_VERSION_0_9_6"/>
+						<feature name="EMBTK_LIBXRENDER_VERSION_0_9_5"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_FONTCONFIG">
+					<and mandatory="true" name="EMBTK_FONTCONFIG_VERSION_2_8_0_alt">
+						<feature mandatory="true" name="EMBTK_FONTCONFIG_VERSION_2_8_0"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_LIBXCOMPOSITE">
+					<and mandatory="true" name="EMBTK_LIBXCOMPOSITE_VERSION_0_4_2_alt">
+						<feature mandatory="true" name="EMBTK_LIBXCOMPOSITE_VERSION_0_4_2"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_TH"/>
+				<feature mandatory="true" name="EMBTK_FREETYPE_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_TR"/>
+				<feature name="EMBTK_EXPAT_NEED_PATCH"/>
+				<feature name="EMBTK_MTDUTILS_NEED_PATCH"/>
+				<and name="EMBTK_HAVE_FREETYPE">
+					<alt mandatory="true" name="EMBTK_FREETYPE_VERSION_2_4_2_alt">
+						<feature name="EMBTK_FREETYPE_VERSION_2_4_2"/>
+						<feature name="EMBTK_FREETYPE_VERSION_2_4_1"/>
+						<feature name="EMBTK_FREETYPE_VERSION_2_4_0"/>
+						<feature name="EMBTK_FREETYPE_VERSION_2_3_12"/>
+						<feature name="EMBTK_FREETYPE_VERSION_2_3_11"/>
+						<feature name="EMBTK_FREETYPE_VERSION_2_3_10"/>
+						<feature name="EMBTK_FREETYPE_VERSION_2_3_9"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_CS"/>
+				<feature mandatory="true" name="EMBTK_BIGREQSPROTO_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBXCOMPOSITE_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_NDS"/>
+				<feature name="EMBTK_ATK_VERSION_1_30_X_AND_GREATER"/>
+				<feature mandatory="true" name="EMBTK_PANGO_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_BR"/>
+				<feature name="EMBTK_HOST_HAVE_MTDUTILS"/>
+				<and name="EMBTK_HAVE_GLIB">
+					<alt mandatory="true" name="EMBTK_GLIB_VERSION_2_24_1_alt">
+						<feature name="EMBTK_GLIB_VERSION_2_24_2"/>
+						<feature name="EMBTK_GLIB_VERSION_2_24_1"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_LIBJPEG">
+					<alt mandatory="true" name="EMBTK_LIBJPEG_VERSION_V7_alt">
+						<feature name="EMBTK_LIBJPEG_VERSION_V8"/>
+						<feature name="EMBTK_LIBJPEG_VERSION_V7"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_RANDRPROTO">
+					<and mandatory="true" name="EMBTK_RANDRPROTO_VERSION_1_3_1_alt">
+						<feature mandatory="true" name="EMBTK_RANDRPROTO_VERSION_1_3_1"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_ATK"/>
+				<feature name="EMBTK_HAVE_NLS_TE"/>
+				<feature name="EMBTK_HAVE_NLS_HY"/>
+				<feature name="EMBTK_HAVE_NLS_FA"/>
+				<feature mandatory="true" name="EMBTK_ZLIB_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_KO"/>
+				<and name="EMBTK_ROOTFS_HAVE_JFFS2">
+					<feature mandatory="true" name="EMBTK_ROOTFS_HAVE_JFFS2_ERASEBLOCKSIZE"/>
+					<feature mandatory="true" name="EMBTK_ROOTFS_HAVE_JFFS2_CLEANMARKERSIZE"/>
+					<feature mandatory="true" name="EMBTK_ROOTFS_HAVE_JFFS2_PAGESIZE"/>
+				</and>
+				<and name="EMBTK_HAVE_XF86VIDEOFBDEV">
+					<and mandatory="true" name="EMBTK_XF86VIDEOFBDEV_VERSION_0_4_2_alt">
+						<feature mandatory="true" name="EMBTK_XF86VIDEOFBDEV_VERSION_0_4_2"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HOST_HAVE_ZLIB"/>
+				<feature name="EMBTK_HAVE_NLS_PT"/>
+				<feature name="EMBTK_HAVE_NLS_SQ"/>
+				<and name="EMBTK_HAVE_RESOURCEPROTO">
+					<and mandatory="true" name="EMBTK_RESOURCEPROTO_VERSION_1_1_0_alt">
+						<feature mandatory="true" name="EMBTK_RESOURCEPROTO_VERSION_1_1_0"/>
+					</and>
+				</and>
+				<feature mandatory="true" name="EMBTK_LIBTIFF_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_ATK_VERSION_STRING"/>
+				<feature name="EMBTK_ATK_VERSION_1_30_X"/>
+				<feature name="EMBTK_HAVE_NLS_LT"/>
+				<feature name="EMBTK_HAVE_NLS_MAI"/>
+				<feature name="EMBTK_HAVE_NLS_LI"/>
+				<feature mandatory="true" name="EMBTK_RECORDPROTO_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_CRH"/>
+				<feature name="EMBTK_HAVE_NLS_EU"/>
+				<and name="EMBTK_HAVE_XF86INPUTEVDEV">
+					<alt mandatory="true" name="EMBTK_XF86INPUTEVDEV_VERSION_2_5_0_alt">
+						<feature name="EMBTK_XF86INPUTEVDEV_VERSION_2_5_0"/>
+						<feature name="EMBTK_XF86INPUTEVDEV_VERSION_2_4_0"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_SK"/>
+				<feature mandatory="true" name="EMBTK_MTDUTILS_VERSION_STRING"/>
+				<feature name="EMBTK_OPENSSL_NEED_PATCH"/>
+				<feature mandatory="true" name="EMBTK_RANDRPROTO_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_UTILMACROS">
+					<alt mandatory="true" name="EMBTK_UTILMACROS_VERSION_1_6_0_alt">
+						<feature name="EMBTK_UTILMACROS_VERSION_1_10_0"/>
+						<feature name="EMBTK_UTILMACROS_VERSION_1_9_0"/>
+						<feature name="EMBTK_UTILMACROS_VERSION_1_8_0"/>
+						<feature name="EMBTK_UTILMACROS_VERSION_1_7_0"/>
+						<feature name="EMBTK_UTILMACROS_VERSION_1_6_1"/>
+						<feature name="EMBTK_UTILMACROS_VERSION_1_6_0"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_DIRECTFB">
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_MATROX"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_DBOXREMOTE"/>
+					<alt mandatory="true" name="EMBTK_DIRECTFB_VERSION_1_4_2_alt">
+						<feature name="EMBTK_DIRECTFB_VERSION_1_4_3"/>
+						<feature name="EMBTK_DIRECTFB_VERSION_1_4_2"/>
+					</alt>
+					<feature name="EMBTK_DIRECTFB_INPUT_SERIALMOUSE"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_MUTOUCH"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_DAVINCI"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_SH772X"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_NEOMAGIC"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_PS2MOUSE"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_UC1X00"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_NVIDIA"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_GL"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_DBOX2REMOTE"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_ELOINPUT"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_DYNAPRO"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_CYBER5K"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_WM97XX"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_OMAP"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_LIRC"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_EP9X"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_LINUXINPUT"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_GUNZE"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_PXA3XX"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_KEYBOARD"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_RADEON"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_VMWARE"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_UNICHROME"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_TSLIB"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_SONYPIJOGDIAL"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_H3600TS"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_ZYTRONIC"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_I810"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_NSC"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_PENMOUNT"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_SIS315"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_TDFX"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_MACH64"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_ATI128"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_CLE266"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_I830"/>
+					<feature name="EMBTK_DIRECTFB_GRAPHIC_SAVAGE"/>
+					<feature name="EMBTK_DIRECTFB_INPUT_JOYSTICK"/>
+				</and>
+				<and name="EMBTK_HAVE_OPENSSL">
+					<alt mandatory="true" name="EMBTK_OPENSSL_VERSION_0_9_8N_alt">
+						<feature name="EMBTK_OPENSSL_VERSION_0_9_8O"/>
+						<feature name="EMBTK_OPENSSL_VERSION_0_9_8N"/>
+						<feature name="EMBTK_OPENSSL_VERSION_0_9_8L"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_ROOTFS_HAVE_SQUASHFS"/>
+				<feature name="EMBTK_HAVE_NLS_PL"/>
+				<feature name="EMBTK_HAVE_NLS_AST"/>
+				<feature name="EMBTK_HAVE_NLS_HE"/>
+				<feature name="EMBTK_XF86INPUTEVDEV_NEED_PATCH"/>
+				<and name="EMBTK_HAVE_LIBXFONT">
+					<alt mandatory="true" name="EMBTK_LIBXFONT_VERSION_1_4_2_alt">
+						<feature name="EMBTK_LIBXFONT_VERSION_1_4_2"/>
+						<feature name="EMBTK_LIBXFONT_VERSION_1_4_1"/>
+					</alt>
+				</and>
+				<feature mandatory="true" name="EMBTK_LUA_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_GETTEXT_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_NB"/>
+				<feature mandatory="true" name="EMBTK_XF86INPUTEVDEV_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_OPENSSL_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_XKBCOMP">
+					<and mandatory="true" name="EMBTK_XKBCOMP_VERSION_1_1_1_alt">
+						<feature mandatory="true" name="EMBTK_XKBCOMP_VERSION_1_1_1"/>
+					</and>
+				</and>
+				<feature name="EMBTK_ATK_VERSION_1_32_X_AND_GREATER"/>
+				<feature mandatory="true" name="EMBTK_DBUS_VERSION_STRING"/>
+				<feature name="EMBTK_LIBELF_NEED_PATCH"/>
+				<and name="EMBTK_HAVE_XPROTO">
+					<alt mandatory="true" name="EMBTK_XPROTO_VERSION_7_0_16_alt">
+						<feature name="EMBTK_XPROTO_VERSION_7_0_18"/>
+						<feature name="EMBTK_XPROTO_VERSION_7_0_17"/>
+						<feature name="EMBTK_XPROTO_VERSION_7_0_16"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_MK"/>
+				<feature name="EMBTK_ATK_VERSION_1_32_X"/>
+				<and name="EMBTK_HAVE_LIBPNG">
+					<alt mandatory="true" name="EMBTK_LIBPNG_VERSION_1_2_40_alt">
+						<feature name="EMBTK_LIBPNG_VERSION_1_4_2"/>
+						<feature name="EMBTK_LIBPNG_VERSION_1_2_42"/>
+						<feature name="EMBTK_LIBPNG_VERSION_1_2_41"/>
+						<feature name="EMBTK_LIBPNG_VERSION_1_2_40"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_ANG"/>
+				<feature name="EMBTK_HAVE_NLS_NL"/>
+				<and name="EMBTK_HAVE_RENDERPROTO">
+					<alt mandatory="true" name="EMBTK_RENDERPROTO_VERSION_0_11_1_alt">
+						<feature name="EMBTK_RENDERPROTO_VERSION_0_11_1"/>
+						<feature name="EMBTK_RENDERPROTO_VERSION_0_11"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_BE"/>
+				<feature mandatory="true" name="EMBTK_KBPROTO_VERSION_STRING"/>
+				<feature name="EMBTK_ROOTFS_HAVE_MTDUTILS"/>
+				<and name="EMBTK_HAVE_XEXTPROTO">
+					<alt mandatory="true" name="EMBTK_XEXTPROTO_VERSION_7_1_2_alt">
+						<feature name="EMBTK_XEXTPROTO_VERSION_7_1_2"/>
+						<feature name="EMBTK_XEXTPROTO_VERSION_7_1_1"/>
+					</alt>
+				</and>
+				<feature mandatory="true" name="EMBTK_TSLIB_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_DAMAGEPROTO_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_NSO"/>
+				<feature mandatory="true" name="EMBTK_CAIRO_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_BIGREQSPROTO">
+					<and mandatory="true" name="EMBTK_BIGREQSPROTO_VERSION_1_1_0_alt">
+						<feature mandatory="true" name="EMBTK_BIGREQSPROTO_VERSION_1_1_0"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_KN"/>
+				<and name="EMBTK_HAVE_MICROPERL">
+					<and mandatory="true" name="EMBTK_MICROPERL_VERSION_5_10_1_alt">
+						<feature mandatory="true" name="EMBTK_MICROPERL_VERSION_5_10_1"/>
+					</and>
+				</and>
+				<alt mandatory="true" name="EMBTK_ATK_VERSION_1_28_0_alt">
+					<feature name="EMBTK_ATK_VERSION_1_30_0"/>
+					<feature name="EMBTK_ATK_VERSION_1_28_0"/>
+				</alt>
+				<and name="EMBTK_HAVE_VIDEOPROTO">
+					<alt mandatory="true" name="EMBTK_VIDEOPROTO_VERSION_2_3_0_alt">
+						<feature name="EMBTK_VIDEOPROTO_VERSION_2_3_1"/>
+						<feature name="EMBTK_VIDEOPROTO_VERSION_2_3_0"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_LIBTIFF">
+					<and mandatory="true" name="EMBTK_LIBTIFF_VERSION_3_9_2_alt">
+						<feature mandatory="true" name="EMBTK_LIBTIFF_VERSION_3_9_2"/>
+					</and>
+				</and>
+				<feature name="EMBTK_PERL_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_UZ_CYRILLIC"/>
+				<and name="EMBTK_HAVE_XCBPROTO">
+					<and mandatory="true" name="EMBTK_XCBPROTO_VERSION_1_6_alt">
+						<feature mandatory="true" name="EMBTK_XCBPROTO_VERSION_1_6"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_CA"/>
+				<feature mandatory="true" name="EMBTK_XKBCOMP_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_WA"/>
+				<feature mandatory="true" name="EMBTK_LIBXRENDER_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_FONTSPROTO_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_COMPOSITEPROTO">
+					<and mandatory="true" name="EMBTK_COMPOSITEPROTO_VERSION_0_4_1_alt">
+						<feature mandatory="true" name="EMBTK_COMPOSITEPROTO_VERSION_0_4_1"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_GA"/>
+				<and name="EMBTK_HAVE_XKEYBOARDCONFIG">
+					<and mandatory="true" name="EMBTK_XKEYBOARDCONFIG_VERSION_1_8_alt">
+						<feature mandatory="true" name="EMBTK_XKEYBOARDCONFIG_VERSION_1_8"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_NCURSES">
+					<and mandatory="true" name="EMBTK_NCURSES_VERSION_5_7_alt">
+						<feature mandatory="true" name="EMBTK_NCURSES_VERSION_5_7"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_KA"/>
+				<feature mandatory="true" name="EMBTK_RENDERPROTO_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBXAU_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_SR"/>
+				<feature name="EMBTK_HAVE_NLS_AZ_IR"/>
+				<and mandatory="true" name="EMBTK_ZLIB_VERSION_1_2_5_alt">
+					<feature mandatory="true" name="EMBTK_ZLIB_VERSION_1_2_5"/>
+				</and>
+				<and name="EMBTK_HAVE_TSLIB">
+					<and mandatory="true" name="EMBTK_TSLIB_VERSION_1_0_alt">
+						<feature mandatory="true" name="EMBTK_TSLIB_VERSION_1_0"/>
+					</and>
+				</and>
+				<feature mandatory="true" name="EMBTK_COMPOSITEPROTO_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_FONTCONFIG_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_UTILLINUXNG">
+					<and mandatory="true" name="EMBTK_UTILLINUXNG_VERSION_2_18_alt">
+						<feature mandatory="true" name="EMBTK_UTILLINUXNG_VERSION_2_18"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_UZ"/>
+				<and name="EMBTK_HAVE_LIBXFT">
+					<and mandatory="true" name="EMBTK_LIBXFT_VERSION_2_1_14_alt">
+						<feature mandatory="true" name="EMBTK_LIBXFT_VERSION_2_1_14"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_BS"/>
+				<feature mandatory="true" name="EMBTK_GTK_MAJOR_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_GLIB_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_DA"/>
+				<feature mandatory="true" name="EMBTK_LIBPCIACCESS_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_RESOURCEPROTO_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_INPUTPROTO_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_TK"/>
+				<feature mandatory="true" name="EMBTK_LIBXKBFILE_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_XSERVER_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_AR"/>
+				<and name="EMBTK_HAVE_LIBXFIXES">
+					<and mandatory="true" name="EMBTK_LIBXFIXES_VERSION_4_0_5_alt">
+						<feature mandatory="true" name="EMBTK_LIBXFIXES_VERSION_4_0_5"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_RW"/>
+				<feature name="EMBTK_ZLIB_NEED_PATCH"/>
+				<feature mandatory="true" name="EMBTK_XCBUTIL_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_LIBFONTENC">
+					<and mandatory="true" name="EMBTK_LIBFONTENC_VERSION_1_0_5_alt">
+						<feature mandatory="true" name="EMBTK_LIBFONTENC_VERSION_1_0_5"/>
+					</and>
+				</and>
+				<and name="EMBTK_ROOTFS_HAVE_INITRAMFS_CPIO">
+					<alt mandatory="true" name="EMBTK_ROOTFS_HAVE_INITRAMFS_CPIO_BZIPED_alt">
+						<feature name="EMBTK_ROOTFS_HAVE_INITRAMFS_CPIO_GZIPED"/>
+						<feature name="EMBTK_ROOTFS_HAVE_INITRAMFS_CPIO_BZIPED"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_FI"/>
+				<feature mandatory="true" name="EMBTK_LIBPNG_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_HU"/>
+				<feature name="EMBTK_HAVE_ZLIB"/>
+				<feature mandatory="true" name="EMBTK_VIDEOPROTO_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_CY"/>
+				<and name="EMBTK_HAVE_LIBXEXT">
+					<alt mandatory="true" name="EMBTK_LIBXEXT_VERSION_1_1_2_alt">
+						<feature name="EMBTK_LIBXEXT_VERSION_1_1_2"/>
+						<feature name="EMBTK_LIBXEXT_VERSION_1_1_1"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_LIBXKBFILE">
+					<and mandatory="true" name="EMBTK_LIBXKBFILE_VERSION_1_0_6_alt">
+						<feature mandatory="true" name="EMBTK_LIBXKBFILE_VERSION_1_0_6"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_DAMAGEPROTO">
+					<and mandatory="true" name="EMBTK_DAMAGEPROTO_VERSION_1_2_0_alt">
+						<feature mandatory="true" name="EMBTK_DAMAGEPROTO_VERSION_1_2_0"/>
+					</and>
+				</and>
+				<feature mandatory="true" name="EMBTK_PANGO_MAJOR_VERSION_STRING"/>
+				<feature name="EMBTK_XF86VIDEOFBDEV_NEED_PATCH"/>
+				<and name="EMBTK_HAVE_LIBXCB">
+					<alt mandatory="true" name="EMBTK_LIBXCB_VERSION_1_5_alt">
+						<feature name="EMBTK_LIBXCB_VERSION_1_7"/>
+						<feature name="EMBTK_LIBXCB_VERSION_1_6"/>
+						<feature name="EMBTK_LIBXCB_VERSION_1_5"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_XTRANS">
+					<and mandatory="true" name="EMBTK_XTRANS_VERSION_1_2_5_alt">
+						<feature mandatory="true" name="EMBTK_XTRANS_VERSION_1_2_5"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_LIBELF">
+					<and mandatory="true" name="EMBTK_LIBELF_VERSION_0_8_13_alt">
+						<feature mandatory="true" name="EMBTK_LIBELF_VERSION_0_8_13"/>
+					</and>
+				</and>
+				<feature name="EMBTK_LIBXFIXES_NEED_PATCH"/>
+				<and name="EMBTK_HAVE_RECORDPROTO">
+					<and mandatory="true" name="EMBTK_RECORDPROTO_VERSION_1_14_alt">
+						<feature mandatory="true" name="EMBTK_RECORDPROTO_VERSION_1_14"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_CAIRO">
+					<alt mandatory="true" name="EMBTK_CAIRO_VERSION_1_8_10_alt">
+						<feature name="EMBTK_CAIRO_VERSION_1_8_10"/>
+						<feature name="EMBTK_CAIRO_VERSION_1_8_9"/>
+						<feature name="EMBTK_CAIRO_VERSION_1_8_8"/>
+					</alt>
+					<feature name="EMBTK_HAVE_CAIRO_WITH_LIBXCB"/>
+					<feature name="EMBTK_HAVE_CAIRO_WITH_DIRECTFB"/>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_DZ"/>
+				<feature name="EMBTK_HAVE_NLS_BN"/>
+				<feature name="EMBTK_HAVE_NLS_IA"/>
+				<feature name="EMBTK_HAVE_NLS_HR"/>
+				<and name="EMBTK_HAVE_LUA">
+					<and mandatory="true" name="EMBTK_LUA_VERSION_5_1_alt">
+						<feature mandatory="true" name="EMBTK_LUA_VERSION_5_1"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_BG"/>
+				<feature name="EMBTK_HAVE_NLS_VI"/>
+				<feature mandatory="true" name="EMBTK_LIBFONTENC_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_DE"/>
+				<feature name="EMBTK_HAVE_NLS_AZ"/>
+				<and name="EMBTK_HAVE_EXPAT">
+					<and mandatory="true" name="EMBTK_EXPAT_VERSION_2_0_1_alt">
+						<feature mandatory="true" name="EMBTK_EXPAT_VERSION_2_0_1"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_TT"/>
+				<feature name="EMBTK_HAVE_NLS_BE_LATIN"/>
+				<feature mandatory="true" name="EMBTK_XF86VIDEOFBDEV_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBXFIXES_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_IS"/>
+				<feature mandatory="true" name="EMBTK_GLIB_MAJOR_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_MS"/>
+				<feature mandatory="true" name="EMBTK_FREEFONT_TTF_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_MN"/>
+				<feature mandatory="true" name="EMBTK_ATK_MAJOR_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_XCBUTIL">
+					<and mandatory="true" name="EMBTK_XCBUTIL_VERSION_0_3_6_alt">
+						<feature mandatory="true" name="EMBTK_XCBUTIL_VERSION_0_3_6"/>
+					</and>
+				</and>
+				<feature mandatory="true" name="EMBTK_NCURSES_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_ID"/>
+				<feature name="EMBTK_HAVE_NLS_AS"/>
+				<feature name="EMBTK_HAVE_NLS_ES"/>
+				<feature mandatory="true" name="EMBTK_FIXESPROTO_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_TA"/>
+				<feature name="EMBTK_HAVE_NLS_YI"/>
+				<feature mandatory="true" name="EMBTK_LIBXCB_VERSION_STRING"/>
+				<feature name="EMBTK_IMLIB2_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_NE"/>
+				<and name="EMBTK_HAVE_DBUS">
+					<and mandatory="true" name="EMBTK_DBUS_VERSION_1_2_24_alt">
+						<feature mandatory="true" name="EMBTK_DBUS_VERSION_1_2_24"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_INPUTPROTO">
+					<and mandatory="true" name="EMBTK_INPUTPROTO_VERSION_2_0_alt">
+						<feature mandatory="true" name="EMBTK_INPUTPROTO_VERSION_2_0"/>
+					</and>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_ZH_CN"/>
+				<feature name="EMBTK_HAVE_NLS_IO"/>
+				<feature mandatory="true" name="EMBTK_XKEYBOARDCONFIG_VERSION_STRING"/>
+				<feature name="EMBTK_ATK_VERSION_1_28_X"/>
+				<feature name="EMBTK_HAVE_NLS_MR"/>
+				<feature name="EMBTK_HAVE_NLS_NN"/>
+				<and name="EMBTK_HAVE_LIBXAU">
+					<alt mandatory="true" name="EMBTK_LIBXAU_VERSION_1_0_5_alt">
+						<feature name="EMBTK_LIBXAU_VERSION_1_0_6"/>
+						<feature name="EMBTK_LIBXAU_VERSION_1_0_5"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_AM"/>
+				<and name="EMBTK_HAVE_FIXESPROTO">
+					<and mandatory="true" name="EMBTK_FIXESPROTO_VERSION_4_1_alt">
+						<feature mandatory="true" name="EMBTK_FIXESPROTO_VERSION_4_1"/>
+					</and>
+				</and>
+				<and name="EMBTK_HAVE_LIBPCIACCESS">
+					<alt mandatory="true" name="EMBTK_LIBPCIACCESS_VERSION_0_12_0_alt">
+						<feature name="EMBTK_LIBPCIACCESS_VERSION_0_12_0"/>
+						<feature name="EMBTK_LIBPCIACCESS_VERSION_0_11_0"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_SI"/>
+				<feature name="EMBTK_HAVE_NLS_KU"/>
+				<feature mandatory="true" name="EMBTK_LIBX11_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_JA"/>
+				<feature mandatory="true" name="EMBTK_NLS_STRING"/>
+				<feature mandatory="true" name="EMBTK_LIBPTHREADSTUBS_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_ZH_TW"/>
+				<feature mandatory="true" name="EMBTK_XCBPROTO_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_IMLIB2_VERSION_STRING"/>
+				<feature name="EMBTK_HAVE_NLS_LV"/>
+				<and name="EMBTK_HAVE_GETTEXT">
+					<alt mandatory="true" name="EMBTK_GETTEXT_VERSION_0_17_alt">
+						<feature name="EMBTK_GETTEXT_VERSION_0_17"/>
+						<feature name="EMBTK_GETTEXT_VERSION_0_16_1"/>
+					</alt>
+				</and>
+				<and name="EMBTK_HAVE_GTK">
+					<alt mandatory="true" name="EMBTK_GTK_VERSION_2_20_1_alt">
+						<feature name="EMBTK_GTK_VERSION_2_20_1"/>
+						<feature name="EMBTK_GTK_VERSION_2_18_9"/>
+						<feature name="EMBTK_GTK_VERSION_2_18_8"/>
+						<feature name="EMBTK_GTK_VERSION_2_18_7"/>
+						<feature name="EMBTK_GTK_VERSION_2_18_6"/>
+						<feature name="EMBTK_GTK_VERSION_2_18_5"/>
+					</alt>
+					<alt mandatory="true" name="EMBTK_GTK_BACKEND_XSERVER_alt">
+						<feature name="EMBTK_GTK_BACKEND_XSERVER"/>
+						<feature name="EMBTK_GTK_BACKEND_DIRECTFB"/>
+					</alt>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_AF"/>
+				<feature mandatory="true" name="EMBTK_DIRECTFB_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_GTK_VERSION_STRING"/>
+				<feature mandatory="true" name="EMBTK_XCMISCPROTO_VERSION_STRING"/>
+				<and name="EMBTK_HAVE_XSERVER">
+					<alt mandatory="true" name="EMBTK_HAVE_XSERVER_KDRIVE_alt">
+						<feature name="EMBTK_HAVE_XSERVER_XORG"/>
+						<feature name="EMBTK_HAVE_XSERVER_KDRIVE"/>
+					</alt>
+					<alt mandatory="true" name="EMBTK_XSERVER_VERSION_1_7_6_alt">
+						<feature name="EMBTK_XSERVER_VERSION_1_8_2"/>
+						<feature name="EMBTK_XSERVER_VERSION_1_8_1"/>
+						<feature name="EMBTK_XSERVER_VERSION_1_7_7"/>
+						<feature name="EMBTK_XSERVER_VERSION_1_7_6"/>
+					</alt>
+					<feature name="EMBTK_HAVE_XSERVER_WITH_TSLIB"/>
+				</and>
+				<feature name="EMBTK_HAVE_NLS_ZH_HK"/>
+				<feature name="EMBTK_HAVE_NLS_UK"/>
+				<and name="EMBTK_HAVE_FREEFONT_TTF">
+					<and mandatory="true" name="EMBTK_FREEFONT_TTF_VERSION_20090104_alt">
+						<feature mandatory="true" name="EMBTK_FREEFONT_TTF_VERSION_20090104"/>
+					</and>
+				</and>
+				<feature mandatory="true" name="EMBTK_PIXMAN_VERSION_STRING"/>
+				<feature name="EMBTK_LIBXCOMPOSITE_NEED_PATCH"/>
+				<feature name="EMBTK_HAVE_NLS_XH"/>
+				<and name="EMBTK_ROOTFS_HAVE_BB">
+					<alt mandatory="true" name="EMBTK_BB_VERSION_1_14_3_alt">
+						<feature name="EMBTK_BB_VERSION_1_16_2"/>
+						<feature name="EMBTK_BB_VERSION_1_16_1"/>
+						<feature name="EMBTK_BB_VERSION_1_15_3"/>
+						<feature name="EMBTK_BB_VERSION_1_15_2"/>
+						<feature name="EMBTK_BB_VERSION_1_15_1"/>
+						<feature name="EMBTK_BB_VERSION_1_15_0"/>
+						<feature name="EMBTK_BB_VERSION_1_14_4"/>
+						<feature name="EMBTK_BB_VERSION_1_14_3"/>
+						<feature name="EMBTK_BB_VERSION_1_14_2"/>
+						<feature name="EMBTK_BB_VERSION_1_14_1"/>
+						<feature name="EMBTK_BB_VERSION_1_13_4"/>
+					</alt>
+					<feature mandatory="true" name="EMBTK_BB_DOT_CONFIG"/>
+					<feature mandatory="true" name="EMBTK_BB_VERSION_STRING"/>
+				</and>
+			</and>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_BUILD_PIE"/>
+			<feature name="EMBTK_STRACE_NEED_PATCH"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_SHUTDOWN_ON_ABORT"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_PRINTF_SCANF_POSITIONAL_ARGS"/>
+			<alt mandatory="true" name="EMBTK_HARDFLOAT_alt">
+				<feature name="EMBTK_SOFTFLOAT"/>
+				<feature name="EMBTK_HARDFLOAT"/>
+			</alt>
+			<feature name="EMBTK_GCC_NEED_PATCH"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_STREAMS"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_ARC4RANDOM"/>
+			<feature name="EMBTK_TARGET_STRIPPED"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GETTEXT_AWARENESS"/>
+			<feature name="KEMBTK_UCLIBC_SUPPORT_LD_DEBUG"/>
+			<feature name="KEMBTK_UCLIBC_PTHREADS_DEBUG_SUPPORT"/>
+			<alt mandatory="true" name="EMBTK_CLIB_UCLIBC_alt">
+				<feature name="EMBTK_CLIB_EGLIBC"/>
+				<feature name="EMBTK_CLIB_UCLIBC"/>
+			</alt>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_LOCALES"/>
+			<feature mandatory="true" name="EMBTK_EGLIBC_SVN_REVISION"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM1176JZF_S"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_h8300"/>
+			<feature name="KEMBTK_UCLIBC_DOMULTI"/>
+			<feature name="KEMBTK_UCLIBC_SUPPORT_LD_DEBUG_EARLY"/>
+			<and name="EMBTK_ROOTFS_HAVE_STRACE">
+				<alt mandatory="true" name="EMBTK_STRACE_VERSION_4_5_19_alt">
+					<feature name="EMBTK_STRACE_VERSION_4_5_19"/>
+					<feature name="EMBTK_STRACE_VERSION_4_5_18"/>
+				</alt>
+			</and>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_GNU_GETOPT">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GETOPT_LONG"/>
+			</and>
+			<feature name="EMBTK_TARGET_ARCH_32BITS"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_BIG_MACROS"/>
+			<feature name="KEMBTK_UCLIBC_COMPAT_ATEXIT"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_SIGNUM_MESSAGES">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SYS_SIGLIST"/>
+			</and>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_UCLIBC_EXTRA_CFLAGS"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_ISA_1"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_alpha"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STRING_GENERIC_OPT"/>
+			<feature mandatory="true" name="KEMBTK_UCLIBC_RUNTIME_PREFIX"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_OBSOLETE_BSD_SIGNAL"/>
+			<feature mandatory="true" name="EMBTK_DOWNLOAD_DIR"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_OBSOLETE_SYSV_SIGNAL"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_CUSTOM_STREAMS"/>
+			<and name="KEMBTK_EGLIBC_OPTION_EGLIBC_UTMP">
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_UTMPX"/>
+				<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_GETLOGIN"/>
+			</and>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_NSSWITCH"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_i960"/>
+			<feature name="KEMBTK_UCLIBC_TARGET_sparc"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_ARM_XSCALE"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_FMTMSG"/>
+			<feature name="EMBTK_TARGET_ARCH_BIG_ENDIAN"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_SCANF_GLIBC_A_FLAG"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_XATTR"/>
+			<feature name="KEMBTK_UCLIBC_CONFIG_MIPS_ISA_MIPS64"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_CRYPT_IMPL">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_CRYPT"/>
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_CRYPT_STUB"/>
+			</and>
+			<and mandatory="true" name="EMBTK_GCC_VERSION_4_2_4_alt">
+				<feature mandatory="true" name="EMBTK_GCC_VERSION_4_2_4"/>
+			</and>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_STRING_ARCH_OPT"/>
+			<feature name="KEMBTK_UCLIBC_ARCH_HAS_NO_MMU"/>
+			<feature name="KEMBTK_UCLIBC_HARDWIRED_ABSPATH"/>
+			<feature mandatory="true" name="EMBTK_MPFR_HOST_VERSION_STRING"/>
+			<and mandatory="true" name="EMBTK_ARCH_ARM_ABI_EABI_alt">
+				<feature mandatory="true" name="EMBTK_ARCH_ARM_ABI_EABI"/>
+			</and>
+			<feature name="EMBTK_TARGET_ARCH_LITTLE_ENDIAN"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_DYNAMIC_ATEXIT"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_GNU_ERROR"/>
+			<feature name="KEMBTK_EGLIBC_OPTION_EGLIBC_BACKTRACE"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_HAS_HEXADECIMAL_FLOATS"/>
+			<and name="KEMBTK_UCLIBC_UCLIBC_HAS_PROGRAM_INVOCATION_NAME">
+				<feature name="KEMBTK_UCLIBC_UCLIBC_HAS___PROGNAME"/>
+			</and>
+			<feature mandatory="true" name="EMBTK_STRACE_VERSION_STRING"/>
+			<feature name="EMBTK_MPFR_HOST_VERSION_PATCH"/>
+			<and mandatory="true" name="EMBTK_MPC_HOST_VERSION_0_8_1_alt">
+				<feature mandatory="true" name="EMBTK_MPC_HOST_VERSION_0_8_1"/>
+			</and>
+			<feature name="EMBTK_UCLIBC_VERSION_SERIES_1_0_X"/>
+			<feature name="KEMBTK_UCLIBC_UCLIBC_SV4_DEPRECATED"/>
+		</and>
+	</struct>
+	<constraints>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM7TDMI</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM7TDMI_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM710T</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM720T</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM7TDMI_ARM740T</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA_110</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA_1100</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_STRONGARM_SA_1110</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM8</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM8_ARM810</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM9TDMI</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM920T</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM922T</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9TDMI_ARM940T</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9E</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM946E_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9E</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM966E_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9E</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM968E_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM9E</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM9E_ARM926EJ_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM10E</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM10E_ARM1020E</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM10E</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM10E_ARM1022E</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM10E</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM10E_ARM1026EJ_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_XSCALE</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_XSCALE_XSCALE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM11</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1136J_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM11</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1136JF_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM11</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1156T2_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM11</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1176JZ_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM11</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM11_ARM1176JZF_S</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_ARM11</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_ARM11_MPCORE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_CORTEX</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_A8</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_CORTEX</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_A9</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_CORTEX</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_R4</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_CORTEX</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_R4F</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_CORTEX</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_M3</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_CORTEX</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_CORTEX_CORTEX_M1</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_IWMMXT</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_IWMMXT_IWMMXT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ARCH_ARM_FAMILY_IWMMXT</var>
+				<not>
+					<var>EMBTK_ARCH_ARM_FAMILY_IWMMXT_IWMMXT2</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<not>
+					<var>EMBTK_TARGET_ARCH_32BITS</var>
+				</not>
+				<not>
+					<var>EMBTK_ARCH_MIPS_ABI_N32</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<not>
+					<var>EMBTK_TARGET_ARCH_32BITS</var>
+				</not>
+				<not>
+					<var>EMBTK_ARCH_MIPS_ABI_N64</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_UCLIBC_VERSION_0_9_30</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_alpha</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_avr32</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_bfin</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_cris</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_e1</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_frv</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_h8300</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_hppa</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_i386</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_i960</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_ia64</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_m68k</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_microblaze</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_nios</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_nios2</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_powerpc</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_sh</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_sh64</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_sparc</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_v850</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_vax</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_x86_64</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_TARGET_xtensa</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_CONFIG_ARM610</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_CONFIG_ARM_OABI</var>
+			</not>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_ARCH_USE_MMU</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_FORMAT_ELF</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_HAVE_NO_PIC</var>
+			</not>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_LDSO_GNU_HASH_SUPPORT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_HAVE_SHARED</var>
+				<not>
+					<var>KEMBTK_UCLIBC_LDSO_GNU_HASH_SUPPORT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_UCLIBC_VERSION_SERIES_1_0_X</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_THREADS_NATIVE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_LINUXTHREADS_NEW</var>
+			</not>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_PTHREADS_DEBUG_SUPPORT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_THREADS</var>
+				<not>
+					<var>KEMBTK_UCLIBC_PTHREADS_DEBUG_SUPPORT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_ARCH_USE_MMU</var>
+				<not>
+					<var>KEMBTK_UCLIBC_MALLOC_STANDARD</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_COMPAT_ATEXIT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_STUBS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_LIBUTIL</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_PTY</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_LIBUTIL</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_UCLIBC_VERSION_SERIES_0_9_31_X</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_LIBUTIL</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_OBSOLETE_BSD_SIGNAL</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_OBSOLETE_SYSV_SIGNAL</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_NTP_LEGACY</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_SV4_DEPRECATED</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_USE_NETLINK</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_SOCKET</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_USE_NETLINK</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_BSD_RES_CLOSE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_NETWORK_SUPPORT</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_BSD_RES_CLOSE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_EXTRA_COMPAT_RES_STATE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_NETWORK_SUPPORT</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_EXTRA_COMPAT_RES_STATE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_UCLIBC_VERSION_SERIES_0_9_31_X</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_EXTRA_COMPAT_RES_STATE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_LIBNSL_STUB</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_NETWORK_SUPPORT</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_LIBNSL_STUB</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_UCLIBC_VERSION_SERIES_0_9_31_X</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_LIBNSL_STUB</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_DOWNLOAD_PREGENERATED_LOCALE_DATA</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_PREGENERATED_LOCALE_DATA</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_DOWNLOAD_PREGENERATED_LOCALE_DATA</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_XLOCALE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_LOCALE</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_XLOCALE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_HEXADECIMAL_FLOATS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_CTYPE_TABLES</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_HEXADECIMAL_FLOATS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_FLOATS</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_HEXADECIMAL_FLOATS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_DIGIT_GROUPING</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_LOCALE</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_DIGIT_GROUPING</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_FLOATS</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_DIGIT_GROUPING</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_CUSTOM_PRINTF</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<not>
+					<var>KEMBTK_UCLIBC_USE_OLD_VFPRINTF</var>
+				</not>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_CUSTOM_PRINTF</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_USE_OLD_VFPRINTF</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_WCHAR</var>
+				</not>
+				<not>
+					<var>KEMBTK_UCLIBC_USE_OLD_VFPRINTF</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_SCANF_GLIBC_A_FLAG</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_STDIO_SHUTDOWN_ON_ABORT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_FOPEN_LARGEFILE_MODE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_LFS</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_FOPEN_LARGEFILE_MODE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_FOPEN_EXCLUSIVE_MODE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GLIBC_CUSTOM_STREAMS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_PRINTF_M_SPEC</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GETTEXT_AWARENESS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_LOCALE</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GETTEXT_AWARENESS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_MJN3_ONLY</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_GETTEXT_AWARENESS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_WORDEXP</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_GLOB</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_WORDEXP</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_NFTW</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_UCLIBC_VERSION_SERIES_0_9_31_X</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_NFTW</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_FTW</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_BUILD_PIE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_HAVE_SHARED</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_BUILD_PIE</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_TARGET_arm</var>
+				<disj>
+					<var>KEMBTK_UCLIBC_TARGET_frv</var>
+					<disj>
+						<var>KEMBTK_UCLIBC_TARGET_i386</var>
+						<disj>
+							<var>KEMBTK_UCLIBC_TARGET_mips</var>
+							<disj>
+								<var>KEMBTK_UCLIBC_TARGET_powerpc</var>
+								<not>
+									<var>KEMBTK_UCLIBC_UCLIBC_BUILD_PIE</var>
+								</not>
+							</disj>
+						</disj>
+					</disj>
+				</disj>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_ARC4RANDOM</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<not>
+				<var>KEMBTK_UCLIBC_HAVE_NO_SSP</var>
+			</not>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_SSP</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<not>
+					<var>KEMBTK_UCLIBC_HAVE_NO_SSP</var>
+				</not>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_HAS_SSP</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_BUILD_NOW</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_HAVE_SHARED</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_BUILD_NOW</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_DODEBUG</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_DODEBUG_PT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_UCLIBC_HAS_THREADS</var>
+				<not>
+					<var>KEMBTK_UCLIBC_DODEBUG_PT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_LINUXTHREADS_OLD</var>
+				<not>
+					<var>KEMBTK_UCLIBC_DODEBUG_PT</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_DOASSERTS</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_SUPPORT_LD_DEBUG</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_HAVE_SHARED</var>
+				<not>
+					<var>KEMBTK_UCLIBC_SUPPORT_LD_DEBUG</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_SUPPORT_LD_DEBUG_EARLY</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_HAVE_SHARED</var>
+				<not>
+					<var>KEMBTK_UCLIBC_SUPPORT_LD_DEBUG_EARLY</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_MALLOC_DEBUGGING</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>KEMBTK_UCLIBC_MALLOC</var>
+				<disj>
+					<var>KEMBTK_UCLIBC_MALLOC_STANDARD</var>
+					<not>
+						<var>KEMBTK_UCLIBC_UCLIBC_MALLOC_DEBUGGING</var>
+					</not>
+				</disj>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_DOMULTI</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_CLIB_UCLIBC</var>
+				<not>
+					<var>KEMBTK_UCLIBC_UCLIBC_MJN3_ONLY</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GCC_VERSION_4_5_0</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GCC_VERSION_4_4_3</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GCC_VERSION_4_4_2</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GCC_VERSION_4_4_1</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GCC_VERSION_4_3_4</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GCC_VERSION_4_3_3</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GCC_VERSION_4_3_2</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GMP_HOST_VERSION_4_3_1</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_OLDPACKAGES</var>
+				<not>
+					<var>EMBTK_GMP_HOST_VERSION_4_3_0</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_MPC_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_ZLIB_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_ATK_VERSION_1_32_X_AND_GREATER</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_ATK_VERSION_1_28_X_AND_GREATER</var>
+			</not>
+		</rule>
+		<rule>
+			<disj>
+				<var>EMBTK_ATK_VERSION_1_28_X</var>
+				<not>
+					<var>EMBTK_ATK_VERSION_1_28_0</var>
+				</not>
+			</disj>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_IMLIB2_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_LUA_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_DBUS_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_UTILLINUXNG_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_EXPAT_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_LIBPCIACCESS_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_LIBXCOMPOSITE_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_LIBXFIXES_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_XF86INPUTEVDEV_NEED_PATCH</var>
+			</not>
+		</rule>
+		<rule>
+			<not>
+				<var>EMBTK_XF86VIDEOFBDEV_NEED_PATCH</var>
+			</not>
+		</rule>
+	</constraints>
+</featureModel>

@@ -1,21 +1,26 @@
-# CommonPackage
-A Maven package for utility functions
+# common-package
 
-## How to use
+A Maven package provides utility functions.
 
-Add the below script in your pom file:
+## Features
 
-```
-<dependency>
-  <groupId>at.tugraz.ist.ase</groupId>
-  <artifactId>common</artifactId>
-  <version>1.2</version>
-</dependency>
-```
+- Utility functions for Choco Solver
+- Utility functions for input and output
+- Utility functions for logging
+- Utility functions for generating random numbers
+- Utility functions for parsing command line argurments
+- Utility functions for a mail service
 
-And the below script in the settings.xml file:
+## How to get this package
 
-```
+| *version*                                                                      | *status* |
+|--------------------------------------------------------------------------------|---|
+| [1.3.9-alpha-16](https://github.com/manleviet/CA-CDR-V2/packages/1408257)      | latest |
+| [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1408257?version=1.3.8) | stable |
+
+Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -39,5 +44,15 @@ And the below script in the settings.xml file:
             </repositories>
         </profile>
     </profiles>
+    
+    <servers>
+        <server>
+            <id>github</id>
+            <username>USERNAME</username>
+            <password>TOKEN</password>
+        </server>
+    </servers>
 </settings>
 ```
+Replacing USERNAME with your GitHub username, and TOKEN with your personal access token 
+(see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)).

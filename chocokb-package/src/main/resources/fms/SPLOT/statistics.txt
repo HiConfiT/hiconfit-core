@@ -1,0 +1,209 @@
+1
+Name: banking.sxfm
+Source: SPLOT
+#variables: 176
+#constraints: 143
+#Choco variables: 374
+#Choco constraints: 280
+Consistency: true
+
+CTC ratio: 0.027972027972027972
+#features: 176
+#relationships: 139
+#constraints: 4
+#MANDATORY: 46
+#OPTIONAL: 77
+#ALTERNATIVE: 10
+#OR: 6
+#REQUIRES: 4
+#EXCLUDES: 0
+2
+Name: ubuntu.sxfm
+Source: SPLOT
+#variables: 263
+#constraints: 261
+#Choco variables: 601
+#Choco constraints: 608
+Consistency: true
+
+CTC ratio: 0.3218390804597701
+#features: 263
+#relationships: 177
+#constraints: 84
+#MANDATORY: 67
+#OPTIONAL: 72
+#ALTERNATIVE: 37
+#OR: 1
+#REQUIRES: 65
+#EXCLUDES: 0
+3
+Name: windows8.sxfm
+Source: SPLOT
+#variables: 451
+#constraints: 405
+#Choco variables: 973
+#Choco constraints: 921
+Consistency: true
+
+CTC ratio: 0.34074074074074073
+#features: 451
+#relationships: 267
+#constraints: 138
+#MANDATORY: 56
+#OPTIONAL: 164
+#ALTERNATIVE: 35
+#OR: 12
+#REQUIRES: 102
+#EXCLUDES: 0
+4
+Name: investment.sxfm
+Source: SPLOT
+#variables: 366
+#constraints: 233
+#Choco variables: 780
+#Choco constraints: 661
+Consistency: true
+
+CTC ratio: 0.8240343347639485
+#features: 366
+#relationships: 41
+#constraints: 192
+#MANDATORY: 20
+#OPTIONAL: 2
+#ALTERNATIVE: 10
+#OR: 9
+#REQUIRES: 1
+#EXCLUDES: 0
+5
+Name: android.sxfm
+Source: SPLOT
+#variables: 210
+#constraints: 160
+#Choco variables: 470
+#Choco constraints: 458
+Consistency: true
+
+CTC ratio: 0.2375
+#features: 210
+#relationships: 122
+#constraints: 38
+#MANDATORY: 52
+#OPTIONAL: 46
+#ALTERNATIVE: 24
+#OR: 0
+#REQUIRES: 27
+#EXCLUDES: 0
+6
+Name: fqa.sxfm
+Source: SPLOT
+#variables: 178
+#constraints: 101
+#Choco variables: 416
+#Choco constraints: 366
+Consistency: true
+
+CTC ratio: 0.0891089108910891
+#features: 178
+#relationships: 92
+#constraints: 9
+#MANDATORY: 32
+#OPTIONAL: 17
+#ALTERNATIVE: 29
+#OR: 14
+#REQUIRES: 8
+#EXCLUDES: 1
+7
+Name: REAL-FM-4.sxfm
+Source: SPLOT
+#variables: 290
+#constraints: 218
+#Choco variables: 582
+#Choco constraints: 425
+Consistency: true
+
+CTC ratio: 0.0963302752293578
+#features: 290
+#relationships: 197
+#constraints: 21
+#MANDATORY: 75
+#OPTIONAL: 82
+#ALTERNATIVE: 0
+#OR: 40
+#REQUIRES: 20
+#EXCLUDES: 0
+8
+Name: subseaCS.sxfm
+Source: SPLOT
+#variables: 142
+#constraints: 83
+#Choco variables: 344
+#Choco constraints: 352
+Consistency: true
+
+CTC ratio: 0.1566265060240964
+#features: 142
+#relationships: 70
+#constraints: 13
+#MANDATORY: 35
+#OPTIONAL: 1
+#ALTERNATIVE: 29
+#OR: 5
+#REQUIRES: 13
+#EXCLUDES: 0
+9
+Name: bigdata.sxfm
+Source: SPLOT
+#variables: 625
+#constraints: 381
+#Choco variables: 1368
+#Choco constraints: 1033
+Consistency: true
+
+CTC ratio: 0.0
+#features: 625
+#relationships: 381
+#constraints: 0
+#MANDATORY: 79
+#OPTIONAL: 213
+#ALTERNATIVE: 58
+#OR: 31
+#REQUIRES: 0
+#EXCLUDES: 0
+10
+Name: printers.sxfm
+Source: SPLOT
+#variables: 172
+#constraints: 77
+#Choco variables: 366
+#Choco constraints: 294
+Consistency: true
+
+CTC ratio: 0.0
+#features: 172
+#relationships: 77
+#constraints: 0
+#MANDATORY: 48
+#OPTIONAL: 1
+#ALTERNATIVE: 10
+#OR: 18
+#REQUIRES: 0
+#EXCLUDES: 0
+11
+Name: windows7.sxfm
+Source: SPLOT
+#variables: 329
+#constraints: 341
+#Choco variables: 711
+#Choco constraints: 652
+Consistency: true
+
+CTC ratio: 0.31671554252199413
+#features: 329
+#relationships: 233
+#constraints: 108
+#MANDATORY: 50
+#OPTIONAL: 147
+#ALTERNATIVE: 26
+#OR: 10
+#REQUIRES: 80
+#EXCLUDES: 0

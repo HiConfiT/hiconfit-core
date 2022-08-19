@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/main/java/at/tugraz/ist/ase/fm/core</OriginalElement>
+  <nodes>
+    <node x="467.5" y="-148.0">at.tugraz.ist.ase.fm.core.Relationship</node>
+    <node x="-262.0" y="796.0">at.tugraz.ist.ase.fm.parser.XMIParser</node>
+    <node x="242.0" y="357.0">at.tugraz.ist.ase.fm.core.ThreeCNFConstraint</node>
+    <node x="860.5" y="638.0">at.tugraz.ist.ase.fm.parser.FeatureModelParser</node>
+    <node x="-262.0" y="1104.0">at.tugraz.ist.ase.fm.core.Feature</node>
+    <node x="744.9999999999999" y="785.0">at.tugraz.ist.ase.fm.parser.FeatureIDEParser</node>
+    <node x="34.0" y="1104.0">at.tugraz.ist.ase.fm.core.Clause</node>
+    <node x="297.0" y="1104.0">at.tugraz.ist.ase.fm.parser.factory.AbstractFMParserFactory</node>
+    <node x="1208.0" y="807.0">at.tugraz.ist.ase.fm.parser.SXFMParser</node>
+    <node x="-262.0" y="-148.0">at.tugraz.ist.ase.fm.core.FeatureModel</node>
+    <node x="594.0" y="335.0">at.tugraz.ist.ase.fm.core.BasicRelationship</node>
+    <node x="200.9999999999999" y="796.0">at.tugraz.ist.ase.fm.parser.GLENCOEParser</node>
+    <node x="1681.0" y="763.0">at.tugraz.ist.ase.fm.parser.DescriptiveFormatParser</node>
+    <node x="297.0" y="1230.0">at.tugraz.ist.ase.fm.parser.factory.FMParserFactory</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="at.tugraz.ist.ase.fm.parser.SXFMParser" target="at.tugraz.ist.ase.fm.parser.FeatureModelParser" relationship="REALIZATION">
+      <point x="0.0" y="-104.0" />
+      <point x="1434.5" y="738.0" />
+      <point x="966.5" y="738.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.fm.core.BasicRelationship" target="at.tugraz.ist.ase.fm.core.Relationship" relationship="GENERALIZATION">
+      <point x="0.0" y="-128.5" />
+      <point x="802.0" y="310.0" />
+      <point x="605.0" y="310.0" />
+      <point x="0.0" y="216.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.fm.core.ThreeCNFConstraint" target="at.tugraz.ist.ase.fm.core.Relationship" relationship="GENERALIZATION">
+      <point x="0.0" y="-106.5" />
+      <point x="408.0" y="310.0" />
+      <point x="605.0" y="310.0" />
+      <point x="0.0" y="216.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.fm.parser.factory.FMParserFactory" target="at.tugraz.ist.ase.fm.parser.factory.AbstractFMParserFactory" relationship="GENERALIZATION">
+      <point x="0.0" y="-61.0" />
+      <point x="0.0" y="38.0" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.fm.parser.XMIParser" target="at.tugraz.ist.ase.fm.parser.FeatureModelParser" relationship="REALIZATION">
+      <point x="0.0" y="-115.0" />
+      <point x="-40.5" y="738.0" />
+      <point x="966.5" y="738.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.fm.parser.GLENCOEParser" target="at.tugraz.ist.ase.fm.parser.FeatureModelParser" relationship="REALIZATION">
+      <point x="0.0" y="-115.0" />
+      <point x="462.9999999999999" y="738.0" />
+      <point x="966.5" y="738.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.fm.parser.DescriptiveFormatParser" target="at.tugraz.ist.ase.fm.parser.FeatureModelParser" relationship="REALIZATION">
+      <point x="0.0" y="-148.0" />
+      <point x="1899.0" y="738.0" />
+      <point x="966.5" y="738.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.fm.parser.FeatureIDEParser" target="at.tugraz.ist.ase.fm.parser.FeatureModelParser" relationship="REALIZATION">
+      <point x="0.0" y="-126.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.4751979991663193" showDependencies="false" x="937.4999999999998" y="649.4999999999999" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

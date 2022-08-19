@@ -8,11 +8,11 @@
 
 package at.tugraz.ist.ase.cdrmodel.fm;
 
-import at.tugraz.ist.ase.test.ITestCase;
-import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
-import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
-import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
+import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
@@ -47,13 +47,14 @@ class FMDebuggingModelTest1 {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         featureModel = parser.parse(fileFM);
 
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(FMDebuggingModelTest.class.getClassLoader(), "FM_10_0.testcases");
 
-        testSuite = factory.buildTestSuite(is, testCaseFactory);
+        testSuite = factory.read(is, testCaseFactory);
 
-        debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMTestCaseTranslator translator = new FMTestCaseTranslator();
+        debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
                 true, false);
         debuggingModel.initialize();
     }

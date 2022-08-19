@@ -54,16 +54,14 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
-public class FastDiagV2 {
+public class FastDiagV2 extends IConsistencyAlgorithm {
 
     // for evaluation
-    public static final String TIMER_FASTDIAGV2 = "Timer for FD V2 ";
-    public static final String COUNTER_FASTDIAGV2_CALLS = "The number of FD V2 calls:";
-
-    protected final ChocoConsistencyChecker checker;
+    public static final String TIMER_FASTDIAGV2 = "Timer for FD V2";
+    public static final String COUNTER_FASTDIAGV2_CALLS = "The number of FD V2 calls";
 
     public FastDiagV2(@NonNull ChocoConsistencyChecker checker) {
-        this.checker = checker;
+        super(checker);
     }
 
     /**
@@ -123,15 +121,15 @@ public class FastDiagV2 {
      * @return a diagnosis or an empty set
      */
     private Set<Constraint> fd(Set<Constraint> D, Set<Constraint> C, Set<Constraint> AC) {
-        log.trace("{}FD [D={}, C={}, AC={}] >>>", LoggerUtils.tab(), D, C, AC);
+        log.debug("{}FD [D={}, C={}, AC={}] >>>", LoggerUtils.tab(), D, C, AC);
         LoggerUtils.indent();
 
         // if D != Φ and consistent(AC) return Φ;
         if ( !D.isEmpty() ) {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(AC)) {
-                log.trace("{}<<< return Φ", LoggerUtils.tab());
                 LoggerUtils.outdent();
+                log.debug("{}<<< return Φ", LoggerUtils.tab());
 
                 return Collections.emptySet();
             }
@@ -141,7 +139,7 @@ public class FastDiagV2 {
         int q = C.size();
         if (q == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
+            log.debug("{}<<< return [{}]", LoggerUtils.tab(), C);
 
             return C;
         }
@@ -165,7 +163,7 @@ public class FastDiagV2 {
         Set<Constraint> D2 = fd(D1, C2, ACwithoutD1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
+        log.debug("{}<<< return [D1={} ∪ D2={}]", LoggerUtils.tab(), D1, D2);
 
         // return(D1 ∪ D2);
         incrementCounter(COUNTER_UNION_OPERATOR);

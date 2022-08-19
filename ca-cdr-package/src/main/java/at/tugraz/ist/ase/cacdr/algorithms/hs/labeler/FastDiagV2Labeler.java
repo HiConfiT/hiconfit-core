@@ -29,7 +29,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Getter
 public class FastDiagV2Labeler extends FastDiagV2 implements IHSLabelable {
 
-    private final FastDiagV2Parameters initialParameters;
+    private FastDiagV2Parameters initialParameters;
 
     /**
      * Constructor with parameters which contain C, and AC
@@ -84,5 +84,11 @@ public class FastDiagV2Labeler extends FastDiagV2 implements IHSLabelable {
         return FastDiagV2Parameters.builder()
                 .C(C)
                 .AC(AC).build();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        initialParameters = null;
     }
 }

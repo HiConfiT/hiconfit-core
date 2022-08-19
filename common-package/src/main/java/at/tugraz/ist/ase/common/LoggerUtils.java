@@ -6,7 +6,9 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.common;import lombok.Getter;
+package at.tugraz.ist.ase.common;
+
+import lombok.Getter;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -20,11 +22,8 @@ public class LoggerUtils {
     public ConcurrentHashMap<Long, String> tabs = new ConcurrentHashMap<>();
 
     public String tab() {
-//        if (!tabs.containsKey(threadId)) {
-//            tabs.put(threadId, "");
-//        }
         long threadId = Thread.currentThread().getId();
-        return tabs.computeIfAbsent(threadId, k -> "");
+        return "|thread=" + threadId + "|" + tabs.computeIfAbsent(threadId, k -> "");
     }
 
     public void indent() {
@@ -41,6 +40,10 @@ public class LoggerUtils {
             tab = tab.substring(0, tab.length() - 3);
             tabs.replace(threadId, tab);
         }
+    }
+
+    public void reset() {
+        tabs.clear();
     }
 
     public synchronized void logMethodInfoWithSession(@NonNull String nameMethod, @NonNull String sessionId, int timeout, @NonNull String requestUri, @NonNull String level) {

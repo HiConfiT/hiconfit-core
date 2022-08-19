@@ -11,18 +11,18 @@ package at.tugraz.ist.ase.cacdr.algorithms;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.cacdr.eval.CAEvaluator;
 import at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModel;
-import at.tugraz.ist.ase.cdrmodel.test.model.*;
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
+import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.cdrmodel.test_model.model.*;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
-import at.tugraz.ist.ase.test.ITestCase;
-import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
-import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
-import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
 import com.google.common.collect.Iterators;
 import com.google.common.io.Files;
 import lombok.Cleanup;
@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedHashSet;
+import java.util.Map;
 import java.util.Set;
 
 import static at.tugraz.ist.ase.cacdr.algorithms.DirectDebug.TIMER_DIRECTDEBUG;
@@ -58,6 +59,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel1 testModel1 = (TestModel1) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -91,6 +93,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel1 testModel1 = (TestModel1) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -141,6 +144,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel2 testModel1 = (TestModel2) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -193,6 +197,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel3 testModel1 = (TestModel3) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -245,6 +250,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel4 testModel1 = (TestModel4) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -297,6 +303,7 @@ public class TestCloneable {
 
         // cloneable
         TestModel5 testModel1 = (TestModel5) testModel.clone();
+        testModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(testModel1);
 
         // run the fastDiag to find diagnoses
@@ -341,26 +348,29 @@ public class TestCloneable {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel featureModel = parser.parse(fileFM);
 
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(DirectDebugTest.class.getClassLoader(), "FM_10_0.testcases");
 
-        TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
+        TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMTestCaseTranslator translator = new FMTestCaseTranslator();
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
                 true, false);
         debuggingModel.initialize();
 
         // cloneable
         FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
         DirectDebug directDebug = new DirectDebug(checker);
 
         CAEvaluator.reset();
-        Set<Constraint> diag = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
+        Map.Entry<Set<ITestCase>, Set<Constraint>> result = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
                 debuggingModel.getCorrectConstraints(),
                 debuggingModel.getTestcases());
+        Set<Constraint> diag = result.getValue();
 
         if (!diag.isEmpty()) {
             System.out.println("\t\tDiag: " + diag);
@@ -385,27 +395,30 @@ public class TestCloneable {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel featureModel = parser.parse(fileFM);
 
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(DirectDebugTest.class.getClassLoader(), "FM_10_1.testcases");
 
-        TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
+        TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMTestCaseTranslator translator = new FMTestCaseTranslator();
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
                 true, false);
         debuggingModel.initialize();
 
         // cloneable
         FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
         // KBDIAG
         DirectDebug directDebug = new DirectDebug(checker);
 
         CAEvaluator.reset();
-        Set<Constraint> diag = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
+        Map.Entry<Set<ITestCase>, Set<Constraint>> result = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
                 debuggingModel.getCorrectConstraints(),
                 debuggingModel.getTestcases());
+        Set<Constraint> diag = result.getValue();
 
         if (!diag.isEmpty()) {
             System.out.println("\t\tDiag: " + diag);
@@ -432,27 +445,30 @@ public class TestCloneable {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel featureModel = parser.parse(fileFM);
 
-        TestSuiteBuilder factory = new TestSuiteBuilder();
+        TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(DirectDebugTest.class.getClassLoader(), "FM_10_2.testcases");
 
-        TestSuite testSuite = factory.buildTestSuite(is, testCaseFactory);
+        TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, new FMTestCaseTranslator(),
+        FMTestCaseTranslator translator = new FMTestCaseTranslator();
+        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
                 true, false);
         debuggingModel.initialize();
 
         // cloneable
         FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
         // KBDIAG
         DirectDebug directDebug = new DirectDebug(checker);
 
         CAEvaluator.reset();
-        Set<Constraint> diag = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
+        Map.Entry<Set<ITestCase>, Set<Constraint>> result = directDebug.findDiagnosis(debuggingModel.getPossiblyFaultyConstraints(),
                 debuggingModel.getCorrectConstraints(),
                 debuggingModel.getTestcases());
+        Set<Constraint> diag = result.getValue();
 
         if (!diag.isEmpty()) {
             System.out.println("\t\tDiag: " + diag);

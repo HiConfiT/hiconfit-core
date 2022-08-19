@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.eval;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.common.ThreadUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collections;
@@ -16,9 +17,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicLong;
-
-import static at.tugraz.ist.ase.common.IOUtils.getThreadString;
 
 @Slf4j
 public class PerformanceEvaluator {
@@ -28,6 +28,8 @@ public class PerformanceEvaluator {
     private static ConcurrentHashMap<String, Counter> counters = new ConcurrentHashMap<>();
     private static ConcurrentHashMap<String, Timer> timers = new ConcurrentHashMap<>();
     private static List<String> commonTimers = new LinkedList<>();
+
+    private static final Semaphore semaphore = new Semaphore(1);
 
     /**
      * Returns a counter with the given name. If counter does not exist, it will be created by the method and added
@@ -75,10 +77,10 @@ public class PerformanceEvaluator {
     /**
      * Starts a timer with the given name
      *
-     * @param name of the counter
+     * @param name of the timer
      */
     public static void start(String name) {
-        name = name + getThreadString() + ": ";
+        name = name + ThreadUtils.getThreadString();
 
         getTimer(name).start();
     }
@@ -87,21 +89,28 @@ public class PerformanceEvaluator {
      * Stops a timer with the given name
      *
      * @param name of the timer
+     * @param isSave whether to save the timing or not
      * @return elapsed time since the timer was started
      */
     public static long stop(String name, boolean isSave) {
-        name = name + getThreadString() + ": ";
+        name = name + ThreadUtils.getThreadString();
 
         return getTimer(name).stop(isSave);
     }
 
+    /**
+     * Stops a timer with the given name and saves the timing
+     *
+     * @param name of the timer
+     * @return elapsed time since the timer was started
+     */
     public static long stop(String name) {
-        name = name + getThreadString() + ": ";
-
-        return getTimer(name).stop();
+        return stop(name, true);
     }
 
     /**
+     * This total can be used for timers that are started by the methods start() and startSharedTimer().
+     *
      * @param name of the timer
      * @return the total time that the timer was running
      */
@@ -109,13 +118,62 @@ public class PerformanceEvaluator {
         return getTimer(name).total();
     }
 
+    /**
+     * Starts a shared timer with the given name
+     *
+     * @param name of the timer
+     */
+    public static void startSharedTimer(String name) {
+        getTimer(name).start();
+
+        if (semaphore.availablePermits() == 0) {
+            semaphore.release();
+        }
+    }
+
+    /**
+     * Stops a shared timer with the given name
+     *
+     * @param name of the timer
+     * @param isSave whether to save the timing or not
+     * @return elapsed time since the timer was started
+     */
+    public static long stopSharedTimer(String name, boolean willStopSoon, boolean isSave) throws InterruptedException {
+        if (willStopSoon) {
+            semaphore.acquire();
+        }
+        return getTimer(name).stop(isSave);
+    }
+
+    /**
+     * Stops a timer with the given name and saves the timing
+     *
+     * @param name of the timer
+     * @return elapsed time since the timer was started
+     */
+    public static long stopSharedTimer(String name, boolean willStopSoon) throws InterruptedException {
+        return stopSharedTimer(name, willStopSoon, true);
+    }
+
+    /**
+     * Add a common timer
+     *
+     * When having a common timer, the method getEvaluationResults() will calculate the total time of all timers
+     * having the same name as the common timer.
+     *
+     * @param name of the common timer
+     */
     public static void setCommonTimer(String name) {
         if (!commonTimers.contains(name)) {
             commonTimers.add(name);
         }
     }
 
-    public static long totalCommon(String name) {
+    /**
+     * Get the total time of a common timer
+     * @return total time of a common timer
+     */
+    public static long totalCommonTimer(String name) {
         AtomicLong total = new AtomicLong();
         timers.forEach((key, timer) -> {
             if (key.contains(name)) {
@@ -163,13 +221,13 @@ public class PerformanceEvaluator {
         StringBuilder st = new StringBuilder();
 
         for (String key: counters.keySet()) {
-            st.append(key).append(" ").append(getCounter(key)).append("\n");
+            st.append(key).append(": ").append(getCounter(key)).append("\n");
         }
 
         st.append("\n");
 
         for (String key: timers.keySet()) {
-            st.append(key).append(" ").append(getTimer(key)).append("\n");
+            st.append(key).append(": ").append(getTimer(key)).append("\n");
 
             List<Long> times = getTimer(key).getTimings();
 
@@ -182,7 +240,7 @@ public class PerformanceEvaluator {
         st.append("\n");
 
         for (String key: commonTimers) {
-            st.append(key).append(": ").append( (double)totalCommon(key) / 1000000000.0).append("\n");
+            st.append(key).append(": ").append( (double) totalCommonTimer(key) / 1000000000.0).append("\n");
         }
 
         return st.toString();
@@ -197,19 +255,19 @@ public class PerformanceEvaluator {
         StringBuilder st = new StringBuilder();
 
         for (String key: counters.keySet()) {
-            st.append(key).append(" ").append(getCounter(key).getValue() / numIteration).append("\n");
+            st.append(key).append(": ").append(getCounter(key).getValue() / numIteration).append("\n");
         }
 
         st.append("\n");
 
         for (String key: timers.keySet()) {
-            st.append(key).append(" ").append((double)getTimer(key).total() / 1000000000.0 / numIteration).append("\n");
+            st.append(key).append(": ").append((double)getTimer(key).total() / 1000000000.0 / numIteration).append("\n");
         }
 
         st.append("\n");
 
         for (String key: commonTimers) {
-            st.append(key).append(": ").append( (double)totalCommon(key) / 1000000000.0 / numIteration).append("\n");
+            st.append(key).append(": ").append( (double) totalCommonTimer(key) / 1000000000.0 / numIteration).append("\n");
         }
 
         return st.toString();

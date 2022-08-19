@@ -33,7 +33,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * //--------------------
  * // Func FastDiag(C, B) : Δ
  * // if isEmpty(C) or consistent(B U C) return Φ
- * // else return C \ FD(C, B, Φ)
+ * // else return C \ FD(Φ, C, B)
  *
  * // Func FD(Δ, C = {c1..cn}, B) : MSS
  * // if Δ != Φ and consistent(B U C) return C;
@@ -45,16 +45,14 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // return Δ1 ∪ Δ2;
  */
 @Slf4j
-public class FastDiagV3 {
+public class FastDiagV3 extends IConsistencyAlgorithm {
 
     // for evaluation
-    public static final String TIMER_FASTDIAGV3 = "Timer for FD V3 ";
-    public static final String COUNTER_FASTDIAGV3_CALLS = "The number of FD V3 calls:";
-
-    protected final ChocoConsistencyChecker checker;
+    public static final String TIMER_FASTDIAGV3 = "Timer for FD V3";
+    public static final String COUNTER_FASTDIAGV3_CALLS = "The number of FD V3 calls";
 
     public FastDiagV3(@NonNull ChocoConsistencyChecker checker) {
-        this.checker = checker;
+        super(checker);
     }
 
     /**
@@ -118,7 +116,7 @@ public class FastDiagV3 {
      * @return a maximal satisfiable subset MSS of C U B.
      */
     private Set<Constraint> fd(Set<Constraint> Δ, Set<Constraint> C, Set<Constraint> B) {
-        log.trace("{}FD [Δ={}, C={}, B={}] >>>", LoggerUtils.tab(), Δ, C, B);
+        log.debug("{}FD [Δ={}, C={}, B={}] >>>", LoggerUtils.tab(), Δ, C, B);
         LoggerUtils.indent();
 
         // if Δ != Φ and consistent(B U C) return C;
@@ -128,7 +126,7 @@ public class FastDiagV3 {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (checker.isConsistent(BwithC)) {
                 LoggerUtils.outdent();
-                log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
+                log.debug("{}<<< return [{}]", LoggerUtils.tab(), C);
 
                 return C;
             }
@@ -138,7 +136,7 @@ public class FastDiagV3 {
         int n = C.size();
         if (n == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return Φ", LoggerUtils.tab());
+            log.debug("{}<<< return Φ", LoggerUtils.tab());
 
             return Collections.emptySet();
         }
@@ -162,7 +160,7 @@ public class FastDiagV3 {
         Set<Constraint> Δ2 = fd(C1withoutΔ1, C2, BwithΔ1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [Δ1={} ∪ Δ2={}]", LoggerUtils.tab(), Δ1, Δ2);
+        log.debug("{}<<< return [Δ1={} ∪ Δ2={}]", LoggerUtils.tab(), Δ1, Δ2);
 
         // return Δ1 ∪ Δ2;
         incrementCounter(COUNTER_UNION_OPERATOR);

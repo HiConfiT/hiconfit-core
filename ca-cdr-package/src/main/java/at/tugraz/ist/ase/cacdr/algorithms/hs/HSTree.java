@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.hasIntersection;
+import static at.tugraz.ist.ase.common.ConstraintUtils.*;
 
 /**
  * Implementation of the HS-tree algorithm.
@@ -36,8 +36,8 @@ public class HSTree extends AbstractHSConstructor {
     @Getter
     private Node root = null;
     protected final Queue<Node> openNodes = new LinkedList<>();
-    // Map of <label, list of nodes which have the label as its label>
-    protected Map<Set<Constraint>, List<Node>> label_nodesMap = new LinkedHashMap<>();
+    // Map of <label's hashcode, list of nodes which have the label as its label>
+    protected Map<Integer, List<Node>> label_nodesMap = new LinkedHashMap<>();
 
     public HSTree(IHSLabelable labeler) {
         super(labeler);
@@ -189,11 +189,11 @@ public class HSTree extends AbstractHSConstructor {
     protected void addItemToLabelNodesMap(Set<Constraint> label, Node node) {
         log.trace("{}addItemToLabelNodesMap [label_nodesMap.size={}, label={}, node={}]", LoggerUtils.tab(), label_nodesMap.size(), label, node);
         LoggerUtils.indent();
-        if (!label_nodesMap.containsKey(label)) {
-            label_nodesMap.put(label, new LinkedList<>());
+        if (!label_nodesMap.containsKey(label.hashCode())) {
+            label_nodesMap.put(label.hashCode(), new LinkedList<>());
             log.trace("{}Add new item", LoggerUtils.tab());
         }
-        label_nodesMap.get(label).add(node);
+        label_nodesMap.get(label.hashCode()).add(node);
         log.trace("{}Updated [label_nodesMap.size={}]", LoggerUtils.tab(), label_nodesMap.size()); 
         LoggerUtils.outdent();
     }

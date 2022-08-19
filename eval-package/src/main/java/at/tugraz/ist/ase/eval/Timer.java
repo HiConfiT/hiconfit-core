@@ -31,7 +31,7 @@ public class Timer extends AbstractEvaluator {
     public Timer(String name) {
         super(name);
 
-        log.debug("{}Created a timer [timer={}]", LoggerUtils.tab(), name);
+        log.trace("{}Created a timer [timer={}]", LoggerUtils.tab(), name);
     }
 
     /**
@@ -42,12 +42,13 @@ public class Timer extends AbstractEvaluator {
         this.running = true;
         this.time = System.nanoTime();
 
-        log.debug("{}Started the timer [timer={}]", LoggerUtils.tab(), name);
+        log.trace("{}Started the timer [timer={}]", LoggerUtils.tab(), name);
     }
 
     /**
      * Stop the timer.
      *
+     * @param isSave whether to save the timing or not
      * @return return the time elapsed since the start in nanoseconds.
      */
     public long stop(boolean isSave) {
@@ -58,11 +59,16 @@ public class Timer extends AbstractEvaluator {
             this.timings.add(this.time);
         }
 
-        log.debug("{}Stopped the timer [timer={}]", LoggerUtils.tab(), name);
+        log.trace("{}Stopped the timer [timer={}]", LoggerUtils.tab(), name);
 
         return this.time;
     }
 
+    /**
+     * Stop the timer and save the timing.
+     *
+     * @return return the time elapsed since the start in nanoseconds.
+     */
     public long stop() {
         return stop(true);
     }

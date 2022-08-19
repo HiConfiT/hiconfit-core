@@ -2,6 +2,10 @@
 
 This tool generates synthesized feature models using the Betty framework. For further details on Betty framework, we refer to [https://www.isa.us.es/betty/welcome](https://www.isa.us.es/betty/welcome).
 
+| *version* | *status* |
+|---|---|
+| [1.3](https://github.com/manleviet/CA-CDR-V2/releases/tag/fm-gen-v1.3) | stable |
+
 ### Parameters
 
 1. The number of constraints (`-c`)
@@ -21,8 +25,13 @@ In case of numFeatures < 10, the tool uses the Random generation. Otherwise, it 
 
 Generated feature models are saved using the [SPLOT format](http://www.splot-research.org).
 
-### Dependencies
+### Usage
 
-- [ChocoKB v1.2.7](https://github.com/manleviet/ChocoKB)
-- [fm v1.2.9](https://github.com/manleviet/FeatureModelPackage)
-- [common v1.2.4](https://github.com/manleviet/CommonPackage)
+**Requirements**: OpenJDK 17.0.2
+
+**Syntax**: 
+```
+java -jar fm_gen.jar [-h] -c <#constraints> -fm <#generated_feature_models> [-ctc <ratio_cross_tree_constraints>] [-g <#max_generations>] [-out <path_to_folder>]
+```
+
+If the parameters `-out`, `-ctc` and `-g` aren't specified, the default values are "./", "0.8" and "5" respectively.

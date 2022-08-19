@@ -10,7 +10,8 @@ package at.tugraz.ist.ase.cacdr.algorithms;
 
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.cacdr.eval.CAEvaluator;
-import at.tugraz.ist.ase.cdrmodel.test.model.*;
+import at.tugraz.ist.ase.cdrmodel.test_model.model.*;
+import at.tugraz.ist.ase.common.ThreadUtils;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,6 @@ import java.util.Set;
 import static at.tugraz.ist.ase.cacdr.algorithms.FastDiagV3.TIMER_FASTDIAGV3;
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.printPerformance;
 import static at.tugraz.ist.ase.common.ConstraintUtils.convertToString;
-import static at.tugraz.ist.ase.common.IOUtils.*;
 import static at.tugraz.ist.ase.eval.PerformanceEvaluator.setCommonTimer;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -53,8 +53,8 @@ public class ThreadTimerTest {
 
         assertEquals(testModel.getExpectedFirstDiagnosis(), firstDiag);
 
-        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + getThreadString() + ": ") / 1000000000.0;
-        double actualTime = CAEvaluator.totalCommon(TIMER_FASTDIAGV3) / 1000000000.0;
+        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + ThreadUtils.getThreadString()) / 1000000000.0;
+        double actualTime = CAEvaluator.totalCommonTimer(TIMER_FASTDIAGV3) / 1000000000.0;
 
         assertEquals(expectedTime, actualTime, 0.000001);
     }
@@ -88,8 +88,8 @@ public class ThreadTimerTest {
 
         assertEquals(testModel.getExpectedFirstDiagnosis(), firstDiag);
 
-        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + getThreadString() + ": ") / 1000000000.0;
-        double actualTime = CAEvaluator.totalCommon(TIMER_FASTDIAGV3) / 1000000000.0;
+        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + ThreadUtils.getThreadString()) / 1000000000.0;
+        double actualTime = CAEvaluator.totalCommonTimer(TIMER_FASTDIAGV3) / 1000000000.0;
 
         assertEquals(expectedTime, actualTime, 0.000001);
     }
@@ -123,8 +123,8 @@ public class ThreadTimerTest {
 
         assertEquals(testModel.getExpectedFirstDiagnosis(), firstDiag);
 
-        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + getThreadString() + ": ") / 1000000000.0;
-        double actualTime = CAEvaluator.totalCommon(TIMER_FASTDIAGV3) / 1000000000.0;
+        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + ThreadUtils.getThreadString()) / 1000000000.0;
+        double actualTime = CAEvaluator.totalCommonTimer(TIMER_FASTDIAGV3) / 1000000000.0;
 
         assertEquals(expectedTime, actualTime, 0.000001);
     }
@@ -158,8 +158,8 @@ public class ThreadTimerTest {
 
         assertEquals(testModel.getExpectedFirstDiagnosis(), firstDiag);
 
-        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + getThreadString() + ": ") / 1000000000.0;
-        double actualTime = CAEvaluator.totalCommon(TIMER_FASTDIAGV3) / 1000000000.0;
+        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + ThreadUtils.getThreadString()) / 1000000000.0;
+        double actualTime = CAEvaluator.totalCommonTimer(TIMER_FASTDIAGV3) / 1000000000.0;
 
         assertEquals(expectedTime, actualTime, 0.000001);
     }
@@ -193,8 +193,8 @@ public class ThreadTimerTest {
 
         assertEquals(testModel.getExpectedFirstDiagnosis(), firstDiag);
 
-        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + getThreadString() + ": ") / 1000000000.0;
-        double actualTime = CAEvaluator.totalCommon(TIMER_FASTDIAGV3) / 1000000000.0;
+        double expectedTime = CAEvaluator.total(TIMER_FASTDIAGV3 + ThreadUtils.getThreadString()) / 1000000000.0;
+        double actualTime = CAEvaluator.totalCommonTimer(TIMER_FASTDIAGV3) / 1000000000.0;
 
         assertEquals(expectedTime, actualTime, 0.000001);
     }

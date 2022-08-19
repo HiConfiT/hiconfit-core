@@ -20,7 +20,7 @@ public class Counter extends AbstractEvaluator {
     public Counter(String name) {
         super(name);
 
-        log.debug("{}Created a counter for [counter={}]", LoggerUtils.tab(), name);
+        log.trace("{}Created a counter for [counter={}]", LoggerUtils.tab(), name);
     }
 
     public long increment(int step) {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/manleviet/Development/GitHub/CA-CDR-V2/eval-package</OriginalElement>
+  <nodes>
+    <node x="122.25" y="-14.0">at.tugraz.ist.ase.eval.AbstractEvaluator</node>
+    <node x="236.0" y="178.0">at.tugraz.ist.ase.eval.Timer</node>
+    <node x="50.0" y="222.0">at.tugraz.ist.ase.eval.Counter</node>
+    <node x="55.25" y="460.0">at.tugraz.ist.ase.eval.PerformanceEvaluator</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="at.tugraz.ist.ase.eval.Timer" target="at.tugraz.ist.ase.eval.AbstractEvaluator" relationship="GENERALIZATION">
+      <point x="0.0" y="-116.0" />
+      <point x="319.5" y="153.0" />
+      <point x="226.25" y="153.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.eval.Counter" target="at.tugraz.ist.ase.eval.AbstractEvaluator" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="133.0" y="153.0" />
+      <point x="226.25" y="153.0" />
+      <point x="0.0" y="71.0" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.eval.PerformanceEvaluator" target="at.tugraz.ist.ase.eval.Counter" relationship="TO_MANY">
+      <point x="0.0" y="-259.0" />
+      <point x="226.25" y="435.0" />
+      <point x="133.0" y="435.0" />
+      <point x="0.0" y="72.0" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.eval.PerformanceEvaluator" target="at.tugraz.ist.ase.eval.Timer" relationship="TO_MANY">
+      <point x="0.0" y="-259.0" />
+      <point x="226.25" y="435.0" />
+      <point x="319.5" y="435.0" />
+      <point x="0.0" y="116.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.8102766798418972" showDependencies="true" x="236.5" y="491.99999999999994" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

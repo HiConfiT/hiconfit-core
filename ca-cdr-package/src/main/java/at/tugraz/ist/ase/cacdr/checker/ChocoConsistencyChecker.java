@@ -11,9 +11,9 @@ package at.tugraz.ist.ase.cacdr.checker;
 import at.tugraz.ist.ase.cdrmodel.CDRModel;
 import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.cdrmodel.IDebuggingModel;
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.test.ITestCase;
-import at.tugraz.ist.ase.test.TestCase;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +32,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @Slf4j
 public class ChocoConsistencyChecker implements IConsistencyChecker {
-    public static final String TIMER_SOLVER = "Timer for solver ";
+    public static final String TIMER_SOLVER = "Timer for solver";
 
     /**
      * An internal models

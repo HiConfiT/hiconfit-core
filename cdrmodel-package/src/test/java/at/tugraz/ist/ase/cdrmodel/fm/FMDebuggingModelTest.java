@@ -8,10 +8,10 @@
 
 package at.tugraz.ist.ase.cdrmodel.fm;
 
-import at.tugraz.ist.ase.test.TestSuite;
-import at.tugraz.ist.ase.test.builder.TestSuiteBuilder;
-import at.tugraz.ist.ase.test.builder.fm.FMTestCaseBuilder;
-import at.tugraz.ist.ase.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
+import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
@@ -62,13 +62,14 @@ class FMDebuggingModelTest {
         FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
         FeatureModel fm = parser.parse(fileFM);
 
-        TestSuiteBuilder builder = new TestSuiteBuilder();
+        TestSuiteReader builder = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
         @Cleanup InputStream is = getInputStream(FMDebuggingModelTest.class.getClassLoader(), "survey.testcases");
 
-        testSuite = builder.buildTestSuite(is, testCaseFactory);
+        testSuite = builder.read(is, testCaseFactory);
 
-        model = new FMDebuggingModel(fm, testSuite, new FMTestCaseTranslator(), true, false);
+        FMTestCaseTranslator translator = new FMTestCaseTranslator();
+        model = new FMDebuggingModel(fm, testSuite, translator, true, false);
         model.initialize();
     }
 
@@ -114,6 +115,7 @@ class FMDebuggingModelTest {
     @Test
     void shouldCloneable() throws CloneNotSupportedException {
         FMDebuggingModel clone = (FMDebuggingModel) model.clone();
+        clone.initialize();
 
         assertAll(() -> assertNotSame(model, clone),
                 () -> assertNotSame(model.getModel(), clone.getModel()),

@@ -17,7 +17,7 @@ import java.util.Set;
 
 @Getter
 public class FlexDiagParameters extends AbstractHSParameters {
-    private final Set<Constraint> AC;
+    private Set<Constraint> AC;
     private final int m;
 
     @Builder
@@ -34,5 +34,11 @@ public class FlexDiagParameters extends AbstractHSParameters {
                 ", AC=" + AC +
                 ", m=" + m +
                 "}";
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        AC = null;
     }
 }

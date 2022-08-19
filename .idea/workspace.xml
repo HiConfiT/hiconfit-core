@@ -1,32 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="ANALYZE_TEST_SOURCES" value="false" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix the merged code">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map...">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/src/main/java/at/tugraz/ist/ase/common/IOUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/src/main/java/at/tugraz/ist/ase/eval/PerformanceEvaluator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exportToHTML/common-package.uml.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-package/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,9 +34,15 @@
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
   </component>
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -52,7 +51,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="24-transparent-between-conflicts-and-diagnoses-in-the-hstree-and-hsdag-algorithms" />
+        <entry key="$PROJECT_DIR$" value="33-downgrade-source-code-to-18" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -90,39 +89,57 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
     &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/cdrmodel-package/src/test/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/test/resources&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;copyright.profiles&quot;
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.30601093&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/fm-package/src/test/resources" />
+      <recent name="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE" />
       <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/ca-cdr-package" />
-      <recent name="$PROJECT_DIR$/cdrmodel-package" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/fm-package" />
+      <recent name="$PROJECT_DIR$/eval-package" />
+      <recent name="$PROJECT_DIR$/common-package" />
       <recent name="$PROJECT_DIR$/chocokb-package" />
+      <recent name="$PROJECT_DIR$/cdrmodel-package" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.kb.fm" />
+      <recent name="at.tugraz.ist.ase.cdrmodel.test.builder.fm" />
+      <recent name="at.tugraz.ist.ase.kb.core" />
       <recent name="at.tugraz.ist.ase.fm.parser" />
       <recent name="at.tugraz.ist.ase.fm.core" />
-      <recent name="at.tugraz.ist.ase.common" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="at.tugraz.ist.ase.cacdr.algorithms" />
+      <recent name="at.tugraz.ist.ase.kb.camera" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.cacdr.algorithms.hs.parameters" />
+      <recent name="at.tugraz.ist.ase.cacdr.algorithms.hs.labeler" />
+      <recent name="at.tugraz.ist.ase.cdrmodel.fm" />
+      <recent name="at.tugraz.ist.ase.cacdr.algorithms" />
       <recent name="at.tugraz.ist.ase.fm.app.cli" />
-      <recent name="at.tugraz.ist.ase.fm.app" />
-      <recent name="at.tugraz.ist.ase.kb.app" />
-      <recent name="at.tugraz.ist.ase.kb.app.cli" />
-      <recent name="at.tugraz.ist.ase.cacdr.eval" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -130,87 +147,129 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.FastDiagV3Test">
-    <configuration name="FastDiagV3Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+  <component name="RunManager" selected="JUnit.TestCaseTest.shouldCloneable">
+    <configuration name="FMGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.app.FMGenerator" />
+      <module name="app-FMGenerator" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.fm.app.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.FastDiagV3Test" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KBStatistics" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.app.KBStatistics" />
+      <module name="app-KBStatistics" />
+      <option name="PROGRAM_PARAMETERS" value="-kb Camera" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ConstraintTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="choco-kb-v2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.core.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.core" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.core.ConstraintTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSDAGTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="ConstraintTest.testConstraint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="choco-kb-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.kb.core.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.core" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.core.ConstraintTest" />
+      <option name="METHOD_NAME" value="testConstraint" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HSTreeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="TestCaseTest.shouldCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.hs.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.hs.HSTreeTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm.TestCaseTest" />
+      <option name="METHOD_NAME" value="shouldCloneable" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ca-cdr-package" />
+    <configuration name="at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="cdrmodel-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel" />
       <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.common in common-package" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="common-package" />
+    <configuration name="at.tugraz.ist.ase.test.builder.fm in test-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.common.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.common" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.test.builder.fm" />
       <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="test-v2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="test-v2" />
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.FastDiagV3Test" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.cacdr.algorithms in ca-cdr-package" />
-        <item itemvalue="JUnit.HSTreeTest" />
-        <item itemvalue="JUnit.HSDAGTest" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.common in common-package" />
+        <item itemvalue="JUnit.TestCaseTest.shouldCloneable" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" />
+        <item itemvalue="JUnit.ConstraintTest" />
+        <item itemvalue="JUnit.ConstraintTest.testConstraint" />
+        <item itemvalue="JUnit.at.tugraz.ist.ase.test.builder.fm in test-v2" />
       </list>
     </recent_temporary>
   </component>
@@ -245,155 +304,409 @@
       <workItem from="1652478184327" duration="742000" />
       <workItem from="1652610876331" duration="1140000" />
       <workItem from="1652655363282" duration="15748000" />
+      <workItem from="1653034708732" duration="100000" />
+      <workItem from="1653034822998" duration="597000" />
+      <workItem from="1653038112176" duration="597000" />
+      <workItem from="1653039066121" duration="86000" />
+      <workItem from="1653042655658" duration="77000" />
+      <workItem from="1653054022149" duration="6334000" />
+      <workItem from="1653087676601" duration="7805000" />
+      <workItem from="1653644867345" duration="49000" />
+      <workItem from="1653644933150" duration="15107000" />
+      <workItem from="1653859043956" duration="1202000" />
+      <workItem from="1653918788905" duration="1520000" />
+      <workItem from="1653991969391" duration="3829000" />
+      <workItem from="1654087314530" duration="598000" />
+      <workItem from="1654155653205" duration="426000" />
+      <workItem from="1654612983056" duration="7136000" />
+      <workItem from="1654778790105" duration="578000" />
+      <workItem from="1654851205699" duration="8222000" />
+      <workItem from="1655563002197" duration="1203000" />
+      <workItem from="1655564399793" duration="4963000" />
+      <workItem from="1655625399438" duration="19000" />
+      <workItem from="1655814438281" duration="15000" />
+      <workItem from="1656669712103" duration="345000" />
+      <workItem from="1656688926598" duration="10475000" />
+      <workItem from="1656884649866" duration="612000" />
+      <workItem from="1656886903351" duration="3062000" />
+      <workItem from="1657206903565" duration="8385000" />
+      <workItem from="1657293521690" duration="30826000" />
+      <workItem from="1657793253955" duration="1224000" />
+      <workItem from="1657873949547" duration="4219000" />
+      <workItem from="1657891649837" duration="25000" />
+      <workItem from="1658073894324" duration="10501000" />
+      <workItem from="1658220667906" duration="299000" />
+      <workItem from="1658221004379" duration="42000" />
+      <workItem from="1658221059012" duration="2503000" />
+      <workItem from="1658316402949" duration="1095000" />
+      <workItem from="1658330624969" duration="1962000" />
+      <workItem from="1658393745714" duration="7422000" />
+      <workItem from="1658476359180" duration="6681000" />
+      <workItem from="1658495075317" duration="5160000" />
+      <workItem from="1658501502180" duration="40000" />
+      <workItem from="1658502166723" duration="1378000" />
+      <workItem from="1658503748606" duration="324000" />
+      <workItem from="1658505010614" duration="6000" />
+      <workItem from="1658505644645" duration="2513000" />
+      <workItem from="1658697235520" duration="3053000" />
+      <workItem from="1658700411683" duration="1485000" />
+      <workItem from="1658702811384" duration="3940000" />
+      <workItem from="1658734288397" duration="8797000" />
+      <workItem from="1658907420698" duration="4983000" />
+      <workItem from="1658914630175" duration="2525000" />
+      <workItem from="1658920767037" duration="181000" />
+      <workItem from="1658994692272" duration="145000" />
+      <workItem from="1659012221975" duration="1745000" />
+      <workItem from="1659023564423" duration="5771000" />
+      <workItem from="1659083240400" duration="701000" />
+      <workItem from="1659083956003" duration="80659000" />
+      <workItem from="1659338507104" duration="3537000" />
+      <workItem from="1659347303507" duration="5918000" />
     </task>
-    <task id="LOCAL-00001" summary="First commit with common-package">
-      <created>1651871782693</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
+    <task id="LOCAL-00032" summary="Publish 1.3.9-alpha-16">
+      <created>1655050208601</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
       <option name="project" value="LOCAL" />
-      <updated>1651871782693</updated>
+      <updated>1655050208601</updated>
     </task>
-    <task id="LOCAL-00002" summary="Add csp2choco-package">
-      <created>1651879769370</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
+    <task id="LOCAL-00033" summary="Add dispose() to ca-cdr algorithms and publish 1.3.9-alpha-17">
+      <created>1655564185663</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
       <option name="project" value="LOCAL" />
-      <updated>1651879769370</updated>
+      <updated>1655564185663</updated>
     </task>
-    <task id="LOCAL-00003" summary="Add fm-package">
-      <created>1651911400565</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
+    <task id="LOCAL-00034" summary="Add dispose() to all projects and publish 1.3.9-alpha-18">
+      <created>1655568391180</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
       <option name="project" value="LOCAL" />
-      <updated>1651911400565</updated>
+      <updated>1655568391180</updated>
     </task>
-    <task id="LOCAL-00004" summary="Update csp2choco-package">
-      <created>1651911433069</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
+    <task id="LOCAL-00035" summary="Add CameraKB">
+      <created>1657293797150</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
       <option name="project" value="LOCAL" />
-      <updated>1651911433069</updated>
+      <updated>1657293797150</updated>
     </task>
-    <task id="LOCAL-00005" summary="Add eval-package">
-      <created>1651911447214</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
+    <task id="LOCAL-00036" summary="Support CameraKB in KBStatistics">
+      <created>1657293838550</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
       <option name="project" value="LOCAL" />
-      <updated>1651911447214</updated>
+      <updated>1657293838550</updated>
     </task>
-    <task id="LOCAL-00006" summary="Add test-package">
-      <created>1651911455757</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
+    <task id="LOCAL-00037" summary="Added DirectDiag with unit tests">
+      <created>1657890937853</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
       <option name="project" value="LOCAL" />
-      <updated>1651911455757</updated>
+      <updated>1657890937853</updated>
     </task>
-    <task id="LOCAL-00007" summary="Update common-package">
-      <created>1651911471470</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
+    <task id="LOCAL-00038" summary="New packages 1.3.9-alpha-19">
+      <created>1657891670044</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
       <option name="project" value="LOCAL" />
-      <updated>1651911471470</updated>
+      <updated>1657891670044</updated>
     </task>
-    <task id="LOCAL-00008" summary="Add chocokb-package">
-      <created>1651911562481</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
+    <task id="LOCAL-00039" summary="Add unit tests for CameraKB">
+      <created>1658077955507</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
       <option name="project" value="LOCAL" />
-      <updated>1651911562481</updated>
+      <updated>1658077955507</updated>
     </task>
-    <task id="LOCAL-00009" summary="Add crdmodel-package">
-      <created>1651918179721</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
+    <task id="LOCAL-00040" summary="Fix the unit test for linux-2.6.33.3.xml">
+      <created>1658332535751</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
       <option name="project" value="LOCAL" />
-      <updated>1651918179722</updated>
+      <updated>1658332535751</updated>
     </task>
-    <task id="LOCAL-00010" summary="Add ca-cdr-package">
-      <created>1651919474750</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
+    <task id="LOCAL-00041" summary="New package 1.3.9-alpha-20">
+      <created>1658332591783</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
       <option name="project" value="LOCAL" />
-      <updated>1651919474750</updated>
+      <updated>1658332591783</updated>
     </task>
-    <task id="LOCAL-00011" summary="Add KBStatistics">
-      <created>1651920766918</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
+    <task id="LOCAL-00042" summary="Fix a bug in FeatureIDEParser">
+      <created>1658476412481</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
       <option name="project" value="LOCAL" />
-      <updated>1651920766918</updated>
+      <updated>1658476412481</updated>
     </task>
-    <task id="LOCAL-00012" summary="Add FMGenerator">
-      <created>1651921106531</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
+    <task id="LOCAL-00043" summary="Add model1.xml">
+      <created>1658495153858</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1651921106531</updated>
+      <updated>1658495153858</updated>
     </task>
-    <task id="LOCAL-00013" summary="Add README.md and build new releases">
-      <created>1651939345068</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
+    <task id="LOCAL-00044" summary="Add rootConstraint to FMKB">
+      <created>1658700188915</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1651939345068</updated>
+      <updated>1658700188915</updated>
     </task>
-    <task id="LOCAL-00014" summary="Corrects the Maven packages">
-      <created>1652431343206</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
+    <task id="LOCAL-00045" summary="Maven package 1.3.9-alpha-21">
+      <created>1658702252236</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1652431343207</updated>
+      <updated>1658702252236</updated>
     </task>
-    <task id="LOCAL-00015" summary="Support to clone TestSuite, and FMDebuggingModel">
-      <created>1652694841940</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
+    <task id="LOCAL-00046" summary="Add FMDiagnosisModel">
+      <created>1658702301810</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1652694841940</updated>
+      <updated>1658702301810</updated>
     </task>
-    <task id="LOCAL-00016" summary="Use Java stream">
-      <created>1652874948669</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
+    <task id="LOCAL-00047" summary="Maven package 1.3.9-alpha-22">
+      <created>1658702358128</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
       <option name="project" value="LOCAL" />
-      <updated>1652874948669</updated>
+      <updated>1658702358128</updated>
     </task>
-    <task id="LOCAL-00017" summary="Use Java stream &amp; Add equals, hashCode">
-      <created>1652875176126</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
+    <task id="LOCAL-00048" summary="Add comments">
+      <created>1658704359512</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
       <option name="project" value="LOCAL" />
-      <updated>1652875176126</updated>
+      <updated>1658704359512</updated>
     </task>
-    <task id="LOCAL-00018" summary="Use Java stream">
-      <created>1652876434972</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
+    <task id="LOCAL-00049" summary="Add ConsoleColors">
+      <created>1658741407724</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
       <option name="project" value="LOCAL" />
-      <updated>1652876434972</updated>
+      <updated>1658741407724</updated>
     </task>
-    <task id="LOCAL-00019" summary="Fix clone &amp; remove ConstraintSet.java">
-      <created>1652876570406</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
+    <task id="LOCAL-00050" summary="New package 1.3.9-alpha-23">
+      <created>1658742853737</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
       <option name="project" value="LOCAL" />
-      <updated>1652876570406</updated>
+      <updated>1658742853739</updated>
     </task>
-    <task id="LOCAL-00020" summary="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator">
-      <created>1652893586907</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
+    <task id="LOCAL-00051" summary="Added convertToStringWithMessage with tabs">
+      <created>1658743999416</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
       <option name="project" value="LOCAL" />
-      <updated>1652893586907</updated>
+      <updated>1658743999417</updated>
     </task>
-    <task id="LOCAL-00021" summary="Fix the merged code">
-      <created>1652911107222</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
+    <task id="LOCAL-00052" summary="Added convertToString with delimiter">
+      <created>1658744623596</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
       <option name="project" value="LOCAL" />
-      <updated>1652911107222</updated>
+      <updated>1658744623596</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00053" summary="Fixed convertToStringWithMessage supporting new convertToString">
+      <created>1658745097272</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1658745097272</updated>
+    </task>
+    <task id="LOCAL-00054" summary="Fixed convertToStringWithMessage supporting brackets">
+      <created>1658745397634</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1658745397634</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Fixed convertToStringWithMessage">
+      <created>1658745777203</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1658745777203</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Removed @Deprecated">
+      <created>1658916916894</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1658916916895</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Supported DirectDebug to identify all diagnoses">
+      <created>1658917150800</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1658917150800</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Add complex_featureide_model.xml">
+      <created>1658994832719</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1658994832719</updated>
+    </task>
+    <task id="LOCAL-00059" summary="FMDebuggingModel inherits FMDiagnosisModel">
+      <created>1659089977383</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1659089977383</updated>
+    </task>
+    <task id="LOCAL-00060" summary="New package 1.3.9-alpha-35">
+      <created>1659089999895</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1659089999895</updated>
+    </task>
+    <task id="LOCAL-00061" summary="#46 - Add IConstraintBuildable, ConstraintBuilder, and FMConstraintBuilder">
+      <created>1659121298169</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1659121298169</updated>
+    </task>
+    <task id="LOCAL-00062" summary="Add @Deprecated to constraints">
+      <created>1659121329379</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1659121329379</updated>
+    </task>
+    <task id="LOCAL-00063" summary="Add IIntVarKB and IBoolVarKB">
+      <created>1659132245678</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1659132245678</updated>
+    </task>
+    <task id="LOCAL-00064" summary="Add getConstraints and addAssignmentToLogOp">
+      <created>1659138785741</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1659138785741</updated>
+    </task>
+    <task id="LOCAL-00065" summary="Add getConstraints and addAssignmentToLogOp">
+      <created>1659138840465</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1659138840465</updated>
+    </task>
+    <task id="LOCAL-00066" summary="Add FMAssignmentsTranslator, IAssignmentsTranslatable, and ILogOpCreatable">
+      <created>1659138881569</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1659138881569</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Delete IConstraintBuildable.java">
+      <created>1659142231094</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1659142231094</updated>
+    </task>
+    <task id="LOCAL-00068" summary="New package 1.3.9-alpha-36">
+      <created>1659144920781</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1659144920781</updated>
+    </task>
+    <task id="LOCAL-00069" summary="Remove @NonNull of negChocoCstrs">
+      <created>1659145387318</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1659145387319</updated>
+    </task>
+    <task id="LOCAL-00070" summary="New package 1.3.9-alpha-37">
+      <created>1659145593058</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1659145593059</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Updates pom files">
+      <created>1659199578160</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1659199578160</updated>
+    </task>
+    <task id="LOCAL-00072" summary="Move Assignment to choco-kb-v2-package">
+      <created>1659263571409</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1659263571409</updated>
+    </task>
+    <task id="LOCAL-00073" summary="Update pom files">
+      <created>1659263728645</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1659263728645</updated>
+    </task>
+    <task id="LOCAL-00074" summary="Migrate TestSuite and TestCase from test-v2 to cdrmodel-v2 + Delete test-v2">
+      <created>1659265889531</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1659265889531</updated>
+    </task>
+    <task id="LOCAL-00075" summary="Fix FMAssignmentsTranslator and FMTestCaseTranslator">
+      <created>1659266952585</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1659266952585</updated>
+    </task>
+    <task id="LOCAL-00076" summary="New package 1.3.9-alpha-38">
+      <created>1659279469320</created>
+      <option name="number" value="00076" />
+      <option name="presentableId" value="LOCAL-00076" />
+      <option name="project" value="LOCAL" />
+      <updated>1659279469320</updated>
+    </task>
+    <task id="LOCAL-00077" summary="Clean up the code in Constraint">
+      <created>1659279650295</created>
+      <option name="number" value="00077" />
+      <option name="presentableId" value="LOCAL-00077" />
+      <option name="project" value="LOCAL" />
+      <updated>1659279650295</updated>
+    </task>
+    <task id="LOCAL-00078" summary="Clean up the code">
+      <created>1659285645227</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1659285645227</updated>
+    </task>
+    <task id="LOCAL-00079" summary="Add Class diagrams">
+      <created>1659342271100</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1659342271100</updated>
+    </task>
+    <task id="LOCAL-00080" summary="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map...">
+      <created>1659353227141</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1659353227142</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -413,7 +726,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="22-support-to-clone-cdrmodels" />
+                        <option value="28-support-multi-threading-in-abstracthsconstructor-hstree-and-hsdag" />
                       </list>
                     </value>
                   </entry>
@@ -426,30 +739,69 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First commit with common-package" />
-    <MESSAGE value="Add csp2choco-package" />
-    <MESSAGE value="Add fm-package, eval-package, test-package, chocokb-package" />
-    <MESSAGE value="Add fm-package" />
-    <MESSAGE value="Update csp2choco-package" />
-    <MESSAGE value="Add eval-package" />
-    <MESSAGE value="Add test-package" />
-    <MESSAGE value="Update common-package" />
-    <MESSAGE value="Add chocokb-package" />
-    <MESSAGE value="Add crdmodel-package" />
-    <MESSAGE value="Add ca-cdr-package" />
-    <MESSAGE value="Add KBStatistics" />
-    <MESSAGE value="Add FMGenerator" />
-    <MESSAGE value="Add README.md and build new releases" />
-    <MESSAGE value="Corrects the Maven packages" />
-    <MESSAGE value="Support to clone TestSuite, and FMDebuggingModel" />
-    <MESSAGE value="Use Java stream &amp; Add equals, hashCode" />
-    <MESSAGE value="Use Java stream" />
-    <MESSAGE value="Fix clone &amp; remove ConstraintSet.java" />
-    <MESSAGE value="Support multi-threading in LoggerUtils &amp; PerformanceEvaluator" />
-    <MESSAGE value="Fix the merged code" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix the merged code" />
+    <MESSAGE value="Fixed convertToStringWithMessage" />
+    <MESSAGE value="Removed @Deprecated" />
+    <MESSAGE value="Supported DirectDebug to identify all diagnoses" />
+    <MESSAGE value="Add complex_featureide_model.xml" />
+    <MESSAGE value="FMDebuggingModel inherits FMDiagnosisModel" />
+    <MESSAGE value="New package 1.3.9-alpha-35" />
+    <MESSAGE value="#46 - Add IConstraintBuildable, ConstraintBuilder, and FMConstraintBuilder" />
+    <MESSAGE value="Add @Deprecated to constraints" />
+    <MESSAGE value="Add IIntVarKB and IBoolVarKB" />
+    <MESSAGE value="Add getConstraints and addAssignmentToLogOp" />
+    <MESSAGE value="Add FMAssignmentsTranslator, IAssignmentsTranslatable, and ILogOpCreatable" />
+    <MESSAGE value="Delete IConstraintBuildable.java" />
+    <MESSAGE value="New package 1.3.9-alpha-36" />
+    <MESSAGE value="Remove @NonNull of negChocoCstrs" />
+    <MESSAGE value="New package 1.3.9-alpha-37" />
+    <MESSAGE value="Updates pom files" />
+    <MESSAGE value="Move Assignment to choco-kb-v2-package" />
+    <MESSAGE value="Update pom files" />
+    <MESSAGE value="Migrate TestSuite and TestCase from test-v2 to cdrmodel-v2 + Delete test-v2" />
+    <MESSAGE value="Fix FMAssignmentsTranslator and FMTestCaseTranslator" />
+    <MESSAGE value="New package 1.3.9-alpha-38" />
+    <MESSAGE value="Clean up the code in Constraint" />
+    <MESSAGE value="Clean up the code" />
+    <MESSAGE value="Add Class diagrams" />
+    <MESSAGE value="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map..." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map..." />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java</url>
+          <line>118</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java</url>
+          <line>291</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebugTest.java</url>
+          <line>48</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java</url>
+          <line>128</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/chocokb-package/src/test/java/at/tugraz/ist/ase/kb/fm/FMKBTest.java</url>
+          <line>117</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/chocokb-package/src/main/java/at/tugraz/ist/ase/kb/pc/PCKB.java</url>
+          <line>690</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="at.tugraz.ist.ase.test.TestSuite" memberName="testCases" />
@@ -459,5 +811,10 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/CA_CDR_V2$GLENCOEParserTest.ic" NAME="GLENCOEParserTest Coverage Results" MODIFIED="1655046004265" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>at.tugraz.ist.ase.fm.parser.*</FILTER>
+    </SUITE>
   </component>
 </project>

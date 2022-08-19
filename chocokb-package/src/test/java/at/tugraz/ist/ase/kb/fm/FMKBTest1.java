@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class FMKBTest1 {
     @Test
     void testLinux() throws FeatureModelParserException {
@@ -24,7 +26,12 @@ public class FMKBTest1 {
 
         FMKB kb = new FMKB(featureModel, true);
 
-        kb.getConstraintList().forEach(System.out::println);
+        assertEquals(kb.getNumVariables(), 6467);
+        assertEquals(featureModel.getNumOfRelationships(), 6322);
+        assertEquals(featureModel.getNumOfConstraints(), 9);
+        assertEquals(kb.getNumConstraints(), 6331);
+
+//        kb.getConstraintList().forEach(System.out::println);
     }
 
     @Test
@@ -35,6 +42,9 @@ public class FMKBTest1 {
 
         FMKB kb = new FMKB(featureModel, true);
 
-        kb.getConstraintList().forEach(System.out::println);
+        assertEquals(kb.getNumVariables(), 6467);
+        assertEquals(kb.getNumConstraints(), 13972);
+
+//        kb.getConstraintList().forEach(System.out::println);
     }
 }

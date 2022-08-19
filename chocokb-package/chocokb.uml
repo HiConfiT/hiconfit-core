@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/manleviet/Development/GitHub/CA-CDR-V2/chocokb-package/src/main/java/at/tugraz/ist/ase</OriginalElement>
+  <nodes>
+    <node x="-301.95833333333326" y="19.0">at.tugraz.ist.ase.kb.core.Domain</node>
+    <node x="256.0" y="1167.0">at.tugraz.ist.ase.kb.core.Constraint</node>
+    <node x="1295.25" y="-14.0">at.tugraz.ist.ase.kb.core.Variable</node>
+    <node x="-186.0" y="833.0">at.tugraz.ist.ase.kb.camera.CameraKB</node>
+    <node x="1133.0" y="381.0">at.tugraz.ist.ase.kb.core.IntVariable</node>
+    <node x="1223.0" y="755.0">at.tugraz.ist.ase.common.ConstraintUtils</node>
+    <node x="741.3333333333333" y="296.0">at.tugraz.ist.ase.kb.core.IBoolVarKB</node>
+    <node x="374.0" y="833.0">at.tugraz.ist.ase.kb.pc.PCKB</node>
+    <node x="639.0" y="755.0">at.tugraz.ist.ase.kb.fm.FMKB</node>
+    <node x="-237.0" y="1167.0">at.tugraz.ist.ase.kb.core.builder.BoolVarConstraintBuilder</node>
+    <node x="385.95833333333326" y="-14.0">at.tugraz.ist.ase.kb.core.KB</node>
+    <node x="127.0" y="582.8585365853659">at.tugraz.ist.ase.kb.core.IIntVarKB</node>
+    <node x="900.0" y="1178.0">at.tugraz.ist.ase.kb.core.translator.IAssignmentsTranslatable</node>
+    <node x="1412.0" y="381.0">at.tugraz.ist.ase.kb.core.BoolVariable</node>
+    <node x="1465.0" y="1169.0">at.tugraz.ist.ase.kb.core.Assignment</node>
+    <node x="79.0" y="800.0">at.tugraz.ist.ase.kb.renault.RenaultKB</node>
+    <node x="708.5" y="1314.0">at.tugraz.ist.ase.kb.core.translator.fm.FMAssignmentsTranslator</node>
+    <node x="-205.5" y="1293.9390243902437">at.tugraz.ist.ase.kb.core.builder.IntVarConstraintBuilder</node>
+    <node x="603.0" y="1167.0">at.tugraz.ist.ase.kb.core.translator.ILogOpCreatable</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="at.tugraz.ist.ase.kb.pc.PCKB" target="at.tugraz.ist.ase.kb.core.KB" relationship="GENERALIZATION">
+      <point x="61.25" y="-105.5" />
+      <point x="557.75" y="725.0" />
+      <point x="510.45833333333326" y="725.0" />
+      <point x="0.0" y="359.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.core.BoolVariable" target="at.tugraz.ist.ase.kb.core.Variable" relationship="GENERALIZATION">
+      <point x="0.0" y="-139.5" />
+      <point x="1553.0" y="356.0" />
+      <point x="1407.75" y="356.0" />
+      <point x="0.0" y="172.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.fm.FMKB" target="at.tugraz.ist.ase.kb.core.KB" relationship="GENERALIZATION">
+      <point x="-112.25" y="-183.5" />
+      <point x="751.25" y="725.0" />
+      <point x="510.45833333333326" y="725.0" />
+      <point x="0.0" y="359.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.camera.CameraKB" target="at.tugraz.ist.ase.kb.core.KB" relationship="GENERALIZATION">
+      <point x="61.25" y="-105.5" />
+      <point x="-2.25" y="725.0" />
+      <point x="510.45833333333337" y="725.0" />
+      <point x="0.0" y="359.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.fm.FMKB" target="at.tugraz.ist.ase.kb.core.IBoolVarKB" relationship="REALIZATION">
+      <point x="112.25" y="-183.5" />
+      <point x="975.75" y="735.0" />
+      <point x="877.3333333333333" y="735.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.camera.CameraKB" target="at.tugraz.ist.ase.kb.core.IIntVarKB" relationship="REALIZATION">
+      <point x="-61.25" y="-105.5" />
+      <point x="-124.75" y="735.0" />
+      <point x="240.5" y="735.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.core.translator.fm.FMAssignmentsTranslator" target="at.tugraz.ist.ase.kb.core.translator.IAssignmentsTranslatable" relationship="REALIZATION">
+      <point x="0.0" y="-93.5" />
+      <point x="933.0" y="1289.0" />
+      <point x="1124.5" y="1289.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.pc.PCKB" target="at.tugraz.ist.ase.kb.core.IIntVarKB" relationship="REALIZATION">
+      <point x="-61.25" y="-105.5" />
+      <point x="435.25" y="735.0" />
+      <point x="240.5" y="735.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.core.translator.fm.FMAssignmentsTranslator" target="at.tugraz.ist.ase.kb.core.translator.ILogOpCreatable" relationship="REALIZATION">
+      <point x="0.0" y="-93.5" />
+      <point x="933.0" y="1289.0" />
+      <point x="741.5" y="1289.0" />
+      <point x="0.0" y="48.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.renault.RenaultKB" target="at.tugraz.ist.ase.kb.core.KB" relationship="GENERALIZATION">
+      <point x="68.75" y="-138.5" />
+      <point x="285.25" y="725.0" />
+      <point x="510.45833333333326" y="725.0" />
+      <point x="0.0" y="359.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.core.IntVariable" target="at.tugraz.ist.ase.kb.core.Variable" relationship="GENERALIZATION">
+      <point x="0.0" y="-139.5" />
+      <point x="1262.5" y="356.0" />
+      <point x="1407.75" y="356.0" />
+      <point x="0.0" y="172.5" />
+    </edge>
+    <edge source="at.tugraz.ist.ase.kb.renault.RenaultKB" target="at.tugraz.ist.ase.kb.core.IIntVarKB" relationship="REALIZATION">
+      <point x="-68.75" y="-138.5" />
+      <point x="147.75" y="735.0" />
+      <point x="240.5" y="735.0" />
+      <point x="0.0" y="49.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.3764921946740128" showDependencies="false" x="849.5" y="1075.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

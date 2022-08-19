@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Consistency-based Algorithms for Conflict Detection and Resolution
+  ~
+  ~ Copyright (c) 2022
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<featureModel>
+    <properties>
+        <graphics key="autolayoutconstraints" value="false"/>
+        <graphics key="legendautolayout" value="true"/>
+        <graphics key="showshortnames" value="false"/>
+        <graphics key="layout" value="horizontal"/>
+        <graphics key="showcollapsedconstraints" value="true"/>
+        <graphics key="legendhidden" value="false"/>
+        <graphics key="layoutalgorithm" value="1"/>
+    </properties>
+    <struct>
+        <and abstract="true" mandatory="true" name="test1">
+            <and mandatory="true" name="A">
+                <feature mandatory="true" name="AA"/>
+                <feature name="AB"/>
+                <feature name="AC"/>
+                <or mandatory="true" name="AD">
+                    <feature name="ADA"/>
+                    <feature name="ADB"/>
+                </or>
+            </and>
+            <and name="B">
+                <feature mandatory="true" name="BA"/>
+                <feature name="BB"/>
+                <feature name="BC"/>
+            </and>
+            <or name="C">
+                <feature name="CA"/>
+                <feature name="CB"/>
+                <feature name="CC"/>
+            </or>
+            <alt mandatory="true" name="D">
+                <or name="DA">
+                    <feature name="DAA"/>
+                    <feature name="DAB"/>
+                </or>
+                <feature name="DB"/>
+            </alt>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <imp>
+                <var>AB</var>
+                <not>
+                    <var>CB</var>
+                </not>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <var>AC</var>
+                <not>
+                    <var>CC</var>
+                </not>
+            </imp>
+        </rule>
+        <rule>
+            <not>
+                <conj>
+                    <var>ADA</var>
+                    <var>AB</var>
+                </conj>
+            </not>
+        </rule>
+        <rule>
+            <disj>
+                <var>ADB</var>
+                <not>
+                    <var>BC</var>
+                </not>
+            </disj>
+        </rule>
+        <rule>
+            <disj>
+                <var>BC</var>
+                <imp>
+                    <var>CA</var>
+                    <var>CB</var>
+                </imp>
+            </disj>
+        </rule>
+        <rule>
+            <imp>
+                <var>DAA</var>
+                <not>
+                    <conj>
+                        <var>AB</var>
+                        <var>AC</var>
+                    </conj>
+                </not>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <var>AB</var>
+                <disj>
+                    <var>AC</var>
+                    <not>
+                        <var>DAB</var>
+                    </not>
+                </disj>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <var>DB</var>
+                <not>
+                    <not>
+                        <var>AB</var>
+                    </not>
+                </not>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <var>DB</var>
+                <not>
+                    <not>
+                        <not>
+                            <not>
+                                <var>AC</var>
+                            </not>
+                        </not>
+                    </not>
+                </not>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <var>DAA</var>
+                <disj>
+                    <var>AB</var>
+                    <not>
+                        <var>AC</var>
+                    </not>
+                </disj>
+            </imp>
+        </rule>
+    </constraints>
+</featureModel>

@@ -38,12 +38,18 @@ public class BoolVariable extends Variable implements Cloneable {
         return chocoVar.getValue();
     }
 
-    @Override
-    public BoolVariable clone() {
+    public BoolVariable clone() throws CloneNotSupportedException {
         BoolVariable clone = (BoolVariable) super.clone();
+
         clone.chocoVar = chocoVar;
 
         log.trace("{}Cloned BoolVariable [var={}]", LoggerUtils.tab(), clone);
         return clone;
+    }
+
+    @Override
+    public void dispose() {
+        chocoVar = null;
+        super.dispose();
     }
 }

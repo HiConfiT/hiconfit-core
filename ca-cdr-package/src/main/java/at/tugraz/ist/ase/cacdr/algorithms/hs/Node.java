@@ -165,4 +165,14 @@ public class Node {
                 ", pathLabels=" + pathLabel +
                 '}';
     }
+
+    public void dispose() {
+        label = null;
+        arcLabel = null;
+        pathLabel.clear();
+        children.clear();
+        parents.clear();
+        parents = null;
+        parameters = null;
+    }
 }

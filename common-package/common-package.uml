@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/Users/manleviet/Development/GitHub/CA-CDR-V2/common-package</OriginalElement>
+  <nodes>
+    <node x="-102.5" y="93.0">at.tugraz.ist.ase.common.IOUtils</node>
+    <node x="-127.0" y="290.0">at.tugraz.ist.ase.common.CmdLineOptionsBase</node>
+    <node x="-62.0" y="-56.0">at.tugraz.ist.ase.common.MailService</node>
+    <node x="-81.0" y="517.0">at.tugraz.ist.ase.common.RandomUtils</node>
+    <node x="533.0" y="-113.5">at.tugraz.ist.ase.common.ConsoleColors</node>
+    <node x="296.5" y="248.0">at.tugraz.ist.ase.common.LoggerUtils</node>
+    <node x="310.5" y="-125.0">at.tugraz.ist.ase.common.ThreadUtils</node>
+    <node x="308.5" y="11.0">at.tugraz.ist.ase.common.ChocoSolverUtils</node>
+    <node x="275.0" y="526.0">at.tugraz.ist.ase.csp2choco.CSP2ChocoTranslator</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Compact" zoom="0.8864864864864865" showDependencies="true" x="127.00000000000011" y="327.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

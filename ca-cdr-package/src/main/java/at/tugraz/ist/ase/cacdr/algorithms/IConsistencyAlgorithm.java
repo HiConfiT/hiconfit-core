@@ -20,4 +20,8 @@ public abstract class IConsistencyAlgorithm {
     public IConsistencyAlgorithm(@NonNull ChocoConsistencyChecker checker) {
         this.checker = checker;
     }
+
+    public void dispose() {
+        this.checker = null;
+    }
 }

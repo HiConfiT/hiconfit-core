@@ -35,13 +35,13 @@ import java.util.List;
 /**
  * Generates synthesized feature models using the Betty framework.
  * For further details on Betty framework, we refer to <a href="https://www.isa.us.es/betty/welcome">https://www.isa.us.es/betty/welcome</a>
- *
+ * <p>
  * The number of features in each generated feature model is specified by the following formula:
  * numFeatures = numConstraints * 3 / 4;
- *
+ * <p>
  * for numFeatures < 10, using Random generation
  * for numFeatures >= 10, using an evolutionary generator
- *
+ * <p>
  * Generated feature models are saved using the SPLOT format (<a href="http://www.splot-research.org">http://www.splot-research.org</a>).
  */
 public class FMGenerator {
@@ -94,6 +94,7 @@ public class FMGenerator {
         int maxGenerations = options.getMaxGenerations();
         String outDir = options.getOutFolder();
 
+        // TODO: multi-threading
         for (int i = 0; i < numGenFM; i++) {
             String modelName = "FM_" + numConstraints + "_" + i;
             String filename = modelName + ".splx";

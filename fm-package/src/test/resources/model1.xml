@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Consistency-based Algorithms for Conflict Detection and Resolution
+  ~
+  ~ Copyright (c) 2022
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<featureModel>
+    <properties>
+        <graphics key="autolayoutconstraints" value="false"/>
+        <graphics key="legendautolayout" value="true"/>
+        <graphics key="showshortnames" value="false"/>
+        <graphics key="layout" value="horizontal"/>
+        <graphics key="showcollapsedconstraints" value="true"/>
+        <graphics key="legendhidden" value="false"/>
+        <graphics key="layoutalgorithm" value="1"/>
+    </properties>
+    <struct>
+        <and abstract="true" mandatory="true" name="root">
+            <and mandatory="true" name="A">
+                <feature name="A1"/>
+                <feature name="A2"/>
+            </and>
+            <and name="B">
+                <feature name="B1"/>
+                <feature name="B2"/>
+            </and>
+            <or name="C">
+                <alt name="C1">
+                    <feature name="C1a"/>
+                    <feature name="C1b"/>
+                    <feature name="C1c"/>
+                </alt>
+                <feature name="C2"/>
+            </or>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <imp>
+                <var>A1</var>
+                <var>A2</var>
+            </imp>
+        </rule>
+        <rule>
+            <imp>
+                <var>A2</var>
+                <var>A1</var>
+            </imp>
+        </rule>
+        <rule>
+            <disj>
+                <not>
+                    <var>A1</var>
+                </not>
+                <not>
+                    <var>A2</var>
+                </not>
+            </disj>
+        </rule>
+    </constraints>
+</featureModel>

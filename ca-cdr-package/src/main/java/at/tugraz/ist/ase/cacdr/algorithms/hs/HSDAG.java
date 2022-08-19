@@ -30,6 +30,7 @@ import static at.tugraz.ist.ase.eval.PerformanceEvaluator.*;
 public class HSDAG extends HSTree {
 
     // Map of <pathLabel, Node>
+    // shouldn't use hashcode for pathLabel, since pathLabel's hashcode is not unique in some cases
     private final Map<Set<Constraint>, Node> nodesLookup = new HashMap<>();
 
     public HSDAG(IHSLabelable labeler) {
@@ -68,11 +69,11 @@ public class HSDAG extends HSTree {
                         nonMinLabels.add(greater);
 
                         // update the DAG
-                        List<Node> nodes = this.label_nodesMap.get(greater);
+                        List<Node> nodes = this.label_nodesMap.get(greater.hashCode());
 
                         if (nodes != null) {
                             nodes.forEach(nd -> {
-                                incrementCounter(COUNTER_PRUNING);
+
 
                                 nd.setLabel(smaller); // relabel the node with smaller
                                 addItemToLabelNodesMap(smaller, nd); // add new label to the map
@@ -82,13 +83,13 @@ public class HSDAG extends HSTree {
                                     Node child = nd.getChildren().get(label);
 
                                     if (child != null) {
+                                        incrementCounter(COUNTER_PRUNING);
                                         child.getParents().remove(nd);
+                                        nd.getChildren().remove(label);
+                                        cleanUpNodes(child);
                                     }
-
-                                    nd.getChildren().remove(label);
-
-                                    cleanUpNodes(nd);
                                 });
+//                                cleanUpNodes(nd);
                             });
                         }
                     }
@@ -96,7 +97,7 @@ public class HSDAG extends HSTree {
             });
             // remove the known non-minimal conflicts
             labels.removeAll(nonMinLabels);
-            nonMinLabels.forEach(label -> this.label_nodesMap.remove(label));
+            nonMinLabels.forEach(label -> this.label_nodesMap.remove(label.hashCode()));
 
             // add new labels to the list of labels
             addNodeLabels(labels);
@@ -108,25 +109,27 @@ public class HSDAG extends HSTree {
         return labels;
     }
 
+    /**
+     * Removes the subtree from a lookup table starting from the given node.
+     * @param node from which the conflictsearch should start
+     */
     private void cleanUpNodes(Node node) {
-        if (!node.getParents().isEmpty()) {
-            return;
-        }
+//        if (node.getParents().isEmpty()) {
+            nodesLookup.remove(node.getPathLabel());
+            if (node.getStatus() == NodeStatus.Open) {
+                node.setStatus(NodeStatus.Pruned);
+                incrementCounter(COUNTER_CLEANED_NODES);
+            }
 
-        nodesLookup.remove(node.getPathLabel());
-        if (node.getStatus() == NodeStatus.Open) {
-            node.setStatus(NodeStatus.Pruned);
-            incrementCounter(COUNTER_CLEANED_NODES);
-        }
-
-        // downward clean up
-        node.getChildren().keySet().parallelStream()
-                .map(arcLabel -> node.getChildren().get(arcLabel))
-                .forEachOrdered(this::cleanUpNodes);
-        /*for (Constraint arcLabel : node.getChildren().keySet()) {
-            Node child = node.getChildren().get(arcLabel);
-            cleanUpNodes(child);
-        }*/
+            // downward clean up
+            node.getChildren().keySet().parallelStream()
+                    .map(arcLabel -> node.getChildren().get(arcLabel))
+                    .forEachOrdered(this::cleanUpNodes);
+            /*for (Constraint arcLabel : node.getChildren().keySet()) {
+                Node child = node.getChildren().get(arcLabel);
+                cleanUpNodes(child);
+            }*/
+//        }
     }
 
     @Override

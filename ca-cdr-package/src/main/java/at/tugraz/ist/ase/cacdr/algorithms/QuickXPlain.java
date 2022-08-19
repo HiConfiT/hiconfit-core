@@ -53,8 +53,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 public class QuickXPlain extends IConsistencyAlgorithm {
 
     // for evaluation
-    public static final String TIMER_QUICKXPLAIN = "Timer for QX ";
-    public static final String COUNTER_QUICKXPLAIN_CALLS = "The number of QX calls:";
+    public static final String TIMER_QUICKXPLAIN = "Timer for QX";
+    public static final String COUNTER_QUICKXPLAIN_CALLS = "The number of QX calls";
 
     public QuickXPlain(@NonNull ChocoConsistencyChecker checker) {
         super(checker);
@@ -112,7 +112,7 @@ public class QuickXPlain extends IConsistencyAlgorithm {
      * @return a conflict set or an empty set
      */
     private Set<Constraint> qx(Set<Constraint> D, Set<Constraint> C, Set<Constraint> B) {
-        log.trace("{}QX [D={}, C={}, B={}] >>>", LoggerUtils.tab(), D, C, B);
+        log.debug("{}QX [D={}, C={}, B={}] >>>", LoggerUtils.tab(), D, C, B);
         LoggerUtils.indent();
 
         //IF (Δ != Φ AND inconsistent(B)) return Φ;
@@ -120,7 +120,7 @@ public class QuickXPlain extends IConsistencyAlgorithm {
             incrementCounter(COUNTER_CONSISTENCY_CHECKS);
             if (!checker.isConsistent(B)) {
                 LoggerUtils.outdent();
-                log.trace("{}<<< return Φ", LoggerUtils.tab());
+                log.debug("{}<<< return Φ", LoggerUtils.tab());
 
                 return Collections.emptySet();
             }
@@ -130,7 +130,7 @@ public class QuickXPlain extends IConsistencyAlgorithm {
         int q = C.size();
         if (q == 1) {
             LoggerUtils.outdent();
-            log.trace("{}<<< return [{}]", LoggerUtils.tab(), C);
+            log.debug("{}<<< return [{}]", LoggerUtils.tab(), C);
 
             return C;
         }
@@ -154,7 +154,7 @@ public class QuickXPlain extends IConsistencyAlgorithm {
         Set<Constraint> CS2 = qx(CS1, C2, BwithCS1);
 
         LoggerUtils.outdent();
-        log.trace("{}<<< return [CS1={} ∪ CS2={}]", LoggerUtils.tab(), CS1, CS2);
+        log.debug("{}<<< return [CS1={} ∪ CS2={}]", LoggerUtils.tab(), CS1, CS2);
 
         //return (CS1 ∪ CS2)
         incrementCounter(COUNTER_UNION_OPERATOR);

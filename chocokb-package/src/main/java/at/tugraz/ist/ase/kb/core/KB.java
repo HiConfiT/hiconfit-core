@@ -12,8 +12,6 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.ToString;
 import org.chocosolver.solver.Model;
-import org.chocosolver.solver.variables.BoolVar;
-import org.chocosolver.solver.variables.IntVar;
 
 import java.util.List;
 import java.util.stream.IntStream;
@@ -21,33 +19,38 @@ import java.util.stream.IntStream;
 import static com.google.common.base.Preconditions.checkElementIndex;
 
 @Getter
-@ToString
+@ToString(onlyExplicitlyIncluded = true)
 public abstract class KB {
+    @ToString.Include
     protected final String name;
+    @ToString.Include
     protected final String source;
 
-    @ToString.Exclude
     protected final boolean hasNegativeConstraints;
 
-    @ToString.Exclude
     protected Model modelKB;
 
     // Variables
-    @ToString.Exclude
     protected List<Variable> variableList;
-
     // Domains
-    @ToString.Exclude
     protected List<Domain> domainList;
-
     // Constraints
-    @ToString.Exclude
     protected List<Constraint> constraintList;
 
     protected KB(String name, String source, boolean hasNegativeConstraints) {
         this.name = name;
         this.source = source;
         this.hasNegativeConstraints = hasNegativeConstraints;
+    }
+
+    public void dispose() {
+        modelKB = null;
+        variableList.clear();
+        variableList = null;
+        domainList.clear();
+        domainList = null;
+        constraintList.clear();
+        constraintList = null;
     }
 
     public abstract void reset(boolean hasNegativeConstraints);
@@ -93,16 +96,6 @@ public abstract class KB {
     public int getNumChocoVars() {
         return getModelKB().getNbVars();
     }
-
-    public abstract IntVar[] getIntVars();
-    public abstract IntVar getIntVar(@NonNull String variable);
-
-    public abstract BoolVar[] getBoolVars();
-    public abstract BoolVar getBoolVar(@NonNull String variable);
-
-    // Choco value
-    public abstract int getIntValue(@NonNull String var, @NonNull String value);
-    public abstract boolean getBoolValue(@NonNull String var, @NonNull String value);
 
     public String getValue(@NonNull String var, int index) {
         Domain domain = getDomain(var);

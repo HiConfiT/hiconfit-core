@@ -13,8 +13,6 @@ import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.AbstractHSParameters;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.FastDiagV2Parameters;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.QuickXPlainParameters;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
-import at.tugraz.ist.ase.cdrmodel.CDRModel;
-import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,7 +27,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Getter
 public class QuickXPlainLabeler extends QuickXPlain implements IHSLabelable {
 
-    private final QuickXPlainParameters initialParameters;
+    private QuickXPlainParameters initialParameters;
 
     /**
      * Constructor with parameters which contain C, and B
@@ -88,5 +86,11 @@ public class QuickXPlainLabeler extends QuickXPlain implements IHSLabelable {
         return QuickXPlainParameters.builder()
                 .C(C)
                 .B(B).build();
+    }
+
+    @Override
+    public void dispose() {
+        super.dispose();
+        initialParameters = null;
     }
 }

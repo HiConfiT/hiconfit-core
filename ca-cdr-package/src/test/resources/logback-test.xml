@@ -37,7 +37,7 @@
 
 <!--    <logger name="at.tugraz.ist.ase.cacdr.algorithms.hsdag" level="TRACE"/>-->
 
-    <root level="trace">
+    <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ROLLING" />
     </root>
