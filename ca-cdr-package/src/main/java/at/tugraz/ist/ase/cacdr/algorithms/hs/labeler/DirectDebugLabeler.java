@@ -25,6 +25,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * HSLabeler for DirectDebug algorithm
+ *
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Getter
 @Slf4j

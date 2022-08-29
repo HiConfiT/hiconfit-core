@@ -26,6 +26,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * HSLabeler for FastDiagV3 algorithm
+ *
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Getter
 public class FastDiagV3Labeler extends FastDiagV3 implements IHSLabelable {

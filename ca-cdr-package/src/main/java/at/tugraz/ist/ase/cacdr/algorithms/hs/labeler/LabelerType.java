@@ -8,6 +8,9 @@
 
 package at.tugraz.ist.ase.cacdr.algorithms.hs.labeler;
 
+/**
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
+ */
 public enum LabelerType {
     CONFLICT,
     DIAGNOSIS

@@ -15,6 +15,9 @@ import lombok.NonNull;
 
 import java.util.Set;
 
+/**
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
+ */
 @Getter
 public class DirectDiagParameters extends AbstractHSParameters {
     private Set<Constraint> B;

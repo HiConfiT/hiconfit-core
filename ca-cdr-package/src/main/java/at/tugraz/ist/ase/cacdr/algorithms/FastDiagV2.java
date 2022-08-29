@@ -38,7 +38,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // Func FastDiag(C ⊆ AC, AC = {c1..ct}) :  Δ
  * // if isEmpty(C) or inconsistent(AC - C) return Φ
  * // else return FD(Φ, C, AC)
- *
+ * <p>
  * // Func FD(D, C = {c1..cq}, AC) : diagnosis  Δ
  * // if D != Φ and consistent(AC) return Φ;
  * // if singleton(C) return C;
@@ -47,7 +47,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // D1 = FD(C2, C1, AC - C2);
  * // D2 = FD(D1, C2, AC - D1);
  * // return(D1 ∪ D2);
- *
+ * <p>
  * #08.2020 - Viet-Man Le: using Set structures to store constraints instead of List
  *
  * @author Muslum Atas (muesluem.atas@ist.tugraz.at)
@@ -67,7 +67,7 @@ public class FastDiagV2 extends IConsistencyAlgorithm {
     /**
      * This function will activate FastDiag algorithm if there exists at least one constraint,
      * which induces an inconsistency with AC - C. Otherwise, it returns an empty set.
-     *
+     * <p>
      * // Func FastDiag(C ⊆ AC, AC = {c1..ct}) :  Δ
      * // if isEmpty(C) or inconsistent(AC - C) return Φ
      * // else return FD(Φ, C, AC)
@@ -105,7 +105,7 @@ public class FastDiagV2 extends IConsistencyAlgorithm {
 
     /**
      * The implementation of FastDiag algorithm.
-     *
+     * <p>
      * // Func FD(D, C = {c1..cq}, AC) : diagnosis  Δ
      * // if D != Φ and consistent(AC) return Φ;
      * // if singleton(C) return C;

@@ -13,6 +13,8 @@ import lombok.NonNull;
 
 /**
  * An abstract class for all consistency algorithms, such as QuickXPlain, FastDiag, etc.
+ *
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 public abstract class IConsistencyAlgorithm {
     protected ChocoConsistencyChecker checker;

@@ -10,7 +10,6 @@ package at.tugraz.ist.ase.cacdr.algorithms.hs;
 
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.IHSLabelable;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.LabelerType;
-import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +21,7 @@ import java.util.Set;
 
 /**
  * An abstract class for HS algorithms
- *
+ * <p>
  * source: <a href="https://github.com/jaccovs/Master-project">https://github.com/jaccovs/Master-project</a>
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */

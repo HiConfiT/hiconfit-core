@@ -22,7 +22,7 @@ import static at.tugraz.ist.ase.eval.PerformanceEvaluator.*;
 /**
  * Implementation of the HS-dag algorithm.
  * IHSLabeler algorithms could return labels (conflict or diagnosis) which are not minimal.
- *
+ * <p>
  * source: <a href="https://github.com/jaccovs/Master-project">https://github.com/jaccovs/Master-project</a>
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */

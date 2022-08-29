@@ -15,6 +15,9 @@ import lombok.NonNull;
 
 import java.util.Set;
 
+/**
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
+ */
 @Getter
 public class FastDiagV2Parameters extends AbstractHSParameters {
     private Set<Constraint> AC;

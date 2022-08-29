@@ -25,6 +25,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * HSLabeler for DirectDiag algorithm
+ *
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Getter
 public class DirectDiagLabeler extends DirectDiag implements IHSLabelable {
