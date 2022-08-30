@@ -171,4 +171,53 @@ public class CSPModels {
 
         return model;
     }
+
+    public Model createModel7() throws IOException {
+        log.trace("{}Creating model from csp7.mzn >>>", LoggerUtils.tab());
+        LoggerUtils.indent();
+
+        // create a model
+        Model model = new Model("WipeOutR_FM Test 1");
+
+        // Decision variables
+        model.intVar("x", -10, 10);
+        model.intVar("y", -10, 10);
+        log.trace("{}Created variables", LoggerUtils.tab());
+
+        ClassLoader classLoader = CSPModels.class.getClassLoader();
+        @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp7.mzn");
+
+        loadConstraints(inputStream, model);
+        log.trace("{}Created constraints", LoggerUtils.tab());
+
+        LoggerUtils.outdent();
+        log.debug("{}<<< Created model from csp7.mzn", LoggerUtils.tab());
+
+        return model;
+    }
+
+    public Model createModel8() throws IOException {
+        log.trace("{}Creating model from csp8.mzn >>>", LoggerUtils.tab());
+        LoggerUtils.indent();
+
+
+        // create a model
+        Model model = new Model("WipeOutR_FM Test 2");
+
+        // Decision variables
+        model.intVar("x", -10, 10);
+        model.intVar("y", -10, 10);
+        log.trace("{}Created variables", LoggerUtils.tab());
+
+        ClassLoader classLoader = CSPModels.class.getClassLoader();
+        @Cleanup InputStream inputStream = IOUtils.getInputStream(classLoader, "csp8.mzn");
+
+        loadConstraints(inputStream, model);
+        log.trace("{}Created constraints", LoggerUtils.tab());
+
+        LoggerUtils.outdent();
+        log.debug("{}<<< Created model from csp8.mzn", LoggerUtils.tab());
+
+        return model;
+    }
 }
