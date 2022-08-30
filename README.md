@@ -27,7 +27,7 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 11. (coming soon) AggregatedTest [13]
 12. (coming soon) LevelWiseParallelHSDAG [10, 11]
 13. (coming soon) FullParallelHSDAG [10, 11]
-14. (coming soon) FastDiagP [the related paper submitted on August 2022]
+14. (coming soon) FastDiagP [the related paper submitted on August 2022] - [Python implementation](https://github.com/manleviet/PyFastDiagP-ver2)
 15. (coming soon) KBDiag [the related paper submitted on August 2022]
 16. (coming soon) InformedQX
 17. (coming soon) ParallelWipeOutR_T
