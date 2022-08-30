@@ -30,6 +30,8 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 14. (coming soon) FastDiagP [the related paper submitted on August 2022]
 15. (coming soon) KBDiag [the related paper submitted on August 2022]
 16. (coming soon) InformedQX
+17. (coming soon) ParallelWipeOutR_T
+18. (coming soon) ParallelWipeOutR_FM
 
 ### Examples
 
