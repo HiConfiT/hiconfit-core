@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.cdrmodel.fm;
 
-import at.tugraz.ist.ase.cdrmodel.CDRModel;
+import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.cdrmodel.IDebuggingModel;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
@@ -23,13 +23,13 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * An extension class of {@link CDRModel} for a debugging task of feature models, in which:
+ * An extension class of {@link AbstractCDRModel} for a debugging task of feature models, in which:
  * + C = CF
  * + B = { f0 = true }
  * + Test cases
  */
 @Slf4j
-public class FMDebuggingModel extends FMDiagnosisModel implements IDebuggingModel {
+public class FMDebuggingModel extends FMCdrModel implements IDebuggingModel {
 
     private TestSuite testSuite;
     private ITestCaseTranslatable translator;
@@ -48,12 +48,13 @@ public class FMDebuggingModel extends FMDiagnosisModel implements IDebuggingMode
      * @param fm a {@link FeatureModel}
      * @param testSuite a {@link TestSuite}
      * @param translator an implementation of {@link ITestCaseTranslatable} which translates test cases to Choco constraints
+     * @param hasNegativeConstraints generate negative constraints if true
      * @param rootConstraints true if the root constraint (f0 = true) should be added
      * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
     public FMDebuggingModel(@NonNull FeatureModel fm, @NonNull TestSuite testSuite, @NonNull ITestCaseTranslatable translator,
-                            boolean rootConstraints, boolean reversedConstraintsOrder) {
-        super(fm, rootConstraints, reversedConstraintsOrder);
+                            boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
+        super(fm, hasNegativeConstraints, rootConstraints, reversedConstraintsOrder);
 
         this.testSuite = testSuite;
         this.translator = translator;

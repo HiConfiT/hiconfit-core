@@ -23,7 +23,7 @@ import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 
 /**
- * Implementation of an MSS-based FastDiag algorithm.
+ * Implementation of the MSS-based FastDiag algorithm.
  * MSS - Maximal Satisfiable Set
  * <p>
  * // MSS-based FastDiag Algorithm

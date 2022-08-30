@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.cacdr.algorithms;
 
-import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
+import at.tugraz.ist.ase.cacdr.checker.IConsistencyChecker;
 import lombok.NonNull;
 
 /**
@@ -17,9 +17,9 @@ import lombok.NonNull;
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 public abstract class IConsistencyAlgorithm {
-    protected ChocoConsistencyChecker checker;
+    protected IConsistencyChecker checker;
 
-    public IConsistencyAlgorithm(@NonNull ChocoConsistencyChecker checker) {
+    public IConsistencyAlgorithm(@NonNull IConsistencyChecker checker) {
         this.checker = checker;
     }
 

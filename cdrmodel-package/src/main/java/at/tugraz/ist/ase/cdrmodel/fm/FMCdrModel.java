@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.cdrmodel.fm;
 
-import at.tugraz.ist.ase.cdrmodel.CDRModel;
+import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
@@ -24,17 +24,29 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * An extension class of {@link CDRModel} for a diagnosis task of feature models, in which:
- * + C = CF
- * + B = { f0 = true }
+ * An extension class of {@link AbstractCDRModel} for diagnosis tasks as well as
+ * analysis operations of feature models, in which:
+ * 1. Diagnosis tasks:
+ *    + C = CF
+ *    + B = { f0 = true } - rootConstraints = true
+ *    + reversedConstraintsOrder = false
+ *    + hasNegativeConstraints = false
+ * 2. Feature model redundancy detection - WipeOutR_FM:
+ *    + C = CF
+ *    + B = {} - rootConstraints = false
+ *    + reversedConstraintsOrder = true
+ *    + hasNegativeConstraints = true
  */
 @Slf4j
-public class FMDiagnosisModel extends CDRModel implements IChocoModel {
+public class FMCdrModel extends AbstractCDRModel implements IChocoModel {
 
     @Getter
     protected Model model;
     protected FeatureModel featureModel;
     protected FMKB fmkb;
+
+    @Getter
+    protected final boolean hasNegativeConstraints;
 
     @Getter
     protected final boolean rootConstraints;
@@ -48,15 +60,17 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
      * corresponding variables and constraints for the model.
      *
      * @param fm a {@link FeatureModel}
+     * @param hasNegativeConstraints generate negative constraints if true
      * @param rootConstraints true if the root constraint (f0 = true) should be added
      * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
-    public FMDiagnosisModel(@NonNull FeatureModel fm, boolean rootConstraints, boolean reversedConstraintsOrder) {
+    public FMCdrModel(@NonNull FeatureModel fm, boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
         super(fm.getName());
 
         this.featureModel = fm;
 
-        this.fmkb = new FMKB(fm, false);
+        this.hasNegativeConstraints = hasNegativeConstraints;
+        this.fmkb = new FMKB(fm, hasNegativeConstraints);
         this.model = fmkb.getModelKB();
 
         this.rootConstraints = rootConstraints;
@@ -113,9 +127,9 @@ public class FMDiagnosisModel extends CDRModel implements IChocoModel {
 
     @Override
     public Object clone() throws CloneNotSupportedException {
-        FMDiagnosisModel clone = (FMDiagnosisModel) super.clone();
+        FMCdrModel clone = (FMCdrModel) super.clone();
 
-        clone.fmkb = new FMKB(this.featureModel, false);
+        clone.fmkb = new FMKB(this.featureModel, this.hasNegativeConstraints);
         clone.model = clone.fmkb.getModelKB();
 
         return clone;

@@ -18,6 +18,9 @@ import java.util.stream.IntStream;
 
 import static com.google.common.base.Preconditions.checkElementIndex;
 
+/**
+ * Contains the knowledge base for constraint problems.
+ */
 @Getter
 @ToString(onlyExplicitlyIncluded = true)
 public abstract class KB {

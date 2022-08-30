@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.cacdr.checker;
 
-import at.tugraz.ist.ase.cdrmodel.CDRModel;
+import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.cdrmodel.IDebuggingModel;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
@@ -40,7 +40,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * An internal models
      */
     protected Model model;
-    protected CDRModel cdrModel;
+    protected AbstractCDRModel cdrModel;
 
     /**
      * Constructor
@@ -48,7 +48,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * CDRModel should have all constraints already posted.
      * - Testcases -> constraints should be posted before calling this function
      */
-    public ChocoConsistencyChecker(@NonNull CDRModel diagModel) {
+    public ChocoConsistencyChecker(@NonNull AbstractCDRModel diagModel) {
         this.cdrModel = diagModel;
         model = ((IChocoModel)diagModel).getModel();
 

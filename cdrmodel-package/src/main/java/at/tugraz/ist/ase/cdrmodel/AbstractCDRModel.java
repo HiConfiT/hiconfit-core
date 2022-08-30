@@ -25,7 +25,7 @@ import java.util.Set;
  * We don't have a clone method here, since all the data in this class needs to be initialized by overriding initialize() method.
  */
 @Getter
-public abstract class CDRModel implements Cloneable {
+public abstract class AbstractCDRModel implements Cloneable {
 
     private final String name;
 
@@ -55,7 +55,7 @@ public abstract class CDRModel implements Cloneable {
     /**
      * Creates an empty diagnosis model.
      */
-    public CDRModel(String name) {
+    public AbstractCDRModel(String name) {
         this.name = name;
     }
 
@@ -124,7 +124,7 @@ public abstract class CDRModel implements Cloneable {
     }
 
     public Object clone() throws CloneNotSupportedException {
-        CDRModel clone = (CDRModel) super.clone();
+        AbstractCDRModel clone = (AbstractCDRModel) super.clone();
 
         clone.clone = true;
 
