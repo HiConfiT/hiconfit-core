@@ -22,9 +22,9 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 6. [HS-tree](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java) [8]
 7. [HSDAG](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java) [9]
 8. [DirectDebug](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java) [4, 5, 6, 7]
-9. (coming soon) WipeOutR_T [12]
-10. (coming soon) WipeOutR_FM [12]
-11. (coming soon) AggregatedTest [13]
+9. (coming soon) WipeOutR_T [12, 13]
+10. (coming soon) WipeOutR_FM [12, 13]
+11. (coming soon) AggregatedTest [14]
 12. (coming soon) LevelWiseParallelHSDAG [10, 11]
 13. (coming soon) FullParallelHSDAG [10, 11]
 14. (coming soon) FastDiagP [the related paper submitted on August 2022] - [Python implementation](https://github.com/manleviet/PyFastDiagP-ver2)
@@ -113,4 +113,5 @@ Replacing USERNAME with your GitHub username, and TOKEN with your personal acces
 10. Jannach, Dietmar, Thomas Schmitz, and Kostyantyn Shchekotykhin. "Parallel model-based diagnosis on multi-core computers." Journal of Artificial Intelligence Research 55 (2016): 835-887. https://doi.org/10.1613/jair.5001.
 11. Jannach, D., Schmitz, T., & Shchekotykhin, K. (2015). Parallelized Hitting Set Computation for Model-Based Diagnosis. Proceedings of the AAAI Conference on Artificial Intelligence, 29(1). https://doi.org/10.1609/aaai.v29i1.9389.
 12. V.M. Le, A. Felfernig, M. Uta, T.N.T. Tran, and C. Vidal, WipeOutR: Automated Redundancy Detection for Feature Models, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume A, 2022.
-13. V.M. Le, A. Felfernig, and T.N.T. Tran, Test Case Aggregation for Efficient Feature Model Testing, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume B, 2022.
+13. An evaluation of WipeOutR algorithms in https://github.com/AIG-ist-tugraz/WipeOutR.
+14. V.M. Le, A. Felfernig, and T.N.T. Tran, Test Case Aggregation for Efficient Feature Model Testing, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume B, 2022.
