@@ -55,7 +55,7 @@ class FMDebuggingModelTest1 {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
     }
 

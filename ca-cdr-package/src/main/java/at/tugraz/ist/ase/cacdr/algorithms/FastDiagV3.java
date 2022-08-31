@@ -23,9 +23,9 @@ import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
 import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 
 /**
- * Implementation of an MSS-based FastDiag algorithm.
+ * Implementation of the MSS-based FastDiag algorithm.
  * MSS - Maximal Satisfiable Set
- *
+ * <p>
  * // MSS-based FastDiag Algorithm
  * //--------------------
  * // B: correctConstraints (background knowledge)
@@ -34,7 +34,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // Func FastDiag(C, B) : Δ
  * // if isEmpty(C) or consistent(B U C) return Φ
  * // else return C \ FD(Φ, C, B)
- *
+ * <p>
  * // Func FD(Δ, C = {c1..cn}, B) : MSS
  * // if Δ != Φ and consistent(B U C) return C;
  * // if singleton(C) return Φ;
@@ -43,6 +43,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // Δ1 = FD(C2, C1, B);
  * // Δ2 = FD(C1 - Δ1, C2, B U Δ1);
  * // return Δ1 ∪ Δ2;
+ *
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
 public class FastDiagV3 extends IConsistencyAlgorithm {
@@ -58,7 +60,7 @@ public class FastDiagV3 extends IConsistencyAlgorithm {
     /**
      * This function will activate FastDiag algorithm if there exists at least one constraint,
      * which induces an inconsistency in B. Otherwise, it returns an empty set.
-     *
+     * <p>
      * // Func FastDiag(C, B) : Δ
      * // if isEmpty(C) or consistent(B U C) return Φ
      * // else return C \ FD(C, B, Φ)
@@ -100,7 +102,7 @@ public class FastDiagV3 extends IConsistencyAlgorithm {
     /**
      * The implementation of MSS-based FastDiag algorithm.
      * The algorithm determines a maximal satisfiable subset MSS (Γ) of C U B.
-     *
+     * <p>
      * // Func FD(Δ, C = {c1..cn}, B) : MSS
      * // if Δ != Φ and consistent(B U C) return C;
      * // if singleton(C) return Φ;

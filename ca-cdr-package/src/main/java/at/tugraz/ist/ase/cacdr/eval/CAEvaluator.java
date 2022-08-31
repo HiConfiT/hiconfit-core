@@ -13,6 +13,9 @@ import at.tugraz.ist.ase.eval.PerformanceEvaluator;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
+/**
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
+ */
 public class CAEvaluator extends PerformanceEvaluator {
     // Consistency checks
     public static final String COUNTER_FEASIBLE = "The number of consistent";

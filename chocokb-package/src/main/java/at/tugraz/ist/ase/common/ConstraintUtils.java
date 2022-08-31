@@ -34,14 +34,14 @@ public final class ConstraintUtils {
     public final String COUNTER_CONSTAINS_CONSTRAINT = "The number of contains calls";
     public final String COUNTER_SPLIT_SET = "The number of split set";
 
-    public String convertToString(@NonNull Set<Constraint> ac, @NonNull String delimiter, boolean brackets) {
-        String ex = Joiner.on(delimiter).join(ac);
-//        String ex = ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter));
+    public String convertToString(@NonNull Set<Constraint> ac, @NonNull String delimiter, String tabs, boolean brackets) {
+        String ex = (tabs != null ? tabs : "") + Joiner.on(delimiter + (tabs != null ? tabs : "")).join(ac);
+//        String ex = (tabs != null ? tabs : "") + ac.stream().map(Constraint::toString).collect(Collectors.joining(delimiter + (tabs != null ? tabs : "")));
         return brackets ? "[" + ex + "]" : ex;
     }
 
     public String convertToString(@NonNull Set<Constraint> ac) {
-        return convertToString(ac, "\n", false);
+        return convertToString(ac, "\n", null, false);
 //        return ac.stream().map(Constraint::toString).collect(Collectors.joining("\n"));
     }
 
@@ -63,7 +63,7 @@ public final class ConstraintUtils {
                 delimiter = delimiter + (tabs != null ? tabs : "");
                 sb.append(delimiter);
             }
-            sb.append(convertToString(diag, delimiter, brackets)).append("\n");
+            sb.append(convertToString(diag, delimiter, null, brackets)).append("\n");
         }
         sb.deleteCharAt(sb.length() - 1);
         return sb.toString();

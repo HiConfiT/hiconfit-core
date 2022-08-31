@@ -14,6 +14,9 @@ import lombok.Getter;
 
 import java.util.Set;
 
+/**
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
+ */
 @Getter
 @AllArgsConstructor
 public abstract class AbstractHSParameters {

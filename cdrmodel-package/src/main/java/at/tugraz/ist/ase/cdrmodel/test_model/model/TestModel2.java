@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.cdrmodel.test_model.model;
 
-import at.tugraz.ist.ase.cdrmodel.CDRModel;
+import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.cdrmodel.test_model.ITestModel;
 import at.tugraz.ist.ase.cdrmodel.test_model.csp.CSPModels;
@@ -21,8 +21,11 @@ import org.chocosolver.solver.Model;
 
 import java.util.*;
 
+/**
+ * Test model for the diagnosis task
+ */
 @Slf4j
-public class TestModel2 extends CDRModel implements IChocoModel, ITestModel {
+public class TestModel2 extends AbstractCDRModel implements IChocoModel, ITestModel {
     @Getter
     private Model model;
 

@@ -34,7 +34,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * //IF consistent(B∪C) return "No conflict";
  * //IF isEmpty(C) return Φ;
  * //ELSE return QX(Φ, C, B);
- *
+ * <p>
  * //func QX(Δ, C={c1,c2, …, cq}, B): CS
  * //IF (Δ != Φ AND inconsistent(B)) return Φ;
  * //IF singleton(C) return C;
@@ -43,7 +43,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * //CS1 <-- QX(C2, C1, B ∪ C2);
  * //CS2 <-- QX(CS1, C2, B ∪ CS1);
  * //return (CS1 ∪ CS2)
- *
+ * <p>
  * #08.2020 - Viet-Man Le: using Set structures to store constraints instead of List
  *
  * @author Muslum Atas (muesluem.atas@ist.tugraz.at)

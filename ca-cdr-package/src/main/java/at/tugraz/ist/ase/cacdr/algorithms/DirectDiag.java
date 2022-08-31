@@ -24,7 +24,6 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
 
 /**
  * Implementation of the DirectDiag algorithm.
- *
  * //--------------------
  * // B: correctConstraints (background knowledge)
  * // C: possiblyFaultyConstraints
@@ -32,7 +31,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // Func DirectDiag(C, B) : Δ
  * // if isEmpty(C) or consistent(B U C) return Φ
  * // else return DD(Φ, C, B)
- *
+ * //--------------------
  * // Func DD(D, C = {c1..cn}, B) : Δ
  * // if D != Φ and consistent(B U C) return Φ;
  * // if singleton(C) return C;
@@ -41,6 +40,8 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // Δ1 = DD(C1, C1, B);
  * // Δ2 = DD(Δ1, C2, B U C1 - Δ1);
  * // return Δ1 ∪ Δ2;
+ *
+ * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
 public class DirectDiag extends IConsistencyAlgorithm {
@@ -56,7 +57,7 @@ public class DirectDiag extends IConsistencyAlgorithm {
     /**
      * This function will activate DirectDiag algorithm if there exists at least one constraint,
      * which induces an inconsistency in B. Otherwise, it returns an empty set.
-     *
+     * <p>
      * // Func DirectDiag(C, B) : Δ
      * // if isEmpty(C) or consistent(B U C) return Φ
      * // else return DD(Φ, C, B)
@@ -95,7 +96,7 @@ public class DirectDiag extends IConsistencyAlgorithm {
     /**
      * The implementation of DirectDiag algorithm.
      * The algorithm determines a diagnosis.
-     *
+     * <p>
      * // Func FD(D, C = {c1..cn}, B) : D
      * // if D != Φ and consistent(B U C) return Φ;
      * // if singleton(C) return C;

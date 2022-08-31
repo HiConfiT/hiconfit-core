@@ -23,6 +23,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * HSLabeler for QuickXPlain algorithm
+ *
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Getter
 public class QuickXPlainLabeler extends QuickXPlain implements IHSLabelable {

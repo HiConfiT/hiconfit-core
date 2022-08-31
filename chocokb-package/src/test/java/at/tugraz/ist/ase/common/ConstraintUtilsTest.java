@@ -56,6 +56,15 @@ class ConstraintUtilsTest {
     }
 
     @Test
+    void testConvertToString() {
+        System.out.println("Constraints:");
+        System.out.println(convertToString(diag1, "\n", "\t", false));
+
+        System.out.println("Diagnoses:");
+        System.out.println(convertToStringWithMessage(allDiag, "Diagnosis", "\t", ", ", true));
+    }
+
+    @Test
     void testContains() {
 
         assertAll(() -> assertTrue(containsAll(allDiag, diag1), "[containsAll] allDiag doesn't contain diag1"),

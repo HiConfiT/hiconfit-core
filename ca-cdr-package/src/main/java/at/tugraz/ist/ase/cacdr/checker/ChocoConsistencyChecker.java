@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.cacdr.checker;
 
-import at.tugraz.ist.ase.cdrmodel.CDRModel;
+import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.cdrmodel.IDebuggingModel;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
@@ -29,6 +29,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 /**
  * A consistency checker implementation using the Choco solver
+ *
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Slf4j
 public class ChocoConsistencyChecker implements IConsistencyChecker {
@@ -38,15 +40,15 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * An internal models
      */
     protected Model model;
-    protected CDRModel cdrModel;
+    protected AbstractCDRModel cdrModel;
 
     /**
      * Constructor
-     *
+     * <p>
      * CDRModel should have all constraints already posted.
      * - Testcases -> constraints should be posted before calling this function
      */
-    public ChocoConsistencyChecker(@NonNull CDRModel diagModel) {
+    public ChocoConsistencyChecker(@NonNull AbstractCDRModel diagModel) {
         this.cdrModel = diagModel;
         model = ((IChocoModel)diagModel).getModel();
 
@@ -133,10 +135,10 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
 
     /**
      * consistent(tα ∧ ¬tγ)
-     *
+     * <p>
      * Checks the consistency between two test cases (tα ∧ ¬tγ) to identify a redundant test case.
      * If the output is false (inconsistent), then tγ is a redundant test case.
-     *
+     * <p>
      * Used by WipeOutR_T algorithm
      *
      * @param testcase a {@link ITestCase}
@@ -172,10 +174,10 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
 
     /**
      * consistent(C - {cstr} ∪ {¬cstr})
-     *
+     * <p>
      * Checks the consistency of (C - {cstr} ∪ {¬cstr}) to identify the redundant constraints.
      * If the output is false (inconsistent), then cstr is a redundant constraint.
-     *
+     * <p>
      * Used by WipeOutR_FM algorithm.
      *
      * @param C set of {@link Constraint}s
@@ -214,7 +216,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
      * the given set of constraints {@param C}, otherwise false. Test cases inducing
      * an inconsistency with {@param C} are stored in {@param TCp}.
      * Note that at the beginning, TC = TCp.
-     *
+     * <p>
      * Used by DirectDebug, TestHSDAG...
      * @param C a set of {@link Constraint}s
      * @param TC considering {@link ITestCase}s
@@ -249,7 +251,7 @@ public class ChocoConsistencyChecker implements IConsistencyChecker {
     /**
      * Checks the consistency of a set of constraints with a set of test cases, and
      * returns remaining inconsistent {@link ITestCase}s.
-     *
+     * <p>
      * Used by DirectDebug, TestHSDAG...
      * @param C a set of {@link Constraint}s
      * @param TC a considering {@link ITestCase}s

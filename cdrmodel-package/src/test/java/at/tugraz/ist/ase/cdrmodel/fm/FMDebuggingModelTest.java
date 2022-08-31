@@ -69,7 +69,7 @@ class FMDebuggingModelTest {
         testSuite = builder.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        model = new FMDebuggingModel(fm, testSuite, translator, true, false);
+        model = new FMDebuggingModel(fm, testSuite, translator, false, true, false);
         model.initialize();
     }
 

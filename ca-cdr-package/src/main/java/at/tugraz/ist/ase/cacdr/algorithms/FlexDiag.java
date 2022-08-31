@@ -36,7 +36,7 @@ import static at.tugraz.ist.ase.common.ConstraintUtils.split;
  * // Func FlexDiag(S, AC = C ∪ Rp ∪ S, m): ∆
  * // if isEmpty(S) or inconsistent(AC - C) return Φ
  * // else return FlexD(Φ, C, AC, m)
- *
+ * <p>
  * // Func FlexD(D,S = {s1..sq},AC,m): ∆
  * // if D != Φ and consistent(AC) return Φ;
  * // if size(S) <= m return S;
@@ -61,7 +61,7 @@ public class FlexDiag extends IConsistencyAlgorithm {
     /**
      * This function will activate FlexDiag algorithm if there exists at least one constraint,
      * which induces an inconsistency with AC - C. Otherwise, it returns an empty set.
-     *
+     * <p>
      * // Func FlexDiag(S, AC = C ∪ Rp ∪ S, m): ∆
      * // if isEmpty(S) or inconsistent(AC - C) return Φ
      * // else return FlexD(Φ, C, AC, m)
@@ -100,7 +100,7 @@ public class FlexDiag extends IConsistencyAlgorithm {
 
     /**
      * The implementation of FlexD procedure.
-     *
+     * <p>
      * // Func FlexD(D,S = {s1..sq},AC,m): ∆
      * // if D != Φ and consistent(AC) return Φ;
      * // if size(S) <= m return S;

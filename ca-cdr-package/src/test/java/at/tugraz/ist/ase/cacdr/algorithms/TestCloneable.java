@@ -356,7 +356,7 @@ public class TestCloneable {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         // cloneable
@@ -403,7 +403,7 @@ public class TestCloneable {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         // cloneable
@@ -453,7 +453,7 @@ public class TestCloneable {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         // cloneable

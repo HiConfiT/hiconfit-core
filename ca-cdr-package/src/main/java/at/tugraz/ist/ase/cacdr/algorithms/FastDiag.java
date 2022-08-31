@@ -30,7 +30,7 @@ import java.util.List;
  * //func FastDiag(C ⊆ AC, AC = {c1..ct}) :  Δ
  * //if isEmpty(C) or inconsistent(AC - C) return Φ
  * //else return FD(Φ, C, AC)
- *
+ * <p>
  * //func FD(D, C = {c1..cq}, AC) : diagnosis  Δ
  * //if D != Φ and consistent(AC) return Φ;
  * //if singleton(C) return C;

@@ -7,19 +7,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map...">
+    <list default="true" id="4e551901-7693-4a77-a939-3dfa377283a0" name="Changes" comment="Add unit tests">
+      <change afterPath="$PROJECT_DIR$/ca-cdr-package/src/test/java/at/tugraz/ist/ase/cacdr/algorithms/WipeOutRFMTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/IKBRedundancyDetectable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel7.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel8.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/resources/csp7.mzn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/resources/csp8.mzn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-FMGenerator/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-FMGenerator/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app-KBStatistics/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app-KBStatistics/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ca-cdr-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ca-cdr-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdrmodel-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/chocokb-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/chocokb-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/csp2choco-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/csp2choco-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/eval-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/eval-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exportToHTML/common-package.uml.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fm-package/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/fm-package/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/csp/CSPModels.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/csp/CSPModels.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel1.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel2.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel3.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel4.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel5.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel6.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/main/java/at/tugraz/ist/ase/cdrmodel/test_model/model/TestModel6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest1.java" beforeDir="false" afterPath="$PROJECT_DIR$/cdrmodel-package/src/test/java/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModelTest1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/CDRModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/CDRModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/class-use/CDRModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/class-use/CDRModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/fm/FMDebuggingModel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/at/tugraz/ist/ase/cdrmodel/test/model/TestModel6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/apidocs/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/apidocs/index-files/index-3.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +57,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JUnit5 Test Class" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -82,36 +97,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;temurin-17&quot;,
-    &quot;last_directory_selection&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/test/resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.30601093&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "jdk.selected.JAVA_MODULE": "temurin-17",
+    "last_directory_selection": "/Users/manleviet/Development/GitHub/CA-CDR-V2/test-package/src/test/java/at/tugraz/ist/ase/test",
+    "last_opened_file_path": "/Users/manleviet/Development/GitHub/CA-CDR-V2/cdrmodel-package/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.30601093",
+    "settings.editor.selected.configurable": "preferences.fileTypes"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cdrmodel-package/src/main/resources" />
       <recent name="$PROJECT_DIR$/fm-package/src/test/resources" />
       <recent name="$PROJECT_DIR$/chocokb-package/src/main/resources/fms/FeatureIDE" />
       <recent name="$PROJECT_DIR$/cdrmodel-package/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
-      <recent name="$PROJECT_DIR$/ca-cdr-package" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/fm-package" />
@@ -124,22 +139,23 @@
       <recent name="" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.cdrmodel.test_model.model" />
       <recent name="at.tugraz.ist.ase.kb.fm" />
       <recent name="at.tugraz.ist.ase.cdrmodel.test.builder.fm" />
       <recent name="at.tugraz.ist.ase.kb.core" />
       <recent name="at.tugraz.ist.ase.fm.parser" />
-      <recent name="at.tugraz.ist.ase.fm.core" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="at.tugraz.ist.ase.cdrmodel.fm" />
       <recent name="at.tugraz.ist.ase.cacdr.algorithms" />
       <recent name="at.tugraz.ist.ase.kb.camera" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="at.tugraz.ist.ase.cdrmodel.test_model.model.wipeoutr" />
+      <recent name="at.tugraz.ist.ase.cdrmodel" />
       <recent name="at.tugraz.ist.ase.cacdr.algorithms.hs.parameters" />
       <recent name="at.tugraz.ist.ase.cacdr.algorithms.hs.labeler" />
       <recent name="at.tugraz.ist.ase.cdrmodel.fm" />
-      <recent name="at.tugraz.ist.ase.cacdr.algorithms" />
-      <recent name="at.tugraz.ist.ase.fm.app.cli" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -147,7 +163,7 @@
       <command value="mvn install" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestCaseTest.shouldCloneable">
+  <component name="RunManager" selected="JUnit.WipeOutRFMTest">
     <configuration name="FMGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.fm.app.FMGenerator" />
       <module name="app-FMGenerator" />
@@ -175,48 +191,64 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ConstraintTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="choco-kb-v2" />
+    <configuration name="WipeOutRFMTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.core.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.core" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.core.ConstraintTest" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.WipeOutRFMTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ConstraintTest.testConstraint" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="choco-kb-v2" />
+    <configuration name="WipeOutRFMTest.test1" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.kb.core.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.kb.core" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.kb.core.ConstraintTest" />
-      <option name="METHOD_NAME" value="testConstraint" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.WipeOutRFMTest" />
+      <option name="METHOD_NAME" value="test1" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestCaseTest.shouldCloneable" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="cdrmodel-v2" />
+    <configuration name="WipeOutRFMTest.test2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-v2" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm.*" />
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm" />
-      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm.TestCaseTest" />
-      <option name="METHOD_NAME" value="shouldCloneable" />
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.WipeOutRFMTest" />
+      <option name="METHOD_NAME" value="test2" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WipeOutR_FMTest.test3" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ca-cdr-v2" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="at.tugraz.ist.ase.cacdr.algorithms.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.cacdr.algorithms" />
+      <option name="MAIN_CLASS_NAME" value="at.tugraz.ist.ase.cacdr.algorithms.WipeOutR_FMTest" />
+      <option name="METHOD_NAME" value="test3" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -236,20 +268,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="at.tugraz.ist.ase.test.builder.fm in test-v2" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test-v2" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="at.tugraz.ist.ase.cdrmodel.test.builder.fm.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="at.tugraz.ist.ase.test.builder.fm" />
-      <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="test-v2" />
       <method v="2">
@@ -263,13 +281,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.FMGenerator" />
+      <item itemvalue="Application.KBStatistics" />
+      <item itemvalue="JUnit.WipeOutRFMTest" />
+      <item itemvalue="JUnit.WipeOutRFMTest.test1" />
+      <item itemvalue="JUnit.WipeOutRFMTest.test2" />
+      <item itemvalue="JUnit.WipeOutR_FMTest.test3" />
+      <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.TestCaseTest.shouldCloneable" />
+        <item itemvalue="JUnit.WipeOutRFMTest" />
+        <item itemvalue="JUnit.WipeOutRFMTest.test2" />
+        <item itemvalue="JUnit.WipeOutRFMTest.test1" />
+        <item itemvalue="JUnit.WipeOutR_FMTest.test3" />
         <item itemvalue="JUnit.at.tugraz.ist.ase.cdrmodel in cdrmodel-v2" />
-        <item itemvalue="JUnit.ConstraintTest" />
-        <item itemvalue="JUnit.ConstraintTest.testConstraint" />
-        <item itemvalue="JUnit.at.tugraz.ist.ase.test.builder.fm in test-v2" />
       </list>
     </recent_temporary>
   </component>
@@ -362,20 +389,7 @@
       <workItem from="1659083956003" duration="80659000" />
       <workItem from="1659338507104" duration="3537000" />
       <workItem from="1659347303507" duration="5918000" />
-    </task>
-    <task id="LOCAL-00032" summary="Publish 1.3.9-alpha-16">
-      <created>1655050208601</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1655050208601</updated>
-    </task>
-    <task id="LOCAL-00033" summary="Add dispose() to ca-cdr algorithms and publish 1.3.9-alpha-17">
-      <created>1655564185663</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1655564185663</updated>
+      <workItem from="1661843887956" duration="7356000" />
     </task>
     <task id="LOCAL-00034" summary="Add dispose() to all projects and publish 1.3.9-alpha-18">
       <created>1655568391180</created>
@@ -706,7 +720,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659353227142</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="Add WipeOutR_FM">
+      <created>1661765134037</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1661765134037</updated>
+    </task>
+    <task id="LOCAL-00082" summary="Change FMDiagnosisModel to FMCdrModel to support the redundancy detection">
+      <created>1661864451707</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1661864451708</updated>
+    </task>
+    <option name="localTasksCounter" value="83" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -726,7 +754,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="28-support-multi-threading-in-abstracthsconstructor-hstree-and-hsdag" />
+                        <option value="7-wipeoutr_fm" />
                       </list>
                     </value>
                   </entry>
@@ -739,9 +767,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed convertToStringWithMessage" />
-    <MESSAGE value="Removed @Deprecated" />
-    <MESSAGE value="Supported DirectDebug to identify all diagnoses" />
     <MESSAGE value="Add complex_featureide_model.xml" />
     <MESSAGE value="FMDebuggingModel inherits FMDiagnosisModel" />
     <MESSAGE value="New package 1.3.9-alpha-35" />
@@ -764,7 +789,10 @@
     <MESSAGE value="Clean up the code" />
     <MESSAGE value="Add Class diagrams" />
     <MESSAGE value="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map..." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix convertToString of ConstraintUtils + Add convertToString to ChocoSolverUtils&#10;&#10;Use Joiner instead of stream.map..." />
+    <MESSAGE value="Add WipeOutR_FM" />
+    <MESSAGE value="Change FMDiagnosisModel to FMCdrModel to support the redundancy detection" />
+    <MESSAGE value="Add unit tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add unit tests" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">

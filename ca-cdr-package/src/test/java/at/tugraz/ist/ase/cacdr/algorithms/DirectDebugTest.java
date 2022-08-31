@@ -59,7 +59,7 @@ class DirectDebugTest {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
@@ -104,7 +104,7 @@ class DirectDebugTest {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
@@ -166,7 +166,7 @@ class DirectDebugTest {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
@@ -213,7 +213,7 @@ class DirectDebugTest {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
@@ -281,7 +281,7 @@ class DirectDebugTest {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
@@ -328,7 +328,7 @@ class DirectDebugTest {
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
         FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
-                true, false);
+                false, true, false);
         debuggingModel.initialize();
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);

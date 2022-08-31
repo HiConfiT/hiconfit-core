@@ -17,6 +17,9 @@ import lombok.Setter;
 
 import java.util.Set;
 
+/**
+ * @author Viet-Man Le (vietman.le@ist.tugraz.at)
+ */
 @Getter
 public class DirectDebugParameters extends AbstractHSParameters {
     private final Set<Constraint> B;

@@ -20,13 +20,13 @@ import lombok.extern.slf4j.Slf4j;
 import java.util.*;
 
 import static at.tugraz.ist.ase.cacdr.eval.CAEvaluator.*;
-import static at.tugraz.ist.ase.common.ConstraintUtils.*;
+import static at.tugraz.ist.ase.common.ConstraintUtils.hasIntersection;
 
 /**
  * Implementation of the HS-tree algorithm.
  * IHSLabeler algorithms have to return labels (conflict or diagnosis) which are guaranteed to be minimal.
  * For example: QuickXPlain, MXP, FastDiag
- *
+ * <p>
  * source: <a href="https://github.com/jaccovs/Master-project">https://github.com/jaccovs/Master-project</a>
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
