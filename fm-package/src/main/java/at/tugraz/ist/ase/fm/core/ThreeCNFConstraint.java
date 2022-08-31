@@ -27,7 +27,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 @Getter
 public class ThreeCNFConstraint extends Relationship {
-    private final List<Clause> clauses;
+    private final List<Literal> literals;
 
     /**
      * A constructor for 3CNF constraints.
@@ -40,7 +40,7 @@ public class ThreeCNFConstraint extends Relationship {
 
         checkArgument(type == RelationshipType.ThreeCNF, "Relationship type must be 3CNF");
 
-        clauses = new LinkedList<>();
+        literals = new LinkedList<>();
         parse3CNFConstraint(constraint3CNF);
 
         convertToConfRule();
@@ -48,13 +48,13 @@ public class ThreeCNFConstraint extends Relationship {
 
     @Override
     public boolean contains(@NonNull Feature feature) {
-        return clauses.stream().anyMatch(clause -> clause.getLiteral().equals(feature.getName()));
+        return literals.stream().anyMatch(literal -> literal.getVariable().equals(feature.getName()));
     }
 
     private void parse3CNFConstraint(String constraint3CNF) {
         String[] clauses = constraint3CNF.split(" \\| ");
 
-        Arrays.stream(clauses).map(Clause::new).forEachOrdered(this.clauses::add);
+        Arrays.stream(clauses).map(Literal::new).forEachOrdered(this.literals::add);
         /*for (String c: clauses) {
             Clause clause = new Clause(c);
             this.clauses.add(clause);
@@ -62,11 +62,11 @@ public class ThreeCNFConstraint extends Relationship {
     }
 
     private void convertToConfRule() {
-        confRule = String.format("3cnf(%s)", clauses.stream().map(Clause::getClause).collect(Collectors.joining(", ")));
+        confRule = String.format("3cnf(%s)", literals.stream().map(Literal::getLiteral).collect(Collectors.joining(", ")));
     }
 
     @Override
     public void dispose() {
-        clauses.clear();
+        literals.clear();
     }
 }

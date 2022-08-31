@@ -12,41 +12,41 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ClauseTest {
+class LiteralTest {
 
     @Test
     void testClause() {
-        Clause c1 = new Clause("A");
-        Clause c2 = new Clause("~A");
-        Clause c3 = new Clause("A");
+        Literal c1 = new Literal("A");
+        Literal c2 = new Literal("~A");
+        Literal c3 = new Literal("A");
 
         assertAll(() -> assertEquals("A = true", c1.toString()),
-                () -> assertEquals("A", c1.getLiteral()),
+                () -> assertEquals("A", c1.getVariable()),
                 () -> assertTrue(c1.isPositive()),
-                () -> assertEquals("A", c1.getClause()),
+                () -> assertEquals("A", c1.getLiteral()),
                 () -> assertEquals("A = false", c2.toString()),
                 () -> assertFalse(c2.isPositive()),
-                () -> assertEquals("~A", c2.getClause()),
+                () -> assertEquals("~A", c2.getLiteral()),
                 () -> assertEquals(c1, c3),
                 () -> assertNotEquals(c1, c2));
     }
 
     @Test
     void testBuilder() {
-        Clause c1 = Clause.builder()
-                .clause("A")
+        Literal c1 = Literal.builder()
+                .literal("A")
                 .build();
-        Clause c2 = Clause.builder()
-                .clause("~A")
+        Literal c2 = Literal.builder()
+                .literal("~A")
                 .build();
 
         assertAll(() -> assertEquals("A = true", c1.toString()),
-                () -> assertEquals("A", c1.getLiteral()),
+                () -> assertEquals("A", c1.getVariable()),
                 () -> assertTrue(c1.isPositive()),
-                () -> assertEquals("A", c1.getClause()),
+                () -> assertEquals("A", c1.getLiteral()),
                 () -> assertEquals("A = false", c2.toString()),
                 () -> assertFalse(c2.isPositive()),
-                () -> assertEquals("~A", c2.getClause()),
+                () -> assertEquals("~A", c2.getLiteral()),
                 () -> assertNotEquals(c1, c2));
     }
 }

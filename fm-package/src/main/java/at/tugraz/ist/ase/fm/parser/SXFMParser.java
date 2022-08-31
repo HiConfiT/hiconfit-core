@@ -34,11 +34,11 @@ import static com.google.common.base.Preconditions.checkState;
 
 /**
  * A parser for the SPLOT format
- *
+ * <p>
  * Using "fmapi" library of Generative Software Development Lab (<a href="http://gsd.uwaterloo.ca/">http://gsd.uwaterloo.ca/</a>)
  * University of Waterloo
  * Waterloo, Ontario, Canada
- *
+ * <p>
  * For further details of this library, we refer to <a href="http://52.32.1.180:8080/SPLOT/sxfm.html">http://52.32.1.180:8080/SPLOT/sxfm.html</a>
  */
 @Slf4j

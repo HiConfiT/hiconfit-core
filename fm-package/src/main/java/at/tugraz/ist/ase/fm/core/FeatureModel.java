@@ -90,7 +90,7 @@ public class FeatureModel {
      * @return a {@link Feature}
      */
     public Feature getFeature(int index) {
-        checkElementIndex(index, bfFeatures.size(), "Index out of bound!");
+        checkElementIndex(index, bfFeatures.size(), "Feature index out of bound!");
 
         return bfFeatures.get(index);
     }
@@ -310,14 +310,6 @@ public class FeatureModel {
 
         log.trace("{}Added relationship [relationship={}]", LoggerUtils.tab(), r);
     }
-
-//    /**
-//     * Gets all {@link Relationship}s
-//     * @return an array of {@link Relationship}s
-//     */
-//    public List<Relationship> getRelationships() {
-//        return relationships;
-//    }
 
     /**
      * Gets the number of relationships.

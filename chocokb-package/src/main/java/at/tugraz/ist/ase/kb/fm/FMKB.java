@@ -158,9 +158,9 @@ public class FMKB extends KB implements IBoolVarKB {
                 if (hasNegativeConstraints) {
                     negLogOp = LogOp.nor();
                 }
-                for (Clause clause: threeCNFConstraint.getClauses()) {
-                    boolean value = clause.isPositive();
-                    BoolVar var = getVarWithName(clause.getLiteral());
+                for (Literal literal : threeCNFConstraint.getLiterals()) {
+                    boolean value = literal.isPositive();
+                    BoolVar var = getVarWithName(literal.getVariable());
 
                     if (value) {
                         logOp.addChild(var);
