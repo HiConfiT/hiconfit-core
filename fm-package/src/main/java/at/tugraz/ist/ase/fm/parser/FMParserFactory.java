@@ -6,11 +6,11 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.fm.parser.factory;
+package at.tugraz.ist.ase.fm.parser;
 
-import at.tugraz.ist.ase.fm.parser.*;
+import lombok.NonNull;
 
-public class FMParserFactory extends AbstractFMParserFactory {
+public class FMParserFactory {
 
     private static final FMParserFactory instance = new FMParserFactory();
 
@@ -20,8 +20,7 @@ public class FMParserFactory extends AbstractFMParserFactory {
         return instance;
     }
 
-    @Override
-    public FeatureModelParser getParser(FMFormat fmFormat) {
+    public FeatureModelParser getParser(@NonNull FMFormat fmFormat) {
         return switch (fmFormat) {
             case SXFM -> new SXFMParser();
             case FEATUREIDE -> new FeatureIDEParser();
@@ -30,5 +29,9 @@ public class FMParserFactory extends AbstractFMParserFactory {
             case DESCRIPTIVE -> new DescriptiveFormatParser();
             default -> throw new IllegalArgumentException("Unsupported feature model format: " + fmFormat);
         };
+    }
+
+    public FeatureModelParser getParser(@NonNull String filename) {
+        return getParser(FMFormat.getFMFormat(filename));
     }
 }

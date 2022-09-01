@@ -9,10 +9,9 @@
 package at.tugraz.ist.ase.kb.fm;
 
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.BoolVariable;
 import at.tugraz.ist.ase.kb.core.Variable;
 import org.chocosolver.solver.variables.BoolVar;
@@ -33,7 +32,7 @@ class FMKBTest2 {
     static void setUp() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/survey.fm4conf");
         FMParserFactory factory = FMParserFactory.getInstance();
-        FeatureModelParser parser = factory.getParser(FMFormat.DESCRIPTIVE);
+        FeatureModelParser parser = factory.getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         kb = new FMKB(featureModel, true);

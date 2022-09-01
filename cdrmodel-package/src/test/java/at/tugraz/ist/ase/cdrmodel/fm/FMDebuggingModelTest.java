@@ -13,12 +13,10 @@ import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import com.google.common.collect.Iterators;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -58,8 +56,7 @@ class FMDebuggingModelTest {
     static void init() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/survey.fm4conf");
 
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         FeatureModel fm = parser.parse(fileFM);
 
         TestSuiteReader builder = new TestSuiteReader();

@@ -9,7 +9,6 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -22,8 +21,7 @@ public class SXFMParserTest {
     @Test
     void testUbuntu() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/ubuntu.splx");
-        FMParserFactory factory = FMParserFactory.getInstance();
-        FeatureModelParser parser = factory.getParser(FMFormat.SXFM);
+        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertNotNull(featureModel);

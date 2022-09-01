@@ -11,16 +11,15 @@ package at.tugraz.ist.ase.kb.app;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.core.RelationshipType;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.app.cli.KBStatistics_CmdLineOptions;
 import at.tugraz.ist.ase.kb.camera.CameraKB;
 import at.tugraz.ist.ase.kb.core.KB;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import at.tugraz.ist.ase.kb.pc.PCKB;
 import at.tugraz.ist.ase.kb.renault.RenaultKB;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import lombok.NonNull;
 
@@ -154,7 +153,7 @@ public class KBStatistics {
 
             for (final File file : Objects.requireNonNull(folder.listFiles())) {
                 // check if the file is a feature model
-                if (FMFormat.getFMFormatString(file.getName()) != null) {
+                if (FMFormat.getFMFormat(file.getName()).isValid()) {
                     processFM(writer, ++counter, file);
                 }
             }
@@ -164,8 +163,7 @@ public class KBStatistics {
     private void processFM(BufferedWriter writer, int counter, File file) throws IOException, FeatureModelParserException {
         System.out.println("\nCalculating statistics for " + file.getName() + "...");
 
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(file.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser parser = FMParserFactory.getInstance().getParser(file.getName());
 
         FeatureModel fm = parser.parse(file);
         FMKB fmkb = new FMKB(fm, false);

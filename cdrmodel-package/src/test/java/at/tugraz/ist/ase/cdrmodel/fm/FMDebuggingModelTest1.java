@@ -14,11 +14,9 @@ import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.chocosolver.solver.Model;
@@ -43,8 +41,7 @@ class FMDebuggingModelTest1 {
     @BeforeAll
     static void setUp() {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();

@@ -18,13 +18,11 @@ import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.cdrmodel.test_model.model.*;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Iterators;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
@@ -344,8 +342,7 @@ public class TestCloneable {
     @Test
     void directDebug1() throws FeatureModelParserException, IOException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         FeatureModel featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
@@ -391,8 +388,7 @@ public class TestCloneable {
     @Test
     void directDebug2() throws FeatureModelParserException, IOException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/FM_10_1.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         FeatureModel featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
@@ -441,8 +437,7 @@ public class TestCloneable {
     @Test
     void directDebug3() throws FeatureModelParserException, IOException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/FM_10_2.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         FeatureModel featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
