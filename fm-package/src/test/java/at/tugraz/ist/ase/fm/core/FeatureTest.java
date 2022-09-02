@@ -18,82 +18,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class FeatureTest {
 
     static Feature root;
-    static Feature feature;
+    static Feature f1;
+    static Feature f2;
+    static Feature f3;
+    static Feature f4;
+    static Feature f5;
+    static Feature f6;
 
     @BeforeAll
     static void setUp() {
         root = Feature.createRoot("root", "root");
-        feature = new Feature("F1", "ID");
-    }
-
-    @Test
-    public void testFeature() {
-        assertAll(() -> assertEquals("F1", feature.getName()),
-                () -> assertEquals("ID", feature.getId()),
-                () -> assertEquals("F1", feature.toString()));
-    }
-
-    @Test
-    public void testException() {
-        assertAll(() -> assertThrows(NullPointerException.class, () -> new Feature(null, null)),
-                () -> assertThrows(NullPointerException.class, () -> new Feature("f", null)));
-    }
-
-    @Test
-    void isDuplicate() {
-        Feature f = Feature.builder()
-                .name("F1")
-                .id("ID")
-                .build();
-        Feature f1 = new Feature("F1", "ID2");
-
-        assertAll(() -> assertTrue(feature.isDuplicate(f)),
-                () -> assertFalse(feature.isDuplicate(f1)),
-                () -> assertTrue(feature.isIdDuplicate("ID")),
-                () -> assertFalse(feature.isIdDuplicate("ID2")),
-                () -> assertTrue(feature.isNameDuplicate("F1")),
-                () -> assertFalse(feature.isNameDuplicate("F2")));
-    }
-
-    @Test
-    void isRoot() {
-        assertAll(() -> assertTrue(root.isRoot()),
-                () -> assertFalse(feature.isRoot()));
-    }
-
-    @Test
-    void isAbstract() {
-        Feature f = Feature.builder()
-                .name("F1")
-                .id("ID")
-                .build();
-        f.setAbstract(true);
-
-        assertAll(() -> assertTrue(root.isAbstract()),
-                () -> assertFalse(feature.isAbstract()),
-                () -> assertTrue(f.isAbstract()));
-    }
-
-    @Test
-    void setParent() {
-        Feature f = Feature.builder()
-                .name("F1")
-                .id("ID")
-                .build();
-
-        assertAll(() -> assertThrows(IllegalArgumentException.class, () -> root.setParent(feature)),
-                () -> assertDoesNotThrow(() -> f.setParent(feature)));
-    }
-
-    @Test
-    void testGetChildren() {
-        Feature root = Feature.createRoot("root", "root");
-        Feature f1 = new Feature("F1", "ID1");
-        Feature f2 = new Feature("F2", "ID2");
-        Feature f3 = new Feature("F3", "ID3");
-        Feature f4 = new Feature("F4", "ID4");
-        Feature f5 = new Feature("F5", "ID5");
-        Feature f6 = new Feature("F6", "ID6");
+        f1 = new Feature("F1", "ID1");
+        f2 = new Feature("F2", "ID2");
+        f3 = new Feature("F3", "ID3");
+        f4 = new Feature("F4", "ID4");
+        f5 = new Feature("F5", "ID5");
+        f6 = new Feature("F6", "ID6");
 
         AbstractRelationship optionalRelationship = OptionalRelationship.builder()
                 .parent(root)
@@ -117,6 +57,109 @@ class FeatureTest {
                 .children(List.of(f5, f6))
                 .build();
         f2.addRelationship(alternativeRelationship);
+    }
+
+    @Test
+    public void testFeature() {
+        assertAll(() -> assertEquals("F1", f1.getName()),
+                () -> assertEquals("ID1", f1.getId()),
+                () -> assertEquals("F1", f1.toString()));
+    }
+
+    @Test
+    public void testException() {
+        assertAll(() -> assertThrows(NullPointerException.class, () -> new Feature(null, null)),
+                () -> assertThrows(NullPointerException.class, () -> new Feature("f", null)));
+    }
+
+    @Test
+    void testIsLeaf() {
+        assertAll(() -> assertFalse(f1.isLeaf()),
+                () -> assertFalse(f2.isLeaf()),
+                () -> assertTrue(f3.isLeaf()),
+                () -> assertTrue(f4.isLeaf()),
+                () -> assertTrue(f5.isLeaf()),
+                () -> assertTrue(f6.isLeaf()));
+    }
+
+    @Test
+    void isDuplicate() {
+        Feature f7 = Feature.builder()
+                .name("F1")
+                .id("ID1")
+                .build();
+        Feature f8 = new Feature("F1", "ID2");
+
+        assertAll(() -> assertTrue(f1.isDuplicate(f7)),
+                () -> assertFalse(f1.isDuplicate(f8)),
+                () -> assertTrue(f1.isIdDuplicate("ID1")),
+                () -> assertFalse(f1.isIdDuplicate("ID2")),
+                () -> assertTrue(f1.isNameDuplicate("F1")),
+                () -> assertFalse(f1.isNameDuplicate("F2")));
+    }
+
+    @Test
+    void isRoot() {
+        assertAll(() -> assertTrue(root.isRoot()),
+                () -> assertFalse(f1.isRoot()));
+    }
+
+    @Test
+    void isAbstract() {
+        Feature f = Feature.builder()
+                .name("F1")
+                .id("ID")
+                .build();
+        f.setAbstract(true);
+
+        assertAll(() -> assertTrue(root.isAbstract()),
+                () -> assertFalse(f1.isAbstract()),
+                () -> assertTrue(f.isAbstract()));
+    }
+
+    @Test
+    void setParent() {
+        Feature f = Feature.builder()
+                .name("F1")
+                .id("ID")
+                .build();
+
+        assertAll(() -> assertThrows(IllegalArgumentException.class, () -> root.setParent(f1)),
+                () -> assertDoesNotThrow(() -> f.setParent(f1)));
+    }
+
+    @Test
+    void testGetChildren() {
+//        Feature root = Feature.createRoot("root", "root");
+//        Feature f1 = new Feature("F1", "ID1");
+//        Feature f2 = new Feature("F2", "ID2");
+//        Feature f3 = new Feature("F3", "ID3");
+//        Feature f4 = new Feature("F4", "ID4");
+//        Feature f5 = new Feature("F5", "ID5");
+//        Feature f6 = new Feature("F6", "ID6");
+//
+//        AbstractRelationship optionalRelationship = OptionalRelationship.builder()
+//                .parent(root)
+//                .child(f1)
+//                .build();
+//        root.addRelationship(optionalRelationship);
+//        AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
+//                .parent(root)
+//                .child(f2)
+//                .build();
+//        root.addRelationship(mandatoryRelationship);
+//
+//        AbstractRelationship orRelationship = OrRelationship.builder()
+//                .parent(f1)
+//                .children(List.of(f3, f4))
+//                .build();
+//        f1.addRelationship(orRelationship);
+//
+//        AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
+//                .parent(f2)
+//                .children(List.of(f5, f6))
+//                .build();
+//        f2.addRelationship(alternativeRelationship);
 
         assertAll(() -> assertEquals(2, root.getChildren().size()),
                 () -> assertEquals(List.of(f1, f2), root.getChildren()),
@@ -132,36 +175,36 @@ class FeatureTest {
 
     @Test
     void testCloneWithRelationships() throws CloneNotSupportedException {
-        Feature root = Feature.createRoot("root", "root");
-        Feature f1 = new Feature("F11", "ID1");
-        Feature f2 = new Feature("F21", "ID2");
-        Feature f3 = new Feature("F31", "ID3");
-        Feature f4 = new Feature("F41", "ID4");
-        Feature f5 = new Feature("F51", "ID5");
-        Feature f6 = new Feature("F61", "ID6");
-
-        AbstractRelationship optionalRelationship = OptionalRelationship.builder()
-                .parent(root)
-                .child(f1)
-                .build();
-        root.addRelationship(optionalRelationship);
-        AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
-                .parent(root)
-                .child(f2)
-                .build();
-        root.addRelationship(mandatoryRelationship);
-
-        AbstractRelationship orRelationship = OrRelationship.builder()
-                .parent(f1)
-                .children(List.of(f3, f4))
-                .build();
-        f1.addRelationship(orRelationship);
-
-        AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
-                .parent(f2)
-                .children(List.of(f5, f6))
-                .build();
-        f2.addRelationship(alternativeRelationship);
+//        Feature root = Feature.createRoot("root", "root");
+//        Feature f1 = new Feature("F11", "ID1");
+//        Feature f2 = new Feature("F21", "ID2");
+//        Feature f3 = new Feature("F31", "ID3");
+//        Feature f4 = new Feature("F41", "ID4");
+//        Feature f5 = new Feature("F51", "ID5");
+//        Feature f6 = new Feature("F61", "ID6");
+//
+//        AbstractRelationship optionalRelationship = OptionalRelationship.builder()
+//                .parent(root)
+//                .child(f1)
+//                .build();
+//        root.addRelationship(optionalRelationship);
+//        AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
+//                .parent(root)
+//                .child(f2)
+//                .build();
+//        root.addRelationship(mandatoryRelationship);
+//
+//        AbstractRelationship orRelationship = OrRelationship.builder()
+//                .parent(f1)
+//                .children(List.of(f3, f4))
+//                .build();
+//        f1.addRelationship(orRelationship);
+//
+//        AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
+//                .parent(f2)
+//                .children(List.of(f5, f6))
+//                .build();
+//        f2.addRelationship(alternativeRelationship);
 
         Feature fClone1 = (Feature) f1.clone();
 

@@ -92,6 +92,10 @@ public class Feature implements Cloneable {
                 && parent.relationships.parallelStream().anyMatch(r -> r instanceof OptionalRelationship && r.isChild(this));
     }
 
+    public boolean isLeaf() {
+        return relationships.isEmpty();
+    }
+
     /**
      * Adds a parent to this feature.
      */
