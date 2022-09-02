@@ -8,9 +8,7 @@
 
 package at.tugraz.ist.ase.fm.core;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
+import lombok.*;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -22,17 +20,18 @@ import java.util.List;
  * This class should be immutable.
  */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public abstract class AbstractRelationship implements Cloneable {
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public abstract class AbstractRelationship<F extends Feature> {
 
     @Getter
-    protected Feature parent;
+    protected F parent;
     @Getter
-    protected List<Feature> children = new LinkedList<>();
+    protected List<F> children = new LinkedList<>();
 
     @EqualsAndHashCode.Include
     protected String confRule = null;
 
-    public AbstractRelationship(@NonNull Feature from, @NonNull Collection<Feature> to) {
+    public AbstractRelationship(@NonNull F from, @NonNull Collection<F> to) {
         this.parent = from;
         this.children.addAll(to);
 
@@ -42,7 +41,19 @@ public abstract class AbstractRelationship implements Cloneable {
         convertToConfRule();
     }
 
-//    /**
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (!(o instanceof AbstractRelationship<?> that)) return false;
+//        return Objects.equals(confRule, that.confRule);
+//    }
+//
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(confRule);
+//    }
+
+    //    /**
 //     * Checks whether the relationship is optional.
 //     * @return true if the relationship is OPTIONAL or OR, false otherwise.
 //     */
@@ -53,7 +64,7 @@ public abstract class AbstractRelationship implements Cloneable {
     /**
      * Returns the first child.
      */
-    public Feature getChild() {
+    public F getChild() {
         if (children.isEmpty()) {
             return null;
         }
@@ -78,7 +89,7 @@ public abstract class AbstractRelationship implements Cloneable {
      * @param feature a {@link Feature}
      * @return true if yes, false otherwise.
      */
-    public boolean isParent(@NonNull Feature feature) {
+    public boolean isParent(@NonNull F feature) {
         return parent.equals(feature);
     }
 
@@ -88,11 +99,11 @@ public abstract class AbstractRelationship implements Cloneable {
      * @param feature a {@link Feature}
      * @return true if yes, false otherwise.
      */
-    public boolean isChild(@NonNull Feature feature) {
+    public boolean isChild(@NonNull F feature) {
         return children.parallelStream().anyMatch(f -> f.equals(feature));
     }
 
-    public boolean contains(@NonNull Feature feature) {
+    public boolean contains(@NonNull F feature) {
         return isParent(feature) || isChild(feature);
     }
 
@@ -112,14 +123,6 @@ public abstract class AbstractRelationship implements Cloneable {
         children = null;
     }
 
-    public AbstractRelationship clone() throws CloneNotSupportedException {
-        AbstractRelationship clone = (AbstractRelationship) super.clone();
-
-        // copy children
-        clone.children = new LinkedList<>(children);
-        clone.convertToConfRule();
-
-        return clone;
-    }
+    public abstract AbstractRelationship<F> clone();
 }
 

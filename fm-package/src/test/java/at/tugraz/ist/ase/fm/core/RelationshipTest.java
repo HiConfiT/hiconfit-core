@@ -18,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RelationshipTest {
 
-    static AbstractRelationship optionalRelationship;
-    static AbstractRelationship mandatoryRelationship;
-    static AbstractRelationship orRelationship;
-    static AbstractRelationship alternativeRelationship;
+    static AbstractRelationship<Feature> optionalRelationship;
+    static AbstractRelationship<Feature> mandatoryRelationship;
+    static AbstractRelationship<Feature> orRelationship;
+    static AbstractRelationship<Feature> alternativeRelationship;
 //    static AbstractRelationship requiresRelationship;
 //    static AbstractRelationship excludesRelationship;
 //    static AbstractRelationship specialRelationship;
@@ -43,12 +43,12 @@ class RelationshipTest {
         f5 = new Feature("F5", "ID5");
         f6 = new Feature("F6", "ID6");
 
-        optionalRelationship = new OptionalRelationship(root, f1);
-        mandatoryRelationship = new MandatoryRelationship(root, f2);
+        optionalRelationship = new OptionalRelationship<>(root, f1);
+        mandatoryRelationship = new MandatoryRelationship<>(root, f2);
 
-        orRelationship = new OrRelationship(f1, List.of(f3, f4));
+        orRelationship = new OrRelationship<>(f1, List.of(f3, f4));
 
-        alternativeRelationship = new AlternativeRelationship(f2, List.of(f5, f6));
+        alternativeRelationship = new AlternativeRelationship<>(f2, List.of(f5, f6));
 
 //        requiresRelationship = new BasicRelationship(RelationshipType.REQUIRES,
 //                f1,
@@ -86,8 +86,8 @@ class RelationshipTest {
 
     @Test
     void testExceptions() {
-        assertThrows(IllegalArgumentException.class, () -> new OrRelationship(root, Collections.emptyList()));
-        assertThrows(IllegalArgumentException.class, () -> new AlternativeRelationship(root, Collections.emptyList()));
+        assertThrows(IllegalArgumentException.class, () -> new OrRelationship<>(root, Collections.emptyList()));
+        assertThrows(IllegalArgumentException.class, () -> new AlternativeRelationship<>(root, Collections.emptyList()));
     }
 
 //    @Test
@@ -145,21 +145,21 @@ class RelationshipTest {
         Feature f5 = new Feature("F51", "ID5");
         Feature f6 = new Feature("F61", "ID6");
 
-        AbstractRelationship optionalRelationship = OptionalRelationship.builder()
+        AbstractRelationship<Feature> optionalRelationship = OptionalRelationship.builder()
                 .from(root)
                 .to(f1)
                 .build();
-        AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
+        AbstractRelationship<Feature> mandatoryRelationship = MandatoryRelationship.builder()
                 .from(root)
                 .to(f2)
                 .build();
 
-        AbstractRelationship orRelationship = OrRelationship.builder()
+        AbstractRelationship<Feature> orRelationship = OrRelationship.builder()
                 .from(f1)
                 .to(List.of(f3, f4))
                 .build();
 
-        AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
+        AbstractRelationship<Feature> alternativeRelationship = AlternativeRelationship.builder()
                 .from(f2)
                 .to(List.of(f5, f6))
                 .build();
@@ -175,11 +175,12 @@ class RelationshipTest {
     }
 
     @Test
-    void testClone() throws CloneNotSupportedException {
-        AbstractRelationship cloneRel = mandatoryRelationship.clone();
-        AbstractRelationship cloneRel2 = orRelationship.clone();
+    void testClone() {
+        AbstractRelationship<Feature> cloneRel = mandatoryRelationship.clone();
+        AbstractRelationship<Feature> cloneRel2 = orRelationship.clone();
 
-        assertAll(() -> assertNotSame(mandatoryRelationship,cloneRel),
+        assertAll(
+                () -> assertNotSame(mandatoryRelationship, cloneRel),
                 () -> assertEquals(mandatoryRelationship, cloneRel),
                 () -> assertEquals(mandatoryRelationship.toString(), cloneRel.toString()),
                 () -> assertEquals(mandatoryRelationship.getParent(), cloneRel.getParent()),

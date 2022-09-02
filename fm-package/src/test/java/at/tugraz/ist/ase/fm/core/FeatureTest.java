@@ -113,6 +113,13 @@ class FeatureTest {
                 () -> assertTrue(f.isAbstract()));
     }
 
+//    @Test
+//    void isMandatory() {
+//        assertAll(() -> assertTrue(root.isMandatory()),
+//                () -> assertFalse(f1.isMandatory()),
+//                () -> assertTrue(f2.isMandatory()));
+//    }
+
     @Test
     void setParent() {
         Feature f = Feature.builder()
@@ -155,8 +162,10 @@ class FeatureTest {
                 () -> assertEquals(f1.getRelationships(), fClone1.getRelationships()),
                 () -> assertNotSame(f1.getRelationships(), fClone1.getRelationships()),
                 () -> assertEquals(f1.getRelationships().size(), fClone1.getRelationships().size()),
+                () -> assertEquals(f1.getRelationships().get(0).toString(), fClone1.getRelationships().get(0).toString()),
                 () -> assertEquals(f1.getRelationships().get(0), fClone1.getRelationships().get(0)),
                 () -> assertNotSame(f1.getRelationships().get(0), fClone1.getRelationships().get(0)));
+
 //                () -> assertNotSame(f1, fClone.getRelationships().get(0).getChildren().get(0)),
 //                () -> assertNotSame(f2, fClone.getRelationships().get(0).getChildren().get(1)),
 //                () -> assertNotSame(f3, fClone.getRelationships().get(1).getChildren().get(0)),

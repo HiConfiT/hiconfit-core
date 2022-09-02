@@ -14,7 +14,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -43,7 +42,7 @@ public class Feature implements Cloneable {
     protected boolean isRoot = false;
 
     protected Feature parent = null;
-    protected List<AbstractRelationship> relationships = new LinkedList<>();
+    protected List<AbstractRelationship<? extends Feature>> relationships = new LinkedList<>();
 
     @Setter
     protected boolean isAbstract = false;
@@ -89,16 +88,16 @@ public class Feature implements Cloneable {
         return isIdDuplicate(feature.id) && isNameDuplicate(feature.name);
     }
 
-    public boolean isMandatory() {
-        return parent != null
-                && parent.relationships.parallelStream().anyMatch(r -> r instanceof MandatoryRelationship && r.isChild(this));
-    }
+//    public boolean isMandatory() {
+//        return parent != null
+//                && parent.relationships.parallelStream().anyMatch(r -> r instanceof MandatoryRelationship<? extends Feature> && r.isChild(this));
+//    }
 
     // TODO - check
-    public boolean isOptional() {
-        return parent != null
-                && parent.relationships.parallelStream().anyMatch(r -> r instanceof OptionalRelationship && r.isChild(this));
-    }
+//    public boolean isOptional() {
+//        return parent != null
+//                && parent.relationships.parallelStream().anyMatch(r -> r instanceof OptionalRelationship && r.isChild(this));
+//    }
 
     public boolean isLeaf() {
         return relationships.isEmpty();
@@ -117,17 +116,17 @@ public class Feature implements Cloneable {
         }
     }
 
-    public void addRelationship(AbstractRelationship relationship) {
+    public void addRelationship(AbstractRelationship<? extends Feature> relationship) {
         relationships.add(relationship);
     }
 
     public List<Feature> getChildren() {
-        return relationships.stream().flatMap(relationship -> relationship.getChildren().stream()).collect(Collectors.toCollection(LinkedList::new));
-        /*List<Feature> children = new LinkedList<>();
-        for (AbstractRelationship relationship : relationships) {
+//        return relationships.stream().flatMap(relationship -> relationship.getChildren().stream()).collect(Collectors.toCollection(LinkedList::new));
+        List<Feature> children = new LinkedList<>();
+        for (AbstractRelationship<? extends Feature> relationship : relationships) {
             children.addAll(relationship.getChildren());
         }
-        return children;*/
+        return children;
     }
 
     /**
@@ -151,7 +150,7 @@ public class Feature implements Cloneable {
 
         // copy relationships
         clone.relationships = new LinkedList<>();
-        for (AbstractRelationship relationship : relationships) {
+        for (AbstractRelationship<? extends Feature> relationship : relationships) {
             clone.relationships.add(relationship.clone());
         }
 

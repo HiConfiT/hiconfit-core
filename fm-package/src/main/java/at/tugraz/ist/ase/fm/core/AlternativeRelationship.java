@@ -9,8 +9,10 @@
 package at.tugraz.ist.ase.fm.core;
 
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,13 +23,14 @@ import static com.google.common.base.Preconditions.checkArgument;
  * <p>
  * This class should be immutable.
  */
-public class AlternativeRelationship extends AbstractRelationship implements Cloneable {
+@NoArgsConstructor
+public class AlternativeRelationship<F extends Feature> extends AbstractRelationship<F> implements Cloneable {
 
     @Builder
-    public AlternativeRelationship(@NonNull Feature parent, @NonNull List<Feature> children) {
-        super(parent, children);
+    public AlternativeRelationship(@NonNull F from, @NonNull List<F> to) {
+        super(from, to);
 
-        checkArgument(children.size() >= 1, "Alternative relationship's children must have more than one feature");
+        checkArgument(to.size() >= 1, "Alternative relationship's children must have more than one feature");
     }
 
     @Override
@@ -35,7 +38,15 @@ public class AlternativeRelationship extends AbstractRelationship implements Clo
         this.confRule = String.format("alternative(%s, %s)", getParent(), getChildren().stream().map(Feature::getName).collect(Collectors.joining(", ")));
     }
 
-    public AlternativeRelationship clone() throws CloneNotSupportedException {
-        return (AlternativeRelationship) super.clone();
+    @Override
+    public AlternativeRelationship<F> clone() {
+        AlternativeRelationship<F> clone = new AlternativeRelationship<>();
+
+        clone.parent = getParent();
+        clone.children = new LinkedList<>(getChildren());
+
+        clone.convertToConfRule();
+
+        return clone;
     }
 }
