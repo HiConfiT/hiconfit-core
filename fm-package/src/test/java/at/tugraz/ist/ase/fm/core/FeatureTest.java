@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FeatureTest {
 
+    static FeatureModel<Feature, AbstractRelationship<Feature>> fm;
     static Feature root;
     static Feature f1;
     static Feature f2;
@@ -27,32 +28,33 @@ class FeatureTest {
 
     @BeforeAll
     static void setUp() {
-        root = Feature.createRoot("root", "root");
-        f1 = new Feature("F1", "ID1");
-        f2 = new Feature("F2", "ID2");
-        f3 = new Feature("F3", "ID3");
-        f4 = new Feature("F4", "ID4");
-        f5 = new Feature("F5", "ID5");
-        f6 = new Feature("F6", "ID6");
+        fm = new FeatureModel<>();
+        root = fm.addRoot(Feature.createRoot("root", "root"));
+        f1 = fm.addFeature(new Feature("F1", "ID1"));
+        f2 = fm.addFeature(new Feature("F2", "ID2"));
+        f3 = fm.addFeature(new Feature("F3", "ID3"));
+        f4 = fm.addFeature(new Feature("F4", "ID4"));
+        f5 = fm.addFeature(new Feature("F5", "ID5"));
+        f6 = fm.addFeature(new Feature("F6", "ID6"));
 
-        OptionalRelationship.builder()
+        fm.addRelationship(OptionalRelationship.builder()
                 .from(root)
                 .to(f1)
-                .build();
-        MandatoryRelationship.builder()
+                .build());
+        fm.addRelationship(MandatoryRelationship.builder()
                 .from(root)
                 .to(f2)
-                .build();
+                .build());
 
-        OrRelationship.builder()
+        fm.addRelationship(OrRelationship.builder()
                 .from(f1)
                 .to(List.of(f3, f4))
-                .build();
+                .build());
 
-        AlternativeRelationship.builder()
+        fm.addRelationship(AlternativeRelationship.builder()
                 .from(f2)
                 .to(List.of(f5, f6))
-                .build();
+                .build());
     }
 
     @Test

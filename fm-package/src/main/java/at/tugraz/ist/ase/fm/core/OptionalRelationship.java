@@ -18,13 +18,11 @@ import java.util.Collections;
  * <p>
  * This class should be immutable.
  */
-public class OptionalRelationship extends AbstractRelationship implements Cloneable {
+public class OptionalRelationship<F extends Feature> extends AbstractRelationship<F> implements Cloneable {
 
     @Builder
-    public OptionalRelationship(@NonNull Feature parent, @NonNull Feature child) {
-        super(parent, Collections.singletonList(child));
-
-//        checkArgument(children.size() == 1, "Optional relationship's children must have exactly one feature");
+    public OptionalRelationship(@NonNull F from, @NonNull F to) {
+        super(from, Collections.singletonList(to));
     }
 
     @Override
@@ -32,7 +30,8 @@ public class OptionalRelationship extends AbstractRelationship implements Clonea
         this.confRule = String.format("optional(%s, %s)", getParent(), getChild());
     }
 
-    public OptionalRelationship clone() throws CloneNotSupportedException {
-        return (OptionalRelationship) super.clone();
+    @Override
+    public OptionalRelationship<F> clone() {
+        return new OptionalRelationship<>(getParent(), getChild());
     }
 }

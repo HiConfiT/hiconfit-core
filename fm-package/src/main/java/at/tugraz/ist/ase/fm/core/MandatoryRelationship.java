@@ -18,13 +18,11 @@ import java.util.Collections;
  * <p>
  * This class should be immutable.
  */
-public class MandatoryRelationship extends AbstractRelationship implements Cloneable {
+public class MandatoryRelationship<F extends Feature> extends AbstractRelationship<F> implements Cloneable {
 
     @Builder
-    public MandatoryRelationship(@NonNull Feature parent, @NonNull Feature child) {
-        super(parent, Collections.singletonList(child));
-
-//        checkArgument(child.size() == 1, "Mandatory relationship's children must have exactly one feature");
+    public MandatoryRelationship(@NonNull F from, @NonNull F to) {
+        super(from, Collections.singletonList(to));
     }
 
     @Override
@@ -32,7 +30,8 @@ public class MandatoryRelationship extends AbstractRelationship implements Clone
         this.confRule = String.format("mandatory(%s, %s)", getParent(), getChild());
     }
 
-    public MandatoryRelationship clone() throws CloneNotSupportedException {
-        return (MandatoryRelationship) super.clone();
+    @Override
+    public MandatoryRelationship<F> clone() {
+        return new MandatoryRelationship<>(getParent(), getChild());
     }
 }

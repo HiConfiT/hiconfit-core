@@ -9,10 +9,8 @@
 package at.tugraz.ist.ase.fm.core;
 
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +21,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * <p>
  * This class should be immutable.
  */
-@NoArgsConstructor
 public class AlternativeRelationship<F extends Feature> extends AbstractRelationship<F> implements Cloneable {
 
     @Builder
@@ -40,13 +37,6 @@ public class AlternativeRelationship<F extends Feature> extends AbstractRelation
 
     @Override
     public AlternativeRelationship<F> clone() {
-        AlternativeRelationship<F> clone = new AlternativeRelationship<>();
-
-        clone.parent = getParent();
-        clone.children = new LinkedList<>(getChildren());
-
-        clone.convertToConfRule();
-
-        return clone;
+        return new AlternativeRelationship<>(getParent(), getChildren());
     }
 }

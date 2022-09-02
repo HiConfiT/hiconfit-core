@@ -8,7 +8,9 @@
 
 package at.tugraz.ist.ase.fm.core;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NonNull;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -20,7 +22,6 @@ import java.util.List;
  * This class should be immutable.
  */
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public abstract class AbstractRelationship<F extends Feature> {
 
     @Getter
@@ -34,9 +35,6 @@ public abstract class AbstractRelationship<F extends Feature> {
     public AbstractRelationship(@NonNull F from, @NonNull Collection<F> to) {
         this.parent = from;
         this.children.addAll(to);
-
-        parent.addRelationship(this);
-        children.forEach(child -> child.setParent(parent));
 
         convertToConfRule();
     }
