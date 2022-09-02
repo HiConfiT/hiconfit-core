@@ -41,6 +41,10 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
 
     protected F root = null;
 
+    public boolean hasRoot() {
+        return root != null;
+    }
+
     /**
      * Adds a root feature
      * @param root root feature

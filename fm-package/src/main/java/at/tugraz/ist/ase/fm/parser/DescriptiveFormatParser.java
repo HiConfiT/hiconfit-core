@@ -9,10 +9,7 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.fm.core.Feature;
-import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.FeatureModelException;
-import at.tugraz.ist.ase.fm.core.RelationshipType;
+import at.tugraz.ist.ase.fm.core.*;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfBaseListener;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfLexer;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfParser;
@@ -36,12 +33,23 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * A parser for the descriptive format
+ * <p>
+ * This parser supports the following classes:
+ * <ul>
+ *     <li>Feature</li>
+ *     <li>AbstractRelationship</li>
+ *     <li>MandatoryRelationship</li>
+ *     <li>OptionalRelationship</li>
+ *     <li>AlternativeRelationship</li>
+ *     <li>OrRelationship</li>
+ *     <li>FeatureModel</li>
+ * </ul>
  */
 @Beta
 @Slf4j
 public class DescriptiveFormatParser extends FM4ConfBaseListener implements FeatureModelParser {
 
-    private FeatureModel featureModel;
+    private FeatureModel<Feature, AbstractRelationship<Feature>> fm;
 
     /**
      * Check whether the format of the given file is Descriptive format
@@ -79,7 +87,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
      * @throws FeatureModelParserException when error occurs in parsing
      */
     @Override
-    public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
+    public FeatureModel<Feature, AbstractRelationship<Feature>> parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not a Descriptive format or there are errors in the file!");
 
         log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
@@ -97,8 +105,8 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
             // create a standard ANTLR parse tree walker
             ParseTreeWalker walker = new ParseTreeWalker();
             // feed to walker
-            featureModel = new FeatureModel();
-            featureModel.setName(filePath.getName());
+            fm = new FeatureModel<>();
+            fm.setName(filePath.getName());
 
             walker.walk(this, tree);        // walk parse tree
         } catch (IOException e) {
@@ -106,24 +114,33 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
-        return featureModel;
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), fm);
+        return fm;
     }
 
     @Override
     public void exitFeature(FM4ConfParser.FeatureContext ctx) {
         List<FM4ConfParser.IdentifierContext> ids = ctx.identifier();
-        ids.forEach(idCx -> featureModel.addFeature(idCx.getText(), idCx.getText()));
-        /*for (FM4ConfParser.IdentifierContext idCx : ids) {
-            featureModel.addFeature(idCx.getText(), idCx.getText());
-        }*/
+        ids.forEach(idCx -> {
+            if (!fm.hasRoot()) {
+                fm.addRoot(Feature.createRoot(idCx.getText(), idCx.getText()));
+            } else {
+                fm.addFeature(Feature.builder().name(idCx.getText()).id(idCx.getText()).build());
+            }
+        });
     }
 
     @Override
     public void exitMandatory(FM4ConfParser.MandatoryContext ctx) {
         try {
-            addRelationship(RelationshipType.MANDATORY, ctx.identifier());
-        } catch (FeatureModelException e) {
+            Feature parent = getParent(ctx.identifier());
+            List<Feature> children = getChildren(ctx.identifier());
+
+            fm.addRelationship(MandatoryRelationship.builder()
+                    .from(parent)
+                    .to(children.get(0))
+                    .build());
+        } catch (Exception e) {
             log.error("{}Error while adding mandatory relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
@@ -131,8 +148,14 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitOptional(FM4ConfParser.OptionalContext ctx) {
         try {
-            addRelationship(RelationshipType.OPTIONAL, ctx.identifier());
-        } catch (FeatureModelException e) {
+            Feature parent = getParent(ctx.identifier());
+            List<Feature> children = getChildren(ctx.identifier());
+
+            fm.addRelationship(OptionalRelationship.builder()
+                    .from(children.get(0))
+                    .to(parent)
+                    .build());
+        } catch (Exception e) {
             log.error("{}Error while adding optional relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
@@ -140,8 +163,14 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitAlternative(FM4ConfParser.AlternativeContext ctx) {
         try {
-            addRelationship(RelationshipType.ALTERNATIVE, ctx.identifier());
-        } catch (FeatureModelException e) {
+            Feature parent = getParent(ctx.identifier());
+            List<Feature> children = getChildren(ctx.identifier());
+
+            fm.addRelationship(AlternativeRelationship.builder()
+                    .from(parent)
+                    .to(children)
+                    .build());
+        } catch (Exception e) {
             log.error("{}Error while adding alternative relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
@@ -149,47 +178,70 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitOr(FM4ConfParser.OrContext ctx) {
         try {
-            addRelationship(RelationshipType.OR, ctx.identifier());
-        } catch (FeatureModelException e) {
+            Feature parent = getParent(ctx.identifier());
+            List<Feature> children = getChildren(ctx.identifier());
+
+            fm.addRelationship(OrRelationship.builder()
+                    .from(parent)
+                    .to(children)
+                    .build());
+        } catch (Exception e) {
             log.error("{}Error while adding or relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
+//
+//    @Override
+//    public void exitRequires(FM4ConfParser.RequiresContext ctx) {
+//        try {
+//            addConstraint(RelationshipType.REQUIRES, ctx.identifier());
+//        } catch (FeatureModelException e) {
+//            log.error("{}Error while adding requires constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
+//        }
+//    }
+//
+//    @Override
+//    public void exitExcludes(FM4ConfParser.ExcludesContext ctx) {
+//        try {
+//            addConstraint(RelationshipType.EXCLUDES, ctx.identifier());
+//        } catch (FeatureModelException e) {
+//            log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
+//        }
+//    }
+//
+//    private void addRelationship(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) {
+//        Feature leftSide = fm.getFeature(ids.get(0).getText());
+//        List<Feature> rightSide = new LinkedList<>();
+//        for (int i = 1; i < ids.size(); i++) {
+//            rightSide.add(fm.getFeature(ids.get(i).getText()));
+//        }
+//
+//        fm.addRelationship(type, leftSide, rightSide);
+//    }
 
-    @Override
-    public void exitRequires(FM4ConfParser.RequiresContext ctx) {
-        try {
-            addConstraint(RelationshipType.REQUIRES, ctx.identifier());
-        } catch (FeatureModelException e) {
-            log.error("{}Error while adding requires constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
+    private Feature getParent(List<FM4ConfParser.IdentifierContext> ids) {
+        Feature parent = null;
+        if (ids.size() > 1) {
+            parent = fm.getFeature(ids.get(0).getText());
         }
+        return parent;
     }
 
-    @Override
-    public void exitExcludes(FM4ConfParser.ExcludesContext ctx) {
-        try {
-            addConstraint(RelationshipType.EXCLUDES, ctx.identifier());
-        } catch (FeatureModelException e) {
-            log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
-        }
-    }
-
-    private void addRelationship(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) throws FeatureModelException {
-        Feature leftSide = featureModel.getFeature(ids.get(0).getText());
-        List<Feature> rightSide = new LinkedList<>();
+    private List<Feature> getChildren(List<FM4ConfParser.IdentifierContext> ids) {
+        List<Feature> children = new LinkedList<>();
         for (int i = 1; i < ids.size(); i++) {
-            rightSide.add(featureModel.getFeature(ids.get(i).getText()));
+            children.add(fm.getFeature(ids.get(i).getText()));
         }
-
-        featureModel.addRelationship(type, leftSide, rightSide);
+        return children;
     }
 
-    private void addConstraint(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) throws FeatureModelException {
-        Feature leftSide = featureModel.getFeature(ids.get(0).getText());
-        List<Feature> rightSide = new LinkedList<>();
-        for (int i = 1; i < ids.size(); i++) {
-            rightSide.add(featureModel.getFeature(ids.get(i).getText()));
-        }
-
-        featureModel.addConstraint(type, leftSide, rightSide);
-    }
+//
+//    private void addConstraint(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) throws FeatureModelException {
+//        Feature leftSide = fm.getFeature(ids.get(0).getText());
+//        List<Feature> rightSide = new LinkedList<>();
+//        for (int i = 1; i < ids.size(); i++) {
+//            rightSide.add(fm.getFeature(ids.get(i).getText()));
+//        }
+//
+//        fm.addConstraint(type, leftSide, rightSide);
+//    }
 }

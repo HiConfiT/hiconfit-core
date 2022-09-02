@@ -8,6 +8,8 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import lombok.NonNull;
 
@@ -33,6 +35,6 @@ public interface FeatureModelParser {
      * @return a {@link FeatureModel}
      * @throws FeatureModelParserException - a PaserException
      */
-    FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException;
+    FeatureModel<? extends Feature, ? extends AbstractRelationship<? extends Feature>> parse(@NonNull File filePath) throws FeatureModelParserException;
 }
 
