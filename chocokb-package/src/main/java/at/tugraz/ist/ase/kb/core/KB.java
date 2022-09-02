@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.kb.core;
 
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.ToString;
 import org.chocosolver.solver.Model;
 
@@ -39,6 +40,9 @@ public abstract class KB {
     protected List<Domain> domainList;
     // Constraints
     protected List<Constraint> constraintList;
+
+    @Setter
+    private boolean consistency = false;
 
     protected KB(String name, String source, boolean hasNegativeConstraints) {
         this.name = name;
