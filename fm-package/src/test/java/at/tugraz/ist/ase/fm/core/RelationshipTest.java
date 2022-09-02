@@ -45,14 +45,10 @@ class RelationshipTest {
 
         optionalRelationship = new OptionalRelationship(root, f1);
         mandatoryRelationship = new MandatoryRelationship(root, f2);
-        root.addRelationship(optionalRelationship);
-        root.addRelationship(mandatoryRelationship);
 
         orRelationship = new OrRelationship(f1, List.of(f3, f4));
-        f1.addRelationship(orRelationship);
 
         alternativeRelationship = new AlternativeRelationship(f2, List.of(f5, f6));
-        f2.addRelationship(alternativeRelationship);
 
 //        requiresRelationship = new BasicRelationship(RelationshipType.REQUIRES,
 //                f1,
@@ -153,24 +149,20 @@ class RelationshipTest {
                 .parent(root)
                 .child(f1)
                 .build();
-        root.addRelationship(optionalRelationship);
         AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
                 .parent(root)
                 .child(f2)
                 .build();
-        root.addRelationship(mandatoryRelationship);
 
         AbstractRelationship orRelationship = OrRelationship.builder()
                 .parent(f1)
                 .children(List.of(f3, f4))
                 .build();
-        f1.addRelationship(orRelationship);
 
         AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
                 .parent(f2)
                 .children(List.of(f5, f6))
                 .build();
-        f2.addRelationship(alternativeRelationship);
 
         assertAll(() -> assertEquals("optional(root, F11)", optionalRelationship.toString()),
                 () -> assertEquals("mandatory(root, F21)", mandatoryRelationship.toString()),

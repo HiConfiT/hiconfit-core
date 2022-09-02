@@ -35,28 +35,24 @@ class FeatureTest {
         f5 = new Feature("F5", "ID5");
         f6 = new Feature("F6", "ID6");
 
-        AbstractRelationship optionalRelationship = OptionalRelationship.builder()
+        OptionalRelationship.builder()
                 .parent(root)
                 .child(f1)
                 .build();
-        root.addRelationship(optionalRelationship);
-        AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
+        MandatoryRelationship.builder()
                 .parent(root)
                 .child(f2)
                 .build();
-        root.addRelationship(mandatoryRelationship);
 
-        AbstractRelationship orRelationship = OrRelationship.builder()
+        OrRelationship.builder()
                 .parent(f1)
                 .children(List.of(f3, f4))
                 .build();
-        f1.addRelationship(orRelationship);
 
-        AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
+        AlternativeRelationship.builder()
                 .parent(f2)
                 .children(List.of(f5, f6))
                 .build();
-        f2.addRelationship(alternativeRelationship);
     }
 
     @Test
@@ -130,37 +126,6 @@ class FeatureTest {
 
     @Test
     void testGetChildren() {
-//        Feature root = Feature.createRoot("root", "root");
-//        Feature f1 = new Feature("F1", "ID1");
-//        Feature f2 = new Feature("F2", "ID2");
-//        Feature f3 = new Feature("F3", "ID3");
-//        Feature f4 = new Feature("F4", "ID4");
-//        Feature f5 = new Feature("F5", "ID5");
-//        Feature f6 = new Feature("F6", "ID6");
-//
-//        AbstractRelationship optionalRelationship = OptionalRelationship.builder()
-//                .parent(root)
-//                .child(f1)
-//                .build();
-//        root.addRelationship(optionalRelationship);
-//        AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
-//                .parent(root)
-//                .child(f2)
-//                .build();
-//        root.addRelationship(mandatoryRelationship);
-//
-//        AbstractRelationship orRelationship = OrRelationship.builder()
-//                .parent(f1)
-//                .children(List.of(f3, f4))
-//                .build();
-//        f1.addRelationship(orRelationship);
-//
-//        AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
-//                .parent(f2)
-//                .children(List.of(f5, f6))
-//                .build();
-//        f2.addRelationship(alternativeRelationship);
-
         assertAll(() -> assertEquals(2, root.getChildren().size()),
                 () -> assertEquals(List.of(f1, f2), root.getChildren()),
                 () -> assertEquals(2, f1.getChildren().size()),
@@ -175,37 +140,6 @@ class FeatureTest {
 
     @Test
     void testCloneWithRelationships() throws CloneNotSupportedException {
-//        Feature root = Feature.createRoot("root", "root");
-//        Feature f1 = new Feature("F11", "ID1");
-//        Feature f2 = new Feature("F21", "ID2");
-//        Feature f3 = new Feature("F31", "ID3");
-//        Feature f4 = new Feature("F41", "ID4");
-//        Feature f5 = new Feature("F51", "ID5");
-//        Feature f6 = new Feature("F61", "ID6");
-//
-//        AbstractRelationship optionalRelationship = OptionalRelationship.builder()
-//                .parent(root)
-//                .child(f1)
-//                .build();
-//        root.addRelationship(optionalRelationship);
-//        AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
-//                .parent(root)
-//                .child(f2)
-//                .build();
-//        root.addRelationship(mandatoryRelationship);
-//
-//        AbstractRelationship orRelationship = OrRelationship.builder()
-//                .parent(f1)
-//                .children(List.of(f3, f4))
-//                .build();
-//        f1.addRelationship(orRelationship);
-//
-//        AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
-//                .parent(f2)
-//                .children(List.of(f5, f6))
-//                .build();
-//        f2.addRelationship(alternativeRelationship);
-
         Feature fClone1 = (Feature) f1.clone();
 
         assertAll(() -> assertNotSame(f1, fClone1),

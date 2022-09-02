@@ -36,6 +36,9 @@ public abstract class AbstractRelationship implements Cloneable {
         this.parent = parent;
         this.children.addAll(children);
 
+        parent.addRelationship(this);
+        children.forEach(child -> child.setParent(parent));
+
         convertToConfRule();
     }
 

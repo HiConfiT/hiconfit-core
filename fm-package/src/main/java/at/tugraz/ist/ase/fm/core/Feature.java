@@ -16,6 +16,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * Represents a feature of a feature model
  * <p>
@@ -50,6 +52,9 @@ public class Feature implements Cloneable {
      * Constructor for the root feature.
      */
     public static Feature createRoot(@NonNull String name, @NonNull String id) {
+        checkArgument(!name.isEmpty(), "Feature name cannot be empty!");
+        checkArgument(!id.isEmpty(), "Feature id cannot be empty!");
+
         Feature root = new Feature(name, id);
         root.isRoot = true;
         root.isAbstract = true;
@@ -63,6 +68,9 @@ public class Feature implements Cloneable {
      */
     @Builder
     public Feature(@NonNull String name, @NonNull String id) {
+        checkArgument(!name.isEmpty(), "Feature name cannot be empty!");
+        checkArgument(!id.isEmpty(), "Feature id cannot be empty!");
+
         this.name = name;
         this.id = id;
 
@@ -111,7 +119,6 @@ public class Feature implements Cloneable {
 
     public void addRelationship(AbstractRelationship relationship) {
         relationships.add(relationship);
-        relationship.getChildren().forEach(child -> child.setParent(this));
     }
 
     public List<Feature> getChildren() {
