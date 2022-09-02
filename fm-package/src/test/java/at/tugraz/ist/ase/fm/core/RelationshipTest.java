@@ -146,22 +146,22 @@ class RelationshipTest {
         Feature f6 = new Feature("F61", "ID6");
 
         AbstractRelationship optionalRelationship = OptionalRelationship.builder()
-                .parent(root)
-                .child(f1)
+                .from(root)
+                .to(f1)
                 .build();
         AbstractRelationship mandatoryRelationship = MandatoryRelationship.builder()
-                .parent(root)
-                .child(f2)
+                .from(root)
+                .to(f2)
                 .build();
 
         AbstractRelationship orRelationship = OrRelationship.builder()
-                .parent(f1)
-                .children(List.of(f3, f4))
+                .from(f1)
+                .to(List.of(f3, f4))
                 .build();
 
         AbstractRelationship alternativeRelationship = AlternativeRelationship.builder()
-                .parent(f2)
-                .children(List.of(f5, f6))
+                .from(f2)
+                .to(List.of(f5, f6))
                 .build();
 
         assertAll(() -> assertEquals("optional(root, F11)", optionalRelationship.toString()),

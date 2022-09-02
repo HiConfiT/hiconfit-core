@@ -32,9 +32,9 @@ public abstract class AbstractRelationship implements Cloneable {
     @EqualsAndHashCode.Include
     protected String confRule = null;
 
-    public AbstractRelationship(@NonNull Feature parent, @NonNull Collection<Feature> children) {
-        this.parent = parent;
-        this.children.addAll(children);
+    public AbstractRelationship(@NonNull Feature from, @NonNull Collection<Feature> to) {
+        this.parent = from;
+        this.children.addAll(to);
 
         parent.addRelationship(this);
         children.forEach(child -> child.setParent(parent));
