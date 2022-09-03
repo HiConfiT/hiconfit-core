@@ -9,11 +9,8 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.RelationshipType;
-import constraints.BooleanVariable;
-import constraints.PropositionalFormula;
+import at.tugraz.ist.ase.fm.core.*;
 import fm.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +23,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import java.util.stream.IntStream;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -40,6 +39,19 @@ import static com.google.common.base.Preconditions.checkState;
  * Waterloo, Ontario, Canada
  * <p>
  * For further details of this library, we refer to <a href="http://52.32.1.180:8080/SPLOT/sxfm.html">http://52.32.1.180:8080/SPLOT/sxfm.html</a>
+ * <p>
+ * This parser supports the following classes:
+ * <ul>
+ *     <li>Feature</li>
+ *     <li>AbstractRelationship</li>
+ *     <li>MandatoryRelationship</li>
+ *     <li>OptionalRelationship</li>
+ *     <li>AlternativeRelationship</li>
+ *     <li>OrRelationship</li>
+ *     <li>FeatureModel</li>
+ * </ul>
+ * <p>
+ * If you want to support other type of features, you should extend this class.
  */
 @Slf4j
 public class SXFMParser implements FeatureModelParser {
@@ -83,13 +95,13 @@ public class SXFMParser implements FeatureModelParser {
      * @throws FeatureModelParserException when error occurs in parsing
      */
     @Override
-    public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
+    public FeatureModel<Feature, AbstractRelationship<Feature>> parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not SPLOT format or there are errors in the file!");
 
         log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
-        FeatureModel featureModel;
+        FeatureModel<Feature, AbstractRelationship<Feature>> featureModel;
         try {
             fm.FeatureModel sxfm = new XMLFeatureModel(filePath.toString(), XMLFeatureModel.USE_VARIABLE_NAME_AS_ID);
 
@@ -97,7 +109,7 @@ public class SXFMParser implements FeatureModelParser {
             sxfm.loadModel();
 
             // create the feature model
-            featureModel = new FeatureModel();
+            featureModel = new FeatureModel<>();
 
             featureModel.setName(filePath.getName());
             // convert features
@@ -111,8 +123,8 @@ public class SXFMParser implements FeatureModelParser {
             convertRelationships(sxfm, featureModel);
 
             // convert constraints
-            convertConstraints(sxfm, featureModel);
-        } catch (FeatureModelException | at.tugraz.ist.ase.fm.core.FeatureModelException ex) {
+//            convertConstraints(sxfm, featureModel);
+        } catch (FeatureModelException ex) {
             throw new FeatureModelParserException(ex.getMessage());
         }
 
@@ -126,7 +138,7 @@ public class SXFMParser implements FeatureModelParser {
      *
      * @param sxfm - a {@link fm.FeatureModel}
      */
-    private void convertFeatures(fm.FeatureModel sxfm, FeatureModel fm) {
+    private void convertFeatures(fm.FeatureModel sxfm, FeatureModel<Feature, AbstractRelationship<Feature>> fm) {
         log.trace("{}Generating features >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
@@ -143,7 +155,11 @@ public class SXFMParser implements FeatureModelParser {
                 String name = node.getName();
                 String id = node.getID();
 
-                fm.addFeature(name, id);
+                if (!fm.hasRoot()) {
+                    fm.addRoot(Feature.createRoot(name, id));
+                } else {
+                    fm.addFeature(new Feature(name, id));
+                }
             }
 
             exploreChildren(queue, node);
@@ -168,7 +184,7 @@ public class SXFMParser implements FeatureModelParser {
      * @param fm - a {@link FeatureModel}
      * @throws FeatureModelParserException a ParserException
      */
-    private void convertRelationships(fm.FeatureModel sxfm, FeatureModel fm) throws FeatureModelParserException {
+    private void convertRelationships(fm.FeatureModel sxfm, FeatureModel<Feature, AbstractRelationship<Feature>> fm) throws FeatureModelParserException {
         log.trace("{}Generating relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
@@ -180,97 +196,105 @@ public class SXFMParser implements FeatureModelParser {
             while (!queue.isEmpty()) {
                 node = queue.remove();
 
-                Feature leftSide;
-                List<Feature> rightSide;
-                RelationshipType type;
-
                 if (node instanceof SolitaireFeature) {
                     if (((SolitaireFeature) node).isOptional()) { // OPTIONAL
-                        type = RelationshipType.OPTIONAL;
-                        leftSide = fm.getFeature(node.getID());
-                        rightSide = Collections.singletonList(fm.getFeature(((FeatureTreeNode) node.getParent()).getID()));
+                        Feature leftSide = fm.getFeature(node.getID());
+                        Feature rightSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
+
+                        fm.addRelationship(OptionalRelationship.builder()
+                                .from(rightSide)
+                                .to(leftSide)
+                                .build());
                     } else { // MANDATORY
-                        type = RelationshipType.MANDATORY;
-                        leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
-                        rightSide = Collections.singletonList(fm.getFeature(node.getID()));
+                        Feature leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
+                        Feature rightSide = fm.getFeature(node.getID());
+
+                        fm.addRelationship(MandatoryRelationship.builder()
+                                .from(leftSide)
+                                .to(rightSide)
+                                .build());
                     }
-                    fm.addRelationship(type, leftSide, rightSide);
                 } else if (node instanceof FeatureGroup) {
-                    leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
-                    rightSide = getChildren(node);
+                    Feature leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
+                    List<Feature> rightSide = getChildren(node);
 
                     checkState(rightSide.size() > 0, "OR and ALT relationships must have at least one child.");
 
                     if (((FeatureGroup) node).getMax() == 1) { // ALTERNATIVE
-                        type = RelationshipType.ALTERNATIVE;
+                        fm.addRelationship(AlternativeRelationship.builder()
+                                .from(leftSide)
+                                .to(rightSide)
+                                .build());
                     } else { // OR
-                        type = RelationshipType.OR;
+                        fm.addRelationship(OrRelationship.builder()
+                                .from(leftSide)
+                                .to(rightSide)
+                                .build());
                     }
-                    fm.addRelationship(type, leftSide, rightSide);
                 }
 
                 exploreChildren(queue, node);
             }
-        } catch (at.tugraz.ist.ase.fm.core.FeatureModelException ex) {
+        } catch (Exception ex) {
             throw new FeatureModelParserException(ex.getMessage());
         }
 
         LoggerUtils.outdent();
     }
 
-    /**
-     * Converts constraints on the file into constraints in {@link FeatureModel}
-     *
-     * @param sxfm - a {@link fm.FeatureModel}
-     * @param fm - a {@link FeatureModel}
-     * @throws FeatureModelParserException a ParserException
-     */
-    private void convertConstraints(fm.FeatureModel sxfm, FeatureModel fm) throws FeatureModelParserException, at.tugraz.ist.ase.fm.core.FeatureModelException {
-        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
-        LoggerUtils.indent();
-
-        for (PropositionalFormula formula : sxfm.getConstraints()) {
-            BooleanVariable[] variables = formula.getVariables().toArray(new BooleanVariable[0]);
-
-            if (variables.length == 2) {
-
-                BooleanVariable leftSide = variables[0];
-                BooleanVariable rightSide = variables[1];
-
-                // take type
-                RelationshipType type;
-                if ((leftSide.isPositive() && !rightSide.isPositive())
-                        || ((!leftSide.isPositive() && rightSide.isPositive()))) { // REQUIRES
-                    type = RelationshipType.REQUIRES;
-                } else if (!leftSide.isPositive() && !rightSide.isPositive()) { // EXCLUDES
-                    type = RelationshipType.EXCLUDES;
-                } else {
-                    throw new FeatureModelParserException(formula + " is not supported constraints!");
-                }
-
-                Feature left = fm.getFeature(leftSide.getID());
-                List<Feature> rightSideList = Collections.singletonList(fm.getFeature(rightSide.getID()));
-
-                fm.addConstraint(type, left, rightSideList);
-            } else {
-                // take type
-                RelationshipType type = RelationshipType.ThreeCNF;
-
-                List<String> threecnf_constraints = new LinkedList<>();
-
-                Arrays.stream(variables).forEachOrdered(variable -> {
-                    if (variable.isPositive()) {
-                        threecnf_constraints.add(sxfm.getNodeByID(variable.getID()).getName());
-                    } else {
-                        threecnf_constraints.add("~" + sxfm.getNodeByID(variable.getID()).getName());
-                    }
-                });
-
-                fm.addConstraint(type, String.join(" | ", threecnf_constraints));
-            }
-        }
-        LoggerUtils.outdent();
-    }
+//    /**
+//     * Converts constraints on the file into constraints in {@link FeatureModel}
+//     *
+//     * @param sxfm - a {@link fm.FeatureModel}
+//     * @param fm - a {@link FeatureModel}
+//     * @throws FeatureModelParserException a ParserException
+//     */
+//    private void convertConstraints(fm.FeatureModel sxfm, FeatureModel<Feature, AbstractRelationship<Feature>> fm) throws FeatureModelParserException, at.tugraz.ist.ase.fm.core.FeatureModelException {
+//        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
+//        LoggerUtils.indent();
+//
+//        for (PropositionalFormula formula : sxfm.getConstraints()) {
+//            BooleanVariable[] variables = formula.getVariables().toArray(new BooleanVariable[0]);
+//
+//            if (variables.length == 2) {
+//
+//                BooleanVariable leftSide = variables[0];
+//                BooleanVariable rightSide = variables[1];
+//
+//                // take type
+//                RelationshipType type;
+//                if ((leftSide.isPositive() && !rightSide.isPositive())
+//                        || ((!leftSide.isPositive() && rightSide.isPositive()))) { // REQUIRES
+//                    type = RelationshipType.REQUIRES;
+//                } else if (!leftSide.isPositive() && !rightSide.isPositive()) { // EXCLUDES
+//                    type = RelationshipType.EXCLUDES;
+//                } else {
+//                    throw new FeatureModelParserException(formula + " is not supported constraints!");
+//                }
+//
+//                Feature left = fm.getFeature(leftSide.getID());
+//                List<Feature> rightSideList = Collections.singletonList(fm.getFeature(rightSide.getID()));
+//
+//                fm.addConstraint(type, left, rightSideList);
+//            } else {
+//                // take type
+//                RelationshipType type = RelationshipType.ThreeCNF;
+//
+//                List<String> threecnf_constraints = new LinkedList<>();
+//
+//                Arrays.stream(variables).forEachOrdered(variable -> {
+//                    if (variable.isPositive()) {
+//                        threecnf_constraints.add(sxfm.getNodeByID(variable.getID()).getName());
+//                    } else {
+//                        threecnf_constraints.add("~" + sxfm.getNodeByID(variable.getID()).getName());
+//                    }
+//                });
+//
+//                fm.addConstraint(type, String.join(" | ", threecnf_constraints));
+//            }
+//        }
+//        LoggerUtils.outdent();
+//    }
 
     /**
      * Gets an array of names of child features.
