@@ -9,7 +9,11 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
-import at.tugraz.ist.ase.fm.core.*;
+import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
+import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.Feature;
+import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfBaseListener;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfLexer;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfParser;
@@ -33,23 +37,21 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * A parser for the descriptive format
- * <p>
- * This parser supports the following classes:
- * <ul>
- *     <li>Feature</li>
- *     <li>AbstractRelationship</li>
- *     <li>MandatoryRelationship</li>
- *     <li>OptionalRelationship</li>
- *     <li>AlternativeRelationship</li>
- *     <li>OrRelationship</li>
- *     <li>FeatureModel</li>
- * </ul>
  */
 @Beta
 @Slf4j
-public class DescriptiveFormatParser extends FM4ConfBaseListener implements FeatureModelParser {
+public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelationship<F>> extends FM4ConfBaseListener implements FeatureModelParser {
 
-    private FeatureModel<Feature, AbstractRelationship<Feature>> fm;
+    private FeatureModel<F, R> fm;
+    ParseTree tree;
+
+    private IFeatureBuildable featureBuilder;
+    private IRelationshipBuildable relationshipBuilder;
+
+    public DescriptiveFormatParser(@NonNull IFeatureBuildable featureBuilder, @NonNull IRelationshipBuildable relationshipBuilder) {
+        this.featureBuilder = featureBuilder;
+        this.relationshipBuilder = relationshipBuilder;
+    }
 
     /**
      * Check whether the format of the given file is Descriptive format
@@ -72,7 +74,7 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
             FM4ConfLexer lexer = new FM4ConfLexer(input);
             CommonTokenStream tokens = new CommonTokenStream(lexer);
             FM4ConfParser parser = new FM4ConfParser(tokens);
-            parser.model();
+            tree = parser.model();
         } catch (IOException e) {
             return false; // it's not Descriptive format
         }
@@ -87,31 +89,18 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
      * @throws FeatureModelParserException when error occurs in parsing
      */
     @Override
-    public FeatureModel<Feature, AbstractRelationship<Feature>> parse(@NonNull File filePath) throws FeatureModelParserException {
+    public FeatureModel<F, R> parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not a Descriptive format or there are errors in the file!");
 
         log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
-        try {
-            InputStream is = new FileInputStream(filePath);
+        // create a standard ANTLR parse tree walker
+        ParseTreeWalker walker = new ParseTreeWalker();
+        // feed to walker
+        fm = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder);
 
-            CharStream input = CharStreams.fromStream(is);
-            FM4ConfLexer lexer = new FM4ConfLexer(input);
-            CommonTokenStream tokens = new CommonTokenStream(lexer);
-            FM4ConfParser parser = new FM4ConfParser(tokens);
-            ParseTree tree = parser.model();
-
-            // create a standard ANTLR parse tree walker
-            ParseTreeWalker walker = new ParseTreeWalker();
-            // feed to walker
-            fm = new FeatureModel<>();
-            fm.setName(filePath.getName());
-
-            walker.walk(this, tree);        // walk parse tree
-        } catch (IOException e) {
-            throw new FeatureModelParserException(e.getMessage());
-        }
+        walker.walk(this, tree);        // walk parse tree
 
         LoggerUtils.outdent();
         log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), fm);
@@ -123,9 +112,9 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
         List<FM4ConfParser.IdentifierContext> ids = ctx.identifier();
         ids.forEach(idCx -> {
             if (!fm.hasRoot()) {
-                fm.addRoot(Feature.createRoot(idCx.getText(), idCx.getText()));
+                fm.addRoot(idCx.getText(), idCx.getText());
             } else {
-                fm.addFeature(Feature.builder().name(idCx.getText()).id(idCx.getText()).build());
+                fm.addFeature(idCx.getText(), idCx.getText());
             }
         });
     }
@@ -133,13 +122,10 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitMandatory(FM4ConfParser.MandatoryContext ctx) {
         try {
-            Feature parent = getParent(ctx.identifier());
-            List<Feature> children = getChildren(ctx.identifier());
+            F parent = getParent(ctx.identifier());
+            List<F> children = getChildren(ctx.identifier());
 
-            fm.addRelationship(MandatoryRelationship.builder()
-                    .from(parent)
-                    .to(children.get(0))
-                    .build());
+            fm.addMandatoryRelationship(parent, children.get(0));
         } catch (Exception e) {
             log.error("{}Error while adding mandatory relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
@@ -148,13 +134,10 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitOptional(FM4ConfParser.OptionalContext ctx) {
         try {
-            Feature parent = getParent(ctx.identifier());
-            List<Feature> children = getChildren(ctx.identifier());
+            F parent = getParent(ctx.identifier());
+            List<F> children = getChildren(ctx.identifier());
 
-            fm.addRelationship(OptionalRelationship.builder()
-                    .from(children.get(0))
-                    .to(parent)
-                    .build());
+            fm.addOptionalRelationship(children.get(0), parent);
         } catch (Exception e) {
             log.error("{}Error while adding optional relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
@@ -163,13 +146,10 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitAlternative(FM4ConfParser.AlternativeContext ctx) {
         try {
-            Feature parent = getParent(ctx.identifier());
-            List<Feature> children = getChildren(ctx.identifier());
+            F parent = getParent(ctx.identifier());
+            List<F> children = getChildren(ctx.identifier());
 
-            fm.addRelationship(AlternativeRelationship.builder()
-                    .from(parent)
-                    .to(children)
-                    .build());
+            fm.addAlternativeRelationship(parent, children);
         } catch (Exception e) {
             log.error("{}Error while adding alternative relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
@@ -178,13 +158,10 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
     @Override
     public void exitOr(FM4ConfParser.OrContext ctx) {
         try {
-            Feature parent = getParent(ctx.identifier());
-            List<Feature> children = getChildren(ctx.identifier());
+            F parent = getParent(ctx.identifier());
+            List<F> children = getChildren(ctx.identifier());
 
-            fm.addRelationship(OrRelationship.builder()
-                    .from(parent)
-                    .to(children)
-                    .build());
+            fm.addOrRelationship(parent, children);
         } catch (Exception e) {
             log.error("{}Error while adding or relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
@@ -207,27 +184,17 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
 //            log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
 //        }
 //    }
-//
-//    private void addRelationship(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) {
-//        Feature leftSide = fm.getFeature(ids.get(0).getText());
-//        List<Feature> rightSide = new LinkedList<>();
-//        for (int i = 1; i < ids.size(); i++) {
-//            rightSide.add(fm.getFeature(ids.get(i).getText()));
-//        }
-//
-//        fm.addRelationship(type, leftSide, rightSide);
-//    }
 
-    private Feature getParent(List<FM4ConfParser.IdentifierContext> ids) {
-        Feature parent = null;
+    private F getParent(List<FM4ConfParser.IdentifierContext> ids) {
+        F parent = null;
         if (ids.size() > 1) {
             parent = fm.getFeature(ids.get(0).getText());
         }
         return parent;
     }
 
-    private List<Feature> getChildren(List<FM4ConfParser.IdentifierContext> ids) {
-        List<Feature> children = new LinkedList<>();
+    private List<F> getChildren(List<FM4ConfParser.IdentifierContext> ids) {
+        List<F> children = new LinkedList<>();
         for (int i = 1; i < ids.size(); i++) {
             children.add(fm.getFeature(ids.get(i).getText()));
         }
@@ -244,4 +211,10 @@ public class DescriptiveFormatParser extends FM4ConfBaseListener implements Feat
 //
 //        fm.addConstraint(type, leftSide, rightSide);
 //    }
+
+    public void dispose() {
+        tree = null;
+        featureBuilder = null;
+        relationshipBuilder = null;
+    }
 }

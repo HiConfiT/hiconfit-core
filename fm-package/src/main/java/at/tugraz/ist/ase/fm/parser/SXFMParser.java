@@ -9,8 +9,11 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
+import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.*;
 import fm.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -39,22 +42,17 @@ import static com.google.common.base.Preconditions.checkState;
  * Waterloo, Ontario, Canada
  * <p>
  * For further details of this library, we refer to <a href="http://52.32.1.180:8080/SPLOT/sxfm.html">http://52.32.1.180:8080/SPLOT/sxfm.html</a>
- * <p>
- * This parser supports the following classes:
- * <ul>
- *     <li>Feature</li>
- *     <li>AbstractRelationship</li>
- *     <li>MandatoryRelationship</li>
- *     <li>OptionalRelationship</li>
- *     <li>AlternativeRelationship</li>
- *     <li>OrRelationship</li>
- *     <li>FeatureModel</li>
- * </ul>
- * <p>
- * If you want to support other type of features, you should extend this class.
  */
 @Slf4j
-public class SXFMParser implements FeatureModelParser {
+public class SXFMParser<F extends Feature, R extends AbstractRelationship<Feature>> implements FeatureModelParser {
+
+    private IFeatureBuildable featureBuilder;
+    private IRelationshipBuildable relationshipBuilder;
+
+    public SXFMParser(@NonNull IFeatureBuildable featureBuilder, @NonNull IRelationshipBuildable relationshipBuilder) {
+        this.featureBuilder = featureBuilder;
+        this.relationshipBuilder = relationshipBuilder;
+    }
 
     /**
      * Checks whether the format of the given file is SPLOT format
@@ -109,9 +107,8 @@ public class SXFMParser implements FeatureModelParser {
             sxfm.loadModel();
 
             // create the feature model
-            featureModel = new FeatureModel<>();
+            featureModel = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder);
 
-            featureModel.setName(filePath.getName());
             // convert features
             convertFeatures(sxfm, featureModel);
 
@@ -156,9 +153,9 @@ public class SXFMParser implements FeatureModelParser {
                 String id = node.getID();
 
                 if (!fm.hasRoot()) {
-                    fm.addRoot(Feature.createRoot(name, id));
+                    fm.addRoot(name, id);
                 } else {
-                    fm.addFeature(new Feature(name, id));
+                    fm.addFeature(name, id);
                 }
             }
 
@@ -201,18 +198,12 @@ public class SXFMParser implements FeatureModelParser {
                         Feature leftSide = fm.getFeature(node.getID());
                         Feature rightSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
 
-                        fm.addRelationship(OptionalRelationship.builder()
-                                .from(rightSide)
-                                .to(leftSide)
-                                .build());
+                        fm.addOptionalRelationship(rightSide, leftSide);
                     } else { // MANDATORY
                         Feature leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
                         Feature rightSide = fm.getFeature(node.getID());
 
-                        fm.addRelationship(MandatoryRelationship.builder()
-                                .from(leftSide)
-                                .to(rightSide)
-                                .build());
+                        fm.addMandatoryRelationship(leftSide, rightSide);
                     }
                 } else if (node instanceof FeatureGroup) {
                     Feature leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
@@ -221,15 +212,9 @@ public class SXFMParser implements FeatureModelParser {
                     checkState(rightSide.size() > 0, "OR and ALT relationships must have at least one child.");
 
                     if (((FeatureGroup) node).getMax() == 1) { // ALTERNATIVE
-                        fm.addRelationship(AlternativeRelationship.builder()
-                                .from(leftSide)
-                                .to(rightSide)
-                                .build());
+                        fm.addAlternativeRelationship(leftSide, rightSide);
                     } else { // OR
-                        fm.addRelationship(OrRelationship.builder()
-                                .from(leftSide)
-                                .to(rightSide)
-                                .build());
+                        fm.addOrRelationship(leftSide, rightSide);
                     }
                 }
 
@@ -316,6 +301,11 @@ public class SXFMParser implements FeatureModelParser {
             features.add(feature);
         }
         return features;
+    }
+
+    public void dispose() {
+        featureBuilder = null;
+        relationshipBuilder = null;
     }
 }
 

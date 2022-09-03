@@ -8,9 +8,12 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -25,7 +28,8 @@ public class SXFMParserTest {
         File fileFM = new File("src/test/resources/bamboobike_splot.sxfm");
 //        FMParserFactory factory = FMParserFactory.getInstance();
 //        FeatureModelParser parser = factory.getParser(FMFormat.SXFM);
-        SXFMParser parser = new SXFMParser();
+        @Cleanup("dispose")
+        SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -60,7 +64,7 @@ public class SXFMParserTest {
     @Test
     void testSmartwatch() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/smartwatch.sxfm");
-        SXFMParser parser = new SXFMParser();
+        SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
         FeatureModel<Feature, AbstractRelationship<Feature>> featureModel = parser.parse(fileFM);
 
         String st = "FEATURES:\n" +
@@ -98,7 +102,7 @@ public class SXFMParserTest {
     @Test
     public void testFM_10_0() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        SXFMParser parser = new SXFMParser();
+        SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
         featureModel = parser.parse(fileFM);
 
         String st = "FEATURES:\n" +

@@ -8,9 +8,12 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -24,7 +27,8 @@ class DescriptiveFormatParserTest {
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike.fm4conf");
 //        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        DescriptiveFormatParser parser = new DescriptiveFormatParser();
+        @Cleanup("dispose")
+        DescriptiveFormatParser<Feature, AbstractRelationship<Feature>> parser = new DescriptiveFormatParser<>(new FeatureBuilder(), new RelationshipBuilder());
         featureModel = parser.parse(fileFM);
 
         System.out.println(featureModel);
