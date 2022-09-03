@@ -8,6 +8,8 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,25 +31,26 @@ public class FeatureModelTest {
 
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>();
-        root = fm.addRoot(Feature.createRoot("survey", "survey"));
-        // the order of adding features should be breadth-first
-        pay = fm.addFeature(new Feature("pay", "pay"));
-        ABtesting = fm.addFeature(new Feature("ABtesting", "ABtesting"));
-        statistics = fm.addFeature(new Feature("statistics", "statistics"));
-        qa = fm.addFeature(new Feature("qa", "qa"));
-        license = fm.addFeature(new Feature("license", "license"));
-        nonlicense = fm.addFeature(new Feature("nonlicense", "nonlicense"));
-        multiplechoice = fm.addFeature(new Feature("multiplechoice", "multiplechoice"));
-        singlechoice = fm.addFeature(new Feature("singlechoice", "singlechoice"));
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
 
-        fm.addRelationship(MandatoryRelationship.builder().from(root).to(pay).build());
-        fm.addRelationship(OptionalRelationship.builder().from(root).to(ABtesting).build());
-        fm.addRelationship(MandatoryRelationship.builder().from(root).to(statistics).build());
-        fm.addRelationship(MandatoryRelationship.builder().from(root).to(qa).build());
-        fm.addRelationship(AlternativeRelationship.builder().from(pay).to(List.of(license, nonlicense)).build());
-        fm.addRelationship(OrRelationship.builder().from(qa).to(List.of(multiplechoice, singlechoice)).build());
-        fm.addRelationship(OptionalRelationship.builder().from(ABtesting).to(statistics).build());
+        root = fm.addRoot("survey", "survey");
+        // the order of adding features should be breadth-first
+        pay = fm.addFeature("pay", "pay");
+        ABtesting = fm.addFeature("ABtesting", "ABtesting");
+        statistics = fm.addFeature("statistics", "statistics");
+        qa = fm.addFeature("qa", "qa");
+        license = fm.addFeature("license", "license");
+        nonlicense = fm.addFeature("nonlicense", "nonlicense");
+        multiplechoice = fm.addFeature("multiplechoice", "multiplechoice");
+        singlechoice = fm.addFeature("singlechoice", "singlechoice");
+
+        fm.addMandatoryRelationship(root, pay);
+        fm.addOptionalRelationship(root, ABtesting);
+        fm.addMandatoryRelationship(root, statistics);
+        fm.addMandatoryRelationship(root, qa);
+        fm.addAlternativeRelationship(pay, List.of(license, nonlicense));
+        fm.addOrRelationship(qa, List.of(multiplechoice, singlechoice));
+        fm.addOptionalRelationship(ABtesting, statistics);
 
 //        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
 //        fm.addConstraint(RelationshipType.EXCLUDES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("nonlicense")));
@@ -56,32 +59,31 @@ public class FeatureModelTest {
 
     @Test
     void testAddFeatureWithoutRoot() {
-        FeatureModel<Feature, AbstractRelationship<Feature>> anotherFM = new FeatureModel<>();
-        assertThrows(IllegalStateException.class, () -> anotherFM.addFeature(new Feature("feature", "feature")));
+        FeatureModel<Feature, AbstractRelationship<Feature>> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        assertThrows(IllegalStateException.class, () -> anotherFM.addFeature("feature", "feature"));
     }
 
     @Test
-    void testAddRootWhenAlreadyExist() {
-        FeatureModel<Feature, AbstractRelationship<Feature>> anotherFM = new FeatureModel<>();
-        anotherFM.addRoot(Feature.createRoot("survey", "survey"));
-        assertThrows(IllegalArgumentException.class, () -> anotherFM.addRoot(new Feature("feature", "feature")));
+    void testAddRootWhenOnceAlreadyExist() {
+        FeatureModel<Feature, AbstractRelationship<Feature>> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        anotherFM.addRoot("survey", "survey");
+        assertThrows(IllegalArgumentException.class, () -> anotherFM.addRoot("feature", "feature"));
     }
 
     @Test
     void testAddFeatureWithTheSameNameAndID() {
-        assertThrows(IllegalArgumentException.class, () -> fm.addFeature(new Feature("ABtesting", "123")));
-        assertThrows(IllegalArgumentException.class, () -> fm.addFeature(new Feature("123", "singlechoice")));
+        assertThrows(IllegalArgumentException.class, () -> fm.addFeature("ABtesting", "123"));
+        assertThrows(IllegalArgumentException.class, () -> fm.addFeature("123", "singlechoice"));
     }
 
     @Test
     void testAddWrongRelationships() {
         Feature f1 = new Feature("f1", "f1");
         Feature f2 = new Feature("f2", "f2");
-        AlternativeRelationship<Feature> r1 = new AlternativeRelationship<>(root, List.of(f1, f2));
-        MandatoryRelationship<Feature> r2 = new MandatoryRelationship<>(f1, ABtesting);
 
-        assertThrows(IllegalArgumentException.class, () -> fm.addRelationship(r1));
-        assertThrows(IllegalArgumentException.class, () -> fm.addRelationship(r2));
+        // f1, f2 are not in the feature model
+        assertThrows(IllegalArgumentException.class, () -> fm.addAlternativeRelationship(root, List.of(f1, f2)));
+        assertThrows(IllegalArgumentException.class, () -> fm.addMandatoryRelationship(f1, ABtesting));
     }
 
     @Test
@@ -111,15 +113,12 @@ public class FeatureModelTest {
     }
 
     @Test
-    public void testGetName() {
+    void testGetName() {
         assertEquals(fm.getName(), "survey");
-
-        fm.setName("new name");
-        assertEquals(fm.getName(), "new name");
     }
 
     @Test
-    public void testGetFeature() {
+    void testGetFeature() {
         Feature f1 = fm.getBfFeatures().get(4);
 
         Feature f2 = fm.getFeature(4);
@@ -137,9 +136,63 @@ public class FeatureModelTest {
     }
 
     @Test
-    public void testGetNumOfFeatures() {
+    void testGetNumOfFeatures() {
         assertEquals(9, fm.getNumOfFeatures());
     }
+
+    @Test
+    void testConnectionBetweenParentAndChildren() {
+        assertAll(() -> assertEquals(fm.getRoot(), fm.getRelationships().get(0).getParent()),
+                () -> assertEquals(fm.getFeature("pay"), fm.getRelationships().get(0).getChild()),
+                () -> assertEquals(fm.getFeature("pay"), fm.getRelationships().get(4).getParent()),
+                () -> assertEquals(fm.getFeature("license"), fm.getRelationships().get(4).getChildren().get(0)),
+                () -> assertEquals(fm.getFeature("nonlicense"), fm.getRelationships().get(4).getChildren().get(1))
+                );
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void testNumOfRelationships() {
+        assertAll(() -> assertEquals(7, fm.getNumOfRelationships()),
+                () -> assertEquals(3, fm.getNumOfRelationships(MandatoryRelationship.class)),
+                () -> assertEquals(2, fm.getNumOfRelationships(OptionalRelationship.class)),
+                () -> assertEquals(1, fm.getNumOfRelationships(AlternativeRelationship.class)),
+                () -> assertEquals(1, fm.getNumOfRelationships(OrRelationship.class))
+        );
+    }
+
+    @Test
+    void testClone() throws CloneNotSupportedException {
+        FeatureModel<Feature, AbstractRelationship<Feature>> clone = (FeatureModel<Feature, AbstractRelationship<Feature>>) fm.clone();
+        assertAll(
+                () -> assertEquals(fm.getName(), clone.getName()),
+                () -> assertEquals(fm.getNumOfFeatures(), clone.getNumOfFeatures()),
+                () -> assertEquals(fm.getFeature(0), clone.getFeature(0)),
+                () -> assertEquals(fm.getFeature(1), clone.getFeature(1)),
+                () -> assertEquals(fm.getFeature(2), clone.getFeature(2)),
+                () -> assertEquals(fm.getFeature(3), clone.getFeature(3)),
+                () -> assertEquals(fm.getFeature(4), clone.getFeature(4)),
+                () -> assertEquals(fm.getFeature(5), clone.getFeature(5)),
+                () -> assertEquals(fm.getFeature(6), clone.getFeature(6)),
+                () -> assertEquals(fm.getFeature(7), clone.getFeature(7)),
+                () -> assertEquals(fm.getFeature(8), clone.getFeature(8)),
+                () -> assertEquals(fm.getNumOfRelationships(), clone.getNumOfRelationships()),
+                () -> assertEquals(fm.getRelationships().get(0), clone.getRelationships().get(0)),
+                () -> assertEquals(fm.getRelationships().get(1), clone.getRelationships().get(1)),
+                () -> assertEquals(fm.getRelationships().get(2), clone.getRelationships().get(2)),
+                () -> assertEquals(fm.getRelationships().get(3), clone.getRelationships().get(3)),
+                () -> assertEquals(fm.getRelationships().get(4), clone.getRelationships().get(4)),
+                () -> assertEquals(fm.getRelationships().get(5), clone.getRelationships().get(5)),
+                () -> assertEquals(fm.getRelationships().get(6), clone.getRelationships().get(6)),
+                () -> assertEquals(fm.getNumOfRelationships(MandatoryRelationship.class), clone.getNumOfRelationships(MandatoryRelationship.class)),
+                () -> assertEquals(fm.getNumOfRelationships(OptionalRelationship.class), clone.getNumOfRelationships(OptionalRelationship.class)),
+                () -> assertEquals(fm.getNumOfRelationships(AlternativeRelationship.class), clone.getNumOfRelationships(AlternativeRelationship.class)),
+                () -> assertEquals(fm.getNumOfRelationships(OrRelationship.class), clone.getNumOfRelationships(OrRelationship.class))
+        );
+    }
+
+
+
 //
 //    @Test
 //    public void testIsMandatoryFeature() {

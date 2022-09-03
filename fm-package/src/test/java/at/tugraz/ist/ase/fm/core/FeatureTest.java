@@ -8,6 +8,8 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -28,33 +30,19 @@ class FeatureTest {
 
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>();
-        root = fm.addRoot(Feature.createRoot("root", "root"));
-        f1 = fm.addFeature(new Feature("F1", "ID1"));
-        f2 = fm.addFeature(new Feature("F2", "ID2"));
-        f3 = fm.addFeature(new Feature("F3", "ID3"));
-        f4 = fm.addFeature(new Feature("F4", "ID4"));
-        f5 = fm.addFeature(new Feature("F5", "ID5"));
-        f6 = fm.addFeature(new Feature("F6", "ID6"));
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        root = fm.addRoot("root", "root");
+        f1 = fm.addFeature("F1", "ID1");
+        f2 = fm.addFeature("F2", "ID2");
+        f3 = fm.addFeature("F3", "ID3");
+        f4 = fm.addFeature("F4", "ID4");
+        f5 = fm.addFeature("F5", "ID5");
+        f6 = fm.addFeature("F6", "ID6");
 
-        fm.addRelationship(OptionalRelationship.builder()
-                .from(root)
-                .to(f1)
-                .build());
-        fm.addRelationship(MandatoryRelationship.builder()
-                .from(root)
-                .to(f2)
-                .build());
-
-        fm.addRelationship(OrRelationship.builder()
-                .from(f1)
-                .to(List.of(f3, f4))
-                .build());
-
-        fm.addRelationship(AlternativeRelationship.builder()
-                .from(f2)
-                .to(List.of(f5, f6))
-                .build());
+        fm.addOptionalRelationship(root, f1);
+        fm.addMandatoryRelationship(root, f2);
+        fm.addOrRelationship(f1, List.of(f3, f4));
+        fm.addAlternativeRelationship(f2, List.of(f5, f6));
     }
 
     @Test

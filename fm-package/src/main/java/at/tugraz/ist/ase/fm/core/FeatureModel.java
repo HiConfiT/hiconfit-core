@@ -9,10 +9,11 @@
 package at.tugraz.ist.ase.fm.core;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
+import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
@@ -29,31 +30,42 @@ import static com.google.common.base.Preconditions.*;
  */
 @Slf4j
 @Getter
-@NoArgsConstructor
-// TODO - builder
 public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> implements Cloneable {
-    @Setter
     protected String name;
 
     protected List<F> bfFeatures = new LinkedList<>(); // breadth-first order
     protected List<R> relationships = new LinkedList<>();
-//    protected List<R> constraints = new LinkedList<>();
+//    protected List<C> constraints = new LinkedList<>();
 
     protected F root = null;
 
+    protected IFeatureBuildable featureBuilder;
+    protected IRelationshipBuildable relationshipBuilder;
+
+    @Builder
+    public FeatureModel(@NonNull String name,
+                        @NonNull IFeatureBuildable featureBuilder,
+                        @NonNull IRelationshipBuildable relationshipBuilder) {
+        this.name = name;
+        this.featureBuilder = featureBuilder;
+        this.relationshipBuilder = relationshipBuilder;
+    }
+
+    // TODO - take a look
     public boolean hasRoot() {
         return root != null;
     }
 
     /**
      * Adds a root feature
-     * @param root root feature
+     * @param name name of root feature
+     * @param id id of root feature
      */
-    public F addRoot(@NonNull F root) {
+    public F addRoot(@NonNull String name, @NonNull String id) {
         checkArgument(this.root == null, "Root feature already exists!");
         checkArgument(bfFeatures.isEmpty(), "Root feature already exists!");
 
-        this.root = root;
+        this.root = featureBuilder.buildRoot(name, id);
         this.bfFeatures.add(root);
         this.name = root.getName();
 
@@ -61,21 +73,17 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
         return this.root;
     }
 
-    /**
-     * Adds a new feature
-     * The order of features adding to feature model should follow the breadth-first order.
-     * @param feature the feature
-     */
-    public F addFeature(@NonNull F feature) {
+    public F addFeature(@NonNull String name, @NonNull String id) {
         checkState(this.root != null, "Root feature does not exist!");
         checkState(bfFeatures.size() >= 1, "Root feature does not exist!");
-        checkArgument(isUniqueFeatureName(feature.getName()), "Feature's name " + feature.getName() + " already exists!");
-        checkArgument(isUniqueFeatureId(feature.getId()), "Feature's id " + feature.getId() + " already exists!");
+        checkArgument(isUniqueFeatureName(name), "Feature's name " + name + " already exists!");
+        checkArgument(isUniqueFeatureId(id), "Feature's id " + id + " already exists!");
 
-        this.bfFeatures.add(feature);
+        F f = featureBuilder.buildFeature(name, id);
+        this.bfFeatures.add(f);
 
-        log.trace("{}Added feature [feature={}]", LoggerUtils.tab(), feature);
-        return feature;
+        log.trace("{}Added feature [feature={}]", LoggerUtils.tab(), f);
+        return f;
     }
 
     private boolean isUniqueFeatureName(String fname) {
@@ -103,7 +111,7 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
      * @param index index of the feature
      * @return a {@link Feature}
      */
-    public Feature getFeature(int index) {
+    public F getFeature(int index) {
         checkElementIndex(index, bfFeatures.size(), "Feature index out of bound!");
 
         return bfFeatures.get(index);
@@ -114,10 +122,10 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
      * @param id id of the feature
      * @return a {@link Feature}
      */
-    public Feature getFeature(@NonNull String id) {
+    public F getFeature(@NonNull String id) {
         checkArgument(!id.isEmpty(), "Feature name cannot be empty!");
 
-        for (Feature f: bfFeatures) {
+        for (F f: bfFeatures) {
             if (f.isIdDuplicate(id)) {
                 return f;
             }
@@ -313,25 +321,83 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
 //    }
 
     /**
-     * Adds a new relationship to the feature model.
+     * Adds a new MANDATORY relationship to the feature model.
      * The features involved in the relationship must already exist in the feature model.
-     * @param relationship the relationship
+     * @param from the parent feature.
+     * @param to the child feature.
      */
-    public void addRelationship(@NonNull R relationship) {
-        checkArgument(bfFeatures.contains(relationship.getParent()), "Parent feature of relationship must be already added to feature model");
-        for (F child : relationship.getChildren()) {
-            checkArgument(bfFeatures.contains(child), "Child feature of relationship must be already added to feature model");
-        }
+    public void addMandatoryRelationship(@NonNull F from, @NonNull F to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        checkArgument(bfFeatures.contains(to), "Child feature of relationship must be already added to feature model");
 
-        this.relationships.add(relationship);
+        R r = relationshipBuilder.buildMandatoryRelationship(from, to);
+
+        this.relationships.add(r);
 
         // make the connection between the parent and the children
-        F parent = relationship.getParent();
-        List<F> children = relationship.getChildren();
-        parent.addRelationship(relationship);
-        children.forEach(child -> child.setParent(parent));
+        r.makeConnectionBetweenParentAndChildren();
 
-        log.trace("{}Added relationship [relationship={}]", LoggerUtils.tab(), relationship);
+        log.trace("{}Added MANDATORY relationship [relationship={}]", LoggerUtils.tab(), r);
+    }
+
+    /**
+     * Adds a new OPTIONAL relationship to the feature model.
+     * The features involved in the relationship must already exist in the feature model.
+     * @param from the parent feature.
+     * @param to the child feature.
+     */
+    public void addOptionalRelationship(@NonNull F from, @NonNull F to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        checkArgument(bfFeatures.contains(to), "Child feature of relationship must be already added to feature model");
+
+        R r = relationshipBuilder.buildOptionalRelationship(from, to);
+
+        this.relationships.add(r);
+
+        // make the connection between the parent and the children
+        r.makeConnectionBetweenParentAndChildren();
+
+        log.trace("{}Added OPTIONAL relationship [relationship={}]", LoggerUtils.tab(), r);
+    }
+
+    /**
+     * Adds a new OR relationship to the feature model.
+     * The features involved in the relationship must already exist in the feature model.
+     * @param from the parent feature.
+     * @param to the child features.
+     */
+    public void addOrRelationship(@NonNull F from, @NonNull List<F> to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        to.forEach(child -> checkArgument(bfFeatures.contains(child), "Child feature of relationship must be already added to feature model"));
+
+        R r = relationshipBuilder.buildOrRelationship(from, to);
+
+        this.relationships.add(r);
+
+        // make the connection between the parent and the children
+        r.makeConnectionBetweenParentAndChildren();
+
+        log.trace("{}Added OR relationship [relationship={}]", LoggerUtils.tab(), r);
+    }
+
+    /**
+     * Adds a new ALTERNATIVE relationship to the feature model.
+     * The features involved in the relationship must already exist in the feature model.
+     * @param from the parent feature.
+     * @param to the child features.
+     */
+    public void addAlternativeRelationship(@NonNull F from, @NonNull List<F> to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        to.forEach(child -> checkArgument(bfFeatures.contains(child), "Child feature of relationship must be already added to feature model"));
+
+        R r = relationshipBuilder.buildAlternativeRelationship(from, to);
+
+        this.relationships.add(r);
+
+        // make the connection between the parent and the children
+        r.makeConnectionBetweenParentAndChildren();
+
+        log.trace("{}Added ALTERNATIVE relationship [relationship={}]", LoggerUtils.tab(), r);
     }
 
     /**
@@ -427,17 +493,21 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
 //        constraints = null;
     }
 
-//    @SuppressWarnings("unchecked")
-//    public Object clone() throws CloneNotSupportedException {
-//        FeatureModel<F, R> clone = (FeatureModel<F, R>) super.clone();
-//
-//        // copy relationships
-////        clone.relationships = new LinkedList<>();
-////        for (AbstractRelationship relationship : relationships) {
-////            clone.relationships.add(relationship.clone());
-////        }
-//
-//        return clone;
-//    }
+    @SuppressWarnings("unchecked")
+    public Object clone() throws CloneNotSupportedException {
+        FeatureModel<F, R> clone = (FeatureModel<F, R>) super.clone();
+
+        // copy bfFeatures
+        clone.bfFeatures = new LinkedList<>();
+        for (F feature : bfFeatures) {
+            clone.bfFeatures.add((F) feature.clone());
+        }
+
+        // copy relationships
+        clone.relationships = new LinkedList<>();
+        relationships.forEach(relationship -> clone.relationships.add((R) relationship.clone()));
+
+        return clone;
+    }
 }
 
