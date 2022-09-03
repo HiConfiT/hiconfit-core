@@ -39,6 +39,11 @@ public abstract class AbstractRelationship<F extends Feature> {
         convertToConfRule();
     }
 
+    public void makeConnectionBetweenParentAndChildren() {
+        parent.addRelationship(this);
+        children.forEach(child -> child.setParent(parent));
+    }
+
 //    @Override
 //    public boolean equals(Object o) {
 //        if (this == o) return true;
