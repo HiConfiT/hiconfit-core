@@ -53,9 +53,9 @@ class AnomalyAwareFeatureModelTest {
         fm.addOrRelationship(qa, List.of(multiplechoice, singlechoice));
         fm.addOptionalRelationship(ABtesting, statistics);
 
-//        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
-//        fm.addConstraint(RelationshipType.EXCLUDES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("nonlicense")));
-//        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
+        fm.addRequires(ABtesting, statistics);
+        fm.addExcludes(ABtesting, nonlicense);
+        fm.addRequires(ABtesting, root);
     }
 
     @Test
@@ -79,6 +79,10 @@ class AnomalyAwareFeatureModelTest {
                 	alternative(pay, license, nonlicense)
                 	or(qa, multiplechoice, singlechoice)
                 	optional(ABtesting, statistics)
+                CONSTRAINTS:
+                	requires(ABtesting, statistics)
+                	excludes(ABtesting, nonlicense)
+                	requires(ABtesting, survey)
                 """;
 
         assertEquals(expected, fm.toString());
