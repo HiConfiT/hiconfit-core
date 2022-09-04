@@ -8,9 +8,9 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
-import at.tugraz.ist.ase.fm.core.ast.ASTBuilder;
 import at.tugraz.ist.ase.fm.core.ast.ASTNode;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CTConstraintTest {
-    static FeatureModel<Feature, AbstractRelationship<Feature>> fm;
+    static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm;
     static Feature root;
     static Feature pay;
     static Feature ABtesting;
@@ -31,9 +31,11 @@ class CTConstraintTest {
     static Feature multiplechoice;
     static Feature singlechoice;
 
+    static ConstraintBuilder builder;
+
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
 
         root = fm.addRoot("survey", "survey");
         // the order of adding features should be breadth-first
@@ -53,13 +55,15 @@ class CTConstraintTest {
         fm.addAlternativeRelationship(pay, List.of(license, nonlicense));
         fm.addOrRelationship(qa, List.of(multiplechoice, singlechoice));
         fm.addOptionalRelationship(ABtesting, statistics);
+
+        builder = new ConstraintBuilder();
     }
 
     @Test
     void test1() {
-        ASTNode ast1 = ASTBuilder.buildRequires(ABtesting, statistics);
-        ASTNode ast2 = ASTBuilder.buildExcludes(ABtesting, nonlicense);
-        ASTNode ast3 = ASTBuilder.buildRequires(ABtesting, root);
+        ASTNode ast1 = builder.buildRequires(ABtesting, statistics);
+        ASTNode ast2 = builder.buildExcludes(ABtesting, nonlicense);
+        ASTNode ast3 = builder.buildRequires(ABtesting, root);
 
         CTConstraint c1 = new CTConstraint(ast1);
         assertEquals("requires(ABtesting, statistics)", c1.toString());
@@ -73,8 +77,8 @@ class CTConstraintTest {
 
     @Test
     void test2() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildOr(ast1, statistics);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildOr(ast1, statistics);
 
         CTConstraint c1 = new CTConstraint(ast2);
         assertEquals("~ABtesting \\/ statistics", c1.toString());
@@ -82,9 +86,9 @@ class CTConstraintTest {
 
     @Test
     void test3() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildOr(ast1, statistics);
-        ASTNode ast3 = ASTBuilder.buildOr(ast2, singlechoice);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildOr(ast1, statistics);
+        ASTNode ast3 = builder.buildOr(ast2, singlechoice);
 
         CTConstraint c1 = new CTConstraint(ast3);
         assertEquals("~ABtesting \\/ statistics \\/ singlechoice", c1.toString());
@@ -103,8 +107,8 @@ class CTConstraintTest {
      */
     @Test
     void test4() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildImplies(pay, ast1);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildImplies(pay, ast1);
 
         CTConstraint c1 = new CTConstraint(ast2);
         assertEquals("pay -> ~ABtesting", c1.toString());
@@ -123,8 +127,8 @@ class CTConstraintTest {
      */
     @Test
     void test5() {
-        ASTNode ast1 = ASTBuilder.buildAnd(ABtesting, pay);
-        ASTNode ast2 = ASTBuilder.buildNot(ast1);
+        ASTNode ast1 = builder.buildAnd(ABtesting, pay);
+        ASTNode ast2 = builder.buildNot(ast1);
 
         CTConstraint c1 = new CTConstraint(ast2);
         assertEquals("~(ABtesting /\\ pay)", c1.toString());
@@ -143,8 +147,8 @@ class CTConstraintTest {
      */
     @Test
     void test6() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildOr(pay, ast1);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildOr(pay, ast1);
 
         CTConstraint c1 = new CTConstraint(ast2);
         assertEquals("pay \\/ ~ABtesting", c1.toString());
@@ -166,9 +170,9 @@ class CTConstraintTest {
      */
     @Test
     void test7() {
-        ASTNode ast1 = ASTBuilder.buildAnd(ABtesting, pay);
-        ASTNode ast2 = ASTBuilder.buildNot(ast1);
-        ASTNode ast3 = ASTBuilder.buildImplies(qa, ast2);
+        ASTNode ast1 = builder.buildAnd(ABtesting, pay);
+        ASTNode ast2 = builder.buildNot(ast1);
+        ASTNode ast3 = builder.buildImplies(qa, ast2);
 
         CTConstraint c1 = new CTConstraint(ast3);
         assertEquals("qa -> ~(ABtesting /\\ pay)", c1.toString());
@@ -190,9 +194,9 @@ class CTConstraintTest {
      */
     @Test
     void test8() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildOr(pay, ast1);
-        ASTNode ast3 = ASTBuilder.buildImplies(qa, ast2);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildOr(pay, ast1);
+        ASTNode ast3 = builder.buildImplies(qa, ast2);
 
         CTConstraint c1 = new CTConstraint(ast3);
         assertEquals("qa -> pay \\/ ~ABtesting", c1.toString());
@@ -213,9 +217,9 @@ class CTConstraintTest {
      */
     @Test
     void test9() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildNot(ast1);
-        ASTNode ast3 = ASTBuilder.buildImplies(qa, ast2);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildNot(ast1);
+        ASTNode ast3 = builder.buildImplies(qa, ast2);
 
         CTConstraint c1 = new CTConstraint(ast3);
         assertEquals("qa -> ~(~ABtesting)", c1.toString());
@@ -240,11 +244,11 @@ class CTConstraintTest {
      */
     @Test
     void test10() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildNot(ast1);
-        ASTNode ast3 = ASTBuilder.buildNot(ast2);
-        ASTNode ast4 = ASTBuilder.buildNot(ast3);
-        ASTNode ast5 = ASTBuilder.buildImplies(qa, ast4);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildNot(ast1);
+        ASTNode ast3 = builder.buildNot(ast2);
+        ASTNode ast4 = builder.buildNot(ast3);
+        ASTNode ast5 = builder.buildImplies(qa, ast4);
 
         CTConstraint c1 = new CTConstraint(ast5);
         assertEquals("qa -> ~(~(~(~ABtesting)))", c1.toString());
@@ -266,9 +270,9 @@ class CTConstraintTest {
      */
     @Test
     void test11() {
-        ASTNode ast1 = ASTBuilder.buildNot(ABtesting);
-        ASTNode ast2 = ASTBuilder.buildOr(pay, ast1);
-        ASTNode ast3 = ASTBuilder.buildImplies(qa, ast2);
+        ASTNode ast1 = builder.buildNot(ABtesting);
+        ASTNode ast2 = builder.buildOr(pay, ast1);
+        ASTNode ast3 = builder.buildImplies(qa, ast2);
 
         CTConstraint c1 = new CTConstraint(ast3);
         assertEquals("qa -> pay \\/ ~ABtesting", c1.toString());
@@ -288,8 +292,8 @@ class CTConstraintTest {
      */
     @Test
     void test12() {
-        ASTNode ast1 = ASTBuilder.buildAnd(ABtesting, pay);
-        ASTNode ast2 = ASTBuilder.buildEquivalence(qa, ast1);
+        ASTNode ast1 = builder.buildAnd(ABtesting, pay);
+        ASTNode ast2 = builder.buildEquivalence(qa, ast1);
 
         CTConstraint c1 = new CTConstraint(ast2);
         assertEquals("qa <-> ABtesting /\\ pay", c1.toString());

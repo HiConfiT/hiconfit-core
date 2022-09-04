@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FeatureModelTest {
-    static FeatureModel<Feature, AbstractRelationship<Feature>> fm;
+    static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm;
     static Feature root;
     static Feature pay;
     static Feature ABtesting;
@@ -31,7 +32,7 @@ public class FeatureModelTest {
 
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
 
         root = fm.addRoot("survey", "survey");
         // the order of adding features should be breadth-first
@@ -59,13 +60,13 @@ public class FeatureModelTest {
 
     @Test
     void testAddFeatureWithoutRoot() {
-        FeatureModel<Feature, AbstractRelationship<Feature>> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
         assertThrows(IllegalStateException.class, () -> anotherFM.addFeature("feature", "feature"));
     }
 
     @Test
     void testAddRootWhenOnceAlreadyExist() {
-        FeatureModel<Feature, AbstractRelationship<Feature>> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
         anotherFM.addRoot("survey", "survey");
         assertThrows(IllegalArgumentException.class, () -> anotherFM.addRoot("feature", "feature"));
     }
@@ -163,7 +164,7 @@ public class FeatureModelTest {
 
     @Test
     void testClone() throws CloneNotSupportedException {
-        FeatureModel<Feature, AbstractRelationship<Feature>> clone = (FeatureModel<Feature, AbstractRelationship<Feature>>) fm.clone();
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> clone = (FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint>) fm.clone();
         assertAll(
                 () -> assertEquals(fm.getName(), clone.getName()),
                 () -> assertEquals(fm.getNumOfFeatures(), clone.getNumOfFeatures()),

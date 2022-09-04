@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.fm.core.anomaly.AnomalyAwareFeatureBuilder;
@@ -19,7 +20,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class AnomalyAwareFeatureModelTest {
-    static FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>> fm;
+    static FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fm;
     static AnomalyAwareFeature root;
     static AnomalyAwareFeature pay;
     static AnomalyAwareFeature ABtesting;
@@ -32,7 +33,7 @@ class AnomalyAwareFeatureModelTest {
 
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>("test", new AnomalyAwareFeatureBuilder(), new RelationshipBuilder());
+        fm = new FeatureModel<>("test", new AnomalyAwareFeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
         root = fm.addRoot("survey", "survey");
         // the order of adding features should be breadth-first
         pay = fm.addFeature("pay", "pay");
@@ -86,7 +87,7 @@ class AnomalyAwareFeatureModelTest {
     @Test
     @SuppressWarnings("unchecked")
     void testClone() throws CloneNotSupportedException {
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>> fm2 = (FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>>) fm.clone();
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fm2 = (FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) fm.clone();
         assertEquals(fm.toString(), fm2.toString());
     }
 }

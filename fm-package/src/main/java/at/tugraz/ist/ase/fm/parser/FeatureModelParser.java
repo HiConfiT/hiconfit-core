@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import lombok.NonNull;
@@ -18,7 +19,7 @@ import java.io.File;
 /**
  * An interface for all feature model parsers
  */
-public interface FeatureModelParser<F extends Feature, R extends AbstractRelationship<F>> {
+public interface FeatureModelParser<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> {
     /**
      * Checks the format of a feature model file.
      *
@@ -35,7 +36,7 @@ public interface FeatureModelParser<F extends Feature, R extends AbstractRelatio
      * @return a {@link FeatureModel}
      * @throws FeatureModelParserException - a PaserException
      */
-    FeatureModel<F, R> parse(@NonNull File filePath) throws FeatureModelParserException;
+    FeatureModel<F, R, C> parse(@NonNull File filePath) throws FeatureModelParserException;
 
     void dispose();
 }

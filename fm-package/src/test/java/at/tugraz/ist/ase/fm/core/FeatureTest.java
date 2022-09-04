@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import org.junit.jupiter.api.BeforeAll;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FeatureTest {
 
-    static FeatureModel<Feature, AbstractRelationship<Feature>> fm;
+    static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm;
     static Feature root;
     static Feature f1;
     static Feature f2;
@@ -30,7 +31,7 @@ class FeatureTest {
 
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder());
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
         root = fm.addRoot("root", "root");
         f1 = fm.addFeature("F1", "ID1");
         f2 = fm.addFeature("F2", "ID2");

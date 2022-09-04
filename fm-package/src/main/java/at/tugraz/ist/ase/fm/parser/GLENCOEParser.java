@@ -9,9 +9,11 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
 import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import com.google.common.annotations.Beta;
@@ -36,7 +38,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @Beta
 @Slf4j
-public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser<F, R> {
+public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> implements FeatureModelParser<F, R, C> {
 
     public static final String FILE_EXTENSION = ".json";
 
@@ -59,17 +61,21 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>>
     public static final String TYPE_EXCLUDES = "ExcludesTerm";
     public static final String TYPE_IMPLY = "ImpliesTerm";
 
-    private FeatureModel<F, R> fm;
+    private FeatureModel<F, R, C> fm;
     private JSONObject features;
     private JSONObject tree;
     private JSONObject constraints;
 
     private IFeatureBuildable featureBuilder;
     private IRelationshipBuildable relationshipBuilder;
+    private IConstraintBuildable constraintBuilder;
 
-    public GLENCOEParser(@NonNull IFeatureBuildable featureBuilder, @NonNull IRelationshipBuildable relationshipBuilder) {
+    public GLENCOEParser(@NonNull IFeatureBuildable featureBuilder,
+                         @NonNull IRelationshipBuildable relationshipBuilder,
+                         @NonNull IConstraintBuildable constraintBuilder) {
         this.featureBuilder = featureBuilder;
         this.relationshipBuilder = relationshipBuilder;
+        this.constraintBuilder = constraintBuilder;
     }
 
     /**
@@ -114,14 +120,14 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>>
      * @throws FeatureModelParserException when error occurs in parsing
      */
     @Override
-    public FeatureModel<F, R> parse(@NonNull File filePath) throws FeatureModelParserException {
+    public FeatureModel<F, R, C> parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not Glencoe format or there are errors in the file!");
 
         log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
         // create the feature model
-        fm = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder);
+        fm = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder, constraintBuilder);
 
         convertTree();
 

@@ -8,8 +8,13 @@
 
 package at.tugraz.ist.ase.fm.core.ast;
 
+import at.tugraz.ist.ase.fm.core.Feature;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+
+import java.util.LinkedList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
@@ -19,10 +24,10 @@ public abstract class ASTNode {
 
     /**
      * Constructor for unary operator
-     * @param operand the operand
+     * @param right the operand
      */
-    public ASTNode(ASTNode operand) {
-        this.right = operand;
+    public ASTNode(@NonNull ASTNode right) {
+        this.right = right;
     }
 
     /**
@@ -30,9 +35,24 @@ public abstract class ASTNode {
      * @param left the left operand
      * @param right the right operand
      */
-    public ASTNode(ASTNode left, ASTNode right) {
+    public ASTNode(@NonNull ASTNode left, @NonNull ASTNode right) {
         this.left = left;
         this.right = right;
+    }
+
+    /**
+     * Gets the list of features that are involved in the constraint.
+     * @return the list of features that are involved in the constraint.
+     */
+    public <F extends Feature> List<F> getFeatures() {
+        List<F> features = new LinkedList<>();
+        if (left != null) {
+            features.addAll(left.getFeatures());
+        }
+        if (right != null) {
+            features.addAll(right.getFeatures());
+        }
+        return features;
     }
 
     public abstract boolean isOperand();

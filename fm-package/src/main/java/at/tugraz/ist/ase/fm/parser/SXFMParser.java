@@ -9,9 +9,11 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
 import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import fm.*;
@@ -44,7 +46,7 @@ import static com.google.common.base.Preconditions.checkState;
  * For further details of this library, we refer to <a href="http://52.32.1.180:8080/SPLOT/sxfm.html">http://52.32.1.180:8080/SPLOT/sxfm.html</a>
  */
 @Slf4j
-public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser<F, R> {
+public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> implements FeatureModelParser<F, R, C> {
 
     public static final String FILE_EXTENSION_1 = ".sxfm";
     public static final String FILE_EXTENSION_2 = ".splx";
@@ -54,14 +56,18 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>> im
     public static final String TAG_STRUCT = "feature_tree";
     public static final String TAG_CONSTRAINT = "constraints";
 
-    private FeatureModel<F, R> fm;
+    private FeatureModel<F, R, C> fm;
 
     private IFeatureBuildable featureBuilder;
     private IRelationshipBuildable relationshipBuilder;
+    private IConstraintBuildable constraintBuilder;
 
-    public SXFMParser(@NonNull IFeatureBuildable featureBuilder, @NonNull IRelationshipBuildable relationshipBuilder) {
+    public SXFMParser(@NonNull IFeatureBuildable featureBuilder,
+                      @NonNull IRelationshipBuildable relationshipBuilder,
+                      @NonNull IConstraintBuildable constraintBuilder) {
         this.featureBuilder = featureBuilder;
         this.relationshipBuilder = relationshipBuilder;
+        this.constraintBuilder = constraintBuilder;
     }
 
     /**
@@ -103,7 +109,7 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>> im
      * @throws FeatureModelParserException when error occurs in parsing
      */
     @Override
-    public FeatureModel<F, R> parse(@NonNull File filePath) throws FeatureModelParserException {
+    public FeatureModel<F, R, C> parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not SPLOT format or there are errors in the file!");
 
         log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
@@ -116,7 +122,7 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>> im
             sxfm.loadModel();
 
             // create the feature model
-            fm = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder);
+            fm = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder, constraintBuilder);
 
             // convert features
             convertFeatures(sxfm);

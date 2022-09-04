@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.fm.core;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
 import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
 import lombok.Builder;
@@ -30,25 +31,28 @@ import static com.google.common.base.Preconditions.*;
  */
 @Slf4j
 @Getter
-public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> implements Cloneable {
+public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> implements Cloneable {
     protected String name;
 
     protected List<F> bfFeatures = new LinkedList<>(); // breadth-first order
     protected List<R> relationships = new LinkedList<>();
-//    protected List<C> constraints = new LinkedList<>();
+    protected List<C> constraints = new LinkedList<>();
 
     protected F root = null;
 
     protected IFeatureBuildable featureBuilder;
     protected IRelationshipBuildable relationshipBuilder;
+    protected IConstraintBuildable constraintBuilder;
 
     @Builder
     public FeatureModel(@NonNull String name,
                         @NonNull IFeatureBuildable featureBuilder,
-                        @NonNull IRelationshipBuildable relationshipBuilder) {
+                        @NonNull IRelationshipBuildable relationshipBuilder,
+                        @NonNull IConstraintBuildable constraintBuilder) {
         this.name = name;
         this.featureBuilder = featureBuilder;
         this.relationshipBuilder = relationshipBuilder;
+        this.constraintBuilder = constraintBuilder;
     }
 
     public boolean hasRoot() {
@@ -488,15 +492,15 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
         bfFeatures = null;
         relationships.clear();
         relationships = null;
-//        constraints.clear();
-//        constraints = null;
+        constraints.clear();
+        constraints = null;
         featureBuilder = null;
         relationshipBuilder = null;
     }
 
     @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
-        FeatureModel<F, R> clone = (FeatureModel<F, R>) super.clone();
+        FeatureModel<F, R, C> clone = (FeatureModel<F, R, C>) super.clone();
 
         // copy bfFeatures
         clone.bfFeatures = new LinkedList<>();
@@ -507,6 +511,8 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
         // copy relationships
         clone.relationships = new LinkedList<>();
         relationships.forEach(relationship -> clone.relationships.add((R) relationship.clone()));
+
+        // copy constraints
 
         return clone;
     }

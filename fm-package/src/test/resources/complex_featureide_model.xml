@@ -146,5 +146,14 @@
                 </disj>
             </imp>
         </rule>
+        <rule>
+            <eq>
+                <var>ADA</var>
+                <conj>
+                    <var>BB</var>
+                    <var>DAB</var>
+                </conj>
+            </eq>
+        </rule>
     </constraints>
 </featureModel>
