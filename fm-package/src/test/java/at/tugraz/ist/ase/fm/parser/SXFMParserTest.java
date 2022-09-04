@@ -64,6 +64,7 @@ public class SXFMParserTest {
     @Test
     void testSmartwatch() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/smartwatch.sxfm");
+        @Cleanup("dispose")
         SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
         FeatureModel<Feature, AbstractRelationship<Feature>> featureModel = parser.parse(fileFM);
 
@@ -102,6 +103,7 @@ public class SXFMParserTest {
     @Test
     public void testFM_10_0() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
+        @Cleanup("dispose")
         SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
         featureModel = parser.parse(fileFM);
 

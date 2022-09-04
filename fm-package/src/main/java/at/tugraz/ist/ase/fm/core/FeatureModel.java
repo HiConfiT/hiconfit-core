@@ -123,7 +123,7 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
      * @return a {@link Feature}
      */
     public F getFeature(@NonNull String id) {
-        checkArgument(!id.isEmpty(), "Feature name cannot be empty!");
+        checkArgument(!id.isEmpty(), "Feature id cannot be empty!");
 
         for (F f: bfFeatures) {
             if (f.isIdDuplicate(id)) {
@@ -491,6 +491,8 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
         relationships = null;
 //        constraints.clear();
 //        constraints = null;
+        featureBuilder = null;
+        relationshipBuilder = null;
     }
 
     @SuppressWarnings("unchecked")

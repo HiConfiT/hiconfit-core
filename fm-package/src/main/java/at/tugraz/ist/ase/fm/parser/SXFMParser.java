@@ -44,7 +44,17 @@ import static com.google.common.base.Preconditions.checkState;
  * For further details of this library, we refer to <a href="http://52.32.1.180:8080/SPLOT/sxfm.html">http://52.32.1.180:8080/SPLOT/sxfm.html</a>
  */
 @Slf4j
-public class SXFMParser<F extends Feature, R extends AbstractRelationship<Feature>> implements FeatureModelParser {
+public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser {
+
+    public static final String FILE_EXTENSION_1 = ".sxfm";
+    public static final String FILE_EXTENSION_2 = ".splx";
+
+    // Main tags
+    public static final String TAG_ROOT = "feature_model";
+    public static final String TAG_STRUCT = "feature_tree";
+    public static final String TAG_CONSTRAINT = "constraints";
+
+    private FeatureModel<F, R> fm;
 
     private IFeatureBuildable featureBuilder;
     private IRelationshipBuildable relationshipBuilder;
@@ -64,7 +74,7 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
     @Override
     public boolean checkFormat(@NonNull File filePath) {
         // first, check the extension of file
-        checkArgument(filePath.getName().endsWith(".sxfm") || filePath.getName().endsWith(".splx"), "The file is not in SPLOT format!");
+        checkArgument(filePath.getName().endsWith(FILE_EXTENSION_1) || filePath.getName().endsWith(FILE_EXTENSION_2), "The file is not in SPLOT format!");
         // second, check the structure of file
         try {
             // read the file
@@ -74,9 +84,9 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
             Element rootEle = doc.getDocumentElement();
 
             // if it has three tag "feature_model", "feature_tree" and "constraints"
-            if (rootEle.getTagName().equals("feature_model") &&
-                    rootEle.getElementsByTagName("feature_tree").getLength() > 0 &&
-                    rootEle.getElementsByTagName("constraints").getLength() > 0) {
+            if (rootEle.getTagName().equals(TAG_ROOT) &&
+                    rootEle.getElementsByTagName(TAG_STRUCT).getLength() > 0 &&
+                    rootEle.getElementsByTagName(TAG_CONSTRAINT).getLength() > 0) {
                 return true;
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
@@ -93,13 +103,12 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
      * @throws FeatureModelParserException when error occurs in parsing
      */
     @Override
-    public FeatureModel<Feature, AbstractRelationship<Feature>> parse(@NonNull File filePath) throws FeatureModelParserException {
+    public FeatureModel<F, R> parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not SPLOT format or there are errors in the file!");
 
         log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
-        FeatureModel<Feature, AbstractRelationship<Feature>> featureModel;
         try {
             fm.FeatureModel sxfm = new XMLFeatureModel(filePath.toString(), XMLFeatureModel.USE_VARIABLE_NAME_AS_ID);
 
@@ -107,17 +116,17 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
             sxfm.loadModel();
 
             // create the feature model
-            featureModel = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder);
+            fm = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder);
 
             // convert features
-            convertFeatures(sxfm, featureModel);
+            convertFeatures(sxfm);
 
-            if (featureModel.getNumOfFeatures() == 0) {
+            if (fm.getNumOfFeatures() == 0) {
                 throw new FeatureModelParserException("Couldn't parse any features in the feature model file!");
             }
 
             // convert relationships
-            convertRelationships(sxfm, featureModel);
+            convertRelationships(sxfm);
 
             // convert constraints
 //            convertConstraints(sxfm, featureModel);
@@ -126,8 +135,8 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
         }
 
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
-        return featureModel;
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), fm);
+        return fm;
     }
 
     /**
@@ -135,7 +144,7 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
      *
      * @param sxfm - a {@link fm.FeatureModel}
      */
-    private void convertFeatures(fm.FeatureModel sxfm, FeatureModel<Feature, AbstractRelationship<Feature>> fm) {
+    private void convertFeatures(fm.FeatureModel sxfm) {
         log.trace("{}Generating features >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
@@ -178,10 +187,9 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
      * Iterates nodes to take the relationships between features.
      *
      * @param sxfm - a {@link fm.FeatureModel}
-     * @param fm - a {@link FeatureModel}
      * @throws FeatureModelParserException a ParserException
      */
-    private void convertRelationships(fm.FeatureModel sxfm, FeatureModel<Feature, AbstractRelationship<Feature>> fm) throws FeatureModelParserException {
+    private void convertRelationships(fm.FeatureModel sxfm) throws FeatureModelParserException {
         log.trace("{}Generating relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
@@ -195,19 +203,19 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
 
                 if (node instanceof SolitaireFeature) {
                     if (((SolitaireFeature) node).isOptional()) { // OPTIONAL
-                        Feature leftSide = fm.getFeature(node.getID());
-                        Feature rightSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
+                        F leftSide = fm.getFeature(node.getID());
+                        F rightSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
 
                         fm.addOptionalRelationship(rightSide, leftSide);
                     } else { // MANDATORY
-                        Feature leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
-                        Feature rightSide = fm.getFeature(node.getID());
+                        F leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
+                        F rightSide = fm.getFeature(node.getID());
 
                         fm.addMandatoryRelationship(leftSide, rightSide);
                     }
                 } else if (node instanceof FeatureGroup) {
-                    Feature leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
-                    List<Feature> rightSide = getChildren(node);
+                    F leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
+                    List<F> rightSide = getChildren(node);
 
                     checkState(rightSide.size() > 0, "OR and ALT relationships must have at least one child.");
 
@@ -287,23 +295,19 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<Featur
      * @param node - a node {@link FeatureTreeNode}
      * @return an array of names of child features.
      */
-    private List<Feature> getChildren(FeatureTreeNode node) throws FeatureModelParserException {
-        List<Feature> features = new LinkedList<>();
+    private List<F> getChildren(FeatureTreeNode node) {
+        List<F> children = new LinkedList<>();
         for (int i = 0; i < node.getChildCount(); i++) {
             FeatureTreeNode child = (FeatureTreeNode)node.getChildAt(i);
 
-            String name = child.getName();
             String id = child.getID();
-            if (name.isEmpty()) {
-                throw new FeatureModelParserException("The feature name could not be blank! [" + child + "]");
-            }
-            Feature feature = new Feature(name, id);
-            features.add(feature);
+            children.add(fm.getFeature(id));
         }
-        return features;
+        return children;
     }
 
     public void dispose() {
+        fm = null;
         featureBuilder = null;
         relationshipBuilder = null;
     }

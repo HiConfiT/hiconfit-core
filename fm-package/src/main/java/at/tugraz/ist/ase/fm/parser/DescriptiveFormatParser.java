@@ -42,8 +42,10 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Slf4j
 public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelationship<F>> extends FM4ConfBaseListener implements FeatureModelParser {
 
+    public static final String FILE_EXTENSION = ".fm4conf";
+
     private FeatureModel<F, R> fm;
-    ParseTree tree;
+    private ParseTree tree;
 
     private IFeatureBuildable featureBuilder;
     private IRelationshipBuildable relationshipBuilder;
@@ -63,7 +65,7 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
     @Override
     public boolean checkFormat(@NonNull File filePath) {
         // first, check the extension of file
-        checkArgument(filePath.getName().endsWith(".fm4conf"), "The file is not in a Descriptive format!");
+        checkArgument(filePath.getName().endsWith(FILE_EXTENSION), "The file is not in a Descriptive format!");
 
         // second, check the structure of file
         try {
@@ -213,6 +215,7 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
 //    }
 
     public void dispose() {
+        fm = null;
         tree = null;
         featureBuilder = null;
         relationshipBuilder = null;
