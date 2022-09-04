@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.fm.core;
 
 import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -30,9 +31,12 @@ public class FeatureModelTest {
     static Feature multiplechoice;
     static Feature singlechoice;
 
+    static IConstraintBuildable constraintBuilder;
+
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
+        constraintBuilder = new ConstraintBuilder();
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), constraintBuilder);
 
         root = fm.addRoot("survey", "survey");
         // the order of adding features should be breadth-first
@@ -53,9 +57,9 @@ public class FeatureModelTest {
         fm.addOrRelationship(qa, List.of(multiplechoice, singlechoice));
         fm.addOptionalRelationship(ABtesting, statistics);
 
-//        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
-//        fm.addConstraint(RelationshipType.EXCLUDES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("nonlicense")));
-//        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
+        fm.addRequires(ABtesting, statistics);
+        fm.addExcludes(ABtesting, nonlicense);
+        fm.addExcludes(ABtesting, root);
     }
 
     @Test
@@ -108,6 +112,10 @@ public class FeatureModelTest {
                 	alternative(pay, license, nonlicense)
                 	or(qa, multiplechoice, singlechoice)
                 	optional(ABtesting, statistics)
+                CONSTRAINTS:
+                	requires(ABtesting, statistics)
+                	excludes(ABtesting, nonlicense)
+                	excludes(ABtesting, survey)
                 """;
 
         assertEquals(expected, fm.toString());
@@ -163,6 +171,12 @@ public class FeatureModelTest {
     }
 
     @Test
+    void testNumOfConstraints() {
+        assertEquals(3, fm.getNumOfConstraints());
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
     void testClone() throws CloneNotSupportedException {
         FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> clone = (FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint>) fm.clone();
         assertAll(
@@ -188,7 +202,12 @@ public class FeatureModelTest {
                 () -> assertEquals(fm.getNumOfRelationships(MandatoryRelationship.class), clone.getNumOfRelationships(MandatoryRelationship.class)),
                 () -> assertEquals(fm.getNumOfRelationships(OptionalRelationship.class), clone.getNumOfRelationships(OptionalRelationship.class)),
                 () -> assertEquals(fm.getNumOfRelationships(AlternativeRelationship.class), clone.getNumOfRelationships(AlternativeRelationship.class)),
-                () -> assertEquals(fm.getNumOfRelationships(OrRelationship.class), clone.getNumOfRelationships(OrRelationship.class))
+                () -> assertEquals(fm.getNumOfRelationships(OrRelationship.class), clone.getNumOfRelationships(OrRelationship.class)),
+                () -> assertEquals(fm.getNumOfConstraints(), clone.getNumOfConstraints()),
+                () -> assertNotSame(fm, clone),
+                () -> assertEquals(fm.getConstraints().get(0).getFormula().toString(), clone.getConstraints().get(0).getFormula().toString()),
+                () -> assertEquals(fm.getConstraints().get(1).getFormula().toString(), clone.getConstraints().get(1).getFormula().toString()),
+                () -> assertEquals(fm.getConstraints().get(2).getFormula().toString(), clone.getConstraints().get(2).getFormula().toString())
         );
     }
 

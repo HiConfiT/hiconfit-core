@@ -436,38 +436,29 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return count;
     }
 
-//    /**
-//     * Adds a new constraint
-//     * @param type type of relationship
-//     * @param leftSide left part of the constraint
-//     * @param rightSide right part of the constraint
-//     */
-//    public void addConstraint(RelationshipType type, @NonNull Feature leftSide, @NonNull List<Feature> rightSide) {
-//        Relationship r = new BasicRelationship(type, leftSide, rightSide);
-//        this.constraints.add(r);
-//
-//        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab(), r);
-//    }
-//
-//    /**
-//     * Adds a new 3CNF constraint
-//     * @param type type of relationship
-//     * @param constraint3CNF 3CNF constraint
-//     */
-//    public void addConstraint(RelationshipType type, String constraint3CNF) {
-//        Relationship r = new ThreeCNFConstraint(type, constraint3CNF);
-//        this.constraints.add(r);
-//
-//        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab(), r);
-//    }
-//
-//    /**
-//     * Gets the number of constraints.
-//     * @return number of constraints.
-//     */
-//    public int getNumOfConstraints() {
-//        return constraints.size();
-//    }
+    public void addConstraint(@NonNull C cstr) {
+        cstr.getFeatures().forEach(f -> checkArgument(bfFeatures.contains(f), "Feature of constraint must be already added to feature model"));
+
+        this.constraints.add(cstr);
+
+        log.trace("{}Added cross-tree constraint [constraint={}]", LoggerUtils.tab(), cstr);
+    }
+
+    public void addRequires(@NonNull F from, @NonNull F to) {
+        addConstraint(constraintBuilder.buildRequires(from, to));
+    }
+
+    public void addExcludes(@NonNull F from, @NonNull F to) {
+        addConstraint(constraintBuilder.buildExcludes(from, to));
+    }
+
+    /**
+     * Gets the number of constraints.
+     * @return number of constraints.
+     */
+    public int getNumOfConstraints() {
+        return constraints.size();
+    }
 
     @Override
     public String toString() {
@@ -481,8 +472,8 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         st.append("RELATIONSHIPS:\n");
         relationships.parallelStream().map(relationship -> String.format("\t%s\n", relationship)).forEachOrdered(st::append);
 
-//        st.append("CONSTRAINTS:\n");
-//        constraints.parallelStream().map(constraint -> String.format("\t%s\n", constraint)).forEachOrdered(st::append);
+        st.append("CONSTRAINTS:\n");
+        constraints.parallelStream().map(constraint -> String.format("\t%s\n", constraint)).forEachOrdered(st::append);
 
         return st.toString();
     }
@@ -504,15 +495,19 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
 
         // copy bfFeatures
         clone.bfFeatures = new LinkedList<>();
-        for (F feature : bfFeatures) {
-            clone.bfFeatures.add((F) feature.clone());
+        for (F f : bfFeatures) {
+            clone.bfFeatures.add((F) f.clone());
         }
 
         // copy relationships
         clone.relationships = new LinkedList<>();
-        relationships.forEach(relationship -> clone.relationships.add((R) relationship.clone()));
+        relationships.forEach(r -> clone.relationships.add((R) r.clone()));
 
         // copy constraints
+        clone.constraints = new LinkedList<>();
+        for (C cstr : constraints) {
+            clone.constraints.add((C) cstr.clone());
+        }
 
         return clone;
     }

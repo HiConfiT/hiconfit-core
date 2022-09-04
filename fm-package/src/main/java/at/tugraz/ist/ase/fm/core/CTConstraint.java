@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.fm.core;
 
 import at.tugraz.ist.ase.fm.core.ast.ASTNode;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -20,9 +21,11 @@ import java.util.List;
  * holds an Abstract Syntax Tree (AST) of the constraint
  */
 @Getter
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class CTConstraint implements Cloneable {
-    private final String constraint;
-    private ASTNode formula;
+    @EqualsAndHashCode.Include
+    protected String constraint;
+    protected ASTNode formula;
 
     public CTConstraint(@NonNull ASTNode formula) {
         this.formula = formula;
