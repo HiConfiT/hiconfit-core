@@ -24,12 +24,11 @@ public class SXFMParserTest {
     static FeatureModel<Feature, AbstractRelationship<Feature>> featureModel;
 
     @Test
+    @SuppressWarnings("unchecked")
     void testBamboo() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike_splot.sxfm");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.SXFM);
         @Cleanup("dispose")
-        SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -62,10 +61,11 @@ public class SXFMParserTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void testSmartwatch() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/smartwatch.sxfm");
         @Cleanup("dispose")
-        SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         FeatureModel<Feature, AbstractRelationship<Feature>> featureModel = parser.parse(fileFM);
 
         String st = "FEATURES:\n" +
@@ -101,10 +101,11 @@ public class SXFMParserTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void testFM_10_0() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
         @Cleanup("dispose")
-        SXFMParser<Feature, AbstractRelationship<Feature>> parser = new SXFMParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String st = "FEATURES:\n" +

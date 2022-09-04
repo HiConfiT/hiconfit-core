@@ -44,7 +44,7 @@ import static com.google.common.base.Preconditions.checkState;
  * For further details of this library, we refer to <a href="http://52.32.1.180:8080/SPLOT/sxfm.html">http://52.32.1.180:8080/SPLOT/sxfm.html</a>
  */
 @Slf4j
-public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser {
+public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser<F, R> {
 
     public static final String FILE_EXTENSION_1 = ".sxfm";
     public static final String FILE_EXTENSION_2 = ".splx";

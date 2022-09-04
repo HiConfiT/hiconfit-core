@@ -8,25 +8,31 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
+import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
+import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
 import lombok.NonNull;
 
 public class FMParserFactory {
 
-    private static final FMParserFactory instance = new FMParserFactory();
+    private IFeatureBuildable featureBuilder;
+    private IRelationshipBuildable relationshipBuilder;
 
-    private FMParserFactory() {}
+    private FMParserFactory(@NonNull IFeatureBuildable featureBuilder, @NonNull IRelationshipBuildable relationshipBuilder) {
+        this.featureBuilder = featureBuilder;
+        this.relationshipBuilder = relationshipBuilder;
+    }
 
-    public static FMParserFactory getInstance(){
-        return instance;
+    public static FMParserFactory getInstance(@NonNull IFeatureBuildable featureBuilder, @NonNull IRelationshipBuildable relationshipBuilder){
+        return new FMParserFactory(featureBuilder, relationshipBuilder);
     }
 
     public FeatureModelParser getParser(@NonNull FMFormat fmFormat) {
         return switch (fmFormat) {
-            case SXFM -> new SXFMParser();
-            case FEATUREIDE -> new FeatureIDEParser();
-            case GLENCOE -> new GLENCOEParser();
-            case XMI -> new XMIParser();
-            case DESCRIPTIVE -> new DescriptiveFormatParser();
+            case SXFM -> new SXFMParser<>(featureBuilder, relationshipBuilder);
+            case FEATUREIDE -> new FeatureIDEParser<>(featureBuilder, relationshipBuilder);
+            case GLENCOE -> new GLENCOEParser<>(featureBuilder, relationshipBuilder);
+            case XMI -> new XMIParser<>(featureBuilder, relationshipBuilder);
+            case DESCRIPTIVE -> new DescriptiveFormatParser<>(featureBuilder, relationshipBuilder);
             default -> throw new IllegalArgumentException("Unsupported feature model format: " + fmFormat);
         };
     }

@@ -24,11 +24,11 @@ class GLENCOEParserTest {
     static FeatureModel<Feature, AbstractRelationship<Feature>> featureModel;
 
     @Test
+    @SuppressWarnings("unchecked")
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike.gfm.json");
-//        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         @Cleanup("dispose")
-        GLENCOEParser<Feature, AbstractRelationship<Feature>> parser = new GLENCOEParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """

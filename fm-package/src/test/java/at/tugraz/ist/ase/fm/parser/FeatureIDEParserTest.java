@@ -24,11 +24,11 @@ class FeatureIDEParserTest {
     static FeatureModel<Feature, AbstractRelationship<Feature>> featureModel;
 
     @Test
+    @SuppressWarnings("unchecked")
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike_featureide.xml");
-//        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         @Cleanup("dispose")
-        FeatureIDEParser<Feature, AbstractRelationship<Feature>> parser = new FeatureIDEParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -61,36 +61,33 @@ class FeatureIDEParserTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void test1() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/linux-2.6.33.3_simple.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
         @Cleanup("dispose")
-        FeatureIDEParser<Feature, AbstractRelationship<Feature>> parser = new FeatureIDEParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void test2() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/linux-2.6.33.3.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
         @Cleanup("dispose")
-        FeatureIDEParser<Feature, AbstractRelationship<Feature>> parser = new FeatureIDEParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void test3() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/model1.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
         @Cleanup("dispose")
-        FeatureIDEParser<Feature, AbstractRelationship<Feature>> parser = new FeatureIDEParser<>(new FeatureBuilder(), new RelationshipBuilder());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));

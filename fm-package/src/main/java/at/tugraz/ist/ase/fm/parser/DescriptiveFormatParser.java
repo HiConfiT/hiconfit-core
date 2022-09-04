@@ -40,7 +40,7 @@ import static com.google.common.base.Preconditions.checkArgument;
  */
 @Beta
 @Slf4j
-public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelationship<F>> extends FM4ConfBaseListener implements FeatureModelParser {
+public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelationship<F>> extends FM4ConfBaseListener implements FeatureModelParser<F, R> {
 
     public static final String FILE_EXTENSION = ".fm4conf";
 

@@ -37,7 +37,7 @@ import static com.google.common.base.Preconditions.checkState;
  * A parser for the FeatureIDE format
  */
 @Slf4j
-public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser {
+public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser<F, R> {
 
     public static final String FILE_EXTENSION = ".xml";
 

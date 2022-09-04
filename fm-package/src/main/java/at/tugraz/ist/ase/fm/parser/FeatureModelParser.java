@@ -18,7 +18,7 @@ import java.io.File;
 /**
  * An interface for all feature model parsers
  */
-public interface FeatureModelParser {
+public interface FeatureModelParser<F extends Feature, R extends AbstractRelationship<F>> {
     /**
      * Checks the format of a feature model file.
      *
@@ -35,6 +35,8 @@ public interface FeatureModelParser {
      * @return a {@link FeatureModel}
      * @throws FeatureModelParserException - a PaserException
      */
-    FeatureModel<? extends Feature, ? extends AbstractRelationship<? extends Feature>> parse(@NonNull File filePath) throws FeatureModelParserException;
+    FeatureModel<F, R> parse(@NonNull File filePath) throws FeatureModelParserException;
+
+    void dispose();
 }
 

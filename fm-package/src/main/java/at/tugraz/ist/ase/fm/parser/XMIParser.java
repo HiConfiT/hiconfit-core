@@ -39,7 +39,7 @@ import static com.google.common.base.Preconditions.checkState;
  */
 @Beta
 @Slf4j
-public class XMIParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser {
+public class XMIParser<F extends Feature, R extends AbstractRelationship<F>> implements FeatureModelParser<F, R> {
 
     public static final String FILE_EXTENSION = ".xmi";
 
