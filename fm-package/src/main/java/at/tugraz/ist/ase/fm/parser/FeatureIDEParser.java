@@ -16,6 +16,7 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fm.core.ast.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
@@ -145,7 +146,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
             throw new FeatureModelParserException("Couldn't parse any features in the feature model file!");
         }
 
-//        convertConstraintNodes(rootEle, fm);
+        convertConstraintNodes(rootEle);
 
         LoggerUtils.outdent();
         log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), fm);
@@ -283,102 +284,118 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
                 || node.getNodeName().equals(TAG_FEATURE));
     }
 
-//    /**
-//     * Take "rule" nodes and convert them into constraints in {@link FeatureModel}.
-//     *
-//     * @param rootEle - the root element
-//     * @param fm - a {@link FeatureModel}
-//     */
-//    private void convertConstraintNodes(Element rootEle, FeatureModel fm) throws FeatureModelParserException {
-//        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
-//        LoggerUtils.indent();
-//
-//        NodeList rules = rootEle.getElementsByTagName(TAG_CONSTRAINT);
-//
-//        for (int i = 0; i < rules.getLength(); i++) {
-//            examineARuleNode(rules.item(i), fm);
-//        }
-//
-//        LoggerUtils.outdent();
-//    }
-//
-//    /**
-//     * Examine a "rule" node to convert into a constraint
-//     *
-//     * @param node - an XML node
-//     * @param fm - a {@link FeatureModel}
-//     * @throws FeatureModelParserException - if the node is not a "rule" node
-//     */
-//    private void examineARuleNode(Node node, FeatureModel fm) throws FeatureModelParserException {
-//        try {
-//            Node n = node.getChildNodes().item(1);
-//
-//            Feature left;
-//            List<Feature> rightSideList;
-//            RelationshipType type;
-//
-//            String constraintType = n.getNodeName();
-//            switch (constraintType) {
-//                case TAG_NOT -> {
-//                    type = RelationshipType.ThreeCNF;
-//
-//                    fm.addConstraint(type, "~" + n.getChildNodes().item(1).getTextContent());
+    /**
+     * Take "rule" nodes and convert them into constraints in {@link FeatureModel}.
+     *
+     * @param rootEle - the root element
+     */
+    private void convertConstraintNodes(Element rootEle) throws FeatureModelParserException {
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
+        LoggerUtils.indent();
+
+        NodeList rules = rootEle.getElementsByTagName(TAG_CONSTRAINT);
+
+        for (int i = 0; i < rules.getLength(); i++) {
+            ASTNode formula = examineARuleNode(rules.item(i).getChildNodes().item(1));
+            if (formula.getFeatures().size() == 2
+                    && (formula instanceof OrOperator) || (formula instanceof ImpliesOperator)) {
+                formula = convertToRequiresOrExcludes(formula);
+            }
+            fm.addConstraint(constraintBuilder.buildConstraint(formula));
+        }
+
+        LoggerUtils.outdent();
+    }
+
+    /**
+     * Examine a "rule" node to convert into a constraint
+     *
+     * @param node - an XML node
+     * @throws FeatureModelParserException - if the node is not a "rule" node
+     */
+    private ASTNode examineARuleNode(Node node) throws FeatureModelParserException {
+        String constraintType = node.getNodeName();
+        ASTNode ast;
+        switch (constraintType) {
+            case TAG_VAR -> {
+                ast = constraintBuilder.buildOperand(fm.getFeature(node.getTextContent()));
+            }
+            case TAG_NOT -> {
+                ASTNode right = examineARuleNode(node.getChildNodes().item(1));
+                ast = constraintBuilder.buildNot(right);
+            }
+            case TAG_IMP -> {
+                ASTNode left = examineARuleNode(node.getChildNodes().item(1));
+                ASTNode right = examineARuleNode(node.getChildNodes().item(3));
+
+//                if (left instanceof Operand && right instanceof Operand) {
+////                    ast = constraintBuilder.buildRequires(left, right);
+//                } else {
+                    ast = constraintBuilder.buildImplies(left, right);
 //                }
-//                case TAG_IMP -> {
-//                    left = fm.getFeature(n.getChildNodes().item(1).getTextContent());
-//                    rightSideList = Collections.singletonList(fm.getFeature(n.getChildNodes().item(3).getTextContent()));
-//                    type = RelationshipType.REQUIRES;
-//
-//                    fm.addConstraint(type, left, rightSideList);
-//                }
-//                case TAG_DISJ -> {
-//                    NodeList n1 = n.getChildNodes();
-//                    List<String> clauses = new LinkedList<>();
-//
-//                    disjExplore(n1, clauses); // explore the disjunction rule
-//
-//                    if (clauses.size() == 2) {
-//                        // requires or excludes
-//                        if (clauses.get(0).startsWith("~") && clauses.get(1).startsWith("~")) { // excludes
-//                            left = fm.getFeature(clauses.get(0).substring(1));
-//                            rightSideList = Collections.singletonList(fm.getFeature(clauses.get(1).substring(1)));
-//                            type = RelationshipType.EXCLUDES;
-//                        } else { // requires
-//                            if (clauses.get(0).startsWith("~")) {
-//                                left = fm.getFeature(clauses.get(0).substring(1));
-//                                rightSideList = Collections.singletonList(fm.getFeature(clauses.get(1)));
-//                            } else {// if (clauses.get(1).startsWith("~")) {
-//                                left = fm.getFeature(clauses.get(1).substring(1));
-//                                rightSideList = Collections.singletonList(fm.getFeature(clauses.get(0)));
-//                            }
-//                            type = RelationshipType.REQUIRES;
-//                        }
-//
-//                        fm.addConstraint(type, left, rightSideList);
+            }
+            case TAG_EQ -> {
+                ASTNode left = examineARuleNode(node.getChildNodes().item(1));
+                ASTNode right = examineARuleNode(node.getChildNodes().item(3));
+                ast = constraintBuilder.buildEquivalence(left, right);
+            }
+            case TAG_DISJ -> {
+                NodeList n1 = node.getChildNodes();
+
+                if (n1.getLength() == 1) {
+                    ast = examineARuleNode(n1.item(1));
+                } else {
+                    ASTNode left = examineARuleNode(n1.item(1));
+                    ASTNode right = examineARuleNode(n1.item(3));
+
+//                    if (left instanceof NotOperator && right instanceof NotOperator
+//                        && left.getRight() instanceof Operand && right.getRight() instanceof Operand) {
+//                        ast = constraintBuilder.buildExcludes(left.getRight(), right.getRight());
 //                    } else {
-//                        // 3CNF
-//                        type = RelationshipType.ThreeCNF;
-//                        fm.addConstraint(type, String.join(" | ", clauses));
+                        ast = constraintBuilder.buildOr(left, right);
 //                    }
-//                }
-//                default -> throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
-//            }
-//        } catch (FeatureModelException e) {
-//            throw new FeatureModelParserException(e.getMessage());
-//        }
-//    }
-//
-//    private void disjExplore(NodeList nodeList, List<String> clauses) {
-//        for (int i = 0; i < nodeList.getLength(); i++) {
-//            Node n = nodeList.item(i);
-//
-//            switch (n.getNodeName()) {
-//                case TAG_DISJ -> disjExplore(n.getChildNodes(), clauses);
-//                case TAG_VAR -> clauses.add(n.getTextContent());
-//                case TAG_NOT -> clauses.add("~" + n.getChildNodes().item(1).getTextContent());
-//            }
-//        }
-//    }
+                }
+            }
+            case TAG_CONJ -> {
+                NodeList n1 = node.getChildNodes();
+
+                if (n1.getLength() == 1) {
+                    ast = examineARuleNode(n1.item(1));
+                } else {
+                    ASTNode left = examineARuleNode(n1.item(1));
+                    ASTNode right = examineARuleNode(n1.item(3));
+                    ast = constraintBuilder.buildAnd(left, right);
+                }
+            }
+            default -> throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
+        }
+        return ast;
+    }
+
+    private ASTNode convertToRequiresOrExcludes(ASTNode formula) {
+        ASTNode left = formula.getLeft();
+        ASTNode right = formula.getRight();
+
+        if (formula instanceof ImpliesOperator && left instanceof Operand && right instanceof Operand) {
+            return constraintBuilder.buildRequires(left, right);
+        }
+
+        if (formula instanceof OrOperator) {
+            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof Operand) {
+                return constraintBuilder.buildRequires(left.getRight(), right);
+            }
+
+            if (right instanceof NotOperator && right.getRight() instanceof Operand && left instanceof Operand) {
+                return constraintBuilder.buildRequires(right.getRight(), left);
+            }
+
+            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof NotOperator && right.getRight() instanceof Operand) {
+                return constraintBuilder.buildExcludes(left.getRight(), right.getRight());
+            }
+        }
+
+        return formula;
+    }
 
     public void dispose() {
         fm = null;

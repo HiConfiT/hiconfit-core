@@ -53,10 +53,10 @@ class FeatureIDEParserTest {
                 	optional(Bamboo Bike, Drop Handlebar)
                 	alternative(Frame, Female, Male, Step-through)
                 	or(Brake, Front, Rear, Back-pedal)
+                CONSTRAINTS:
+                	requires(Drop Handlebar, Male)
+                	excludes(Engine, Back-pedal)
                 """;
-//        CONSTRAINTS:
-//        requires(Drop Handlebar, Male)
-//        excludes(Engine, Back-pedal)
 
         assertAll(() -> assertNotNull(featureModel),
                 () -> assertEquals(expected, featureModel.toString()));
@@ -92,6 +92,103 @@ class FeatureIDEParserTest {
         FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
-        assertAll(() -> assertNotNull(featureModel));
+        String expected = """
+                FEATURES:
+                	root
+                	A
+                	B
+                	C
+                	A1
+                	A2
+                	B1
+                	B2
+                	C1
+                	C2
+                	C1a
+                	C1b
+                	C1c
+                RELATIONSHIPS:
+                	mandatory(root, A)
+                	optional(root, B)
+                	optional(root, C)
+                	optional(A, A1)
+                	optional(A, A2)
+                	optional(B, B1)
+                	optional(B, B2)
+                	or(C, C1, C2)
+                	alternative(C1, C1a, C1b, C1c)
+                CONSTRAINTS:
+                	requires(A1, A2)
+                	requires(A2, A1)
+                	excludes(A1, A2)
+                """;
+
+        assertAll(() -> assertNotNull(featureModel),
+                () -> assertEquals(expected, featureModel.toString()));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void test4() throws FeatureModelParserException {
+        File fileFM = new File("src/test/resources/complex_featureide_model.xml");
+        @Cleanup("dispose")
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
+        featureModel = parser.parse(fileFM);
+
+        String expected = """
+                FEATURES:
+                	test1
+                	A
+                	B
+                	C
+                	D
+                	AA
+                	AB
+                	AC
+                	AD
+                	ADA
+                	ADB
+                	BA
+                	BB
+                	BC
+                	CA
+                	CB
+                	CC
+                	DA
+                	DB
+                	DAA
+                	DAB
+                RELATIONSHIPS:
+                	mandatory(test1, A)
+                	optional(test1, B)
+                	optional(test1, C)
+                	mandatory(test1, D)
+                	mandatory(A, AA)
+                	optional(A, AB)
+                	optional(A, AC)
+                	mandatory(A, AD)
+                	or(AD, ADA, ADB)
+                	mandatory(B, BA)
+                	optional(B, BB)
+                	optional(B, BC)
+                	or(C, CA, CB, CC)
+                	alternative(D, DA, DB)
+                	or(DA, DAA, DAB)
+                CONSTRAINTS:
+                	AB -> ~CB
+                	AC -> ~CC
+                	~(ADA /\\ AB)
+                	requires(BC, ADB)
+                	BC \\/ CA -> CB
+                	DAA -> ~(AB /\\ AC)
+                	AB -> AC \\/ ~DAB
+                	DB -> ~(~AB)
+                	DB -> ~(~(~(~AC)))
+                	DAA -> AB \\/ ~AC
+                	ADA <-> BB /\\ DAB
+                """;
+
+        assertAll(() -> assertNotNull(featureModel),
+                () -> assertEquals(expected, featureModel.toString()));
     }
 }

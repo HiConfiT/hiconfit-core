@@ -445,11 +445,11 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
     }
 
     public void addRequires(@NonNull F from, @NonNull F to) {
-        addConstraint(constraintBuilder.buildRequires(from, to));
+        addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildRequires(from, to)));
     }
 
     public void addExcludes(@NonNull F from, @NonNull F to) {
-        addConstraint(constraintBuilder.buildExcludes(from, to));
+        addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildExcludes(from, to)));
     }
 
     /**
