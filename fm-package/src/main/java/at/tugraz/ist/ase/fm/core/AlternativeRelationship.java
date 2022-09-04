@@ -31,6 +31,31 @@ public class AlternativeRelationship<F extends Feature> extends AbstractRelation
     }
 
     @Override
+    public boolean isMandatory() {
+        return false;
+    }
+
+    @Override
+    public boolean isOptional() {
+        return false;
+    }
+
+    @Override
+    public boolean isAlternative() {
+        return true;
+    }
+
+    @Override
+    public boolean isOr() {
+        return false;
+    }
+
+    @Override
+    public boolean isGroup() {
+        return true;
+    }
+
+    @Override
     protected void convertToConfRule() {
         this.confRule = String.format("alternative(%s, %s)", getParent(), getChildren().stream().map(Feature::getName).collect(Collectors.joining(", ")));
     }

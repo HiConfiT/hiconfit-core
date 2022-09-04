@@ -44,18 +44,6 @@ public abstract class AbstractRelationship<F extends Feature> {
         children.forEach(child -> child.setParent(parent));
     }
 
-//    @Override
-//    public boolean equals(Object o) {
-//        if (this == o) return true;
-//        if (!(o instanceof AbstractRelationship<?> that)) return false;
-//        return Objects.equals(confRule, that.confRule);
-//    }
-//
-//    @Override
-//    public int hashCode() {
-//        return Objects.hash(confRule);
-//    }
-
     //    /**
 //     * Checks whether the relationship is optional.
 //     * @return true if the relationship is OPTIONAL or OR, false otherwise.
@@ -82,17 +70,13 @@ public abstract class AbstractRelationship<F extends Feature> {
 //        children.add(child);
 //    }
 
-    public boolean isGroup() {
-        return children.size() > 1;
-    }
-
     /**
      * Checks whether the given {@link Feature} belongs to the left part of the relationship/constraint.
      *
      * @param feature a {@link Feature}
      * @return true if yes, false otherwise.
      */
-    public boolean isParent(@NonNull F feature) {
+    public <F extends Feature> boolean isParent(@NonNull F feature) {
         return parent.equals(feature);
     }
 
@@ -102,13 +86,19 @@ public abstract class AbstractRelationship<F extends Feature> {
      * @param feature a {@link Feature}
      * @return true if yes, false otherwise.
      */
-    public boolean isChild(@NonNull F feature) {
+    public <F extends Feature> boolean isChild(@NonNull F feature) {
         return children.parallelStream().anyMatch(f -> f.equals(feature));
     }
 
-    public boolean contains(@NonNull F feature) {
+    public <F extends Feature> boolean contains(@NonNull F feature) {
         return isParent(feature) || isChild(feature);
     }
+
+    public abstract boolean isMandatory();
+    public abstract boolean isOptional();
+    public abstract boolean isAlternative();
+    public abstract boolean isOr();
+    public abstract boolean isGroup();
 
     protected abstract void convertToConfRule();
 

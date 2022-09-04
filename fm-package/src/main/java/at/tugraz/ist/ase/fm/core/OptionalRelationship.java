@@ -26,6 +26,31 @@ public class OptionalRelationship<F extends Feature> extends AbstractRelationshi
     }
 
     @Override
+    public boolean isMandatory() {
+        return false;
+    }
+
+    @Override
+    public boolean isOptional() {
+        return true;
+    }
+
+    @Override
+    public boolean isAlternative() {
+        return false;
+    }
+
+    @Override
+    public boolean isOr() {
+        return false;
+    }
+
+    @Override
+    public boolean isGroup() {
+        return false;
+    }
+
+    @Override
     protected void convertToConfRule() {
         this.confRule = String.format("optional(%s, %s)", getParent(), getChild());
     }

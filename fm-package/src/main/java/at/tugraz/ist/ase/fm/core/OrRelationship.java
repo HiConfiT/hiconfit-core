@@ -31,6 +31,31 @@ public class OrRelationship<F extends Feature> extends AbstractRelationship<F> i
     }
 
     @Override
+    public boolean isMandatory() {
+        return false;
+    }
+
+    @Override
+    public boolean isOptional() {
+        return false;
+    }
+
+    @Override
+    public boolean isAlternative() {
+        return false;
+    }
+
+    @Override
+    public boolean isOr() {
+        return true;
+    }
+
+    @Override
+    public boolean isGroup() {
+        return true;
+    }
+
+    @Override
     protected void convertToConfRule() {
         this.confRule = String.format("or(%s, %s)", getParent(), getChildren().stream().map(Feature::getName).collect(Collectors.joining(", ")));
     }

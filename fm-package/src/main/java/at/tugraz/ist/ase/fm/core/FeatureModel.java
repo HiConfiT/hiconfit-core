@@ -51,7 +51,6 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>> 
         this.relationshipBuilder = relationshipBuilder;
     }
 
-    // TODO - take a look
     public boolean hasRoot() {
         return root != null;
     }

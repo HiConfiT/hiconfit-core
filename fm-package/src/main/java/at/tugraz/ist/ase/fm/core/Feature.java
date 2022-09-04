@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -88,15 +89,24 @@ public class Feature implements Cloneable {
         return isIdDuplicate(feature.id) && isNameDuplicate(feature.name);
     }
 
-//    public boolean isMandatory() {
-//        return parent != null
-//                && parent.relationships.parallelStream().anyMatch(r -> r instanceof MandatoryRelationship<? extends Feature> && r.isChild(this));
-//    }
+    public boolean isMandatory() {
+        return parent != null
+                && parent.relationships.stream().anyMatch(r -> r.isMandatory() && r.isChild(this));
+    }
 
-    // TODO - check
-//    public boolean isOptional() {
+    public boolean isOptional() {
+        return parent != null
+                && parent.relationships.parallelStream().anyMatch(r -> r.isOptional() && r.isChild(this));
+    }
+
+//    public boolean isOrGroup() {
 //        return parent != null
-//                && parent.relationships.parallelStream().anyMatch(r -> r instanceof OptionalRelationship && r.isChild(this));
+//                && parent.relationships.parallelStream().anyMatch(r -> r.isOr() && r.isChild(this));
+//    }
+//
+//    public boolean isAlternativeGroup() {
+//        return parent != null
+//                && parent.relationships.parallelStream().anyMatch(r -> r.isAlternative() && r.isChild(this));
 //    }
 
     public boolean isLeaf() {
@@ -121,12 +131,12 @@ public class Feature implements Cloneable {
     }
 
     public List<Feature> getChildren() {
-//        return relationships.stream().flatMap(relationship -> relationship.getChildren().stream()).collect(Collectors.toCollection(LinkedList::new));
-        List<Feature> children = new LinkedList<>();
+        return relationships.parallelStream().flatMap(relationship -> relationship.getChildren().parallelStream()).collect(Collectors.toCollection(LinkedList::new));
+        /*List<Feature> children = new LinkedList<>();
         for (AbstractRelationship<? extends Feature> relationship : relationships) {
             children.addAll(relationship.getChildren());
         }
-        return children;
+        return children;*/
     }
 
     /**

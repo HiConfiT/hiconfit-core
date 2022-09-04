@@ -103,12 +103,27 @@ class FeatureTest {
                 () -> assertTrue(f.isAbstract()));
     }
 
-//    @Test
-//    void isMandatory() {
-//        assertAll(() -> assertTrue(root.isMandatory()),
-//                () -> assertFalse(f1.isMandatory()),
-//                () -> assertTrue(f2.isMandatory()));
-//    }
+    @Test
+    void isMandatory() {
+        assertAll(() -> assertFalse(root.isMandatory()),
+                () -> assertFalse(f1.isMandatory()),
+                () -> assertTrue(f2.isMandatory()),
+                () -> assertFalse(f3.isMandatory()),
+                () -> assertFalse(f4.isMandatory()),
+                () -> assertFalse(f5.isMandatory()),
+                () -> assertFalse(f6.isMandatory()));
+    }
+
+    @Test
+    void isOptional() {
+        assertAll(() -> assertFalse(root.isOptional()),
+                () -> assertTrue(f1.isOptional()),
+                () -> assertFalse(f2.isOptional()),
+                () -> assertFalse(f3.isOptional()),
+                () -> assertFalse(f4.isOptional()),
+                () -> assertFalse(f5.isOptional()),
+                () -> assertFalse(f6.isOptional()));
+    }
 
     @Test
     void setParent() {
@@ -125,10 +140,16 @@ class FeatureTest {
     void testGetChildren() {
         assertAll(() -> assertEquals(2, root.getChildren().size()),
                 () -> assertEquals(List.of(f1, f2), root.getChildren()),
+                () -> assertEquals(f1, root.getChildren().get(0)),
+                () -> assertEquals(f2, root.getChildren().get(1)),
                 () -> assertEquals(2, f1.getChildren().size()),
                 () -> assertEquals(List.of(f3, f4), f1.getChildren()),
+                () -> assertEquals(f3, f1.getChildren().get(0)),
+                () -> assertEquals(f4, f1.getChildren().get(1)),
                 () -> assertEquals(2, f2.getChildren().size()),
                 () -> assertEquals(List.of(f5, f6), f2.getChildren()),
+                () -> assertEquals(f5, f2.getChildren().get(0)),
+                () -> assertEquals(f6, f2.getChildren().get(1)),
                 () -> assertEquals(0, f3.getChildren().size()),
                 () -> assertEquals(0, f4.getChildren().size()),
                 () -> assertEquals(0, f5.getChildren().size()),
