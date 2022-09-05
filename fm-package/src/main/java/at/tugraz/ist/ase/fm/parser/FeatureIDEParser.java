@@ -317,9 +317,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
         String constraintType = node.getNodeName();
         ASTNode ast;
         switch (constraintType) {
-            case TAG_VAR -> {
-                ast = constraintBuilder.buildOperand(fm.getFeature(node.getTextContent()));
-            }
+            case TAG_VAR -> ast = constraintBuilder.buildOperand(fm.getFeature(node.getTextContent()));
             case TAG_NOT -> {
                 ASTNode right = examineARuleNode(node.getChildNodes().item(1));
                 ast = constraintBuilder.buildNot(right);
@@ -328,11 +326,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
                 ASTNode left = examineARuleNode(node.getChildNodes().item(1));
                 ASTNode right = examineARuleNode(node.getChildNodes().item(3));
 
-//                if (left instanceof Operand && right instanceof Operand) {
-////                    ast = constraintBuilder.buildRequires(left, right);
-//                } else {
-                    ast = constraintBuilder.buildImplies(left, right);
-//                }
+                ast = constraintBuilder.buildImplies(left, right);
             }
             case TAG_EQ -> {
                 ASTNode left = examineARuleNode(node.getChildNodes().item(1));
@@ -348,12 +342,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
                     ASTNode left = examineARuleNode(n1.item(1));
                     ASTNode right = examineARuleNode(n1.item(3));
 
-//                    if (left instanceof NotOperator && right instanceof NotOperator
-//                        && left.getRight() instanceof Operand && right.getRight() instanceof Operand) {
-//                        ast = constraintBuilder.buildExcludes(left.getRight(), right.getRight());
-//                    } else {
-                        ast = constraintBuilder.buildOr(left, right);
-//                    }
+                    ast = constraintBuilder.buildOr(left, right);
                 }
             }
             case TAG_CONJ -> {
@@ -402,5 +391,6 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
         rootEle = null;
         featureBuilder = null;
         relationshipBuilder = null;
+        constraintBuilder = null;
     }
 }
