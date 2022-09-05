@@ -365,31 +365,6 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
         return ast;
     }
 
-//    private ASTNode convertToRequiresOrExcludes(ASTNode formula) {
-//        ASTNode left = formula.getLeft();
-//        ASTNode right = formula.getRight();
-//
-//        if (formula instanceof ImpliesOperator && left instanceof Operand && right instanceof Operand) {
-//            return constraintBuilder.buildRequires(left, right);
-//        }
-//
-//        if (formula instanceof OrOperator) {
-//            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof Operand) {
-//                return constraintBuilder.buildRequires(left.getRight(), right);
-//            }
-//
-//            if (right instanceof NotOperator && right.getRight() instanceof Operand && left instanceof Operand) {
-//                return constraintBuilder.buildRequires(right.getRight(), left);
-//            }
-//
-//            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof NotOperator && right.getRight() instanceof Operand) {
-//                return constraintBuilder.buildExcludes(left.getRight(), right.getRight());
-//            }
-//        }
-//
-//        return formula;
-//    }
-
     public void dispose() {
         fm = null;
         rootEle = null;

@@ -273,8 +273,8 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
                 String leftFeatureID = (((JSONObject) operands.get(0)).getJSONArray(KEY_OPERANDS)).get(0).toString();
                 String rightFeatureID = (((JSONObject) operands.get(1)).getJSONArray(KEY_OPERANDS)).get(0).toString();
 
-                Feature left = fm.getFeature(leftFeatureID);
-                Feature right = fm.getFeature(rightFeatureID);
+                F left = fm.getFeature(leftFeatureID);
+                F right = fm.getFeature(rightFeatureID);
 
                 String constraintType = constraint.getString(KEY_TYPE);
                 if (constraintType.equals(TYPE_EXCLUDES)) {

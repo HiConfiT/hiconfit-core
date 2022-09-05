@@ -38,6 +38,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 /**
  * A parser for the XMI format (a format of v.control)
+ * <p>
+ * Supports only requires and excludes constraints
  */
 @Beta
 @Slf4j
@@ -147,7 +149,7 @@ public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C e
             throw new FeatureModelParserException("Couldn't parse any features in the feature model file!");
         }
 
-//            convertConstraintsNodes();
+        convertConstraintsNodes();
 
         LoggerUtils.outdent();
         log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), fm);
@@ -283,62 +285,59 @@ public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C e
                 || node.getNodeName().equals(TAG_CHILDREN));
     }
 
-//    /**
-//     * Take "constraints" nodes and convert them into constraints in {@link FeatureModel}.
-//     *
-//     * @param rootEle - the root element
-//     * @throws FeatureModelParserException - if there exists errors in the feature model file
-//     */
-//    private void convertConstraintsNodes(Element rootEle) throws FeatureModelParserException {
-//        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
-//        LoggerUtils.indent();
-//
-//        NodeList constraints = rootEle.getElementsByTagName(TAG_CONSTRAINT);
-//
-//        for (int i = 0; i < constraints.getLength(); i++) {
-//            examineAConstraintsNode(constraints.item(i), fm);
-//        }
-//
-//        LoggerUtils.outdent();
-//    }
-//
-//    /**
-//     * Examine a "rule" node to convert into a constraint
-//     *
-//     * @param node - an XML node
-//     * @throws FeatureModelParserException - if there exists errors in the feature model file
-//     */
-//    private void examineAConstraintsNode(Node node) throws FeatureModelParserException {
-//        try {
-//            Node n = node.getChildNodes().item(1);
-//            Element ele = (Element) n;
-//
-//            Element leftOperand = (Element) (n.getChildNodes().item(1));
-//            Element rightOperand = (Element) (n.getChildNodes().item(3));
-//
-//            F left = fm.getFeature(leftOperand.getAttribute(ATTRIB_ELEMENT));
-//            List<F> rightSideList = Collections.singletonList(fm.getFeature(rightOperand.getAttribute(ATTRIB_ELEMENT)));
-//
-//            RelationshipType type;
-//            String constraintType = ele.getAttribute(ATTRIB_TYPE);
-//            if (constraintType.equals(TYPE_IMPLY)) {
-//                type = RelationshipType.REQUIRES;
-//            } else if (constraintType.equals(TYPE_EXCLUDES)) {
-//                type = RelationshipType.EXCLUDES;
-//            } else {
-//                throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
-//            }
-//
-//            fm.addConstraint(type, left, rightSideList);
-//        } catch (Exception e) {
-//            throw new FeatureModelParserException(e.getMessage());
-//        }
-//    }
+    /**
+     * Take "constraints" nodes and convert them into constraints in {@link FeatureModel}.
+     *
+     * @throws FeatureModelParserException - if there exists errors in the feature model file
+     */
+    private void convertConstraintsNodes() throws FeatureModelParserException {
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
+        LoggerUtils.indent();
+
+        NodeList constraints = rootEle.getElementsByTagName(TAG_CONSTRAINT);
+
+        for (int i = 0; i < constraints.getLength(); i++) {
+            examineAConstraintsNode(constraints.item(i));
+        }
+
+        LoggerUtils.outdent();
+    }
+
+    /**
+     * Examine a "rule" node to convert into a constraint
+     *
+     * @param node - an XML node
+     * @throws FeatureModelParserException - if there exists errors in the feature model file
+     */
+    private void examineAConstraintsNode(Node node) throws FeatureModelParserException {
+        try {
+            Node n = node.getChildNodes().item(1);
+            Element ele = (Element) n;
+
+            Element leftOperand = (Element) (n.getChildNodes().item(1));
+            Element rightOperand = (Element) (n.getChildNodes().item(3));
+
+            F left = fm.getFeature(leftOperand.getAttribute(ATTRIB_ELEMENT));
+            F right = fm.getFeature(rightOperand.getAttribute(ATTRIB_ELEMENT));
+
+            String constraintType = ele.getAttribute(ATTRIB_TYPE);
+            if (constraintType.equals(TYPE_IMPLIES)) {
+                fm.addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildRequires(left, right)));
+            } else if (constraintType.equals(TYPE_EXCLUDES)) {
+                fm.addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildExcludes(left, right)));
+            } else {
+                throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
+            }
+        } catch (Exception e) {
+            throw new FeatureModelParserException(e.getMessage());
+        }
+    }
 
     public void dispose() {
         fm = null;
         rootEle = null;
         featureBuilder = null;
         relationshipBuilder = null;
+        constraintBuilder = null;
     }
 }
