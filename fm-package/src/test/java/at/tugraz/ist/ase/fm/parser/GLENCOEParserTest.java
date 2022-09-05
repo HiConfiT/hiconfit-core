@@ -53,10 +53,11 @@ class GLENCOEParserTest {
                 	optional(Bamboo Bike, Drop Handlebar)
                 	alternative(Frame, Female, Male, Step-through)
                 	or(Brake, Front, Rear, Back-pedal)
+                CONSTRAINTS:
+                	excludes(Engine, Back-pedal)
+                	requires(Drop Handlebar, Male)
                 """;
-//        CONSTRAINTS:
-//        requires(Drop Handlebar, Male)
-//        excludes(Engine, Back-pedal)
+
 
         assertAll(() -> assertNotNull(featureModel),
                 () -> assertEquals(expected, featureModel.toString()));

@@ -16,6 +16,7 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fm.core.ast.ASTNode;
 import com.google.common.annotations.Beta;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 /**
  * A parser for the Glencoe format
+ * <p>
+ * Supports only requires and excludes constraints
  */
 @Beta
 @Slf4j
@@ -135,7 +138,7 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
             throw new FeatureModelParserException("Couldn't parse any features in the feature model file!");
         }
 
-//            convertConstraints(constraints, features);
+        convertConstraints(constraints);
 
         LoggerUtils.outdent();
         log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), fm);
@@ -237,62 +240,62 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
         }
     }
 
-//    /**
-//     * Iterate objects in a {@link JSONObject} of the key "constraints" to
-//     * take constraints for a {@link FeatureModel}.
-//     *
-//     * @param constraints - a {@link JSONObject} of the key "constraints"
-//     * @param features - a {@link JSONObject} of the key "features"
-//     * @param fm - a {@link FeatureModel}
-//     */
-//    private void convertConstraints(JSONObject constraints, JSONObject features, FeatureModel fm) throws FeatureModelParserException {
-//        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
-//        LoggerUtils.indent();
-//
-//        for (Iterator<String> it = constraints.keys(); it.hasNext(); ) {
-//            String key = it.next();
-//
-//            examineAConstraintNode(constraints.getJSONObject(key), fm);
-//        }
-//
-//        LoggerUtils.outdent();
-//    }
-//
-//    /**
-//     * Examine a constraint that belongs to the value of the key "constraints"
-//     * to convert it into a constraint in the {@link FeatureModel}.
-//     *
-//     * @param constraint - a constraint of the key "constraints"
-//     * @param fm - a {@link FeatureModel}
-//     * @throws FeatureModelParserException - if there exists errors in the
-//     */
-//    private void examineAConstraintNode(JSONObject constraint, FeatureModel fm) throws FeatureModelParserException {
-//        try {
-//            if (constraint.has(KEY_TYPE)) {
-//                JSONArray operands = constraint.getJSONArray(KEY_OPERANDS);
-//
-//                String leftFeatureID = (((JSONObject) operands.get(0)).getJSONArray(KEY_OPERANDS)).get(0).toString();
-//                String rightFeatureID = (((JSONObject) operands.get(1)).getJSONArray(KEY_OPERANDS)).get(0).toString();
-//
-//                Feature left = fm.getFeature(leftFeatureID);
-//                List<Feature> rightSideList = Collections.singletonList(fm.getFeature(rightFeatureID));
-//
-//                RelationshipType type;
-//                String constraintType = constraint.getString(KEY_TYPE);
-//                if (constraintType.equals(TYPE_EXCLUDES)) {
-//                    type = RelationshipType.EXCLUDES;
-//                } else if (constraintType.equals(TYPE_IMPLY)) {
-//                    type = RelationshipType.REQUIRES;
-//                } else {
-//                    throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
-//                }
-//
-//                fm.addConstraint(type, left, rightSideList);
-//            }
-//        } catch (Exception e) {
-//            throw new FeatureModelParserException(e.getMessage());
-//        }
-//    }
+    /**
+     * Iterate objects in a {@link JSONObject} of the key "constraints" to
+     * take constraints for a {@link FeatureModel}.
+     *
+     * @param constraints - a {@link JSONObject} of the key "constraints"
+     */
+    private void convertConstraints(JSONObject constraints) throws FeatureModelParserException {
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
+        LoggerUtils.indent();
+
+        for (Iterator<String> it = constraints.keys(); it.hasNext(); ) {
+            String key = it.next();
+
+            examineAConstraintNode(constraints.getJSONObject(key));
+        }
+
+        LoggerUtils.outdent();
+    }
+
+    /**
+     * Examine a constraint that belongs to the value of the key "constraints"
+     * to convert it into a constraint in the {@link FeatureModel}.
+     *
+     * @param constraint - a constraint of the key "constraints"
+     * @throws FeatureModelParserException - if there exists errors in the
+     */
+    private void examineAConstraintNode(JSONObject constraint) throws FeatureModelParserException {
+        try {
+            if (constraint.has(KEY_TYPE)) {
+                JSONArray operands = constraint.getJSONArray(KEY_OPERANDS);
+
+                String leftFeatureID = (((JSONObject) operands.get(0)).getJSONArray(KEY_OPERANDS)).get(0).toString();
+                String rightFeatureID = (((JSONObject) operands.get(1)).getJSONArray(KEY_OPERANDS)).get(0).toString();
+
+                Feature left = fm.getFeature(leftFeatureID);
+                Feature right = fm.getFeature(rightFeatureID);
+
+                String constraintType = constraint.getString(KEY_TYPE);
+                if (constraintType.equals(TYPE_EXCLUDES)) {
+
+                    ASTNode formula = constraintBuilder.buildExcludes(left, right);
+
+                    fm.addConstraint(constraintBuilder.buildConstraint(formula));
+                } else if (constraintType.equals(TYPE_IMPLY)) {
+
+                    ASTNode formula = constraintBuilder.buildRequires(left, right);
+
+                    fm.addConstraint(constraintBuilder.buildConstraint(formula));
+                } else {
+                    throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
+                }
+            }
+        } catch (Exception e) {
+            throw new FeatureModelParserException(e.getMessage());
+        }
+    }
 
     /**
      * Find a feature JSON Object based on its id.
@@ -342,5 +345,6 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
         tree = null;
         featureBuilder = null;
         relationshipBuilder = null;
+        constraintBuilder = null;
     }
 }

@@ -40,6 +40,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * A parser for the descriptive format
+ * <p>
+ * Supports only requires and excludes constraints
  */
 @Beta
 @Slf4j

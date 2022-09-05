@@ -38,6 +38,8 @@ import static com.google.common.base.Preconditions.checkState;
 
 /**
  * A parser for the FeatureIDE format
+ * <p>
+ * Supports arbitrary constraints
  */
 @Slf4j
 public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> implements FeatureModelParser<F, R, C> {
