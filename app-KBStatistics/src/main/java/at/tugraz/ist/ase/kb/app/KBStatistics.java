@@ -8,12 +8,15 @@
 
 package at.tugraz.ist.ase.kb.app;
 
-import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.RelationshipType;
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
+import at.tugraz.ist.ase.fm.core.*;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
 import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
 import at.tugraz.ist.ase.kb.app.cli.KBStatistics_CmdLineOptions;
 import at.tugraz.ist.ase.kb.camera.CameraKB;
 import at.tugraz.ist.ase.kb.core.KB;
@@ -163,10 +166,15 @@ public class KBStatistics {
     private void processFM(BufferedWriter writer, int counter, File file) throws IOException, FeatureModelParserException {
         System.out.println("\nCalculating statistics for " + file.getName() + "...");
 
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(file.getName());
+        FeatureBuilder featureBuilder = new FeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        RelationshipBuilder relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        ConstraintBuilder constraintBuilder = new ConstraintBuilder(ruleTranslator);
 
-        FeatureModel fm = parser.parse(file);
-        FMKB fmkb = new FMKB(fm, false);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder).getParser(file.getName());
+
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm = parser.parse(file);
+        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> fmkb = new FMKB<>(fm, false);
 
         System.out.println("Saving statistics to " + options.getOutFile() + "...");
         saveFMStatistics(writer, counter, fmkb, fm);
@@ -190,7 +198,9 @@ public class KBStatistics {
         writer.flush();
     }
 
-    private void saveFMStatistics(BufferedWriter writer, int counter, KB kb, FeatureModel fm) throws IOException {
+    @SuppressWarnings("unchecked")
+    private void saveFMStatistics(BufferedWriter writer, int counter, KB kb,
+                                  FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm) throws IOException {
         double ctc = (double)fm.getNumOfConstraints() / kb.getNumConstraints();
 
         saveStatistics(writer, counter, kb);
@@ -200,12 +210,12 @@ public class KBStatistics {
         writer.write("#features: " + fm.getNumOfFeatures() + "\n");
         writer.write("#relationships: " + fm.getNumOfRelationships() + "\n");
         writer.write("#constraints: " + fm.getNumOfConstraints() + "\n");
-        writer.write("#MANDATORY: " + fm.getNumOfRelationships(RelationshipType.MANDATORY) + "\n");
-        writer.write("#OPTIONAL: " + fm.getNumOfRelationships(RelationshipType.OPTIONAL) + "\n");
-        writer.write("#ALTERNATIVE: " + fm.getNumOfRelationships(RelationshipType.ALTERNATIVE) + "\n");
-        writer.write("#OR: " + fm.getNumOfRelationships(RelationshipType.OR) + "\n");
-        writer.write("#REQUIRES: " + fm.getNumOfRelationships(RelationshipType.REQUIRES) + "\n");
-        writer.write("#EXCLUDES: " + fm.getNumOfRelationships(RelationshipType.EXCLUDES) + "\n");
+        writer.write("#MANDATORY: " + fm.getNumOfRelationships(MandatoryRelationship.class) + "\n");
+        writer.write("#OPTIONAL: " + fm.getNumOfRelationships(OptionalRelationship.class) + "\n");
+        writer.write("#ALTERNATIVE: " + fm.getNumOfRelationships(AlternativeRelationship.class) + "\n");
+        writer.write("#OR: " + fm.getNumOfRelationships(OrRelationship.class) + "\n");
+        writer.write("#REQUIRES: " + fm.getNumOfRequires() + "\n");
+        writer.write("#EXCLUDES: " + fm.getNumOfExcludes() + "\n");
 
         writer.flush();
     }
