@@ -212,16 +212,6 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
         }
     }
 
-//    private void addConstraint(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) throws FeatureModelException {
-//        Feature leftSide = fm.getFeature(ids.get(0).getText());
-//        List<Feature> rightSide = new LinkedList<>();
-//        for (int i = 1; i < ids.size(); i++) {
-//            rightSide.add(fm.getFeature(ids.get(i).getText()));
-//        }
-//
-//        fm.addConstraint(type, leftSide, rightSide);
-//    }
-
     private F getParent(List<FM4ConfParser.IdentifierContext> ids) {
         F parent = null;
         if (ids.size() > 1) {

@@ -8,11 +8,11 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.Builder;
 import lombok.NonNull;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -24,8 +24,8 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class AlternativeRelationship<F extends Feature> extends AbstractRelationship<F> implements Cloneable {
 
     @Builder
-    public AlternativeRelationship(@NonNull F from, @NonNull List<F> to) {
-        super(from, to);
+    public AlternativeRelationship(@NonNull F from, @NonNull List<F> to, @NonNull IConfRuleTranslatable translator) {
+        super(from, to, translator);
 
         checkArgument(to.size() >= 1, "Alternative relationship's children must have more than one feature");
     }
@@ -56,12 +56,7 @@ public class AlternativeRelationship<F extends Feature> extends AbstractRelation
     }
 
     @Override
-    protected void convertToConfRule() {
-        this.confRule = String.format("alternative(%s, %s)", getParent(), getChildren().stream().map(Feature::getName).collect(Collectors.joining(", ")));
-    }
-
-    @Override
     public AlternativeRelationship<F> clone() {
-        return new AlternativeRelationship<>(getParent(), getChildren());
+        return new AlternativeRelationship<>(getParent(), getChildren(), confRuleTranslator);
     }
 }

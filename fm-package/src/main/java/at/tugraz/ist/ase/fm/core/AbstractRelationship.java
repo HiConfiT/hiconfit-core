@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -30,13 +31,16 @@ public abstract class AbstractRelationship<F extends Feature> {
     protected List<F> children = new LinkedList<>();
 
     @EqualsAndHashCode.Include
-    protected String confRule = null;
+    protected String confRule;
 
-    public AbstractRelationship(@NonNull F from, @NonNull Collection<F> to) {
+    protected IConfRuleTranslatable confRuleTranslator;
+
+    public AbstractRelationship(@NonNull F from, @NonNull Collection<F> to, @NonNull IConfRuleTranslatable confRuleTranslator) {
         this.parent = from;
         this.children.addAll(to);
+        this.confRuleTranslator = confRuleTranslator;
 
-        convertToConfRule();
+        this.confRule = confRuleTranslator.translate(this);
     }
 
     public void makeConnectionBetweenParentAndChildren() {
@@ -100,13 +104,8 @@ public abstract class AbstractRelationship<F extends Feature> {
     public abstract boolean isOr();
     public abstract boolean isGroup();
 
-    protected abstract void convertToConfRule();
-
     @Override
     public String toString() {
-        if (confRule == null) {
-            convertToConfRule();
-        }
         return confRule;
     }
 

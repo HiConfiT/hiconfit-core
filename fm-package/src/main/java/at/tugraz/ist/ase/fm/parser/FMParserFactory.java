@@ -11,9 +11,12 @@ package at.tugraz.ist.ase.fm.parser;
 import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
 import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import lombok.NonNull;
 
-public class FMParserFactory {
+public class FMParserFactory<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> {
 
     private IFeatureBuildable featureBuilder;
     private IRelationshipBuildable relationshipBuilder;
@@ -27,13 +30,13 @@ public class FMParserFactory {
         this.constraintBuilder = constraintBuilder;
     }
 
-    public static FMParserFactory getInstance(@NonNull IFeatureBuildable featureBuilder,
+    public static <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> FMParserFactory<F, R, C> getInstance(@NonNull IFeatureBuildable featureBuilder,
                                               @NonNull IRelationshipBuildable relationshipBuilder,
                                               @NonNull IConstraintBuildable constraintBuilder) {
-        return new FMParserFactory(featureBuilder, relationshipBuilder, constraintBuilder);
+        return new FMParserFactory<F, R, C>(featureBuilder, relationshipBuilder, constraintBuilder);
     }
 
-    public FeatureModelParser getParser(@NonNull FMFormat fmFormat) {
+    public FeatureModelParser<F, R, C> getParser(@NonNull FMFormat fmFormat) {
         return switch (fmFormat) {
             case SXFM -> new SXFMParser<>(featureBuilder, relationshipBuilder, constraintBuilder);
             case FEATUREIDE -> new FeatureIDEParser<>(featureBuilder, relationshipBuilder, constraintBuilder);
@@ -44,7 +47,7 @@ public class FMParserFactory {
         };
     }
 
-    public FeatureModelParser getParser(@NonNull String filename) {
+    public FeatureModelParser<F, R, C> getParser(@NonNull String filename) {
         return getParser(FMFormat.getFMFormat(filename));
     }
 }

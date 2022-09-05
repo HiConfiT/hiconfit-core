@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.Builder;
 import lombok.NonNull;
 
@@ -21,8 +22,8 @@ import java.util.Collections;
 public class OptionalRelationship<F extends Feature> extends AbstractRelationship<F> implements Cloneable {
 
     @Builder
-    public OptionalRelationship(@NonNull F from, @NonNull F to) {
-        super(from, Collections.singletonList(to));
+    public OptionalRelationship(@NonNull F from, @NonNull F to, @NonNull IConfRuleTranslatable translator) {
+        super(from, Collections.singletonList(to), translator);
     }
 
     @Override
@@ -51,12 +52,7 @@ public class OptionalRelationship<F extends Feature> extends AbstractRelationshi
     }
 
     @Override
-    protected void convertToConfRule() {
-        this.confRule = String.format("optional(%s, %s)", getParent(), getChild());
-    }
-
-    @Override
     public OptionalRelationship<F> clone() {
-        return new OptionalRelationship<>(getParent(), getChild());
+        return new OptionalRelationship<>(getParent(), getChild(), confRuleTranslator);
     }
 }

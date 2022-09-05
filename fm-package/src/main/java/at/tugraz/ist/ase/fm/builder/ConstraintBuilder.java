@@ -13,13 +13,20 @@ import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.ast.ASTBuilder;
 import at.tugraz.ist.ase.fm.core.ast.ASTNode;
 import at.tugraz.ist.ase.fm.core.ast.Operand;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.NonNull;
 
 public class ConstraintBuilder implements IConstraintBuildable {
 
+    private final IConfRuleTranslatable translator;
+
+    public ConstraintBuilder(@NonNull IConfRuleTranslatable translator) {
+        this.translator = translator;
+    }
+
     @SuppressWarnings("unchecked")
     public <C extends CTConstraint> C buildConstraint(@NonNull ASTNode formula) {
-        return (C) new CTConstraint(formula);
+        return (C) new CTConstraint(formula, translator);
     }
 
     public <F extends Feature> ASTNode buildOperand(@NonNull F operand) {

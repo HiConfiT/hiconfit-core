@@ -15,6 +15,8 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
@@ -26,11 +28,11 @@ class GLENCOEParserTest {
     static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
 
     @Test
-    @SuppressWarnings("unchecked")
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike.gfm.json");
+        IConfRuleTranslatable translator = new ConfRuleTranslator();
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """

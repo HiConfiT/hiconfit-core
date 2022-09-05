@@ -12,6 +12,8 @@ import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.fm.core.anomaly.AnomalyAwareFeatureBuilder;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -31,9 +33,11 @@ class AnomalyAwareFeatureModelTest {
     static AnomalyAwareFeature multiplechoice;
     static AnomalyAwareFeature singlechoice;
 
+    static IConfRuleTranslatable translator = new ConfRuleTranslator();
+
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>("test", new AnomalyAwareFeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
+        fm = new FeatureModel<>("test", new AnomalyAwareFeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator));
         root = fm.addRoot("survey", "survey");
         // the order of adding features should be breadth-first
         pay = fm.addFeature("pay", "pay");

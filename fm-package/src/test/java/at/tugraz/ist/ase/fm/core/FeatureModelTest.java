@@ -12,6 +12,8 @@ import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
 import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -32,11 +34,12 @@ public class FeatureModelTest {
     static Feature singlechoice;
 
     static IConstraintBuildable constraintBuilder;
+    static IConfRuleTranslatable translator = new ConfRuleTranslator();
 
     @BeforeAll
     static void setUp() {
-        constraintBuilder = new ConstraintBuilder();
-        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), constraintBuilder);
+        constraintBuilder = new ConstraintBuilder(translator);
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(translator), constraintBuilder);
 
         root = fm.addRoot("survey", "survey");
         // the order of adding features should be breadth-first
@@ -64,13 +67,13 @@ public class FeatureModelTest {
 
     @Test
     void testAddFeatureWithoutRoot() {
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator));
         assertThrows(IllegalStateException.class, () -> anotherFM.addFeature("feature", "feature"));
     }
 
     @Test
     void testAddRootWhenOnceAlreadyExist() {
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> anotherFM = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator));
         anotherFM.addRoot("survey", "survey");
         assertThrows(IllegalArgumentException.class, () -> anotherFM.addRoot("feature", "feature"));
     }

@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.fm.core;
 
 import at.tugraz.ist.ase.fm.core.ast.ASTNode;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -27,9 +28,12 @@ public class CTConstraint implements Cloneable {
     protected String constraint;
     protected ASTNode formula;
 
-    public CTConstraint(@NonNull ASTNode formula) {
+    protected IConfRuleTranslatable translator;
+
+    public CTConstraint(@NonNull ASTNode formula, @NonNull IConfRuleTranslatable translator) {
         this.formula = formula;
-        this.constraint = formula.toString();
+        this.translator = translator;
+        this.constraint = translator.translate(formula);
     }
 
     /**

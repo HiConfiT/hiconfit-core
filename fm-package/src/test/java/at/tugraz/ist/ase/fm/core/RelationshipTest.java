@@ -8,6 +8,8 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -22,9 +24,6 @@ class RelationshipTest {
     static AbstractRelationship<Feature> mandatoryRelationship;
     static AbstractRelationship<Feature> orRelationship;
     static AbstractRelationship<Feature> alternativeRelationship;
-//    static AbstractRelationship requiresRelationship;
-//    static AbstractRelationship excludesRelationship;
-//    static AbstractRelationship specialRelationship;
     static Feature root;
     static Feature f1;
     static Feature f2;
@@ -32,6 +31,8 @@ class RelationshipTest {
     static Feature f4;
     static Feature f5;
     static Feature f6;
+
+    static IConfRuleTranslatable translator = new ConfRuleTranslator();
 
     @BeforeAll
     static void setUp() {
@@ -43,21 +44,12 @@ class RelationshipTest {
         f5 = new Feature("F5", "ID5");
         f6 = new Feature("F6", "ID6");
 
-        optionalRelationship = new OptionalRelationship<>(root, f1);
-        mandatoryRelationship = new MandatoryRelationship<>(root, f2);
+        optionalRelationship = new OptionalRelationship<>(root, f1, translator);
+        mandatoryRelationship = new MandatoryRelationship<>(root, f2, translator);
 
-        orRelationship = new OrRelationship<>(f1, List.of(f3, f4));
+        orRelationship = new OrRelationship<>(f1, List.of(f3, f4), translator);
 
-        alternativeRelationship = new AlternativeRelationship<>(f2, List.of(f5, f6));
-
-//        requiresRelationship = new BasicRelationship(RelationshipType.REQUIRES,
-//                f1,
-//                Collections.singletonList(f2));
-//        excludesRelationship = new BasicRelationship(RelationshipType.EXCLUDES,
-//                f1,
-//                Collections.singletonList(f2));
-//        specialRelationship = new ThreeCNFConstraint(RelationshipType.ThreeCNF,
-//                "~F1 | F2");
+        alternativeRelationship = new AlternativeRelationship<>(f2, List.of(f5, f6), translator);
     }
 
     @Test
@@ -78,16 +70,13 @@ class RelationshipTest {
                 () -> assertEquals("mandatory(root, F2)", mandatoryRelationship.toString()),
                 () -> assertEquals("or(F1, F3, F4)", orRelationship.toString()),
                 () -> assertEquals("alternative(F2, F5, F6)", alternativeRelationship.toString())
-//                () -> assertEquals("requires(F1, F2)", requiresRelationship.getConfRule()),
-//                () -> assertEquals("excludes(F1, F2)", excludesRelationship.getConfRule()),
-//                () -> assertEquals("3cnf(~F1, F2)", specialRelationship.getConfRule())
         );
     }
 
     @Test
     void testExceptions() {
-        assertThrows(IllegalArgumentException.class, () -> new OrRelationship<>(root, Collections.emptyList()));
-        assertThrows(IllegalArgumentException.class, () -> new AlternativeRelationship<>(root, Collections.emptyList()));
+        assertThrows(IllegalArgumentException.class, () -> new OrRelationship<>(root, Collections.emptyList(), translator));
+        assertThrows(IllegalArgumentException.class, () -> new AlternativeRelationship<>(root, Collections.emptyList(), translator));
     }
 
 //    @Test
@@ -148,20 +137,24 @@ class RelationshipTest {
         AbstractRelationship<Feature> optionalRelationship = OptionalRelationship.builder()
                 .from(root)
                 .to(f1)
+                .translator(translator)
                 .build();
         AbstractRelationship<Feature> mandatoryRelationship = MandatoryRelationship.builder()
                 .from(root)
                 .to(f2)
+                .translator(translator)
                 .build();
 
         AbstractRelationship<Feature> orRelationship = OrRelationship.builder()
                 .from(f1)
                 .to(List.of(f3, f4))
+                .translator(translator)
                 .build();
 
         AbstractRelationship<Feature> alternativeRelationship = AlternativeRelationship.builder()
                 .from(f2)
                 .to(List.of(f5, f6))
+                .translator(translator)
                 .build();
 
         assertAll(() -> assertEquals("optional(root, F11)", optionalRelationship.toString()),

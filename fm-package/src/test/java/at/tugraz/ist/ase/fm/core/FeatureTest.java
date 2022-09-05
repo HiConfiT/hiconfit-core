@@ -11,6 +11,8 @@ package at.tugraz.ist.ase.fm.core;
 import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -29,9 +31,11 @@ class FeatureTest {
     static Feature f5;
     static Feature f6;
 
+    static IConfRuleTranslatable translator = new ConfRuleTranslator();
+
     @BeforeAll
     static void setUp() {
-        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder());
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator));
         root = fm.addRoot("root", "root");
         f1 = fm.addFeature("F1", "ID1");
         f2 = fm.addFeature("F2", "ID2");

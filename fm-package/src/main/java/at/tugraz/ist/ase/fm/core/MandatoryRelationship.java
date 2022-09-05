@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.fm.core;
 
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.Builder;
 import lombok.NonNull;
 
@@ -21,8 +22,8 @@ import java.util.Collections;
 public class MandatoryRelationship<F extends Feature> extends AbstractRelationship<F> implements Cloneable {
 
     @Builder
-    public MandatoryRelationship(@NonNull F from, @NonNull F to) {
-        super(from, Collections.singletonList(to));
+    public MandatoryRelationship(@NonNull F from, @NonNull F to, @NonNull IConfRuleTranslatable translator) {
+        super(from, Collections.singletonList(to), translator);
     }
 
     @Override
@@ -51,12 +52,7 @@ public class MandatoryRelationship<F extends Feature> extends AbstractRelationsh
     }
 
     @Override
-    protected void convertToConfRule() {
-        this.confRule = String.format("mandatory(%s, %s)", getParent(), getChild());
-    }
-
-    @Override
     public MandatoryRelationship<F> clone() {
-        return new MandatoryRelationship<>(getParent(), getChild());
+        return new MandatoryRelationship<>(getParent(), getChild(), confRuleTranslator);
     }
 }

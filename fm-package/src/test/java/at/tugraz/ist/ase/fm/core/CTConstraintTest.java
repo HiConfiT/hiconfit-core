@@ -13,6 +13,8 @@ import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
 import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.ast.ASTNode;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -34,10 +36,12 @@ class CTConstraintTest {
 
     static IConstraintBuildable constraintBuilder;
 
+    static IConfRuleTranslatable translator = new ConfRuleTranslator();
+
     @BeforeAll
     static void setUp() {
-        constraintBuilder = new ConstraintBuilder();
-        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(), constraintBuilder);
+        constraintBuilder = new ConstraintBuilder(translator);
+        fm = new FeatureModel<>("test", new FeatureBuilder(), new RelationshipBuilder(translator), constraintBuilder);
 
         root = fm.addRoot("survey", "survey");
         // the order of adding features should be breadth-first
@@ -65,13 +69,13 @@ class CTConstraintTest {
         ASTNode ast2 = constraintBuilder.buildExcludes(ABtesting, nonlicense);
         ASTNode ast3 = constraintBuilder.buildRequires(ABtesting, root);
 
-        CTConstraint c1 = new CTConstraint(ast1);
+        CTConstraint c1 = new CTConstraint(ast1, translator);
         assertEquals("requires(ABtesting, statistics)", c1.toString());
 
-        CTConstraint c2 = new CTConstraint(ast2);
+        CTConstraint c2 = new CTConstraint(ast2, translator);
         assertEquals("excludes(ABtesting, nonlicense)", c2.toString());
 
-        CTConstraint c3 = new CTConstraint(ast3);
+        CTConstraint c3 = new CTConstraint(ast3, translator);
         assertEquals("requires(ABtesting, survey)", c3.toString());
 
         assertEquals(List.of(ABtesting, statistics), c1.getFeatures());
@@ -84,7 +88,7 @@ class CTConstraintTest {
         ASTNode ast1 = constraintBuilder.buildNot(ABtesting);
         ASTNode ast2 = constraintBuilder.buildOr(ast1, statistics);
 
-        CTConstraint c1 = new CTConstraint(ast2);
+        CTConstraint c1 = new CTConstraint(ast2, translator);
         assertEquals("~ABtesting \\/ statistics", c1.toString());
 
         assertEquals(List.of(ABtesting, statistics), c1.getFeatures());
@@ -96,7 +100,7 @@ class CTConstraintTest {
         ASTNode ast2 = constraintBuilder.buildOr(ast1, statistics);
         ASTNode ast3 = constraintBuilder.buildOr(ast2, singlechoice);
 
-        CTConstraint c1 = new CTConstraint(ast3);
+        CTConstraint c1 = new CTConstraint(ast3, translator);
         assertEquals("~ABtesting \\/ statistics \\/ singlechoice", c1.toString());
 
         assertEquals(List.of(ABtesting, statistics, singlechoice), c1.getFeatures());
@@ -118,7 +122,7 @@ class CTConstraintTest {
         ASTNode ast1 = constraintBuilder.buildNot(ABtesting);
         ASTNode ast2 = constraintBuilder.buildImplies(pay, ast1);
 
-        CTConstraint c1 = new CTConstraint(ast2);
+        CTConstraint c1 = new CTConstraint(ast2, translator);
         assertEquals("pay -> ~ABtesting", c1.toString());
 
         assertEquals(List.of(pay, ABtesting), c1.getFeatures());
@@ -140,7 +144,7 @@ class CTConstraintTest {
         ASTNode ast1 = constraintBuilder.buildAnd(ABtesting, pay);
         ASTNode ast2 = constraintBuilder.buildNot(ast1);
 
-        CTConstraint c1 = new CTConstraint(ast2);
+        CTConstraint c1 = new CTConstraint(ast2, translator);
         assertEquals("~(ABtesting /\\ pay)", c1.toString());
 
         assertEquals(List.of(ABtesting, pay), c1.getFeatures());
@@ -162,7 +166,7 @@ class CTConstraintTest {
         ASTNode ast1 = constraintBuilder.buildNot(ABtesting);
         ASTNode ast2 = constraintBuilder.buildOr(pay, ast1);
 
-        CTConstraint c1 = new CTConstraint(ast2);
+        CTConstraint c1 = new CTConstraint(ast2, translator);
         assertEquals("pay \\/ ~ABtesting", c1.toString());
 
         assertEquals(List.of(pay, ABtesting), c1.getFeatures());
@@ -188,7 +192,7 @@ class CTConstraintTest {
         ASTNode ast2 = constraintBuilder.buildNot(ast1);
         ASTNode ast3 = constraintBuilder.buildImplies(qa, ast2);
 
-        CTConstraint c1 = new CTConstraint(ast3);
+        CTConstraint c1 = new CTConstraint(ast3, translator);
         assertEquals("qa -> ~(ABtesting /\\ pay)", c1.toString());
 
         assertEquals(List.of(qa, ABtesting, pay), c1.getFeatures());
@@ -214,7 +218,7 @@ class CTConstraintTest {
         ASTNode ast2 = constraintBuilder.buildOr(pay, ast1);
         ASTNode ast3 = constraintBuilder.buildImplies(qa, ast2);
 
-        CTConstraint c1 = new CTConstraint(ast3);
+        CTConstraint c1 = new CTConstraint(ast3, translator);
         assertEquals("qa -> pay \\/ ~ABtesting", c1.toString());
 
         assertEquals(List.of(qa, pay, ABtesting), c1.getFeatures());
@@ -239,7 +243,7 @@ class CTConstraintTest {
         ASTNode ast2 = constraintBuilder.buildNot(ast1);
         ASTNode ast3 = constraintBuilder.buildImplies(qa, ast2);
 
-        CTConstraint c1 = new CTConstraint(ast3);
+        CTConstraint c1 = new CTConstraint(ast3, translator);
         assertEquals("qa -> ~(~ABtesting)", c1.toString());
 
         assertEquals(List.of(qa, ABtesting), c1.getFeatures());
@@ -270,7 +274,7 @@ class CTConstraintTest {
         ASTNode ast4 = constraintBuilder.buildNot(ast3);
         ASTNode ast5 = constraintBuilder.buildImplies(qa, ast4);
 
-        CTConstraint c1 = new CTConstraint(ast5);
+        CTConstraint c1 = new CTConstraint(ast5, translator);
         assertEquals("qa -> ~(~(~(~ABtesting)))", c1.toString());
 
         assertEquals(List.of(qa, ABtesting), c1.getFeatures());
@@ -296,7 +300,7 @@ class CTConstraintTest {
         ASTNode ast2 = constraintBuilder.buildOr(pay, ast1);
         ASTNode ast3 = constraintBuilder.buildImplies(qa, ast2);
 
-        CTConstraint c1 = new CTConstraint(ast3);
+        CTConstraint c1 = new CTConstraint(ast3, translator);
         assertEquals("qa -> pay \\/ ~ABtesting", c1.toString());
 
         assertEquals(List.of(qa, pay, ABtesting), c1.getFeatures());
@@ -319,7 +323,7 @@ class CTConstraintTest {
         ASTNode ast1 = constraintBuilder.buildAnd(ABtesting, pay);
         ASTNode ast2 = constraintBuilder.buildEquivalence(qa, ast1);
 
-        CTConstraint c1 = new CTConstraint(ast2);
+        CTConstraint c1 = new CTConstraint(ast2, translator);
         assertEquals("qa <-> ABtesting /\\ pay", c1.toString());
 
         assertEquals(List.of(qa, ABtesting, pay), c1.getFeatures());

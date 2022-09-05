@@ -9,10 +9,12 @@
 package at.tugraz.ist.ase.fm.core.ast;
 
 import at.tugraz.ist.ase.fm.core.Feature;
+import lombok.Getter;
 
 import java.util.Collections;
 import java.util.List;
 
+@Getter
 public class Operand<F extends Feature> extends ASTNode {
     private final F feature;
 

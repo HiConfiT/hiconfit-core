@@ -15,6 +15,8 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
@@ -24,13 +26,13 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FeatureIDEParserTest {
     static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
+    static IConfRuleTranslatable translator = new ConfRuleTranslator();
 
     @Test
-    @SuppressWarnings("unchecked")
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike_featureide.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -63,33 +65,30 @@ class FeatureIDEParserTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     void test1() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/linux-2.6.33.3_simple.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     void test2() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/linux-2.6.33.3.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     void test3() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/model1.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -128,11 +127,10 @@ class FeatureIDEParserTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
     void test4() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/complex_featureide_model.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = (FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint>) FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(), new ConstraintBuilder()).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
