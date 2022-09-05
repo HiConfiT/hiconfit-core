@@ -55,11 +55,10 @@ class DescriptiveFormatParserTest {
                 	optional(Bamboo Bike, Drop Handlebar)
                 	alternative(Frame, Female, Male, Step-through)
                 	or(Brake, Front, Rear, Back-pedal)
+                CONSTRAINTS:
+                	excludes(Engine, Back-pedal)
+                	requires(Drop Handlebar, Male)
                 	""";
-
-//                CONSTRAINTS:
-//                	excludes(Engine, Back-pedal)
-//                	requires(Drop Handlebar, Male)
 
         assertAll(() -> assertNotNull(featureModel),
                 () -> assertEquals(expected, featureModel.toString()));

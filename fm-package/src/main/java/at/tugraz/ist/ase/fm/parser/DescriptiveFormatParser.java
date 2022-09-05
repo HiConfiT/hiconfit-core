@@ -16,6 +16,7 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fm.core.ast.ASTNode;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfBaseListener;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfLexer;
 import at.tugraz.ist.ase.fm.parser.fm4conf.FM4ConfParser;
@@ -174,23 +175,49 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
             log.error("{}Error while adding or relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }
     }
-//
-//    @Override
-//    public void exitRequires(FM4ConfParser.RequiresContext ctx) {
-//        try {
-//            addConstraint(RelationshipType.REQUIRES, ctx.identifier());
-//        } catch (FeatureModelException e) {
-//            log.error("{}Error while adding requires constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
+
+    @Override
+    public void exitRequires(FM4ConfParser.RequiresContext ctx) {
+        try {
+            F parent = getParent(ctx.identifier());
+            List<F> children = getChildren(ctx.identifier());
+
+            ASTNode left = constraintBuilder.buildOperand(parent);
+            ASTNode right = constraintBuilder.buildOperand(children.get(0));
+
+            ASTNode formula = constraintBuilder.buildRequires(left, right);
+
+            fm.addConstraint(constraintBuilder.buildConstraint(formula));
+        } catch (Exception e) {
+            log.error("{}Error while adding requires constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
+        }
+    }
+
+    @Override
+    public void exitExcludes(FM4ConfParser.ExcludesContext ctx) {
+        try {
+            F parent = getParent(ctx.identifier());
+            List<F> children = getChildren(ctx.identifier());
+
+            ASTNode left = constraintBuilder.buildOperand(parent);
+            ASTNode right = constraintBuilder.buildOperand(children.get(0));
+
+            ASTNode formula = constraintBuilder.buildExcludes(left, right);
+
+            fm.addConstraint(constraintBuilder.buildConstraint(formula));
+        } catch (Exception e) {
+            log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
+        }
+    }
+
+//    private void addConstraint(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) throws FeatureModelException {
+//        Feature leftSide = fm.getFeature(ids.get(0).getText());
+//        List<Feature> rightSide = new LinkedList<>();
+//        for (int i = 1; i < ids.size(); i++) {
+//            rightSide.add(fm.getFeature(ids.get(i).getText()));
 //        }
-//    }
 //
-//    @Override
-//    public void exitExcludes(FM4ConfParser.ExcludesContext ctx) {
-//        try {
-//            addConstraint(RelationshipType.EXCLUDES, ctx.identifier());
-//        } catch (FeatureModelException e) {
-//            log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
-//        }
+//        fm.addConstraint(type, leftSide, rightSide);
 //    }
 
     private F getParent(List<FM4ConfParser.IdentifierContext> ids) {
@@ -209,21 +236,11 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
         return children;
     }
 
-//
-//    private void addConstraint(RelationshipType type, List<FM4ConfParser.IdentifierContext> ids) throws FeatureModelException {
-//        Feature leftSide = fm.getFeature(ids.get(0).getText());
-//        List<Feature> rightSide = new LinkedList<>();
-//        for (int i = 1; i < ids.size(); i++) {
-//            rightSide.add(fm.getFeature(ids.get(i).getText()));
-//        }
-//
-//        fm.addConstraint(type, leftSide, rightSide);
-//    }
-
     public void dispose() {
         fm = null;
         tree = null;
         featureBuilder = null;
         relationshipBuilder = null;
+        constraintBuilder = null;
     }
 }
