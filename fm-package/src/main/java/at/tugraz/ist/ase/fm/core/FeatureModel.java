@@ -459,6 +459,14 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return constraints.size();
     }
 
+    public int getNumOfRequires() {
+        return (int) constraints.parallelStream().filter(c -> c.getFormula().isRequires()).count();
+    }
+
+    public int getNumOfExcludes() {
+        return (int) constraints.parallelStream().filter(c -> c.getFormula().isExcludes()).count();
+    }
+
     @Override
     public String toString() {
         if (bfFeatures.isEmpty()) return "";

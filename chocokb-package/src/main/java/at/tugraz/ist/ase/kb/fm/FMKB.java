@@ -12,6 +12,7 @@ import at.tugraz.ist.ase.common.ChocoSolverUtils;
 import at.tugraz.ist.ase.common.ConstraintUtils;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.*;
+import at.tugraz.ist.ase.fm.core.ast.*;
 import at.tugraz.ist.ase.kb.core.*;
 import at.tugraz.ist.ase.kb.core.builder.BoolVarConstraintBuilder;
 import lombok.Getter;
@@ -27,14 +28,14 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @Slf4j
-public class FMKB extends KB implements IBoolVarKB {
+public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> extends KB implements IBoolVarKB {
 
-    private FeatureModel featureModel;
+    private FeatureModel<F, R, C> featureModel;
 
     @Getter
     private Constraint rootConstraint = null;
 
-    public FMKB(@NonNull FeatureModel featureModel, boolean hasNegativeConstraints) {
+    public FMKB(@NonNull FeatureModel<F, R, C> featureModel, boolean hasNegativeConstraints) {
         super(featureModel.getName(), "SPLOT", hasNegativeConstraints);
 
         this.featureModel = featureModel;
@@ -94,111 +95,84 @@ public class FMKB extends KB implements IBoolVarKB {
         LogOp negLogOp = null;
 
         // first convert relationships into constraints
-        for (Relationship relationship: featureModel.getRelationships()) {
-            BasicRelationship basicRelationship = (BasicRelationship) relationship;
-
-            BoolVar leftVar = getVarWithName(basicRelationship.getLeftSide().getName());
+        for (R relationship: featureModel.getRelationships()) {
+            BoolVar leftVar = getVarWithName(relationship.getParent().getName());
             BoolVar rightVar;
 
             startIdx = modelKB.getNbCstrs();
 
-            switch (relationship.getType()) {
-                case MANDATORY -> {
-                    rightVar = getVarWithName(basicRelationship.getRightSide().get(0).getName());
-                    // leftVar <=> rightVar
-                    logOp = LogOp.ifOnlyIf(leftVar, rightVar);
-                    // negative logOp
-                    if (hasNegativeConstraints) {
-                        negLogOp = LogOp.nand(LogOp.implies(leftVar, rightVar), LogOp.implies(rightVar, leftVar));
-                    }
+            if (relationship instanceof MandatoryRelationship) {
+                rightVar = getVarWithName(relationship.getChild().getName());
+                // leftVar <=> rightVar
+                logOp = LogOp.ifOnlyIf(leftVar, rightVar);
+                // negative logOp
+                if (hasNegativeConstraints) {
+                    negLogOp = LogOp.nand(LogOp.implies(leftVar, rightVar), LogOp.implies(rightVar, leftVar));
                 }
-                case OPTIONAL -> {
-                    rightVar = getVarWithName(basicRelationship.getRightSide().get(0).getName());
+            } else if (relationship instanceof OptionalRelationship) {
+                rightVar = getVarWithName(relationship.getChild().getName());
+                // rightVar => leftVar
+                logOp = LogOp.implies(rightVar, leftVar);
+                // negative logOp
+                if (hasNegativeConstraints) {
+                    negLogOp = LogOp.and(rightVar, leftVar.not());
+                }
+            } else if (relationship instanceof OrRelationship) {// LogOp of rule {A \/ B \/ ... \/ C}
+                LogOp rightLogOp = getRightSideOfOrRelationship(relationship.getChildren());
+                // leftVar <=> rightLogOp
+                logOp = LogOp.ifOnlyIf(leftVar, rightLogOp);
+                // negative logOp
+                if (hasNegativeConstraints) {
+                    negLogOp = LogOp.nand(LogOp.implies(leftVar, rightLogOp), LogOp.implies(rightLogOp, leftVar));
+                }
+            } else if (relationship instanceof AlternativeRelationship) {// LogOp of an ALTERNATIVE relationship
+                logOp = getLogOpOfAlternativeRelationship(relationship, false);
+                // negative logOp
+                if (hasNegativeConstraints) {
+                    negLogOp = getLogOpOfAlternativeRelationship(relationship, true);
+                }
+            } else {
+                throw new IllegalStateException("Unexpected class: " + relationship.getClass());
+            }
+
+            Constraint constraint = BoolVarConstraintBuilder.build(relationship, modelKB, logOp, negLogOp, startIdx, hasNegativeConstraints);
+            constraintList.add(constraint);
+        }
+
+        // second convert constraints of {@link FeatureModel} into ChocoSolver constraints
+        for (C cstr: featureModel.getConstraints()) {
+            ASTNode formula = cstr.getFormula();
+            if (formula instanceof RequiresOperator || formula instanceof ExcludesOperator) {
+                BoolVar leftVar = getVarWithName(((Operand<?>)formula.getLeft()).getFeature().getName());
+                BoolVar rightVar = getVarWithName(((Operand<?>)formula.getRight()).getFeature().getName());
+
+                startIdx = modelKB.getNbCstrs();
+
+                if (formula instanceof RequiresOperator) {
                     // leftVar => rightVar
                     logOp = LogOp.implies(leftVar, rightVar);
                     // negative logOp
                     if (hasNegativeConstraints) {
                         negLogOp = LogOp.and(leftVar, rightVar.not());
                     }
-                }
-                case OR -> {
-                    // LogOp of rule {A \/ B \/ ... \/ C}
-                    LogOp rightLogOp = getRightSideOfOrRelationship(basicRelationship.getRightSide());
-                    // leftVar <=> rightLogOp
-                    logOp = LogOp.ifOnlyIf(leftVar, rightLogOp);
+                } else {
+                    // leftVar => !rightVar
+                    logOp = LogOp.or(leftVar.not(), rightVar.not());
                     // negative logOp
                     if (hasNegativeConstraints) {
-                        negLogOp = LogOp.nand(LogOp.implies(leftVar, rightLogOp), LogOp.implies(rightLogOp, leftVar));
-                    }
-                }
-                case ALTERNATIVE -> {
-                    // LogOp of an ALTERNATIVE relationship
-                    logOp = getLogOpOfAlternativeRelationship(basicRelationship, false);
-                    // negative logOp
-                    if (hasNegativeConstraints) {
-                        negLogOp = getLogOpOfAlternativeRelationship(basicRelationship, true);
-                    }
-                }
-                default -> throw new IllegalStateException("Unexpected value: " + relationship.getType());
-            }
-
-//            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, basicRelationship);
-            Constraint constraint = BoolVarConstraintBuilder.build(basicRelationship, modelKB, logOp, negLogOp, startIdx, hasNegativeConstraints);
-            constraintList.add(constraint);
-        }
-
-        // second convert constraints of {@link FeatureModel} into ChocoSolver constraints
-        for (Relationship relationship: featureModel.getConstraints()) {
-            if (relationship.isType(RelationshipType.ThreeCNF)) {
-                ThreeCNFConstraint threeCNFConstraint = (ThreeCNFConstraint) relationship;
-
-                startIdx = modelKB.getNbCstrs();
-
-                logOp = LogOp.or();
-                if (hasNegativeConstraints) {
-                    negLogOp = LogOp.nor();
-                }
-                for (Literal literal : threeCNFConstraint.getLiterals()) {
-                    boolean value = literal.isPositive();
-                    BoolVar var = getVarWithName(literal.getVariable());
-
-                    if (value) {
-                        logOp.addChild(var);
-                        if (hasNegativeConstraints) {
-                            negLogOp.addChild(var);
-                        }
-                    } else {
-                        logOp.addChild(var.not());
-                        if (hasNegativeConstraints) {
-                            negLogOp.addChild(var.not());
-                        }
+                        negLogOp = LogOp.nor(leftVar.not(), rightVar.not());
                     }
                 }
             } else {
-                BasicRelationship basicRelationship = (BasicRelationship) relationship;
-
-                BoolVar leftVar = getVarWithName(basicRelationship.getLeftSide().getName());
-                BoolVar rightVar = getVarWithName(basicRelationship.getRightSide().get(0).getName());
-
                 startIdx = modelKB.getNbCstrs();
-                switch (relationship.getType()) {
-                    case REQUIRES -> {
-                        logOp = LogOp.implies(leftVar, rightVar);
-                        if (hasNegativeConstraints) {
-                            negLogOp = LogOp.and(leftVar, rightVar.not());
-                        }
-                    }
-                    case EXCLUDES -> {
-                        logOp = LogOp.or(leftVar.not(), rightVar.not());
-                        if (hasNegativeConstraints) {
-                            negLogOp = LogOp.nor(leftVar.not(), rightVar.not());
-                        }
-                    }
+
+                logOp = convertToLopOp(cstr.getCnf(), false);
+                if (hasNegativeConstraints) {
+                    negLogOp = convertToLopOp(cstr.getCnf(), true);
                 }
             }
 
-//            addConstraintsToModel(hasNegativeConstraints, startIdx, logOp, negLogOp, relationship);
-            Constraint constraint = BoolVarConstraintBuilder.build(relationship, modelKB, logOp, negLogOp, startIdx,hasNegativeConstraints);
+            Constraint constraint = BoolVarConstraintBuilder.build(cstr, modelKB, logOp, negLogOp, startIdx,hasNegativeConstraints);
             constraintList.add(constraint);
         }
 
@@ -206,66 +180,42 @@ public class FMKB extends KB implements IBoolVarKB {
         log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
-//    private void addConstraintsToModel(boolean hasNegativeConstraints, int startIdx, LogOp logOp, LogOp negLogOp, Relationship relationship) {
-//        modelKB.addClauses(logOp);
-//
-//        Constraint constraint = new Constraint(relationship.getConfRule());
-//        ConstraintUtils.addChocoConstraintsToList(false, constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);
-////        addConstraint(constraint, relationship, startIdx, modelKB.getNbCstrs() - 1);
-//
-//        if (hasNegativeConstraints) {
-//            if (relationship.isType(RelationshipType.ALTERNATIVE)) {
-//                ConstraintUtils.addChocoConstraintsToList(true, constraint, modelKB, startIdx + 1, startIdx + 1);
-////                addNegConstraint(constraint, startIdx + 1, startIdx + 1);
-//            }
-//
-//            startIdx = modelKB.getNbCstrs();
-//
-//            modelKB.addClauses(negLogOp);
-//            ConstraintUtils.addChocoConstraintsToList(true, constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);
-////            addNegConstraint(constraint, startIdx, modelKB.getNbCstrs() - 1);
-//        }
-//
-//        constraintList.add(constraint);
-//
-//        // unpost the negative constraint
-//        if (hasNegativeConstraints) {
-//            ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
-//        }
-//    }
-
-//    private void unpostConstraintFrom(int startIdx) {
-//        int index = modelKB.getNbCstrs() - 1;
-//        while (index >= startIdx) {
-//            modelKB.unpost(modelKB.getCstrs()[index]);
-//            index--;
-//        }
-//    }
-
-//    private void addConstraint(Constraint constraint, Relationship relationship, int startIdx, int endIdx) {
-//        org.chocosolver.solver.constraints.Constraint[] constraints = modelKB.getCstrs();
-//
-//        int index = startIdx;
-//        while (index <= endIdx) {
-//            // add to constraint
-//            constraint.addChocoConstraint(constraints[index]);
-//            // add to Relationship
-////            relationship.setConstraint(constraints[index].toString());
-//
-//            index++;
-//        }
-//    }
-
-//    private void addNegConstraint(Constraint constraint, int startIdx, int endIdx) {
-//        org.chocosolver.solver.constraints.Constraint[] constraints = modelKB.getCstrs();
-//
-//        int index = startIdx;
-//        while (index <= endIdx) {
-//            constraint.addNegChocoConstraint(constraints[index]);
-//
-//            index++;
-//        }
-//    }
+    private LogOp convertToLopOp(ASTNode cnf, boolean isNot) {
+        LogOp logOp = null;
+        ASTNode left = cnf.getLeft();
+        ASTNode right = cnf.getRight();
+        if (cnf instanceof AndOperator) {
+            if (isNot) {
+                logOp = LogOp.or();
+            } else {
+                logOp = LogOp.and();
+            }
+            logOp.addChild(convertToLopOp(left, isNot));
+            logOp.addChild(convertToLopOp(right, isNot));
+        } else if (cnf instanceof OrOperator) {
+            if (isNot) {
+                logOp = LogOp.and();
+            } else {
+                logOp = LogOp.or();
+            }
+            logOp.addChild(convertToLopOp(left, isNot));
+            logOp.addChild(convertToLopOp(right, isNot));
+        } else if (cnf instanceof NotOperator) {
+            logOp = LogOp.and();
+            logOp.addChild(convertToLopOp(right, !isNot));
+        } else if (cnf instanceof Operand) {
+            if (isNot) {
+                logOp = LogOp.and();
+                logOp.addChild(getVarWithName(((Operand<?>)cnf).getFeature().getName()).not());
+            } else {
+                logOp = LogOp.and();
+                logOp.addChild(getVarWithName(((Operand<?>)cnf).getFeature().getName()));
+            }
+        } else {
+            throw new IllegalStateException("Unexpected class: " + cnf.getClass());
+        }
+        return logOp;
+    }
 
     /**
      * Create the root constraint: f0 = true.
@@ -285,37 +235,6 @@ public class FMKB extends KB implements IBoolVarKB {
         ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
     }
 
-//    /**
-//     * Create a {@link LogOp} that represent to an ALTERNATIVE relationship.
-//     * The form of rule is {C1 <=> (not C2 /\ ... /\ not Cn /\ P) /\
-//     *                      C2 <=> (not C1 /\ ... /\ not Cn /\ P) /\
-//     *                      ... /\
-//     *                      Cn <=> (not C1 /\ ... /\ not Cn-1 /\ P)
-//     *
-//     * @param relationship - a {@link Relationship} of {@link FeatureModel}
-//     * @return A {@link LogOp} that represent to an ALTERNATIVE relationship
-//     * @throws IllegalArgumentException when couldn't find the corresponding variable in the model
-//     */
-//    private LogOp getLogOpOfAlternativeRelationship(Relationship relationship, boolean negative) throws IllegalArgumentException {
-//        LogOp logOp;
-//        if (negative) { // negative constraint
-//            logOp = LogOp.nand(); // an LogOp of NAND operators
-//        } else {
-//            logOp = LogOp.and(); // an LogOp of AND operators
-//        }
-//        BasicRelationship basicRelationship = (BasicRelationship) relationship;
-//        for (int i = 0; i < basicRelationship.getRightSide().size(); i++) {
-//            BoolVar rightVar = getVarWithName(basicRelationship.getRightSide().get(i).getName());
-//            // (not C2 /\ ... /\ not Cn /\ P)
-//            LogOp rightSide = getRightSideOfAlternativeRelationship(basicRelationship.getLeftSide().getName(), basicRelationship.getRightSide(), i);
-//            // {C1 <=> (not C2 /\ ... /\ not Cn /\ P)}
-//            LogOp part = LogOp.ifOnlyIf(rightVar, rightSide);
-//
-//            logOp.addChild(part);
-//        }
-//        return logOp;
-//    }
-
     /**
      * Create a {@link LogOp} that represent to an ALTERNATIVE relationship.
      * The form of rule is {C1 <=> (not C2 /\ ... /\ not Cn /\ P) /\
@@ -323,19 +242,18 @@ public class FMKB extends KB implements IBoolVarKB {
      *                      ... /\
      *                      Cn <=> (not C1 /\ ... /\ not Cn-1 /\ P)
      *
-     * @param relationship - a {@link Relationship} of {@link FeatureModel}
+     * @param relationship - a {@link AbstractRelationship} of {@link FeatureModel}
      * @return A {@link LogOp} that represent to an ALTERNATIVE relationship
      * @throws IllegalArgumentException when couldn't find the corresponding variable in the model
      */
-    private LogOp getLogOpOfAlternativeRelationship(Relationship relationship, boolean negative) throws IllegalArgumentException {
+    private LogOp getLogOpOfAlternativeRelationship(R relationship, boolean negative) throws IllegalArgumentException {
         LogOp logOp = LogOp.or(); // an LogOp of OR operators
-        BasicRelationship basicRelationship = (BasicRelationship) relationship;
-        BoolVar[] vars = basicRelationship.getRightSide().parallelStream().map(feature -> getVarWithName(feature.getName())).toArray(BoolVar[]::new);
+        BoolVar[] vars = relationship.getChildren().parallelStream().map(feature -> getVarWithName(feature.getName())).toArray(BoolVar[]::new);
         /*for (int i = 0; i < basicRelationship.getRightSide().size(); i++) {
             vars[i] = getVarWithName(basicRelationship.getRightSide().get(i).getName());
         }*/
 
-        BoolVar leftVar = getVarWithName(basicRelationship.getLeftSide().getName());
+        BoolVar leftVar = getVarWithName(relationship.getParent().getName());
         if (negative) { // negative constraint
             BoolVar notEqualVar = modelKB.boolVar();
             modelKB.sum(vars, "!=", 1).reifyWith(notEqualVar); // B + C + D != 1
@@ -372,7 +290,7 @@ public class FMKB extends KB implements IBoolVarKB {
      * @return a {@link LogOp} that represent the rule {(not C2 /\ ... /\ not Cn /\ P)}.
      * @throws IllegalArgumentException when couldn't find the variable in the model
      */
-    private LogOp getRightSideOfAlternativeRelationship(String leftSide, List<Feature> rightSide, int removedIndex) throws IllegalArgumentException {
+    private LogOp getRightSideOfAlternativeRelationship(String leftSide, List<F> rightSide, int removedIndex) throws IllegalArgumentException {
         BoolVar leftVar = getVarWithName(leftSide);
         LogOp op = LogOp.and(leftVar);
         IntStream.range(0, rightSide.size())
@@ -395,12 +313,12 @@ public class FMKB extends KB implements IBoolVarKB {
      * @return a {@link LogOp} or null if the rightSide is empty
      * @throws IllegalArgumentException when couldn't find a variable which corresponds to the given feature name
      */
-    private LogOp getRightSideOfOrRelationship(List<Feature> rightSide) throws IllegalArgumentException {
+    private LogOp getRightSideOfOrRelationship(List<F> rightSide) throws IllegalArgumentException {
         if (rightSide.size() == 0) return null;
         LogOp op = LogOp.or(); // create a LogOp of OR operators
         rightSide.parallelStream().map(feature -> getVarWithName(feature.getName()))
                 .forEachOrdered(op::addChild);
-        /*for (Feature feature : rightSide) {
+        /*for (F feature : rightSide) {
             BoolVar var = getVarWithName(feature.getName());
             op.addChild(var);
         }*/

@@ -37,6 +37,11 @@ public class ExcludesOperator extends ASTNode {
     }
 
     @Override
+    public boolean isExcludes() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return String.format("excludes(%s, %s)", left, right);
     }

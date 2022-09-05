@@ -36,6 +36,11 @@ public class RequiresOperator extends ASTNode {
     }
 
     @Override
+    public boolean isRequires() {
+        return true;
+    }
+
+    @Override
     public String toString() {
         return String.format("requires(%s, %s)", left, right);
     }

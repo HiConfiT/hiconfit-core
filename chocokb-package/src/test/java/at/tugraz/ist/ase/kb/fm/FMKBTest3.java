@@ -8,10 +8,17 @@
 
 package at.tugraz.ist.ase.kb.fm;
 
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
 import at.tugraz.ist.ase.kb.core.BoolVariable;
 import at.tugraz.ist.ase.kb.core.Variable;
 import org.chocosolver.solver.variables.BoolVar;
@@ -25,17 +32,23 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FMKBTest3 {
-    static FMKB kb;
-    static FeatureModel featureModel;
+    static FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> kb;
+    static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
 
     @BeforeAll
     static void setUp() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/survey.fm4conf");
-        FMParserFactory factory = FMParserFactory.getInstance();
-        FeatureModelParser parser = factory.getParser(fileFM.getName());
+
+        FeatureBuilder featureBuilder = new FeatureBuilder();
+        ConfRuleTranslator confRuleTranslator = new ConfRuleTranslator();
+        RelationshipBuilder relationshipBuilder = new RelationshipBuilder(confRuleTranslator);
+        ConstraintBuilder constraintBuilder = new ConstraintBuilder(confRuleTranslator);
+
+        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
-        kb = new FMKB(featureModel, false);
+        kb = new FMKB<>(featureModel, false);
 
         kb.getConstraintList().forEach(c -> {
             System.out.println(c);

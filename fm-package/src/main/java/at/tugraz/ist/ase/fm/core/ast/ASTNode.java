@@ -60,6 +60,14 @@ public abstract class ASTNode {
     public abstract boolean isUnaryOperator();
     public abstract boolean isBinaryOperator();
 
+    public boolean isRequires() {
+        return false;
+    }
+
+    public boolean isExcludes() {
+        return false;
+    }
+
     public void dispose() {
         if (left != null)
             left.dispose();
