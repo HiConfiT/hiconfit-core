@@ -16,7 +16,9 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.ast.*;
+import at.tugraz.ist.ase.fm.core.ast.ASTNode;
+import at.tugraz.ist.ase.fm.core.ast.ImpliesOperator;
+import at.tugraz.ist.ase.fm.core.ast.OrOperator;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
@@ -301,7 +303,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
             ASTNode formula = examineARuleNode(rules.item(i).getChildNodes().item(1));
             if (formula.getFeatures().size() == 2
                     && (formula instanceof OrOperator) || (formula instanceof ImpliesOperator)) {
-                formula = convertToRequiresOrExcludes(formula);
+                formula = constraintBuilder.convertToRequiresOrExcludes(formula);
             }
             fm.addConstraint(constraintBuilder.buildConstraint(formula));
         }
@@ -363,30 +365,30 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
         return ast;
     }
 
-    private ASTNode convertToRequiresOrExcludes(ASTNode formula) {
-        ASTNode left = formula.getLeft();
-        ASTNode right = formula.getRight();
-
-        if (formula instanceof ImpliesOperator && left instanceof Operand && right instanceof Operand) {
-            return constraintBuilder.buildRequires(left, right);
-        }
-
-        if (formula instanceof OrOperator) {
-            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof Operand) {
-                return constraintBuilder.buildRequires(left.getRight(), right);
-            }
-
-            if (right instanceof NotOperator && right.getRight() instanceof Operand && left instanceof Operand) {
-                return constraintBuilder.buildRequires(right.getRight(), left);
-            }
-
-            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof NotOperator && right.getRight() instanceof Operand) {
-                return constraintBuilder.buildExcludes(left.getRight(), right.getRight());
-            }
-        }
-
-        return formula;
-    }
+//    private ASTNode convertToRequiresOrExcludes(ASTNode formula) {
+//        ASTNode left = formula.getLeft();
+//        ASTNode right = formula.getRight();
+//
+//        if (formula instanceof ImpliesOperator && left instanceof Operand && right instanceof Operand) {
+//            return constraintBuilder.buildRequires(left, right);
+//        }
+//
+//        if (formula instanceof OrOperator) {
+//            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof Operand) {
+//                return constraintBuilder.buildRequires(left.getRight(), right);
+//            }
+//
+//            if (right instanceof NotOperator && right.getRight() instanceof Operand && left instanceof Operand) {
+//                return constraintBuilder.buildRequires(right.getRight(), left);
+//            }
+//
+//            if (left instanceof NotOperator && left.getRight() instanceof Operand && right instanceof NotOperator && right.getRight() instanceof Operand) {
+//                return constraintBuilder.buildExcludes(left.getRight(), right.getRight());
+//            }
+//        }
+//
+//        return formula;
+//    }
 
     public void dispose() {
         fm = null;

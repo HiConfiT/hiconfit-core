@@ -20,6 +20,7 @@ public interface IConstraintBuildable {
     <F extends Feature> ASTNode buildRequires(@NonNull F leftOperand, @NonNull F rightOperand);
     ASTNode buildExcludes(@NonNull ASTNode leftOperand, @NonNull ASTNode rightOperand);
     <F extends Feature> ASTNode buildExcludes(@NonNull F leftOperand, @NonNull F rightOperand);
+    ASTNode convertToRequiresOrExcludes(ASTNode formula);
     <F extends Feature> ASTNode buildNot(@NonNull F feature);
     ASTNode buildNot(@NonNull ASTNode node);
     <F extends Feature> ASTNode buildOr(@NonNull F feature1, @NonNull F feature2);

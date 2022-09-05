@@ -53,10 +53,10 @@ public class SXFMParserTest {
                 	optional(Bamboo Bike, Drop Handlebar)
                 	alternative(Frame, Female, Male, Step-through)
                 	or(Brake, Front, Rear, Back-pedal)
+                CONSTRAINTS:
+                	requires(Drop Handlebar, Male)
+                	excludes(Engine, Back-pedal)
                 """;
-//        CONSTRAINTS:
-//        requires(Drop Handlebar, Male)
-//        excludes(Engine, Back-pedal)
 
         assertAll(() -> assertNotNull(featureModel),
                 () -> assertEquals(expected, featureModel.toString()));
@@ -89,12 +89,12 @@ public class SXFMParserTest {
                 String.format("\t%s\n", "optional(Smartwatch, Camera)") +
                 String.format("\t%s\n", "optional(Smartwatch, Compass)") +
                 String.format("\t%s\n", "or(Connector, GPS, Cellular, Wifi, Bluetooth)") +
-                String.format("\t%s\n", "alternative(Screen, Analog, High Resolution, E-ink)");// +
-//                "CONSTRAINTS:\n" +
-//                String.format("\t%s\n", "requires(Camera, High Resolution)") +
-//                String.format("\t%s\n", "requires(Compass, GPS)") +
-//                String.format("\t%s\n", "excludes(Analog, Cellular)") +
-//                String.format("\t%s\n", "3cnf(~Analog, Cellular, Wifi)");
+                String.format("\t%s\n", "alternative(Screen, Analog, High Resolution, E-ink)") +
+                "CONSTRAINTS:\n" +
+                String.format("\t%s\n", "requires(Camera, High Resolution)") +
+                String.format("\t%s\n", "requires(Compass, GPS)") +
+                String.format("\t%s\n", "excludes(Analog, Cellular)") +
+                String.format("\t%s\n", "~Analog \\/ Cellular \\/ Wifi");
 
         assertAll(() -> assertEquals(12, featureModel.getNumOfFeatures()),
                 () -> assertEquals(6, featureModel.getNumOfRelationships()),
@@ -125,12 +125,12 @@ public class SXFMParserTest {
                 String.format("\t%s\n", "mandatory(FM_10_0, F2)") +
                 String.format("\t%s\n", "or(FM_10_0, F3, F4, F5)") +
                 String.format("\t%s\n", "alternative(FM_10_0, F6, F7)") +
-                String.format("\t%s\n", "optional(F2, F8)");// +
-//                "CONSTRAINTS:\n" +
-//                String.format("\t%s\n", "requires(F8, F6)") +
-//                String.format("\t%s\n", "excludes(F1, F4)") +
-//                String.format("\t%s\n", "3cnf(~F1, F7, F8)") +
-//                String.format("\t%s\n", "requires(F2, F6)");
+                String.format("\t%s\n", "optional(F2, F8)") +
+                "CONSTRAINTS:\n" +
+                String.format("\t%s\n", "requires(F8, F6)") +
+                String.format("\t%s\n", "excludes(F1, F4)") +
+                String.format("\t%s\n", "~F1 \\/ F7 \\/ F8") +
+                String.format("\t%s\n", "requires(F2, F6)");
 
         assertEquals(st, featureModel.toString());
     }

@@ -42,6 +42,10 @@ public class ConstraintBuilder implements IConstraintBuildable {
         return ASTBuilder.buildExcludes(new Operand<>(leftOperand), new Operand<>(rightOperand));
     }
 
+    public ASTNode convertToRequiresOrExcludes(ASTNode formula) {
+        return ASTBuilder.convertToRequiresOrExcludes(formula);
+    }
+
     public <F extends Feature> ASTNode buildNot(@NonNull F feature) {
         return ASTBuilder.buildNot(new Operand<>(feature));
     }

@@ -16,7 +16,6 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.ast.ASTNode;
 import com.google.common.annotations.Beta;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -279,15 +278,9 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
 
                 String constraintType = constraint.getString(KEY_TYPE);
                 if (constraintType.equals(TYPE_EXCLUDES)) {
-
-                    ASTNode formula = constraintBuilder.buildExcludes(left, right);
-
-                    fm.addConstraint(constraintBuilder.buildConstraint(formula));
+                    fm.addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildExcludes(left, right)));
                 } else if (constraintType.equals(TYPE_IMPLY)) {
-
-                    ASTNode formula = constraintBuilder.buildRequires(left, right);
-
-                    fm.addConstraint(constraintBuilder.buildConstraint(formula));
+                    fm.addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildRequires(left, right)));
                 } else {
                     throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
                 }

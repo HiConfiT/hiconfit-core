@@ -16,6 +16,10 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fm.core.ast.ASTNode;
+import at.tugraz.ist.ase.fm.core.ast.OrOperator;
+import constraints.BooleanVariable;
+import constraints.PropositionalFormula;
 import fm.*;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -44,6 +48,13 @@ import static com.google.common.base.Preconditions.checkState;
  * Waterloo, Ontario, Canada
  * <p>
  * For further details of this library, we refer to <a href="http://52.32.1.180:8080/SPLOT/sxfm.html">http://52.32.1.180:8080/SPLOT/sxfm.html</a>
+ * <p>
+ * Supports the following constraints:
+ * <ul>
+ *     <li>requires</li>
+ *     <li>excludes</li>
+ *     <li>3CNF and CNF</li>
+ * </ul>
  */
 @Slf4j
 public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> implements FeatureModelParser<F, R, C> {
@@ -135,7 +146,7 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C 
             convertRelationships(sxfm);
 
             // convert constraints
-//            convertConstraints(sxfm, featureModel);
+            convertConstraints(sxfm);
         } catch (FeatureModelException ex) {
             throw new FeatureModelParserException(ex.getMessage());
         }
@@ -241,59 +252,42 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C 
         LoggerUtils.outdent();
     }
 
-//    /**
-//     * Converts constraints on the file into constraints in {@link FeatureModel}
-//     *
-//     * @param sxfm - a {@link fm.FeatureModel}
-//     * @param fm - a {@link FeatureModel}
-//     * @throws FeatureModelParserException a ParserException
-//     */
-//    private void convertConstraints(fm.FeatureModel sxfm, FeatureModel<Feature, AbstractRelationship<Feature>> fm) throws FeatureModelParserException, at.tugraz.ist.ase.fm.core.FeatureModelException {
-//        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
-//        LoggerUtils.indent();
-//
-//        for (PropositionalFormula formula : sxfm.getConstraints()) {
-//            BooleanVariable[] variables = formula.getVariables().toArray(new BooleanVariable[0]);
-//
-//            if (variables.length == 2) {
-//
-//                BooleanVariable leftSide = variables[0];
-//                BooleanVariable rightSide = variables[1];
-//
-//                // take type
-//                RelationshipType type;
-//                if ((leftSide.isPositive() && !rightSide.isPositive())
-//                        || ((!leftSide.isPositive() && rightSide.isPositive()))) { // REQUIRES
-//                    type = RelationshipType.REQUIRES;
-//                } else if (!leftSide.isPositive() && !rightSide.isPositive()) { // EXCLUDES
-//                    type = RelationshipType.EXCLUDES;
-//                } else {
-//                    throw new FeatureModelParserException(formula + " is not supported constraints!");
-//                }
-//
-//                Feature left = fm.getFeature(leftSide.getID());
-//                List<Feature> rightSideList = Collections.singletonList(fm.getFeature(rightSide.getID()));
-//
-//                fm.addConstraint(type, left, rightSideList);
-//            } else {
-//                // take type
-//                RelationshipType type = RelationshipType.ThreeCNF;
-//
-//                List<String> threecnf_constraints = new LinkedList<>();
-//
-//                Arrays.stream(variables).forEachOrdered(variable -> {
-//                    if (variable.isPositive()) {
-//                        threecnf_constraints.add(sxfm.getNodeByID(variable.getID()).getName());
-//                    } else {
-//                        threecnf_constraints.add("~" + sxfm.getNodeByID(variable.getID()).getName());
-//                    }
-//                });
-//
-//                fm.addConstraint(type, String.join(" | ", threecnf_constraints));
-//            }
-//        }
-//        LoggerUtils.outdent();
-//    }
+    /**
+     * Converts constraints on the file into constraints in {@link FeatureModel}
+     *
+     * @param sxfm - a {@link fm.FeatureModel}
+     */
+    private void convertConstraints(fm.FeatureModel sxfm) {
+        log.trace("{}Generating constraints >>>", LoggerUtils.tab());
+        LoggerUtils.indent();
+
+        for (PropositionalFormula formula : sxfm.getConstraints()) {
+            BooleanVariable[] variables = formula.getVariables().toArray(new BooleanVariable[0]);
+
+            ASTNode ast = null;
+            ASTNode right;
+
+            for (BooleanVariable booleanVariable : variables) {
+                if (booleanVariable.isPositive()) {
+                    right = constraintBuilder.buildOperand(fm.getFeature(booleanVariable.getID()));
+                } else {
+                    right = constraintBuilder.buildNot(fm.getFeature(booleanVariable.getID()));
+                }
+
+                if (ast == null) {
+                    ast = right;
+                } else {
+                    ast = constraintBuilder.buildOr(ast, right);
+                }
+            }
+
+            if (ast.getFeatures().size() == 2 && ast instanceof OrOperator) {
+                ast = constraintBuilder.convertToRequiresOrExcludes(ast);
+            }
+            fm.addConstraint(constraintBuilder.buildConstraint(ast));
+        }
+        LoggerUtils.outdent();
+    }
 
     /**
      * Gets an array of names of child features.
@@ -316,6 +310,7 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C 
         fm = null;
         featureBuilder = null;
         relationshipBuilder = null;
+        constraintBuilder = null;
     }
 }
 
