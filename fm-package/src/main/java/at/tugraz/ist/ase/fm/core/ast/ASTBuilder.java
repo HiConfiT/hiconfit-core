@@ -90,6 +90,7 @@ public class ASTBuilder {
     /**
      * Convert a propositional formula to an equivalent formula without
      * '->', '<->' operators.
+     * Adapted from <a href="https://github.com/flamapy/core/blob/master/flamapy/core/models/ast.py">...</a>.
      * @param formula the propositional formula
      * @return the equivalent formula without '->', '<->' operators.
      */
@@ -123,6 +124,13 @@ public class ASTBuilder {
         }
     }
 
+    /**
+     * Propagate negation inwards.
+     * Adapted from <a href="https://github.com/flamapy/core/blob/master/flamapy/core/models/ast.py">...</a>.
+     * @param formula the propositional formula
+     * @param negated whether the formula is negated
+     * @return the formula with negation propagated inwards.
+     */
     private ASTNode propagateNegation(ASTNode formula, boolean negated) {
         ASTNode left = formula.getLeft();
         ASTNode right = formula.getRight();
@@ -165,6 +173,12 @@ public class ASTBuilder {
         }
     }
 
+    /**
+     * Convert a propositional formula to CNF.
+     * Adapted from <a href="https://github.com/flamapy/core/blob/master/flamapy/core/models/ast.py">...</a>.
+     * @param formula the propositional formula
+     * @return the formula in CNF.
+     */
     private ASTNode to_cnf(ASTNode formula) {
         ASTNode left = formula.getLeft();
         ASTNode right = formula.getRight();
