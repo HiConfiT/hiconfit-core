@@ -173,17 +173,17 @@ class FeatureIDEParserTest {
                 	alternative(D, DA, DB)
                 	or(DA, DAA, DAB)
                 CONSTRAINTS:
-                	AB -> ~CB
-                	AC -> ~CC
+                	(AB -> ~CB)
+                	(AC -> ~CC)
                 	~(ADA /\\ AB)
                 	requires(BC, ADB)
-                	BC \\/ CA -> CB
-                	DAA -> ~(AB /\\ AC)
-                	AB -> AC \\/ ~DAB
-                	DB -> ~(~AB)
-                	DB -> ~(~(~(~AC)))
-                	DAA -> AB \\/ ~AC
-                	ADA <-> BB /\\ DAB
+                	(BC \\/ (CA -> CB))
+                	(DAA -> ~(AB /\\ AC))
+                	(AB -> (AC \\/ ~DAB))
+                	(DB -> ~(~AB))
+                	(DB -> ~(~(~(~AC))))
+                	(DAA -> (AB \\/ ~AC))
+                	(ADA <-> (BB /\\ DAB))
                 """;
 
         assertAll(() -> assertNotNull(featureModel),

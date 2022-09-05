@@ -95,7 +95,7 @@ public class SXFMParserTest {
                 String.format("\t%s\n", "requires(Camera, High Resolution)") +
                 String.format("\t%s\n", "requires(Compass, GPS)") +
                 String.format("\t%s\n", "excludes(Analog, Cellular)") +
-                String.format("\t%s\n", "~Analog \\/ Cellular \\/ Wifi");
+                String.format("\t%s\n", "((~Analog \\/ Cellular) \\/ Wifi)");
 
         assertAll(() -> assertEquals(12, featureModel.getNumOfFeatures()),
                 () -> assertEquals(6, featureModel.getNumOfRelationships()),
@@ -129,7 +129,7 @@ public class SXFMParserTest {
                 "CONSTRAINTS:\n" +
                 String.format("\t%s\n", "requires(F8, F6)") +
                 String.format("\t%s\n", "excludes(F1, F4)") +
-                String.format("\t%s\n", "~F1 \\/ F7 \\/ F8") +
+                String.format("\t%s\n", "((~F1 \\/ F7) \\/ F8)") +
                 String.format("\t%s\n", "requires(F2, F6)");
 
         assertEquals(st, featureModel.toString());

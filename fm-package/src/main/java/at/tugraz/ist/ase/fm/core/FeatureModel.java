@@ -70,7 +70,6 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
 
         this.root = featureBuilder.buildRoot(name, id);
         this.bfFeatures.add(root);
-        this.name = root.getName();
 
         log.trace("{}Added root [root={}]", LoggerUtils.tab(), this.root);
         return this.root;

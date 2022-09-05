@@ -28,10 +28,19 @@ public class CTConstraint implements Cloneable {
     protected String constraint;
     protected ASTNode formula;
 
+    protected ASTNode cnf = null;
+
     protected IConfRuleTranslatable translator;
 
     public CTConstraint(@NonNull ASTNode formula, @NonNull IConfRuleTranslatable translator) {
         this.formula = formula;
+        this.translator = translator;
+        this.constraint = translator.translate(formula);
+    }
+
+    public CTConstraint(@NonNull ASTNode formula, @NonNull ASTNode cnf, @NonNull IConfRuleTranslatable translator) {
+        this.formula = formula;
+        this.cnf = cnf;
         this.translator = translator;
         this.constraint = translator.translate(formula);
     }

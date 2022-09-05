@@ -55,10 +55,10 @@ public class NotOperator extends ASTNode {
 
     @Override
     public String toString() {
-        if (right.isOperand()) {
-            return String.format("~%s", right);
-        } else {
+        if (right instanceof NotOperator) {
             return String.format("~(%s)", right);
+        } else {
+            return String.format("~%s", right);
         }
     }
 

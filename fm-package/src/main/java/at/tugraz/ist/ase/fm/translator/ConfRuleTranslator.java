@@ -34,23 +34,29 @@ public class ConfRuleTranslator implements IConfRuleTranslatable {
 
     public String translate(@NonNull ASTNode r) {
         if (r instanceof AndOperator) {
-            return String.format("%s /\\ %s", translate(r.getLeft()), translate(r.getRight()));
+            return String.format("(%s /\\ %s)", translate(r.getLeft()), translate(r.getRight()));
         } else if (r instanceof OrOperator) {
-            return String.format("%s \\/ %s", translate(r.getLeft()), translate(r.getRight()));
+            return String.format("(%s \\/ %s)", translate(r.getLeft()), translate(r.getRight()));
         } else if (r instanceof RequiresOperator) {
             return String.format("requires(%s, %s)", translate(r.getLeft()), translate(r.getRight()));
         } else if (r instanceof ExcludesOperator) {
             return String.format("excludes(%s, %s)", translate(r.getLeft()), translate(r.getRight()));
         } else if (r instanceof ImpliesOperator) {
-            return String.format("%s -> %s", translate(r.getLeft()), translate(r.getRight()));
+            return String.format("(%s -> %s)", translate(r.getLeft()), translate(r.getRight()));
         } else if (r instanceof EquivalenceOperator) {
-            return String.format("%s <-> %s", translate(r.getLeft()), translate(r.getRight()));
+            return String.format("(%s <-> %s)", translate(r.getLeft()), translate(r.getRight()));
         } else if (r instanceof NotOperator) {
-            if (r.getRight().isOperand()) {
-                return String.format("~%s", translate(r.getRight()));
+            if (r.getRight() instanceof NotOperator) {
+                return String.format("~(%s)", r.getRight());
             } else {
-                return String.format("~(%s)", translate(r.getRight()));
+                return String.format("~%s", r.getRight());
             }
+//            return String.format("~%s", translate(r.getRight()));
+//            if (r.getRight().isOperand()) {
+//
+//            } else {
+//                return String.format("~(%s)", translate(r.getRight()));
+//            }
         } else if (r instanceof Operand<?>) {
             return ((Operand<?>) r).getFeature().toString();
         } else {

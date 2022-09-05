@@ -126,7 +126,7 @@ public class FeatureModelTest {
 
     @Test
     void testGetName() {
-        assertEquals(fm.getName(), "survey");
+        assertEquals(fm.getName(), "test");
     }
 
     @Test

@@ -26,7 +26,8 @@ public class ConstraintBuilder implements IConstraintBuildable {
 
     @SuppressWarnings("unchecked")
     public <C extends CTConstraint> C buildConstraint(@NonNull ASTNode formula) {
-        return (C) new CTConstraint(formula, translator);
+        ASTNode cnf = ASTBuilder.convertToCNF(formula);
+        return (C) new CTConstraint(formula, cnf, translator);
     }
 
     public <F extends Feature> ASTNode buildOperand(@NonNull F operand) {
