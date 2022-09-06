@@ -6,20 +6,21 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.fm.core.anomaly;
+package at.tugraz.ist.ase.fma.anomaly;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.Feature;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Slf4j
 public class AnomalyAwareFeature extends Feature {
-    protected List<AnomalyType> anomalies;
+    protected List<AnomalyType> anomalies = new LinkedList<>();
 
     /**
      * Constructor for the root feature.
@@ -63,5 +64,20 @@ public class AnomalyAwareFeature extends Feature {
      */
     public void setAnomalyType(AnomalyType type) {
         anomalies.add(type);
+    }
+
+    public void dispose() {
+        super.dispose();
+        this.anomalies.clear();
+        this.anomalies = null;
+    }
+
+    public Object clone() throws CloneNotSupportedException {
+        AnomalyAwareFeature clone = (AnomalyAwareFeature) super.clone();
+
+        // copy anomalies
+        clone.anomalies = new LinkedList<>(anomalies);
+
+        return clone;
     }
 }

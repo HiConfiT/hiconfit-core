@@ -13,6 +13,7 @@ import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.common.ConsoleColors;
+import at.tugraz.ist.ase.fm.builder.*;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
@@ -20,15 +21,14 @@ import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fma.analysis.DeadFeatureAnalysis;
-import at.tugraz.ist.ase.fma.analysis.FalseOptionalAnalysis;
-import at.tugraz.ist.ase.fma.analysis.FullMandatoryAnalysis;
-import at.tugraz.ist.ase.fma.analysis.VoidFMAnalysis;
-import at.tugraz.ist.ase.fma.assumption.DeadFeatureAssumptions;
-import at.tugraz.ist.ase.fma.assumption.FalseOptionalAssumptions;
-import at.tugraz.ist.ase.fma.assumption.FullMandatoryAssumptions;
-import at.tugraz.ist.ase.fma.assumption.VoidFMAssumption;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
+import at.tugraz.ist.ase.fma.analysis.*;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeatureBuilder;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
+import at.tugraz.ist.ase.fma.assumption.*;
 import at.tugraz.ist.ase.fma.explanator.*;
+import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Iterators;
 import lombok.Cleanup;
@@ -450,15 +450,75 @@ class FMAnalyzerTest {
         Assertions.assertEquals(cs1, allDiagnoses.get(0));
     }
 
+    @Test
+    void testConditionallyDead_0() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        // set Female and Step-through as dead
+        featureModel.getFeature("Female").setAnomalyType(AnomalyType.DEAD);
+        featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
+
+        // create a test case/assumption
+        // check for conditionally dead features
+        ConditionallyDeadAssumptions conditionallyDeadAssumptions = new ConditionallyDeadAssumptions();
+        List<ITestCase> testCases = conditionallyDeadAssumptions.createAssumptions(featureModel);
+        TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
+
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        debuggingModel.initialize();
+
+        // create the specified analysis and the corresponding explanator
+        ITestCase testCase = testCases.get(4);
+        ConditionallyDeadAnalysis analysis = new ConditionallyDeadAnalysis(debuggingModel, testCase); // Check feature Engine and Back-pedal
+        ConditionallyDeadExplanator explanator = new ConditionallyDeadExplanator(debuggingModel, testCase);
+
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.addAnalysis(analysis, explanator); // add the analysis to the analyzer
+        analyzer.run(); // run the analyzer
+
+        // print the result
+        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
+        if (analysis.get()) {
+            System.out.println(ExplanationColors.OK + "\u2713 Consistency: ok");
+        } else {
+            System.out.println(ExplanationColors.ANOMALY + "X Conditionally dead feature: " + ((AssumptionAwareTestCase) testCase).getAssumptions());
+            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(explanator.get(), "conditionally dead feature"));
+        }
+
+        assertFalse(analysis.get());
+
+        List<Set<Constraint>> allDiagnoses = explanator.get();
+
+        Assertions.assertEquals(1, allDiagnoses.size());
+    }
+
 //    @Test
 //    void testConditionallyDead_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
 //        File fileFM = new File("src/test/resources/basic_featureide_conditionallydead1.xml");
+//
+//        // create the factory for anomaly feature models
+//        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+//        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+//        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+//        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+//
+//        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+//
 //        @Cleanup("dispose")
-//        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-//        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
-////        FMParserFactory factory = FMParserFactory.getInstance();
-////        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-////        FeatureModel featureModel = parser.parse(fileFM);
+//        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+//        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
 //
 //        // create a test case/assumption
 //        // check for conditionally dead features

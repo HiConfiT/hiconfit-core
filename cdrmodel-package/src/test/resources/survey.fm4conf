@@ -14,7 +14,7 @@ singlechoice
 RELATIONSHIPS:
 mandatory(survey, pay),
 mandatory(survey, ABtesting),
-optional(statistics, survey),
+optional(survey, statistics),
 mandatory(survey, qa),
 alternative(pay, license, nonlicense),
 or(qa, multiplechoice, singlechoice)

@@ -6,12 +6,13 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.fm.core;
+package at.tugraz.ist.ase.fma.anomaly;
 
 import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
 import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
-import at.tugraz.ist.ase.fm.core.anomaly.AnomalyAwareFeature;
-import at.tugraz.ist.ase.fm.core.anomaly.AnomalyAwareFeatureBuilder;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
 import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import org.junit.jupiter.api.BeforeAll;

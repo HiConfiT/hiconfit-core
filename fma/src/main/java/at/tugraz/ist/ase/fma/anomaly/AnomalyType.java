@@ -6,7 +6,7 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.fm.core.anomaly;
+package at.tugraz.ist.ase.fma.anomaly;
 
 /**
  * Describes a feature's anomaly.
