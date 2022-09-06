@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Consistency-based Algorithms for Conflict Detection and Resolution
+  ~
+  ~ Copyright (c) 2022
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<featureModel>
+    <properties>
+        <graphics key="autolayoutconstraints" value="false"/>
+        <graphics key="legendautolayout" value="true"/>
+        <graphics key="showshortnames" value="false"/>
+        <graphics key="layout" value="horizontal"/>
+        <graphics key="showcollapsedconstraints" value="true"/>
+        <graphics key="legendhidden" value="false"/>
+        <graphics key="layoutalgorithm" value="1"/>
+    </properties>
+    <struct>
+        <and mandatory="true" name="Root">
+            <alt name="A1">
+                <feature name="B1"/>
+                <and name="B2">
+                    <feature name="C1"/>
+                    <feature name="C2"/>
+                </and>
+                <feature name="B3"/>
+            </alt>
+            <feature mandatory="true" name="A2"/>
+            <feature name="A3"/>
+            <feature name="A4"/>
+            <feature name="A5"/>
+            <alt name="A6">
+                <alt name="B4">
+                    <and name="C3">
+                        <and name="D1">
+                            <feature mandatory="true" name="E1"/>
+                            <feature mandatory="true" name="E2"/>
+                            <feature name="E3"/>
+                            <or name="E4">
+                                <feature name="F1"/>
+                                <feature name="F2"/>
+                                <feature mandatory="true" name="F3"/>
+                            </or>
+                        </and>
+                        <feature name="D2"/>
+                    </and>
+                    <and name="C4">
+                        <alt name="D3">
+                            <feature name="E5"/>
+                            <and name="E6">
+                                <feature mandatory="true" name="F4"/>
+                            </and>
+                        </alt>
+                        <feature name="D4"/>
+                    </and>
+                    <or name="C5">
+                        <feature name="D5"/>
+                        <feature name="D6"/>
+                    </or>
+                </alt>
+                <or name="B5">
+                    <alt name="C6">
+                        <feature name="D7"/>
+                        <feature name="D8"/>
+                    </alt>
+                    <feature name="C7"/>
+                    <and mandatory="true" name="C8">
+                        <and name="D9">
+                            <and name="E7">
+                                <feature name="F5"/>
+                            </and>
+                        </and>
+                    </and>
+                </or>
+                <feature name="B6"/>
+            </alt>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <imp>
+                <var>A2</var>
+                <var>B3</var>
+            </imp>
+        </rule>
+        <rule>
+            <disj>
+                <not>
+                    <var>A3</var>
+                </not>
+                <not>
+                    <var>A4</var>
+                </not>
+            </disj>
+        </rule>
+    </constraints>
+</featureModel>

@@ -12,6 +12,7 @@ import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
 import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
 import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import at.tugraz.ist.ase.fm.core.ast.Operand;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
@@ -179,43 +180,6 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
     }
 
 //    /**
-//     * Checks whether the given {@link Feature} is mandatory.
-//     * @param feature a {@link Feature}
-//     * @return true if the given {@link Feature} is mandatory, false otherwise.
-//     */
-//    public boolean isMandatoryFeature(@NonNull Feature feature) {
-//        return relationships.parallelStream().filter(r -> r.getType() == RelationshipType.MANDATORY).anyMatch(r -> r.presentAtRightSide(feature));
-//        /*for (Relationship r : relationships) {
-//            if (r.getType() == RelationshipType.MANDATORY) {
-//                if (r.presentAtRightSide(feature)) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;*/
-//    }
-//
-//    /**
-//     * Checks whether the given {@link Feature} is optional.
-//     * @param feature a {@link Feature}
-//     * @return true if the given {@link Feature} is optional, false otherwise.
-//     */
-//    public boolean isOptionalFeature(@NonNull Feature feature) {
-//        for (Relationship r : relationships) {
-//            if (r.getType() == RelationshipType.OPTIONAL) {
-//                if (r.presentAtLeftSide(feature)) {
-//                    return true;
-//                }
-//            } else if (r.getType() == RelationshipType.OR || r.getType() == RelationshipType.ALTERNATIVE) {
-//                if (r.presentAtRightSide(feature)) {
-//                    return true;
-//                }
-//            }
-//        }
-//        return false;
-//    }
-
-//    /**
 //     * Gets all {@link Feature}s participating on the right side of the constraint
 //     * in which the left side is the given {@link Feature}.
 //     * @param leftSide a {@link Feature}
@@ -246,116 +210,96 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
 //        }
 //        return children;
 //    }
-//
-//    /**
-//     * Gets all parent {@link Feature}s of the given {@link Feature}.
-//     * @param rightSide a {@link Feature}.
-//     * @return an array of {@link Feature}s.
-//     */
-//    public List<Feature> getMandatoryParents(@NonNull Feature rightSide) throws FeatureModelException {
-//        List<Feature> parents = new LinkedList<>();
-//
-//        List<Relationship> relationships = getRelationshipsWith(rightSide);
-//        for (Relationship r : relationships) {
-//            List<Feature> parentsqueue = new LinkedList<>();
-//            if (r.isType(RelationshipType.REQUIRES)) {
-//                if (r.presentAtRightSide(rightSide)) {
-//                    parentsqueue.add(rightSide);
-//                    getMandatoryParent(r, rightSide, parents, parentsqueue);
-//                }
-//            } else if (r.isType(RelationshipType.ALTERNATIVE)
-//                    || r.isType(RelationshipType.OR)) {
-//                parentsqueue.add(rightSide);
-//                getMandatoryParent(r, rightSide, parents, parentsqueue);
-//            } // TODO - 3CNF
-//        }
-//
-//        return parents;
-//    }
-//
-//    private void getMandatoryParent(Relationship r, Feature feature, List<Feature> parents, List<Feature> parentsqueue) throws FeatureModelException {
-//        if (feature.toString().equals(this.getName())) return;
-//
-//        if (r.isType(RelationshipType.REQUIRES)) {
-//            Feature parent = ((BasicRelationship) r).getLeftSide();
-//
-//            if (parent.getName().equals(this.getName())) return;
-//            if (parentsqueue.contains(parent)) return;
-//
-//            exploreMandatoryParent(parents, parentsqueue, parent);
-//
-//        } else if (r.getType() == RelationshipType.ALTERNATIVE
-//                || r.getType() == RelationshipType.OR) {
-//            if (r.presentAtRightSide(feature)) {
-//                Feature parent = ((BasicRelationship) r).getLeftSide();
-//
-//                if (parent.getName().equals(this.getName())) return;
-//                if (parentsqueue.contains(parent)) return;
-//
-//                exploreMandatoryParent(parents, parentsqueue, parent);
-//            } else if (r.presentAtLeftSide(feature)) {
-//                List<Feature> lefts = ((BasicRelationship)r).getRightSide();
-//                for (Feature parent: lefts) {
-//
-//                    if (parentsqueue.contains(parent)) return;
-//                    if (parent.getName().equals(this.getName())) return;
-//
-//                    exploreMandatoryParent(parents, parentsqueue, parent);
-//                }
-//            }
-//        }
-//    }
-//
-//    private void exploreMandatoryParent(List<Feature> parents, List<Feature> parentsqueue, Feature parent) throws FeatureModelException {
-//        if (this.isMandatoryFeature(parent)) {
-//            if (!parents.contains(parent)) {
-//                parents.add(parent);
-//            }
-//        } else {
-//            List<Relationship> relationships = getRelationshipsWith(parent);
-//            for (Relationship r1 : relationships) {
-//                if (r1.isType(RelationshipType.REQUIRES)) {
-//                    if (r1.presentAtRightSide(parent)) {
-//                        parentsqueue.add(parent);
-//                        getMandatoryParent(r1, parent, parents, parentsqueue);
-//                        parentsqueue.remove(parentsqueue.size() - 1);
-//                    }
-//                } else if (r1.isType(RelationshipType.ALTERNATIVE)
-//                        || r1.isType(RelationshipType.OR)) {
-//                    parentsqueue.add(parent);
-//                    getMandatoryParent(r1, parent, parents, parentsqueue);
-//                    parentsqueue.remove(parentsqueue.size() - 1);
-//                }
-//            }
-//        }
-//    }
 
-//    /**
-//     * Gets all {@link Relationship}s in which the given {@link Feature} participates.
-//     * @param feature a {@link Feature}
-//     * @return an array of {@link Relationship}s.
-//     */
-//    public List<Relationship> getRelationshipsWith(@NonNull Feature feature) {
-//        List<Relationship> rs = relationships.parallelStream().filter(r -> r.presentAtRightSide(feature) || r.presentAtLeftSide(feature))
-//                .collect(Collectors.toCollection(LinkedList::new));
-//        /*for (Relationship r : relationships) {
-//            if (r.presentAtRightSide(feature) || r.presentAtLeftSide(feature)) {
-//                rs.add(r);
-//            }
-//        }*/
-//        for (Relationship r : constraints) {
-//            if (!r.isType(RelationshipType.ThreeCNF)) {
-//                if (r.presentAtRightSide(feature) || r.presentAtLeftSide(feature)) {
-//                    rs.add(r);
-//                }
-//            } else { // 3CNF
-//                if (r.contains(feature)) {
-//                    rs.add(r);
-//                }
-//            }
-//        }
-//        return rs;
-//    }
+    /**
+     * Gets all parent {@link Feature}s of the given {@link Feature}.
+     * @param rightSide a {@link Feature}.
+     * @return an array of {@link Feature}s.
+     */
+    public List<F> getMandatoryParents(@NonNull F rightSide) {
+        List<F> parents = new LinkedList<>();
+
+        List<F> parentsqueue = new LinkedList<>();
+
+        exploreMandatoryParentFrom(rightSide, parents, parentsqueue);
+
+        return parents;
+    }
+
+    @SuppressWarnings("unchecked")
+    private void exploreMandatoryParentFrom(@NonNull F rightSide, List<F> parents, List<F> parentsqueue) {
+        List<R> relationships = (List<R>) rightSide.getAllRelationships();
+        List<C> cstrs = getRequiresConstraintsAndFeatureInRight(rightSide);
+
+        for (R r : relationships) {
+            if (r instanceof OrRelationship
+                || r instanceof AlternativeRelationship) {
+                parentsqueue.add(rightSide);
+                getMandatoryParent(r, rightSide, parents, parentsqueue);
+                parentsqueue.remove(parentsqueue.size() - 1);
+            }
+        }
+
+        for (C c : cstrs) {
+            parentsqueue.add(rightSide);
+            getMandatoryParent(c, rightSide, parents, parentsqueue);
+            parentsqueue.remove(parentsqueue.size() - 1);
+        }
+    }
+
+    private void getMandatoryParent(R r, F feature, List<F> parents, List<F> parentsqueue) {
+        // ignore the root feature
+        if (feature.isRoot()) return;
+
+        if (r.isChild(feature)) {
+            F parent = r.getParent();
+
+            checkAndExploreFurther(parent, parents, parentsqueue);
+        } else if (r.isParent(feature)) {
+            List<F> lefts = r.getChildren();
+            for (F parent: lefts) {
+
+                checkAndExploreFurther(parent, parents, parentsqueue);
+            }
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void getMandatoryParent(C c, F feature, List<F> parents, List<F> parentsqueue) {
+        // ignore the root feature
+        if (feature.isRoot()) return;
+
+        F parent = (F) ((Operand) c.getFormula().getLeft()).getFeature();
+
+        // ignore the root feature
+        checkAndExploreFurther(parent, parents, parentsqueue);
+    }
+
+    private void checkAndExploreFurther(F parent, List<F> parents, List<F> parentsqueue) {
+        if (parent.isRoot()) return; // ignore the root feature
+        if (parentsqueue.contains(parent)) return;
+        if (parent.isMandatory() && !parents.contains(parent)) {
+            parents.add(parent);
+        }
+
+        exploreMandatoryParentFrom(parent, parents, parentsqueue);
+    }
+
+    /**
+     * Gets requires constraints which the given feature is on the right side.
+     * @param feature a {@link F}.
+     * @return a list of {@link C}.
+     */
+    private List<C> getRequiresConstraintsAndFeatureInRight(@NonNull F feature) {
+        List<C> cstrs = new LinkedList<>();
+        constraints.parallelStream().filter(CTConstraint::isRequires).forEachOrdered(cstr -> {
+            List<F> right = cstr.getFormula().getRight().getFeatures();
+            if (right.size() == 1 && right.contains(feature)) {
+                cstrs.add(cstr);
+            }
+        });
+        return cstrs;
+    }
 
     /**
      * Adds a new MANDATORY relationship to the feature model.
@@ -451,23 +395,12 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
      * @return number of relationships with the specific type.
      */
     public <cls extends AbstractRelationship<F>> int getNumOfRelationships(Class<cls> type) {
-        int count;
-//        if (type == RelationshipType.REQUIRES || type == RelationshipType.EXCLUDES) {
-//            count = (int) constraints.parallelStream().filter(relationship -> relationship.isType(type)).count();
-//            /*for (Relationship relationship : constraints) {
-//                if (relationship.isType(type)) {
-//                    count++;
-//                }
-//            }*/
-//        } else {
-            count = (int) relationships.parallelStream().filter(type::isInstance).count();
-            /*for (Relationship relationship : relationships) {
-                if (type.isInstance(relationship)) {
-                    count++;
-                }
-            }*/
-//        }
-        return count;
+        return (int) relationships.parallelStream().filter(type::isInstance).count();
+        /*for (Relationship relationship : relationships) {
+            if (type.isInstance(relationship)) {
+                count++;
+            }
+        }*/
     }
 
     public void addConstraint(@NonNull C cstr) {
@@ -494,10 +427,18 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return constraints.size();
     }
 
+    /**
+     * Gets the number of requires.
+     * @return number of requires.
+     */
     public int getNumOfRequires() {
         return (int) constraints.parallelStream().filter(c -> c.getFormula().isRequires()).count();
     }
 
+    /**
+     * Gets the number of excludes.
+     * @return number of excludes.
+     */
     public int getNumOfExcludes() {
         return (int) constraints.parallelStream().filter(c -> c.getFormula().isExcludes()).count();
     }

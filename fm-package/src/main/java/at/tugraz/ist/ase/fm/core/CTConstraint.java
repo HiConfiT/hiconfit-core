@@ -57,6 +57,14 @@ public class CTConstraint implements Cloneable {
         return formula.getFeatures().contains(feature);
     }
 
+    public boolean isRequires() {
+        return formula.isRequires();
+    }
+
+    public boolean isExcludes() {
+        return formula.isExcludes();
+    }
+
     @Override
     public String toString() {
         return constraint;

@@ -32,6 +32,7 @@
         <module>chocokb-package</module>
         <module>cdrmodel-package</module>
         <module>ca-cdr-package</module>
+        <module>fma</module>
     </modules>
 
     <profiles>
