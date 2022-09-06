@@ -11,6 +11,9 @@ package at.tugraz.ist.ase.cdrmodel.fm;
 import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import at.tugraz.ist.ase.kb.fm.FMKB;
@@ -38,12 +41,12 @@ import java.util.List;
  *    + hasNegativeConstraints = true
  */
 @Slf4j
-public class FMCdrModel extends AbstractCDRModel implements IChocoModel {
+public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> extends AbstractCDRModel implements IChocoModel {
 
     @Getter
     protected Model model;
-    protected FeatureModel featureModel;
-    protected FMKB fmkb;
+    protected FeatureModel<F, R, C> featureModel;
+    protected FMKB<F, R, C> fmkb;
 
     @Getter
     protected final boolean hasNegativeConstraints;
@@ -64,13 +67,13 @@ public class FMCdrModel extends AbstractCDRModel implements IChocoModel {
      * @param rootConstraints true if the root constraint (f0 = true) should be added
      * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
-    public FMCdrModel(@NonNull FeatureModel fm, boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
+    public FMCdrModel(@NonNull FeatureModel<F, R, C> fm, boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
         super(fm.getName());
 
         this.featureModel = fm;
 
         this.hasNegativeConstraints = hasNegativeConstraints;
-        this.fmkb = new FMKB(fm, hasNegativeConstraints);
+        this.fmkb = new FMKB<>(fm, hasNegativeConstraints);
         this.model = fmkb.getModelKB();
 
         this.rootConstraints = rootConstraints;
@@ -126,10 +129,11 @@ public class FMCdrModel extends AbstractCDRModel implements IChocoModel {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
-        FMCdrModel clone = (FMCdrModel) super.clone();
+        FMCdrModel<F, R, C> clone = (FMCdrModel<F, R, C>) super.clone();
 
-        clone.fmkb = new FMKB(this.featureModel, this.hasNegativeConstraints);
+        clone.fmkb = new FMKB<>(this.featureModel, this.hasNegativeConstraints);
         clone.model = clone.fmkb.getModelKB();
 
         return clone;

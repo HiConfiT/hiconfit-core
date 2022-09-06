@@ -13,6 +13,9 @@ import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
@@ -32,16 +35,16 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FMDebuggingModelTest1 {
-    static FeatureModel featureModel;
+    static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
     static TestSuite testSuite;
 
-    static FMDebuggingModel debuggingModel;
+    static FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel;
 
     @SneakyThrows
     @BeforeAll
     static void setUp() {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
@@ -51,7 +54,7 @@ class FMDebuggingModelTest1 {
         testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
     }
