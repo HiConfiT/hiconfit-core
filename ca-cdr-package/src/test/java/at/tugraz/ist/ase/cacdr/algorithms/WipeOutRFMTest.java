@@ -12,14 +12,18 @@ import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.cdrmodel.fm.FMCdrModel;
 import at.tugraz.ist.ase.cdrmodel.test_model.model.TestModel7;
 import at.tugraz.ist.ase.cdrmodel.test_model.model.TestModel8;
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.FeatureModelException;
-import at.tugraz.ist.ase.fm.core.RelationshipType;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -79,29 +83,36 @@ class WipeOutRFMTest {
     }
 
     @Test
-    void test3() throws FeatureModelException {
-        FeatureModel fm = new FeatureModel();
-        fm.addFeature("survey", "survey");
-        fm.addFeature("pay", "pay");
-        fm.addFeature("ABtesting", "ABtesting");
-        fm.addFeature("statistics", "statistics");
-        fm.addFeature("qa", "qa");
-        fm.addFeature("license", "license");
-        fm.addFeature("nonlicense", "nonlicense");
-        fm.addFeature("multiplechoice", "multiplechoice");
-        fm.addFeature("singlechoice", "singlechoice");
-        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("pay")));
-        fm.addRelationship(RelationshipType.OPTIONAL, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
-        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("statistics")));
-        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("qa")));
-        fm.addRelationship(RelationshipType.ALTERNATIVE, fm.getFeature("pay"), List.of(fm.getFeature("license"), fm.getFeature("nonlicense")));
-        fm.addRelationship(RelationshipType.OR, fm.getFeature("qa"), List.of(fm.getFeature("multiplechoice"), fm.getFeature("singlechoice")));
-        fm.addRelationship(RelationshipType.OPTIONAL, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
-        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
-        fm.addConstraint(RelationshipType.EXCLUDES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("nonlicense")));
-        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
+    void test3() {
+        ConfRuleTranslator translator = new ConfRuleTranslator();
+        FeatureBuilder featureBuilder = new FeatureBuilder();
+        RelationshipBuilder relationshipBuilder = new RelationshipBuilder(translator);
+        ConstraintBuilder constraintBuilder = new ConstraintBuilder(translator);
 
-        FMCdrModel testCaseModel = new FMCdrModel(fm, true, false, true);
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm = new FeatureModel<>("test", featureBuilder, relationshipBuilder, constraintBuilder);
+        Feature survey = fm.addRoot("survey", "survey");
+        Feature pay = fm.addFeature("pay", "pay");
+        Feature ABtesting = fm.addFeature("ABtesting", "ABtesting");
+        Feature statistics = fm.addFeature("statistics", "statistics");
+        Feature qa = fm.addFeature("qa", "qa");
+        Feature license = fm.addFeature("license", "license");
+        Feature nonlicense = fm.addFeature("nonlicense", "nonlicense");
+        Feature multiplechoice = fm.addFeature("multiplechoice", "multiplechoice");
+        Feature singlechoice = fm.addFeature("singlechoice", "singlechoice");
+
+        fm.addMandatoryRelationship(survey, pay);
+        fm.addOptionalRelationship(survey, ABtesting);
+        fm.addMandatoryRelationship(survey, statistics);
+        fm.addMandatoryRelationship(survey, qa);
+        fm.addAlternativeRelationship(pay, List.of(license, nonlicense));
+        fm.addOrRelationship(qa, List.of(multiplechoice, singlechoice));
+        fm.addOptionalRelationship(statistics, ABtesting);
+
+        fm.addRequires(ABtesting, statistics);
+        fm.addExcludes(ABtesting, nonlicense);
+        fm.addRequires(ABtesting, survey);
+
+        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> testCaseModel = new FMCdrModel<>(fm, true, false, true);
         testCaseModel.initialize();
 
         System.out.println("=========================================");
