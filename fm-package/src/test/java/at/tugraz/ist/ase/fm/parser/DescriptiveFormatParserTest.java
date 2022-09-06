@@ -8,9 +8,6 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
-import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
-import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
-import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
@@ -32,7 +29,7 @@ class DescriptiveFormatParserTest {
         File fileFM = new File("src/test/resources/bamboobike.fm4conf");
         IConfRuleTranslatable translator = new ConfRuleTranslator();
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         System.out.println(featureModel);

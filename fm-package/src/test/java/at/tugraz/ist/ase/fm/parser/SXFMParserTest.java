@@ -8,9 +8,6 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
-import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
-import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
-import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
@@ -32,7 +29,7 @@ public class SXFMParserTest {
     void testBamboo() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike_splot.sxfm");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -68,7 +65,7 @@ public class SXFMParserTest {
     void testSmartwatch() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/smartwatch.sxfm");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         String st = "FEATURES:\n" +
@@ -107,7 +104,7 @@ public class SXFMParserTest {
     public void testFM_10_0() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String st = "FEATURES:\n" +

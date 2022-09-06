@@ -8,19 +8,24 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
-import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
-import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
-import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import at.tugraz.ist.ase.fm.builder.*;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
 import lombok.NonNull;
 
+/**
+ * Factory for creating a feature model parser.
+ * @param <F> Type of feature
+ * @param <R> Type of relationship
+ * @param <C> Type of constraint
+ */
 public class FMParserFactory<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> {
 
-    private IFeatureBuildable featureBuilder;
-    private IRelationshipBuildable relationshipBuilder;
-    private IConstraintBuildable constraintBuilder;
+    private final IFeatureBuildable featureBuilder; // Builder for creating features
+    private final IRelationshipBuildable relationshipBuilder; // Builder for creating relationships
+    private final IConstraintBuildable constraintBuilder; // Builder for creating constraints
 
     private FMParserFactory(@NonNull IFeatureBuildable featureBuilder,
                             @NonNull IRelationshipBuildable relationshipBuilder,
@@ -30,10 +35,26 @@ public class FMParserFactory<F extends Feature, R extends AbstractRelationship<F
         this.constraintBuilder = constraintBuilder;
     }
 
-    public static <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> FMParserFactory<F, R, C> getInstance(@NonNull IFeatureBuildable featureBuilder,
-                                              @NonNull IRelationshipBuildable relationshipBuilder,
-                                              @NonNull IConstraintBuildable constraintBuilder) {
-        return new FMParserFactory<F, R, C>(featureBuilder, relationshipBuilder, constraintBuilder);
+    public static <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+    FMParserFactory<F, R, C> getInstance(@NonNull IFeatureBuildable featureBuilder,
+                                      @NonNull IRelationshipBuildable relationshipBuilder,
+                                      @NonNull IConstraintBuildable constraintBuilder) {
+        return new FMParserFactory<>(featureBuilder, relationshipBuilder, constraintBuilder);
+    }
+
+    /**
+     * Creates a feature model parser with built-in builders.
+     * @return a feature model parser
+     * @param <F> Type of feature
+     * @param <R> Type of relationship
+     * @param <C> Type of constraint
+     */
+    public static <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+    FMParserFactory<F, R, C> getInstance() {
+        ConfRuleTranslator translator = new ConfRuleTranslator();
+        return new FMParserFactory<>(new FeatureBuilder(),
+                new RelationshipBuilder(translator),
+                new ConstraintBuilder(translator));
     }
 
     public FeatureModelParser<F, R, C> getParser(@NonNull FMFormat fmFormat) {

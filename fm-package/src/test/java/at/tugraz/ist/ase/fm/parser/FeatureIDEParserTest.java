@@ -8,9 +8,6 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
-import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
-import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
-import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
@@ -31,8 +28,10 @@ class FeatureIDEParserTest {
     @Test
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike_featureide.xml");
+        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
+
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -68,7 +67,7 @@ class FeatureIDEParserTest {
     void test1() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/linux-2.6.33.3_simple.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
@@ -78,7 +77,7 @@ class FeatureIDEParserTest {
     void test2() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/linux-2.6.33.3.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
@@ -88,7 +87,7 @@ class FeatureIDEParserTest {
     void test3() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/model1.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """
@@ -130,7 +129,7 @@ class FeatureIDEParserTest {
     void test4() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/complex_featureide_model.xml");
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance(new FeatureBuilder(), new RelationshipBuilder(translator), new ConstraintBuilder(translator)).getParser(fileFM.getName());
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         String expected = """

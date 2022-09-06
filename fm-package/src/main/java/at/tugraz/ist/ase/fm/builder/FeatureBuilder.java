@@ -22,5 +22,4 @@ public class FeatureBuilder implements IFeatureBuildable {
     public <F extends Feature> F buildFeature(@NonNull String name, @NonNull String id) {
         return (F) new Feature(name, id);
     }
-
 }
