@@ -23,7 +23,6 @@ import static com.google.common.base.Preconditions.checkArgument;
  * <p>
  * This class should be immutable.
  */
-@Getter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Slf4j
 public class Feature implements Cloneable {
@@ -31,20 +30,25 @@ public class Feature implements Cloneable {
     /**
      * Name of feature
      */
+    @Getter
     @EqualsAndHashCode.Include
     protected @NonNull String name;
 
     /**
      * ID of feature
      */
+    @Getter
     @EqualsAndHashCode.Include
     protected @NonNull String id;
 
+    @Getter
     protected boolean isRoot = false;
 
+    @Getter
     protected Feature parent = null;
     protected List<AbstractRelationship<? extends Feature>> relationships = new LinkedList<>();
 
+    @Getter
     @Setter
     protected boolean isAbstract = false;
 
@@ -94,9 +98,16 @@ public class Feature implements Cloneable {
                 && parent.relationships.stream().anyMatch(r -> r.isMandatory() && r.isChild(this));
     }
 
+//    public boolean isOptional() {
+//        return parent != null
+//                && parent.relationships.parallelStream().anyMatch(r -> r.isOptional() && r.isChild(this));
+//    }
+
     public boolean isOptional() {
         return parent != null
-                && parent.relationships.parallelStream().anyMatch(r -> r.isOptional() && r.isChild(this));
+                && parent.relationships.parallelStream()
+                        .anyMatch(r -> r.isChild(this)
+                                       && (r.isOptional() || r.isOr() || r.isAlternative()));
     }
 
 //    public boolean isOrGroup() {
@@ -131,12 +142,26 @@ public class Feature implements Cloneable {
     }
 
     public List<Feature> getChildren() {
-        return relationships.parallelStream().flatMap(relationship -> relationship.getChildren().parallelStream()).collect(Collectors.toCollection(LinkedList::new));
+        return relationships.parallelStream().flatMap(r -> r.getChildren().parallelStream()).collect(Collectors.toCollection(LinkedList::new));
         /*List<Feature> children = new LinkedList<>();
         for (AbstractRelationship<? extends Feature> relationship : relationships) {
             children.addAll(relationship.getChildren());
         }
         return children;*/
+    }
+
+    public List<AbstractRelationship<? extends Feature>> getRelationshipsAsParent() {
+        return relationships;
+    }
+
+    public List<AbstractRelationship<? extends Feature>> getAllRelationships() {
+        List<AbstractRelationship<? extends Feature>> allRelationships = new LinkedList<>(relationships);
+        parent.getRelationshipsAsParent().forEach(r -> {
+            if (r.isChild(this)) {
+                allRelationships.add(r);
+            }
+        });
+        return allRelationships;
     }
 
     /**

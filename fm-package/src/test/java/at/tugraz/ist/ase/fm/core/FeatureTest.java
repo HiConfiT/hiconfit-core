@@ -124,10 +124,10 @@ class FeatureTest {
         assertAll(() -> assertFalse(root.isOptional()),
                 () -> assertTrue(f1.isOptional()),
                 () -> assertFalse(f2.isOptional()),
-                () -> assertFalse(f3.isOptional()),
-                () -> assertFalse(f4.isOptional()),
-                () -> assertFalse(f5.isOptional()),
-                () -> assertFalse(f6.isOptional()));
+                () -> assertTrue(f3.isOptional()),
+                () -> assertTrue(f4.isOptional()),
+                () -> assertTrue(f5.isOptional()),
+                () -> assertTrue(f6.isOptional()));
     }
 
     @Test
@@ -175,18 +175,11 @@ class FeatureTest {
                 () -> assertEquals(f1.parent, fClone1.parent),
                 () -> assertSame(f1.parent, fClone1.parent),
                 () -> assertEquals(f1.getChildren(), fClone1.getChildren()),
-                () -> assertEquals(f1.getRelationships(), fClone1.getRelationships()),
-                () -> assertNotSame(f1.getRelationships(), fClone1.getRelationships()),
-                () -> assertEquals(f1.getRelationships().size(), fClone1.getRelationships().size()),
-                () -> assertEquals(f1.getRelationships().get(0).toString(), fClone1.getRelationships().get(0).toString()),
-                () -> assertEquals(f1.getRelationships().get(0), fClone1.getRelationships().get(0)),
-                () -> assertNotSame(f1.getRelationships().get(0), fClone1.getRelationships().get(0)));
-
-//                () -> assertNotSame(f1, fClone.getRelationships().get(0).getChildren().get(0)),
-//                () -> assertNotSame(f2, fClone.getRelationships().get(0).getChildren().get(1)),
-//                () -> assertNotSame(f3, fClone.getRelationships().get(1).getChildren().get(0)),
-//                () -> assertNotSame(f4, fClone.getRelationships().get(1).getChildren().get(1)),
-//                () -> assertNotSame(f5, fClone.getRelationships().get(2).getChildren().get(0)),
-//                () -> assertNotSame(f6, fClone.getRelationships().get(2).getChildren().get(1)));
+                () -> assertEquals(f1.getRelationshipsAsParent(), fClone1.getRelationshipsAsParent()),
+                () -> assertNotSame(f1.getRelationshipsAsParent(), fClone1.getRelationshipsAsParent()),
+                () -> assertEquals(f1.getRelationshipsAsParent().size(), fClone1.getRelationshipsAsParent().size()),
+                () -> assertEquals(f1.getRelationshipsAsParent().get(0).toString(), fClone1.getRelationshipsAsParent().get(0).toString()),
+                () -> assertEquals(f1.getRelationshipsAsParent().get(0), fClone1.getRelationshipsAsParent().get(0)),
+                () -> assertNotSame(f1.getRelationshipsAsParent().get(0), fClone1.getRelationshipsAsParent().get(0)));
     }
 }
