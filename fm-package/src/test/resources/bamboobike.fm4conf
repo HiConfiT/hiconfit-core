@@ -16,8 +16,8 @@ Back-pedal
 RELATIONSHIPS:
 mandatory(Bamboo Bike, Frame),
 mandatory(Bamboo Bike, Brake),
-optional(Engine, Bamboo Bike),
-optional(Drop Handlebar, Bamboo Bike),
+optional(Bamboo Bike, Engine),
+optional(Bamboo Bike, Drop Handlebar),
 alternative(Frame, Female, Male, Step-through),
 or(Brake, Front, Rear, Back-pedal)
 CONSTRAINTS:

@@ -219,15 +219,11 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C 
                 node = queue.remove();
 
                 if (node instanceof SolitaireFeature) {
+                    F leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
+                    F rightSide = fm.getFeature(node.getID());
                     if (((SolitaireFeature) node).isOptional()) { // OPTIONAL
-                        F leftSide = fm.getFeature(node.getID());
-                        F rightSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
-
-                        fm.addOptionalRelationship(rightSide, leftSide);
+                        fm.addOptionalRelationship(leftSide, rightSide);
                     } else { // MANDATORY
-                        F leftSide = fm.getFeature(((FeatureTreeNode) node.getParent()).getID());
-                        F rightSide = fm.getFeature(node.getID());
-
                         fm.addMandatoryRelationship(leftSide, rightSide);
                     }
                 } else if (node instanceof FeatureGroup) {

@@ -196,18 +196,15 @@ public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C e
                             if (isCorrectNode(child)) {
                                 Element childElement = (Element) child;
 
+                                F leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_ID));
+                                F rightSide = fm.getFeature(childElement.getAttribute(ATTRIB_ID));
+
                                 if (childElement.getAttribute(ATTRIB_OPTIONAL).equals(VALUE_FALSE)) {
                                     // MANDATORY
-                                    F leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_ID));
-                                    F rightSide = fm.getFeature(childElement.getAttribute(ATTRIB_ID));
-
                                     fm.addMandatoryRelationship(leftSide, rightSide);
                                 } else {
                                     // OPTIONAL
-                                    F leftSide = fm.getFeature(childElement.getAttribute(ATTRIB_ID));
-                                    F rightSide = fm.getFeature(parentElement.getAttribute(ATTRIB_ID));
-
-                                    fm.addOptionalRelationship(rightSide, leftSide);
+                                    fm.addOptionalRelationship(leftSide, rightSide);
                                 }
                             }
                         }

@@ -148,7 +148,7 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
             F parent = getParent(ctx.identifier());
             List<F> children = getChildren(ctx.identifier());
 
-            fm.addOptionalRelationship(children.get(0), parent);
+            fm.addOptionalRelationship(parent, children.get(0));
         } catch (Exception e) {
             log.error("{}Error while adding optional relationship [relationship={}]", LoggerUtils.tab(), ctx.getText());
         }

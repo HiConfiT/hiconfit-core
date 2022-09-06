@@ -195,13 +195,10 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
 
                                 // takes optional
                                 if (childFeatureObject.has(KEY_OPTIONAL)) {
+                                    F parent = fm.getFeature(parentID);
                                     if (!childFeatureObject.getBoolean(KEY_OPTIONAL)) { // MANDATORY
-                                        F parent = fm.getFeature(parentID);
-
                                         fm.addMandatoryRelationship(parent, child);
                                     } else { // OPTIONAL
-                                        F parent = fm.getFeature(parentID);
-
                                         fm.addOptionalRelationship(parent, child);
                                     }
                                 }

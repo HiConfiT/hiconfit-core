@@ -38,12 +38,20 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
     protected List<R> relationships = new LinkedList<>();
     protected List<C> constraints = new LinkedList<>();
 
+    // the root of the feature model tree
     protected F root = null;
 
     protected IFeatureBuildable featureBuilder;
     protected IRelationshipBuildable relationshipBuilder;
     protected IConstraintBuildable constraintBuilder;
 
+    /**
+     * Constructor for a feature model
+     * @param name name of the feature model
+     * @param featureBuilder builder for features
+     * @param relationshipBuilder builder for relationships
+     * @param constraintBuilder builder for constraints
+     */
     @Builder
     public FeatureModel(@NonNull String name,
                         @NonNull IFeatureBuildable featureBuilder,
@@ -60,9 +68,11 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
     }
 
     /**
-     * Adds a root feature
+     * Adds a root feature with the given name and id.
+     * The root feature is abstract.
      * @param name name of root feature
      * @param id id of root feature
+     * @return the root feature
      */
     public F addRoot(@NonNull String name, @NonNull String id) {
         checkArgument(this.root == null, "Root feature already exists!");
@@ -75,6 +85,13 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return this.root;
     }
 
+    /**
+     * Adds a feature with the given name and id.
+     * The order of adding features should follow the breadth-first order.
+     * @param name name of feature
+     * @param id id of feature
+     * @return the added feature
+     */
     public F addFeature(@NonNull String name, @NonNull String id) {
         checkState(this.root != null, "Root feature does not exist!");
         checkState(bfFeatures.size() >= 1, "Root feature does not exist!");
@@ -88,6 +105,11 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return f;
     }
 
+    /**
+     * Checks if the given name is duplicated.
+     * @param fname name of feature
+     * @return true if the given name is unique, otherwise false
+     */
     private boolean isUniqueFeatureName(String fname) {
         return bfFeatures.parallelStream().noneMatch(f -> f.isNameDuplicate(fname));
         /*for (Feature f: bfFeatures) {
@@ -98,6 +120,11 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return true;*/
     }
 
+    /**
+     * Checks if the given id is duplicated.
+     * @param id id of feature
+     * @return true if the given id is unique, otherwise false
+     */
     private boolean isUniqueFeatureId(String id) {
         return bfFeatures.parallelStream().noneMatch(f -> f.isIdDuplicate(id));
         /*for (Feature f: bfFeatures) {
@@ -141,6 +168,14 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
      */
     public int getNumOfFeatures() {
         return bfFeatures.size();
+    }
+
+    /**
+     * Gets the number of leaf features
+     * @return the number of leaf features
+     */
+    public int getNumOfLeaf() {
+        return (int) bfFeatures.parallelStream().filter(F::isLeaf).count();
     }
 
 //    /**

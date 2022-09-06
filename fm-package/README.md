@@ -4,16 +4,14 @@ This package provides the management functionalities for [basic feature models](
 
 ## Features
 
-- Provides an object representing a feature model
-- Provides a feature model factory which can create a feature model parser for the format of the given feature model
+- Provides the data structure representing a feature model
+- Provides a feature model factory which can create a feature model parser which corresponds with the format of the given feature model
 - Supports the following feature model formats:
     1. [SPLOT feature models](splot-research.org). The file extension could be “.sxfm” or “.splx.”
     2. [FeatureIDE format](https://featureide.github.io). The file extension should be “xml.”
     3. v.control format. The feature model format of the v.control tool. The file extension should be “xmi.”
     4. [Glencoe format](https://glencoe.hochschule-trier.de). The file extension should be “json.”
     5. [Descriptive format](https://github.com/manleviet/CA-CDR-V2/blob/main/fm-package/src/test/resources/bamboobike.fm4conf). Our feature model format. The file extension should be “fm4conf”.
-
-
 
 ## How to get this package
 

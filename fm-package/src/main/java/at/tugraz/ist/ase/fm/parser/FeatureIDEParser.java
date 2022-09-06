@@ -197,18 +197,15 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
                         if (isCorrectNode(child)) {
                             Element childElement = (Element) child;
 
+                            F leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
+                            F rightSide = fm.getFeature(childElement.getAttribute(ATTRIB_NAME));
+
                             if (childElement.getAttribute(ATTRIB_MANDATORY).equals(VALUE_TRUE)) {
                                 // MANDATORY
-                                F leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
-                                F rightSide = fm.getFeature(childElement.getAttribute(ATTRIB_NAME));
-
                                 fm.addMandatoryRelationship(leftSide, rightSide);
                             } else {
                                 // OPTIONAL
-                                F leftSide = fm.getFeature(childElement.getAttribute(ATTRIB_NAME));
-                                F rightSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
-
-                                fm.addOptionalRelationship(rightSide, leftSide);
+                                fm.addOptionalRelationship(leftSide, rightSide);
                             }
                         }
                     }
