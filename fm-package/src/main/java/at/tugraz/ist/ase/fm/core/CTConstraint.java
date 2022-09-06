@@ -53,6 +53,10 @@ public class CTConstraint implements Cloneable {
         return new LinkedList<>(formula.getFeatures());
     }
 
+    public <F extends Feature> boolean contains(F feature) {
+        return formula.getFeatures().contains(feature);
+    }
+
     @Override
     public String toString() {
         return constraint;
