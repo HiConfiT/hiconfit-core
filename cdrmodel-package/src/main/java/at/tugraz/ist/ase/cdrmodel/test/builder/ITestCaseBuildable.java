@@ -12,5 +12,5 @@ import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import lombok.NonNull;
 
 public interface ITestCaseBuildable {
-    ITestCase buildTestCase(@NonNull String testcase);
+    ITestCase buildTestCase(@NonNull Object testcase);
 }
