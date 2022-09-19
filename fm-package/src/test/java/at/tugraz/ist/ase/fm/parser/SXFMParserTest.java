@@ -12,8 +12,6 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
-import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +21,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class SXFMParserTest {
     static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
-    static IConfRuleTranslatable translator = new ConfRuleTranslator();
 
     @Test
     void testBamboo() throws FeatureModelParserException {
