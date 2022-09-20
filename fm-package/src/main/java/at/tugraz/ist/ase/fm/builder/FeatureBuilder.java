@@ -11,6 +11,9 @@ package at.tugraz.ist.ase.fm.builder;
 import at.tugraz.ist.ase.fm.core.Feature;
 import lombok.NonNull;
 
+/**
+ * Provides methods for creating the feature
+ */
 public class FeatureBuilder implements IFeatureBuildable {
 
     @SuppressWarnings("unchecked")

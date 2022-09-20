@@ -12,6 +12,9 @@ import at.tugraz.ist.ase.fm.core.Feature;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 
+/**
+ * A utility class for constructing Abstract Syntax Trees (ASTs).
+ */
 @UtilityClass
 public class ASTBuilder {
     public <F extends Feature> ASTNode buildOperand(@NonNull F operand) {

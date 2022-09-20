@@ -14,6 +14,9 @@ import lombok.NonNull;
 
 import java.util.List;
 
+/**
+ * Provides methods for creating the relationship of a basic feature model
+ */
 public class RelationshipBuilder implements IRelationshipBuildable {
 
     private final IConfRuleTranslatable translator;

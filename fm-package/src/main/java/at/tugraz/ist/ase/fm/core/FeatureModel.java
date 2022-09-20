@@ -179,38 +179,6 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return (int) bfFeatures.parallelStream().filter(F::isLeaf).count();
     }
 
-//    /**
-//     * Gets all {@link Feature}s participating on the right side of the constraint
-//     * in which the left side is the given {@link Feature}.
-//     * @param leftSide a {@link Feature}
-//     * @return an array of {@link Feature}s
-//     */
-//    public List<Feature> getRightSideOfRelationships(@NonNull Feature leftSide) throws FeatureModelException {
-//        List<Feature> children = new LinkedList<>();
-//        for (Relationship r : relationships) {
-//            if (r.getType() == RelationshipType.OPTIONAL) {
-//                if (r.presentAtRightSide(leftSide)) {
-//                    Feature left = ((BasicRelationship) r).getLeftSide();
-//                    Feature parent = getFeature(left.getId());
-//                    if (parent != null) {
-//                        children.add(parent);
-//                    }
-//                }
-//            } else {
-//                if (r.presentAtLeftSide(leftSide)) {
-//                    List<Feature> rightSide = ((BasicRelationship) r).getRightSide();
-//                    for (Feature right : rightSide) {
-//                        Feature child = getFeature(right.getId());
-//                        if (child != null) {
-//                            children.add(child);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return children;
-//    }
-
     /**
      * Gets all parent {@link Feature}s of the given {@link Feature}.
      * @param rightSide a {@link Feature}.

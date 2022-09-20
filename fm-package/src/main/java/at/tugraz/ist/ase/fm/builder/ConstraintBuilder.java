@@ -16,6 +16,9 @@ import at.tugraz.ist.ase.fm.core.ast.Operand;
 import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.NonNull;
 
+/**
+ * Provides methods for building constraints.
+ */
 public class ConstraintBuilder implements IConstraintBuildable {
 
     private final IConfRuleTranslatable translator;

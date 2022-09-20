@@ -66,14 +66,6 @@ public abstract class AbstractRelationship<F extends Feature> {
         return children.get(0);
     }
 
-//    /**
-//     * Adds a child to the relationship.
-//     * Supports this operation just in case of a mutable relationship.
-//     */
-//    public void addChild(Feature child) {
-//        children.add(child);
-//    }
-
     /**
      * Checks whether the given {@link Feature} belongs to the left part of the relationship/constraint.
      *

@@ -17,7 +17,7 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkArgument;
 
 /**
- * Represents an Or relationship.
+ * Represents an Alternative relationship.
  * <p>
  * This class should be immutable.
  */
