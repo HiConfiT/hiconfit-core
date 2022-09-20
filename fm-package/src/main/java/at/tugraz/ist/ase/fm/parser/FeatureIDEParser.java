@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
@@ -169,7 +170,13 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
 
         NodeList struct = rootEle.getElementsByTagName(TAG_STRUCT);
 
-        examineAStructNode(struct.item(0));
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(struct.item(0));
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            queue.addAll(examineAStructNode(node));
+        }
 
         LoggerUtils.outdent();
     }
@@ -180,7 +187,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
      *
      * @param node - a XML node
      */
-    private void examineAStructNode(Node node) {
+    private List<Node> examineAStructNode(Node node) {
         NodeList children = node.getChildNodes();
         Element parentElement = (Element) node;
         // create features for child nodes
@@ -231,12 +238,15 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
         }
 
         // examine sub-nodes
+        List<Node> subNodes = new LinkedList<>();
         for (int i = 0; i < children.getLength(); i++) {
             Node child = children.item(i);
             if (isCorrectNode(child)) {
-                examineAStructNode(child);
+                subNodes.add(child);
+//                examineAStructNode(child);
             }
         }
+        return subNodes;
     }
 
     /**

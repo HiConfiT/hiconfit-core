@@ -140,8 +140,6 @@ class FeatureIDEParserTest {
                 	AB
                 	AC
                 	AD
-                	ADA
-                	ADB
                 	BA
                 	BB
                 	BC
@@ -150,6 +148,8 @@ class FeatureIDEParserTest {
                 	CC
                 	DA
                 	DB
+                	ADA
+                	ADB
                 	DAA
                 	DAB
                 RELATIONSHIPS:
@@ -161,12 +161,12 @@ class FeatureIDEParserTest {
                 	optional(A, AB)
                 	optional(A, AC)
                 	mandatory(A, AD)
-                	or(AD, ADA, ADB)
                 	mandatory(B, BA)
                 	optional(B, BB)
                 	optional(B, BC)
                 	or(C, CA, CB, CC)
                 	alternative(D, DA, DB)
+                	or(AD, ADA, ADB)
                 	or(DA, DAA, DAB)
                 CONSTRAINTS:
                 	(AB -> ~CB)
