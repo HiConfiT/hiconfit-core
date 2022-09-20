@@ -35,7 +35,7 @@ public class TestSuiteReader implements ITestSuiteReadable {
 
         @Cleanup BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
 
-        List<ITestCase>  testCases;
+        List<ITestCase> testCases;
 
         br.readLine(); // omit first line
 
