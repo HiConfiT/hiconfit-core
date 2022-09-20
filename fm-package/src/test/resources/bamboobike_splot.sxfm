@@ -25,6 +25,8 @@
 			: Rear(_r_2_9_11)
 			: Back-pedal(_r_2_9_12)
 	:o Engine(_r_3)
+		:o Engine1(_r_3_1)
+			:o Engine2(_r_3_1_1)
 	:o Drop Handlebar(_r_4)
 </feature_tree>
 <constraints>

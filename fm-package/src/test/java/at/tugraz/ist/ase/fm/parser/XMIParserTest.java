@@ -45,6 +45,8 @@ class XMIParserTest {
                 	Front
                 	Rear
                 	Back-pedal
+                	Engine1
+                	Engine2
                 RELATIONSHIPS:
                 	mandatory(Bamboo Bike, Frame)
                 	mandatory(Bamboo Bike, Brake)
@@ -52,6 +54,8 @@ class XMIParserTest {
                 	optional(Bamboo Bike, Drop Handlebar)
                 	alternative(Frame, Female, Male, Step-through)
                 	or(Brake, Front, Rear, Back-pedal)
+                	optional(Engine, Engine1)
+                	optional(Engine1, Engine2)
                 CONSTRAINTS:
                 	excludes(Engine, Back-pedal)
                 	requires(Drop Handlebar, Male)

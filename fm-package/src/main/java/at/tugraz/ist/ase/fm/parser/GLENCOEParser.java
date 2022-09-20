@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
@@ -162,7 +163,13 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
         String rootName = rootFeature.getString(KEY_NAME);
         fm.addRoot(rootName, rootId);
 
-        examineANode(tree);
+        Queue<JSONObject> queue = new LinkedList<>();
+        queue.add(tree);
+
+        while (!queue.isEmpty()) {
+            JSONObject node = queue.poll();
+            queue.addAll(examineANode(node));
+        }
 
         LoggerUtils.outdent();
     }
@@ -174,11 +181,12 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
      * @param node - a {@link JSONObject}
      * @throws FeatureModelParserException when error occurs in parsing
      */
-    private void examineANode(JSONObject node) throws FeatureModelParserException {
+    private List<JSONObject> examineANode(JSONObject node) throws FeatureModelParserException {
         try {
             String parentID = node.getString(KEY_ID);
             JSONObject parentFeature = getFeatureObject(parentID);
 
+            List<JSONObject> subNodes = new LinkedList<>();
             if (node.has(KEY_CHILDREN)) {
                 // takes children nodes
                 JSONArray childrenNodes = node.getJSONArray(KEY_CHILDREN);
@@ -228,9 +236,11 @@ public class GLENCOEParser<F extends Feature, R extends AbstractRelationship<F>,
                 // examine sub-nodes
                 for (int i = 0; i < childrenNodes.length(); i++) {
                     JSONObject child = (JSONObject) childrenNodes.get(i);
-                    examineANode(child);
+                    subNodes.add(child);
+//                    examineANode(child);
                 }
             }
+            return subNodes;
         } catch (Exception e) {
             throw new FeatureModelParserException(e.getMessage());
         }

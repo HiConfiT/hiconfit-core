@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
@@ -166,7 +167,13 @@ public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C e
 
         NodeList models = rootEle.getElementsByTagName(TAG_STRUCT);
 
-        examineModelsNode(models.item(0));
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(models.item(0));
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            queue.addAll(examineModelsNode(node));
+        }
 
         LoggerUtils.outdent();
     }
@@ -178,7 +185,7 @@ public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C e
      * @param node - a XML node
      * @throws FeatureModelParserException when error occurs in parsing
      */
-    private void examineModelsNode(Node node) throws FeatureModelParserException {
+    private List<Node> examineModelsNode(Node node) throws FeatureModelParserException {
         try {
             NodeList children = node.getChildNodes();
             Element parentElement = (Element) node;
@@ -226,12 +233,15 @@ public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C e
             }
 
             // examine sub-nodes
+            List<Node> subNodes = new LinkedList<>();
             for (int i = 0; i < children.getLength(); i++) {
                 Node child = children.item(i);
                 if (isCorrectNode(child)) {
-                    examineModelsNode(child);
+                    subNodes.add(child);
+//                    examineModelsNode(child);
                 }
             }
+            return subNodes;
         } catch (Exception e) {
             throw new FeatureModelParserException("There exists errors in the feature model file!");
         }

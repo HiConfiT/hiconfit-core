@@ -42,6 +42,8 @@ public class SXFMParserTest {
                 	Front
                 	Rear
                 	Back-pedal
+                	Engine1
+                	Engine2
                 RELATIONSHIPS:
                 	mandatory(Bamboo Bike, Frame)
                 	mandatory(Bamboo Bike, Brake)
@@ -49,6 +51,8 @@ public class SXFMParserTest {
                 	optional(Bamboo Bike, Drop Handlebar)
                 	alternative(Frame, Female, Male, Step-through)
                 	or(Brake, Front, Rear, Back-pedal)
+                	optional(Engine, Engine1)
+                	optional(Engine1, Engine2)
                 CONSTRAINTS:
                 	requires(Drop Handlebar, Male)
                 	excludes(Engine, Back-pedal)
@@ -108,12 +112,12 @@ public class SXFMParserTest {
                 String.format("\t%s\n", "FM_10_0") +
                 String.format("\t%s\n", "F1") +
                 String.format("\t%s\n", "F2") +
-                String.format("\t%s\n", "F8") +
                 String.format("\t%s\n", "F3") +
                 String.format("\t%s\n", "F4") +
                 String.format("\t%s\n", "F5") +
                 String.format("\t%s\n", "F6") +
                 String.format("\t%s\n", "F7") +
+                String.format("\t%s\n", "F8") +
                 "RELATIONSHIPS:\n" +
                 String.format("\t%s\n", "optional(FM_10_0, F1)") +
                 String.format("\t%s\n", "mandatory(FM_10_0, F2)") +

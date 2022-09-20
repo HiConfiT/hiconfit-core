@@ -68,6 +68,18 @@
       "optional": true,
       "type": "FEATURE",
       "note": ""
+    },
+    "ckci3tibr00063e58kb3ine27": {
+      "name": "Engine1",
+      "optional": true,
+      "type": "FEATURE",
+      "note": ""
+    },
+    "ckci3tibr00063e58kb3ine28": {
+      "name": "Engine2",
+      "optional": true,
+      "type": "FEATURE",
+      "note": ""
     }
   },
   "tree": {
@@ -102,7 +114,17 @@
         ]
       },
       {
-        "id": "ckci3tibr00063e58kb3ine26"
+        "id": "ckci3tibr00063e58kb3ine26",
+        "children": [
+          {
+            "id": "ckci3tibr00063e58kb3ine27",
+            "children": [
+              {
+                "id": "ckci3tibr00063e58kb3ine28"
+              }
+            ]
+          }
+        ]
       },
       {
         "id": "ckci3trnl00083e583617r23q"

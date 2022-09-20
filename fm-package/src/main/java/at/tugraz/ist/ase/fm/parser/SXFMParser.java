@@ -185,19 +185,27 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C 
                 }
             }
 
-            exploreChildren(queue, node);
+            exploreChildFeatures(queue, node);
         }
 
         LoggerUtils.outdent();
     }
 
-    private void exploreChildren(Queue<FeatureTreeNode> queue, FeatureTreeNode node) {
+    private void exploreChildFeatures(Queue<FeatureTreeNode> queue, FeatureTreeNode node) {
+        IntStream.range(0, node.getChildCount()).mapToObj(i -> (FeatureTreeNode) node.getChildAt(i)).forEachOrdered(child -> {
+            if ((child instanceof RootNode)
+                    || (child instanceof SolitaireFeature)
+                    || (child instanceof GroupedFeature)) {
+                queue.add(child);
+            } else {
+                exploreChildNodes(queue, child);
+            }
+        });
+    }
+
+    private void exploreChildNodes(Queue<FeatureTreeNode> queue, FeatureTreeNode node) {
         IntStream.range(0, node.getChildCount()).mapToObj(i -> (FeatureTreeNode) node.getChildAt(i))
                 .forEachOrdered(queue::add);
-        /*for (int i = 0; i < node.getChildCount(); i++) {
-            FeatureTreeNode child = (FeatureTreeNode) node.getChildAt(i);
-            queue.add(child);
-        }*/
     }
 
     /**
@@ -239,7 +247,7 @@ public class SXFMParser<F extends Feature, R extends AbstractRelationship<F>, C 
                     }
                 }
 
-                exploreChildren(queue, node);
+                exploreChildNodes(queue, node);
             }
         } catch (Exception ex) {
             throw new FeatureModelParserException(ex.getMessage());
