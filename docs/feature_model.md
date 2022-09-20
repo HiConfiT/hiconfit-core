@@ -87,7 +87,7 @@ FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTC
 #### Other examples
 
 1. [Unit tests of 5 parsers](https://github.com/manleviet/CA-CDR-V2/tree/21-uses-generics-for-feature-model/fm-package/src/test/java/at/tugraz/ist/ase/fm/parser)
-2. [**KBStatistics**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/app-KBStatistics/src/main/java/at/tugraz/ist/ase/kb/app/KBStatistics.java) (the function _processFM_)
+2. [**KBStatistics**](https://github.com/manleviet/CA-CDR-V2/blob/6b140f7dc922d14e8066f122f187738adc3c6433/app-KBStatistics/src/main/java/at/tugraz/ist/ase/kb/app/KBStatistics.java#L162) (the function _processFM_)
 3. [**FMAnalyzerTest**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/test/java/at/tugraz/ist/ase/fma/FMAnalyzerTest.java)
 
 ### How to encode a feature model
