@@ -15,7 +15,7 @@ Mutable versions of these classes should be implemented in other packages to kee
 and _alternative_) and two cross-tree constraints (_requires_ and _excludes_).
 Other types of feature models should be implemented in other packages to keep this package simple.
 4. Supports to arbitrary constraints with complex operators (e.g., /\\, \\/, not, ->, <->).
-5. Supports common feature model formats found in the literature, i.e., [SPLOT](splot-research.org), [FeatureIDE](https://featureide.github.io).
+5. Supports common feature model formats found in the literature, i.e., [SPLOT](http://www.splot-research.org), [FeatureIDE](https://featureide.github.io).
 
 ### Contents
 
@@ -27,7 +27,7 @@ Other types of feature models should be implemented in other packages to keep th
 ### How to read a feature model from a file
 
 The following code shows the **simplest way** to read a feature model from a file.
-This way, the parser will use the [_built-in builders_](#built-in-builders) to create the feature model. 
+This way, the parser will use the [_built-in builders_](#feature-relationship-and-constraint-builders) to create the feature model. 
 
 ```java
 // create a parser for the given file
@@ -41,7 +41,7 @@ FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm = parser.p
 ```
 
 Another example shows a **complete way** to read a feature model from a given file.
-First, we need to create _builders_ on the basis of the [_built-in builders_](#built-in-builders).
+First, we need to create _builders_ on the basis of the [_built-in builders_](#feature-relationship-and-constraint-builders).
 Then, we can use the builders to create an **FMParserFactory**. 
 We can create a parser for a given feature model format with the factory.
 Finally, we can use the parser to read the feature model from a file.
@@ -86,9 +86,9 @@ FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTC
 
 #### Other examples
 
-1. Unit tests of 5 parsers
-2. **KBStatistics** (the function _processFM_)
-3. **FMAnalyzerTest**
+1. [Unit tests of 5 parsers](https://github.com/manleviet/CA-CDR-V2/tree/21-uses-generics-for-feature-model/fm-package/src/test/java/at/tugraz/ist/ase/fm/parser)
+2. [**KBStatistics**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/app-KBStatistics/src/main/java/at/tugraz/ist/ase/kb/app/KBStatistics.java) (the function _processFM_)
+3. [**FMAnalyzerTest**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/test/java/at/tugraz/ist/ase/fma/FMAnalyzerTest.java)
 
 ### How to encode a feature model
 
@@ -138,33 +138,43 @@ fm.addExcludes(ABtesting, root);
 There are two requirements to use the _**generic**_ feature model:
 
 1. The custom features, relationships, and cross-tree constraints must be inherited from the base classes:
-[**Feature**](), [**AbstractRelationship**](), and [**CTConstraint**]().
+[**Feature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Feature.java), 
+[**AbstractRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/AbstractRelationship.java), 
+and [**CTConstraint**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/CTConstraint.java).
 2. Custom feature, relationship, and constraint _builders_ must be provided to the feature model.
 These classes are inherited from the base classes:
-[**IFeatureBuildable**](), [**IRelationshipBuildable**](), and [**IConstraintBuildable**](). 
+[**IFeatureBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IFeatureBuildable.java), 
+[**IRelationshipBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IRelationshipBuildable.java),
+and [**IConstraintBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IConstraintBuildable.java). 
 
 An example could be found in the **_fma_** package.
-In the class [**FMAnalyzerTest**](), the function _testConditionallyDead_0_ shows how to use the _**generic**_ feature model 
+In the class [**FMAnalyzerTest**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/test/java/at/tugraz/ist/ase/fma/FMAnalyzerTest.java), 
+the function _testConditionallyDead_0_ shows how to use the _**generic**_ feature model 
 to support anomaly-aware features.
 In this context, two new classes are defined.
-The class [**AnomalyAwareFeature**]() is inherited from the base class [**Feature**](), and
-the class [**AnomalyAwareFeatureBuilder**]() is inherited from the base class [**IFeatureBuildable**]().
+The class [**AnomalyAwareFeature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/anomaly/AnomalyAwareFeature.java)
+is inherited from the base class [**Feature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Feature.java), 
+and the class [**AnomalyAwareFeatureBuilder**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/anomaly/AnomalyAwareFeatureBuilder.java) 
+is inherited from the base class [**IFeatureBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IFeatureBuildable.java).
 
 ### What does the package provide?
 
 #### Generic FeatureModel class
 
-The package provides the generic [**FeatureModel**]() class to construct a feature model with any type of features, 
+The package provides the generic [**FeatureModel**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/FeatureModel.java) 
+class to construct a feature model with any type of features, 
 relationships, and cross-tree constraints. The class accepts three bounded type parameters:
 
-1. [**Feature**]() and all its subclasses
-2. [**AbstractRelationship**]() and all its subclasses
-3. [**CTConstraint**]() and all its subclasses
+1. [**Feature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Feature.java) and all its subclasses
+2. [**AbstractRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/AbstractRelationship.java) and all its subclasses
+3. [**CTConstraint**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/CTConstraint.java) and all its subclasses
 
 Since the class is generic, i.e., the class doesn't know how to build features, relationships, and constraints,
 it requires _builders_ to create features, relationships, and constraints.
-The package includes [_built-in builders_](#built-in-builders) for _basic_ features, relationships and constraints.
-These builders conform to the interfaces [**IFeatureBuildable**](), [**IRelationshipBuildable**]() and [**IConstraintBuildable**]().
+The package includes [_built-in builders_](#feature-relationship-and-constraint-builders) for _basic_ features, relationships and constraints.
+These builders conform to the interfaces [**IFeatureBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IFeatureBuildable.java),
+[**IRelationshipBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IRelationshipBuildable.java),
+and [**IConstraintBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IConstraintBuildable.java).
 
 Besides, the class provides the following data structures:
 
@@ -175,23 +185,27 @@ Besides, the class provides the following data structures:
 
 #### Feature class
 
-Besides the basic information of a feature, e.g., _name_, _id_, the [**Feature**]() class contains a connection
-to the parent feature, and a list of relationships starting from it.
+Besides the basic information of a feature, e.g., _name_, _id_, the [**Feature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Feature.java)
+class contains a connection to the parent feature, and a list of relationships starting from it.
 The structure allows for the construction of a feature model tree.
 
 #### Generic classes for relationships
 
-The package provides an abstract class [**AbstractRelationship**]() 
-and four inherited classes [**MandatoryRelationship**](), [**OptionalRelationship**](), 
-[**OrRelationship**](), and [**AlternativeRelationship**]() 
+The package provides an abstract class [**AbstractRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/AbstractRelationship.java)
+and four inherited classes [**MandatoryRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/MandatoryRelationship.java),
+[**OptionalRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/OptionalRelationship.java), 
+[**OrRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/OrRelationship.java), 
+and [**AlternativeRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/AlternativeRelationship.java) 
 to represent relationships of a _basic_ feature model.
-These classes are generic and accept features with the type of [**Feature**]() or [**Feature**]()'s subclasses.
+These classes are generic and accept features with the type of [**Feature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Feature.java)
+or [**Feature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Feature.java)'s subclasses.
 
 Besides, each relationship contains a connection to the parent feature and a list of child features.
 
 #### CTConstraint class
 
-The [**CTConstraint**]() class represents a cross-tree constraint of a feature model.
+The [**CTConstraint**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/CTConstraint.java)
+class represents a cross-tree constraint of a feature model.
 By supporting Abstract Syntax Trees (ASTs), the class allows the representation of complex constraints,
 which are supported by the common feature model formats.
 
@@ -199,38 +213,51 @@ which are supported by the common feature model formats.
 
 When creating/initializing a relationship or a cross-tree constraint, a configuration rule translator
 is required to translate the relationship or constraint into a text-based configuration rule.
-For example, the built-in translator [**ConfRuleTranslator**]() translates a mandatory relationship
-into the configuration rule _"mandatory(parent, child)"_.
+For example, the built-in translator [**ConfRuleTranslator**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/translator/ConfRuleTranslator.java)
+translates a mandatory relationship into the configuration rule _"mandatory(parent, child)"_.
 
-The [**AbstractRelationship**]() and [**CTConstraint**]() classes accept custom translators,
-if they conform to the interface [**IConfRuleTranslatable**]().
+The [**AbstractRelationship**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/AbstractRelationship.java)
+and [**CTConstraint**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/CTConstraint.java)
+classes accept custom translators, if they conform to the interface 
+[**IConfRuleTranslatable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/translator/IConfRuleTranslatable.java).
 
 #### Feature, Relationship and Constraint Builders
 
-The [**FeatureModel**]() class is generic and doesn't know how to build features, relationships, and constraints.
+The [**FeatureModel**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/FeatureModel.java) 
+class is generic and doesn't know how to build features, relationships, and constraints.
 Therefore, the class requires _builders_ that are able to create features, relationships, and constraints.
-These builders need to conform to the interfaces [**IFeatureBuildable**](), [**IRelationshipBuildable**]()
-and [**IConstraintBuildable**]().
+These builders need to conform to the interfaces [**IFeatureBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IFeatureBuildable.java),
+[**IRelationshipBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IRelationshipBuildable.java),
+and [**IConstraintBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/IConstraintBuildable.java).
 
 The package includes the following _built-in builders_:
 
-1. [**FeatureBuilder**]() - can create a root feature or a not-root feature with a given _name_ and _id_
-2. [**RelationshipBuilder**]() - allows to create four types of relationships: _mandatory_, _optional_, _or_ and _alternative_
-3. [**ConstraintBuilder**]() - is able to create a complex cross-tree constraint
+1. [**FeatureBuilder**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/FeatureBuilder.java)
+can create a root feature or a not-root feature with a given _name_ and _id_
+2. [**RelationshipBuilder**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/RelationshipBuilder.java) 
+allows to create four types of relationships: _mandatory_, _optional_, _or_ and _alternative_
+3. [**ConstraintBuilder**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/builder/ConstraintBuilder.java)
+is able to create a complex cross-tree constraint
 
 #### Parsers
 
 The package currently provides five parsers corresponding to five following feature model formats:
 
-1. [**SXFMParser**]() supports [SPLOT feature models](splot-research.org). The file extension could be “.sxfm” or “.splx.”
-2. [**FeatureIDEParser**]() supports the feature model format of the [FeatureIDE tool](https://featureide.github.io). The file extension should be “xml.”
-3. [**XMIParser**]() supports the feature model format of the v.control tool. The file extension should be “xmi.”
-4. [**GlencoeParser**]() supports the feature model format of the [Glencoe tool](https://glencoe.hochschule-trier.de). The file extension should be “json.”
-5. [**DescriptiveFormatParser**]() supports our feature model format. The file extension should be “fm4conf”.
+1. [**SXFMParser**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/SXFMParser.java) 
+supports [SPLOT feature models](splot-research.org). The file extension could be “.sxfm” or “.splx.”
+2. [**FeatureIDEParser**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FeatureIDEParser.java)
+supports the feature model format of the [FeatureIDE tool](https://featureide.github.io). The file extension should be “xml.”
+3. [**XMIParser**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/XMIParser.java)
+supports the feature model format of the v.control tool. The file extension should be “xmi.”
+4. [**GlencoeParser**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/GLENCOEParser.java)
+supports the feature model format of the [Glencoe tool](https://glencoe.hochschule-trier.de). The file extension should be “json.”
+5. [**DescriptiveFormatParser**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/DescriptiveFormatParser.java)
+supports our feature model format. The file extension should be “fm4conf”.
 
-You can find examples of the above feature model formats in the [**resources**]() folder.
+You can find examples of the above feature model formats in the [**resources**](https://github.com/manleviet/CA-CDR-V2/tree/21-uses-generics-for-feature-model/fm-package/src/test/resources) folder.
 
-The package also provides the [**FMParserFactory**]() class that can create a parser for a given feature model file.
+The package also provides the [**FMParserFactory**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/FMParserFactory.java) 
+class that can create a parser for a given feature model file.
 
 #### Descriptive format
 
@@ -244,4 +271,4 @@ The feature model file should contain the following sections:
 4. A relationships section starting with a "RELATIONSHIPS:" line that contains the list of relationships, each relationship in a new line
 5. A constraints section starting with a "CONSTRAINTS:" line that contains the list of cross-tree constraints, each constraint in a new line
 
-An example of the feature model file in the descriptive format is available in the [**resources**]() folder.
+An example of the feature model file in the descriptive format is available in the [**resources**](https://github.com/manleviet/CA-CDR-V2/tree/21-uses-generics-for-feature-model/fm-package/src/test/resources) folder.
