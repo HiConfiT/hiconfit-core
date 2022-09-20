@@ -149,8 +149,8 @@ and [**IConstraintBuildable**](https://github.com/manleviet/CA-CDR-V2/blob/21-us
 
 An example could be found in the **_fma_** package.
 In the class [**FMAnalyzerTest**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/test/java/at/tugraz/ist/ase/fma/FMAnalyzerTest.java), 
-the function _testConditionallyDead_0_ shows how to use the _**generic**_ feature model 
-to support anomaly-aware features.
+the function [_testConditionallyDead_0_](https://github.com/manleviet/CA-CDR-V2/blob/5c666ed1f76b94b300b244a8078737552288e689/fma/src/test/java/at/tugraz/ist/ase/fma/FMAnalyzerTest.java#L454) 
+shows how to use the _**generic**_ feature model to support anomaly-aware features.
 In this context, two new classes are defined.
 The class [**AnomalyAwareFeature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/anomaly/AnomalyAwareFeature.java)
 is inherited from the base class [**Feature**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fm-package/src/main/java/at/tugraz/ist/ase/fm/core/Feature.java), 
