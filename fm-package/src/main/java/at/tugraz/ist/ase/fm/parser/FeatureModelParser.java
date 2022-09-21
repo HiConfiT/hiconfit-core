@@ -34,7 +34,7 @@ public interface FeatureModelParser<F extends Feature, R extends AbstractRelatio
      *
      * @param filePath - a {@link File}
      * @return a {@link FeatureModel}
-     * @throws FeatureModelParserException - a PaserException
+     * @throws FeatureModelParserException - a ParserException
      */
     FeatureModel<F, R, C> parse(@NonNull File filePath) throws FeatureModelParserException;
 

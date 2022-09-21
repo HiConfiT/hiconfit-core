@@ -51,12 +51,6 @@ public class ConfRuleTranslator implements IConfRuleTranslatable {
             } else {
                 return String.format("~%s", r.getRight());
             }
-//            return String.format("~%s", translate(r.getRight()));
-//            if (r.getRight().isOperand()) {
-//
-//            } else {
-//                return String.format("~(%s)", translate(r.getRight()));
-//            }
         } else if (r instanceof Operand<?>) {
             return ((Operand<?>) r).getFeature().toString();
         } else {

@@ -12,8 +12,6 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
-import at.tugraz.ist.ase.fm.translator.IConfRuleTranslatable;
 import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +25,6 @@ class XMIParserTest {
     @Test
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike.xmi");
-        IConfRuleTranslatable translator = new ConfRuleTranslator();
         @Cleanup("dispose")
         FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);

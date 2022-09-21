@@ -19,6 +19,9 @@ import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
@@ -45,8 +48,8 @@ class DirectDebugTest {
     @Test
     void testDirectDebug1() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -55,7 +58,7 @@ class DirectDebugTest {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
@@ -89,8 +92,8 @@ class DirectDebugTest {
     @Test
     void testAllDiagnoses1() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -99,7 +102,7 @@ class DirectDebugTest {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
@@ -150,8 +153,8 @@ class DirectDebugTest {
     @Test
     void testDirectDebug2() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/FM_10_1.splx");
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -160,7 +163,7 @@ class DirectDebugTest {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
@@ -196,8 +199,8 @@ class DirectDebugTest {
     @Test
     void testAllDiagnoses2() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/FM_10_1.splx");
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -206,7 +209,7 @@ class DirectDebugTest {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
@@ -263,8 +266,8 @@ class DirectDebugTest {
     @Test
     void testDirectDebug3() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/FM_10_2.splx");
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -273,7 +276,7 @@ class DirectDebugTest {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
@@ -309,8 +312,8 @@ class DirectDebugTest {
     @Test
     void testAllDiagnoses3() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/FM_10_2.splx");
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -319,7 +322,7 @@ class DirectDebugTest {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
