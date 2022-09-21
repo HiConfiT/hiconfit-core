@@ -20,6 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 @Slf4j
 public class AnomalyAwareFeature extends Feature {
+    // TODO: @Tamim: fix this with only AnomalyType. The class should have a method to add many anomalies.
     protected List<AnomalyType> anomalies = new LinkedList<>();
 
     /**

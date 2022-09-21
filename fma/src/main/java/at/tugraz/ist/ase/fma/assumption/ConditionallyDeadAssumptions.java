@@ -28,7 +28,7 @@ import java.util.stream.IntStream;
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
-public class ConditionallyDeadAssumptions implements IFMAnalysisAssumptionCreatable{
+public class ConditionallyDeadAssumptions implements IFMAnalysisAssumptionCreatable {
     @Override
     public <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
     List<ITestCase> createAssumptions(@NonNull FeatureModel<F, R, C> fm) {

@@ -117,7 +117,7 @@ class FMDebuggingModelTest1 {
                     assertEquals(1, constraints.get(6).getChocoConstraints().size());
                     assertEquals("ARITHM ([not(F1) + not(F4) >= 1])", constraints.get(6).getChocoConstraints().get(0).toString());
                     assertEquals(1, constraints.get(7).getChocoConstraints().size());
-                    assertEquals("SUM ([not(F1) + F7 + F8 >= 1])", constraints.get(7).getChocoConstraints().get(0).toString());
+                    assertEquals("SUM ([not(F1) + F8 + F7 >= 1])", constraints.get(7).getChocoConstraints().get(0).toString());
                 });
     }
 

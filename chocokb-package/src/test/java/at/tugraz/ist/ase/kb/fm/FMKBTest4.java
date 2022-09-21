@@ -57,8 +57,8 @@ public class FMKBTest4 {
     @Test
     void testVariables() {
         List<String> expectedVariables = List.of("test1", "A", "B", "C", "D",
-                "AA", "AB", "AC", "AD", "ADA", "ADB", "BA", "BB", "BC", "CA", "CB", "CC", "DA", "DB",
-                "DAA", "DAB");
+                "AA", "AB", "AC", "AD", "BA", "BB", "BC", "CA", "CB", "CC", "DA", "DB",
+                "ADA", "ADB", "DAA", "DAB");
 
         assertAll(() -> assertEquals(21, kb.getNumVariables()),
                 () -> assertEquals("complex_featureide_model.xml", kb.getName()),
@@ -81,8 +81,6 @@ public class FMKBTest4 {
                 List.of("ARITHM ([A + not(AB) >= 1])"),
                 List.of("ARITHM ([A + not(AC) >= 1])"),
                 List.of("ARITHM ([A + not(AD) >= 1])", "ARITHM ([AD + not(A) >= 1])"),
-                List.of("ARITHM ([AD + not(ADA) >= 1])", "ARITHM ([AD + not(ADB) >= 1])",
-                        "SUM ([not(AD) + ADB + ADA >= 1])"),
                 List.of("ARITHM ([B + not(BA) >= 1])", "ARITHM ([BA + not(B) >= 1])"),
                 List.of("ARITHM ([B + not(BB) >= 1])"),
                 List.of("ARITHM ([B + not(BC) >= 1])"),
@@ -96,6 +94,8 @@ public class FMKBTest4 {
                         "ARITHM ([not(D) + BV_1 >= 1])",
                         "ARITHM ([BV_1 + not(DA) >= 1])",
                         "ARITHM ([BV_1 + not(DB) >= 1])"),
+                List.of("ARITHM ([AD + not(ADA) >= 1])", "ARITHM ([AD + not(ADB) >= 1])",
+                        "SUM ([not(AD) + ADB + ADA >= 1])"),
                 List.of("ARITHM ([DA + not(DAA) >= 1])", "ARITHM ([DA + not(DAB) >= 1])",
                         "SUM ([not(DA) + DAB + DAA >= 1])"),
                 List.of("ARITHM ([not(AB) + not(CB) >= 1])"),
@@ -120,8 +120,6 @@ public class FMKBTest4 {
                 List.of("ARITHM ([AB = 1])", "ARITHM ([not(A) = 1])"),
                 List.of("ARITHM ([AC = 1])", "ARITHM ([not(A) = 1])"),
                 List.of("ARITHM ([A + AD >= 1])", "ARITHM ([not(A) + not(AD) >= 1])"),
-                List.of("ARITHM ([not(AD) + not(ADA) >= 1])", "ARITHM ([not(AD) + not(ADB) >= 1])",
-                        "SUM ([ADB + ADA + AD >= 1])"),
                 List.of("ARITHM ([B + BA >= 1])", "ARITHM ([not(B) + not(BA) >= 1])"),
                 List.of("ARITHM ([BB = 1])", "ARITHM ([not(B) = 1])"),
                 List.of("ARITHM ([BC = 1])", "ARITHM ([not(B) = 1])"),
@@ -132,6 +130,8 @@ public class FMKBTest4 {
                         "ARITHM ([not(D) + BV_2 >= 1])",
                         "SUM ([DB + DA + D >= 1])",
                         "SUM ([BV_2 + DB + DA >= 1])"),
+                List.of("ARITHM ([not(AD) + not(ADA) >= 1])", "ARITHM ([not(AD) + not(ADB) >= 1])",
+                        "SUM ([ADB + ADA + AD >= 1])"),
                 List.of("ARITHM ([not(DA) + not(DAA) >= 1])", "ARITHM ([not(DA) + not(DAB) >= 1])",
                         "SUM ([DAB + DAA + DA >= 1])"),
                 List.of("ARITHM ([AB = 1])", "ARITHM ([CB = 1])"),
@@ -144,8 +144,8 @@ public class FMKBTest4 {
                 List.of("ARITHM ([DB = 1])", "ARITHM ([not(AB) = 1])"),
                 List.of("ARITHM ([DB = 1])", "ARITHM ([not(AC) = 1])"),
                 List.of("ARITHM ([AC = 1])", "ARITHM ([DAA = 1])", "ARITHM ([not(AB) = 1])"),
-                List.of("ARITHM ([ADA + BB >= 1])", "ARITHM ([ADA + DAB >= 1])", "SUM ([not(DAB) + BB + ADA >= 1])",
-                        "SUM ([not(BB) + DAB + ADA >= 1])", "SUM ([not(DAB) + not(BB) + not(ADA) >= 1])")
+                List.of("ARITHM ([BB + ADA >= 1])", "ARITHM ([ADA + DAB >= 1])", "SUM ([not(DAB) + ADA + BB >= 1])",
+                        "SUM ([not(BB) + DAB + ADA >= 1])", "SUM ([not(DAB) + not(ADA) + not(BB) >= 1])")
         );
 
         assertEquals(26, kb.getNumConstraints());
@@ -166,21 +166,4 @@ public class FMKBTest4 {
                     }}
         );
     }
-
-//    @Test
-//    void testComplexFeatureIDEModel() throws FeatureModelParserException {
-//        File fileFM = new File("src/test/resources/complex_featureide_model.xml");
-//
-//        FeatureIDEParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = new FeatureIDEParser<>(featureBuilder, relationshipBuilder, constraintBuilder);
-//        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
-//
-//        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> kb = new FMKB<>(featureModel, true);
-//
-//        assertEquals(kb.getNumVariables(), 21);
-//        assertEquals(featureModel.getNumOfRelationships(), 6322);
-//        assertEquals(featureModel.getNumOfConstraints(), 9);
-//        assertEquals(kb.getNumConstraints(), 21);
-//
-////        kb.getConstraintList().forEach(System.out::println);
-//    }
 }
