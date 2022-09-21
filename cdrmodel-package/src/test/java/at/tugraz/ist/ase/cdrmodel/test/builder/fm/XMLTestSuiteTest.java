@@ -44,8 +44,7 @@ public class XMLTestSuiteTest {
         String expected = """
                 root
                 root & something
-                root & ~anything
-                """;
+                root & ~anything""";
 
         System.out.println(testSuite.toString());
         assertEquals(expected, testSuite.toString());

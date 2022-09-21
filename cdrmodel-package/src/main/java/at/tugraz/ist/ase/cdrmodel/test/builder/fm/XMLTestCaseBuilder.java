@@ -85,17 +85,32 @@ public class XMLTestCaseBuilder implements ITestCaseBuildable {
     private String testCaseNodeToString(Element testcase) {
         NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE);
 
-        Element firstClause = (Element) clauses.item(0);
-        StringBuilder sb = new StringBuilder()
-                .append(clauses.item(0).getChildNodes().item(0).getNodeValue())
-                .append(" = ")
-                .append(clauses.item(0).getChildNodes().item(1).getNodeValue());
+        Element clause = (Element) clauses.item(0);
+        Element variableEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VARIABLE).item(0);
+        Element valueEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VALUE).item(0);
+
+        StringBuilder sb = new StringBuilder();
+        if (valueEle.getFirstChild().getNodeValue().equals("false")) {
+            sb.append("~");
+        }
+        sb.append(variableEle.getFirstChild().getNodeValue());
+//                .append(variableEle.getFirstChild().getNodeValue())
+//                .append(" = ")
+//                .append(valueEle.getFirstChild().getNodeValue());
 
         for (int clauseIndex = 1; clauseIndex < clauses.getLength(); clauseIndex++) {
-            sb.append(" & ")
-                    .append(clauses.item(clauseIndex).getChildNodes().item(0).getNodeValue())
-                    .append(" = ")
-                    .append(clauses.item(clauseIndex).getChildNodes().item(1).getNodeValue());
+            clause = (Element) clauses.item(clauseIndex);
+            variableEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VARIABLE).item(0);
+            valueEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VALUE).item(0);
+
+            sb.append(" & ");
+            if (valueEle.getFirstChild().getNodeValue().equals("false")) {
+                sb.append("~");
+            }
+            sb.append(variableEle.getFirstChild().getNodeValue());
+//                    .append(variableEle.getFirstChild().getNodeValue())
+//                    .append(" = ")
+//                    .append(valueEle.getFirstChild().getNodeValue());
         }
 
         return sb.toString();
