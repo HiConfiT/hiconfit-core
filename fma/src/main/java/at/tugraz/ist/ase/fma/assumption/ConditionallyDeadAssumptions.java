@@ -73,7 +73,7 @@ public class ConditionallyDeadAssumptions implements IFMAnalysisAssumptionCreata
     }
 
     private boolean isConditionallyDeadCandidate(AnomalyAwareFeature feature) {
-        // a feature is not DEAD and have to be optional
+        // a feature is not DEAD and has to be optional
         // Only optional features can be conditionally dead - dead features are dead anyway
         return feature.isOptional() && !feature.isAnomalyType(AnomalyType.DEAD);
     }

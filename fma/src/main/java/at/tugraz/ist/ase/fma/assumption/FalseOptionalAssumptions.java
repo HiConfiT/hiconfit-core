@@ -14,12 +14,17 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
+import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
@@ -30,41 +35,53 @@ public class FalseOptionalAssumptions implements IFMAnalysisAssumptionCreatable 
     @SuppressWarnings("unchecked")
     public <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
     List<ITestCase> createAssumptions(@NonNull FeatureModel<F, R, C> fm) {
+        // get candidate features
+        List<AnomalyAwareFeature> candidateFeatures = IntStream.range(1, fm.getNumOfFeatures())
+                .mapToObj(i -> (AnomalyAwareFeature) fm.getFeature(i))
+                .filter(this::isFalseOptionalCandidate)
+                .collect(Collectors.toCollection(LinkedList::new));
+
         List<ITestCase> testCases = new LinkedList<>();
-        for (int i = 1; i < fm.getNumOfFeatures(); i++) {
-            Feature feature = fm.getFeature(i);
+        for (int i = 1; i < candidateFeatures.size(); i++) {
+            AnomalyAwareFeature feature = candidateFeatures.get(i);
 
-            if (feature.isOptional()) {
-                ArrayList<Feature> parents = null;
-                parents = new ArrayList<>(fm.getMandatoryParents((F) feature));
-                if (parents.size() < 1) {
-                    continue;
-                }
+            ArrayList<F> parents;
+            parents = new ArrayList<>(fm.getMandatoryParents((F) feature));
+            if (parents.size() < 1) {
+                continue;
+            }
 
-                for (Feature parent : parents) {
-                    String testcase = fm.getFeature(0).getName() + " = true & " + parent.getName() + " = true & "
-                            + feature.getName() + " = false";
-                    List<Assignment> assignments = new LinkedList<>();
-                    assignments.add(Assignment.builder()
-                            .variable(fm.getFeature(0).getName())
-                            .value("true")
-                            .build());
-                    assignments.add(Assignment.builder()
-                            .variable(parent.getName())
-                            .value("true")
-                            .build());
-                    assignments.add(Assignment.builder()
-                            .variable(feature.getName())
-                            .value("false")
-                            .build());
+            for (Feature parent : parents) {
+                String testcase = fm.getFeature(0).getName() + " = true & " + parent.getName() + " = true & "
+                        + feature.getName() + " = false";
+                List<Assignment> assignments = new LinkedList<>();
+                assignments.add(Assignment.builder()
+                        .variable(fm.getFeature(0).getName())
+                        .value("true")
+                        .build());
+                assignments.add(Assignment.builder()
+                        .variable(parent.getName())
+                        .value("true")
+                        .build());
+                assignments.add(Assignment.builder()
+                        .variable(feature.getName())
+                        .value("false")
+                        .build());
 
-                    testCases.add(TestCase.builder()
-                            .testcase(testcase)
-                            .assignments(assignments).build());
-                }
+                testCases.add(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
+                        .testcase(testcase)
+                        .assignments(assignments)
+                        .assumptions(List.of(feature, (AnomalyAwareFeature) parent))
+                        .build());
             }
         }
 
         return testCases;
+    }
+
+    private boolean isFalseOptionalCandidate(AnomalyAwareFeature feature) {
+        // a feature is not DEAD and has to be optional
+        // Only optional features can be false optional (believe it or not) - dead features are dead anyway
+        return feature.isOptional() && !feature.isAnomalyType(AnomalyType.DEAD);
     }
 }
