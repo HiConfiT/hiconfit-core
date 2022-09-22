@@ -994,9 +994,18 @@ class FMAnalyzerTest {
 //    @Test
 //    public void testRedundancy_3() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
 //        File fileFM = new File("src/test/resources/bamboobike_featureide_redundancies1.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+//
+//        // create the factory for anomaly feature models
+//        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+//        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+//        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+//        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+//
+//        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+//
+//        @Cleanup("dispose")
+//        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+//        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
 //
 //        FMAnalyzer analyzer = new FMAnalyzer();
 //        analyzer.performFullAnalysis(featureModel);
@@ -1007,9 +1016,18 @@ class FMAnalyzerTest {
 //    @Test
 //    public void testRedundancy_4() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
 //        File fileFM = new File("src/test/resources/bamboobike_featureide_redundancies2.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+//
+//        // create the factory for anomaly feature models
+//        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+//        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+//        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+//        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+//
+//        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+//
+//        @Cleanup("dispose")
+//        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+//        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
 //
 //        FMAnalyzer analyzer = new FMAnalyzer();
 //        analyzer.performFullAnalysis(featureModel);
@@ -1020,9 +1038,18 @@ class FMAnalyzerTest {
 //    @Test
 //    public void testRedundancy_5() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
 //        File fileFM = new File("src/test/resources/bamboobike_featureide_redundancies3.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+//
+//        // create the factory for anomaly feature models
+//        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+//        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+//        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+//        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+//
+//        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+//
+//        @Cleanup("dispose")
+//        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+//        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
 //
 //        FMAnalyzer analyzer = new FMAnalyzer();
 //        analyzer.performFullAnalysis(featureModel);
@@ -1033,9 +1060,18 @@ class FMAnalyzerTest {
 //    @Test
 //    public void testRedundancy_6() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
 //        File fileFM = new File("src/test/resources/bamboobike_featureide_redundancies4.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+//
+//        // create the factory for anomaly feature models
+//        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+//        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+//        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+//        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+//
+//        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+//
+//        @Cleanup("dispose")
+//        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+//        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
 //
 //        FMAnalyzer analyzer = new FMAnalyzer();
 //        analyzer.performFullAnalysis(featureModel);
