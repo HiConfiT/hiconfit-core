@@ -237,7 +237,7 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         // ignore the root feature
         if (feature.isRoot()) return;
 
-        F parent = (F) ((Operand) c.getFormula().getLeft()).getFeature();
+        F parent = ((Operand<F>) c.getFormula().getLeft()).getFeature();
 
         // ignore the root feature
         checkAndExploreFurther(parent, parents, parentsqueue);

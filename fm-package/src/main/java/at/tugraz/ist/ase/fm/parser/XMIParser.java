@@ -253,7 +253,7 @@ public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C e
      * @param node - a XML node
      * @return a list of children {@link Feature}s a given XML node
      */
-    private List<F> createChildFeaturesIfAbsent(Node node) throws FeatureModelParserException {
+    private List<F> createChildFeaturesIfAbsent(Node node) {
         NodeList children = node.getChildNodes();
         List<F> features = new LinkedList<>();
 

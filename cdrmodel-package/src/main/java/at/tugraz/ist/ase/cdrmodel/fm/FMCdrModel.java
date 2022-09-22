@@ -121,7 +121,7 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
         // sets correct constraints to super class
         initializeConstraintSets();
 
-        // remove all Choco constraints, cause we just need variables and test cases
+        // remove all Choco constraints, because we just need variables and test cases
         model.unpost(model.getCstrs());
 
         LoggerUtils.outdent();

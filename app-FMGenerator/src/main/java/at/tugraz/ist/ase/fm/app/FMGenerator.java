@@ -9,9 +9,13 @@
 package at.tugraz.ist.ase.fm.app;
 
 import at.tugraz.ist.ase.fm.app.cli.FMGenerator_CmdLineOptions;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
+import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.SXFMParser;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import es.us.isa.FAMA.models.FAMAfeatureModel.FAMAFeatureModel;
 import es.us.isa.FAMA.models.variabilityModel.VariabilityModel;
@@ -183,11 +187,10 @@ public class FMGenerator {
      * @return true if the number of constraints is enough, false otherwise
      */
     private boolean isNotEnoughConstraints(String filename, int numExpCstrs) throws FeatureModelParserException {
-        SXFMParser parser = new SXFMParser();
-
         File file = new File(filename);
-        FeatureModel featureModel = parser.parse(file);
-        FMKB model = new FMKB(featureModel, false);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(file.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(file);
+        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMKB<>(featureModel, false);
 
         if (model.getModelKB().getSolver().solve()) { // if the model is consistent
             int numGenCstrs = featureModel.getNumOfRelationships() + featureModel.getNumOfConstraints();

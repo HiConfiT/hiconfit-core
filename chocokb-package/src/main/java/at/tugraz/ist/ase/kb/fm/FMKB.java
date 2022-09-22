@@ -91,7 +91,7 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         LoggerUtils.indent();
 
         int startIdx;
-        LogOp logOp = null;
+        LogOp logOp;
         LogOp negLogOp = null;
 
         // first convert relationships into constraints
@@ -181,7 +181,7 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
     }
 
     private LogOp convertToLopOp(ASTNode cnf, boolean isNot) {
-        LogOp logOp = null;
+        LogOp logOp;
         ASTNode left = cnf.getLeft();
         ASTNode right = cnf.getRight();
         if (cnf instanceof AndOperator) {

@@ -29,8 +29,8 @@ public class Operand<F extends Feature> extends ASTNode {
      */
     @Override
     @SuppressWarnings("unchecked")
-    public <F extends Feature> List<F> getFeatures() {
-        return (List<F>) Collections.singletonList(feature);
+    public List<F> getFeatures() {
+        return Collections.singletonList(feature);
     }
 
     @Override

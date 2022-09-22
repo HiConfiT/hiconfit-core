@@ -85,7 +85,7 @@ public class FMDebuggingModel<F extends Feature, R extends AbstractRelationship<
             testcases.addAll(testSuite.getTestCases());
         }
 
-        // remove all Choco constraints, cause we just need variables and test cases
+        // remove all Choco constraints, because we just need variables and test cases
         model.unpost(model.getCstrs());
 
         LoggerUtils.outdent();

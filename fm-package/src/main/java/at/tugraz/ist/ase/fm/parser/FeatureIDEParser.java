@@ -243,7 +243,6 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
             Node child = children.item(i);
             if (isCorrectNode(child)) {
                 subNodes.add(child);
-//                examineAStructNode(child);
             }
         }
         return subNodes;
@@ -281,7 +280,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
     }
 
     /**
-     * Check whether a {@link Node} is a Element node
+     * Check whether a {@link Node} is an Element node
      * and the node name is "and" or "or" or "alt" or "feature"
      *
      * @param node - a {@link Node}
