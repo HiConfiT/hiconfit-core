@@ -8,11 +8,13 @@
 
 package at.tugraz.ist.ase.fma;
 
+import at.tugraz.ist.ase.cdrmodel.fm.FMCdrModel;
 import at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModel;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.common.ConsoleColors;
+import at.tugraz.ist.ase.common.ConstraintUtils;
 import at.tugraz.ist.ase.fm.builder.*;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
@@ -39,8 +41,7 @@ import java.io.File;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class FMAnalyzerTest {
     static FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
@@ -95,10 +96,10 @@ class FMAnalyzerTest {
         Set<Constraint> cs3 = new LinkedHashSet<>();
         cs3.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 0));
 
-        Assertions.assertEquals(3, allDiagnoses.size());
-        Assertions.assertEquals(cs1, allDiagnoses.get(0));
-        Assertions.assertEquals(cs2, allDiagnoses.get(1));
-        Assertions.assertEquals(cs3, allDiagnoses.get(2));
+        assertEquals(3, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(cs3, allDiagnoses.get(2));
     }
 
     @Test
@@ -169,9 +170,9 @@ class FMAnalyzerTest {
         Set<Constraint> cs2 = new LinkedHashSet<>();
         cs2.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 1));
 
-        Assertions.assertEquals(2, allDiagnoses.size());
-        Assertions.assertEquals(cs1, allDiagnoses.get(0));
-        Assertions.assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(2, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
     }
 
     @Test
@@ -258,15 +259,15 @@ class FMAnalyzerTest {
         Set<Constraint> cs3 = new LinkedHashSet<>();
         cs3.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 1));
 
-        Assertions.assertEquals(3, allDiagnoses.size());
-        Assertions.assertEquals(cs1, allDiagnoses.get(0));
-        Assertions.assertEquals(cs2, allDiagnoses.get(1));
-        Assertions.assertEquals(cs3, allDiagnoses.get(2));
+        assertEquals(3, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(cs3, allDiagnoses.get(2));
 
-        Assertions.assertEquals(3, allDiagnoses1.size());
-        Assertions.assertEquals(cs1, allDiagnoses1.get(0));
-        Assertions.assertEquals(cs2, allDiagnoses1.get(1));
-        Assertions.assertEquals(cs3, allDiagnoses1.get(2));
+        assertEquals(3, allDiagnoses1.size());
+        assertEquals(cs1, allDiagnoses1.get(0));
+        assertEquals(cs2, allDiagnoses1.get(1));
+        assertEquals(cs3, allDiagnoses1.get(2));
     }
 
     @Test
@@ -340,10 +341,10 @@ class FMAnalyzerTest {
         cs3.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 0));
         cs3.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 4));
 
-        Assertions.assertEquals(3, allDiagnoses.size());
-        Assertions.assertEquals(cs1, allDiagnoses.get(0));
-        Assertions.assertEquals(cs2, allDiagnoses.get(1));
-        Assertions.assertEquals(cs3, allDiagnoses.get(2));
+        assertEquals(3, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(cs3, allDiagnoses.get(2));
     }
 
     @Test
@@ -392,9 +393,9 @@ class FMAnalyzerTest {
         Set<Constraint> cs2 = new LinkedHashSet<>();
         cs2.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 0));
 
-        Assertions.assertEquals(2, allDiagnoses.size());
-        Assertions.assertEquals(cs1, allDiagnoses.get(0));
-        Assertions.assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(2, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
     }
 
     @Test
@@ -443,8 +444,8 @@ class FMAnalyzerTest {
         Set<Constraint> cs1 = new LinkedHashSet<>();
         cs1.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 2));
 
-        Assertions.assertEquals(1, allDiagnoses.size());
-        Assertions.assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(1, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
     }
 
     @Test
@@ -498,7 +499,7 @@ class FMAnalyzerTest {
 
         List<Set<Constraint>> allDiagnoses = explanator.get();
 
-        Assertions.assertEquals(1, allDiagnoses.size());
+        assertEquals(1, allDiagnoses.size());
     }
 
     @Test
@@ -575,8 +576,8 @@ class FMAnalyzerTest {
         List<Set<Constraint>> allDiagnoses2 = explanator2.get();
         List<Set<Constraint>> allDiagnoses3 = explanator3.get();
 
-        Assertions.assertEquals(2, allDiagnoses2.size());
-        Assertions.assertEquals(1, allDiagnoses3.size());
+        assertEquals(2, allDiagnoses2.size());
+        assertEquals(1, allDiagnoses3.size());
     }
 
 //    @Test
@@ -594,303 +595,363 @@ class FMAnalyzerTest {
 //    }
 //
 
-@Test
-public void testMultiple_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
-    File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
+    @Test
+    public void testMultiple_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
 
-    // create the factory for anomaly feature models
-    IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-    ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-    IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-    IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
 
-    FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
 
-    @Cleanup("dispose")
-    FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-    FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
 
-    /// VOID FEATURE MODEL
-    // create a test case/assumption
-    // check void feature model - inconsistent( CF ∪ { c0 })
-    VoidFMAssumption voidFMAssumption = new VoidFMAssumption();
-    List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
-    TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
+        /// VOID FEATURE MODEL
+        // create a test case/assumption
+        // check void feature model - inconsistent( CF ∪ { c0 })
+        VoidFMAssumption voidFMAssumption = new VoidFMAssumption();
+        List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
+        TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-    FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
-    debuggingModel.initialize();
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        debuggingModel.initialize();
 
-    // create the specified analysis and the corresponding explanator
-    VoidFMAnalysis analysis = new VoidFMAnalysis(debuggingModel, testCases.get(0));
-    VoidFMExplanator explanator = new VoidFMExplanator(debuggingModel, testCases.get(0));
+        // create the specified analysis and the corresponding explanator
+        VoidFMAnalysis analysis = new VoidFMAnalysis(debuggingModel, testCases.get(0));
+        VoidFMExplanator explanator = new VoidFMExplanator(debuggingModel, testCases.get(0));
 
-    FMAnalyzer analyzer = new FMAnalyzer();
-    analyzer.addAnalysis(analysis, explanator); // add the analysis to the analyzer
-    analyzer.run(); // run the analyzer
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.addAnalysis(analysis, explanator); // add the analysis to the analyzer
+        analyzer.run(); // run the analyzer
 
-    // print the result
-    ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
-    if (analysis.get()) {
-        System.out.println(ExplanationColors.OK + "\u2713 Consistency: ok");
-    } else {
-        System.out.println(ExplanationColors.ANOMALY + "X Void feature model");
-        System.out.println(ExplanationUtils.convertToDescriptiveExplanation(explanator.get(), "void feature model"));
-    }
-
-    assertTrue(analysis.get());
-
-    List<List<AbstractFMAnalysis<?>>> allAnalyses = new ArrayList<>(Collections.emptyList());
-    List<List<AbstractAnomalyExplanator<List<Set<Constraint>>>>> allExplanators = new ArrayList<>(Collections.emptyList());
-
-    // prepare for collecting analyses and explanators
-    for (AnomalyType a : AnomalyType.values()) {
-        allAnalyses.add(new ArrayList<>(Collections.emptyList()));
-        allExplanators.add(new ArrayList<>(Collections.emptyList()));
-    }
-
-    analyzer = new FMAnalyzer(); // TODO necessary?
-    FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModelClone = null;
-
-    boolean anomalyFound = false;
-
-    /// DEAD FEATURES
-    // create a test case/assumption
-    // check dead features - inconsistent( CF ∪ { c0 } U { fi = true })
-    DeadFeatureAssumptions deadFeatureAssumptions = new DeadFeatureAssumptions();
-    List<ITestCase> deadFeatureTestCases = deadFeatureAssumptions.createAssumptions(featureModel);
-    TestSuite deadFeatureTestSuite = TestSuite.builder().testCases(deadFeatureTestCases).build();
-
-    FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> deadFeatureDebuggingModel = new FMDebuggingModel<>(featureModel, deadFeatureTestSuite, new FMTestCaseTranslator(), false, false, false);
-    deadFeatureDebuggingModel.initialize();
-
-    for (ITestCase deadFeatureTestCase : deadFeatureTestCases) {
-        // create the specified analyses and the corresponding explanators
-        debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) deadFeatureDebuggingModel.clone();
-        debuggingModelClone.initialize();
-        DeadFeatureAnalysis deadFeatureAnalysis = new DeadFeatureAnalysis(debuggingModelClone, deadFeatureTestCase);
-        DeadFeatureExplanator deadFeatureExplanator = new DeadFeatureExplanator(debuggingModelClone, deadFeatureTestCase);
-        analyzer.addAnalysis(deadFeatureAnalysis, deadFeatureExplanator); // add the analysis to the analyzer
-
-        allAnalyses.get(AnomalyType.DEAD.ordinal()).add(deadFeatureAnalysis);
-        allExplanators.get(AnomalyType.DEAD.ordinal()).add(deadFeatureExplanator);
-    }
-
-    analyzer.run(); // run the analyzer
-
-    // Check the results and set dead features
-    for (int runningAnalysis = 0; runningAnalysis < allAnalyses.get(AnomalyType.DEAD.ordinal()).size(); runningAnalysis++) {
-        if (!allAnalyses.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).get()) {
-            System.out.println(ExplanationColors.ANOMALY + "X Dead feature: " + ((AssumptionAwareTestCase) allAnalyses.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
-            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).get(), "dead feature"));
-
-            for (AnomalyAwareFeature deadFeature : ((AssumptionAwareTestCase) allAnalyses.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions()) {
-                featureModel.getFeature(deadFeature.getId()).setAnomalyType(AnomalyType.DEAD);
-            }
-
-            anomalyFound = true;
+        // print the result
+        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
+        if (analysis.get()) {
+            System.out.println(ExplanationColors.OK + "\u2713 Consistency: ok");
+        } else {
+            System.out.println(ExplanationColors.ANOMALY + "X Void feature model");
+            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(explanator.get(), "void feature model"));
         }
-    }
 
-    analyzer = new FMAnalyzer(); // TODO necessary?
+        assertTrue(analysis.get());
 
-    /// FULL MANDATORY
-    // create a test case/assumption
-    // check full mandatory features - inconsistent( CF ∪ { c0 } U { fi = false })
-    FullMandatoryAssumptions fullMandatoryAssumptions = new FullMandatoryAssumptions();
-    List<ITestCase> fullMandatoryTestCases = fullMandatoryAssumptions.createAssumptions(featureModel);
-    TestSuite fullMandatoryTestSuite = TestSuite.builder().testCases(fullMandatoryTestCases).build();
+        List<List<AbstractFMAnalysis<?>>> allAnalyses = new ArrayList<>(Collections.emptyList());
+        List<List<AbstractAnomalyExplanator<List<Set<Constraint>>>>> allExplanators = new ArrayList<>(Collections.emptyList());
 
-    FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fullMandatoryDebuggingModel = new FMDebuggingModel<>(featureModel, fullMandatoryTestSuite, new FMTestCaseTranslator(), false, false, false);
-    fullMandatoryDebuggingModel.initialize();
-
-    for (ITestCase fullMandatoryTestCase : fullMandatoryTestCases) {
-        // create the specified analyses and the corresponding explanators
-        debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) fullMandatoryDebuggingModel.clone();
-        debuggingModelClone.initialize();
-        FullMandatoryAnalysis fullMandatoryAnalysis = new FullMandatoryAnalysis(debuggingModelClone, fullMandatoryTestCase);
-        FullMandatoryExplanator fullMandatoryExplanator = new FullMandatoryExplanator(debuggingModelClone, fullMandatoryTestCase);
-        analyzer.addAnalysis(fullMandatoryAnalysis, fullMandatoryExplanator); // add the analysis to the analyzer
-
-        allAnalyses.get(AnomalyType.FULLMANDATORY.ordinal()).add(fullMandatoryAnalysis);
-        allExplanators.get(AnomalyType.FULLMANDATORY.ordinal()).add(fullMandatoryExplanator);
-    }
-
-    // CONDITIONALLY DEAD
-    // create a test case/assumption
-    // check conditionally dead features - inconsistent( CF ∪ { c0 } U { fj = true } U { fi = true } ) for any fj
-    ConditionallyDeadAssumptions conditionallyDeadAssumptions = new ConditionallyDeadAssumptions();
-    List<ITestCase> conditionallyDeadTestCases = conditionallyDeadAssumptions.createAssumptions(featureModel);
-    TestSuite conditionallyDeadTestSuite = TestSuite.builder().testCases(conditionallyDeadTestCases).build();
-
-    FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> conditionallyDeadDebuggingModel = new FMDebuggingModel<>(featureModel, conditionallyDeadTestSuite, new FMTestCaseTranslator(), false, false, false);
-    conditionallyDeadDebuggingModel.initialize();
-
-    for (ITestCase conditionallyDeadTestCase : conditionallyDeadTestCases) {
-        // create the specified analyses and the corresponding explanators
-        debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) conditionallyDeadDebuggingModel.clone();
-        debuggingModelClone.initialize();
-        ConditionallyDeadAnalysis conditionallyDeadAnalysis = new ConditionallyDeadAnalysis(debuggingModelClone, conditionallyDeadTestCase);
-        ConditionallyDeadExplanator conditionallyDeadExplanator = new ConditionallyDeadExplanator(debuggingModelClone, conditionallyDeadTestCase);
-        analyzer.addAnalysis(conditionallyDeadAnalysis, conditionallyDeadExplanator); // add the analysis to the analyzer
-
-        allAnalyses.get(AnomalyType.CONDITIONALLYDEAD.ordinal()).add(conditionallyDeadAnalysis);
-        allExplanators.get(AnomalyType.CONDITIONALLYDEAD.ordinal()).add(conditionallyDeadExplanator);
-    }
-
-    /// FALSE OPTIONAL
-    // create a test case/assumption
-    // check false optional features  - inconsistent( CF ∪ { c0 } U { fpar = true ^ fopt = false } )
-    FalseOptionalAssumptions falseOptionalAssumptions = new FalseOptionalAssumptions();
-    List<ITestCase> falseOptionalTestCases = falseOptionalAssumptions.createAssumptions(featureModel);
-    TestSuite falseOptionalTestSuite = TestSuite.builder().testCases(falseOptionalTestCases).build();
-
-    FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> falseOptionalDebuggingModel = new FMDebuggingModel<>(featureModel, falseOptionalTestSuite, new FMTestCaseTranslator(), false, false, false);
-    falseOptionalDebuggingModel.initialize();
-
-    for (ITestCase falseOptionalTestCase : falseOptionalTestCases) {
-        // create the specified analyses and the corresponding explanators
-        debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) falseOptionalDebuggingModel.clone();
-        debuggingModelClone.initialize();
-        FalseOptionalAnalysis falseOptionalAnalysis = new FalseOptionalAnalysis(debuggingModelClone, falseOptionalTestCase);
-        FalseOptionalExplanator falseOptionalExplanator = new FalseOptionalExplanator(debuggingModelClone, falseOptionalTestCase);
-        analyzer.addAnalysis(falseOptionalAnalysis, falseOptionalExplanator); // add the analysis to the analyzer
-
-        allAnalyses.get(AnomalyType.FALSEOPTIONAL.ordinal()).add(falseOptionalAnalysis);
-        allExplanators.get(AnomalyType.FALSEOPTIONAL.ordinal()).add(falseOptionalExplanator);
-    }
-
-    analyzer.run(); // run the analyzer
-
-    for (AnomalyType anomaly : AnomalyType.values()) {
-        if (anomaly.ordinal() < 2) {
-            continue;
+        // prepare for collecting analyses and explanators
+        for (AnomalyType a : AnomalyType.values()) {
+            allAnalyses.add(new ArrayList<>(Collections.emptyList()));
+            allExplanators.add(new ArrayList<>(Collections.emptyList()));
         }
-        for (int runningAnalysis = 0; runningAnalysis < allAnalyses.get(anomaly.ordinal()).size(); runningAnalysis++) {
-            if (!allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).get()) {
-                switch (anomaly) {
-                    case FULLMANDATORY -> {
-                        System.out.println(ExplanationColors.ANOMALY + "X Full mandatory feature: " + ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
-                        System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(anomaly.ordinal()).get(runningAnalysis).get(), "full mandatory feature"));
-                    }
-                    case CONDITIONALLYDEAD -> {
-                        System.out.println(ExplanationColors.ANOMALY + "X Conditionally dead feature: " + ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
-                        System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(anomaly.ordinal()).get(runningAnalysis).get(), "conditionally dead feature"));
-                    }
-                    case FALSEOPTIONAL -> {
-                        System.out.println(ExplanationColors.ANOMALY + "X False optional feature: " + ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
-                        System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(anomaly.ordinal()).get(runningAnalysis).get(), "false optional feature"));
-                    }
-                }
 
-                for (AnomalyAwareFeature featureWithAnomaly : ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions()) {
-                    featureModel.getFeature(featureWithAnomaly.getId()).setAnomalyType(anomaly);
+        analyzer = new FMAnalyzer(); // TODO necessary?
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModelClone = null;
+
+        boolean anomalyFound = false;
+
+        /// DEAD FEATURES
+        // create a test case/assumption
+        // check dead features - inconsistent( CF ∪ { c0 } U { fi = true })
+        DeadFeatureAssumptions deadFeatureAssumptions = new DeadFeatureAssumptions();
+        List<ITestCase> deadFeatureTestCases = deadFeatureAssumptions.createAssumptions(featureModel);
+        TestSuite deadFeatureTestSuite = TestSuite.builder().testCases(deadFeatureTestCases).build();
+
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> deadFeatureDebuggingModel = new FMDebuggingModel<>(featureModel, deadFeatureTestSuite, new FMTestCaseTranslator(), false, false, false);
+        deadFeatureDebuggingModel.initialize();
+
+        for (ITestCase deadFeatureTestCase : deadFeatureTestCases) {
+            // create the specified analyses and the corresponding explanators
+            debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) deadFeatureDebuggingModel.clone();
+            debuggingModelClone.initialize();
+            DeadFeatureAnalysis deadFeatureAnalysis = new DeadFeatureAnalysis(debuggingModelClone, deadFeatureTestCase);
+            DeadFeatureExplanator deadFeatureExplanator = new DeadFeatureExplanator(debuggingModelClone, deadFeatureTestCase);
+            analyzer.addAnalysis(deadFeatureAnalysis, deadFeatureExplanator); // add the analysis to the analyzer
+
+            allAnalyses.get(AnomalyType.DEAD.ordinal()).add(deadFeatureAnalysis);
+            allExplanators.get(AnomalyType.DEAD.ordinal()).add(deadFeatureExplanator);
+        }
+
+        analyzer.run(); // run the analyzer
+
+        // Check the results and set dead features
+        for (int runningAnalysis = 0; runningAnalysis < allAnalyses.get(AnomalyType.DEAD.ordinal()).size(); runningAnalysis++) {
+            if (!allAnalyses.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).get()) {
+                System.out.println(ExplanationColors.ANOMALY + "X Dead feature: " + ((AssumptionAwareTestCase) allAnalyses.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
+                System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).get(), "dead feature"));
+
+                for (AnomalyAwareFeature deadFeature : ((AssumptionAwareTestCase) allAnalyses.get(AnomalyType.DEAD.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions()) {
+                    featureModel.getFeature(deadFeature.getId()).setAnomalyType(AnomalyType.DEAD);
                 }
 
                 anomalyFound = true;
             }
         }
+
+        analyzer = new FMAnalyzer(); // TODO necessary?
+
+        /// FULL MANDATORY
+        // create a test case/assumption
+        // check full mandatory features - inconsistent( CF ∪ { c0 } U { fi = false })
+        FullMandatoryAssumptions fullMandatoryAssumptions = new FullMandatoryAssumptions();
+        List<ITestCase> fullMandatoryTestCases = fullMandatoryAssumptions.createAssumptions(featureModel);
+        TestSuite fullMandatoryTestSuite = TestSuite.builder().testCases(fullMandatoryTestCases).build();
+
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fullMandatoryDebuggingModel = new FMDebuggingModel<>(featureModel, fullMandatoryTestSuite, new FMTestCaseTranslator(), false, false, false);
+        fullMandatoryDebuggingModel.initialize();
+
+        for (ITestCase fullMandatoryTestCase : fullMandatoryTestCases) {
+            // create the specified analyses and the corresponding explanators
+            debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) fullMandatoryDebuggingModel.clone();
+            debuggingModelClone.initialize();
+            FullMandatoryAnalysis fullMandatoryAnalysis = new FullMandatoryAnalysis(debuggingModelClone, fullMandatoryTestCase);
+            FullMandatoryExplanator fullMandatoryExplanator = new FullMandatoryExplanator(debuggingModelClone, fullMandatoryTestCase);
+            analyzer.addAnalysis(fullMandatoryAnalysis, fullMandatoryExplanator); // add the analysis to the analyzer
+
+            allAnalyses.get(AnomalyType.FULLMANDATORY.ordinal()).add(fullMandatoryAnalysis);
+            allExplanators.get(AnomalyType.FULLMANDATORY.ordinal()).add(fullMandatoryExplanator);
+        }
+
+        // CONDITIONALLY DEAD
+        // create a test case/assumption
+        // check conditionally dead features - inconsistent( CF ∪ { c0 } U { fj = true } U { fi = true } ) for any fj
+        ConditionallyDeadAssumptions conditionallyDeadAssumptions = new ConditionallyDeadAssumptions();
+        List<ITestCase> conditionallyDeadTestCases = conditionallyDeadAssumptions.createAssumptions(featureModel);
+        TestSuite conditionallyDeadTestSuite = TestSuite.builder().testCases(conditionallyDeadTestCases).build();
+
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> conditionallyDeadDebuggingModel = new FMDebuggingModel<>(featureModel, conditionallyDeadTestSuite, new FMTestCaseTranslator(), false, false, false);
+        conditionallyDeadDebuggingModel.initialize();
+
+        for (ITestCase conditionallyDeadTestCase : conditionallyDeadTestCases) {
+            // create the specified analyses and the corresponding explanators
+            debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) conditionallyDeadDebuggingModel.clone();
+            debuggingModelClone.initialize();
+            ConditionallyDeadAnalysis conditionallyDeadAnalysis = new ConditionallyDeadAnalysis(debuggingModelClone, conditionallyDeadTestCase);
+            ConditionallyDeadExplanator conditionallyDeadExplanator = new ConditionallyDeadExplanator(debuggingModelClone, conditionallyDeadTestCase);
+            analyzer.addAnalysis(conditionallyDeadAnalysis, conditionallyDeadExplanator); // add the analysis to the analyzer
+
+            allAnalyses.get(AnomalyType.CONDITIONALLYDEAD.ordinal()).add(conditionallyDeadAnalysis);
+            allExplanators.get(AnomalyType.CONDITIONALLYDEAD.ordinal()).add(conditionallyDeadExplanator);
+        }
+
+        /// FALSE OPTIONAL
+        // create a test case/assumption
+        // check false optional features  - inconsistent( CF ∪ { c0 } U { fpar = true ^ fopt = false } )
+        FalseOptionalAssumptions falseOptionalAssumptions = new FalseOptionalAssumptions();
+        List<ITestCase> falseOptionalTestCases = falseOptionalAssumptions.createAssumptions(featureModel);
+        TestSuite falseOptionalTestSuite = TestSuite.builder().testCases(falseOptionalTestCases).build();
+
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> falseOptionalDebuggingModel = new FMDebuggingModel<>(featureModel, falseOptionalTestSuite, new FMTestCaseTranslator(), false, false, false);
+        falseOptionalDebuggingModel.initialize();
+
+        for (ITestCase falseOptionalTestCase : falseOptionalTestCases) {
+            // create the specified analyses and the corresponding explanators
+            debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) falseOptionalDebuggingModel.clone();
+            debuggingModelClone.initialize();
+            FalseOptionalAnalysis falseOptionalAnalysis = new FalseOptionalAnalysis(debuggingModelClone, falseOptionalTestCase);
+            FalseOptionalExplanator falseOptionalExplanator = new FalseOptionalExplanator(debuggingModelClone, falseOptionalTestCase);
+            analyzer.addAnalysis(falseOptionalAnalysis, falseOptionalExplanator); // add the analysis to the analyzer
+
+            allAnalyses.get(AnomalyType.FALSEOPTIONAL.ordinal()).add(falseOptionalAnalysis);
+            allExplanators.get(AnomalyType.FALSEOPTIONAL.ordinal()).add(falseOptionalExplanator);
+        }
+
+        analyzer.run(); // run the analyzer
+
+        for (AnomalyType anomaly : AnomalyType.values()) {
+            if (anomaly.ordinal() < 2) {
+                continue;
+            }
+            for (int runningAnalysis = 0; runningAnalysis < allAnalyses.get(anomaly.ordinal()).size(); runningAnalysis++) {
+                if (!allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).get()) {
+                    switch (anomaly) {
+                        case FULLMANDATORY -> {
+                            System.out.println(ExplanationColors.ANOMALY + "X Full mandatory feature: " + ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
+                            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(anomaly.ordinal()).get(runningAnalysis).get(), "full mandatory feature"));
+                        }
+                        case CONDITIONALLYDEAD -> {
+                            System.out.println(ExplanationColors.ANOMALY + "X Conditionally dead feature: " + ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
+                            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(anomaly.ordinal()).get(runningAnalysis).get(), "conditionally dead feature"));
+                        }
+                        case FALSEOPTIONAL -> {
+                            System.out.println(ExplanationColors.ANOMALY + "X False optional feature: " + ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions());
+                            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(allExplanators.get(anomaly.ordinal()).get(runningAnalysis).get(), "false optional feature"));
+                        }
+                    }
+
+                    for (AnomalyAwareFeature featureWithAnomaly : ((AssumptionAwareTestCase) allAnalyses.get(anomaly.ordinal()).get(runningAnalysis).getAssumption()).getAssumptions()) {
+                        featureModel.getFeature(featureWithAnomaly.getId()).setAnomalyType(anomaly);
+                    }
+
+                    anomalyFound = true;
+                }
+            }
+        }
+
+        if (!anomalyFound) {
+            System.out.println(ConsoleColors.GREEN + "\u2713 No anomaly found" + ConsoleColors.RESET);
+        }
     }
 
-    if (!anomalyFound) {
-        System.out.println(ConsoleColors.GREEN + "\u2713 No anomaly found" + ConsoleColors.RESET);
+
+    @Test
+    public void testFullAnalysis() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.performFullAnalysis(featureModel);
     }
-}
 
+    @Test
+    public void testLargeModel_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // 42 features in 6 layers - no constraints
+        File fileFM = new File("src/test/resources/basic_featureide_large1.xml");
 
-//    @Test
-//    public void testFullAnalysis() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
-//        File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
-//
-//        FMAnalyzer analyzer = new FMAnalyzer();
-//        analyzer.performFullAnalysis(featureModel);
-//    }
-//
-//    @Test
-//    public void testLargeModel_1() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
-//        // 42 features in 6 layers - no constraints
-//        File fileFM = new File("src/test/resources/basic_featureide_large1.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
-//
-//        FMAnalyzer analyzer = new FMAnalyzer();
-//        analyzer.performFullAnalysis(featureModel);
-//    }
-//
-//    @Test
-//    public void testLargeModel_2() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
-//        // 42 features in 6 layers - few, basic constraints
-//        File fileFM = new File("src/test/resources/basic_featureide_large2.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
-//
-//        FMAnalyzer analyzer = new FMAnalyzer();
-//        analyzer.performFullAnalysis(featureModel);
-//    }
-//
-//    @Test
-//    public void testLargeModel_3() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
-//        // 42 features in 6 layers - more constraints
-//        File fileFM = new File("src/test/resources/basic_featureide_large3.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
-//
-//        FMAnalyzer analyzer = new FMAnalyzer();
-//        analyzer.performFullAnalysis(featureModel);
-//    }
-//
-//    @Test
-//    void testRedundancy_1() throws FeatureModelParserException, ExecutionException, InterruptedException {
-//        // load the feature model
-//        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
-//
-//        FMCdrModel model = new FMCdrModel(featureModel, true, false, true);
-//        model.initialize();
-//
-//        // create the redundancy analysis
-//        RedundancyAnalysis analysis = new RedundancyAnalysis(model);
-//
-//        FMAnalyzer analyzer = new FMAnalyzer();
-//        analyzer.addAnalysis(analysis, null); // add the analysis to the analyzer
-//        analyzer.run(); // run the analyzer
-//
-//        // print the result
-//        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
-//        if (!analysis.get()) {
-//            System.out.println(ExplanationColors.ANOMALY + "X Redundant constraint:");
-//            System.out.println(ExplanationColors.EXPLANATION + ConstraintUtils.convertToString(analysis.getRedundantConstraints(), "\n", "\t", false));
-//        }
-//
-//        assertFalse(analysis.get());
-//
-//        Set<Constraint> constraints = new LinkedHashSet<>();
-//        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 2));
-//
-//        assertEquals(1, analysis.getRedundantConstraints().size());
-//        assertEquals(constraints, analysis.getRedundantConstraints());
-//    }
-//
-//    @Test
-//    void testRedundancy_2() throws ExecutionException, InterruptedException, FeatureModelException {
-//        // create the feature model
-//        FeatureModel fm = new FeatureModel();
-//        fm.addFeature("survey", "survey");
-//        fm.addFeature("pay", "pay");
-//        fm.addFeature("ABtesting", "ABtesting");
-//        fm.addFeature("statistics", "statistics");
-//        fm.addFeature("qa", "qa");
-//        fm.addFeature("license", "license");
-//        fm.addFeature("nonlicense", "nonlicense");
-//        fm.addFeature("multiplechoice", "multiplechoice");
-//        fm.addFeature("singlechoice", "singlechoice");
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.performFullAnalysis(featureModel);
+    }
+
+    @Test
+    public void testLargeModel_2() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // 42 features in 6 layers - few, basic constraints
+        File fileFM = new File("src/test/resources/basic_featureide_large2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.performFullAnalysis(featureModel);
+    }
+
+    @Test
+    public void testLargeModel_3() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // 42 features in 6 layers - more constraints
+        File fileFM = new File("src/test/resources/basic_featureide_large3.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.performFullAnalysis(featureModel);
+    }
+
+    @Test
+    void testRedundancy_1() throws FeatureModelParserException, ExecutionException, InterruptedException {
+        // load the feature model
+        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        FMCdrModel model = new FMCdrModel(featureModel, true, false, true);
+        model.initialize();
+
+        // create the redundancy analysis
+        RedundancyAnalysis analysis = new RedundancyAnalysis(model);
+
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.addAnalysis(analysis, null); // add the analysis to the analyzer
+        analyzer.run(); // run the analyzer
+
+        // print the result
+        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
+        if (!analysis.get()) {
+            System.out.println(ExplanationColors.ANOMALY + "X Redundant constraint:");
+            System.out.println(ExplanationColors.EXPLANATION + ConstraintUtils.convertToString(analysis.getRedundantConstraints(), "\n", "\t", false));
+        }
+
+        assertFalse(analysis.get());
+
+        Set<Constraint> constraints = new LinkedHashSet<>();
+        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 2));
+
+        assertEquals(1, analysis.getRedundantConstraints().size());
+        assertEquals(constraints, analysis.getRedundantConstraints());
+    }
+
+    @Test
+    void testRedundancy_2() throws ExecutionException, InterruptedException {
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        // create the feature model
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fm = new FeatureModel<>("survey-tool", featureBuilder, relationshipBuilder, constraintBuilder);
+        fm.addRoot("survey", "survey");
+        fm.addFeature("pay", "pay");
+        fm.addFeature("ABtesting", "ABtesting");
+        fm.addFeature("statistics", "statistics");
+        fm.addFeature("qa", "qa");
+        fm.addFeature("license", "license");
+        fm.addFeature("nonlicense", "nonlicense");
+        fm.addFeature("multiplechoice", "multiplechoice");
+        fm.addFeature("singlechoice", "singlechoice");
+        fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("pay"));
+        fm.addOptionalRelationship(fm.getFeature("survey"), fm.getFeature("ABtesting"));
+        fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("statistics"));
+        fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("qa"));
+        fm.addAlternativeRelationship(fm.getFeature("pay"), List.of(fm.getFeature("license"), fm.getFeature("nonlicense")));
+        fm.addOrRelationship(fm.getFeature("qa"), List.of(fm.getFeature("multiplechoice"), fm.getFeature("singlechoice")));
+        fm.addOptionalRelationship(fm.getFeature("ABtesting"), fm.getFeature("statistics"));
+        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("statistics"));
+        fm.addExcludes(fm.getFeature("ABtesting"), fm.getFeature("nonlicense"));
+        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey"));
 //        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("pay")));
 //        fm.addRelationship(RelationshipType.OPTIONAL, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
 //        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("statistics")));
@@ -901,35 +962,35 @@ public void testMultiple_1() throws FeatureModelParserException, ExecutionExcept
 //        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
 //        fm.addConstraint(RelationshipType.EXCLUDES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("nonlicense")));
 //        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
-//
-//        FMCdrModel model = new FMCdrModel(fm, true, false, true);
-//        model.initialize();
-//
-//        // create the redundancy analysis
-//        RedundancyAnalysis analysis = new RedundancyAnalysis(model);
-//
-//        FMAnalyzer analyzer = new FMAnalyzer();
-//        analyzer.addAnalysis(analysis, null); // add the analysis to the analyzer
-//        analyzer.run(); // run the analyzer
-//
-//        // print the result
-//        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
-//        if (!analysis.get()) {
-//            System.out.println(ExplanationColors.ANOMALY + "X Redundant constraints:");
-//            System.out.println(ExplanationColors.EXPLANATION + ConstraintUtils.convertToString(analysis.getRedundantConstraints(), "\n", "\t", false));
-//        }
-//
-//        assertFalse(analysis.get());
-//
-//        Set<Constraint> constraints = new LinkedHashSet<>();
-//        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 0));
-//        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 2));
-//        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 3));
-//
-//        assertEquals(3, analysis.getRedundantConstraints().size());
-//        assertEquals(constraints, analysis.getRedundantConstraints());
-//    }
-//
+
+        FMCdrModel model = new FMCdrModel(fm, true, false, true);
+        model.initialize();
+
+        // create the redundancy analysis
+        RedundancyAnalysis analysis = new RedundancyAnalysis(model);
+
+        FMAnalyzer analyzer = new FMAnalyzer();
+        analyzer.addAnalysis(analysis, null); // add the analysis to the analyzer
+        analyzer.run(); // run the analyzer
+
+        // print the result
+        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
+        if (!analysis.get()) {
+            System.out.println(ExplanationColors.ANOMALY + "X Redundant constraints:");
+            System.out.println(ExplanationColors.EXPLANATION + ConstraintUtils.convertToString(analysis.getRedundantConstraints(), "\n", "\t", false));
+        }
+
+        assertFalse(analysis.get());
+
+        Set<Constraint> constraints = new LinkedHashSet<>();
+        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 0));
+        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 2));
+        constraints.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 3));
+
+        assertEquals(3, analysis.getRedundantConstraints().size());
+        assertEquals(constraints, analysis.getRedundantConstraints());
+    }
+
 //    @Test
 //    public void testRedundancy_3() throws FeatureModelParserException, ExecutionException, FeatureModelException, InterruptedException, CloneNotSupportedException {
 //        File fileFM = new File("src/test/resources/bamboobike_featureide_redundancies1.xml");
