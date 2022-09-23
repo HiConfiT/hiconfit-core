@@ -34,7 +34,6 @@ import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Iterators;
 import lombok.Cleanup;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -54,9 +53,6 @@ class FMAnalyzerTest {
         @Cleanup("dispose")
         FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
         FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
-
-//        FeatureModelParser<F extends Feature, R AbstractRelationship<F>, C extends CTConstraint> parser = factory.getParser(FMFormat.FEATUREIDE);
-
 
         // create a test case/assumption
         // check void feature model - inconsistent( CF ∪ { c0 })
@@ -110,19 +106,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
-
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         // create a test case/assumption
         // check void feature model - inconsistent( CF ∪ { c0 })
@@ -130,7 +121,8 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -147,8 +139,8 @@ class FMAnalyzerTest {
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(5)); // check the feature Step-through
-        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(5));
+        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(6)); // check the feature Step-through
+        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(6));
 
         FMAnalyzer analyzer = new FMAnalyzer();
         analyzer.addAnalysis(analysis1, explanator1); // add the analysis to the analyzer
@@ -192,19 +184,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
-
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         // create a test case/assumption
         // check void feature model - inconsistent( CF ∪ { c0 })
@@ -229,15 +216,15 @@ class FMAnalyzerTest {
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(3)); // check the feature Female
-        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(3));
+        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(4)); // check the feature Female
+        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(4));
 
         // check the feature Step-through
         FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();
         debuggingModel1.initialize();
 
-        DeadFeatureAnalysis analysis3 = new DeadFeatureAnalysis(debuggingModel1, testCases.get(5)); // check the feature Step-through
-        DeadFeatureExplanator explanator3 = new DeadFeatureExplanator(debuggingModel1, testCases.get(5));
+        DeadFeatureAnalysis analysis3 = new DeadFeatureAnalysis(debuggingModel1, testCases.get(6)); // check the feature Step-through
+        DeadFeatureExplanator explanator3 = new DeadFeatureExplanator(debuggingModel1, testCases.get(6));
 
         FMAnalyzer analyzer = new FMAnalyzer();
         analyzer.addAnalysis(analysis1, explanator1); // add the analysis to the analyzer
@@ -296,19 +283,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
-
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         // create a test case/assumption
         // check void feature model - inconsistent( CF ∪ { c0 })
@@ -316,7 +298,8 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -333,8 +316,8 @@ class FMAnalyzerTest {
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(2)); // check the feature Drop Handlebar
-        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(2));
+        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(3)); // check the feature Drop Handlebar
+        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(3));
 
         FMAnalyzer analyzer = new FMAnalyzer();
         analyzer.addAnalysis(analysis1, explanator1); // add the analysis to the analyzer
@@ -382,19 +365,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
-
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         // create a test case/assumption
         // check for full mandatory features
@@ -406,8 +384,8 @@ class FMAnalyzerTest {
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        FullMandatoryAnalysis analysis = new FullMandatoryAnalysis(debuggingModel, testCases.get(1));
-        FullMandatoryExplanator explanator = new FullMandatoryExplanator(debuggingModel, testCases.get(1));
+        FullMandatoryAnalysis analysis = new FullMandatoryAnalysis(debuggingModel, testCases.get(2));
+        FullMandatoryExplanator explanator = new FullMandatoryExplanator(debuggingModel, testCases.get(2));
 
         FMAnalyzer analyzer = new FMAnalyzer();
         analyzer.addAnalysis(analysis, explanator); // add the analysis to the analyzer
@@ -427,10 +405,10 @@ class FMAnalyzerTest {
         List<Set<Constraint>> allDiagnoses = explanator.get();
 
         Set<Constraint> cs1 = new LinkedHashSet<>();
-        cs1.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 0));
+        cs1.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 2));
 
         Set<Constraint> cs2 = new LinkedHashSet<>();
-        cs2.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 1));
+        cs2.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 0));
 
         assertEquals(2, allDiagnoses.size());
         assertEquals(cs1, allDiagnoses.get(0));
@@ -443,19 +421,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
-
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         // create a test case/assumption
         // check for false optional features
@@ -503,15 +476,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         // set Female and Step-through as dead
         featureModel.getFeature("Female").setAnomalyType(AnomalyType.DEAD);
@@ -523,7 +495,8 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = conditionallyDeadAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -552,20 +525,20 @@ class FMAnalyzerTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void testConditionallyDead_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_conditionallydead1.xml");
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         // create a test case/assumption
         // check for conditionally dead features
@@ -573,20 +546,23 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = conditionallyDeadAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
         ConditionallyDeadAnalysis analysis = new ConditionallyDeadAnalysis(debuggingModel, testCases.get(0)); // C & B
         ConditionallyDeadExplanator explanator = new ConditionallyDeadExplanator(debuggingModel, testCases.get(0));
 
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel2 = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModel2 = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
         debuggingModel2.initialize();
 
         ConditionallyDeadAnalysis analysis2 = new ConditionallyDeadAnalysis(debuggingModel2, testCases.get(1)); // D & B
         ConditionallyDeadExplanator explanator2 = new ConditionallyDeadExplanator(debuggingModel2, testCases.get(1));
 
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel3 = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModel3 = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
         debuggingModel3.initialize();
 
         ConditionallyDeadAnalysis analysis3 = new ConditionallyDeadAnalysis(debuggingModel3, testCases.get(2)); // D & C
@@ -635,39 +611,34 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
-//        FMParserFactory factory = FMParserFactory.getInstance();
-//        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
-//        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
     }
 
-
     @Test
+    @SuppressWarnings("unchecked")
     public void testMultiple_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         /// VOID FEATURE MODEL
         // create a test case/assumption
@@ -676,7 +647,8 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -708,7 +680,8 @@ class FMAnalyzerTest {
         }
 
         analyzer = new FMAnalyzer(); // TODO necessary?
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModelClone = null;
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                debuggingModelClone;
 
         boolean anomalyFound = false;
 
@@ -862,15 +835,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -884,15 +856,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -906,15 +877,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -928,15 +898,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -949,17 +918,17 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
-        FMCdrModel model = new FMCdrModel(featureModel, true, false, true);
+        FMCdrModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                model = new FMCdrModel<>(featureModel, true, false, true);
         model.initialize();
 
         // create the redundancy analysis
@@ -1010,22 +979,13 @@ class FMAnalyzerTest {
         fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("qa"));
         fm.addAlternativeRelationship(fm.getFeature("pay"), List.of(fm.getFeature("license"), fm.getFeature("nonlicense")));
         fm.addOrRelationship(fm.getFeature("qa"), List.of(fm.getFeature("multiplechoice"), fm.getFeature("singlechoice")));
-        fm.addOptionalRelationship(fm.getFeature("ABtesting"), fm.getFeature("statistics"));
-        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("statistics"));
+        fm.addOptionalRelationship(fm.getFeature("statistics"), fm.getFeature("ABtesting")); // should be redundant // TODO @Tamim, I changed the order of features to trigger the correct assertion
+        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("statistics")); // should be redundant
         fm.addExcludes(fm.getFeature("ABtesting"), fm.getFeature("nonlicense"));
-        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey"));
-//        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("pay")));
-//        fm.addRelationship(RelationshipType.OPTIONAL, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
-//        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("statistics")));
-//        fm.addRelationship(RelationshipType.MANDATORY, fm.getFeature("survey"), Collections.singletonList(fm.getFeature("qa")));
-//        fm.addRelationship(RelationshipType.ALTERNATIVE, fm.getFeature("pay"), List.of(fm.getFeature("license"), fm.getFeature("nonlicense")));
-//        fm.addRelationship(RelationshipType.OR, fm.getFeature("qa"), List.of(fm.getFeature("multiplechoice"), fm.getFeature("singlechoice")));
-//        fm.addRelationship(RelationshipType.OPTIONAL, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
-//        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("statistics")));
-//        fm.addConstraint(RelationshipType.EXCLUDES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("nonlicense")));
-//        fm.addConstraint(RelationshipType.REQUIRES, fm.getFeature("ABtesting"), Collections.singletonList(fm.getFeature("survey")));
+        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey")); // should be redundant
 
-        FMCdrModel model = new FMCdrModel(fm, true, false, true);
+        FMCdrModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                model = new FMCdrModel<>(fm, true, false, true);
         model.initialize();
 
         // create the redundancy analysis
@@ -1059,15 +1019,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -1081,15 +1040,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -1103,15 +1061,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -1125,15 +1082,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performFullAnalysis(featureModel);
@@ -1147,15 +1103,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.REDUNDANT.bitValue());
@@ -1167,15 +1122,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.DEAD.bitValue());
@@ -1187,15 +1141,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.FULLMANDATORY.bitValue());
@@ -1207,15 +1160,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.CONDITIONALLYDEAD.bitValue());
@@ -1227,15 +1179,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.FALSEOPTIONAL.bitValue());
@@ -1247,15 +1198,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.REDUNDANT.bitValue() | AnomalyType.DEAD.bitValue());
@@ -1267,15 +1217,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.REDUNDANT.bitValue() | AnomalyType.DEAD.bitValue() | AnomalyType.FULLMANDATORY.bitValue());
@@ -1287,15 +1236,14 @@ class FMAnalyzerTest {
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
-        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
-        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
-        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
-
-        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
 
         @Cleanup("dispose")
-        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
 
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.DEAD.bitValue() | AnomalyType.FULLMANDATORY.bitValue());

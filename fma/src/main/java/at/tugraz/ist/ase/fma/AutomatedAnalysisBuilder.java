@@ -44,11 +44,9 @@ public class AutomatedAnalysisBuilder {
      *
      * @param featureModel The feature model to analyse
      * @param anomalyTypes Bitwise "or" of the bit-values of the {@link AnomalyType anomaly types} that should be checked
-     * @throws ExecutionException
-     * @throws InterruptedException
-     * @throws CloneNotSupportedException
      */
-    public void performAnalysis(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel, int anomalyTypes) throws ExecutionException, InterruptedException, CloneNotSupportedException {
+    public void performAnalysis(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                                int anomalyTypes) throws ExecutionException, InterruptedException, CloneNotSupportedException {
         /// VOID FEATURE MODEL
         // create a test case/assumption
         // check void feature model - inconsistent( CF ∪ { c0 })
@@ -260,9 +258,6 @@ public class AutomatedAnalysisBuilder {
      * checking for all different anomaly types.
      *
      * @param featureModel The feature model to analyse
-     * @throws ExecutionException
-     * @throws InterruptedException
-     * @throws CloneNotSupportedException
      */
     public void performFullAnalysis(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel) throws ExecutionException, InterruptedException, CloneNotSupportedException {
         /// VOID FEATURE MODEL
