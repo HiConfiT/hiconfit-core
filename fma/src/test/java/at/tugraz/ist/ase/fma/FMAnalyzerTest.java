@@ -147,8 +147,8 @@ class FMAnalyzerTest {
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(6)); // check the feature Step-through
-        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(6));
+        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(5)); // check the feature Step-through
+        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(5));
 
         FMAnalyzer analyzer = new FMAnalyzer();
         analyzer.addAnalysis(analysis1, explanator1); // add the analysis to the analyzer
@@ -229,15 +229,15 @@ class FMAnalyzerTest {
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(6)); // check the feature Step-through
-        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(6));
+        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(3)); // check the feature Female
+        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(3));
 
         // check the feature Step-through
         FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();
         debuggingModel1.initialize();
 
-        DeadFeatureAnalysis analysis3 = new DeadFeatureAnalysis(debuggingModel1, testCases.get(6));
-        DeadFeatureExplanator explanator3 = new DeadFeatureExplanator(debuggingModel1, testCases.get(6));
+        DeadFeatureAnalysis analysis3 = new DeadFeatureAnalysis(debuggingModel1, testCases.get(5)); // check the feature Step-through
+        DeadFeatureExplanator explanator3 = new DeadFeatureExplanator(debuggingModel1, testCases.get(5));
 
         FMAnalyzer analyzer = new FMAnalyzer();
         analyzer.addAnalysis(analysis1, explanator1); // add the analysis to the analyzer
@@ -333,8 +333,8 @@ class FMAnalyzerTest {
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(3)); // check the feature Drop Handlebar
-        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(3));
+        DeadFeatureAnalysis analysis2 = new DeadFeatureAnalysis(debuggingModel, testCases.get(2)); // check the feature Drop Handlebar
+        DeadFeatureExplanator explanator2 = new DeadFeatureExplanator(debuggingModel, testCases.get(2));
 
         FMAnalyzer analyzer = new FMAnalyzer();
         analyzer.addAnalysis(analysis1, explanator1); // add the analysis to the analyzer
@@ -427,10 +427,10 @@ class FMAnalyzerTest {
         List<Set<Constraint>> allDiagnoses = explanator.get();
 
         Set<Constraint> cs1 = new LinkedHashSet<>();
-        cs1.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 1));
+        cs1.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 0));
 
         Set<Constraint> cs2 = new LinkedHashSet<>();
-        cs2.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 0));
+        cs2.add(Iterators.get(debuggingModel.getPossiblyFaultyConstraints().iterator(), 1));
 
         assertEquals(2, allDiagnoses.size());
         assertEquals(cs1, allDiagnoses.get(0));
