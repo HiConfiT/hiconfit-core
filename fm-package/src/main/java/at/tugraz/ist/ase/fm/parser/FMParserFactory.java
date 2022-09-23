@@ -42,6 +42,14 @@ public class FMParserFactory<F extends Feature, R extends AbstractRelationship<F
         return new FMParserFactory<>(featureBuilder, relationshipBuilder, constraintBuilder);
     }
 
+    public static <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+    FMParserFactory<F, R, C> getInstance(@NonNull IFeatureBuildable featureBuilder) {
+        ConfRuleTranslator translator = new ConfRuleTranslator();
+        return getInstance(featureBuilder,
+                           new RelationshipBuilder(translator),
+                           new ConstraintBuilder(translator));
+    }
+
     /**
      * Creates a feature model parser with built-in builders.
      * @return a feature model parser
@@ -51,10 +59,7 @@ public class FMParserFactory<F extends Feature, R extends AbstractRelationship<F
      */
     public static <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
     FMParserFactory<F, R, C> getInstance() {
-        ConfRuleTranslator translator = new ConfRuleTranslator();
-        return new FMParserFactory<>(new FeatureBuilder(),
-                new RelationshipBuilder(translator),
-                new ConstraintBuilder(translator));
+        return getInstance(new FeatureBuilder());
     }
 
     public FeatureModelParser<F, R, C> getParser(@NonNull FMFormat fmFormat) {
