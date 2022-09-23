@@ -1192,4 +1192,64 @@ class FMAnalyzerTest {
         AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
         automatedAnalyzer.performAnalysis(featureModel, AnomalyType.FALSEOPTIONAL.bitValue());
     }
+
+    @Test
+    public void testSingleAnalysis_6() throws ExecutionException, InterruptedException, CloneNotSupportedException, FeatureModelParserException {
+        File fileFM = new File("src/test/resources/basic_featureide_redundant1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
+        automatedAnalyzer.performAnalysis(featureModel, AnomalyType.REDUNDANT.bitValue() | AnomalyType.DEAD.bitValue());
+    }
+
+    @Test
+    public void testSingleAnalysis_7() throws ExecutionException, InterruptedException, CloneNotSupportedException, FeatureModelParserException {
+        File fileFM = new File("src/test/resources/basic_featureide_redundant1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
+        automatedAnalyzer.performAnalysis(featureModel, AnomalyType.REDUNDANT.bitValue() | AnomalyType.DEAD.bitValue() | AnomalyType.FULLMANDATORY.bitValue());
+    }
+
+    @Test
+    public void testSingleAnalysis_8() throws ExecutionException, InterruptedException, CloneNotSupportedException, FeatureModelParserException {
+        File fileFM = new File("src/test/resources/basic_featureide_redundant1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
+        AutomatedAnalysisBuilder automatedAnalyzer = new AutomatedAnalysisBuilder();
+        automatedAnalyzer.performAnalysis(featureModel, AnomalyType.DEAD.bitValue() | AnomalyType.FULLMANDATORY.bitValue());
+    }
 }
