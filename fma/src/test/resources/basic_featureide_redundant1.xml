@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--
+  ~ Consistency-based Algorithms for Conflict Detection and Resolution
+  ~
+  ~ Copyright (c) 2022
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<featureModel>
+    <properties>
+        <graphics key="autolayoutconstraints" value="false"/>
+        <graphics key="legendautolayout" value="true"/>
+        <graphics key="showshortnames" value="false"/>
+        <graphics key="layout" value="horizontal"/>
+        <graphics key="showcollapsedconstraints" value="true"/>
+        <graphics key="legendhidden" value="false"/>
+        <graphics key="layoutalgorithm" value="1"/>
+    </properties>
+    <struct>
+        <and mandatory="true" name="Root">
+            <alt name="A">
+                <feature name="A1"/>
+                <feature name="A2"/>
+                <feature name="A3"/>
+            </alt>
+            <feature mandatory="true" name="B"/>
+            <feature name="C"/>
+        </and>
+    </struct>
+    <constraints>
+        <rule>
+            <disj>
+                <not>
+                    <var>A1</var>
+                </not>
+                <not>
+                    <var>A2</var>
+                </not>
+            </disj>
+        </rule>
+        <rule>
+            <disj>
+                <not>
+                    <var>B</var>
+                </not>
+                <not>
+                    <var>C</var>
+                </not>
+            </disj>
+        </rule>
+    </constraints>
+</featureModel>
