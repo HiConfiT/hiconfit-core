@@ -107,10 +107,18 @@ class FMAnalyzerTest {
     void testDeadFeature_1() throws FeatureModelParserException, ExecutionException, InterruptedException {
         // load the feature model
         File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature1.xml");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
 
 //        FMParserFactory factory = FMParserFactory.getInstance();
 //        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
@@ -122,7 +130,7 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -181,9 +189,19 @@ class FMAnalyzerTest {
     void testDeadFeature_2() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         // load the feature model
         File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
 //        FMParserFactory factory = FMParserFactory.getInstance();
 //        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
 //        FeatureModel featureModel = parser.parse(fileFM);
@@ -194,7 +212,7 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -275,9 +293,19 @@ class FMAnalyzerTest {
     void testDeadFeature_3() throws FeatureModelParserException, ExecutionException, InterruptedException {
         // load the feature model
         File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature3.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
 //        FMParserFactory factory = FMParserFactory.getInstance();
 //        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
 //        FeatureModel featureModel = parser.parse(fileFM);
@@ -288,7 +316,7 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -351,9 +379,19 @@ class FMAnalyzerTest {
     @Test
     void testFullMandatory() throws FeatureModelParserException, ExecutionException, InterruptedException {
         File fileFM = new File("src/test/resources/basic_featureide_fullmandatory1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
 //        FMParserFactory factory = FMParserFactory.getInstance();
 //        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
 //        FeatureModel featureModel = parser.parse(fileFM);
@@ -364,7 +402,7 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = fullMandatoryAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
@@ -402,9 +440,19 @@ class FMAnalyzerTest {
     @Test
     void testFalseOptional() throws FeatureModelParserException, ExecutionException, InterruptedException {
         File fileFM = new File("src/test/resources/basic_featureide_falseoptional1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
+
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel = parser.parse(fileFM);
+
 //        FMParserFactory factory = FMParserFactory.getInstance();
 //        FeatureModelParser parser = factory.getParser(FMFormat.FEATUREIDE);
 //        FeatureModel featureModel = parser.parse(fileFM);
@@ -415,7 +463,7 @@ class FMAnalyzerTest {
         List<ITestCase> testCases = falseOptionalAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
