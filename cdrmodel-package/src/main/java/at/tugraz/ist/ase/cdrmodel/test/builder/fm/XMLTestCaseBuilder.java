@@ -54,17 +54,8 @@ public class XMLTestCaseBuilder implements ITestCaseBuildable {
             String variable;
             String value;
 
-            NodeList variableList = clause.getElementsByTagName(XMLTestSuiteReader.TAG_VARIABLE);
-            NodeList valueList = clause.getElementsByTagName(XMLTestSuiteReader.TAG_VALUE);
-            if (variableList.getLength() != 1 || valueList.getLength() != 1) {
-                throw new RuntimeException("There is a clause with not exactly one variable and/or value!");
-            }
-
-            Element variableEle = (Element) variableList.item(0);
-            Element valueEle = (Element) valueList.item(0);
-
-            variable = variableEle.getChildNodes().item(0).getNodeValue();
-            value = valueEle.getChildNodes().item(0).getNodeValue();
+            variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
+            value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
 
             if (!(value.equals("true") || value.equals("false"))) {
                 throw new RuntimeException("Assignment to a variable must be boolean!");
@@ -86,31 +77,25 @@ public class XMLTestCaseBuilder implements ITestCaseBuildable {
         NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE);
 
         Element clause = (Element) clauses.item(0);
-        Element variableEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VARIABLE).item(0);
-        Element valueEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VALUE).item(0);
+        String variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
+        String value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
 
         StringBuilder sb = new StringBuilder();
-        if (valueEle.getFirstChild().getNodeValue().equals("false")) {
+        if (value.equals("false")) {
             sb.append("~");
         }
-        sb.append(variableEle.getFirstChild().getNodeValue());
-//                .append(variableEle.getFirstChild().getNodeValue())
-//                .append(" = ")
-//                .append(valueEle.getFirstChild().getNodeValue());
+        sb.append(variable);
 
         for (int clauseIndex = 1; clauseIndex < clauses.getLength(); clauseIndex++) {
             clause = (Element) clauses.item(clauseIndex);
-            variableEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VARIABLE).item(0);
-            valueEle = (Element) clause.getElementsByTagName(XMLTestSuiteReader.TAG_VALUE).item(0);
+            variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
+            value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
 
             sb.append(" & ");
-            if (valueEle.getFirstChild().getNodeValue().equals("false")) {
+            if (value.equals("false")) {
                 sb.append("~");
             }
-            sb.append(variableEle.getFirstChild().getNodeValue());
-//                    .append(variableEle.getFirstChild().getNodeValue())
-//                    .append(" = ")
-//                    .append(valueEle.getFirstChild().getNodeValue());
+            sb.append(variable);
         }
 
         return sb.toString();
