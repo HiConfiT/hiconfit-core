@@ -9,7 +9,6 @@
 package at.tugraz.ist.ase.fma.assumption;
 
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
@@ -42,9 +41,7 @@ public class FalseOptionalAssumptions implements IFMAnalysisAssumptionCreatable 
                 .collect(Collectors.toCollection(LinkedList::new));
 
         List<ITestCase> testCases = new LinkedList<>();
-        for (int i = 1; i < candidateFeatures.size(); i++) {
-            AnomalyAwareFeature feature = candidateFeatures.get(i);
-
+        for (AnomalyAwareFeature feature : candidateFeatures) {
             ArrayList<F> parents;
             parents = new ArrayList<>(fm.getMandatoryParents((F) feature));
             if (parents.size() < 1) {

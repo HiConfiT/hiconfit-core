@@ -9,7 +9,6 @@
 package at.tugraz.ist.ase.fma.assumption;
 
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
@@ -37,9 +36,7 @@ public class FullMandatoryAssumptions implements IFMAnalysisAssumptionCreatable 
                 .collect(Collectors.toCollection(LinkedList::new));
 
         List<ITestCase> testCases = new LinkedList<>();
-        for (int i = 1; i < candidateFeatures.size(); i++) {
-            AnomalyAwareFeature feature = candidateFeatures.get(i);
-
+        for (AnomalyAwareFeature feature : candidateFeatures) {
             String testcase = fm.getFeature(0).getName() + " = true & " + feature.getName() + " = false";
             List<Assignment> assignments = new LinkedList<>();
             assignments.add(Assignment.builder()
