@@ -33,7 +33,8 @@ public enum AnomalyType implements IAnomalyType {
             "\u2717 Redundant constraint",
         "\u2713 No redundant constraint");
 
-    private final String description;
-    private final String violatedDescription;
-    private final String nonViolatedDescription;
+    // these strings are used for the output of the results
+    private final String description; // used for diagnostic messages
+    private final String violatedDescription; // when the assumption is violated
+    private final String nonViolatedDescription; // when the assumption is not violated
 }

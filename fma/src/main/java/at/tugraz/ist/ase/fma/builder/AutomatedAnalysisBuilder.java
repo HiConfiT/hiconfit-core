@@ -25,7 +25,7 @@ import java.util.EnumSet;
 public class AutomatedAnalysisBuilder {
 
     /**
-     * Generates analyses and explanators for all types of anomalies
+     * Generates analyses for all types of anomalies
      * @param featureModel the feature model
      * @param analyzer where generated analyses are stored
      */
