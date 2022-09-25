@@ -8,68 +8,57 @@
 
 package at.tugraz.ist.ase.fma;
 
-import at.tugraz.ist.ase.cdrmodel.fm.FMCdrModel;
-import at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModel;
-import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
-import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
-import at.tugraz.ist.ase.common.ConsoleColors;
-import at.tugraz.ist.ase.common.ConstraintUtils;
-import at.tugraz.ist.ase.fm.core.AbstractRelationship;
-import at.tugraz.ist.ase.fm.core.CTConstraint;
-import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fma.analysis.*;
-import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
-import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
-import at.tugraz.ist.ase.fma.assumption.*;
-import at.tugraz.ist.ase.fma.explanator.*;
-import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
-import at.tugraz.ist.ase.kb.core.Constraint;
+import at.tugraz.ist.ase.fma.analysis.AbstractFMAnalysis;
+import at.tugraz.ist.ase.fma.monitor.IAnalysisMonitor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.Setter;
 
-import java.util.*;
-import java.util.concurrent.ExecutionException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.ForkJoinPool;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
+@NoArgsConstructor
 public class FMAnalyzer {
-    private final Map<AbstractFMAnalysis<?>, AbstractAnomalyExplanator<?>> analyses = new LinkedHashMap<>();
+    @Getter
+    private final List<AbstractFMAnalysis<?>> analyses = new LinkedList<>();
 
-    public FMAnalyzer() {
+    @Setter
+    protected IAnalysisMonitor monitor = null;
+
+    public void addAnalysis(@NonNull AbstractFMAnalysis<?> analysis) {
+        analyses.add(analysis);
     }
 
-    public void addAnalysis(AbstractFMAnalysis<?> analysis, AbstractAnomalyExplanator<?> explanator) {
-        analyses.put(analysis, explanator);
-    }
-
-    public void run() throws ExecutionException, InterruptedException {
+    public void run(boolean withDiagnosis) {
         ForkJoinPool pool = ForkJoinPool.commonPool();
-        for (AbstractFMAnalysis<?> analysis : analyses.keySet()) {
+
+        if (monitor != null) {
+            monitor.setNumberOfTasks(analyses.size());
+        }
+
+        for (AbstractFMAnalysis<?> analysis : analyses) {
+            analysis.setWithDiagnosis(withDiagnosis);
             pool.execute(analysis);
         }
 
-        List<AbstractAnomalyExplanator<?>> runningTasks = new LinkedList<>();
-        for (AbstractFMAnalysis<?> analysis : analyses.keySet()) {
-            if (!analysis.get()) {
-                AbstractAnomalyExplanator<?> explanator = analyses.get(analysis);
+        for (AbstractFMAnalysis<?> analysis : analyses) {
+            analysis.join();
 
-                if (explanator != null) {
-                    pool.execute(explanator);
-
-                    runningTasks.add(explanator);
-                }
+            if (monitor != null) {
+                monitor.done();
             }
         }
 
-        for (AbstractAnomalyExplanator<?> tasks : runningTasks) {
-            tasks.join();
-        }
-
         pool.shutdown();
+    }
+
+    public void reset() {
+        analyses.clear();
     }
 }

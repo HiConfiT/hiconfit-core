@@ -14,25 +14,28 @@ import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.DirectDebugParameters;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.cdrmodel.fm.FMDebuggingModel;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.kb.core.Constraint;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
 import lombok.NonNull;
 
 import java.util.Collections;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
-public class FullMandatoryExplanator extends AbstractAnomalyExplanator<List<Set<Constraint>>> {
-    public FullMandatoryExplanator(@NonNull FMDebuggingModel debuggingModel, ITestCase assumption) {
+public class FullMandatoryExplanator extends AbstractAnomalyExplanator {
+
+    public FullMandatoryExplanator(@NonNull FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel,
+                                   ITestCase assumption) {
         super(debuggingModel, assumption);
     }
 
     @Override
-    public List<Set<Constraint>> identify() {
+    public void identify() {
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
 
         Set<ITestCase> TC = new LinkedHashSet<>(Collections.singletonList(assumption));
@@ -47,9 +50,8 @@ public class FullMandatoryExplanator extends AbstractAnomalyExplanator<List<Set<
 
         HSDAG hsdag = new HSDAG(directDebug);
 
-//        CAEvaluator.reset();
         hsdag.construct();
 
-        return hsdag.getDiagnoses();
+        diagnoses = hsdag.getDiagnoses();
     }
 }

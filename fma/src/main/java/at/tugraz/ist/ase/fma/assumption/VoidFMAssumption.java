@@ -9,11 +9,12 @@
 package at.tugraz.ist.ase.fma.assumption;
 
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
+import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
 
@@ -34,8 +35,12 @@ public class VoidFMAssumption implements IFMAnalysisAssumptionCreatable {
                 .variable(fm.getFeature(0).getName())
                 .value("true")
                 .build();
-        return Collections.singletonList(TestCase.builder()
+        AnomalyAwareFeature f0 = (AnomalyAwareFeature) fm.getFeature(0);
+
+        return Collections.singletonList(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                 .testcase(testcase)
-                .assignments(Collections.singletonList(assignment)).build());
+                .assignments(Collections.singletonList(assignment))
+                .assumptions(Collections.singletonList(f0))
+                .build());
     }
 }

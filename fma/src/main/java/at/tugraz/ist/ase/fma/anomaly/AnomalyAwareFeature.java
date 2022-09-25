@@ -20,8 +20,7 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 @Slf4j
 public class AnomalyAwareFeature extends Feature {
-    // TODO: @Tamim: fix this with only AnomalyType. The class should have a method to add many anomalies.
-    protected List<AnomalyType> anomalies = new LinkedList<>();
+    protected List<IAnomalyType> anomalies = new LinkedList<>();
 
     /**
      * Constructor for the root feature.
@@ -54,7 +53,7 @@ public class AnomalyAwareFeature extends Feature {
      * @param type - an {@link AnomalyType} type
      * @return true if it is right, false otherwise
      */
-    public boolean isAnomalyType(AnomalyType type) {
+    public boolean isAnomalyType(IAnomalyType type) {
         return anomalies.contains(type);
     }
 
@@ -63,7 +62,7 @@ public class AnomalyAwareFeature extends Feature {
      *
      * @param type - an {@link AnomalyType} type
      */
-    public void setAnomalyType(AnomalyType type) {
+    public void setAnomalyType(IAnomalyType type) {
         anomalies.add(type);
     }
 

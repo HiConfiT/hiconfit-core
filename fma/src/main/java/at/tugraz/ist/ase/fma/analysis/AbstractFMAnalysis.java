@@ -9,6 +9,9 @@
 package at.tugraz.ist.ase.fma.analysis;
 
 import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
+import at.tugraz.ist.ase.fma.anomaly.IAnomalyType;
+import at.tugraz.ist.ase.fma.explanator.AbstractAnomalyExplanator;
+import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -26,20 +29,26 @@ import java.util.concurrent.RecursiveTask;
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
 @Slf4j
+@Getter
 public abstract class AbstractFMAnalysis<T> extends RecursiveTask<Boolean> {
 
 	protected AbstractCDRModel model;
 
-	@Getter
 	protected T assumption; // could be ITestCase or Constraint
+	@Setter
+	protected boolean withDiagnosis = true;
 
-	@Getter
-	private boolean timeoutOccurred = false;
-	@Getter @Setter
-	private long timeout = 1000;
+	protected boolean non_violated;
+
+	protected AbstractAnomalyExplanator explanator = null;
+
+//	@Getter
+//	private boolean timeoutOccurred = false;
+//	@Getter @Setter
+//	private long timeout = 1000;
 
 //	@Setter
-//	protected IMonitor monitor;
+//	protected IAnalysisMonitor monitor = null;
 
 	public AbstractFMAnalysis(@NonNull AbstractCDRModel model, T assumption) {
 		this.model = model;
@@ -61,4 +70,10 @@ public abstract class AbstractFMAnalysis<T> extends RecursiveTask<Boolean> {
 	}
 
 	protected abstract Boolean analyze();
+
+	protected void setAnomalyType(IAnomalyType anomalyType) {
+		if (assumption instanceof AssumptionAwareTestCase) {
+			((AssumptionAwareTestCase)assumption).getAssumptions().forEach(feature -> feature.setAnomalyType(anomalyType));
+		}
+	}
 }
