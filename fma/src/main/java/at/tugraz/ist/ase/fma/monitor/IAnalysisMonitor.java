@@ -14,5 +14,6 @@ public interface IAnalysisMonitor {
     int getRemainingTasks();
     void done();
     void doneAll();
+    void reset();
     void printProgress();
 }

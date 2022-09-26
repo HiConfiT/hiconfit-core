@@ -35,6 +35,8 @@
         </encoder>
     </appender>
 
+<!--    <logger name="at.tugraz.ist.ase.fma" level="TRACE"/>-->
+
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ROLLING" />

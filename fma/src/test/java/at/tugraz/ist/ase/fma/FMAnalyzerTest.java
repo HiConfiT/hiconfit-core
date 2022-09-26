@@ -62,7 +62,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         // generates analyses and add them to the analyzer
         // USING the VoidFMAnalysisBuilder
@@ -102,6 +102,12 @@ class FMAnalyzerTest {
         assertEquals(cs3, allDiagnoses.get(2));
     }
 
+    /**
+     * Test run() method
+     * This unit test simulates the case when read test cases from a XML file, add them to the analyzer,
+     * and run the analyzer.
+     * DeadFeatureAnalysis won't be executed because VoidFMAnalysis is violated
+     */
     @Test
     void testVoidFM_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         // load the feature model
@@ -120,9 +126,10 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
-        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID);
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
+                AnomalyType.DEAD); // DeadFeatureAnalysis won't be executed because VoidFMAnalysis is violated
         // generates analyses and add them to the analyzer
         // USING the AutomatedAnalysisBuilder
         AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
@@ -130,6 +137,65 @@ class FMAnalyzerTest {
 
         // run the analyzer
         analyzer.run(true);
+
+        // print the result using AutomatedAnalysisExplanation
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis voidAnalysis = (VoidFMAnalysis) analyses.get(0);
+
+        assertFalse(voidAnalysis.get());
+        assertTrue(((AssumptionAwareTestCase)voidAnalysis.getAssumption()).getAssumptions().get(0).isAnomalyType(AnomalyType.VOID));
+
+        List<Set<Constraint>> allDiagnoses = voidAnalysis.getExplanator().getDiagnoses();
+
+        AbstractCDRModel model = voidAnalysis.getModel();
+        Set<Constraint> cs1 = new LinkedHashSet<>();
+        cs1.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 8));
+
+        Set<Constraint> cs2 = new LinkedHashSet<>();
+        cs2.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 1));
+
+        Set<Constraint> cs3 = new LinkedHashSet<>();
+        cs3.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 0));
+
+        assertEquals(3, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(cs3, allDiagnoses.get(2));
+    }
+
+    /**
+     * Test generateAndRun() method
+     * DeadFeatureAnalysis won't be executed because VoidFMAnalysis is violated
+     */
+    @Test
+    void testVoidFM_2() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // load the feature model
+        File fileFM = new File("src/test/resources/bamboobike_featureide_void.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        // create the parser
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
+                AnomalyType.DEAD); // DeadFeatureAnalysis won't be executed because VoidFMAnalysis is violated
+
+        // run the analyzer
+        analyzer.generateAndRun(options,true);
 
         // print the result using AutomatedAnalysisExplanation
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -178,7 +244,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         // generates analyses and add them to the analyzer
         // USING the DeadFeatureAnalysisBuilder
@@ -212,6 +278,9 @@ class FMAnalyzerTest {
         assertEquals(cs2, allDiagnoses.get(1));
     }
 
+    /**
+     * Test run() method
+     */
     @Test
     void testDeadFeature_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         // load the feature model
@@ -230,10 +299,10 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
-                                                         AnomalyType.DEAD);
+                AnomalyType.DEAD);
         // generates analyses and add them to the analyzer
         AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
         analysisBuilder.build(featureModel, options, analyzer);
@@ -267,6 +336,64 @@ class FMAnalyzerTest {
         assertEquals(cs2, allDiagnoses.get(1));
     }
 
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testDeadFeature_11() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // load the feature model
+        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        // create the parser
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
+                AnomalyType.DEAD);
+
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
+        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(7);
+
+        assertTrue(analysis1.get());
+        assertFalse(analysis2.get());
+
+        List<Set<Constraint>> allDiagnoses = analysis2.getExplanator().getDiagnoses();
+
+        AbstractCDRModel model = analysis2.getModel();
+        Set<Constraint> cs1 = new LinkedHashSet<>();
+        cs1.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 8));
+
+        Set<Constraint> cs2 = new LinkedHashSet<>();
+        cs2.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 1));
+
+        assertEquals(2, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+    }
+
+    /**
+     * Test run() method
+     */
     @Test
     void testDeadFeature_2() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         // load the feature model
@@ -284,7 +411,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                                                          AnomalyType.DEAD);
@@ -332,6 +459,74 @@ class FMAnalyzerTest {
         assertEquals(cs3, allDiagnoses1.get(2));
     }
 
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testDeadFeature_21() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // load the feature model
+        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
+                AnomalyType.DEAD);
+
+        analyzer.generateAndRun(options, true); // run the analyzer
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
+        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(5);
+        DeadFeatureAnalysis analysis3 = (DeadFeatureAnalysis) analyses.get(7);
+
+        assertTrue(analysis1.get());
+        assertFalse(analysis2.get());
+        assertFalse(analysis3.get());
+
+        List<Set<Constraint>> allDiagnoses = analysis2.getExplanator().getDiagnoses();
+        List<Set<Constraint>> allDiagnoses1 = analysis3.getExplanator().getDiagnoses();
+
+        AbstractCDRModel model = analysis2.getModel();
+        Set<Constraint> cs1 = new LinkedHashSet<>();
+        cs1.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 8));
+
+        Set<Constraint> cs2 = new LinkedHashSet<>();
+        cs2.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 4));
+
+        Set<Constraint> cs3 = new LinkedHashSet<>();
+        cs3.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 1));
+
+        assertEquals(3, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(cs3, allDiagnoses.get(2));
+
+        assertEquals(3, allDiagnoses1.size());
+        assertEquals(cs1, allDiagnoses1.get(0));
+        assertEquals(cs2, allDiagnoses1.get(1));
+        assertEquals(cs3, allDiagnoses1.get(2));
+    }
+
+    /**
+     * Test run() method
+     */
     @Test
     void testDeadFeature_3() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         // load the feature model
@@ -349,7 +544,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD);
@@ -359,6 +554,66 @@ class FMAnalyzerTest {
 
         // run the analyzer
         analyzer.run(true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
+        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(4);
+
+        assertTrue(analysis1.get());
+        assertFalse(analysis2.get());
+
+        List<Set<Constraint>> allDiagnoses = analysis2.getExplanator().getDiagnoses();
+
+        AbstractCDRModel model = analysis2.getModel();
+        Set<Constraint> cs1 = new LinkedHashSet<>();
+        cs1.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 8));
+
+        Set<Constraint> cs2 = new LinkedHashSet<>();
+        cs2.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 0));
+        cs2.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 6));
+
+        Set<Constraint> cs3 = new LinkedHashSet<>();
+        cs3.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 0));
+        cs3.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 4));
+
+        assertEquals(3, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(cs3, allDiagnoses.get(2));
+    }
+
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testDeadFeature_31() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // load the feature model
+        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature3.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
+                AnomalyType.DEAD);
+
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -408,7 +663,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         // generates analyses and add them to the analyzer
         // USING the FullMandatoryAnalysisBuilder
@@ -442,6 +697,9 @@ class FMAnalyzerTest {
         assertEquals(cs2, allDiagnoses.get(1));
     }
 
+    /**
+     * Test run() method
+     */
     @Test
     void testFullMandatory_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_fullmandatory1.xml");
@@ -458,7 +716,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FULLMANDATORY);
         // generates analyses and add them to the analyzer
@@ -492,6 +750,57 @@ class FMAnalyzerTest {
         assertEquals(cs2, allDiagnoses.get(1));
     }
 
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testFullMandatory_11() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_fullmandatory1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FULLMANDATORY);
+
+        // generate VoidFMAnalysis, DeadFeatureAnalysis, and FullMandatoryAnalysis
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        FullMandatoryAnalysis analysis = (FullMandatoryAnalysis) analyses.get(6);
+
+        assertFalse(analysis.get());
+
+        List<Set<Constraint>> allDiagnoses = analysis.getExplanator().getDiagnoses();
+
+        AbstractCDRModel model = analysis.getModel();
+        Set<Constraint> cs1 = new LinkedHashSet<>();
+        cs1.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 2));
+
+        Set<Constraint> cs2 = new LinkedHashSet<>();
+        cs2.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 0));
+
+        assertEquals(2, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+    }
+
     @Test
     void testFalseOptional_0() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_falseoptional1.xml");
@@ -508,7 +817,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         // generates analyses and add them to the analyzer
         FalseOptionalAnalysisBuilder analysisBuilder = new FalseOptionalAnalysisBuilder();
@@ -537,6 +846,9 @@ class FMAnalyzerTest {
         assertEquals(cs1, allDiagnoses.get(0));
     }
 
+    /**
+     * Test run() method
+     */
     @Test
     void testFalseOptional_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_falseoptional1.xml");
@@ -553,7 +865,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FALSEOPTIONAL);
         // generates analyses and add them to the analyzer
@@ -570,6 +882,53 @@ class FMAnalyzerTest {
         // Assertions
         List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
         FalseOptionalAnalysis analysis = (FalseOptionalAnalysis) analyses.get(0);
+
+        assertFalse(analysis.get());
+
+        List<Set<Constraint>> allDiagnoses = analysis.getExplanator().getDiagnoses();
+
+        AbstractCDRModel model = analysis.getModel();
+        Set<Constraint> cs1 = new LinkedHashSet<>();
+        cs1.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 2));
+
+        assertEquals(1, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+    }
+
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testFalseOptional_11() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_falseoptional1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FALSEOPTIONAL);
+
+        // generate VoidFMAnalysis, DeadFeatureAnalysis, and FalseOptionalAnalysis
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        FalseOptionalAnalysis analysis = (FalseOptionalAnalysis) analyses.get(3);
 
         assertFalse(analysis.get());
 
@@ -603,7 +962,7 @@ class FMAnalyzerTest {
         featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         // generates analyses and add them to the analyzer
         ConditionallyDeadAnalysisBuilder analysisBuilder = new ConditionallyDeadAnalysisBuilder();
@@ -627,6 +986,9 @@ class FMAnalyzerTest {
         assertEquals(1, allDiagnoses.size());
     }
 
+    /**
+     * Test run() method
+     */
     @Test
     void testConditionallyDead_1() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
@@ -647,7 +1009,7 @@ class FMAnalyzerTest {
         featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
         // generates analyses and add them to the analyzer
@@ -672,6 +1034,54 @@ class FMAnalyzerTest {
         assertEquals(1, allDiagnoses.size());
     }
 
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testConditionallyDead_11() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // set Female and Step-through as dead
+//        featureModel.getFeature("Female").setAnomalyType(AnomalyType.DEAD);
+//        featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
+
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        ConditionallyDeadAnalysis analysis = (ConditionallyDeadAnalysis) analyses.get(15);
+
+        assertFalse(analysis.get());
+
+        List<Set<Constraint>> allDiagnoses = analysis.getExplanator().getDiagnoses();
+
+        assertEquals(1, allDiagnoses.size());
+    }
+
+    /**
+     * Test run() method
+     */
     @Test
     void testConditionallyDead_2() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_conditionallydead1.xml");
@@ -688,7 +1098,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
         // generates analyses and add them to the analyzer
@@ -717,6 +1127,54 @@ class FMAnalyzerTest {
         assertEquals(1, allDiagnoses3.size());
     }
 
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testConditionallyDead_21() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_conditionallydead1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
+
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        ConditionallyDeadAnalysis analysis2 = (ConditionallyDeadAnalysis) analyses.get(6);
+        ConditionallyDeadAnalysis analysis3 = (ConditionallyDeadAnalysis) analyses.get(7);
+
+        assertFalse(analysis2.get());
+        assertFalse(analysis3.get());
+
+        List<Set<Constraint>> allDiagnoses2 = analysis2.getExplanator().getDiagnoses();
+        List<Set<Constraint>> allDiagnoses3 = analysis3.getExplanator().getDiagnoses();
+
+        assertEquals(2, allDiagnoses2.size());
+        assertEquals(1, allDiagnoses3.size());
+    }
+
+    /**
+     * Test run() method
+     */
     @Test
     void testConditionallyDead_3() throws FeatureModelParserException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_conditionallydead2.xml");
@@ -733,7 +1191,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generates analyses and add them to the analyzer
@@ -748,6 +1206,76 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
     }
 
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    void testConditionallyDead_31() throws FeatureModelParserException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_conditionallydead2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    /**
+     * Test run() method
+     */
+    @Test
+    public void testMultiple_0() throws FeatureModelParserException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+        // generates analyses and add them to the analyzer
+        // In real scenario, analyses/test cases should be read from a file
+        // TODO - @Tamim: please replace two lines below with test cases read from a XML file
+        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
+        analysisBuilder.build(featureModel, options, analyzer);
+
+        // generate analyses and run the analyzer
+        analyzer.run(true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    /**
+     * Test generateAndRun() method
+     */
     @Test
     public void testMultiple_1() throws FeatureModelParserException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
@@ -764,15 +1292,42 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
+        // generate analyses and run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    @Disabled("Bad for Tamim's laptop battery...")
+    @Test
+    public void testLargeModel_1() throws FeatureModelParserException, CloneNotSupportedException {
+        // 42 features in 6 layers - few, basic constraints
+        File fileFM = new File("src/test/resources/basic_featureide_large1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.setMonitor(new ProgressMonitor()); // MONITOR
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -832,16 +1387,13 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
         analyzer.setMonitor(new ProgressMonitor()); // MONITOR
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -866,15 +1418,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -898,7 +1447,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         // generates analyses and add them to the analyzer
         RedundancyAnalysisBuilder analysisBuilder = new RedundancyAnalysisBuilder();
@@ -942,7 +1491,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.REDUNDANT);
         // generates analyses and add them to the analyzer
@@ -1001,7 +1550,7 @@ class FMAnalyzerTest {
         fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey")); // should be redundant
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(fm);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.REDUNDANT);
         // generates analyses and add them to the analyzer
@@ -1047,15 +1596,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1080,15 +1626,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1113,15 +1656,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1146,15 +1686,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1179,15 +1716,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.REDUNDANT);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1210,15 +1744,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1241,15 +1772,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FULLMANDATORY);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1272,15 +1800,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1303,15 +1828,12 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FALSEOPTIONAL);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1334,16 +1856,13 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD,
                 AnomalyType.REDUNDANT);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1366,17 +1885,14 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD,
                 AnomalyType.FULLMANDATORY,
                 AnomalyType.REDUNDANT);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
@@ -1399,16 +1915,13 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer();
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD,
                 AnomalyType.FULLMANDATORY);
-        // generates analyses and add them to the analyzer
-        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
 
         // run the analyzer
-        analyzer.run(true);
+        analyzer.generateAndRun(options, true);
 
         // print the result
         AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
