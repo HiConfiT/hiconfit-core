@@ -83,7 +83,6 @@ public class XMLTestSuiteReader implements ITestSuiteReadable {
             return testSuite;
         }
         catch (ParserConfigurationException | SAXException e) {
-            // TODO eval return null instead?
             throw new RuntimeException("An error occurred while reading the file!", e.getCause());
         }
     }

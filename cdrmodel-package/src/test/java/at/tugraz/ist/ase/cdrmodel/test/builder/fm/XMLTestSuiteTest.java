@@ -11,10 +11,13 @@ package at.tugraz.ist.ase.cdrmodel.test.builder.fm;
 import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.writer.XMLTestSuiteWriter;
 import lombok.Cleanup;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -35,7 +38,7 @@ public class XMLTestSuiteTest {
     }
 
     @Test
-    void testSize() {
+    public void testSize() {
         assertEquals(3, testSuite.size());
     }
 
@@ -48,5 +51,21 @@ public class XMLTestSuiteTest {
 
         System.out.println(testSuite.toString());
         assertEquals(expected, testSuite.toString());
+    }
+
+    @Test
+    public void testWrite() throws IOException, ParserConfigurationException, TransformerException {
+        String fileName = "written_testcases.xml";
+        String filePath = "src/test/resources/" + fileName;
+
+        XMLTestSuiteWriter writer = new XMLTestSuiteWriter();
+        writer.write(testSuite.getTestCases(), filePath);
+
+        XMLTestSuiteReader factory = new XMLTestSuiteReader();
+        XMLTestCaseBuilder testCaseFactory = new XMLTestCaseBuilder();
+        @Cleanup InputStream is = getInputStream(TestSuiteTest.class.getClassLoader(), fileName);
+
+        TestSuite reReadTestSuite = factory.read(is, testCaseFactory);
+        assertEquals(testSuite, reReadTestSuite);
     }
 }

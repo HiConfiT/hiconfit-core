@@ -51,11 +51,8 @@ public class XMLTestCaseBuilder implements ITestCaseBuildable {
         for (int clauseIndex = 0; clauseIndex < testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE).getLength(); clauseIndex++) {
             Element clause = (Element) testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE).item(clauseIndex);
 
-            String variable;
-            String value;
-
-            variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
-            value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
+            String variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
+            String value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
 
             if (!(value.equals("true") || value.equals("false"))) {
                 throw new RuntimeException("Assignment to a variable must be boolean!");
