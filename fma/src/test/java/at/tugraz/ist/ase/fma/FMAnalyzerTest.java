@@ -779,6 +779,40 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
     }
 
+    @Disabled("Bad for Tamim's laptop battery...")
+    @Test
+    public void testLargeModel_1() throws FeatureModelParserException, CloneNotSupportedException {
+        // 42 features in 6 layers - no constraints
+        File fileFM = new File("src/test/resources/basic_featureide_large1.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer();
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+        // generates analyses and add them to the analyzer
+        AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
+        analysisBuilder.build(featureModel, options, analyzer);
+
+        // run the analyzer
+        analyzer.setMonitor(new ProgressMonitor()); // MONITOR
+        analyzer.run(true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
     // this function will take about 30-45 minutes to run
     @Disabled("Bad for Tamim's laptop battery...")
     @Test
