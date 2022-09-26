@@ -50,6 +50,11 @@ public class ProgressMonitor implements IAnalysisMonitor {
     }
 
     @Override
+    public void reset() {
+        progress.set(0);
+    }
+
+    @Override
     public void printProgress() {
         System.out.print("Progress: " + Math.round((double) progress.get() / numberOfTasks.get() * 100) + "%");
         System.out.println(" - Remaining tasks: " + getRemainingTasks());

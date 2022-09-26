@@ -59,6 +59,8 @@ public class RedundancyAnalysis extends AbstractFMAnalysis<Boolean> {
 
         LoggerUtils.outdent();
         log.debug("{}Analyzed Redundancy", LoggerUtils.tab());
-        return redundantConstraints.isEmpty();
+
+        non_violated = redundantConstraints.isEmpty();
+        return non_violated;
     }
 }

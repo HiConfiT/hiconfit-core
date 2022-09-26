@@ -15,6 +15,7 @@ and made changes to adapt the code with the generic feature model.
 7. [**Explanations**](https://github.com/manleviet/CA-CDR-V2/tree/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/explanation), e.g., [**VoidFMExplanation**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/explanation/VoidFMExplanation.java), help to generate explanations.
 8. [**AutomatedAnalysisBuilder**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/builder/AutomatedAnalysisBuilder.java) encapsulates all built-in builders.
 9. [**AutomatedAnalysisExplanation**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/explanation/AutomatedAnalysisExplanation.java) encapsulates all built-in explanations.
+10. VoidFMAnalysis and DeadFeatureAnalysis are mandatory analyses.
 
 ### Simple usage of the package
 
@@ -37,30 +38,66 @@ FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTC
         featureModel = parser.parse(fileFM);
 
 // 4. Create an analyzer
-FMAnalyzer analyzer = new FMAnalyzer();
+FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
 // 5. Select analysis operations to be performed
 EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD,
                                           AnomalyType.FULLMANDATORY,
                                           AnomalyType.REDUNDANT);
 
-// 6. Generates analyses and add them to the analyzer
-AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-analysisBuilder.build(featureModel, options, analyzer);
-
-// 7. Run the analyzer
+// 6. Generate VoidFMAnalysis, DeadFeatureAnalysis, FullMandatoryAnalysis, and RedundancyAnalysis 
+// And Run the analyzer
 // (true - trigger the corresponding explanator if the assumption is violated)
-analyzer.run(true);
+analyzer.generateAndRun(options, true);
 
 // 8. Print the result
 AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
 System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+// generated explanations depends on options
+// in this case where options don't include VOID, the VoidFMAnalysis' results won't be printed
 ```
 
 If you want to perform all built-in analyses, you can replace the statement in Step 5 by the following statement:
 
 ```java
 EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+```
+
+### Usage of the FMAnalyzer's run() method
+
+Use this method if you read test cases from a file.
+
+```java
+File fileFM = new File("src/test/resources/basic_featureide_redundant1.xml");
+
+// 1. Create the factory for anomaly feature models
+IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+        factory = FMParserFactory.getInstance(featureBuilder);
+
+// 2. Create the parser
+@Cleanup("dispose")
+FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+        parser = factory.getParser(fileFM.getName());
+// 3. Parse the feature model
+FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+        featureModel = parser.parse(fileFM);
+
+// 4. Create an analyzer
+FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+// 5. Read test cases from a file and add to analyzer
+...
+
+// 6. Run the analyzer
+// (true - trigger the corresponding explanator if the assumption is violated)
+// execute the VoidFMAnalysis first if there is any
+analyzer.run(true);
+
+// 8. Print the result
+EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 ```
 
 ### [**AutomatedAnalysisBuilder**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/builder/AutomatedAnalysisBuilder.java) and [**AutomatedAnalysisExplanation**](https://github.com/manleviet/CA-CDR-V2/blob/21-uses-generics-for-feature-model/fma/src/main/java/at/tugraz/ist/ase/fma/explanation/AutomatedAnalysisExplanation.java)
@@ -87,7 +124,7 @@ FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTC
         featureModel = parser.parse(fileFM);
 
 // 4. Create an analyzer
-FMAnalyzer analyzer = new FMAnalyzer();
+FMAnalyzer analyzer = new FMAnalyzer(featureModel);
 
 // (omitted) 5. Select analysis operations to be performed
 

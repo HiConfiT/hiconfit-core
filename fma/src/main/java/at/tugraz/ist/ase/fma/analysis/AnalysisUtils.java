@@ -41,12 +41,20 @@ public class AnalysisUtils {
     }
 
     /**
-     * Get all DeadFeatureAnalysis from the list of analyses
+     * Get all specific and done analyses from the list of analyses
      * @param analyses list of analyses
      * @return a list of DeadFeatureAnalysis
      */
     public List<AbstractFMAnalysis<?>> getAnalyses(@NonNull List<AbstractFMAnalysis<?>> analyses, @NonNull Class<?> clazz) {
-        return analyses.parallelStream().filter(clazz::isInstance)
-                                        .toList();
+        return analyses.parallelStream().filter(clazz::isInstance).toList();
+    }
+
+    public List<AbstractFMAnalysis<?>> getDoneAnalyses(@NonNull List<AbstractFMAnalysis<?>> analyses, @NonNull Class<?> clazz) {
+        return analyses.parallelStream().filter(analysis -> clazz.isInstance(analysis) && analysis.isDone())
+                .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    public List<AbstractFMAnalysis<?>> getNotExecutedAnalyses(@NonNull List<AbstractFMAnalysis<?>> analyses) {
+        return analyses.parallelStream().filter(analysis -> !analysis.isDone()).toList();
     }
 }

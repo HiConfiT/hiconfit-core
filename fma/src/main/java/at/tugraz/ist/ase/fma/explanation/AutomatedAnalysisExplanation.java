@@ -25,6 +25,11 @@ public class AutomatedAnalysisExplanation {
                 case VOID -> {
                     explanable = new VoidFMExplanation();
                     sb.append(explanable.getDescriptiveExplanation(analyses, VoidFMAnalysis.class, anomalyType));
+
+                    VoidFMAnalysis analysis = (VoidFMAnalysis) AnalysisUtils.getAnalyses(analyses, VoidFMAnalysis.class).get(0);
+                    if (analysis != null && !analysis.isNon_violated()) {
+                        return sb.toString();
+                    }
                 }
                 case DEAD -> {
                     explanable = new CompactExplanation();

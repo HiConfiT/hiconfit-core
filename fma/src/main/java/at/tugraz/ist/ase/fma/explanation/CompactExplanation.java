@@ -36,7 +36,7 @@ public class CompactExplanation implements IAnalysisExplanable {
     public String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<?>> allAnalyses,
                                             @NonNull Class<? extends AbstractFMAnalysis<?>> analysisClass,
                                             @NonNull AnomalyType anomalyType) {
-        List<AbstractFMAnalysis<?>> filteredAnalyses = AnalysisUtils.getAnalyses(allAnalyses, analysisClass);
+        List<AbstractFMAnalysis<?>> filteredAnalyses = AnalysisUtils.getDoneAnalyses(allAnalyses, analysisClass);
 
         List<AbstractFMAnalysis<?>> violatedAnalyses = AnalysisUtils.getViolatedAnalyses(filteredAnalyses);
 
