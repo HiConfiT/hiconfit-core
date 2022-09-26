@@ -11,8 +11,11 @@ package at.tugraz.ist.ase.cdrmodel.test.writer;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import lombok.NonNull;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.util.List;
 
 public interface ITestSuiteWritable {
-    void write(@NonNull List<ITestCase> testCases, @NonNull String path);
+    void write(@NonNull List<ITestCase> testCases, @NonNull String path) throws ParserConfigurationException, TransformerException;
 }
