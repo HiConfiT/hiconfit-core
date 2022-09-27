@@ -53,12 +53,6 @@
         <clause value="true" variable="A3"/>
     </testcase>
     <testcase anomaly="FALSEOPTIONAL">
-        <assumption id="A" name="A"/>
-        <clause value="true" variable="Root"/>
-        <clause value="true" variable="B"/>
-        <clause value="false" variable="A"/>
-    </testcase>
-    <testcase anomaly="FALSEOPTIONAL">
         <assumption id="A3" name="A3"/>
         <clause value="true" variable="Root"/>
         <clause value="true" variable="B"/>

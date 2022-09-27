@@ -186,7 +186,6 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
      */
     public List<F> getMandatoryParents(@NonNull F rightSide) {
         List<F> parents = new LinkedList<>();
-
         List<F> parentsqueue = new LinkedList<>();
 
         exploreMandatoryParentFrom(rightSide, parents, parentsqueue);
@@ -196,7 +195,7 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
 
     @SuppressWarnings("unchecked")
     private void exploreMandatoryParentFrom(@NonNull F rightSide, List<F> parents, List<F> parentsqueue) {
-        List<R> relationships = (List<R>) rightSide.getAllRelationships();
+        List<R> relationships = (List<R>) rightSide.getRelationshipsAsChild();
         List<C> cstrs = getRequiresConstraintsAndFeatureInRight(rightSide);
 
         for (R r : relationships) {

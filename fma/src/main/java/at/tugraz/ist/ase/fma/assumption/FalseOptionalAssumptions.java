@@ -44,7 +44,7 @@ public class FalseOptionalAssumptions implements IFMAnalysisAssumptionCreatable 
         for (AnomalyAwareFeature feature : candidateFeatures) {
             ArrayList<F> parents;
             parents = new ArrayList<>(fm.getMandatoryParents((F) feature));
-            if (parents.size() < 1) {
+            if (parents.isEmpty()) {
                 continue;
             }
 

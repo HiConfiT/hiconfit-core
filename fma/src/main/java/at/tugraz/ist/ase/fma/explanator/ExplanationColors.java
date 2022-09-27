@@ -19,4 +19,5 @@ public class ExplanationColors {
     public String OK = ConsoleColors.BLUE;
     public String ANOMALY = ConsoleColors.RED;
     public String EXPLANATION = ConsoleColors.BLACK;
+    public String ASSUMPTION = ConsoleColors.GREEN;
 }
