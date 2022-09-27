@@ -8,6 +8,8 @@
 
 package at.tugraz.ist.ase.fm.parser;
 
+import lombok.NonNull;
+
 /**
  * An enum of types of feature model formats.
  */
@@ -19,7 +21,12 @@ public enum FMFormat {
     GLENCOE, // Glencoe format
     DESCRIPTIVE; // my format
 
-    public static FMFormat getFMFormat(String format) {
+    public boolean isValid() {
+        return this != NONE;
+    }
+
+    public static FMFormat getFMFormat(@NonNull String filename) {
+        String format = getFMFormatString(filename);
         return switch (format) {
             case "sxfm", "splx" -> FMFormat.SXFM;
             case "xml" -> FMFormat.FEATUREIDE;
@@ -30,7 +37,7 @@ public enum FMFormat {
         };
     }
 
-    public static String getFMFormatString(String filename) {
+    private static String getFMFormatString(@NonNull String filename) {
         if (filename.endsWith(".sxfm") || filename.endsWith(".splx")) {
             return "sxfm";
         } else if (filename.endsWith(".xml")) {
@@ -42,6 +49,6 @@ public enum FMFormat {
         } else if (filename.endsWith(".fm4conf")) {
             return "fm4conf";
         }
-        return null;
+        return "";
     }
 }

@@ -8,9 +8,16 @@
 
 package at.tugraz.ist.ase.kb.fm;
 
+import at.tugraz.ist.ase.fm.builder.ConstraintBuilder;
+import at.tugraz.ist.ase.fm.builder.FeatureBuilder;
+import at.tugraz.ist.ase.fm.builder.RelationshipBuilder;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.fm.parser.SXFMParser;
+import at.tugraz.ist.ase.fm.translator.ConfRuleTranslator;
 import at.tugraz.ist.ase.kb.core.BoolVariable;
 import at.tugraz.ist.ase.kb.core.Variable;
 import org.chocosolver.solver.variables.BoolVar;
@@ -24,16 +31,22 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FMKBTest {
-    static FMKB kb;
-    static FeatureModel featureModel;
+    static FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> kb;
+    static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
 
     @BeforeAll
     static void setUp() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/smartwatch.sxfm");
-        SXFMParser parser = new SXFMParser();
+
+        FeatureBuilder featureBuilder = new FeatureBuilder();
+        ConfRuleTranslator confRuleTranslator = new ConfRuleTranslator();
+        RelationshipBuilder relationshipBuilder = new RelationshipBuilder(confRuleTranslator);
+        ConstraintBuilder constraintBuilder = new ConstraintBuilder(confRuleTranslator);
+
+        SXFMParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = new SXFMParser<>(featureBuilder, relationshipBuilder, constraintBuilder);
         featureModel = parser.parse(fileFM);
 
-        kb = new FMKB(featureModel, true);
+        kb = new FMKB<>(featureModel, true);
 
         kb.getConstraintList().forEach(c -> {
             System.out.println(c);

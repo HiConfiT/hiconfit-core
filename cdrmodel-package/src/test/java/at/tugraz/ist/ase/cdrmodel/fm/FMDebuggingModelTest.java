@@ -12,13 +12,14 @@ import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import com.google.common.collect.Iterators;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -33,7 +34,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FMDebuggingModelTest {
 
-    static FMDebuggingModel model;
+    static FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> model;
     static TestSuite testSuite;
 
     List<List<String>> expectedConstraints = List.of(
@@ -54,13 +55,14 @@ class FMDebuggingModelTest {
             List.of("ARITHM ([not(ABtesting) + not(nonlicense) >= 1])")
     );
 
+    static FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
+
     @BeforeAll
     static void init() throws FeatureModelParserException, IOException {
         File fileFM = new File("src/test/resources/survey.fm4conf");
 
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
-        FeatureModel fm = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm = parser.parse(fileFM);
 
         TestSuiteReader builder = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -69,7 +71,7 @@ class FMDebuggingModelTest {
         testSuite = builder.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        model = new FMDebuggingModel(fm, testSuite, translator, false, true, false);
+        model = new FMDebuggingModel<>(fm, testSuite, translator, false, true, false);
         model.initialize();
     }
 
@@ -113,8 +115,9 @@ class FMDebuggingModelTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void shouldCloneable() throws CloneNotSupportedException {
-        FMDebuggingModel clone = (FMDebuggingModel) model.clone();
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> clone = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) model.clone();
         clone.initialize();
 
         assertAll(() -> assertNotSame(model, clone),

@@ -12,6 +12,7 @@ import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.cdrmodel.test.builder.ITestCaseBuildable;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.Assignment;
+import com.google.common.base.Preconditions;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,14 +21,17 @@ import java.util.List;
 
 @Slf4j
 public class FMTestCaseBuilder implements ITestCaseBuildable {
-    public TestCase buildTestCase(@NonNull String testcase) {
+    public TestCase buildTestCase(@NonNull Object testcase) {
+        Preconditions.checkArgument(testcase instanceof String, "The test case must be a string");
+        String testcaseStr = (String) testcase;
+
         log.trace("{}Building test case [testcase={}] >>>", LoggerUtils.tab(), testcase);
         LoggerUtils.indent();
 
-        List<Assignment> assignments = splitTestCase(testcase);
+        List<Assignment> assignments = splitTestCase(testcaseStr);
 
         TestCase testCase = TestCase.builder()
-                .testcase(testcase)
+                .testcase(testcaseStr)
                 .assignments(assignments)
                 .build();
 

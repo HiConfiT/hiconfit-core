@@ -1,0 +1,49 @@
+<!--
+  ~ Consistency-based Algorithms for Conflict Detection and Resolution
+  ~
+  ~ Copyright (c) 2022
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+<testcases>
+    <testcase>
+        <clause variable="root" value="true"/>
+    </testcase>
+    <testcase>
+        <clause variable="root" value="true"/>
+        <clause variable="something" value="true"/>
+    </testcase>
+    <testcase>
+        <clause variable="root" value="true"/>
+        <clause variable="anything" value="false"/>
+    </testcase>
+</testcases>
+
+<!--<testcases>-->
+<!--    <testcase>-->
+<!--        <clause>-->
+<!--            <variable>root</variable>-->
+<!--            <value>true</value>-->
+<!--        </clause>-->
+<!--    </testcase>-->
+<!--    <testcase>-->
+<!--        <clause>-->
+<!--            <variable>root</variable>-->
+<!--            <value>true</value>-->
+<!--        </clause>-->
+<!--        <clause>-->
+<!--            <variable>something</variable>-->
+<!--            <value>true</value>-->
+<!--        </clause>-->
+<!--    </testcase>-->
+<!--    <testcase>-->
+<!--        <clause>-->
+<!--            <variable>root</variable>-->
+<!--            <value>true</value>-->
+<!--        </clause>-->
+<!--        <clause>-->
+<!--            <variable>anything</variable>-->
+<!--            <value>false</value>-->
+<!--        </clause>-->
+<!--    </testcase>-->
+<!--</testcases>-->

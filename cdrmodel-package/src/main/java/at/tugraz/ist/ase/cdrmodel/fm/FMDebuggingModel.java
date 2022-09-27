@@ -14,6 +14,9 @@ import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.translator.ITestCaseTranslatable;
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import lombok.Getter;
 import lombok.NonNull;
@@ -29,7 +32,7 @@ import java.util.Set;
  * + Test cases
  */
 @Slf4j
-public class FMDebuggingModel extends FMCdrModel implements IDebuggingModel {
+public class FMDebuggingModel<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> extends FMCdrModel<F, R, C> implements IDebuggingModel {
 
     private TestSuite testSuite;
     private ITestCaseTranslatable translator;
@@ -52,7 +55,7 @@ public class FMDebuggingModel extends FMCdrModel implements IDebuggingModel {
      * @param rootConstraints true if the root constraint (f0 = true) should be added
      * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
-    public FMDebuggingModel(@NonNull FeatureModel fm, @NonNull TestSuite testSuite, @NonNull ITestCaseTranslatable translator,
+    public FMDebuggingModel(@NonNull FeatureModel<F, R, C> fm, @NonNull TestSuite testSuite, @NonNull ITestCaseTranslatable translator,
                             boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
         super(fm, hasNegativeConstraints, rootConstraints, reversedConstraintsOrder);
 
@@ -82,7 +85,7 @@ public class FMDebuggingModel extends FMCdrModel implements IDebuggingModel {
             testcases.addAll(testSuite.getTestCases());
         }
 
-        // remove all Choco constraints, cause we just need variables and test cases
+        // remove all Choco constraints, because we just need variables and test cases
         model.unpost(model.getCstrs());
 
         LoggerUtils.outdent();
@@ -108,8 +111,9 @@ public class FMDebuggingModel extends FMCdrModel implements IDebuggingModel {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
-        FMDebuggingModel clone = (FMDebuggingModel) super.clone();
+        FMDebuggingModel<F, R, C> clone = (FMDebuggingModel<F, R, C>) super.clone();
 
         clone.testSuite = (TestSuite) testSuite.clone();
         clone.testcases = new LinkedHashSet<>();

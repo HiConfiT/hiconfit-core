@@ -27,6 +27,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/fma/pom.xml" />
         <option value="$PROJECT_DIR$/test-package/pom.xml" />
       </set>
     </option>

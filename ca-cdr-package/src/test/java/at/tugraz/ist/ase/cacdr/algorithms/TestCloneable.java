@@ -17,14 +17,15 @@ import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.cdrmodel.test_model.model.*;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Iterators;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import org.junit.jupiter.api.Test;
 
@@ -342,11 +343,11 @@ public class TestCloneable {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void directDebug1() throws FeatureModelParserException, IOException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -355,12 +356,12 @@ public class TestCloneable {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
         // cloneable
-        FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();
         debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
@@ -389,11 +390,11 @@ public class TestCloneable {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void directDebug2() throws FeatureModelParserException, IOException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/FM_10_1.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -402,12 +403,12 @@ public class TestCloneable {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
         // cloneable
-        FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();
         debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 
@@ -439,11 +440,11 @@ public class TestCloneable {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     void directDebug3() throws FeatureModelParserException, IOException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/FM_10_2.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
-        FeatureModel featureModel = parser.parse(fileFM);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -452,12 +453,12 @@ public class TestCloneable {
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
 
         // cloneable
-        FMDebuggingModel debuggingModel1 = (FMDebuggingModel) debuggingModel.clone();
+        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();
         debuggingModel1.initialize();
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel1);
 

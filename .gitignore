@@ -38,6 +38,9 @@ build/
 ### Mac OS ###
 .DS_Store
 
+### Fleet ###
+.fleet/
+
 logs.log
 
 *.zip

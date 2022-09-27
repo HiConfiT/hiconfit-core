@@ -13,12 +13,13 @@ import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
+import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.core.Constraint;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
 import org.chocosolver.solver.Model;
@@ -34,17 +35,16 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FMDebuggingModelTest1 {
-    static FeatureModel featureModel;
+    static FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
     static TestSuite testSuite;
 
-    static FMDebuggingModel debuggingModel;
+    static FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel;
 
     @SneakyThrows
     @BeforeAll
     static void setUp() {
         File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(fileFM.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
@@ -54,7 +54,7 @@ class FMDebuggingModelTest1 {
         testSuite = factory.read(is, testCaseFactory);
 
         FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        debuggingModel = new FMDebuggingModel(featureModel, testSuite, translator,
+        debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
                 false, true, false);
         debuggingModel.initialize();
     }
@@ -117,7 +117,7 @@ class FMDebuggingModelTest1 {
                     assertEquals(1, constraints.get(6).getChocoConstraints().size());
                     assertEquals("ARITHM ([not(F1) + not(F4) >= 1])", constraints.get(6).getChocoConstraints().get(0).toString());
                     assertEquals(1, constraints.get(7).getChocoConstraints().size());
-                    assertEquals("SUM ([not(F1) + F7 + F8 >= 1])", constraints.get(7).getChocoConstraints().get(0).toString());
+                    assertEquals("SUM ([not(F1) + F8 + F7 >= 1])", constraints.get(7).getChocoConstraints().get(0).toString());
                 });
     }
 

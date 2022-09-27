@@ -9,10 +9,13 @@
 package at.tugraz.ist.ase.fm.parser;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
+import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
+import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import at.tugraz.ist.ase.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.FeatureModelException;
-import at.tugraz.ist.ase.fm.core.RelationshipType;
 import com.google.common.annotations.Beta;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -27,21 +30,68 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
 /**
  * A parser for the XMI format (a format of v.control)
+ * <p>
+ * Supports only requires and excludes constraints
  */
 @Beta
 @Slf4j
-public class XMIParser implements FeatureModelParser {
+public class XMIParser<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> implements FeatureModelParser<F, R, C> {
 
-    private Element rootEle = null;
+    public static final String FILE_EXTENSION = ".xmi";
+
+    // Main tags
+    public static final String TAG_ROOT = "xmi:XMI";
+    public static final String TAG_STRUCT = "models";
+    public static final String TAG_CONSTRAINT = "constraints";
+
+    // Feature tags
+    public static final String TAG_ROOT_FEATURE = "rootFeature";
+    public static final String TAG_CHILDREN = "children";
+
+    // Feature types
+    public static final String TYPE_FEATURE = "com.prostep.vcontrol.model.feature:Feature";
+    public static final String TYPE_FEATURE_GROUP = "com.prostep.vcontrol.model.feature:FeatureGroup";
+
+    // Constraint types
+    public static final String TYPE_IMPLIES = "com.prostep.vcontrol.model.terms:ImpliesTerm";
+    public static final String TYPE_EXCLUDES = "com.prostep.vcontrol.model.terms:ExcludesTerm";
+
+    // Feature attributes
+    public static final String ATTRIB_NAME = "name";
+    public static final String ATTRIB_ID = "id";
+    public static final String ATTRIB_TYPE = "xsi:type";
+    public static final String ATTRIB_OPTIONAL = "optional";
+    public static final String ATTRIB_MAX = "max";
+
+    // Constraint attributes
+    public static final String ATTRIB_ELEMENT = "element";
+
+    // Attribute values
+    public static final String VALUE_FALSE = "false";
+
+    private FeatureModel<F, R, C> fm;
+    private Element rootEle;
+
+    private IFeatureBuildable featureBuilder;
+    private IRelationshipBuildable relationshipBuilder;
+    private IConstraintBuildable constraintBuilder;
+
+    public XMIParser(@NonNull IFeatureBuildable featureBuilder,
+                     @NonNull IRelationshipBuildable relationshipBuilder,
+                     @NonNull IConstraintBuildable constraintBuilder) {
+        this.featureBuilder = featureBuilder;
+        this.relationshipBuilder = relationshipBuilder;
+        this.constraintBuilder = constraintBuilder;
+    }
 
     /**
      * Check whether the format of the given file is v.control format
@@ -53,7 +103,7 @@ public class XMIParser implements FeatureModelParser {
     @Override
     public boolean checkFormat(@NonNull File filePath) {
         // first, check the extension of file
-        checkArgument(filePath.getName().endsWith(".xmi"), "The file is not in XMI format!");
+        checkArgument(filePath.getName().endsWith(FILE_EXTENSION), "The file is not in XMI format!");
 
         // second, check the structure of file
         try {
@@ -61,13 +111,12 @@ public class XMIParser implements FeatureModelParser {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document doc = db.parse(filePath.toString());
-            Element rootEle = doc.getDocumentElement();
-
+            rootEle = doc.getDocumentElement();
 
             // if it has three tag "xmi:XMI", "models" and "constraints"
-            if (rootEle.getTagName().equals("xmi:XMI") &&
-                    rootEle.getElementsByTagName("models").getLength() > 0 &&
-                    rootEle.getElementsByTagName("constraints").getLength() > 0) {
+            if (rootEle.getTagName().equals(TAG_ROOT) &&
+                    rootEle.getElementsByTagName(TAG_STRUCT).getLength() > 0 &&
+                    rootEle.getElementsByTagName(TAG_CONSTRAINT).getLength() > 0) {
                 return true;
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
@@ -84,133 +133,115 @@ public class XMIParser implements FeatureModelParser {
      * @throws FeatureModelParserException when error occurs in parsing
      */
     @Override
-    public FeatureModel parse(@NonNull File filePath) throws FeatureModelParserException {
+    public FeatureModel<F, R, C> parse(@NonNull File filePath) throws FeatureModelParserException {
         checkArgument(checkFormat(filePath), "The format of file is not XMI format or there are errors in the file!");
 
         log.trace("{}Parsing the feature model file [file={}] >>>", LoggerUtils.tab(), filePath.getName());
         LoggerUtils.indent();
 
-        FeatureModel featureModel;
-        try {
-            // read XMI file
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-            DocumentBuilder db = dbf.newDocumentBuilder();
-            Document doc = db.parse(filePath.toString());
-            doc.getDocumentElement().normalize();
-            rootEle = doc.getDocumentElement();
+        checkState(rootEle != null, "DocumentBuilder couldn't parse the document! There are errors in the file.");
 
-            checkState(rootEle != null, "DocumentBuilder couldn't parse the document! There are errors in the file.");
+        // create the feature model
+        fm = new FeatureModel<>(filePath.getName(), featureBuilder, relationshipBuilder, constraintBuilder);
 
-            // create the feature model
-            featureModel = new FeatureModel();
-            featureModel.setName(filePath.getName());
+        convertModelsNode();
 
-            convertModelsNode(rootEle, featureModel);
-
-            if (featureModel.getNumOfFeatures() == 0) {
-                throw new FeatureModelParserException("Couldn't parse any features in the feature model file!");
-            }
-
-            convertConstraintsNodes(rootEle, featureModel);
-
-        } catch (ParserConfigurationException | SAXException | IOException ex) {
-            throw new FeatureModelParserException(ex.getMessage());
+        if (fm.getNumOfFeatures() == 0) {
+            throw new FeatureModelParserException("Couldn't parse any features in the feature model file!");
         }
 
+        convertConstraintsNodes();
+
         LoggerUtils.outdent();
-        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), featureModel);
-        return featureModel;
+        log.debug("{}<<< Parsed feature model [file={}, fm={}]", LoggerUtils.tab(), filePath.getName(), fm);
+        return fm;
     }
 
     /**
      * Take the "models" node and convert its child nodes into features
      * and relationships in the {@link FeatureModel}.
-     *
-     * @param rootEle - a XML root element
-     * @param fm - a {@link FeatureModel}
      */
-    private void convertModelsNode(Element rootEle, FeatureModel fm) throws FeatureModelParserException {
+    private void convertModelsNode() throws FeatureModelParserException {
         log.trace("{}Generating features and relationships >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
-        NodeList models = rootEle.getElementsByTagName("models");
+        NodeList models = rootEle.getElementsByTagName(TAG_STRUCT);
 
-        examineModelsNode(models.item(0), fm);
+        Queue<Node> queue = new LinkedList<>();
+        queue.add(models.item(0));
+
+        while (!queue.isEmpty()) {
+            Node node = queue.poll();
+            queue.addAll(examineModelsNode(node));
+        }
 
         LoggerUtils.outdent();
     }
 
     /**
-     * Examine a XML node to convert child nodes into features, and relationships
+     * Examine an XML node to convert child nodes into features, and relationships
      * of a {@link FeatureModel}.
      *
      * @param node - a XML node
-     * @param fm - a {@link FeatureModel}
      * @throws FeatureModelParserException when error occurs in parsing
      */
-    private void examineModelsNode(Node node, FeatureModel fm) throws FeatureModelParserException {
+    private List<Node> examineModelsNode(Node node) throws FeatureModelParserException {
         try {
             NodeList children = node.getChildNodes();
             Element parentElement = (Element) node;
             // create features for child nodes
-            List<Feature> childrenFeatures = createChildFeaturesIfAbsent(node, fm);
+            List<F> childrenFeatures = createChildFeaturesIfAbsent(node);
 
             // convert relationships
-            if (!node.getNodeName().equals("models")) {
+            if (!node.getNodeName().equals(TAG_STRUCT)) {
                 // relationships
-                Feature leftSide;
-                List<Feature> rightSide;
-                RelationshipType type;
-
-                switch (parentElement.getAttribute("xsi:type")) {
-                    case "com.prostep.vcontrol.model.feature:Feature":
+                switch (parentElement.getAttribute(ATTRIB_TYPE)) {
+                    case TYPE_FEATURE:
                         for (int i = 0; i < children.getLength(); i++) {
                             Node child = children.item(i);
 
                             if (isCorrectNode(child)) {
                                 Element childElement = (Element) child;
 
-                                if (childElement.getAttribute("optional").equals("false")) {
+                                F leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_ID));
+                                F rightSide = fm.getFeature(childElement.getAttribute(ATTRIB_ID));
+
+                                if (childElement.getAttribute(ATTRIB_OPTIONAL).equals(VALUE_FALSE)) {
                                     // MANDATORY
-                                    leftSide = fm.getFeature(parentElement.getAttribute("id"));
-                                    rightSide = Collections.singletonList(fm.getFeature(childElement.getAttribute("id")));
-                                    type = RelationshipType.MANDATORY;
+                                    fm.addMandatoryRelationship(leftSide, rightSide);
                                 } else {
                                     // OPTIONAL
-                                    leftSide = fm.getFeature(childElement.getAttribute("id"));
-                                    rightSide = Collections.singletonList(fm.getFeature(parentElement.getAttribute("id")));
-                                    type = RelationshipType.OPTIONAL;
+                                    fm.addOptionalRelationship(leftSide, rightSide);
                                 }
-                                fm.addRelationship(type, leftSide, rightSide);
                             }
                         }
                         break;
-                    case "com.prostep.vcontrol.model.feature:FeatureGroup":
+                    case TYPE_FEATURE_GROUP:
                         checkState(childrenFeatures.size() > 0, "OR and ALT relationships must have at least one child feature");
 
-                        leftSide = fm.getFeature(parentElement.getAttribute("id"));
-                        rightSide = childrenFeatures;
+                        F parent = fm.getFeature(parentElement.getAttribute(ATTRIB_ID));
 
-                        if (parentElement.getAttribute("max").isEmpty()) { // ALTERNATIVE
-                            type = RelationshipType.ALTERNATIVE;
+                        if (parentElement.getAttribute(ATTRIB_MAX).isEmpty()) { // ALTERNATIVE
+                            fm.addAlternativeRelationship(parent, childrenFeatures);
                         } else { // OR
-                            type = RelationshipType.OR;
+                            fm.addOrRelationship(parent, childrenFeatures);
                         }
-
-                        fm.addRelationship(type, leftSide, rightSide);
                         break;
                     default:
-                        throw new FeatureModelParserException("Unexpected relationship type: " + parentElement.getAttribute("xsi:type"));
+                        throw new FeatureModelParserException("Unexpected relationship type: " + parentElement.getAttribute(ATTRIB_TYPE));
                 }
             }
 
             // examine sub-nodes
+            List<Node> subNodes = new LinkedList<>();
             for (int i = 0; i < children.getLength(); i++) {
                 Node child = children.item(i);
                 if (isCorrectNode(child)) {
-                    examineModelsNode(child, fm);
+                    subNodes.add(child);
+//                    examineModelsNode(child);
                 }
             }
+            return subNodes;
         } catch (Exception e) {
             throw new FeatureModelParserException("There exists errors in the feature model file!");
         }
@@ -222,33 +253,23 @@ public class XMIParser implements FeatureModelParser {
      * @param node - a XML node
      * @return a list of children {@link Feature}s a given XML node
      */
-    private List<Feature> createChildFeaturesIfAbsent(Node node, FeatureModel fm) throws FeatureModelParserException {
+    private List<F> createChildFeaturesIfAbsent(Node node) {
         NodeList children = node.getChildNodes();
-        List<Feature> features = new LinkedList<>();
+        List<F> features = new LinkedList<>();
 
         for (int i = 0; i < children.getLength(); i++)
         {
             Node child = children.item(i);
             if (isCorrectNode(child)) {
                 Element childElement = (Element) child;
-                String name = childElement.getAttribute("name");
-                String id = childElement.getAttribute("id");
+                String name = childElement.getAttribute(ATTRIB_NAME);
+                String id = childElement.getAttribute(ATTRIB_ID);
 
-                Feature childFeature;
-                try {
-                    // first, try to get the feature with id=name
-                    childFeature = fm.getFeature(id);
-                } catch (FeatureModelException e) {
-
-                    // create new feature
-                    fm.addFeature(name, id);
-
-                    try {
-                        // try to get again
-                        childFeature = fm.getFeature(id);
-                    } catch (FeatureModelException ex) {
-                        throw new FeatureModelParserException(e.getMessage());
-                    }
+                F childFeature;
+                if (!fm.hasRoot()) {
+                    childFeature = fm.addRoot(name, id);
+                } else {
+                    childFeature = fm.addFeature(name, id);
                 }
 
                 features.add(childFeature);
@@ -259,7 +280,7 @@ public class XMIParser implements FeatureModelParser {
     }
 
     /**
-     * Check whether a {@link Node} is a Element node
+     * Check whether a {@link Node} is an Element node
      * and the node name is "and" or "or" or "alt" or "feature"
      *
      * @param node - a {@link Node}
@@ -267,25 +288,23 @@ public class XMIParser implements FeatureModelParser {
      */
     private boolean isCorrectNode(Node node) {
         return node.getNodeType() == Node.ELEMENT_NODE
-                && (node.getNodeName().equals("rootFeature")
-                || node.getNodeName().equals("children"));
+                && (node.getNodeName().equals(TAG_ROOT_FEATURE)
+                || node.getNodeName().equals(TAG_CHILDREN));
     }
 
     /**
      * Take "constraints" nodes and convert them into constraints in {@link FeatureModel}.
      *
-     * @param rootEle - the root element
-     * @param fm - a {@link FeatureModel}
      * @throws FeatureModelParserException - if there exists errors in the feature model file
      */
-    private void convertConstraintsNodes(Element rootEle, FeatureModel fm) throws FeatureModelParserException {
+    private void convertConstraintsNodes() throws FeatureModelParserException {
         log.trace("{}Generating constraints >>>", LoggerUtils.tab());
         LoggerUtils.indent();
 
-        NodeList constraints = rootEle.getElementsByTagName("constraints");
+        NodeList constraints = rootEle.getElementsByTagName(TAG_CONSTRAINT);
 
         for (int i = 0; i < constraints.getLength(); i++) {
-            examineAConstraintsNode(constraints.item(i), fm);
+            examineAConstraintsNode(constraints.item(i));
         }
 
         LoggerUtils.outdent();
@@ -295,10 +314,9 @@ public class XMIParser implements FeatureModelParser {
      * Examine a "rule" node to convert into a constraint
      *
      * @param node - an XML node
-     * @param fm - a {@link FeatureModel}
      * @throws FeatureModelParserException - if there exists errors in the feature model file
      */
-    private void examineAConstraintsNode(Node node, FeatureModel fm) throws FeatureModelParserException {
+    private void examineAConstraintsNode(Node node) throws FeatureModelParserException {
         try {
             Node n = node.getChildNodes().item(1);
             Element ele = (Element) n;
@@ -306,22 +324,27 @@ public class XMIParser implements FeatureModelParser {
             Element leftOperand = (Element) (n.getChildNodes().item(1));
             Element rightOperand = (Element) (n.getChildNodes().item(3));
 
-            Feature left = fm.getFeature(leftOperand.getAttribute("element"));
-            List<Feature> rightSideList = Collections.singletonList(fm.getFeature(rightOperand.getAttribute("element")));
+            F left = fm.getFeature(leftOperand.getAttribute(ATTRIB_ELEMENT));
+            F right = fm.getFeature(rightOperand.getAttribute(ATTRIB_ELEMENT));
 
-            RelationshipType type;
-            String constraintType = ele.getAttribute("xsi:type");
-            if (constraintType.equals("com.prostep.vcontrol.model.terms:ImpliesTerm")) {
-                type = RelationshipType.REQUIRES;
-            } else if (constraintType.equals("com.prostep.vcontrol.model.terms:ExcludesTerm")) {
-                type = RelationshipType.EXCLUDES;
+            String constraintType = ele.getAttribute(ATTRIB_TYPE);
+            if (constraintType.equals(TYPE_IMPLIES)) {
+                fm.addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildRequires(left, right)));
+            } else if (constraintType.equals(TYPE_EXCLUDES)) {
+                fm.addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildExcludes(left, right)));
             } else {
                 throw new FeatureModelParserException("Unexpected constraint type: " + constraintType);
             }
-
-            fm.addConstraint(type, left, rightSideList);
         } catch (Exception e) {
             throw new FeatureModelParserException(e.getMessage());
         }
+    }
+
+    public void dispose() {
+        fm = null;
+        rootEle = null;
+        featureBuilder = null;
+        relationshipBuilder = null;
+        constraintBuilder = null;
     }
 }

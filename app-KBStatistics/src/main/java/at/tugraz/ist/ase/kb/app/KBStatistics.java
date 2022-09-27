@@ -8,19 +8,17 @@
 
 package at.tugraz.ist.ase.kb.app;
 
-import at.tugraz.ist.ase.fm.core.FeatureModel;
-import at.tugraz.ist.ase.fm.core.RelationshipType;
+import at.tugraz.ist.ase.fm.core.*;
 import at.tugraz.ist.ase.fm.parser.FMFormat;
+import at.tugraz.ist.ase.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.fm.parser.factory.FMParserFactory;
 import at.tugraz.ist.ase.kb.app.cli.KBStatistics_CmdLineOptions;
 import at.tugraz.ist.ase.kb.camera.CameraKB;
 import at.tugraz.ist.ase.kb.core.KB;
 import at.tugraz.ist.ase.kb.fm.FMKB;
 import at.tugraz.ist.ase.kb.pc.PCKB;
 import at.tugraz.ist.ase.kb.renault.RenaultKB;
-import com.google.common.io.Files;
 import lombok.Cleanup;
 import lombok.NonNull;
 
@@ -154,7 +152,7 @@ public class KBStatistics {
 
             for (final File file : Objects.requireNonNull(folder.listFiles())) {
                 // check if the file is a feature model
-                if (FMFormat.getFMFormatString(file.getName()) != null) {
+                if (FMFormat.getFMFormat(file.getName()).isValid()) {
                     processFM(writer, ++counter, file);
                 }
             }
@@ -164,11 +162,10 @@ public class KBStatistics {
     private void processFM(BufferedWriter writer, int counter, File file) throws IOException, FeatureModelParserException {
         System.out.println("\nCalculating statistics for " + file.getName() + "...");
 
-        FMFormat fmFormat = FMFormat.getFMFormat(Files.getFileExtension(file.getName()));
-        FeatureModelParser parser = FMParserFactory.getInstance().getParser(fmFormat);
+        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(file.getName());
 
-        FeatureModel fm = parser.parse(file);
-        FMKB fmkb = new FMKB(fm, false);
+        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm = parser.parse(file);
+        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> fmkb = new FMKB<>(fm, false);
 
         System.out.println("Saving statistics to " + options.getOutFile() + "...");
         saveFMStatistics(writer, counter, fmkb, fm);
@@ -192,7 +189,9 @@ public class KBStatistics {
         writer.flush();
     }
 
-    private void saveFMStatistics(BufferedWriter writer, int counter, KB kb, FeatureModel fm) throws IOException {
+    @SuppressWarnings("unchecked")
+    private void saveFMStatistics(BufferedWriter writer, int counter, KB kb,
+                                  FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm) throws IOException {
         double ctc = (double)fm.getNumOfConstraints() / kb.getNumConstraints();
 
         saveStatistics(writer, counter, kb);
@@ -202,12 +201,12 @@ public class KBStatistics {
         writer.write("#features: " + fm.getNumOfFeatures() + "\n");
         writer.write("#relationships: " + fm.getNumOfRelationships() + "\n");
         writer.write("#constraints: " + fm.getNumOfConstraints() + "\n");
-        writer.write("#MANDATORY: " + fm.getNumOfRelationships(RelationshipType.MANDATORY) + "\n");
-        writer.write("#OPTIONAL: " + fm.getNumOfRelationships(RelationshipType.OPTIONAL) + "\n");
-        writer.write("#ALTERNATIVE: " + fm.getNumOfRelationships(RelationshipType.ALTERNATIVE) + "\n");
-        writer.write("#OR: " + fm.getNumOfRelationships(RelationshipType.OR) + "\n");
-        writer.write("#REQUIRES: " + fm.getNumOfRelationships(RelationshipType.REQUIRES) + "\n");
-        writer.write("#EXCLUDES: " + fm.getNumOfRelationships(RelationshipType.EXCLUDES) + "\n");
+        writer.write("#MANDATORY: " + fm.getNumOfRelationships(MandatoryRelationship.class) + "\n");
+        writer.write("#OPTIONAL: " + fm.getNumOfRelationships(OptionalRelationship.class) + "\n");
+        writer.write("#ALTERNATIVE: " + fm.getNumOfRelationships(AlternativeRelationship.class) + "\n");
+        writer.write("#OR: " + fm.getNumOfRelationships(OrRelationship.class) + "\n");
+        writer.write("#REQUIRES: " + fm.getNumOfRequires() + "\n");
+        writer.write("#EXCLUDES: " + fm.getNumOfExcludes() + "\n");
 
         writer.flush();
     }

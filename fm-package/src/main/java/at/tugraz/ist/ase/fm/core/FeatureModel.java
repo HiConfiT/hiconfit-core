@@ -9,61 +9,108 @@
 package at.tugraz.ist.ase.fm.core;
 
 import at.tugraz.ist.ase.common.LoggerUtils;
+import at.tugraz.ist.ase.fm.builder.IConstraintBuildable;
+import at.tugraz.ist.ase.fm.builder.IFeatureBuildable;
+import at.tugraz.ist.ase.fm.builder.IRelationshipBuildable;
+import at.tugraz.ist.ase.fm.core.ast.Operand;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkElementIndex;
+import static com.google.common.base.Preconditions.*;
 
 /**
  * Represents a feature model
+ * ver 2.0 - support a feature model tree, and generic type for features, relationships
  * ver 1.0 - support basic feature models
+ * <p>
+ * The order of features adding to feature model should follow the breadth-first order.
  */
 @Slf4j
 @Getter
-public class FeatureModel {
-    @Setter
-    private String name;
+public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> implements Cloneable {
+    protected String name;
 
-    private List<Feature> bfFeatures; // breadth-first order
-    private List<Relationship> relationships;
-    private List<Relationship> constraints;
+    protected List<F> bfFeatures = new LinkedList<>(); // breadth-first order
+    protected List<R> relationships = new LinkedList<>();
+    protected List<C> constraints = new LinkedList<>();
 
-    @Setter
-    private boolean consistency;
+    // the root of the feature model tree
+    protected F root = null;
+
+    protected IFeatureBuildable featureBuilder;
+    protected IRelationshipBuildable relationshipBuilder;
+    protected IConstraintBuildable constraintBuilder;
 
     /**
-     * A constructor
+     * Constructor for a feature model
+     * @param name name of the feature model
+     * @param featureBuilder builder for features
+     * @param relationshipBuilder builder for relationships
+     * @param constraintBuilder builder for constraints
      */
-    public FeatureModel() {
-        bfFeatures = new LinkedList<>();
-        relationships = new LinkedList<>();
-        constraints = new LinkedList<>();
-        consistency = false;
+    @Builder
+    public FeatureModel(@NonNull String name,
+                        @NonNull IFeatureBuildable featureBuilder,
+                        @NonNull IRelationshipBuildable relationshipBuilder,
+                        @NonNull IConstraintBuildable constraintBuilder) {
+        this.name = name;
+        this.featureBuilder = featureBuilder;
+        this.relationshipBuilder = relationshipBuilder;
+        this.constraintBuilder = constraintBuilder;
+    }
+
+    public boolean hasRoot() {
+        return root != null;
     }
 
     /**
-     * Adds a new feature
-     * @param fname name of the feature
+     * Adds a root feature with the given name and id.
+     * The root feature is abstract.
+     * @param name name of root feature
+     * @param id id of root feature
+     * @return the root feature
      */
-    public void addFeature(@NonNull String fname, @NonNull String id) {
-        checkArgument(!fname.isEmpty(), "Feature name cannot be empty!");
-        checkArgument(!id.isEmpty(), "Feature id cannot be empty!");
-        checkArgument(isUniqueFeatureName(fname), "Feature's name " + fname + " already exists!");
+    public F addRoot(@NonNull String name, @NonNull String id) {
+        checkArgument(this.root == null, "Root feature already exists!");
+        checkArgument(bfFeatures.isEmpty(), "Root feature already exists!");
+
+        this.root = featureBuilder.buildRoot(name, id);
+        this.bfFeatures.add(root);
+
+        log.trace("{}Added root [root={}]", LoggerUtils.tab(), this.root);
+        return this.root;
+    }
+
+    /**
+     * Adds a feature with the given name and id.
+     * The order of adding features should follow the breadth-first order.
+     * @param name name of feature
+     * @param id id of feature
+     * @return the added feature
+     */
+    public F addFeature(@NonNull String name, @NonNull String id) {
+        checkState(this.root != null, "Root feature does not exist!");
+        checkState(bfFeatures.size() >= 1, "Root feature does not exist!");
+        checkArgument(isUniqueFeatureName(name), "Feature's name " + name + " already exists!");
         checkArgument(isUniqueFeatureId(id), "Feature's id " + id + " already exists!");
 
-        Feature f = new Feature(fname, id);
+        F f = featureBuilder.buildFeature(name, id);
         this.bfFeatures.add(f);
 
         log.trace("{}Added feature [feature={}]", LoggerUtils.tab(), f);
+        return f;
     }
 
+    /**
+     * Checks if the given name is duplicated.
+     * @param fname name of feature
+     * @return true if the given name is unique, otherwise false
+     */
     private boolean isUniqueFeatureName(String fname) {
         return bfFeatures.parallelStream().noneMatch(f -> f.isNameDuplicate(fname));
         /*for (Feature f: bfFeatures) {
@@ -74,6 +121,11 @@ public class FeatureModel {
         return true;*/
     }
 
+    /**
+     * Checks if the given id is duplicated.
+     * @param id id of feature
+     * @return true if the given id is unique, otherwise false
+     */
     private boolean isUniqueFeatureId(String id) {
         return bfFeatures.parallelStream().noneMatch(f -> f.isIdDuplicate(id));
         /*for (Feature f: bfFeatures) {
@@ -89,8 +141,8 @@ public class FeatureModel {
      * @param index index of the feature
      * @return a {@link Feature}
      */
-    public Feature getFeature(int index) {
-        checkElementIndex(index, bfFeatures.size(), "Index out of bound!");
+    public F getFeature(int index) {
+        checkElementIndex(index, bfFeatures.size(), "Feature index out of bound!");
 
         return bfFeatures.get(index);
     }
@@ -100,15 +152,15 @@ public class FeatureModel {
      * @param id id of the feature
      * @return a {@link Feature}
      */
-    public Feature getFeature(@NonNull String id) throws FeatureModelException {
-        checkArgument(!id.isEmpty(), "Feature name cannot be empty!");
+    public F getFeature(@NonNull String id) {
+        checkArgument(!id.isEmpty(), "Feature id cannot be empty!");
 
-        for (Feature f: bfFeatures) {
+        for (F f: bfFeatures) {
             if (f.isIdDuplicate(id)) {
                 return f;
             }
         }
-        throw new FeatureModelException("Feature '" + id + "' doesn't exist!");
+        throw new IllegalArgumentException("Feature '" + id + "' doesn't exist!");
     }
 
     /**
@@ -120,72 +172,11 @@ public class FeatureModel {
     }
 
     /**
-     * Checks whether the given {@link Feature} is mandatory.
-     * @param feature a {@link Feature}
-     * @return true if the given {@link Feature} is mandatory, false otherwise.
+     * Gets the number of leaf features
+     * @return the number of leaf features
      */
-    public boolean isMandatoryFeature(@NonNull Feature feature) {
-        return relationships.parallelStream().filter(r -> r.getType() == RelationshipType.MANDATORY).anyMatch(r -> r.presentAtRightSide(feature));
-        /*for (Relationship r : relationships) {
-            if (r.getType() == RelationshipType.MANDATORY) {
-                if (r.presentAtRightSide(feature)) {
-                    return true;
-                }
-            }
-        }
-        return false;*/
-    }
-
-    /**
-     * Checks whether the given {@link Feature} is optional.
-     * @param feature a {@link Feature}
-     * @return true if the given {@link Feature} is optional, false otherwise.
-     */
-    public boolean isOptionalFeature(@NonNull Feature feature) {
-        for (Relationship r : relationships) {
-            if (r.getType() == RelationshipType.OPTIONAL) {
-                if (r.presentAtLeftSide(feature)) {
-                    return true;
-                }
-            } else if (r.getType() == RelationshipType.OR || r.getType() == RelationshipType.ALTERNATIVE) {
-                if (r.presentAtRightSide(feature)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Gets all {@link Feature}s participating on the right side of the constraint
-     * in which the left side is the given {@link Feature}.
-     * @param leftSide a {@link Feature}
-     * @return an array of {@link Feature}s
-     */
-    public List<Feature> getRightSideOfRelationships(@NonNull Feature leftSide) throws FeatureModelException {
-        List<Feature> children = new LinkedList<>();
-        for (Relationship r : relationships) {
-            if (r.getType() == RelationshipType.OPTIONAL) {
-                if (r.presentAtRightSide(leftSide)) {
-                    Feature left = ((BasicRelationship) r).getLeftSide();
-                    Feature parent = getFeature(left.getId());
-                    if (parent != null) {
-                        children.add(parent);
-                    }
-                }
-            } else {
-                if (r.presentAtLeftSide(leftSide)) {
-                    List<Feature> rightSide = ((BasicRelationship) r).getRightSide();
-                    for (Feature right : rightSide) {
-                        Feature child = getFeature(right.getId());
-                        if (child != null) {
-                            children.add(child);
-                        }
-                    }
-                }
-            }
-        }
-        return children;
+    public int getNumOfLeaf() {
+        return (int) bfFeatures.parallelStream().filter(F::isLeaf).count();
     }
 
     /**
@@ -193,131 +184,169 @@ public class FeatureModel {
      * @param rightSide a {@link Feature}.
      * @return an array of {@link Feature}s.
      */
-    public List<Feature> getMandatoryParents(@NonNull Feature rightSide) throws FeatureModelException {
-        List<Feature> parents = new LinkedList<>();
+    public List<F> getMandatoryParents(@NonNull F rightSide) {
+        List<F> parents = new LinkedList<>();
+        List<F> parentsqueue = new LinkedList<>();
 
-        List<Relationship> relationships = getRelationshipsWith(rightSide);
-        for (Relationship r : relationships) {
-            List<Feature> parentsqueue = new LinkedList<>();
-            if (r.isType(RelationshipType.REQUIRES)) {
-                if (r.presentAtRightSide(rightSide)) {
-                    parentsqueue.add(rightSide);
-                    getMandatoryParent(r, rightSide, parents, parentsqueue);
-                }
-            } else if (r.isType(RelationshipType.ALTERNATIVE)
-                    || r.isType(RelationshipType.OR)) {
-                parentsqueue.add(rightSide);
-                getMandatoryParent(r, rightSide, parents, parentsqueue);
-            } // TODO - 3CNF
-        }
+        exploreMandatoryParentFrom(rightSide, parents, parentsqueue);
 
         return parents;
     }
 
-    private void getMandatoryParent(Relationship r, Feature feature, List<Feature> parents, List<Feature> parentsqueue) throws FeatureModelException {
-        if (feature.toString().equals(this.getName())) return;
+    @SuppressWarnings("unchecked")
+    private void exploreMandatoryParentFrom(@NonNull F rightSide, List<F> parents, List<F> parentsqueue) {
+        List<R> relationships = (List<R>) rightSide.getRelationshipsAsChild();
+        List<C> cstrs = getRequiresConstraintsAndFeatureInRight(rightSide);
 
-        if (r.isType(RelationshipType.REQUIRES)) {
-            Feature parent = ((BasicRelationship) r).getLeftSide();
+        for (R r : relationships) {
+            if (r instanceof OrRelationship
+                || r instanceof AlternativeRelationship) {
+                parentsqueue.add(rightSide);
+                getMandatoryParent(r, rightSide, parents, parentsqueue);
+                parentsqueue.remove(parentsqueue.size() - 1);
+            }
+        }
 
-            if (parent.getName().equals(this.getName())) return;
-            if (parentsqueue.contains(parent)) return;
+        for (C c : cstrs) {
+            parentsqueue.add(rightSide);
+            getMandatoryParent(c, rightSide, parents, parentsqueue);
+            parentsqueue.remove(parentsqueue.size() - 1);
+        }
+    }
 
-            exploreMandatoryParent(parents, parentsqueue, parent);
+    private void getMandatoryParent(R r, F feature, List<F> parents, List<F> parentsqueue) {
+        // ignore the root feature
+        if (feature.isRoot()) return;
 
-        } else if (r.getType() == RelationshipType.ALTERNATIVE
-                || r.getType() == RelationshipType.OR) {
-            if (r.presentAtRightSide(feature)) {
-                Feature parent = ((BasicRelationship) r).getLeftSide();
+        if (r.isChild(feature)) {
+            F parent = r.getParent();
 
-                if (parent.getName().equals(this.getName())) return;
-                if (parentsqueue.contains(parent)) return;
+            checkAndExploreFurther(parent, parents, parentsqueue);
+        } else if (r.isParent(feature)) {
+            List<F> lefts = r.getChildren();
+            for (F parent: lefts) {
 
-                exploreMandatoryParent(parents, parentsqueue, parent);
-            } else if (r.presentAtLeftSide(feature)) {
-                List<Feature> lefts = ((BasicRelationship)r).getRightSide();
-                for (Feature parent: lefts) {
-
-                    if (parentsqueue.contains(parent)) return;
-                    if (parent.getName().equals(this.getName())) return;
-
-                    exploreMandatoryParent(parents, parentsqueue, parent);
-                }
+                checkAndExploreFurther(parent, parents, parentsqueue);
             }
         }
     }
 
-    private void exploreMandatoryParent(List<Feature> parents, List<Feature> parentsqueue, Feature parent) throws FeatureModelException {
-        if (this.isMandatoryFeature(parent)) {
-            if (!parents.contains(parent)) {
-                parents.add(parent);
-            }
-        } else {
-            List<Relationship> relationships = getRelationshipsWith(parent);
-            for (Relationship r1 : relationships) {
-                if (r1.isType(RelationshipType.REQUIRES)) {
-                    if (r1.presentAtRightSide(parent)) {
-                        parentsqueue.add(parent);
-                        getMandatoryParent(r1, parent, parents, parentsqueue);
-                        parentsqueue.remove(parentsqueue.size() - 1);
-                    }
-                } else if (r1.isType(RelationshipType.ALTERNATIVE)
-                        || r1.isType(RelationshipType.OR)) {
-                    parentsqueue.add(parent);
-                    getMandatoryParent(r1, parent, parents, parentsqueue);
-                    parentsqueue.remove(parentsqueue.size() - 1);
-                }
-            }
-        }
+    @SuppressWarnings("unchecked")
+    private void getMandatoryParent(C c, F feature, List<F> parents, List<F> parentsqueue) {
+        // ignore the root feature
+        if (feature.isRoot()) return;
+
+        F parent = ((Operand<F>) c.getFormula().getLeft()).getFeature();
+
+        // ignore the root feature
+        checkAndExploreFurther(parent, parents, parentsqueue);
     }
 
-    /**
-     * Gets all {@link Relationship}s in which the given {@link Feature} participates.
-     * @param feature a {@link Feature}
-     * @return an array of {@link Relationship}s.
-     */
-    public List<Relationship> getRelationshipsWith(@NonNull Feature feature) {
-        List<Relationship> rs = relationships.parallelStream().filter(r -> r.presentAtRightSide(feature) || r.presentAtLeftSide(feature))
-                .collect(Collectors.toCollection(LinkedList::new));
-        /*for (Relationship r : relationships) {
-            if (r.presentAtRightSide(feature) || r.presentAtLeftSide(feature)) {
-                rs.add(r);
-            }
-        }*/
-        for (Relationship r : constraints) {
-            if (!r.isType(RelationshipType.ThreeCNF)) {
-                if (r.presentAtRightSide(feature) || r.presentAtLeftSide(feature)) {
-                    rs.add(r);
-                }
-            } else { // 3CNF
-                if (r.contains(feature)) {
-                    rs.add(r);
-                }
-            }
+    private void checkAndExploreFurther(F parent, List<F> parents, List<F> parentsqueue) {
+        if (parent.isRoot()) return; // ignore the root feature
+        if (parentsqueue.contains(parent)) return;
+        if (parent.isMandatory() && !parents.contains(parent)) {
+            parents.add(parent);
         }
-        return rs;
+
+        exploreMandatoryParentFrom(parent, parents, parentsqueue);
     }
 
     /**
-     * Adds a new relationship to the feature model.
-     * @param type type of the relationship
-     * @param leftSide the left part of relationship
-     * @param rightSide the right part of relationship
+     * Gets requires constraints which the given feature is on the right side.
+     * @param feature a {@link F}.
+     * @return a list of {@link C}.
      */
-    public void addRelationship(RelationshipType type, @NonNull Feature leftSide, @NonNull List<Feature> rightSide) {
-        Relationship r = new BasicRelationship(type, leftSide, rightSide);
+    private List<C> getRequiresConstraintsAndFeatureInRight(@NonNull F feature) {
+        List<C> cstrs = new LinkedList<>();
+        constraints.parallelStream().filter(CTConstraint::isRequires).forEachOrdered(cstr -> {
+            List<F> right = cstr.getFormula().getRight().getFeatures();
+            if (right.size() == 1 && right.contains(feature)) {
+                cstrs.add(cstr);
+            }
+        });
+        return cstrs;
+    }
+
+    /**
+     * Adds a new MANDATORY relationship to the feature model.
+     * The features involved in the relationship must already exist in the feature model.
+     * @param from the parent feature.
+     * @param to the child feature.
+     */
+    public void addMandatoryRelationship(@NonNull F from, @NonNull F to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        checkArgument(bfFeatures.contains(to), "Child feature of relationship must be already added to feature model");
+
+        R r = relationshipBuilder.buildMandatoryRelationship(from, to);
+
         this.relationships.add(r);
 
-        log.trace("{}Added relationship [relationship={}]", LoggerUtils.tab(), r);
+        // make the connection between the parent and the children
+        r.makeConnectionBetweenParentAndChildren();
+
+        log.trace("{}Added MANDATORY relationship [relationship={}]", LoggerUtils.tab(), r);
     }
 
-//    /**
-//     * Gets all {@link Relationship}s
-//     * @return an array of {@link Relationship}s
-//     */
-//    public List<Relationship> getRelationships() {
-//        return relationships;
-//    }
+    /**
+     * Adds a new OPTIONAL relationship to the feature model.
+     * The features involved in the relationship must already exist in the feature model.
+     * @param from the parent feature.
+     * @param to the child feature.
+     */
+    public void addOptionalRelationship(@NonNull F from, @NonNull F to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        checkArgument(bfFeatures.contains(to), "Child feature of relationship must be already added to feature model");
+
+        R r = relationshipBuilder.buildOptionalRelationship(from, to);
+
+        this.relationships.add(r);
+
+        // make the connection between the parent and the children
+        r.makeConnectionBetweenParentAndChildren();
+
+        log.trace("{}Added OPTIONAL relationship [relationship={}]", LoggerUtils.tab(), r);
+    }
+
+    /**
+     * Adds a new OR relationship to the feature model.
+     * The features involved in the relationship must already exist in the feature model.
+     * @param from the parent feature.
+     * @param to the child features.
+     */
+    public void addOrRelationship(@NonNull F from, @NonNull List<F> to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        to.forEach(child -> checkArgument(bfFeatures.contains(child), "Child feature of relationship must be already added to feature model"));
+
+        R r = relationshipBuilder.buildOrRelationship(from, to);
+
+        this.relationships.add(r);
+
+        // make the connection between the parent and the children
+        r.makeConnectionBetweenParentAndChildren();
+
+        log.trace("{}Added OR relationship [relationship={}]", LoggerUtils.tab(), r);
+    }
+
+    /**
+     * Adds a new ALTERNATIVE relationship to the feature model.
+     * The features involved in the relationship must already exist in the feature model.
+     * @param from the parent feature.
+     * @param to the child features.
+     */
+    public void addAlternativeRelationship(@NonNull F from, @NonNull List<F> to) {
+        checkArgument(bfFeatures.contains(from), "Parent feature of relationship must be already added to feature model");
+        to.forEach(child -> checkArgument(bfFeatures.contains(child), "Child feature of relationship must be already added to feature model"));
+
+        R r = relationshipBuilder.buildAlternativeRelationship(from, to);
+
+        this.relationships.add(r);
+
+        // make the connection between the parent and the children
+        r.makeConnectionBetweenParentAndChildren();
+
+        log.trace("{}Added ALTERNATIVE relationship [relationship={}]", LoggerUtils.tab(), r);
+    }
 
     /**
      * Gets the number of relationships.
@@ -332,49 +361,29 @@ public class FeatureModel {
      * @param type type of relationships
      * @return number of relationships with the specific type.
      */
-    public int getNumOfRelationships(RelationshipType type) {
-        int count;
-        if (type == RelationshipType.REQUIRES || type == RelationshipType.EXCLUDES) {
-            count = (int) constraints.parallelStream().filter(relationship -> relationship.isType(type)).count();
-            /*for (Relationship relationship : constraints) {
-                if (relationship.isType(type)) {
-                    count++;
-                }
-            }*/
-        } else {
-            count = (int) relationships.stream().filter(relationship -> relationship.isType(type)).count();
-            /*for (Relationship relationship : relationships) {
-                if (relationship.isType(type)) {
-                    count++;
-                }
-            }*/
-        }
-        return count;
+    public <cls extends AbstractRelationship<F>> int getNumOfRelationships(Class<cls> type) {
+        return (int) relationships.parallelStream().filter(type::isInstance).count();
+        /*for (Relationship relationship : relationships) {
+            if (type.isInstance(relationship)) {
+                count++;
+            }
+        }*/
     }
 
-    /**
-     * Adds a new constraint
-     * @param type type of relationship
-     * @param leftSide left part of the constraint
-     * @param rightSide right part of the constraint
-     */
-    public void addConstraint(RelationshipType type, @NonNull Feature leftSide, @NonNull List<Feature> rightSide) {
-        Relationship r = new BasicRelationship(type, leftSide, rightSide);
-        this.constraints.add(r);
+    public void addConstraint(@NonNull C cstr) {
+        cstr.getFeatures().forEach(f -> checkArgument(bfFeatures.contains(f), "Feature of constraint must be already added to feature model"));
 
-        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab(), r);
+        this.constraints.add(cstr);
+
+        log.trace("{}Added cross-tree constraint [constraint={}]", LoggerUtils.tab(), cstr);
     }
 
-    /**
-     * Adds a new 3CNF constraint
-     * @param type type of relationship
-     * @param constraint3CNF 3CNF constraint
-     */
-    public void addConstraint(RelationshipType type, String constraint3CNF) {
-        Relationship r = new ThreeCNFConstraint(type, constraint3CNF);
-        this.constraints.add(r);
+    public void addRequires(@NonNull F from, @NonNull F to) {
+        addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildRequires(from, to)));
+    }
 
-        log.trace("{}Added constraint [constraint={}]", LoggerUtils.tab(), r);
+    public void addExcludes(@NonNull F from, @NonNull F to) {
+        addConstraint(constraintBuilder.buildConstraint(constraintBuilder.buildExcludes(from, to)));
     }
 
     /**
@@ -383,6 +392,22 @@ public class FeatureModel {
      */
     public int getNumOfConstraints() {
         return constraints.size();
+    }
+
+    /**
+     * Gets the number of requires.
+     * @return number of requires.
+     */
+    public int getNumOfRequires() {
+        return (int) constraints.parallelStream().filter(c -> c.getFormula().isRequires()).count();
+    }
+
+    /**
+     * Gets the number of excludes.
+     * @return number of excludes.
+     */
+    public int getNumOfExcludes() {
+        return (int) constraints.parallelStream().filter(c -> c.getFormula().isExcludes()).count();
     }
 
     @Override
@@ -410,6 +435,31 @@ public class FeatureModel {
         relationships = null;
         constraints.clear();
         constraints = null;
+        featureBuilder = null;
+        relationshipBuilder = null;
+    }
+
+    @SuppressWarnings("unchecked")
+    public Object clone() throws CloneNotSupportedException {
+        FeatureModel<F, R, C> clone = (FeatureModel<F, R, C>) super.clone();
+
+        // copy bfFeatures
+        clone.bfFeatures = new LinkedList<>();
+        for (F f : bfFeatures) {
+            clone.bfFeatures.add((F) f.clone());
+        }
+
+        // copy relationships
+        clone.relationships = new LinkedList<>();
+        relationships.forEach(r -> clone.relationships.add((R) r.clone()));
+
+        // copy constraints
+        clone.constraints = new LinkedList<>();
+        for (C cstr : constraints) {
+            clone.constraints.add((C) cstr.clone());
+        }
+
+        return clone;
     }
 }
 
