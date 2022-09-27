@@ -1303,6 +1303,130 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
     }
 
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    public void testMultiple_2() throws FeatureModelParserException, CloneNotSupportedException {
+        File fileFM = new File("src/test/resources/basic_featureide_multiple2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+        // generate analyses and run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    public void testMultiple_21() throws FeatureModelParserException, CloneNotSupportedException {
+        // Add redundant constraint
+        File fileFM = new File("src/test/resources/basic_featureide_multiple21.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+        // generate analyses and run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    public void testMultiple_22() throws FeatureModelParserException, CloneNotSupportedException {
+        // Add full mandatory feature
+        File fileFM = new File("src/test/resources/basic_featureide_multiple22.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+        // generate analyses and run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    /**
+     * Test generateAndRun() method
+     */
+    @Test
+    public void testMultiple_23() throws FeatureModelParserException, CloneNotSupportedException {
+        // Add dead feature
+        File fileFM = new File("src/test/resources/basic_featureide_multiple23.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+        // generate analyses and run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    // these functions will take about 30-45 minutes to run
     @Disabled("Bad for Tamim's laptop battery...")
     @Test
     public void testLargeModel_1() throws FeatureModelParserException, CloneNotSupportedException {
@@ -1334,7 +1458,6 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
     }
 
-    // this function will take about 30-45 minutes to run
     @Disabled("Bad for Tamim's laptop battery...")
     @Test
     public void testLargeModel_2() throws FeatureModelParserException, CloneNotSupportedException {
@@ -1505,12 +1628,12 @@ class FMAnalyzerTest {
         fm.addFeature("multiplechoice", "multiplechoice");
         fm.addFeature("singlechoice", "singlechoice");
         fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("pay"));
-        fm.addOptionalRelationship(fm.getFeature("survey"), fm.getFeature("ABtesting")); // TODO @Man, as info, I had to swap the features here (maybe a reason for failing assertions?)
+        fm.addOptionalRelationship(fm.getFeature("survey"), fm.getFeature("ABtesting"));
         fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("statistics"));
         fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("qa"));
         fm.addAlternativeRelationship(fm.getFeature("pay"), List.of(fm.getFeature("license"), fm.getFeature("nonlicense")));
         fm.addOrRelationship(fm.getFeature("qa"), List.of(fm.getFeature("multiplechoice"), fm.getFeature("singlechoice")));
-        fm.addOptionalRelationship(fm.getFeature("statistics"), fm.getFeature("ABtesting")); // should be redundant // TODO @Tamim, I changed the order of features to trigger the correct assertion
+        fm.addOptionalRelationship(fm.getFeature("statistics"), fm.getFeature("ABtesting")); // should be redundant
         fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("statistics")); // should be redundant
         fm.addExcludes(fm.getFeature("ABtesting"), fm.getFeature("nonlicense"));
         fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey")); // should be redundant
