@@ -43,32 +43,32 @@ public class ConditionallyDeadAssumptions implements IFMAnalysisAssumptionCreata
         for (int i = 0; i < candidateFeatures.size() - 1; i++) {
             AnomalyAwareFeature f1 = candidateFeatures.get(i);
 
-            if (f1.isOptional()) {
-                for (int j = i + 1; j < candidateFeatures.size(); j++) {
-                    AnomalyAwareFeature f2 = candidateFeatures.get(j);
+            if (!f1.isOptional()) { continue; }
 
-                    String testcase = fm.getFeature(0).getName() + " = true & " + f2.getName() + " = true & " + f1.getName() + " = true";
-                    List<Assignment> assignments = new LinkedList<>();
-                    assignments.add(Assignment.builder()
-                            .variable(fm.getFeature(0).getName())
-                            .value("true")
-                            .build());
-                    assignments.add(Assignment.builder()
-                            .variable(f2.getName())
-                            .value("true")
-                            .build());
-                    assignments.add(Assignment.builder()
-                            .variable(f1.getName())
-                            .value("true")
-                            .build());
+            for (int j = i + 1; j < candidateFeatures.size(); j++) {
+                AnomalyAwareFeature f2 = candidateFeatures.get(j);
 
-                    testCases.add(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
-                            .testcase(testcase)
-                            .anomalyType(AnomalyType.CONDITIONALLYDEAD)
-                            .assignments(assignments)
-                            .assumptions(List.of(f1, f2))
-                            .build());
-                }
+                String testcase = fm.getFeature(0).getName() + " = true & " + f2.getName() + " = true & " + f1.getName() + " = true";
+                List<Assignment> assignments = new LinkedList<>();
+                assignments.add(Assignment.builder()
+                        .variable(fm.getFeature(0).getName())
+                        .value("true")
+                        .build());
+                assignments.add(Assignment.builder()
+                        .variable(f2.getName())
+                        .value("true")
+                        .build());
+                assignments.add(Assignment.builder()
+                        .variable(f1.getName())
+                        .value("true")
+                        .build());
+
+                testCases.add(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
+                        .testcase(testcase)
+                        .anomalyType(AnomalyType.CONDITIONALLYDEAD)
+                        .assignments(assignments)
+                        .assumptions(List.of(f1, f2))
+                        .build());
             }
         }
 
