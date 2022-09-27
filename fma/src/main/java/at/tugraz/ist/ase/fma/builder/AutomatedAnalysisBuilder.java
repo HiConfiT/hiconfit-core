@@ -8,12 +8,14 @@
 
 package at.tugraz.ist.ase.fma.builder;
 
+import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fma.FMAnalyzer;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
+import at.tugraz.ist.ase.fma.test.TestSuiteUtils;
 import lombok.NonNull;
 
 import java.util.EnumSet;
@@ -65,6 +67,20 @@ public class AutomatedAnalysisBuilder {
                     builder.build(featureModel, analyzer);
                 }
             }
+        }
+    }
+
+    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                      @NonNull TestSuite testSuite,
+                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+
+        EnumSet<AnomalyType> anomalyTypes = TestSuiteUtils.getAnomalyTypes(testSuite);
+        IAnalysisBuildable builder;
+        for (AnomalyType anomaly : anomalyTypes) {
+            TestSuite specificTestSuite = TestSuiteUtils.getSpecificTestCases(testSuite, anomaly);
+
+            builder = anomaly.getBuilder();
+            builder.build(featureModel, specificTestSuite, analyzer);
         }
     }
 

@@ -25,7 +25,6 @@ import java.util.List;
 
 public class FalseOptionalAnalysisBuilder implements IAnalysisBuildable {
     @Override
-    @SuppressWarnings("unchecked")
     public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
                       @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
         // create a test case/assumption
@@ -34,14 +33,22 @@ public class FalseOptionalAnalysisBuilder implements IAnalysisBuildable {
         List<ITestCase> testCases = falseOptionalAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
+        build(featureModel, testSuite, analyzer);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                      @NonNull TestSuite testSuite,
+                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
         FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
                 debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analyses and the corresponding explanators
-        for (ITestCase testCase : testCases) {
+        for (ITestCase testCase : testSuite.getTestCases()) {
             FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
-                debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
+                    debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
             debuggingModelClone.initialize();
 
             FalseOptionalAnalysis analysis = new FalseOptionalAnalysis(debuggingModelClone, testCase);

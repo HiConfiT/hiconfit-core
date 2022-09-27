@@ -25,8 +25,8 @@ import java.util.List;
 
 public class ConditionallyDeadAnalysisBuilder implements IAnalysisBuildable {
     @Override
-    @SuppressWarnings("unchecked")
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel, @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
         // CONDITIONALLY DEAD
         // create a test case/assumption
         // check conditionally dead features - inconsistent( CF ∪ { c0 } U { fj = true } U { fi = true } ) for any fj
@@ -34,14 +34,22 @@ public class ConditionallyDeadAnalysisBuilder implements IAnalysisBuildable {
         List<ITestCase> testCases = conditionallyDeadAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
+        build(featureModel, testSuite, analyzer);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                      @NonNull TestSuite testSuite,
+                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
         FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
                 conditionallyDeadDebuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         conditionallyDeadDebuggingModel.initialize();
 
         // create the specified analyses and the corresponding explanators
-        for (ITestCase testCase : testCases) {
+        for (ITestCase testCase : testSuite.getTestCases()) {
             FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
-                debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) conditionallyDeadDebuggingModel.clone();
+                    debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) conditionallyDeadDebuggingModel.clone();
             debuggingModelClone.initialize();
 
             ConditionallyDeadAnalysis analysis = new ConditionallyDeadAnalysis(debuggingModelClone, testCase);
