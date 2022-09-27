@@ -9,6 +9,9 @@
 package at.tugraz.ist.ase.fma;
 
 import at.tugraz.ist.ase.cdrmodel.AbstractCDRModel;
+import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
+import at.tugraz.ist.ase.cdrmodel.test.builder.fm.XMLTestCaseBuilder;
+import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
 import at.tugraz.ist.ase.fm.builder.*;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
@@ -28,6 +31,8 @@ import at.tugraz.ist.ase.fma.explanation.RedundancyAnalysisExplanation;
 import at.tugraz.ist.ase.fma.explanation.VoidFMExplanation;
 import at.tugraz.ist.ase.fma.monitor.ProgressMonitor;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
+import at.tugraz.ist.ase.fma.test.builder.XMLAssumptionAwareTestCaseBuilder;
+import at.tugraz.ist.ase.fma.test.reader.XMLAssumptionAwareTestSuiteReader;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import com.google.common.collect.Iterators;
 import lombok.Cleanup;
@@ -35,12 +40,15 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
+import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FMAnalyzerTest {
@@ -1302,7 +1310,7 @@ class FMAnalyzerTest {
      * Test run() method
      */
     @Test
-    public void testMultiple_0() throws FeatureModelParserException, CloneNotSupportedException {
+    public void testMultiple_0() throws FeatureModelParserException, CloneNotSupportedException, IOException {
         File fileFM = new File("src/test/resources/basic_featureide_multiple1.xml");
 
         // create the factory for anomaly feature models
@@ -1321,10 +1329,14 @@ class FMAnalyzerTest {
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generates analyses and add them to the analyzer
-        // In real scenario, analyses/test cases should be read from a file
-        // TODO - @Tamim: please replace two lines below with test cases read from a XML file
+        // read pre-generated test cases from a file
+        XMLAssumptionAwareTestSuiteReader reader = new XMLAssumptionAwareTestSuiteReader(featureModel);
+        XMLAssumptionAwareTestCaseBuilder builder = new XMLAssumptionAwareTestCaseBuilder(featureModel);
+        @Cleanup InputStream is = getInputStream(FMAnalyzerTest.class.getClassLoader(), "testsuite_multiple1.xml");
+        TestSuite testSuite = reader.read(is, builder);
+
         AutomatedAnalysisBuilder analysisBuilder = new AutomatedAnalysisBuilder();
-        analysisBuilder.build(featureModel, options, analyzer);
+        analysisBuilder.build(featureModel, testSuite, analyzer);
 
         // generate analyses and run the analyzer
         analyzer.run(true);
