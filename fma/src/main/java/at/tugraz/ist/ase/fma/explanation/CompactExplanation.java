@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.fma.explanation;
 import at.tugraz.ist.ase.common.ConsoleColors;
 import at.tugraz.ist.ase.fma.analysis.AbstractFMAnalysis;
 import at.tugraz.ist.ase.fma.analysis.AnalysisUtils;
+import at.tugraz.ist.ase.fma.analysis.FalseOptionalAnalysis;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.fma.explanator.ExplanationColors;
@@ -68,6 +69,11 @@ public class CompactExplanation implements IAnalysisExplanable {
                         }
 
                         String featuresEx = Joiner.on(", ").join(((AssumptionAwareTestCase) analysis.getAssumption()).getAssumptions());
+
+                        if (analysis instanceof FalseOptionalAnalysis) {
+                            String parent = ((AssumptionAwareTestCase) analysis.getAssumption()).getAssignments().get(1).getVariable();
+                            featuresEx = featuresEx + ExplanationColors.ASSUMPTION + " (parent=[" + parent + "])" + ConsoleColors.WHITE;
+                        }
 
                         sb.append(ExplanationUtils.convertToDescriptiveExplanation(analysis.getExplanator().getDiagnoses(), featuresEx));
                     }

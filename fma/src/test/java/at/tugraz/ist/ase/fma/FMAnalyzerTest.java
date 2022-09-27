@@ -524,6 +524,67 @@ class FMAnalyzerTest {
         assertEquals(cs3, allDiagnoses1.get(2));
     }
 
+    @Test
+    void testDeadFeature_22() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+        // load the feature model
+        File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
+
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        FMParserFactory<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                factory = FMParserFactory.getInstance(featureBuilder);
+
+        @Cleanup("dispose")
+        FeatureModelParser<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                parser = factory.getParser(fileFM.getName());
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+                featureModel = parser.parse(fileFM);
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+
+        analyzer.generateAndRun(options, true); // run the analyzer
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+
+        // Assertions
+        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
+        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(5);
+        DeadFeatureAnalysis analysis3 = (DeadFeatureAnalysis) analyses.get(7);
+
+        assertTrue(analysis1.get());
+        assertFalse(analysis2.get());
+        assertFalse(analysis3.get());
+
+        List<Set<Constraint>> allDiagnoses = analysis2.getExplanator().getDiagnoses();
+        List<Set<Constraint>> allDiagnoses1 = analysis3.getExplanator().getDiagnoses();
+
+        AbstractCDRModel model = analysis2.getModel();
+        Set<Constraint> cs1 = new LinkedHashSet<>();
+        cs1.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 8));
+
+        Set<Constraint> cs2 = new LinkedHashSet<>();
+        cs2.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 4));
+
+        Set<Constraint> cs3 = new LinkedHashSet<>();
+        cs3.add(Iterators.get(model.getPossiblyFaultyConstraints().iterator(), 1));
+
+        assertEquals(3, allDiagnoses.size());
+        assertEquals(cs1, allDiagnoses.get(0));
+        assertEquals(cs2, allDiagnoses.get(1));
+        assertEquals(cs3, allDiagnoses.get(2));
+
+        assertEquals(3, allDiagnoses1.size());
+        assertEquals(cs1, allDiagnoses1.get(0));
+        assertEquals(cs2, allDiagnoses1.get(1));
+        assertEquals(cs3, allDiagnoses1.get(2));
+    }
+
     /**
      * Test run() method
      */
