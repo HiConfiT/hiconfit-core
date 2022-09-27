@@ -1731,6 +1731,49 @@ class FMAnalyzerTest {
     }
 
     @Test
+    void testRedundancy_21() throws CloneNotSupportedException {
+        // create the factory for anomaly feature models
+        IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();
+        ConfRuleTranslator ruleTranslator = new ConfRuleTranslator();
+        IRelationshipBuildable relationshipBuilder = new RelationshipBuilder(ruleTranslator);
+        IConstraintBuildable constraintBuilder = new ConstraintBuilder(ruleTranslator);
+
+        // create the feature model
+        FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fm = new FeatureModel<>("survey-tool", featureBuilder, relationshipBuilder, constraintBuilder);
+        fm.addRoot("survey", "survey");
+        fm.addFeature("pay", "pay");
+        fm.addFeature("ABtesting", "ABtesting");
+        fm.addFeature("statistics", "statistics");
+        fm.addFeature("qa", "qa");
+        fm.addFeature("license", "license");
+        fm.addFeature("nonlicense", "nonlicense");
+        fm.addFeature("multiplechoice", "multiplechoice");
+        fm.addFeature("singlechoice", "singlechoice");
+        fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("pay"));
+        fm.addOptionalRelationship(fm.getFeature("survey"), fm.getFeature("ABtesting"));
+        fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("statistics"));
+        fm.addMandatoryRelationship(fm.getFeature("survey"), fm.getFeature("qa"));
+        fm.addAlternativeRelationship(fm.getFeature("pay"), List.of(fm.getFeature("license"), fm.getFeature("nonlicense")));
+        fm.addOrRelationship(fm.getFeature("qa"), List.of(fm.getFeature("multiplechoice"), fm.getFeature("singlechoice")));
+        fm.addOptionalRelationship(fm.getFeature("statistics"), fm.getFeature("ABtesting")); // should be redundant
+        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("statistics")); // should be redundant
+        fm.addExcludes(fm.getFeature("ABtesting"), fm.getFeature("nonlicense"));
+        fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey")); // should be redundant
+
+        // create an analyzer
+        FMAnalyzer analyzer = new FMAnalyzer(fm);
+
+        EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
+
+        // run the analyzer
+        analyzer.generateAndRun(options, true);
+
+        // print the result
+        AutomatedAnalysisExplanation explanation = new AutomatedAnalysisExplanation();
+        System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
+    }
+
+    @Test
     public void testRedundancy_3() throws FeatureModelParserException, CloneNotSupportedException {
         File fileFM = new File("src/test/resources/bamboobike_featureide_redundancies1.xml");
 
