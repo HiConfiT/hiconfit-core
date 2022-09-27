@@ -63,6 +63,7 @@ public class ConditionallyDeadAssumptions implements IFMAnalysisAssumptionCreata
 
                 testCases.add(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                         .testcase(testcase)
+                        .anomalyType(AnomalyType.CONDITIONALLYDEAD)
                         .assignments(assignments)
                         .assumptions(List.of(f1, f2))
                         .build());

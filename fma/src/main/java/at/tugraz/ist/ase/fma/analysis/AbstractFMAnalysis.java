@@ -76,4 +76,9 @@ public abstract class AbstractFMAnalysis<T> extends RecursiveTask<Boolean> {
 			((AssumptionAwareTestCase)assumption).getAssumptions().forEach(feature -> feature.setAnomalyType(anomalyType));
 		}
 	}
+
+	@Override
+	public String toString() {
+		return assumption.toString();
+	}
 }

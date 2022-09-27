@@ -14,6 +14,7 @@ import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
@@ -50,6 +51,7 @@ public class FullMandatoryAssumptions implements IFMAnalysisAssumptionCreatable 
 
             testCases.add(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                     .testcase(testcase)
+                    .anomalyType(AnomalyType.FULLMANDATORY)
                     .assignments(assignments)
                     .assumptions(List.of(feature))
                     .build());

@@ -11,8 +11,8 @@ package at.tugraz.ist.ase.fma.test.reader;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.cdrmodel.test.builder.ITestCaseBuildable;
+import at.tugraz.ist.ase.cdrmodel.test.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.cdrmodel.test.reader.ITestSuiteReadable;
-import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
@@ -41,12 +41,9 @@ import static com.google.common.base.Preconditions.checkState;
 
 @Slf4j
 public class XMLAssumptionAwareTestSuiteReader implements ITestSuiteReadable {
-    public static final String TAG_ASSUMPTION = "assumption";
-    public static final String TAG_NAME = "name";
-    public static final String TAG_ID = "id";
 
     @Getter
-    private FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel;
+    private final FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel;
 
     public XMLAssumptionAwareTestSuiteReader(FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel) {
         this.featureModel = featureModel;
@@ -65,7 +62,7 @@ public class XMLAssumptionAwareTestSuiteReader implements ITestSuiteReadable {
             // if it has two tags "featureModel", "struct"
             checkState(rootEle != null, "DocumentBuilder couldn't parse the document! There are errors in the file.");
 
-            if (!(rootEle.getTagName().equals(XMLTestSuiteReader.TAG_ROOT) && rootEle.getElementsByTagName(XMLTestSuiteReader.TAG_TESTCASE).getLength() > 0)) {
+            if (!(rootEle.getTagName().equals(XMLTestSuiteFormat.TAG_ROOT) && rootEle.getElementsByTagName(XMLTestSuiteFormat.TAG_TESTCASE).getLength() > 0)) {
                 throw new RuntimeException("The file does not contain test cases!");
             }
 
@@ -74,8 +71,8 @@ public class XMLAssumptionAwareTestSuiteReader implements ITestSuiteReadable {
 
             List<ITestCase> testCases;
 
-            Stream<Node> nodeStream = IntStream.range(0, rootEle.getElementsByTagName(XMLTestSuiteReader.TAG_TESTCASE).getLength())
-                    .mapToObj(rootEle.getElementsByTagName(XMLTestSuiteReader.TAG_TESTCASE)::item);
+            Stream<Node> nodeStream = IntStream.range(0, rootEle.getElementsByTagName(XMLTestSuiteFormat.TAG_TESTCASE).getLength())
+                    .mapToObj(rootEle.getElementsByTagName(XMLTestSuiteFormat.TAG_TESTCASE)::item);
             testCases = nodeStream.map(testCaseBuilder::buildTestCase).collect(Collectors.toCollection(LinkedList::new));
 
             TestSuite testSuite = TestSuite.builder()

@@ -14,6 +14,7 @@ import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
@@ -51,6 +52,7 @@ public class DeadFeatureAssumptions implements IFMAnalysisAssumptionCreatable {
 
             testCases.add(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                     .testcase(testcase)
+                    .anomalyType(AnomalyType.DEAD)
                     .assignments(assignments)
                     .assumptions(List.of(feature))
                     .build());

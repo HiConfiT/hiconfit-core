@@ -14,6 +14,7 @@ import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
@@ -39,6 +40,7 @@ public class VoidFMAssumption implements IFMAnalysisAssumptionCreatable {
 
         return Collections.singletonList(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                 .testcase(testcase)
+                .anomalyType(AnomalyType.VOID)
                 .assignments(Collections.singletonList(assignment))
                 .assumptions(Collections.singletonList(f0))
                 .build());

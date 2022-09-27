@@ -9,12 +9,11 @@
 package at.tugraz.ist.ase.fma.test.writer;
 
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.cdrmodel.test.writer.ITestSuiteWritable;
-import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
-import at.tugraz.ist.ase.fma.test.reader.XMLAssumptionAwareTestSuiteReader;
+import at.tugraz.ist.ase.fma.test.format.XMLAssumptionAwareTestSuiteFormat;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -40,25 +39,26 @@ public class XMLAssumptionAwareTestSuiteWriter implements ITestSuiteWritable {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document doc = db.newDocument();
-        Element rootEle = doc.createElement(XMLTestSuiteReader.TAG_ROOT);
+        Element rootEle = doc.createElement(XMLTestSuiteFormat.TAG_ROOT);
         doc.appendChild(rootEle);
 
         for (ITestCase testCase : testCases) {
-            Element testCaseEle = doc.createElement(XMLTestSuiteReader.TAG_TESTCASE);
+            Element testCaseEle = doc.createElement(XMLTestSuiteFormat.TAG_TESTCASE);
             AssumptionAwareTestCase assumptionAwareTestCase = (AssumptionAwareTestCase) testCase;
+            testCaseEle.setAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ANOMALY, assumptionAwareTestCase.getAnomalyType().toString());
 
             for (AnomalyAwareFeature anomalyAwareFeature : assumptionAwareTestCase.getAssumptions()) {
-                Element assumptionEle = doc.createElement(XMLAssumptionAwareTestSuiteReader.TAG_ASSUMPTION);
-                assumptionEle.setAttribute(XMLAssumptionAwareTestSuiteReader.TAG_NAME, anomalyAwareFeature.getName());
-                assumptionEle.setAttribute(XMLAssumptionAwareTestSuiteReader.TAG_ID, anomalyAwareFeature.getId());
+                Element assumptionEle = doc.createElement(XMLAssumptionAwareTestSuiteFormat.TAG_ASSUMPTION);
+                assumptionEle.setAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_NAME, anomalyAwareFeature.getName());
+                assumptionEle.setAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ID, anomalyAwareFeature.getId());
 
                 testCaseEle.appendChild(assumptionEle);
             }
 
             for (Assignment assignment : testCase.getAssignments()) {
-                Element clauseEle = doc.createElement(XMLTestSuiteReader.TAG_CLAUSE);
-                clauseEle.setAttribute(XMLTestSuiteReader.TAG_VARIABLE,  assignment.getVariable());
-                clauseEle.setAttribute(XMLTestSuiteReader.TAG_VALUE, assignment.getValue());
+                Element clauseEle = doc.createElement(XMLTestSuiteFormat.TAG_CLAUSE);
+                clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VARIABLE,  assignment.getVariable());
+                clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VALUE, assignment.getValue());
 
                 testCaseEle.appendChild(clauseEle);
             }

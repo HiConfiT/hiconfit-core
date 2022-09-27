@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.fma.analysis;
 import at.tugraz.ist.ase.cacdr.algorithms.WipeOutR_FM;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.cdrmodel.fm.FMCdrModel;
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
@@ -27,13 +28,14 @@ import java.util.List;
 import java.util.Set;
 
 @Slf4j
-public class RedundancyAnalysis extends AbstractFMAnalysis<Boolean> {
+public class RedundancyAnalysis extends AbstractFMAnalysis<ITestCase> {
 
     @Getter
     private Set<Constraint> redundantConstraints;
 
-    public RedundancyAnalysis(@NonNull FMCdrModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> model) {
-        super(model, null);
+    public RedundancyAnalysis(@NonNull FMCdrModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> model,
+                              @NonNull ITestCase assumption) {
+        super(model, assumption);
 
         redundantConstraints = new LinkedHashSet<>();
     }

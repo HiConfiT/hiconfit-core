@@ -11,14 +11,13 @@ package at.tugraz.ist.ase.cdrmodel.test.builder.fm;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.cdrmodel.test.builder.ITestCaseBuildable;
-import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import com.google.common.base.Preconditions;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.util.LinkedList;
@@ -48,11 +47,11 @@ public class XMLTestCaseBuilder implements ITestCaseBuildable {
 
     private List<Assignment> splitTestCase(Element testcase) {
         List<Assignment> assignments = new LinkedList<>();
-        for (int clauseIndex = 0; clauseIndex < testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE).getLength(); clauseIndex++) {
-            Element clause = (Element) testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE).item(clauseIndex);
+        for (int clauseIndex = 0; clauseIndex < testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE).getLength(); clauseIndex++) {
+            Element clause = (Element) testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE).item(clauseIndex);
 
-            String variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
-            String value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
+            String variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+            String value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
 
             if (!(value.equals("true") || value.equals("false"))) {
                 throw new RuntimeException("Assignment to a variable must be boolean!");
@@ -71,11 +70,11 @@ public class XMLTestCaseBuilder implements ITestCaseBuildable {
     }
 
     private String testCaseNodeToString(Element testcase) {
-        NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE);
+        NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE);
 
         Element clause = (Element) clauses.item(0);
-        String variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
-        String value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
+        String variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+        String value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
 
         StringBuilder sb = new StringBuilder();
         if (value.equals("false")) {
@@ -85,8 +84,8 @@ public class XMLTestCaseBuilder implements ITestCaseBuildable {
 
         for (int clauseIndex = 1; clauseIndex < clauses.getLength(); clauseIndex++) {
             clause = (Element) clauses.item(clauseIndex);
-            variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
-            value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
+            variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+            value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
 
             sb.append(" & ");
             if (value.equals("false")) {

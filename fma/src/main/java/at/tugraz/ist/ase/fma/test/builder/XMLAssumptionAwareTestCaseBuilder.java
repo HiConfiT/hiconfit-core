@@ -9,17 +9,15 @@
 package at.tugraz.ist.ase.fma.test.builder;
 
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.cdrmodel.test.builder.ITestCaseBuildable;
-import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
-import at.tugraz.ist.ase.fm.core.Feature;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
-import at.tugraz.ist.ase.fma.test.reader.XMLAssumptionAwareTestSuiteReader;
+import at.tugraz.ist.ase.fma.test.format.XMLAssumptionAwareTestSuiteFormat;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
@@ -29,14 +27,13 @@ import org.javatuples.Pair;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import java.io.ObjectStreamConstants;
 import java.util.LinkedList;
 import java.util.List;
 
 @Slf4j
 public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
     @Getter
-    private FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel;
+    private final FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel;
 
     public XMLAssumptionAwareTestCaseBuilder(FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel) {
         this.featureModel = featureModel;
@@ -65,11 +62,11 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
 
     private Pair<List<Assignment>, List<AnomalyAwareFeature>> splitTestCase(Element testcase) {
         List<AnomalyAwareFeature> assumptions = new LinkedList<>();
-        for (int assumptionIndex = 0; assumptionIndex  < testcase.getElementsByTagName(XMLAssumptionAwareTestSuiteReader.TAG_ASSUMPTION).getLength(); assumptionIndex ++) {
-            Element assumptionEle = (Element) testcase.getElementsByTagName(XMLAssumptionAwareTestSuiteReader.TAG_ASSUMPTION).item(assumptionIndex);
+        for (int assumptionIndex = 0; assumptionIndex  < testcase.getElementsByTagName(XMLAssumptionAwareTestSuiteFormat.TAG_ASSUMPTION).getLength(); assumptionIndex ++) {
+            Element assumptionEle = (Element) testcase.getElementsByTagName(XMLAssumptionAwareTestSuiteFormat.TAG_ASSUMPTION).item(assumptionIndex);
 
-            String name = assumptionEle.getAttribute(XMLAssumptionAwareTestSuiteReader.TAG_NAME);
-            String id = assumptionEle.getAttribute(XMLAssumptionAwareTestSuiteReader.TAG_ID);
+            String name = assumptionEle.getAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_NAME);
+            String id = assumptionEle.getAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ID);
 
             try {
                 AnomalyAwareFeature feature = featureModel.getFeature(id);
@@ -84,11 +81,11 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
         }
 
         List<Assignment> assignments = new LinkedList<>();
-        for (int clauseIndex = 0; clauseIndex < testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE).getLength(); clauseIndex++) {
-            Element clause = (Element) testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE).item(clauseIndex);
+        for (int clauseIndex = 0; clauseIndex < testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE).getLength(); clauseIndex++) {
+            Element clause = (Element) testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE).item(clauseIndex);
 
-            String variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
-            String value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
+            String variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+            String value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
 
             if (!(value.equals("true") || value.equals("false"))) {
                 throw new RuntimeException("Assignment to a variable must be boolean!");
@@ -107,11 +104,11 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
     }
 
     private String testCaseNodeToString(Element testcase) {
-        NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteReader.TAG_CLAUSE);
+        NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE);
 
         Element clause = (Element) clauses.item(0);
-        String variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
-        String value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
+        String variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+        String value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
 
         StringBuilder sb = new StringBuilder();
         if (value.equals("false")) {
@@ -121,8 +118,8 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
 
         for (int clauseIndex = 1; clauseIndex < clauses.getLength(); clauseIndex++) {
             clause = (Element) clauses.item(clauseIndex);
-            variable = clause.getAttribute(XMLTestSuiteReader.TAG_VARIABLE);
-            value = clause.getAttribute(XMLTestSuiteReader.TAG_VALUE);
+            variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+            value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
 
             sb.append(" & ");
             if (value.equals("false")) {

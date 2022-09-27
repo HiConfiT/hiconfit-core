@@ -9,7 +9,7 @@
 package at.tugraz.ist.ase.cdrmodel.test.writer;
 
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
+import at.tugraz.ist.ase.cdrmodel.test.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.kb.core.Assignment;
 import lombok.NonNull;
 import org.w3c.dom.Document;
@@ -18,12 +18,14 @@ import org.w3c.dom.Element;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.util.List;
-import java.util.Properties;
 
 public class XMLTestSuiteWriter implements ITestSuiteWritable {
     @Override
@@ -31,16 +33,16 @@ public class XMLTestSuiteWriter implements ITestSuiteWritable {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document doc = db.newDocument();
-        Element rootEle = doc.createElement(XMLTestSuiteReader.TAG_ROOT);
+        Element rootEle = doc.createElement(XMLTestSuiteFormat.TAG_ROOT);
         doc.appendChild(rootEle);
 
         for (ITestCase testCase : testCases) {
-            Element testCaseEle = doc.createElement(XMLTestSuiteReader.TAG_TESTCASE);
+            Element testCaseEle = doc.createElement(XMLTestSuiteFormat.TAG_TESTCASE);
 
             for (Assignment assignment : testCase.getAssignments()) {
-                Element clauseEle = doc.createElement(XMLTestSuiteReader.TAG_CLAUSE);
-                clauseEle.setAttribute(XMLTestSuiteReader.TAG_VARIABLE,  assignment.getVariable());
-                clauseEle.setAttribute(XMLTestSuiteReader.TAG_VALUE, assignment.getValue());
+                Element clauseEle = doc.createElement(XMLTestSuiteFormat.TAG_CLAUSE);
+                clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VARIABLE,  assignment.getVariable());
+                clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VALUE, assignment.getValue());
 
                 testCaseEle.appendChild(clauseEle);
             }

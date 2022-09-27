@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.fma.analysis;
 
+import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import lombok.NonNull;
@@ -56,5 +57,12 @@ public class AnalysisUtils {
 
     public List<AbstractFMAnalysis<?>> getNotExecutedAnalyses(@NonNull List<AbstractFMAnalysis<?>> analyses) {
         return analyses.parallelStream().filter(analysis -> !analysis.isDone()).toList();
+    }
+
+    public List<ITestCase> getTestcases(List<AbstractFMAnalysis<?>> analyses) {
+        return analyses.parallelStream()
+                .filter(analysis -> analysis.getAssumption() instanceof ITestCase)
+                .map(analysis -> (ITestCase) analysis.getAssumption())
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 }

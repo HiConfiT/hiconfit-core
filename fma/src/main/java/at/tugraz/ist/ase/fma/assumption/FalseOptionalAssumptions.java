@@ -67,6 +67,7 @@ public class FalseOptionalAssumptions implements IFMAnalysisAssumptionCreatable 
 
                 testCases.add(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                         .testcase(testcase)
+                        .anomalyType(AnomalyType.FALSEOPTIONAL)
                         .assignments(assignments)
                         .assumptions(List.of(feature))
                         .build());
