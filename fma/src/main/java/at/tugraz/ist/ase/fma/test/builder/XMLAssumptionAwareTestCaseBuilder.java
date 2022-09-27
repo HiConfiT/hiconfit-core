@@ -16,6 +16,8 @@ import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
 import at.tugraz.ist.ase.fma.anomaly.AnomalyAwareFeature;
+import at.tugraz.ist.ase.fma.anomaly.AnomalyType;
+import at.tugraz.ist.ase.fma.anomaly.IAnomalyType;
 import at.tugraz.ist.ase.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.fma.test.format.XMLAssumptionAwareTestSuiteFormat;
 import at.tugraz.ist.ase.kb.core.Assignment;
@@ -42,14 +44,19 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
     @Override
     public ITestCase buildTestCase(@NonNull Object testcase) {
         Preconditions.checkArgument(testcase instanceof Element, "The test case must be an XML Element");
+        LoggerUtils.indent();
+
         Element testcaseEle = (Element) testcase;
 
-        LoggerUtils.indent();
+        // get the anomaly type
+        String anomalyString = testcaseEle.getAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ANOMALY);
+        IAnomalyType anomalyType = AnomalyType.valueOf(anomalyString);
 
         Pair<List<Assignment>, List<AnomalyAwareFeature>> splitTestCases = splitTestCase(testcaseEle);
 
         AssumptionAwareTestCase testCase = AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
-                .testcase(testCaseNodeToString(testcaseEle))
+                .testcase(anomalyString.equals("REDUNDANT") ? "RedundancyAnalysis" : testCaseNodeToString(testcaseEle))
+                .anomalyType(anomalyType)
                 .assignments(splitTestCases.getValue0())
                 .assumptions(splitTestCases.getValue1())
                 .build();
@@ -74,8 +81,7 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
                     throw new RuntimeException("Feature has different name in feature model and test cases!");
                 }
                 assumptions.add(feature);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 throw new RuntimeException("The test cases are incompatible with the feature model!", e.getCause());
             }
         }

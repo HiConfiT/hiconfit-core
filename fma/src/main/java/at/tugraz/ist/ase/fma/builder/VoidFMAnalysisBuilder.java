@@ -39,12 +39,18 @@ public class VoidFMAnalysisBuilder implements IAnalysisBuildable {
         List<ITestCase> testCases = voidFMAssumption.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
+        build(featureModel, testSuite, analyzer);
+    }
+
+    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                      @NonNull TestSuite testSuite,
+                      @NonNull FMAnalyzer analyzer) {
         FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
                 debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        VoidFMAnalysis analysis = new VoidFMAnalysis(debuggingModel, testCases.get(0));
+        VoidFMAnalysis analysis = new VoidFMAnalysis(debuggingModel, testSuite.getTestCases().get(0));
 
         analyzer.addAnalysis(analysis);
     }

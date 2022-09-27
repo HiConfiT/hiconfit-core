@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.fma.builder;
 
 import at.tugraz.ist.ase.cdrmodel.fm.FMCdrModel;
 import at.tugraz.ist.ase.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.fm.core.CTConstraint;
 import at.tugraz.ist.ase.fm.core.FeatureModel;
@@ -34,13 +35,21 @@ public class RedundancyAnalysisBuilder implements IAnalysisBuildable {
         // REDUNDANCIES
         RedundancyAssumption redundancyAssumption = new RedundancyAssumption();
         List<ITestCase> testCases = redundancyAssumption.createAssumptions(featureModel);
+        TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
+        build(featureModel, testSuite, analyzer);
+    }
+
+    @Override
+    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                      @NonNull TestSuite testSuite,
+                      @NonNull FMAnalyzer analyzer) {
         FMCdrModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
                 model = new FMCdrModel<>(featureModel, true, false, true);
         model.initialize();
 
         // create the redundancy analysis
-        ITestCase testCase = testCases.get(0);
+        ITestCase testCase = testSuite.getTestCases().get(0);
 
         RedundancyAnalysis redundancyAnalysis = new RedundancyAnalysis(model, testCase);
 

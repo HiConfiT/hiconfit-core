@@ -24,7 +24,7 @@ import lombok.NonNull;
 import java.util.List;
 
 public class DeadFeatureAnalysisBuilder implements IAnalysisBuildable {
-    @SuppressWarnings("unchecked")
+    @Override
     public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
                       @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
         // create a test case/assumption
@@ -33,12 +33,20 @@ public class DeadFeatureAnalysisBuilder implements IAnalysisBuildable {
         List<ITestCase> testCases = deadFeatureAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
 
+        build(featureModel, testSuite, analyzer);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+                      @NonNull TestSuite testSuite,
+                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
         FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
                 debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        for (ITestCase testCase : testCases) {
+        for (ITestCase testCase : testSuite.getTestCases()) {
             FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
                     clonedDebuggingModel = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
             clonedDebuggingModel.initialize();
