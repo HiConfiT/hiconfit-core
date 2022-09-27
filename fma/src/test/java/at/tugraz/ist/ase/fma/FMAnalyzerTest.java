@@ -1115,7 +1115,7 @@ class FMAnalyzerTest {
         // Assertions
         List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
         ConditionallyDeadAnalysis analysis2 = (ConditionallyDeadAnalysis) analyses.get(1);
-        ConditionallyDeadAnalysis analysis3 = (ConditionallyDeadAnalysis) analyses.get(2);
+        ConditionallyDeadAnalysis analysis3 = (ConditionallyDeadAnalysis) analyses.get(3);
 
         assertFalse(analysis2.get());
         assertFalse(analysis3.get());
@@ -1160,7 +1160,7 @@ class FMAnalyzerTest {
         // Assertions
         List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
         ConditionallyDeadAnalysis analysis2 = (ConditionallyDeadAnalysis) analyses.get(6);
-        ConditionallyDeadAnalysis analysis3 = (ConditionallyDeadAnalysis) analyses.get(7);
+        ConditionallyDeadAnalysis analysis3 = (ConditionallyDeadAnalysis) analyses.get(8);
 
         assertFalse(analysis2.get());
         assertFalse(analysis3.get());

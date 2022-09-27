@@ -106,6 +106,13 @@
     </testcase>
     <testcase anomaly="CONDITIONALLYDEAD">
         <assumption id="A" name="A"/>
+        <assumption id="B" name="B"/>
+        <clause value="true" variable="Root"/>
+        <clause value="true" variable="B"/>
+        <clause value="true" variable="A"/>
+    </testcase>
+    <testcase anomaly="CONDITIONALLYDEAD">
+        <assumption id="A" name="A"/>
         <assumption id="C" name="C"/>
         <clause value="true" variable="Root"/>
         <clause value="true" variable="C"/>
