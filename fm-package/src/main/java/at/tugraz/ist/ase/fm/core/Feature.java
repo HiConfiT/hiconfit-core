@@ -154,13 +154,20 @@ public class Feature implements Cloneable {
         return relationships;
     }
 
+    public List<AbstractRelationship<? extends Feature>> getRelationshipsAsChild() {
+        return parent.getRelationshipsAsParent().parallelStream()
+                    .filter(r -> r.isChild(this))
+                    .collect(Collectors.toCollection(LinkedList::new));
+    }
+
     public List<AbstractRelationship<? extends Feature>> getAllRelationships() {
         List<AbstractRelationship<? extends Feature>> allRelationships = new LinkedList<>(relationships);
-        parent.getRelationshipsAsParent().forEach(r -> {
-            if (r.isChild(this)) {
-                allRelationships.add(r);
-            }
-        });
+        allRelationships.addAll(getRelationshipsAsChild());
+//        parent.getRelationshipsAsParent().forEach(r -> {
+//            if (r.isChild(this)) {
+//                allRelationships.add(r);
+//            }
+//        });
         return allRelationships;
     }
 
