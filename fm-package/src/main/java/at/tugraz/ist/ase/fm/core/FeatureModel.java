@@ -195,7 +195,7 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
 
     @SuppressWarnings("unchecked")
     private void exploreMandatoryParentFrom(@NonNull F rightSide, List<F> parents, List<F> parentsqueue) {
-        List<R> relationships = (List<R>) rightSide.getRelationshipsAsChild();
+        List<R> relationships = (List<R>) rightSide.getAllRelationships();
         List<C> cstrs = getRequiresConstraintsAndFeatureInRight(rightSide);
 
         for (R r : relationships) {
@@ -262,7 +262,13 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         constraints.parallelStream().filter(CTConstraint::isRequires).forEachOrdered(cstr -> {
             List<F> right = cstr.getFormula().getRight().getFeatures();
             if (right.size() == 1 && right.contains(feature)) {
-                cstrs.add(cstr);
+
+                List<F> left = cstr.getFormula().getLeft().getFeatures();
+                List<Feature> subFeaturesOfRight = (right.get(0)).getChildren();
+
+                if (left.size() == 1 && !subFeaturesOfRight.contains(left.get(0))) {
+                    cstrs.add(cstr);
+                }
             }
         });
         return cstrs;
