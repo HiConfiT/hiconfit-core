@@ -4,11 +4,8 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-.idea/workspace.xml
+.idea/
+!.idea/copyright/*.xml
 *.iws
 *.iml
 *.ipr
@@ -41,7 +38,8 @@ build/
 ### Fleet ###
 .fleet/
 
+### Logs ###
 logs.log
+logs-*.zip
 
-*.zip
 *.tmp
