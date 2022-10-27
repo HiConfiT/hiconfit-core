@@ -6,7 +6,8 @@
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.common;import at.tugraz.ist.ase.common.IOUtils;
+package at.tugraz.ist.ase.common;
+
 import org.junit.jupiter.api.Test;
 
 import java.io.BufferedReader;
