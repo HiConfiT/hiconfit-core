@@ -56,7 +56,7 @@ In this repository, I published eight Maven packages, and two apps as the follow
 
 ## How to get the CA-CDR packages
 
-Please add the below script in the *settings.xml* file to download the Maven dependencies from GitHub package repository.
+To download the Maven dependencies from GitHub package repository, please add the below script in the *settings.xml* file.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -74,6 +74,22 @@ Please add the below script in the *settings.xml* file to download the Maven dep
 ```
 Replacing USERNAME with your GitHub username, and TOKEN with your personal access token 
 (see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)).
+
+Add also the below script in the *pom.xml* file:
+
+```xml
+<profiles>
+    <profile>
+        <id>github-maven-repository</id>
+        <repositories>
+            <repository>
+                <id>github-maven-repository</id>
+                <url>https://maven.pkg.github.com/manleviet/*</url>
+            </repository>
+        </repositories>
+    </profile>
+</profiles>
+```
 
 ## References
 1. U. Junker. 2004. QuickXPlain: preferred explanations and relaxations for over-constrained problems. In Proceedings of the 19th national conference on Artificial intelligence (AAAI'04). AAAI Press, 167–172. https://dl.acm.org/doi/abs/10.5555/1597148.1597177
