@@ -14,20 +14,21 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 - [References](#references)
 
 ## List of algorithms:
+
 1. [QuickXPlain](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java) [1]
 2. [FastDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java) [2]
-3. [MSS-based FastDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java)
-4. [DirectDiag](https://github.com/manleviet/CA-CDR-V2/blob/third_release/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDiag.java)
-5. [FlexDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java) [3]
-6. [HS-tree](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java) [8]
-7. [HSDAG](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java) [9]
-8. [DirectDebug](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java) [4, 5, 6, 7]
+3. [MSS-based FastDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java) [15]
+4. [FlexDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java) [3]
+5. [HS-tree](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java) [8]
+6. [HSDAG](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java) [9]
+7. [DirectDebug](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java) [4, 5, 6, 7]
+8. (coming soon) DirectDiag - [third_release](https://github.com/manleviet/CA-CDR-V2/blob/third_release/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDiag.java)
 9. (coming soon) WipeOutR_T [12, 13]
-10. (coming soon) WipeOutR_FM [12, 13]
+10. (coming soon) WipeOutR_FM [12, 13] - [third_release](https://github.com/manleviet/CA-CDR-V2/blob/third_release/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/WipeOutR_FM.java)
 11. (coming soon) AggregatedTest [14]
 12. (coming soon) LevelWiseParallelHSDAG [10, 11]
 13. (coming soon) FullParallelHSDAG [10, 11]
-14. (coming soon) FastDiagP [the related paper submitted on August 2022] - [Python implementation](https://github.com/manleviet/PyFastDiagP-ver2)
+14. (coming soon) FastDiagP [15] - [Python implementation](https://github.com/manleviet/PyFastDiagP-ver2)
 15. (coming soon) KBDiag [the related paper submitted on August 2022]
 16. (coming soon) InformedQX
 17. (coming soon) ParallelWipeOutR_T
@@ -41,7 +42,7 @@ Besides, there are some test models in [here](https://github.com/manleviet/CDRMo
 
 ## What the CA-CDR library provides
 
-In this repository, I published eight Maven packages and two apps as the followings:
+In this repository, I published seven Maven packages and two apps as the followings:
 
 | *Maven packages*                                       | *description*                            |
 |----------------------------------------------|------------------------------------------|
@@ -50,7 +51,6 @@ In this repository, I published eight Maven packages and two apps as the followi
 | [at.tugraz.ist.ase.choco-kb-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408660)    | provides classes managing CSP (Choco) representations of a knowlege base/feature model |
 | [at.tugraz.ist.ase.fm-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408657)         | provides the management functionalities for basic feature models |
 | [at.tugraz.ist.ase.eval-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408656)      | provides a performance evaluator, i.e., counters and timers, which could be used to measure the performance of algorithms |
-| [at.tugraz.ist.ase.test-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408658)         | provides core functionalities related to knolwedge base testing and debugging tasks |
 | [at.tugraz.ist.ase.csp2choco-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408654) | provides a translator which enables converting CSP constraints into Choco Solver commands |
 | [at.tugraz.ist.ase.common-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408257) | a Maven package for utility functions |
 
@@ -61,36 +61,16 @@ In this repository, I published eight Maven packages and two apps as the followi
 
 ## How to get the CA-CDR packages
 
-Please add the script below in the *settings.xml* file to download the Maven dependencies from the GitHub repository.
+To download the Maven dependencies from GitHub package repository, please add the below script in the *settings.xml* file.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <activeProfiles>
-        <activeProfile>github</activeProfile>
-    </activeProfiles>
-
-    <profiles>
-        <profile>
-            <id>github</id>
-            <repositories>
-                <repository>
-                    <id>central</id>
-                    <url>https://repo1.maven.org/maven2</url>
-                </repository>
-                <repository>
-                    <id>github</id>
-                    <url>https://maven.pkg.github.com/manleviet/*</url>
-                </repository>
-            </repositories>
-        </profile>
-    </profiles>
-    
     <servers>
         <server>
-            <id>github</id>
+            <id>github-maven-repository</id>
             <username>USERNAME</username>
             <password>TOKEN</password>
         </server>
@@ -98,7 +78,23 @@ Please add the script below in the *settings.xml* file to download the Maven dep
 </settings>
 ```
 Replacing USERNAME with your GitHub username, and TOKEN with your personal access token 
-(see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)). Note: your token must have the ```read:packages``` scope.
+(see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)).
+
+Add also the below script in the *pom.xml* file:
+
+```xml
+<profiles>
+    <profile>
+        <id>github-maven-repository</id>
+        <repositories>
+            <repository>
+                <id>github-maven-repository</id>
+                <url>https://maven.pkg.github.com/manleviet/*</url>
+            </repository>
+        </repositories>
+    </profile>
+</profiles>
+```
 
 ## References
 1. U. Junker. 2004. QuickXPlain: preferred explanations and relaxations for over-constrained problems. In Proceedings of the 19th national conference on Artificial intelligence (AAAI'04). AAAI Press, 167–172. https://dl.acm.org/doi/abs/10.5555/1597148.1597177
@@ -114,4 +110,5 @@ Replacing USERNAME with your GitHub username, and TOKEN with your personal acces
 11. Jannach, D., Schmitz, T., & Shchekotykhin, K. (2015). Parallelized Hitting Set Computation for Model-Based Diagnosis. Proceedings of the AAAI Conference on Artificial Intelligence, 29(1). https://doi.org/10.1609/aaai.v29i1.9389.
 12. V.M. Le, A. Felfernig, M. Uta, T.N.T. Tran, and C. Vidal, WipeOutR: Automated Redundancy Detection for Feature Models, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume A, 2022.
 13. An evaluation of WipeOutR algorithms in https://github.com/AIG-ist-tugraz/WipeOutR.
-14. V.M. Le, A. Felfernig, and T.N.T. Tran, Test Case Aggregation for Efficient Feature Model Testing, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume B, 2022.
+14. V.M. Le, A. Felfernig, and T.N.T. Tran, Test Case Aggregation for Efficient Feature Model Testing, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume B, 2022. https://doi.org/10.1145/3503229.3547046
+15. V.M. Le, C.V. Silva, A. Felfernig, T.N.T. Tran, J. Galindo, D. Benavides. FastDiagP: An Algorithm for Parallelized Direct Diagnosis. In 37th AAAI Conference on Artificial Intelligence. AAAI’23, Washington, DC, USA. 2023. (to appear)
