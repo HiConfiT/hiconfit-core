@@ -65,7 +65,7 @@ To download the Maven dependencies from GitHub package repository, please add th
           xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
     <servers>
         <server>
-            <id>github</id>
+            <id>github-maven-repository</id>
             <username>USERNAME</username>
             <password>TOKEN</password>
         </server>
