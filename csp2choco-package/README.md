@@ -12,7 +12,7 @@ A translator, using the ANTLR4 runtime for parsing, enables converting CSP const
 
 | *version*                                                                                        | *status* |
 |--------------------------------------------------------------------------------------------------|---|
-| [1.3.9-alpha-47](https://github.com/manleviet/CA-CDR-V2/packages/1408654?version=1.3.9-alpha-15) | latest |
+| [1.3.9-alpha-47](https://github.com/manleviet/CA-CDR-V2/packages/1408654) | latest |
 | [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1408654?version=1.3.8)                   | stable |
 
 Please add the below script in the *settings.xml* file.
