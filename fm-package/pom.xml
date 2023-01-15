@@ -20,6 +20,7 @@
     <artifactId>fm-v2</artifactId>
 
     <dependencies>
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>common-v2</artifactId>

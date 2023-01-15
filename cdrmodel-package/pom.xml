@@ -27,6 +27,7 @@
             <scope>compile</scope>
         </dependency>
 
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>csp2choco-v2</artifactId>

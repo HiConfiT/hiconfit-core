@@ -20,6 +20,7 @@
     <artifactId>ca-cdr-v2</artifactId>
 
     <dependencies>
+        <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>cdrmodel-v2</artifactId>
