@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2021-2022
+ * Copyright (c) 2021-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -212,14 +212,17 @@ public final class ConstraintUtils {
         incrementCounter(COUNTER_SPLIT_SET);
     }
 
+    // TODO: generic method - T needs to have equals and hashCode methods
     public boolean isMinimal(Set<Constraint> cstrSet, List<Set<Constraint>> allCstrSets) {
         return allCstrSets.parallelStream().noneMatch(cstrSet::containsAll);
     }
 
+    // TODO: generic method - T needs to have equals and hashCode methods
     public boolean containsAll(List<Set<Constraint>> allCstrSets, Set<Constraint> cstrSet) {
         return allCstrSets.parallelStream().anyMatch(adiag -> adiag.containsAll(cstrSet));
     }
 
+    // TODO: generic method - T needs to have equals and hashCode methods
     public boolean hasIntersection(Collection<Constraint> col1, Collection<Constraint> col2) {
         return col1.parallelStream().anyMatch(col2::contains);
         /*
