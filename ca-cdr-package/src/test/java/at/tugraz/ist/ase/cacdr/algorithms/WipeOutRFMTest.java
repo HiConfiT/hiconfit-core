@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -112,7 +112,7 @@ class WipeOutRFMTest {
         fm.addExcludes(ABtesting, nonlicense);
         fm.addRequires(ABtesting, survey);
 
-        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> testCaseModel = new FMCdrModel<>(fm, true, false, true);
+        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> testCaseModel = new FMCdrModel<>(fm, true, false, true, true);
         testCaseModel.initialize();
 
         System.out.println("=========================================");
