@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2021-2022
+ * Copyright (c) 2021-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -30,10 +30,12 @@ import java.util.stream.IntStream;
 @Slf4j
 public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> extends KB implements IBoolVarKB {
 
-    private FeatureModel<F, R, C> featureModel;
+    protected FeatureModel<F, R, C> featureModel;
 
     @Getter
-    private Constraint rootConstraint = null;
+    protected Constraint rootConstraint = null;
+
+    protected LogOp notKB_LogOp = null;
 
     public FMKB(@NonNull FeatureModel<F, R, C> featureModel, boolean hasNegativeConstraints) {
         super(featureModel.getName(), "SPLOT", hasNegativeConstraints);
@@ -53,14 +55,30 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         domainList = new LinkedList<>();
         constraintList = new LinkedList<>();
 
+        notKB_LogOp = LogOp.or();
+
         defineVariables();
         defineConstraints(hasNegativeConstraints);
 
         // create the root constraint, remove created Choco constraints after this step
         defineRootConstraint();
 
+        // TODO - implement notKB
+        defineNotKB();
+
         LoggerUtils.outdent();
         log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab(), name);
+    }
+
+    private void defineNotKB() {
+        int startIdx = modelKB.getNbCstrs();
+        modelKB.addClauses(notKB_LogOp);
+
+        notKB = new Constraint("not(KB)");
+
+        ConstraintUtils.addChocoConstraintsToConstraint(false, notKB, modelKB, startIdx, modelKB.getNbCstrs() - 1);
+
+        ChocoSolverUtils.unpostConstraintsFrom(startIdx, modelKB);
     }
 
     public void defineVariables (){
@@ -108,6 +126,8 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
                 // negative logOp
                 if (hasNegativeConstraints) {
                     negLogOp = LogOp.nand(LogOp.implies(leftVar, rightVar), LogOp.implies(rightVar, leftVar));
+
+                    notKB_LogOp.addChild(negLogOp);
                 }
             } else if (relationship instanceof OptionalRelationship) {
                 rightVar = getVarWithName(relationship.getChild().getName());
@@ -116,6 +136,8 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
                 // negative logOp
                 if (hasNegativeConstraints) {
                     negLogOp = LogOp.and(rightVar, leftVar.not());
+
+                    notKB_LogOp.addChild(negLogOp);
                 }
             } else if (relationship instanceof OrRelationship) {// LogOp of rule {A \/ B \/ ... \/ C}
                 LogOp rightLogOp = getRightSideOfOrRelationship(relationship.getChildren());
@@ -124,12 +146,16 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
                 // negative logOp
                 if (hasNegativeConstraints) {
                     negLogOp = LogOp.nand(LogOp.implies(leftVar, rightLogOp), LogOp.implies(rightLogOp, leftVar));
+
+                    notKB_LogOp.addChild(negLogOp);
                 }
             } else if (relationship instanceof AlternativeRelationship) {// LogOp of an ALTERNATIVE relationship
                 logOp = getLogOpOfAlternativeRelationship(relationship, false);
                 // negative logOp
                 if (hasNegativeConstraints) {
                     negLogOp = getLogOpOfAlternativeRelationship(relationship, true);
+
+                    notKB_LogOp.addChild(negLogOp);
                 }
             } else {
                 throw new IllegalStateException("Unexpected class: " + relationship.getClass());
@@ -154,6 +180,8 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
                     // negative logOp
                     if (hasNegativeConstraints) {
                         negLogOp = LogOp.and(leftVar, rightVar.not());
+
+                        notKB_LogOp.addChild(negLogOp);
                     }
                 } else {
                     // leftVar => !rightVar
@@ -161,6 +189,8 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
                     // negative logOp
                     if (hasNegativeConstraints) {
                         negLogOp = LogOp.nor(leftVar.not(), rightVar.not());
+
+                        notKB_LogOp.addChild(negLogOp);
                     }
                 }
             } else {
@@ -169,6 +199,8 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
                 logOp = convertToLopOp(cstr.getCnf(), false);
                 if (hasNegativeConstraints) {
                     negLogOp = convertToLopOp(cstr.getCnf(), true);
+
+                    notKB_LogOp.addChild(negLogOp);
                 }
             }
 
@@ -226,6 +258,8 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         String f0 = this.getVariable(0).getName();
         BoolVar f0Var = (BoolVar) ChocoSolverUtils.getVariable(modelKB, f0);
         modelKB.addClauseTrue(f0Var);
+
+        notKB_LogOp.addChild(f0Var.not());
 
         this.rootConstraint = new Constraint(f0 + " = true");
         ConstraintUtils.addChocoConstraintsToConstraint(false, this.rootConstraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);

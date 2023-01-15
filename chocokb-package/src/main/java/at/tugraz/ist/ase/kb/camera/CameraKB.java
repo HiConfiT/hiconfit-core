@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -42,6 +42,8 @@ public class CameraKB extends KB implements IIntVarKB {
         defineDomains();
         defineVariables();
         defineConstraints(hasNegativeConstraints);
+
+        // TODO - implement notKB
 
         LoggerUtils.outdent();
         log.debug("{}<<< Created CameraKB", LoggerUtils.tab());
