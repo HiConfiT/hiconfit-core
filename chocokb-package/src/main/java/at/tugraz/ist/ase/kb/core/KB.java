@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2021-2022
+ * Copyright (c) 2021-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -40,6 +40,8 @@ public abstract class KB {
     protected List<Domain> domainList;
     // Constraints
     protected List<Constraint> constraintList;
+    // not(KB)
+    protected Constraint notKB;
 
     @Setter
     private boolean consistency = false;

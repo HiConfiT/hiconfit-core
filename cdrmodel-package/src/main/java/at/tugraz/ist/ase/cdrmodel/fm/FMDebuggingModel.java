@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2021-2022
+ * Copyright (c) 2021-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -57,7 +57,7 @@ public class FMDebuggingModel<F extends Feature, R extends AbstractRelationship<
      */
     public FMDebuggingModel(@NonNull FeatureModel<F, R, C> fm, @NonNull TestSuite testSuite, @NonNull ITestCaseTranslatable translator,
                             boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
-        super(fm, hasNegativeConstraints, rootConstraints, reversedConstraintsOrder);
+        super(fm, hasNegativeConstraints, rootConstraints, true, reversedConstraintsOrder);
 
         this.testSuite = testSuite;
         this.translator = translator;

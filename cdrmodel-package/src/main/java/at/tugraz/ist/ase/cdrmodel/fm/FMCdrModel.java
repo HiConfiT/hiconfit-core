@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2021-2022
+ * Copyright (c) 2021-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -29,14 +29,22 @@ import java.util.List;
 /**
  * An extension class of {@link AbstractCDRModel} for diagnosis tasks as well as
  * analysis operations of feature models, in which:
- * 1. Diagnosis tasks:
- *    + C = CF
- *    + B = { f0 = true } - rootConstraints = true
+ * 1. Diagnosis tasks (rootConstraints = true):
+ *    If cfInConflicts, then:
+ *        + C = CF
+ *        + B = { f0 = true } - rootConstraints = true
+ *    else:
+ *        + C = {}
+ *        + B = { f0 = true } + CF - rootConstraints = true
  *    + reversedConstraintsOrder = false
  *    + hasNegativeConstraints = false
- * 2. Feature model redundancy detection - WipeOutR_FM:
- *    + C = CF
- *    + B = {} - rootConstraints = false
+ * 2. Feature model redundancy detection - WipeOutR_FM (rootConstraints = false):
+ *    If cfInConflicts, then:
+ *        + C = CF
+ *        + B = {} - rootConstraints = false
+ *    else:
+ *        + C = {}
+ *        + B = CF - rootConstraints = false
  *    + reversedConstraintsOrder = true
  *    + hasNegativeConstraints = true
  */
@@ -55,6 +63,9 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
     protected final boolean rootConstraints;
 
     @Getter
+    protected final boolean cfInConflicts;
+
+    @Getter
     protected final boolean reversedConstraintsOrder;
 
     /**
@@ -67,7 +78,11 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
      * @param rootConstraints true if the root constraint (f0 = true) should be added
      * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
-    public FMCdrModel(@NonNull FeatureModel<F, R, C> fm, boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
+    public FMCdrModel(@NonNull FeatureModel<F, R, C> fm,
+                      boolean hasNegativeConstraints,
+                      boolean rootConstraints,
+                      boolean cfInConflicts,
+                      boolean reversedConstraintsOrder) {
         super(fm.getName());
 
         this.featureModel = fm;
@@ -77,21 +92,24 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
         this.model = fmkb.getModelKB();
 
         this.rootConstraints = rootConstraints;
+        this.cfInConflicts = cfInConflicts;
         this.reversedConstraintsOrder = reversedConstraintsOrder;
     }
 
     protected void initializeConstraintSets() {
         // sets possibly faulty constraints to super class
-        log.trace("{}Adding possibly faulty constraints", LoggerUtils.tab());
-        List<Constraint> C = new LinkedList<>(fmkb.getConstraintList());
-        if (isReversedConstraintsOrder()) {
-            Collections.reverse(C); // in default, this shouldn't happen
+        if (cfInConflicts) {
+            log.trace("{}Adding possibly faulty constraints", LoggerUtils.tab());
+            List<Constraint> C = new LinkedList<>(fmkb.getConstraintList());
+            if (isReversedConstraintsOrder()) {
+                Collections.reverse(C); // in default, this shouldn't happen
+            }
+            this.setPossiblyFaultyConstraints(C);
         }
-        this.setPossiblyFaultyConstraints(C);
 
         // sets correct constraints to super class
+        Constraint rootConstraint = null;
         if (isRootConstraints()) {
-            log.trace("{}Adding correct constraints", LoggerUtils.tab());
             // {f0 = true}
 //            int startIdx = model.getNbCstrs();
 //            String f0 = fmkb.getVariable(0).getName();
@@ -101,12 +119,18 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
 //            Constraint constraint = new Constraint(f0 + " = true");
 //            constraint.addChocoConstraints(model, startIdx, model.getNbCstrs() - 1, false);
 
-            Constraint constraint = fmkb.getRootConstraint();
-
-            if (constraint != null) {
-                this.setCorrectConstraints(Collections.singletonList(constraint));
-            }
+            rootConstraint = fmkb.getRootConstraint();
         }
+
+        log.trace("{}Adding correct constraints", LoggerUtils.tab());
+        List<Constraint> C = new LinkedList<>();
+        if (rootConstraint != null) {
+            C.add(rootConstraint);
+        }
+        if (!cfInConflicts) {
+            C.addAll(fmkb.getConstraintList());
+        }
+        this.setCorrectConstraints(C);
     }
 
     /**

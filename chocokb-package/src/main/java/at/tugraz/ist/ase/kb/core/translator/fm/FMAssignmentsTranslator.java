@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -39,14 +39,23 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
         Model model = kb.getModelKB();
 
         LogOp logOp = create(assignments, kb);
-        model.addClauses(logOp); // add the translated constraints to the Choco kb
-
-        chocoCstrs.addAll(ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1));
+        post(logOp, model, chocoCstrs, startIdx);
 
         // Negation of the translated constraints
         if (negChocoCstrs != null) {
             translateToNegation(logOp, model, negChocoCstrs);
         }
+    }
+
+    private static void post(LogOp logOp, Model model, List<Constraint> chocoCstrs, int startIdx) {
+        model.addClauses(logOp); // add the translated constraints to the Choco kb
+
+        List<Constraint> postedCstrs = ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1);
+
+        chocoCstrs.addAll(postedCstrs);
+
+        // remove the posted constraints from the Choco model
+        postedCstrs.forEach(model::unpost);
     }
 
     /**
@@ -63,9 +72,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
         Model model = kb.getModelKB();
 
         LogOp logOp = create(assignment, kb);
-        model.addClauses(logOp); // add the translated constraints to the Choco model
-
-        chocoCstrs.addAll(ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1));
+        post(logOp, model, chocoCstrs, startIdx);
 
         // Negation of the translated constraints
         if (negChocoCstrs != null) {
@@ -74,11 +81,9 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
     }
 
     private void translateToNegation(LogOp logOp, Model model, List<Constraint> negChocoCstrs) {
-        LogOp negLogOp = createNegation(logOp);
         int startIdx = model.getNbCstrs();
-        model.addClauses(negLogOp);
-
-        negChocoCstrs.addAll(ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1));
+        LogOp negLogOp = createNegation(logOp);
+        post(negLogOp, model, negChocoCstrs, startIdx);
     }
 
     @Override
