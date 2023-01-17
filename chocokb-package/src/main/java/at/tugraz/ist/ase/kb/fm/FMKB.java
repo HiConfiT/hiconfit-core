@@ -45,6 +45,7 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         reset(hasNegativeConstraints);
     }
 
+    // TODO - negativeConstraints should be default
     @Override
     public void reset(boolean hasNegativeConstraints) {
         log.trace("{}Creating FMKB for feature model [fm={}] >>>", LoggerUtils.tab(), name);
