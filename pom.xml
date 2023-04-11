@@ -15,13 +15,16 @@
     <groupId>at.tugraz.ist.ase</groupId>
     <artifactId>ca-cdr-v2-root</artifactId>
     <packaging>pom</packaging>
-    <version>1.3.9-alpha-50</version>
+    <version>1.3.9-alpha-52</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <cacdr.version>1.3.9-alpha-52</cacdr.version>
+        <fm.gen.version>1.3</fm.gen.version>
+        <kbstatistic.version>1.3.1</kbstatistic.version>
     </properties>
 
     <modules>

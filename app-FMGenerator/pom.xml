@@ -13,13 +13,13 @@
     <parent>
         <artifactId>ca-cdr-v2-root</artifactId>
         <groupId>at.tugraz.ist.ase</groupId>
-        <version>1.3.9-alpha-50</version>
+        <version>1.3.9-alpha-52</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>at.tugraz.ist.ase.fm</groupId>
     <artifactId>fm-gen</artifactId>
-    <version>1.3</version>
+    <version>${fm.gen.version}</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -27,7 +27,7 @@
         <dependency>
             <groupId>at.tugraz.ist.ase</groupId>
             <artifactId>choco-kb-v2</artifactId>
-            <version>1.3.9-alpha-50</version>
+            <version>${cacdr.version}</version>
         </dependency>
 
         <!-- Betty framework -->

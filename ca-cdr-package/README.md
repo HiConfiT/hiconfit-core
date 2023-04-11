@@ -89,7 +89,7 @@ Add also the below script in the *pom.xml* file:
 9. R. Greiner, B. A. Smith, and R. W. Wilkerson, A correction to the algorithm in reiter’s theory of diagnosis, Artif Intell, vol. 41, no. 1, pp. 79–88, 1989, https://doi.org/10.1016/0004-3702(89)90079-9.
 10. Jannach, Dietmar, Thomas Schmitz, and Kostyantyn Shchekotykhin. "Parallel model-based diagnosis on multi-core computers." Journal of Artificial Intelligence Research 55 (2016): 835-887. https://doi.org/10.1613/jair.5001.
 11. Jannach, D., Schmitz, T., & Shchekotykhin, K. (2015). Parallelized Hitting Set Computation for Model-Based Diagnosis. Proceedings of the AAAI Conference on Artificial Intelligence, 29(1). https://doi.org/10.1609/aaai.v29i1.9389.
-12. V.M. Le, A. Felfernig, M. Uta, T.N.T. Tran, and C. Vidal, WipeOutR: Automated Redundancy Detection for Feature Models, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume A, 2022.
+12. V.M. Le, A. Felfernig, M. Uta, T.N.T. Tran, and C. Vidal, WipeOutR: Automated Redundancy Detection for Feature Models, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume A, 2022. 
 13. An evaluation of WipeOutR algorithms in https://github.com/AIG-ist-tugraz/WipeOutR.
 14. V.M. Le, A. Felfernig, and T.N.T. Tran, Test Case Aggregation for Efficient Feature Model Testing, 26th ACM International Systems and Software Product Line Conference (SPLC 2022) - Volume B, 2022. https://doi.org/10.1145/3503229.3547046
 15. V.M. Le, C.V. Silva, A. Felfernig, T.N.T. Tran, J. Galindo, D. Benavides. FastDiagP: An Algorithm for Parallelized Direct Diagnosis. In 37th AAAI Conference on Artificial Intelligence. AAAI’23, Washington, DC, USA. 2023. (to appear)
