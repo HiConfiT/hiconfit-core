@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -14,7 +14,11 @@ import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.*;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Semaphore;
 
 /**
  * A data structure representing a node of an HS-dag.
@@ -72,18 +76,20 @@ public class Node {
     /**
      * The node's children
      */
-    private final Map<Constraint, Node> children = new LinkedHashMap<>();
+    private final ConcurrentHashMap<Constraint, Node> children = new ConcurrentHashMap<>();
 
     /**
      * The node's parent. Can be null for the root node.
      */
-    private List<Node> parents = null;
+    private ConcurrentLinkedQueue<Node> parents = null;
 
     /**
      * The labelers' parameters
      */
     @Setter
     private AbstractHSParameters parameters;
+
+    private final Semaphore semaphore = new Semaphore(1);
 
     /**
      * Constructor for the root node.
@@ -107,7 +113,7 @@ public class Node {
     public Node(@NonNull Node parent,
                 @NonNull Constraint arcLabel,
                 @NonNull AbstractHSParameters parameters) {
-        this.parents = new LinkedList<>();
+        this.parents = new ConcurrentLinkedQueue<>();
         this.parents.add(parent);
         this.level = parent.level + 1;
         this.arcLabel = arcLabel;
@@ -120,6 +126,16 @@ public class Node {
 
         log.trace("{}Created child node with [parent={}, arcLabel={}]", LoggerUtils.tab(), parent, arcLabel);
     }
+
+//    protected void acquire() throws InterruptedException {
+//        semaphore.acquire();
+//        log.trace("{}(Node) acquired for [node={}]", LoggerUtils.tab(), this);
+//    }
+//
+//    public void release() {
+//        semaphore.release();
+//        log.trace("{}(Node) released for [node={}]", LoggerUtils.tab(), this);
+//    }
 
     /**
      * Adds a parent to this node.
