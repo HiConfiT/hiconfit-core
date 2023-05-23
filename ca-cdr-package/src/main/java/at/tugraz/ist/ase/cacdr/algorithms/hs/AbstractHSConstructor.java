@@ -115,6 +115,7 @@ public abstract class AbstractHSConstructor {
 
     protected abstract void addNodeLabels(Collection<Set<Constraint>> labels);
     protected abstract void addPathLabel(Set<Constraint> pathLabel);
+    protected abstract ConcurrentLinkedQueue<Node> getOpenNodes();
 
     public void acquireNodeLabels() throws InterruptedException {
         nodeLabels_Semaphore.acquire();

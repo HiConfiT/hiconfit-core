@@ -34,10 +34,10 @@ public class HSTreePruningEngine {
     protected final ConcurrentHashMap<Set<Constraint>, ConcurrentLinkedQueue<Node>> label_nodesMap = new ConcurrentHashMap<>();
     private final Semaphore label_nodesMap_Semaphore = new Semaphore(1);
 
-    private HSTree hsTree;
+    protected AbstractHSConstructor hsConstructor;
 
-    public HSTreePruningEngine(@NonNull HSTree hsTree) {
-        this.hsTree = hsTree;
+    public HSTreePruningEngine(@NonNull AbstractHSConstructor hsConstructor) {
+        this.hsConstructor = hsConstructor;
     }
 
     protected void acquireLabelNodesMap() throws InterruptedException {
@@ -54,7 +54,7 @@ public class HSTreePruningEngine {
         if (!labels.isEmpty()) {
             stop(TIMER_NODE_LABEL);
 
-            hsTree.addNodeLabels(labels);
+            hsConstructor.addNodeLabels(labels);
         } else {
             // stop TIMER_NODE_LABEL without saving the time
             stop(TIMER_NODE_LABEL, false);
@@ -69,7 +69,7 @@ public class HSTreePruningEngine {
 
     public List<Set<Constraint>> getReusableLabels(@NonNull Node node) {
         List<Set<Constraint>> labels = new LinkedList<>();
-        for (Set<Constraint> label : hsTree.getNodeLabels()) {
+        for (Set<Constraint> label : hsConstructor.getNodeLabels()) {
             // H(node) ∩ S = {}
             if (!hasIntersection(node.getPathLabel(), label)) {
                 labels.add(label);
@@ -81,14 +81,14 @@ public class HSTreePruningEngine {
     }
 
     public boolean skipNode(@NonNull Node node) {
-        boolean condition1 = hsTree.getMaxDepth() != 0 && hsTree.getMaxDepth() < node.getLevel();
+        boolean condition1 = hsConstructor.getMaxDepth() != 0 && hsConstructor.getMaxDepth() < node.getLevel();
         return node.getStatus() != NodeStatus.Open || condition1 || canPrune(node);
     }
 
     public boolean canPrune(@NonNull Node node) {
         // 3.i - if n is checked, and n' is such that H(n) ⊆ H(n'), then close the node n'
         // n is a diagnosis
-        for (Set<Constraint> pathLabel : hsTree.getPathLabels()) {
+        for (Set<Constraint> pathLabel : hsConstructor.getPathLabels()) {
             if (node.getPathLabel().containsAll(pathLabel)) {
                 node.setStatus(NodeStatus.Closed);
                 incrementCounter(COUNTER_CLOSE_1);
@@ -100,7 +100,7 @@ public class HSTreePruningEngine {
         }
 
         // 3.ii - if n has been generated and node n' is such that H(n') = H(n), then close node n'
-        for (Node n : hsTree.openNodes) {
+        for (Node n : hsConstructor.getOpenNodes()) {
             if (n.getPathLabel().size() == node.getPathLabel().size()
                     && Sets.difference(n.getPathLabel(), node.getPathLabel()).isEmpty()) {
                 node.setStatus(NodeStatus.Closed);
@@ -121,7 +121,7 @@ public class HSTreePruningEngine {
 
     public void dispose() {
         label_nodesMap.clear();
-        hsTree = null;
+        hsConstructor = null;
     }
 }
 

@@ -42,7 +42,7 @@ public class HSTree extends AbstractHSConstructor {
     protected final ConcurrentLinkedQueue<Node> openNodes = new ConcurrentLinkedQueue<>();
 
     @Setter
-    private HSTreePruningEngine pruningEngine = null;
+    protected HSTreePruningEngine pruningEngine = null;
 
     public HSTree(@NonNull IHSLabelable labeler) {
         super(labeler);
@@ -64,7 +64,7 @@ public class HSTree extends AbstractHSConstructor {
         // generate root if there is none
         boolean hasRootLabel = createRoot(param);
 
-        if (hasRootLabel) {
+        if (!shouldStopConstruction() && hasRootLabel) {
             createNodes();
         }
 
@@ -222,6 +222,11 @@ public class HSTree extends AbstractHSConstructor {
 
     protected void addPathLabel(Set<Constraint> pathLabel) {
         getPathLabels().add(pathLabel);
+    }
+
+    @Override
+    protected ConcurrentLinkedQueue<Node> getOpenNodes() {
+        return openNodes;
     }
 
     /**

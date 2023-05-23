@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -47,6 +47,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -87,6 +88,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
         hsdag.setMaxNumberOfDiagnoses(1);
 
         CAEvaluator.reset();
@@ -127,6 +129,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
         hsdag.setMaxNumberOfDiagnoses(2);
 
         CAEvaluator.reset();
@@ -167,6 +170,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
         hsdag.setMaxNumberOfConflicts(1);
 
         CAEvaluator.reset();
@@ -208,6 +212,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
         hsdag.setMaxNumberOfConflicts(2);
 
         CAEvaluator.reset();
@@ -249,6 +254,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -289,6 +295,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -329,6 +336,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -369,6 +377,7 @@ class HSDAGTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSDAG hsdag = new HSDAG(quickXplain);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -409,6 +418,7 @@ class HSDAGTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -448,6 +458,7 @@ class HSDAGTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -487,6 +498,7 @@ class HSDAGTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -526,6 +538,7 @@ class HSDAGTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -565,6 +578,7 @@ class HSDAGTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -604,6 +618,7 @@ class HSDAGTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -643,6 +658,7 @@ class HSDAGTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -682,6 +698,7 @@ class HSDAGTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -721,6 +738,7 @@ class HSDAGTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -760,6 +778,7 @@ class HSDAGTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSDAG hsdag = new HSDAG(fastDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -801,6 +820,7 @@ class HSDAGTest {
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(flexDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -842,6 +862,7 @@ class HSDAGTest {
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(flexDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -883,6 +904,7 @@ class HSDAGTest {
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(flexDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -924,6 +946,7 @@ class HSDAGTest {
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(flexDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -965,6 +988,7 @@ class HSDAGTest {
         FlexDiagLabeler flexDiag = new FlexDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(flexDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -1004,6 +1028,7 @@ class HSDAGTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -1043,6 +1068,7 @@ class HSDAGTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -1082,6 +1108,7 @@ class HSDAGTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -1121,6 +1148,7 @@ class HSDAGTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -1160,6 +1188,7 @@ class HSDAGTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDiag);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();

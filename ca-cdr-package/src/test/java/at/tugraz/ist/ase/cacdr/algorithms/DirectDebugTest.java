@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.cacdr.algorithms;
 
 import at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAG;
+import at.tugraz.ist.ase.cacdr.algorithms.hs.HSDAGPruningEngine;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.DirectDebugLabeler;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.DirectDebugParameters;
 import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
@@ -117,6 +118,7 @@ class DirectDebugTest {
         DirectDebugLabeler directDebug = new DirectDebugLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDebug);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -224,6 +226,7 @@ class DirectDebugTest {
         DirectDebugLabeler directDebug = new DirectDebugLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDebug);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
@@ -337,6 +340,7 @@ class DirectDebugTest {
         DirectDebugLabeler directDebug = new DirectDebugLabeler(checker, params);
 
         HSDAG hsdag = new HSDAG(directDebug);
+        hsdag.setPruningEngine(new HSDAGPruningEngine(hsdag));
 
         CAEvaluator.reset();
         hsdag.construct();
