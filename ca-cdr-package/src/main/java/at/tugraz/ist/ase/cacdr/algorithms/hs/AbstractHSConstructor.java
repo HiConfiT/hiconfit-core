@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -10,14 +10,17 @@ package at.tugraz.ist.ase.cacdr.algorithms.hs;
 
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.IHSLabelable;
 import at.tugraz.ist.ase.cacdr.algorithms.hs.labeler.LabelerType;
+import at.tugraz.ist.ase.common.LoggerUtils;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.Semaphore;
 
 /**
  * An abstract class for HS algorithms
@@ -26,6 +29,7 @@ import java.util.Set;
  * @author Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 @Getter
+@Slf4j
 public abstract class AbstractHSConstructor {
     // for evaluation
     public static final String TIMER_HS_CONSTRUCTION_SESSION = "Timer for HS construction session";
@@ -46,14 +50,19 @@ public abstract class AbstractHSConstructor {
     private int maxNumberOfConflicts = -1; // -1 - all conflicts
 
     @Setter
-    private int maxDepth = 0;
+    private int maxDepth = 0; // 0 - no check
+
+    @Setter
+    private String pruningEngineName; // for logging
 
     /**
      * Use setter to preset known conflicts
      */
     @Setter
-    private List<Set<Constraint>> nodeLabels = new LinkedList<>(); // conflict/diagnosis
-    private final List<Set<Constraint>> pathLabels = new LinkedList<>(); // diagnosis/conflict
+    private ConcurrentLinkedQueue<Set<Constraint>> nodeLabels = new ConcurrentLinkedQueue<>();
+    private final ConcurrentLinkedQueue<Set<Constraint>> pathLabels = new ConcurrentLinkedQueue<>(); // diagnosis/conflict
+
+    private final Semaphore nodeLabels_Semaphore = new Semaphore(1);
 
     private IHSLabelable labeler;
 
@@ -67,9 +76,9 @@ public abstract class AbstractHSConstructor {
      */
     public List<Set<Constraint>> getConflicts() {
         if (labeler.getType() == LabelerType.CONFLICT) {
-            return nodeLabels;
+            return nodeLabels.parallelStream().toList();
         } else {
-            return pathLabels;
+            return pathLabels.parallelStream().toList();
         }
     }
 
@@ -79,9 +88,9 @@ public abstract class AbstractHSConstructor {
      */
     public List<Set<Constraint>> getDiagnoses() {
         if (labeler.getType() == LabelerType.CONFLICT) {
-            return pathLabels;
+            return pathLabels.parallelStream().toList();
         } else {
-            return nodeLabels;
+            return nodeLabels.parallelStream().toList();
         }
     }
 
@@ -96,7 +105,7 @@ public abstract class AbstractHSConstructor {
      * @return <code>true</code> if the required number of diagnoses is found,
      * or the required number of conflicts is found.
      */
-    public boolean stopConstruction() {
+    public boolean shouldStopConstruction() {
         // when the number of already identified diagnoses is greater than the limit, stop the computation
         boolean condition1 = (getMaxNumberOfDiagnoses() != -1 && getMaxNumberOfDiagnoses() <= getDiagnoses().size());
         // OR when the number of already identified conflicts is greater than the limit, stop the computation
@@ -105,7 +114,17 @@ public abstract class AbstractHSConstructor {
     }
 
     protected abstract void addNodeLabels(Collection<Set<Constraint>> labels);
-    protected abstract void addItemToLabelNodesMap(Set<Constraint> label, Node node);
+    protected abstract void addPathLabel(Set<Constraint> pathLabel);
+
+    public void acquireNodeLabels() throws InterruptedException {
+        nodeLabels_Semaphore.acquire();
+        log.debug("{}(AbstractHSConstructor) acquired for nodeLabels", LoggerUtils.tab());
+    }
+
+    public void releaseNodeLabels() {
+        nodeLabels_Semaphore.release();
+        log.debug("{}(AbstractHSConstructor) released for nodeLabels", LoggerUtils.tab());
+    }
 
     /**
      * Reverts the state of the engine to how it was when first instantiated
