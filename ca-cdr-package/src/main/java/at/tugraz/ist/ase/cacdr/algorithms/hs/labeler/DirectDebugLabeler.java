@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -111,6 +111,10 @@ public class DirectDebugLabeler extends DirectDebug implements IHSLabelable {
                 .B(B)
                 .TV(params.getTV())
                 .TC(TC).build();
+    }
+
+    public IHSLabelable getInstance(@NonNull ChocoConsistencyChecker checker) {
+        return new DirectDebugLabeler(checker, this.initialParameters);
     }
 
     @Override

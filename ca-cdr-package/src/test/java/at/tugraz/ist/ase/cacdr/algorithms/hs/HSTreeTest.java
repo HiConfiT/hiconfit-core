@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -53,6 +53,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -93,6 +94,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
         hsTree.setMaxNumberOfDiagnoses(1);
 
         CAEvaluator.reset();
@@ -133,6 +135,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
         hsTree.setMaxNumberOfDiagnoses(2);
 
         CAEvaluator.reset();
@@ -173,6 +176,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
         hsTree.setMaxNumberOfConflicts(1);
 
         CAEvaluator.reset();
@@ -214,6 +218,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
         hsTree.setMaxNumberOfConflicts(2);
 
         CAEvaluator.reset();
@@ -255,6 +260,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -295,6 +301,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -335,6 +342,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -375,6 +383,7 @@ class HSTreeTest {
         QuickXPlainLabeler quickXplain = new QuickXPlainLabeler(checker, parameter);
 
         HSTree hsTree = new HSTree(quickXplain);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -415,6 +424,7 @@ class HSTreeTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -454,6 +464,7 @@ class HSTreeTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -493,6 +504,7 @@ class HSTreeTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -532,6 +544,7 @@ class HSTreeTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -571,6 +584,7 @@ class HSTreeTest {
         FastDiagV2Labeler fastDiag = new FastDiagV2Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -610,6 +624,7 @@ class HSTreeTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -649,6 +664,7 @@ class HSTreeTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -688,6 +704,7 @@ class HSTreeTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -727,6 +744,7 @@ class HSTreeTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -766,6 +784,7 @@ class HSTreeTest {
         FastDiagV3Labeler fastDiag = new FastDiagV3Labeler(checker, params);
 
         HSTree hsTree = new HSTree(fastDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -805,6 +824,7 @@ class HSTreeTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSTree hsTree = new HSTree(directDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -844,6 +864,7 @@ class HSTreeTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSTree hsTree = new HSTree(directDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -883,6 +904,7 @@ class HSTreeTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSTree hsTree = new HSTree(directDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -922,6 +944,7 @@ class HSTreeTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSTree hsTree = new HSTree(directDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();
@@ -961,6 +984,7 @@ class HSTreeTest {
         DirectDiagLabeler directDiag = new DirectDiagLabeler(checker, params);
 
         HSTree hsTree = new HSTree(directDiag);
+        hsTree.setPruningEngine(new HSTreePruningEngine(hsTree));
 
         CAEvaluator.reset();
         hsTree.construct();

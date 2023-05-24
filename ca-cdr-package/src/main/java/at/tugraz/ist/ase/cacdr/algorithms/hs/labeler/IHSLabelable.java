@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -9,6 +9,7 @@
 package at.tugraz.ist.ase.cacdr.algorithms.hs.labeler;
 
 import at.tugraz.ist.ase.cacdr.algorithms.hs.parameters.AbstractHSParameters;
+import at.tugraz.ist.ase.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.kb.core.Constraint;
 import lombok.NonNull;
 
@@ -51,4 +52,8 @@ public interface IHSLabelable extends Cloneable {
      * @return new parameters for the new node
      */
     AbstractHSParameters createParameter(@NonNull AbstractHSParameters param_parentNode, @NonNull Constraint arcLabel);
+
+    IHSLabelable getInstance(@NonNull ChocoConsistencyChecker checker);
+
+    void dispose();
 }
