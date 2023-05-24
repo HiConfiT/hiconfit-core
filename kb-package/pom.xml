@@ -11,27 +11,27 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>ca-cdr-v2-root</artifactId>
-        <groupId>at.tugraz.ist.ase</groupId>
-        <version>1.3.9-alpha-54</version>
+        <artifactId>hiconfit-core</artifactId>
+        <groupId>at.tugraz.ist.ase.hiconfit</groupId>
+        <version>0.1.1-alpha-02</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>choco-kb-v2</artifactId>
+    <artifactId>kb</artifactId>
 
     <dependencies>
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
-            <groupId>at.tugraz.ist.ase</groupId>
-            <artifactId>fm-v2</artifactId>
-            <version>${cacdr.version}</version>
+            <groupId>at.tugraz.ist.ase.hiconfit</groupId>
+            <artifactId>fm</artifactId>
+            <version>${artifact.version}</version>
             <scope>compile</scope>
         </dependency>
 
         <dependency>
-            <groupId>at.tugraz.ist.ase</groupId>
-            <artifactId>eval-v2</artifactId>
-            <version>${cacdr.version}</version>
+            <groupId>at.tugraz.ist.ase.hiconfit</groupId>
+            <artifactId>eval</artifactId>
+            <version>${artifact.version}</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
