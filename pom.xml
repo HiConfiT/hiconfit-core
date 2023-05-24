@@ -16,6 +16,7 @@
     <artifactId>hiconfit-core</artifactId>
     <packaging>pom</packaging>
     <version>0.1.1-alpha-02</version>
+<!--    Test-->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
