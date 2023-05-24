@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -88,6 +88,10 @@ public class QuickXPlainLabeler extends QuickXPlain implements IHSLabelable {
         return QuickXPlainParameters.builder()
                 .C(C)
                 .B(B).build();
+    }
+
+    public IHSLabelable getInstance(@NonNull ChocoConsistencyChecker checker) {
+        return new QuickXPlainLabeler(checker, this.initialParameters);
     }
 
     @Override

@@ -193,7 +193,7 @@ public class HSTree extends AbstractHSConstructor {
         return labeler.getLabel(param);
     }
 
-    protected List<Set<Constraint>> computeLabel(IHSLabelable labeler, Node node) {
+    public List<Set<Constraint>> computeLabel(IHSLabelable labeler, Node node) {
         AbstractHSParameters param = node.getParameters();
 
         start(TIMER_NODE_LABEL);
@@ -209,7 +209,7 @@ public class HSTree extends AbstractHSConstructor {
         });
     }
 
-    protected void foundAPathLabelAtNode(Node node) {
+    public void foundAPathLabelAtNode(Node node) {
         node.setStatus(NodeStatus.Checked);
         Set<Constraint> pathLabel = new LinkedHashSet<>(node.getPathLabel());
 
@@ -235,7 +235,7 @@ public class HSTree extends AbstractHSConstructor {
      * @param labels list of labels (conflicts/diagnoses)
      * @return node label
      */
-    protected Set<Constraint> selectLabel(List<Set<Constraint>> labels) {
+    public Set<Constraint> selectLabel(List<Set<Constraint>> labels) {
         return labels.get(0);
     }
 

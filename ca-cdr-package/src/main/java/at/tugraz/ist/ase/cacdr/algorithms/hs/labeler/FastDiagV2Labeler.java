@@ -1,7 +1,7 @@
 /*
  * Consistency-based Algorithms for Conflict Detection and Resolution
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -86,6 +86,10 @@ public class FastDiagV2Labeler extends FastDiagV2 implements IHSLabelable {
         return FastDiagV2Parameters.builder()
                 .C(C)
                 .AC(AC).build();
+    }
+
+    public IHSLabelable getInstance(@NonNull ChocoConsistencyChecker checker) {
+        return new FastDiagV2Labeler(checker, this.initialParameters);
     }
 
     @Override

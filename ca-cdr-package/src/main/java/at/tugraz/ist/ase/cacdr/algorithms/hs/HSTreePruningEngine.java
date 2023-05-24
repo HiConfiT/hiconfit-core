@@ -40,7 +40,7 @@ public class HSTreePruningEngine {
         this.hsConstructor = hsConstructor;
     }
 
-    protected void acquireLabelNodesMap() throws InterruptedException {
+    public void acquireLabelNodesMap() throws InterruptedException {
         label_nodesMap_Semaphore.acquire();
         log.debug("{}(HSTreePruningEngine) acquired for label_nodesMap", LoggerUtils.tab());
     }
