@@ -61,7 +61,7 @@ public class FastDiagV3Labeler extends FastDiagV3 implements IHSLabelable {
         checkArgument(parameters instanceof FastDiagV3Parameters, "parameter must be an instance of FastDiagV3Parameters");
         FastDiagV3Parameters params = (FastDiagV3Parameters) parameters;
 
-        if (params.getC().size() > 1 && (params.getB().isEmpty() || checker.isConsistent(params.getB()))) {
+        if (params.getC().size() >= 1 && (params.getB().isEmpty() || checker.isConsistent(params.getB()))) {
             Set<Constraint> diag = findDiagnosis(params.getC(), params.getB());
 
             if (!diag.isEmpty()) {
