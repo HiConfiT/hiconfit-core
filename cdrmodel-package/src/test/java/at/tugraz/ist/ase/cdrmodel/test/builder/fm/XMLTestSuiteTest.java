@@ -1,7 +1,7 @@
 /*
- * Consistency-based Algorithms for Conflict Detection and Resolution
+ * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -9,7 +9,6 @@
 package at.tugraz.ist.ase.cdrmodel.test.builder.fm;
 
 import at.tugraz.ist.ase.cdrmodel.test.TestSuite;
-import at.tugraz.ist.ase.cdrmodel.test.reader.TestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.reader.XMLTestSuiteReader;
 import at.tugraz.ist.ase.cdrmodel.test.writer.XMLTestSuiteWriter;
 import lombok.Cleanup;
@@ -23,7 +22,6 @@ import java.io.InputStream;
 
 import static at.tugraz.ist.ase.common.IOUtils.getInputStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 public class XMLTestSuiteTest {
     private static TestSuite testSuite;

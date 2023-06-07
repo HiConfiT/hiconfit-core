@@ -1,5 +1,5 @@
 /*
- * Consistency-based Algorithms for Conflict Detection and Resolution
+ * High Performance Knowledge Based Configuration Techniques
  *
  * Copyright (c) 2023
  *

@@ -1,7 +1,7 @@
 /*
- * at.tugraz.ist.ase.fm - A Maven package for feature models
+ * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022
+ * Copyright (c) 2022-2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
