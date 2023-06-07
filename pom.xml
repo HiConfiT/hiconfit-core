@@ -35,7 +35,8 @@
         <module>kb-package</module>
         <module>cdrmodel-package</module>
         <module>ca-cdr-package</module>
-        <module>ce-package</module>
+        <module>configurator-package</module>
+        <module>heuristics-package</module>
     </modules>
 
     <profiles>

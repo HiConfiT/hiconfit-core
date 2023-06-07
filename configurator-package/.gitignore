@@ -4,9 +4,10 @@ target/
 !**/src/test/**/target/
 
 ### IntelliJ IDEA ###
-/.idea/
-!.idea/copyright/ca_cdr_v2.xml
-!.idea/copyright/profiles_settings.xml
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
 *.iws
 *.iml
 *.ipr
@@ -35,13 +36,3 @@ build/
 
 ### Mac OS ###
 .DS_Store
-
-### Fleet ###
-.fleet/
-
-### Logs ###
-logs.log
-logs-*.zip
-
-*.tmp
-/configurator-package/conf/
