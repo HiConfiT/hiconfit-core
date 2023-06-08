@@ -1,12 +1,12 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-// Generated from /Users/manleviet/Development/GitHub/CSP2ChocoTranslator/src/main/java/at/tugraz/ist/ase/csp2choco/antlr/CSP2Choco.g4 by ANTLR 4.10.1
+// Generated from /Users/manleviet/Development/GitHub/hiconfit-core/csp2choco-package/src/main/java/at/tugraz/ist/ase/hiconfit/csp2choco/antlr/CSP2Choco.g4 by ANTLR 4.12.0
 package at.tugraz.ist.ase.hiconfit.csp2choco.antlr;
 
 import org.antlr.v4.runtime.*;
@@ -21,9 +21,9 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.List;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class CSP2ChocoParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.12.0", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -109,6 +109,7 @@ public class CSP2ChocoParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ModelContext extends ParserRuleContext {
 		public List<Statement_listContext> statement_list() {
 			return getRuleContexts(Statement_listContext.class);
@@ -169,6 +170,7 @@ public class CSP2ChocoParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Statement_listContext extends ParserRuleContext {
 		public StatementContext statement() {
 			return getRuleContext(StatementContext.class,0);
@@ -218,6 +220,7 @@ public class CSP2ChocoParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementContext extends ParserRuleContext {
 		public ConstraintContext constraint() {
 			return getRuleContext(ConstraintContext.class,0);
@@ -280,6 +283,7 @@ public class CSP2ChocoParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ConstraintContext extends ParserRuleContext {
 		public TerminalNode CONSTRAINT() { return getToken(CSP2ChocoParser.CONSTRAINT, 0); }
 		public ExprContext expr() {
@@ -327,6 +331,7 @@ public class CSP2ChocoParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class RequirementContext extends ParserRuleContext {
 		public TerminalNode REQUIREMENT() { return getToken(CSP2ChocoParser.REQUIREMENT, 0); }
 		public ExprContext expr() {
@@ -374,6 +379,7 @@ public class CSP2ChocoParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExprContext extends ParserRuleContext {
 		public ExprContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -385,6 +391,7 @@ public class CSP2ChocoParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class NotContext extends ExprContext {
 		public ExprContext expr() {
 			return getRuleContext(ExprContext.class,0);
@@ -404,6 +411,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ParensContext extends ExprContext {
 		public TerminalNode LP() { return getToken(CSP2ChocoParser.LP, 0); }
 		public ExprContext expr() {
@@ -425,6 +433,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class OrContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
@@ -449,6 +458,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class MulDivContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
@@ -474,6 +484,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class AddSubContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
@@ -499,6 +510,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class AndContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
@@ -523,6 +535,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class IdContext extends ExprContext {
 		public TerminalNode IDENTIFIER() { return getToken(CSP2ChocoParser.IDENTIFIER, 0); }
 		public IdContext(ExprContext ctx) { copyFrom(ctx); }
@@ -540,6 +553,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ImplicationContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
@@ -564,6 +578,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class MinusContext extends ExprContext {
 		public TerminalNode SUB() { return getToken(CSP2ChocoParser.SUB, 0); }
 		public ExprContext expr() {
@@ -584,6 +599,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class IntContext extends ExprContext {
 		public TerminalNode INT_CONST() { return getToken(CSP2ChocoParser.INT_CONST, 0); }
 		public IntContext(ExprContext ctx) { copyFrom(ctx); }
@@ -601,6 +617,7 @@ public class CSP2ChocoParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ComparationContext extends ExprContext {
 		public Token op;
 		public List<ExprContext> expr() {
@@ -711,7 +728,7 @@ public class CSP2ChocoParser extends Parser {
 			setState(64);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
-			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
@@ -770,7 +787,7 @@ public class CSP2ChocoParser extends Parser {
 						setState(51);
 						((ComparationContext)_localctx).op = _input.LT(1);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << EQU) | (1L << NEQ) | (1L << GRT) | (1L << LES) | (1L << GRE) | (1L << LEE))) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1032192L) != 0)) ) {
 							((ComparationContext)_localctx).op = (Token)_errHandler.recoverInline(this);
 						}
 						else {

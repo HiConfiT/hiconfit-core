@@ -1,12 +1,12 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-// Generated from /Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/fm4conf/FM4Conf.g4 by ANTLR 4.10.1
+// Generated from /Users/manleviet/Development/GitHub/hiconfit-core/fm-package/src/main/java/at/tugraz/ist/ase/hiconfit/fm/parser/fm4conf/FM4Conf.g4 by ANTLR 4.12.0
 package at.tugraz.ist.ase.hiconfit.fm.parser.fm4conf;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -18,6 +18,7 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
+@SuppressWarnings("CheckReturnValue")
 public class FM4ConfBaseListener implements FM4ConfListener {
 	/**
 	 * {@inheritDoc}

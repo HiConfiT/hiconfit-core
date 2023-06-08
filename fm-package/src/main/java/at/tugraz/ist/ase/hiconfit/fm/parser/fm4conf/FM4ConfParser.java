@@ -1,12 +1,12 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2023
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-// Generated from /Users/manleviet/Development/GitHub/CA-CDR-V2/fm-package/src/main/java/at/tugraz/ist/ase/fm/parser/fm4conf/FM4Conf.g4 by ANTLR 4.10.1
+// Generated from /Users/manleviet/Development/GitHub/hiconfit-core/fm-package/src/main/java/at/tugraz/ist/ase/hiconfit/fm/parser/fm4conf/FM4Conf.g4 by ANTLR 4.12.0
 package at.tugraz.ist.ase.hiconfit.fm.parser.fm4conf;
 
 import org.antlr.v4.runtime.*;
@@ -21,9 +21,9 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 import java.util.List;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class FM4ConfParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.12.0", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -110,6 +110,7 @@ public class FM4ConfParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ModelContext extends ParserRuleContext {
 		public Fm4confverContext fm4confver() {
 			return getRuleContext(Fm4confverContext.class,0);
@@ -199,6 +200,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Fm4confverContext extends ParserRuleContext {
 		public TerminalNode FM4CONFversion() { return getToken(FM4ConfParser.FM4CONFversion, 0); }
 		public Fm4confverContext(ParserRuleContext parent, int invokingState) {
@@ -241,6 +243,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ModelnameContext extends ParserRuleContext {
 		public TerminalNode MODELNAME() { return getToken(FM4ConfParser.MODELNAME, 0); }
 		public TerminalNode CL() { return getToken(FM4ConfParser.CL, 0); }
@@ -291,6 +294,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class FeatureContext extends ParserRuleContext {
 		public TerminalNode FEATURE() { return getToken(FM4ConfParser.FEATURE, 0); }
 		public TerminalNode CL() { return getToken(FM4ConfParser.CL, 0); }
@@ -365,6 +369,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class RelationshipContext extends ParserRuleContext {
 		public TerminalNode RELATIONSHIP() { return getToken(FM4ConfParser.RELATIONSHIP, 0); }
 		public TerminalNode CL() { return getToken(FM4ConfParser.CL, 0); }
@@ -439,6 +444,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ConstraintContext extends ParserRuleContext {
 		public TerminalNode CONSTRAINT() { return getToken(FM4ConfParser.CONSTRAINT, 0); }
 		public TerminalNode CL() { return getToken(FM4ConfParser.CL, 0); }
@@ -513,6 +519,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class IdentifierContext extends ParserRuleContext {
 		public TerminalNode NAME() { return getToken(FM4ConfParser.NAME, 0); }
 		public IdentifierContext(ParserRuleContext parent, int invokingState) {
@@ -555,6 +562,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class RelationshipruleContext extends ParserRuleContext {
 		public RelationshipruleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -566,6 +574,7 @@ public class FM4ConfParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class OrContext extends RelationshipruleContext {
 		public TerminalNode OR() { return getToken(FM4ConfParser.OR, 0); }
 		public TerminalNode LP() { return getToken(FM4ConfParser.LP, 0); }
@@ -595,6 +604,7 @@ public class FM4ConfParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class AlternativeContext extends RelationshipruleContext {
 		public TerminalNode ALTERNATIVE() { return getToken(FM4ConfParser.ALTERNATIVE, 0); }
 		public TerminalNode LP() { return getToken(FM4ConfParser.LP, 0); }
@@ -624,6 +634,7 @@ public class FM4ConfParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class OptionalContext extends RelationshipruleContext {
 		public TerminalNode OPTIONAL() { return getToken(FM4ConfParser.OPTIONAL, 0); }
 		public TerminalNode LP() { return getToken(FM4ConfParser.LP, 0); }
@@ -650,6 +661,7 @@ public class FM4ConfParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class MandatoryContext extends RelationshipruleContext {
 		public TerminalNode MANDATORY() { return getToken(FM4ConfParser.MANDATORY, 0); }
 		public TerminalNode LP() { return getToken(FM4ConfParser.LP, 0); }
@@ -796,6 +808,7 @@ public class FM4ConfParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ConstraintruleContext extends ParserRuleContext {
 		public ConstraintruleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -807,6 +820,7 @@ public class FM4ConfParser extends Parser {
 			super.copyFrom(ctx);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExcludesContext extends ConstraintruleContext {
 		public TerminalNode EXCLUDES() { return getToken(FM4ConfParser.EXCLUDES, 0); }
 		public TerminalNode LP() { return getToken(FM4ConfParser.LP, 0); }
@@ -833,6 +847,7 @@ public class FM4ConfParser extends Parser {
 			else return visitor.visitChildren(this);
 		}
 	}
+	@SuppressWarnings("CheckReturnValue")
 	public static class RequiresContext extends ConstraintruleContext {
 		public TerminalNode REQUIRES() { return getToken(FM4ConfParser.REQUIRES, 0); }
 		public TerminalNode LP() { return getToken(FM4ConfParser.LP, 0); }
