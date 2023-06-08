@@ -37,6 +37,7 @@
         <module>ca-cdr-package</module>
         <module>configurator-package</module>
         <module>heuristics-package</module>
+        <module>fma-package</module>
     </modules>
 
     <profiles>
