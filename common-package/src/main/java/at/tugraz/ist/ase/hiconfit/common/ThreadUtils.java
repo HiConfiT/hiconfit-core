@@ -13,6 +13,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class ThreadUtils {
     public String getThreadString() {
-        return "[thread=" + Thread.currentThread().getId() + "]";
+        return "[thread=" + Thread.currentThread().threadId() + "]";
     }
 }

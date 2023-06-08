@@ -22,19 +22,19 @@ public class LoggerUtils {
     public ConcurrentHashMap<Long, String> tabs = new ConcurrentHashMap<>();
 
     public String tab() {
-        long threadId = Thread.currentThread().getId();
+        long threadId = Thread.currentThread().threadId();
         return "|thread=" + threadId + "|" + tabs.computeIfAbsent(threadId, k -> "");
     }
 
     public void indent() {
-        long threadId = Thread.currentThread().getId();
+        long threadId = Thread.currentThread().threadId();
         String tab = tabs.computeIfAbsent(threadId, k -> "");
         tab += "   ";
         tabs.replace(threadId, tab);
     }
 
     public void outdent() {
-        long threadId = Thread.currentThread().getId();
+        long threadId = Thread.currentThread().threadId();
         String tab = tabs.computeIfAbsent(threadId, k -> "");
         if (tab.length() > 0) {
             tab = tab.substring(0, tab.length() - 3);
@@ -46,7 +46,8 @@ public class LoggerUtils {
         tabs.clear();
     }
 
-    public synchronized void logMethodInfoWithSession(@NonNull String nameMethod, @NonNull String sessionId, int timeout, @NonNull String requestUri, @NonNull String level) {
+    public synchronized void logMethodInfoWithSession(@NonNull String nameMethod, @NonNull String sessionId, int timeout,
+                                                      @NonNull String requestUri, @NonNull String level) {
         String logMessage = "{}[method={}, sessionId={}, timeout={}, request={}]";
         switch (level) {
             case "DEBUG" -> log.debug(logMessage, tab(), nameMethod, sessionId, timeout, requestUri);
