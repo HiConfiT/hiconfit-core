@@ -42,14 +42,6 @@
 
     <profiles>
         <profile>
-            <id>apps</id>
-            <modules>
-                <module>app-KBStatistics</module>
-                <module>app-FMGenerator</module>
-            </modules>
-        </profile>
-
-        <profile>
             <id>github-maven-repository</id>
             <repositories>
                 <repository>
