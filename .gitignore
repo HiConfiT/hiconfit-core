@@ -44,3 +44,4 @@ logs.log
 logs-*.zip
 
 *.tmp
+/configurator-package/conf/
