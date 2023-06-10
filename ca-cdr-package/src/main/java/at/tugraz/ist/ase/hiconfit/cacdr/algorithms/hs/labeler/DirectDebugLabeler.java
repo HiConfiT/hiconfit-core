@@ -12,7 +12,7 @@ import at.tugraz.ist.ase.hiconfit.cacdr.algorithms.DirectDebug;
 import at.tugraz.ist.ase.hiconfit.cacdr.algorithms.hs.parameters.AbstractHSParameters;
 import at.tugraz.ist.ase.hiconfit.cacdr.algorithms.hs.parameters.DirectDebugParameters;
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import lombok.Getter;

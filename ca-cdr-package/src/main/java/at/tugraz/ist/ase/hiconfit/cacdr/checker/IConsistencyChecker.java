@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.cacdr.checker;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import lombok.NonNull;
 

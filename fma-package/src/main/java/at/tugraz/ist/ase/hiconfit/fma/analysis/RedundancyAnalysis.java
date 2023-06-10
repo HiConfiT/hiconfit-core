@@ -10,8 +10,8 @@ package at.tugraz.ist.ase.hiconfit.fma.analysis;
 
 import at.tugraz.ist.ase.hiconfit.cacdr.algorithms.WipeOutR_FM;
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMCdrModel;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;

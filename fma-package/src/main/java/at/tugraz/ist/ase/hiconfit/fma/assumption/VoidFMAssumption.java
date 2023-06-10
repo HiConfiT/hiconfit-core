@@ -8,7 +8,8 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.assumption;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
@@ -16,7 +17,6 @@ import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.test.AssumptionAwareTestCase;
-import at.tugraz.ist.ase.hiconfit.kb.core.Assignment;
 import lombok.NonNull;
 
 import java.util.Collections;

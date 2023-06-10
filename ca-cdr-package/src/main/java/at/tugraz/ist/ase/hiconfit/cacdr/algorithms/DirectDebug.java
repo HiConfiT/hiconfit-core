@@ -9,7 +9,7 @@
 package at.tugraz.ist.ase.hiconfit.cacdr.algorithms;
 
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.common.ConstraintUtils;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;

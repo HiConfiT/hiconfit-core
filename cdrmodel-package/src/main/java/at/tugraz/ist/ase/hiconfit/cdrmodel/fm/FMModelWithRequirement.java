@@ -8,14 +8,14 @@
 
 package at.tugraz.ist.ase.hiconfit.cdrmodel.fm;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMSolutionTranslator;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
-import at.tugraz.ist.ase.hiconfit.kb.core.Requirement;
-import at.tugraz.ist.ase.hiconfit.kb.core.translator.fm.FMSolutionTranslator;
 import at.tugraz.ist.ase.hiconfit.kb.fm.FMKB;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

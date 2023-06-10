@@ -8,8 +8,8 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.test;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.TestSuite;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
 import lombok.experimental.UtilityClass;
 

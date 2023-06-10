@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ High Performance Knowledge Based Configuration Techniques
+  ~
+  ~ Copyright (c) 2023
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<testcases>
+    <testcase>
+        <clause value="true" variable="root"/>
+    </testcase>
+    <testcase>
+        <clause value="true" variable="root"/>
+        <clause value="true" variable="something"/>
+    </testcase>
+    <testcase>
+        <clause value="true" variable="root"/>
+        <clause value="false" variable="anything"/>
+    </testcase>
+</testcases>

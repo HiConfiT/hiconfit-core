@@ -8,8 +8,8 @@
 
 package at.tugraz.ist.ase.hiconfit.fma;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.AbstractCDRModel;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.TestSuite;
 import at.tugraz.ist.ase.hiconfit.fm.builder.*;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;

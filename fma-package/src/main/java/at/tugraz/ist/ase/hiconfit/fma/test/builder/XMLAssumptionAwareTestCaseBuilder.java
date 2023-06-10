@@ -8,9 +8,10 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.test.builder;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.builder.ITestCaseBuildable;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.format.XMLTestSuiteFormat;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.ITestCaseBuildable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -20,7 +21,6 @@ import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.IAnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.hiconfit.fma.test.format.XMLAssumptionAwareTestSuiteFormat;
-import at.tugraz.ist.ase.hiconfit.kb.core.Assignment;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
 import lombok.NonNull;

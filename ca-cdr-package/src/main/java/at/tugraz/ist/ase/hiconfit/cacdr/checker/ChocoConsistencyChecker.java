@@ -8,11 +8,11 @@
 
 package at.tugraz.ist.ase.hiconfit.cacdr.checker;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.TestCase;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.IChocoModel;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.IDebuggingModel;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.TestCase;
 import at.tugraz.ist.ase.hiconfit.common.ConstraintUtils;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;

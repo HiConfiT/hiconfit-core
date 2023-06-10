@@ -23,7 +23,7 @@
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>at.tugraz.ist.ase.hiconfit</groupId>
-            <artifactId>kb</artifactId>
+            <artifactId>ca-cdr-core</artifactId>
             <version>${artifact.version}</version>
             <scope>compile</scope>
         </dependency>

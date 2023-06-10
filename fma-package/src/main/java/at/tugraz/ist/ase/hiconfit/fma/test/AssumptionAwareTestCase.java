@@ -8,10 +8,10 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.test;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.TestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.TestCase;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.IAnomalyType;
-import at.tugraz.ist.ase.hiconfit.kb.core.Assignment;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;

@@ -8,9 +8,9 @@
 
 package at.tugraz.ist.ase.hiconfit.heuristics;
 
-import at.tugraz.ist.ase.hiconfit.kb.core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.kb.core.Domain;
-import at.tugraz.ist.ase.hiconfit.kb.core.Solution;
 import at.tugraz.ist.ase.hiconfit.kb.core.Variable;
 import lombok.Builder;
 import lombok.Getter;

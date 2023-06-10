@@ -9,6 +9,8 @@
 package at.tugraz.ist.ase.hiconfit.cacdr.algorithms;
 
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.RequirementBuilder;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMModelWithRequirement;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -18,8 +20,6 @@ import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
-import at.tugraz.ist.ase.hiconfit.kb.core.Requirement;
-import at.tugraz.ist.ase.hiconfit.kb.core.builder.RequirementBuilder;
 import com.google.common.collect.Iterators;
 import lombok.Cleanup;
 import org.junit.jupiter.api.Test;

@@ -8,13 +8,13 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.test.writer;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.format.XMLTestSuiteFormat;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.writer.ITestSuiteWritable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.format.XMLTestSuiteFormat;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.ITestSuiteWritable;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.test.AssumptionAwareTestCase;
 import at.tugraz.ist.ase.hiconfit.fma.test.format.XMLAssumptionAwareTestSuiteFormat;
-import at.tugraz.ist.ase.hiconfit.kb.core.Assignment;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;

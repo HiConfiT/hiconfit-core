@@ -8,10 +8,10 @@
 
 package at.tugraz.ist.ase.hiconfit.cdrmodel.fm;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.TestSuite;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.builder.fm.FMTestCaseBuilder;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.reader.TestSuiteReader;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.fm.FMTestCaseBuilder;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.TestSuiteReader;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;

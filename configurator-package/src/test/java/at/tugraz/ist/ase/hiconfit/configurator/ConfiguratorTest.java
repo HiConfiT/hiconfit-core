@@ -8,6 +8,12 @@
 
 package at.tugraz.ist.ase.hiconfit.configurator;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.camera.CameraSolutionTranslator;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMSolutionTranslator;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer.TxtSolutionWriter;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -19,12 +25,6 @@ import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.heuristics.ValueVariableOrdering;
 import at.tugraz.ist.ase.hiconfit.heuristics.io.ValueVariableOrderingReader;
 import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
-import at.tugraz.ist.ase.hiconfit.kb.core.Assignment;
-import at.tugraz.ist.ase.hiconfit.kb.core.Requirement;
-import at.tugraz.ist.ase.hiconfit.kb.core.Solution;
-import at.tugraz.ist.ase.hiconfit.kb.core.translator.camera.CameraSolutionTranslator;
-import at.tugraz.ist.ase.hiconfit.kb.core.translator.fm.FMSolutionTranslator;
-import at.tugraz.ist.ase.hiconfit.kb.core.writer.TxtSolutionWriter;
 import at.tugraz.ist.ase.hiconfit.kb.fm.FMKB;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.Cleanup;

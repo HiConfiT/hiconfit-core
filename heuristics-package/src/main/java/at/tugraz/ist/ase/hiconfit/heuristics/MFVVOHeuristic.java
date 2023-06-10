@@ -8,9 +8,13 @@
 
 package at.tugraz.ist.ase.hiconfit.heuristics;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.common.VariableUtils;
 import at.tugraz.ist.ase.hiconfit.heuristics.mf.MatrixFactorization;
-import at.tugraz.ist.ase.hiconfit.kb.core.*;
+import at.tugraz.ist.ase.hiconfit.kb.core.BoolVariable;
+import at.tugraz.ist.ase.hiconfit.kb.core.IntVariable;
+import at.tugraz.ist.ase.hiconfit.kb.core.Variable;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;

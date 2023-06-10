@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.cdrmodel;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 
 import java.util.Set;
 

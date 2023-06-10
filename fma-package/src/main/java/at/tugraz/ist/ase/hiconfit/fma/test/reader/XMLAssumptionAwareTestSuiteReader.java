@@ -8,11 +8,11 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.test.reader;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.TestSuite;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.builder.ITestCaseBuildable;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.format.XMLTestSuiteFormat;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.reader.ITestSuiteReadable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.ITestCaseBuildable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.format.XMLTestSuiteFormat;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.ITestSuiteReadable;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;

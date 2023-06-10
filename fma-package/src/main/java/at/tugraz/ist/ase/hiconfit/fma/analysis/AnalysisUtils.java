@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.analysis;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.test.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.test.AssumptionAwareTestCase;
 import lombok.NonNull;
