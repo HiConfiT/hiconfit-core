@@ -1,4 +1,19 @@
-# CA-CDR
+# hiconfit-core
+
+A set of Maven-based libraries for High-Performance Knowledge Based Configuration Techniques.
+
+**hiconfit-core** consists of the following libraries:
+
+| *package*                                       | *description*                            |
+|:----------------------------------------------|:------------------------------------------|
+| [ca-cdr-v2]     | provides implementations of Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR) and a ChocoConsistencyChecker |
+| [cdrmodel-v2] | provides an programmatic approach to manage/prepare the constraints/test cases for consistency-based algorithms |
+| [choco-kb-v2]    | provides classes managing CSP (Choco) representations of a knowlege base/feature model |
+| [fm-v2]         | provides the management functionalities for basic feature models |
+| [eval-v2]     | provides a performance evaluator, i.e., counters and timers, which could be used to measure the performance of algorithms |
+| [csp2choco-v2] | provides a translator which enables converting CSP constraints into Choco Solver commands |
+| [common-v2] | a Maven package for utility functions |
+
 
 Maven packages for Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR).
 
@@ -10,7 +25,7 @@ Conflict Detection and Resolution is a substantial task in Knowledge Base Engine
 
 - [List of algorithms](#list-of-algorithms)
 - [What the CA-CDR library provide](#what-the-ca-cdr-library-provide)
-- [How to get the CA-CDR packages](#how-to-get-the-ca-cdr-packages)
+- [How to get the packages](#how-to-get-the-packages)
 - [References](#references)
 
 ## List of algorithms:
@@ -38,23 +53,16 @@ There are some test models in [here](https://github.com/manleviet/CDRModel/tree/
 
 In this repository, I published eight Maven packages, and two apps as the followings:
 
-| *Maven packages*                                       | *description*                            |
-|----------------------------------------------|------------------------------------------|
-| [at.tugraz.ist.ase.ca-cdr-v2](https://github.com/manleviet/CA-CDR-V2/packages/1417091)     | provides implementations of Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR) and a ChocoConsistencyChecker |
-| [at.tugraz.ist.ase.cdrmodel-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408661) | provides an programmatic approach to manage/prepare the constraints/test cases for consistency-based algorithms |
-| [at.tugraz.ist.ase.choco-kb-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408660)    | provides classes managing CSP (Choco) representations of a knowlege base/feature model |
-| [at.tugraz.ist.ase.fm-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408657)         | provides the management functionalities for basic feature models |
-| [at.tugraz.ist.ase.eval-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408656)      | provides a performance evaluator, i.e., counters and timers, which could be used to measure the performance of algorithms |
-| [at.tugraz.ist.ase.test-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408658)         | provides core functionalities related to knolwedge base testing and debugging tasks |
-| [at.tugraz.ist.ase.csp2choco-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408654) | provides a translator which enables converting CSP constraints into Choco Solver commands |
-| [at.tugraz.ist.ase.common-v2](https://github.com/manleviet/CA-CDR-V2/packages/1408257) | a Maven package for utility functions |
 
 | *apps*                                       | *description*                            |
 |----------------------------------------------|------------------------------------------|
 | [kbstatistics](https://github.com/manleviet/CA-CDR-V2/releases/tag/kbstatistics-v1.3.1) | calculate statistics of given knowledge bases |
 | [fm-gen](https://github.com/manleviet/CA-CDR-V2/releases/tag/fm-gen-v1.3) | generates synthesized feature models using the [Betty framework](https://www.isa.us.es/betty/welcome) |
 
-## How to get the CA-CDR packages
+## How to get the packages
+
+We publish libraries on [GitHub Packages].
+In this page, you'll find how to import these Maven packages into your Java project.
 
 To download the Maven dependencies from GitHub package repository, please add the below script in the *settings.xml* file.
 

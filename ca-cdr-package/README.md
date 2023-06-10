@@ -4,7 +4,9 @@ A Maven package for Consistency-based Algorithms for Conflict Detection and Reso
 
 Conflict Detection and Resolution is a substantial task in Knowledge Base Engineering (KBE). Intelligent mechanisms are urgently needed, especially in large-scale knowledge bases. This repository publishes our implementations for some/our consistency-based algorithms, which can be utilized in all three phases of KBE, i.e., design, testing and debugging, and configuration.
 
-*If you use my implementations in your research, please cite the papers listed in the References.*
+ > If you use my implementations in your research, please cite the papers listed in the References.
+
+This package provides the following algorithms:
 
 ## List of algorithms:
 

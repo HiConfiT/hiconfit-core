@@ -23,7 +23,7 @@
         <!--suppress VulnerableLibrariesLocal -->
         <dependency>
             <groupId>at.tugraz.ist.ase.hiconfit</groupId>
-            <artifactId>configurator</artifactId>
+            <artifactId>ca-cdr</artifactId>
             <version>${artifact.version}</version>
         </dependency>
     </dependencies>
