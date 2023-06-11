@@ -8,24 +8,24 @@ For further details about the library, please refer to the [Documentation].
 
 - algorithms:
 
-1. [QuickXPlain] [1]
-2. [FastDiag] [2]
-3. [MSS-based FastDiag] [15]
-4. [FlexDiag] [3]
-5. [HS-tree] [8]
-6. [HSDAG] [9]
-7. [DirectDebug] [4, 5, 6, 7]
-8. [DirectDiag]
-9. [WipeOutR_T] [12, 13]
-10. [WipeOutR_FM] [12, 13]
-11. (coming soon) AggregatedTest [14]
-12. (coming soon) LevelWiseParallelHSDAG [10, 11]
-13. (coming soon) FullParallelHSDAG [10, 11]
-14. (coming soon) FastDiagP [15] - [Python implementation]
-15. (coming soon) KBDiag [the related paper submitted on April 2023]
-16. (coming soon) InformedQX
-17. (coming soon) ParallelWipeOutR_T
-18. (coming soon) ParallelWipeOutR_FM
+  1. [QuickXPlain] [1]
+  2. [FastDiag] [2]
+  3. [MSS-based FastDiag] [15]
+  4. [FlexDiag] [3]
+  5. [HS-tree] [8]
+  6. [HSDAG] [9]
+  7. [DirectDebug] [4, 5, 6, 7]
+  8. [DirectDiag]
+  9. WipeOutR_T [12, 13]
+  10. [WipeOutR_FM] [12, 13]
+  11. (coming soon) AggregatedTest [14]
+  12. (coming soon) LevelWiseParallelHSDAG [10, 11]
+  13. (coming soon) FullParallelHSDAG [10, 11]
+  14. (coming soon) FastDiagP [15] - [Python implementation]
+  15. (coming soon) KBDiag [the related paper submitted on April 2023]
+  16. (coming soon) InformedQX
+  17. (coming soon) ParallelWipeOutR_T
+  18. (coming soon) ParallelWipeOutR_FM
 
 - a [Choco Consistency Checker], supporting the consistency checks for sets of constraints or sets of test cases.
 
@@ -48,15 +48,14 @@ For further details about the library, please refer to the [Documentation].
 16. An evaluation of FastDiagP algorithm in [GitHub](https://github.com/AIG-ist-tugraz/FastDiagP).
 
 [Documentation]: https://hiconfit.manleviet.info
-[QuickXPlain]: quickxplain
-[FastDiag]: fastdiag
-[MSS-based FastDiag]:
-[FlexDiag]:
-[HS-tree]:
-[HSDAG]:
-[DirectDebug]:
-[DirectDiag]:
-[WipeOutR_T]:
-[WipeOutR_FM]:
-[Python implementation]:
+[QuickXPlain]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/QuickXPlain.java
+[FastDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FastDiagV2.java
+[MSS-based FastDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FastDiagV3.java
+[FlexDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FlexDiag.java
+[HS-tree]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/hs/HSTree.java
+[HSDAG]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/hs/HSDAG.java
+[DirectDebug]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/DirectDebug.java
+[DirectDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/DirectDiag.java
+[WipeOutR_FM]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/WipeOutR_FM.java
+[Python implementation]: https://github.com/AIG-ist-tugraz/FastDiagP
 [Choco Consistency Checker]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/checker/ChocoConsistencyChecker.java
