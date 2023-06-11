@@ -14,7 +14,7 @@
     <parent>
         <groupId>at.tugraz.ist.ase.hiconfit</groupId>
         <artifactId>hiconfit-core</artifactId>
-        <version>0.1.1-alpha-05</version>
+        <version>1.0</version>
     </parent>
 
     <artifactId>fma</artifactId>
