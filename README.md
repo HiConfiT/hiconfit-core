@@ -4,7 +4,7 @@ A set of Maven-based libraries for High-Performance Knowledge Based Configuratio
 
 Documentation: https://hiconfit.manleviet.info
 
-*If our implementations are utilized in your research, kindly cite the corresponding papers listed in the [References].*
+*If our implementations are utilized in your research, kindly cite the corresponding papers listed in the [References](#references).*
 
 ## Table of Contents
 
