@@ -20,7 +20,7 @@ Documentation: https://hiconfit.manleviet.info
 
 ### ca-cdr
 
-_**ca-cdr**_ is a library of Consistency-based Algorithms for Conflict Detection and Resolution.
+[_**ca-cdr**_] is a library of Consistency-based Algorithms for Conflict Detection and Resolution.
 
 _Conflict Detection and Resolution_ (CDR) is a substantial task in _Knowledge Base Engineering_ (KBE). 
 _**ca-cdr**_ publishes our implementations of CDR consistency-based algorithms, 
@@ -28,16 +28,16 @@ which can be utilized in all three phases of KBE, i.e., _design_, _testing and d
 
 ##### List of algorithms:
 
-1. [QuickXPlain](quickxplain) [1]
-2. [FastDiag](fastdiag) [2]
-3. [MSS-based FastDiag](mss_fastdiag) [15]
-4. [FlexDiag](flexdiag) [3]
-5. [HS-tree](hstree) [8]
-6. [HSDAG](hsdag) [9]
-7. [DirectDebug](directdebug) [4, 5, 6, 7]
-8. [DirectDiag](directdiag)
-9. [WipeOutR_T](wipeoutr_t) [12, 13]
-10. [WipeOutR_FM](wipeoutr_fm) [12, 13]
+1. [QuickXPlain] [1]
+2. [FastDiag] [2]
+3. [MSS-based FastDiag] [15]
+4. [FlexDiag] [3]
+5. [HS-tree] [8]
+6. [HSDAG] [9]
+7. [DirectDebug] [4, 5, 6, 7]
+8. [DirectDiag]
+9. WipeOutR_T [12, 13]
+10. [WipeOutR_FM] [12, 13]
 11. (coming soon) AggregatedTest [14]
 12. (coming soon) LevelWiseParallelHSDAG [10, 11]
 13. (coming soon) FullParallelHSDAG [10, 11]
@@ -49,7 +49,7 @@ which can be utilized in all three phases of KBE, i.e., _design_, _testing and d
 
 ### fma
 
-_**fma**_ is a library for Feature Model Testing and Debugging.
+[_**fma**_] is a library for Feature Model Testing and Debugging.
 
 Two key features:
 
@@ -64,7 +64,7 @@ explanations for the anomalies in the feature model.
 
 ### configurator
 
-_**configurator**_ offers a compact knowledge-based configurator 
+[_**configurator**_] offers a compact knowledge-based configurator 
 that supports the state-of-the-art Matrix Factorization-based Configuration and Recommendation.
 
 ## All libraries of hiconfit-core
@@ -86,6 +86,9 @@ that supports the state-of-the-art Matrix Factorization-based Configuration and 
 | [fma]          | provides a mechanism to automatically generate property-based test cases for feature models and allows the automated determination of faulty constraints in the feature model                               |
 
 ## How to get the libraries
+
+We publish libraries of **hiconfit-core** in Maven packages hosted by [GitHub Packages].
+You'll find here how to import these Maven libraries into your Java project.
 
 ### Authenticating to GitHub Packages
 
@@ -140,19 +143,19 @@ Add the library dependencies to the `dependencies` element of your project `pom.
 
 Replacing `ARTIFACT_ID` and `VERSION` with the corresponding information from the following table.
 
-| *artifact_id*  | *versions* | *description*                                                                                                                                                                                              |
-|:---------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [common]       | 1.0        | provides utility functions                                                                                                                                                                                 |
-| [csp2choco]    | 1.0        | provides a translator converting CSP constraints into Choco Solver commands                                                                                                                                |
-| [eval]         | 1.0        | provides a performance evaluator, i.e., counters and timers, which could be used to measure the performance of algorithms                                                                                  |
-| [fm]           | 1.0        | provides the management functionalities for basic feature models                                                                                                                                           |
-| [kb]           | 1.0        | provides classes managing CSP (Choco) representations of a knowlege base/feature model                                                                                                                     |
-| [ca-cdr-core]  | 1.0        | provides core classes for representing user requirements and solutions of a configurator as well as for managing test cases and test suites                                                                |
-| [cdrmodel]     | 1.0        | provides an programmatic approach to manage/prepare the constraints/test cases for consistency-based algorithms                                                                                            |
-| [ca-cdr]       | 1.0        | provides implementations of Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR) and a ChocoConsistencyChecker                                                                      |
-| [heuristics]   | 1.0        | provides an implementation of Matrix Factorization Based Variable and Value Ordering Heuristics for Constraint Solving and a wrapper for Matrix Factorization algorithm on the basis of the Mahout library |
-| [configurator] | 1.0        | provides a compact knolwedge-based configurator supporting Matrix Factorization based Configuration and Recommendation                                                                                     |
-| [fma]          | 1.0        | provides a mechnism to automatically generate property-based test cases for feature models and allows the automated determination of faulty constraints in the feature model                               |
+| *ARTIFACT_ID*  | *VERSION* |
+|:---------------|:-----------|
+| common       | 1.0        |
+| csp2choco    | 1.0        |
+| eval         | 1.0        |
+| fm           | 1.0        |
+| kb           | 1.0        |
+| ca-cdr-core  | 1.0        |
+| cdrmodel     | 1.0        |
+| ca-cdr       | 1.0        |
+| heuristics   | 1.0        |
+| configurator | 1.0        |
+| fma          | 1.0        |
 
 ## References
 1. U. Junker. 2004. QuickXPlain: preferred explanations and relaxations for over-constrained problems. *In Proceedings of the 19th national conference on Artificial intelligence (AAAI'04)*. AAAI Press, 167–172. [[ACM](https://dl.acm.org/doi/abs/10.5555/1597148.1597177)]
@@ -173,3 +176,31 @@ Replacing `ARTIFACT_ID` and `VERSION` with the corresponding information from th
 16. An evaluation of FastDiagP algorithm in [GitHub](https://github.com/AIG-ist-tugraz/FastDiagP).
 
 [//]: # (links)
+[_**ca-cdr**_]: https://github.com/HiConfiT/hiconfit-core/tree/main/ca-cdr-package
+[_**fma**_]: https://github.com/HiConfiT/hiconfit-core/tree/main/fma-package
+[_**configurator**_]: https://github.com/HiConfiT/hiconfit-core/tree/main/configurator-package
+[common]: https://github.com/HiConfiT/hiconfit-core/tree/main/common-package
+[csp2choco]: https://github.com/HiConfiT/hiconfit-core/tree/main/csp2choco-package
+[eval]: https://github.com/HiConfiT/hiconfit-core/tree/main/eval-package
+[fm]: https://github.com/HiConfiT/hiconfit-core/tree/main/fm-package
+[kb]: https://github.com/HiConfiT/hiconfit-core/tree/main/kb-package
+[ca-cdr-core]: https://github.com/HiConfiT/hiconfit-core/tree/main/ca-cdr-core-package
+[cdrmodel]: https://github.com/HiConfiT/hiconfit-core/tree/main/cdrmodel-package
+[ca-cdr]: https://github.com/HiConfiT/hiconfit-core/tree/main/ca-cdr-package
+[heuristics]: https://github.com/HiConfiT/hiconfit-core/tree/main/heuristics-package
+[configurator]: https://github.com/HiConfiT/hiconfit-core/tree/main/configurator-package
+[fma]: https://github.com/HiConfiT/hiconfit-core/tree/main/fma-package
+
+[QuickXPlain]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/QuickXPlain.java
+[FastDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FastDiagV2.java
+[MSS-based FastDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FastDiagV3.java
+[FlexDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FlexDiag.java
+[HS-tree]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/hs/HSTree.java
+[HSDAG]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/hs/HSDAG.java
+[DirectDebug]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/DirectDebug.java
+[DirectDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/DirectDiag.java
+[WipeOutR_FM]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/WipeOutR_FM.java
+[Python implementation]: https://github.com/AIG-ist-tugraz/FastDiagP
+
+[Creating a personal access token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+[GitHub Packages]: https://github.com/features/packages
