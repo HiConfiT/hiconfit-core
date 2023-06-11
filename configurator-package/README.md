@@ -1,9 +1,8 @@
 # configurator-package
 
-The library provides a compact knowledge-based configurator 
-supporting Matrix Factorization based Configuration and Recommendation.
+The library provides a compact knowledge-based configurator supporting Matrix Factorization based Configuration and Recommendation.
 
-For further details about the library, please refer to the [Documentation].
+Please refer to the [Documentation] for further details about the library.
 
 ## Features
 

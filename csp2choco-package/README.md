@@ -1,8 +1,8 @@
 # csp2choco-package
 
-A translator, using the ANTLR4 runtime for parsing, enables converting CSP constraints into Choco Solver commands.
+A translator for converting CSP constraints into Choco Solver commands.
 
-For further details about the library, please refer to the [Documentation].
+Please refer to the [Documentation] for further details about the library.
 
 ## Features
 

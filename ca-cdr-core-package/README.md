@@ -2,7 +2,7 @@
 
 The library provides core classes, e.g., solutions, test cases, for other packages. 
 
-For further details about the library, please refer to the [Documentation].
+Please refer to the [Documentation] for further details about the library.
 
 ## Features
 

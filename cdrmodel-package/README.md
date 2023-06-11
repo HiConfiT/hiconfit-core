@@ -2,11 +2,11 @@
 
 This package provides a programmatic approach to manage/prepare the input constraints/test cases for [consistency-based algorithms].
 
-For further details about the library, please refer to the [Documentation].
+Please refer to the [Documentation] for further details about the library.
 
 ## Features
 
-- An abstract class CDRModel managing a set of constraints which we assume to be always correct and another set of constraints that could be faulty
+- An abstract class CDRModel managing a set of constraints that we assume to be always correct and another set of constraints that could be faulty
 - Some TestModels used by unit-tests of [consistency-based algorithms].
 - FMDebuggingModel - an extension of the CDRModel for debugging tasks of feature models, i.e., working with [test cases].
 - Test case and test suite management

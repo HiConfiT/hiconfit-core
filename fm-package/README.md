@@ -2,12 +2,12 @@
 
 This package provides the management functionalities for [basic feature models].
 
-For further details about the library, please refer to the [Documentation].
+Please refer to the [Documentation] for further details about the library.
 
 ## Features
 
 - Provides the generic FeatureModel class to construct a feature model with any type of features, relationships, and cross-tree constraints.
-- Provides a feature model factory which can create a feature model parser which corresponds with the format of the given feature model
+- Provides a feature model factory that can create a feature model parser that corresponds with the format of the given feature model
 - Supports the following feature model formats:
     1. [SPLOT feature models]. The file extension could be “.sxfm” or “.splx.”
     2. [FeatureIDE format]. The file extension should be “xml.”

@@ -2,7 +2,7 @@
 
 A Maven package provides utility functions.
 
-For further details about the library, please refer to the [Documentation](https://hiconfit.manleviet.info).
+Please refer to the [Documentation] for further details about the library.
 
 ## Features
 
@@ -12,3 +12,5 @@ For further details about the library, please refer to the [Documentation](https
 - Utility functions for generating random numbers
 - Utility functions for parsing command line arguments
 - Utility functions for a mail service
+
+[Documentation]: https://hiconfit.manleviet.info

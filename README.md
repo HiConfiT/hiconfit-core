@@ -4,7 +4,7 @@ A set of Maven-based libraries for High-Performance Knowledge Based Configuratio
 
 Documentation: https://hiconfit.manleviet.info
 
-*If you use our implementations in your research, please cite the papers listed in the [References](#references).*
+*If our implementations are utilized in your research, kindly cite the corresponding papers listed in the [References].*
 
 ## Table of Contents
 
@@ -24,7 +24,7 @@ Documentation: https://hiconfit.manleviet.info
 
 _Conflict Detection and Resolution_ (CDR) is a substantial task in _Knowledge Base Engineering_ (KBE). 
 _**ca-cdr**_ publishes our implementations of CDR consistency-based algorithms, 
-which can be utilized in all three phases of KBE, i.e., _design_, _testing and debugging_, and _configuration_.
+which can be applied throughout all phases of KBE, i.e., _design_, _testing and debugging_, and _configuration_.
 
 ##### List of algorithms:
 
@@ -53,14 +53,8 @@ which can be utilized in all three phases of KBE, i.e., _design_, _testing and d
 
 Two key features:
 
-1. _**fma**_ provides a mechanism to automatically generate property-based test cases for feature models. Test cases 
-are generated based on six basic analysis operations, including _void feature models_, _dead features_, 
-_conditionally dead features_, _full mandatory features_, _false optional features_, and _redundant constraints_, 
-which are considered as anomalies in feature models.
-2. On the basis of the generated test cases, _**fma**_ allows to check whether a feature model contains one 
-or more of these six anomalies and execute asynchronously test case validation as well as corresponding diagnosis.
-On the basis of three algorithms, i.e., _**DirectDebug**_, _**WipeOutR_FM**_, and _**HSDAG**_, _**fma**_ determines all
-explanations for the anomalies in the feature model.
+1. _**fma**_ provides a mechanism to automatically generate property-based test cases for feature models. Test cases are generated based on six basic analysis operations, including _void feature models_, _dead features_, _conditionally dead features_, _full mandatory features_, _false optional features_, and _redundant constraints_, which are considered anomalies in feature models.
+2. On the basis of the generated test cases, _**fma**_ allows checking whether a feature model contains one or more of these six anomalies and executes asynchronous test case validation as well as corresponding diagnosis. It uses three algorithms, namely _**DirectDebug**_, _**WipeOutR_FM**_, and _**HSDAG**_, to determine all explanations for the anomalies in the feature model.
 
 ### configurator
 
@@ -75,11 +69,11 @@ that supports the state-of-the-art Matrix Factorization-based Configuration and 
 |:---------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [common]       | provides utility functions                                                                                                                                                                                 |
 | [csp2choco]    | provides a translator converting CSP constraints into Choco Solver commands                                                                                                                                |
-| [eval]         | provides a performance evaluator, i.e., counters and timers, which could be used to measure the performance of algorithms                                                                                  |
+| [eval]         | provides a performance evaluator, including counters and timers, to measure the performance of algorithms                                                                                  |
 | [fm]           | provides the management functionalities for basic feature models                                                                                                                                           |
-| [kb]           | provides classes managing CSP (Choco) representations of a knowlege base/feature model                                                                                                                     |
+| [kb]           | provides classes managing CSP (Choco) representations of a knowledge base/feature model                                                                                                                     |
 | [ca-cdr-core]  | provides core classes for representing user requirements and solutions of a configurator as well as for managing test cases and test suites                                                                |
-| [cdrmodel]     | provides an programmatic approach to manage/prepare the constraints/test cases for consistency-based algorithms                                                                                            |
+| [cdrmodel]     | provides a programmatic approach to manage/prepare the constraints/test cases for consistency-based algorithms                                                                                            |
 | [ca-cdr]       | provides implementations of Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR) and a ChocoConsistencyChecker                                                                      |
 | [heuristics]   | provides an implementation of Matrix Factorization Based Variable and Value Ordering Heuristics for Constraint Solving and a wrapper for Matrix Factorization algorithm on the basis of the Mahout library |
 | [configurator] | provides a compact knowledge-based configurator supporting Matrix Factorization based Configuration and Recommendation                                                                                     |
