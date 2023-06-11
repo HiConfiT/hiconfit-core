@@ -139,7 +139,6 @@ Add the library dependencies to the `dependencies` element of your project `pom.
 ```
 
 Replacing `ARTIFACT_ID` and `VERSION` with the corresponding information from the following table.
-_Legend_: <span>stable version</span>{: .label .label-green .fs-1 } <span>latest version</span>{: .label .label-purple .fs-1 }
 
 | *artifact_id*  | *versions* | *description*                                                                                                                                                                                              |
 |:---------------|:-----------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|

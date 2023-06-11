@@ -2,7 +2,7 @@
 
 This package provides a programmatic approach to manage/prepare the input constraints/test cases for [consistency-based algorithms](https://github.com/manleviet/CA-CDR-V2/tree/main/ca-cdr-package).
 
-For further details about the library, please refer to the [Documentation](https://hiconfit.manleviet.info).
+For further details about the library, please refer to the [Documentation].
 
 ## Features
 
@@ -12,3 +12,5 @@ For further details about the library, please refer to the [Documentation](https
 - Test case and test suite management
 - Test case and test suite reading
 - Translation of test cases into Choco constraints
+
+[Documentation]: https://hiconfit.manleviet.info

@@ -17,7 +17,7 @@ For further details about the library, please refer to the [Documentation].
 
 [Documentation]: https://hiconfit.manleviet.info
 [basic feature models]: https://apps.dtic.mil/sti/pdfs/ADA235785.pdf
-[SPLOT feature models]: splot-research.org
+[SPLOT feature models]: https://splot-research.org
 [FeatureIDE format]: https://featureide.github.io
 [Glencoe format]: https://glencoe.hochschule-trier.de
 [Descriptive format]: https://github.com/HiConfiT/hiconfit-core/blob/main/fm-package/src/test/resources/bamboobike.fm4conf
