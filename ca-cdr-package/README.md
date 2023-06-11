@@ -2,82 +2,30 @@
 
 A Maven package for Consistency-based Algorithms for Conflict Detection and Resolution (CA-CDR).
 
-Conflict Detection and Resolution is a substantial task in Knowledge Base Engineering (KBE). Intelligent mechanisms are urgently needed, especially in large-scale knowledge bases. This repository publishes our implementations for some/our consistency-based algorithms, which can be utilized in all three phases of KBE, i.e., design, testing and debugging, and configuration.
-
- > If you use my implementations in your research, please cite the papers listed in the References.
-
-This package provides the following algorithms:
+For further details about the library, please refer to the [Documentation](https://hiconfit.manleviet.info).
 
 ## List of algorithms:
 
-1. [QuickXPlain](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/QuickXPlain.java) [1]
-2. [FastDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV2.java) [2]
-3. [MSS-based FastDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FastDiagV3.java) [15]
-4. [FlexDiag](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/FlexDiag.java) [3]
-5. [HS-tree](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSTree.java) [8]
-6. [HSDAG](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/hs/HSDAG.java) [9]
-7. [DirectDebug](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDebug.java) [4, 5, 6, 7]
-8. (coming soon) DirectDiag - [third_release](https://github.com/manleviet/CA-CDR-V2/blob/third_release/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/DirectDiag.java)
-9. (coming soon) WipeOutR_T [12, 13]
-10. (coming soon) WipeOutR_FM [12, 13] - [third_release](https://github.com/manleviet/CA-CDR-V2/blob/third_release/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/algorithms/WipeOutR_FM.java)
+1. [QuickXPlain](quickxplain) [1]
+2. [FastDiag](fastdiag) [2]
+3. [MSS-based FastDiag](mss_fastdiag) [15]
+4. [FlexDiag](flexdiag) [3]
+5. [HS-tree](hstree) [8]
+6. [HSDAG](hsdag) [9]
+7. [DirectDebug](directdebug) [4, 5, 6, 7]
+8. [DirectDiag](directdiag)
+9. [WipeOutR_T](wipeoutr_t) [12, 13]
+10. [WipeOutR_FM](wipeoutr_fm) [12, 13]
 11. (coming soon) AggregatedTest [14]
 12. (coming soon) LevelWiseParallelHSDAG [10, 11]
 13. (coming soon) FullParallelHSDAG [10, 11]
-14. (coming soon) FastDiagP [15] - [Python implementation](https://github.com/manleviet/PyFastDiagP-ver2)
-15. (coming soon) KBDiag [the related paper submitted on August 2022]
+14. (coming soon) FastDiagP [15] - [Python implementation]
+15. (coming soon) KBDiag [the related paper submitted on April 2023]
 16. (coming soon) InformedQX
 17. (coming soon) ParallelWipeOutR_T
 18. (coming soon) ParallelWipeOutR_FM
 
 This package also provides a [Choco Consistency Checker](https://github.com/manleviet/CA-CDR-V2/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/cacdr/checker/ChocoConsistencyChecker.java), supporting the consistency checks for sets of constraints or sets of test cases.
-
-## Examples
-
-A good example in [here](https://github.com/manleviet/FlexDiagTest).
-
-Besides, there are some test models in [here](https://github.com/manleviet/CDRModel/tree/main/src/main/java/at/tugraz/ist/ase/cdrmodel/test/model) and some examples showing how to use these algorithms in [here](https://github.com/manleviet/CA-CDR/tree/main/src/test/java/at/tugraz/ist/ase/cacdr/algorithms).
-
-## How to get this package
-
-| *version*                                                                      | *status* |
-|--------------------------------------------------------------------------------|---|
-| [1.3.9-alpha-47](https://github.com/manleviet/CA-CDR-V2/packages/1417091)      | latest |
-| [1.3.8](https://github.com/manleviet/CA-CDR-V2/packages/1417091?version=1.3.8) | stable |
-
-Please add the below script in the *settings.xml* file.
-
-```xml
-<?xml version="1.0" encoding="UTF-8"?>
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-    <servers>
-        <server>
-            <id>github-maven-repository</id>
-            <username>USERNAME</username>
-            <password>TOKEN</password>
-        </server>
-    </servers>
-</settings>
-```
-Replacing USERNAME with your GitHub username, and TOKEN with your personal access token 
-(see [Creating a personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)).
-
-Add also the below script in the *pom.xml* file:
-
-```xml
-<profiles>
-    <profile>
-        <id>github-maven-repository</id>
-        <repositories>
-            <repository>
-                <id>github-maven-repository</id>
-                <url>https://maven.pkg.github.com/manleviet/*</url>
-            </repository>
-        </repositories>
-    </profile>
-</profiles>
-```
 
 ## References
 1. U. Junker. 2004. QuickXPlain: preferred explanations and relaxations for over-constrained problems. In Proceedings of the 19th national conference on Artificial intelligence (AAAI'04). AAAI Press, 167–172. https://dl.acm.org/doi/abs/10.5555/1597148.1597177
