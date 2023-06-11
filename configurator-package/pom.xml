@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ High Performance Knowledge Based Configuration Techniques
+  ~
+  ~ Copyright (c) 2023
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>at.tugraz.ist.ase.hiconfit</groupId>
+        <artifactId>hiconfit-core</artifactId>
+        <version>0.1.1-alpha-05</version>
+    </parent>
+
+    <artifactId>configurator</artifactId>
+
+    <dependencies>
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>at.tugraz.ist.ase.hiconfit</groupId>
+            <artifactId>ca-cdr</artifactId>
+            <version>${artifact.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--suppress VulnerableLibrariesLocal -->
+        <dependency>
+            <groupId>at.tugraz.ist.ase.hiconfit</groupId>
+            <artifactId>heuristics</artifactId>
+            <version>${artifact.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>

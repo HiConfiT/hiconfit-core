@@ -1,7 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="ca-cdr-v2">
+  <settings>
     <module2copyright>
-      <element module="All" copyright="ca-cdr-v2" />
+      <element module="All" copyright="hiconfit-core" />
     </module2copyright>
   </settings>
 </component>

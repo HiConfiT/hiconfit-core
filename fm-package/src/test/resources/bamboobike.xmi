@@ -16,7 +16,11 @@
           <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3w049000l3e58wp35pb7r" name="Front"/>
           <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3w6qr000n3e58b2xz21kc" name="Rear"/>
           <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3wg4y000p3e58n3tfzdar" name="Back-pedal"/></children>
-        <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3tibr00063e58kb3ine26" name="Engine"/>
+        <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3tibr00063e58kb3ine26" name="Engine">
+          <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3tibr00063e58kb3ine27" name="Engine1">
+            <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3tibr00063e58kb3ine28" name="Engine2"/>
+          </children>
+        </children>
         <children xsi:type="com.prostep.vcontrol.model.feature:Feature" id="ckci3trnl00083e583617r23q" name="Drop Handlebar"/>
       </rootFeature>
       <constraints id="ckci464cd002s3e58i6ck9n52">
