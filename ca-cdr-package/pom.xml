@@ -13,7 +13,7 @@
     <parent>
         <artifactId>hiconfit-core</artifactId>
         <groupId>at.tugraz.ist.ase.hiconfit</groupId>
-        <version>1.0</version>
+        <version>1.0.1-alpha-2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -37,13 +37,13 @@
                 <version>3.3.0</version>
                 <executions>
                     <execution>
-                        <id>ca-cdr-v2</id>
+                        <id>ca-cdr</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
                         </goals>
                         <configuration>
-                            <finalName>ca-cdr-v2</finalName>
+                            <finalName>ca-cdr</finalName>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
