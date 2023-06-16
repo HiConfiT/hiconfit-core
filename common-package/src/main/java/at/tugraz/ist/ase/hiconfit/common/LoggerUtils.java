@@ -10,6 +10,7 @@ package at.tugraz.ist.ase.hiconfit.common;
 
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,12 +19,16 @@ import java.util.concurrent.ConcurrentHashMap;
 @UtilityClass
 @Slf4j
 public class LoggerUtils {
+    @Setter
+    public boolean useThreadInfo = true;
+
     @Getter
     public ConcurrentHashMap<Long, String> tabs = new ConcurrentHashMap<>();
 
     public String tab() {
         long threadId = Thread.currentThread().threadId();
-        return "|thread=" + threadId + "|" + tabs.computeIfAbsent(threadId, k -> "");
+        String threadInfo = useThreadInfo ? "|thread=" + threadId + "|" : "";
+        return threadInfo + tabs.computeIfAbsent(threadId, k -> "");
     }
 
     public void indent() {
