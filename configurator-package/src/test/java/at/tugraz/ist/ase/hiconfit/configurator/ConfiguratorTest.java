@@ -20,19 +20,17 @@ import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.hiconfit.heuristics.ValueVariableOrdering;
 import at.tugraz.ist.ase.hiconfit.heuristics.io.ValueVariableOrderingReader;
 import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
 import at.tugraz.ist.ase.hiconfit.kb.fm.FMKB;
 import com.opencsv.exceptions.CsvValidationException;
 import lombok.Cleanup;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,14 +44,21 @@ class ConfiguratorTest {
 
     @Test
     void testCameraKB() throws IOException, CsvValidationException {
-        InputStream is = IOUtils.getInputStream(this.getClass().getClassLoader(), "vvo_camera.csv");
+        val is = IOUtils.getInputStream(this.getClass().getClassLoader(), "vvo_camera.csv");
 
-        ValueVariableOrderingReader reader = new ValueVariableOrderingReader();
-        ValueVariableOrdering vvo = reader.read(is, cameraKB);
+        val vvoReader = new ValueVariableOrderingReader();
+        val vvo = vvoReader.read(is, cameraKB);
 
         System.out.println(vvo);
 
-        Configurator configurator = new Configurator(cameraKB, false, new CameraSolutionTranslator());
+//        Configurator configurator = new Configurator(cameraKB, false, new CameraSolutionTranslator());
+        val configurationModel = new ConfigurationModel(cameraKB, false);
+        configurationModel.initialize();
+        val configurator = Configurator.builder()
+                .kb(cameraKB)
+                .configurationModel(configurationModel)
+                .translator(new CameraSolutionTranslator())
+                .build();
 
         // identify first 5 solutions without the given VVO
         configurator.findSolutions(false, 5, new TxtSolutionWriter("./conf/camera_withoutVVO/"));
@@ -65,24 +70,31 @@ class ConfiguratorTest {
     @Test
     void testFMKB() throws FeatureModelParserException, IOException, CsvValidationException {
         // read the feature model
-        File fileFM = new File("src/test/resources/pizzas.xml");
+        val fileFM = new File("src/test/resources/pizzas.xml");
 
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
 
         // read the value variable ordering
-        InputStream is = IOUtils.getInputStream(this.getClass().getClassLoader(), "vvo_pizzas.csv");
+        val is = IOUtils.getInputStream(this.getClass().getClassLoader(), "vvo_pizzas.csv");
 
-        ValueVariableOrderingReader reader = new ValueVariableOrderingReader();
-        ValueVariableOrdering vvo = reader.read(is, kb);
+        val vvoReader = new ValueVariableOrderingReader();
+        val vvo = vvoReader.read(is, kb);
 
         System.out.println(vvo);
 
-        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+        val configurationModel = new ConfigurationModel(kb, true);
+        configurationModel.initialize();
+        val configurator = Configurator.builder()
+                .kb(kb)
+                .configurationModel(configurationModel)
+                .translator(new FMSolutionTranslator())
+                .build();
 
         // identify first 5 solutions without the given VVO
         configurator.findSolutions(false, 5, new TxtSolutionWriter("./conf/pizzas_withoutVVO/"));
@@ -92,18 +104,62 @@ class ConfiguratorTest {
     }
 
     @Test
-    void testFindSolutions() throws FeatureModelParserException {
+    void testConsistency() throws FeatureModelParserException {
         // read the feature model
-        File fileFM = new File("src/test/resources/pizzas.xml");
+        val fileFM = new File("src/test/resources/camera.xml");
 
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        featureModel = parser.parse(fileFM);
+
+        // convert the feature model into FMKB
+        kb = new FMKB<>(featureModel, false);
+
+        Requirement userRequirement = Requirement.requirementBuilder()
+                .assignments(List.of(
+                        Assignment.builder()
+                                .variable("sports")
+                                .value("true")
+                                .build(),
+                        Assignment.builder()
+                                .variable("waterproof")
+                                .value("false")
+                                .build()
+                ))
+                .build();
+
+        // check consistency
+        val configurationModel = new ConfigurationModel(kb, true);
+        configurationModel.initialize();
+        val configurator = Configurator.builder()
+                .kb(kb)
+                .configurationModel(configurationModel)
+                .translator(new FMSolutionTranslator())
+                .build();
+
+        assertFalse(configurator.isConsistent(userRequirement));
+    }
+
+    @Test
+    void testFindSolutions() throws FeatureModelParserException {
+        // read the feature model
+        val fileFM = new File("src/test/resources/pizzas.xml");
+
+        @Cleanup("dispose")
+        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
 
-        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+        val configurationModel = new ConfigurationModel(kb, true);
+        configurationModel.initialize();
+        val configurator = Configurator.builder()
+                .kb(kb)
+                .configurationModel(configurationModel)
+                .translator(new FMSolutionTranslator())
+                .build();
 
         int counter = 0;
         for (int i = 0; i < 100; i++) {
@@ -112,7 +168,7 @@ class ConfiguratorTest {
         }
 
         // check uniqueness of configurations
-        List<Solution> solutions = configurator.getSolutions();
+        val solutions = configurator.getSolutions();
         for (int i = 0; i < solutions.size() - 1; i++) {
             for (int j = i + 1; j < solutions.size(); j++) {
                 assertNotEquals(solutions.get(i), solutions.get(j));
@@ -126,20 +182,34 @@ class ConfiguratorTest {
     @Test
     void testFind() throws FeatureModelParserException {
         // read the feature model
-        File fileFM = new File("src/test/resources/pizzas.xml");
+        val fileFM = new File("src/test/resources/pizzas.xml");
 
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
 
-        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> checkKB = new FMKB<>(featureModel, true);
+        val checkKB = new FMKB<>(featureModel, true);
 
-        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+//        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+        val configurationModel = new ConfigurationModel(checkKB, true);
+        configurationModel.initialize();
+        val checker = Configurator.builder()
+                .kb(checkKB)
+                .configurationModel(configurationModel)
+                .translator(new FMSolutionTranslator())
+                .build();
 
-        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+        val configurationModel2 = new ConfigurationModel(kb, true);
+        configurationModel2.initialize();
+        val configurator = Configurator.builder()
+                .kb(kb)
+                .configurationModel(configurationModel2)
+                .translator(new FMSolutionTranslator())
+                .build();
         configurator.initializeWithKB();
 
         configurator.find(43, 0);
@@ -163,20 +233,34 @@ class ConfiguratorTest {
     @Test
     void testFindWithRequirement() throws FeatureModelParserException {
         // read the feature model
-        File fileFM = new File("src/test/resources/pizzas.xml");
+        val fileFM = new File("src/test/resources/pizzas.xml");
 
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
 
-        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> checkKB = new FMKB<>(featureModel, true);
+        val checkKB = new FMKB<>(featureModel, true);
 
-        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+//        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+        val configurationModel = new ConfigurationModel(checkKB, true);
+        configurationModel.initialize();
+        val checker = Configurator.builder()
+                .kb(checkKB)
+                .configurationModel(configurationModel)
+                .translator(new FMSolutionTranslator())
+                .build();
 
-        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+        val configurationModel2 = new ConfigurationModel(kb, true);
+        configurationModel2.initialize();
+        val configurator = Configurator.builder()
+                .kb(kb)
+                .configurationModel(configurationModel2)
+                .translator(new FMSolutionTranslator())
+                .build();
         configurator.initializeWithKB();
 
         configurator.setRequirement(Requirement.requirementBuilder()
@@ -206,20 +290,34 @@ class ConfiguratorTest {
     @Test
     void testFindWithNotKB() throws FeatureModelParserException {
         // read the feature model
-        File fileFM = new File("src/test/resources/pizzas.xml");
+        val fileFM = new File("src/test/resources/pizzas.xml");
 
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
 
-        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> checkKB = new FMKB<>(featureModel, true);
+        val checkKB = new FMKB<>(featureModel, true);
 
-        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+//        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+        val configurationModel = new ConfigurationModel(checkKB, true);
+        configurationModel.initialize();
+        val checker = Configurator.builder()
+                .kb(checkKB)
+                .configurationModel(configurationModel)
+                .translator(new FMSolutionTranslator())
+                .build();
 
-        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+        val configurationModel2 = new ConfigurationModel(kb, true);
+        configurationModel2.initialize();
+        val configurator = Configurator.builder()
+                .kb(kb)
+                .configurationModel(configurationModel2)
+                .translator(new FMSolutionTranslator())
+                .build();
         configurator.initializeWithNotKB();
 
         while (configurator.find(1, 0)) {
@@ -246,20 +344,34 @@ class ConfiguratorTest {
     @Test
     void testFindWithNotKBInCompactMode() throws FeatureModelParserException {
         // read the feature model
-        File fileFM = new File("src/test/resources/pizzas.xml");
+        val fileFM = new File("src/test/resources/pizzas.xml");
 
         @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
         featureModel = parser.parse(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
 
-        FMKB<Feature, AbstractRelationship<Feature>, CTConstraint> checkKB = new FMKB<>(featureModel, true);
+        val checkKB = new FMKB<>(featureModel, true);
 
-        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+//        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+        val configurationModel = new ConfigurationModel(checkKB, true);
+        configurationModel.initialize();
+        val checker = Configurator.builder()
+                .kb(checkKB)
+                .configurationModel(configurationModel)
+                .translator(new FMSolutionTranslator())
+                .build();
 
-        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+        val configurationModel2 = new ConfigurationModel(kb, true);
+        configurationModel2.initialize();
+        val configurator = Configurator.builder()
+                .kb(kb)
+                .configurationModel(configurationModel2)
+                .translator(new FMSolutionTranslator())
+                .build();
 
         configurator.findAllSolutions(true,0);
         assert configurator.getNumberSolutions() == 2560;
