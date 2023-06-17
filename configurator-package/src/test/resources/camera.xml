@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ High Performance Knowledge Based Configuration Techniques
+  ~
+  ~ Copyright (c) 2023
+  ~
+  ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+  -->
+
+<featureModel>
+	<struct>
+		<and abstract="true" mandatory="true" name="camera">
+			<or mandatory="true" name="goal">
+				<feature name="landscape"/>
+				<feature name="portrait"/>
+				<feature name="sports"/>
+			</or>
+			<feature name="lightweight"/>
+			<feature name="exchangelens"/>
+			<feature name="waterproof"/>
+		</and>
+	</struct>
+	<constraints>
+		<rule>
+			<imp>
+				<var>sports</var>
+				<var>waterproof</var>
+			</imp>
+		</rule>
+	</constraints>
+</featureModel>

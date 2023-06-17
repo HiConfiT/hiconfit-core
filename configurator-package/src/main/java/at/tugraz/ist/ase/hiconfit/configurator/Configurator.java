@@ -24,6 +24,7 @@ import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import at.tugraz.ist.ase.hiconfit.kb.core.IntVariable;
 import at.tugraz.ist.ase.hiconfit.kb.core.KB;
 import com.google.common.collect.Sets;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -44,20 +45,18 @@ import static org.chocosolver.solver.search.strategy.Search.intVarSearch;
 @Slf4j
 public class Configurator {
     protected final KB kb;
-
     protected final ConfigurationModel configurationModel;
     protected final ChocoConsistencyChecker checker;
 
-    protected final boolean rootConstraints;
+//    protected final boolean rootConstraints;
 
     @Setter
-    protected ISolutionTranslatable translator = null;
+    protected ISolutionTranslatable translator;
+    @Setter
+    protected SolutionWriter writer;
 
     @Getter
     protected final List<Solution> solutions = new LinkedList<>();
-
-    @Setter
-    protected SolutionWriter writer = null;
 
     @Getter
     protected Constraint requirement = null;
@@ -66,28 +65,23 @@ public class Configurator {
     protected Model model;
     protected Solver solver;
 
-    public Configurator(@NonNull KB kb, boolean rootConstraints) {
+    @Builder
+    public Configurator(@NonNull KB kb, @NonNull ConfigurationModel configurationModel, // boolean rootConstraints,
+                        ISolutionTranslatable translator, SolutionWriter writer) {
         this.kb = kb;
-        this.rootConstraints = rootConstraints;
+//        this.rootConstraints = rootConstraints;
 
-        this.configurationModel = new ConfigurationModel(kb, rootConstraints);
-        this.configurationModel.initialize(); // unpost all Choco constraints from the Choco model
+//        this.configurationModel = new ConfigurationModel(kb, rootConstraints);
+//        this.configurationModel.initialize(); // unpost all Choco constraints from the Choco model
+
+        this.configurationModel = configurationModel;
         this.checker = new ChocoConsistencyChecker(configurationModel);
 
         this.defaultSearch = Search.defaultSearch(kb.getModelKB());
         this.model = kb.getModelKB();
         this.solver = this.model.getSolver();
-    }
-
-    public Configurator(@NonNull KB kb, boolean rootConstraints, ISolutionTranslatable translator) {
-        this(kb, rootConstraints);
 
         this.translator = translator;
-    }
-
-    public Configurator(@NonNull KB kb, boolean rootConstraints, ISolutionTranslatable translator, SolutionWriter writer) {
-        this(kb, rootConstraints, translator);
-
         this.writer = writer;
     }
 
@@ -136,13 +130,6 @@ public class Configurator {
 
         requirement.getChocoConstraints().forEach(model::post);
         log.trace("{}Posted requirement", LoggerUtils.tab());
-    }
-
-    public void removeRequirement() {
-        if (requirement != null) {
-            model.unpost(requirement.getChocoConstraints().toArray(new org.chocosolver.solver.constraints.Constraint[0]));
-            log.trace("{}Unposted requirement", LoggerUtils.tab());
-        }
     }
 
     public void setVVO(@NonNull ValueVariableOrdering vvo) {
@@ -270,7 +257,6 @@ public class Configurator {
         findSolutions(notKB, maxNumConf);
     }
 
-    // TODO - generic method
     public void findSolutions(boolean notKB, int maxNumConf, @NonNull Requirement requirement) {
         checkArgument(translator != null, "Translator for the requirement is not set.");
 
@@ -283,14 +269,12 @@ public class Configurator {
         reset();
     }
 
-    // TODO - generic method
     public void findSolutions(boolean notKB, int maxNumConf, @NonNull Requirement requirement, @NonNull SolutionWriter writer) {
         setWriter(writer);
 
         findSolutions(notKB, maxNumConf, requirement);
     }
 
-    // TODO - generic method
     public void findSolutions(boolean notKB, int maxNumConf, @NonNull Requirement requirement, @NonNull ValueVariableOrdering vvo) {
         checkArgument(translator != null, "Translator for the requirement is not set.");
 
