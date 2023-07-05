@@ -166,7 +166,7 @@ Replacing `ARTIFACT_ID` and `VERSION` with the corresponding information from th
 12. V.M. Le, A. Felfernig, M. Uta, T.N.T. Tran, and C. Vidal. 2022. WipeOutR: Automated Redundancy Detection for Feature Models, *26th ACM International Systems and Software Product Line Conference* (SPLC 2022). [[ACM](https://doi.org/10.1145/3546932.3546992)]
 13. An evaluation of WipeOutR algorithms in [GitHub](https://github.com/AIG-ist-tugraz/WipeOutR).
 14. V.M. Le, A. Felfernig, and T.N.T. Tran. 2022. Test Case Aggregation for Efficient Feature Model Testing, *26th ACM International Systems and Software Product Line Conference* (SPLC 2022) - Volume B. [[ACM](https://doi.org/10.1145/3503229.3547046)]
-15. V.M. Le, C.V. Silva, A. Felfernig, T.N.T. Tran, J. Galindo, D. Benavides. 2023. FastDiagP: An Algorithm for Parallelized Direct Diagnosis. *In 37th AAAI Conference on Artificial Intelligence*. AAAI’23, Washington, DC, USA. [[arXiv](https://arxiv.org/pdf/2305.06951.pdf)]
+15. V.M. Le, C.V. Silva, A. Felfernig, T.N.T. Tran, J. Galindo, D. Benavides. 2023. FastDiagP: An Algorithm for Parallelized Direct Diagnosis. *In 37th AAAI Conference on Artificial Intelligence*. AAAI’23, Washington, DC, USA. [[AAAI](https://ojs.aaai.org/index.php/AAAI/article/view/25792)]
 16. An evaluation of FastDiagP algorithm in [GitHub](https://github.com/AIG-ist-tugraz/FastDiagP).
 
 [//]: # (links)
