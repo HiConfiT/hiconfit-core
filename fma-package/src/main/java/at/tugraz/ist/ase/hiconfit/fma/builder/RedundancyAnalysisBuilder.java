@@ -30,8 +30,9 @@ public class RedundancyAnalysisBuilder implements IAnalysisBuildable {
      * @param analyzer the FMAnalyzer
      */
     @Override
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull FMAnalyzer<T, F> analyzer) {
         // REDUNDANCIES
         RedundancyAssumption redundancyAssumption = new RedundancyAssumption();
         List<ITestCase> testCases = redundancyAssumption.createAssumptions(featureModel);
@@ -41,17 +42,19 @@ public class RedundancyAnalysisBuilder implements IAnalysisBuildable {
     }
 
     @Override
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull TestSuite testSuite,
-                      @NonNull FMAnalyzer analyzer) {
-        FMCdrModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+    @SuppressWarnings("unchecked")
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull TestSuite testSuite,
+               @NonNull FMAnalyzer<T, F> analyzer) {
+        FMCdrModel<F, AbstractRelationship<F>, CTConstraint>
                 model = new FMCdrModel<>(featureModel, true, false, true, true);
         model.initialize();
 
         // create the redundancy analysis
         ITestCase testCase = testSuite.getTestCases().get(0);
 
-        RedundancyAnalysis redundancyAnalysis = new RedundancyAnalysis(model, testCase);
+        RedundancyAnalysis<T, F> redundancyAnalysis = new RedundancyAnalysis<>(model, (T) testCase);
 
         analyzer.addAnalysis(redundancyAnalysis);
     }

@@ -33,7 +33,7 @@ import java.io.File;
 import java.util.List;
 
 @Slf4j
-public class XMLAssumptionAwareTestSuiteWriter implements ITestSuiteWritable {
+public class XMLAssumptionAwareTestSuiteWriter<F extends AnomalyAwareFeature> implements ITestSuiteWritable {
     @Override
     public void write(@NonNull List<ITestCase> testCases, @NonNull String path) throws ParserConfigurationException, TransformerException {
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -44,10 +44,10 @@ public class XMLAssumptionAwareTestSuiteWriter implements ITestSuiteWritable {
 
         for (ITestCase testCase : testCases) {
             Element testCaseEle = doc.createElement(XMLTestSuiteFormat.TAG_TESTCASE);
-            AssumptionAwareTestCase assumptionAwareTestCase = (AssumptionAwareTestCase) testCase;
+            AssumptionAwareTestCase<F> assumptionAwareTestCase = (AssumptionAwareTestCase<F>) testCase;
             testCaseEle.setAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ANOMALY, assumptionAwareTestCase.getAnomalyType().toString());
 
-            for (AnomalyAwareFeature anomalyAwareFeature : assumptionAwareTestCase.getAssumptions()) {
+            for (F anomalyAwareFeature : assumptionAwareTestCase.getAssumptions()) {
                 Element assumptionEle = doc.createElement(XMLAssumptionAwareTestSuiteFormat.TAG_ASSUMPTION);
                 assumptionEle.setAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_NAME, anomalyAwareFeature.getName());
                 assumptionEle.setAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ID, anomalyAwareFeature.getId());

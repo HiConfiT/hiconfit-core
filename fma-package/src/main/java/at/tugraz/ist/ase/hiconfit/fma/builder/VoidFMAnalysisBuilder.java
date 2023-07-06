@@ -30,8 +30,9 @@ public class VoidFMAnalysisBuilder implements IAnalysisBuildable {
      * @param featureModel the given feature model
      * @param analyzer the FMAnalyzer
      */
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull FMAnalyzer analyzer) {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull FMAnalyzer<T, F> analyzer) {
         /// VOID FEATURE MODEL
         // create a test case/assumption
         // check void feature model - inconsistent( CF ∪ { c0 })
@@ -42,15 +43,17 @@ public class VoidFMAnalysisBuilder implements IAnalysisBuildable {
         build(featureModel, testSuite, analyzer);
     }
 
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull TestSuite testSuite,
-                      @NonNull FMAnalyzer analyzer) {
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+    @SuppressWarnings("unchecked")
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+              @NonNull TestSuite testSuite,
+              @NonNull FMAnalyzer<T, F> analyzer) {
+        FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
                 debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
-        VoidFMAnalysis analysis = new VoidFMAnalysis(debuggingModel, testSuite.getTestCases().get(0));
+        VoidFMAnalysis<T, F> analysis = new VoidFMAnalysis<>(debuggingModel, (T) testSuite.getTestCases().get(0));
 
         analyzer.addAnalysis(analysis);
     }

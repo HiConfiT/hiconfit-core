@@ -12,7 +12,6 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
@@ -28,7 +27,7 @@ import java.util.List;
  */
 public class VoidFMAssumption implements IFMAnalysisAssumptionCreatable {
 
-    public <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+    public <F extends AnomalyAwareFeature, R extends AbstractRelationship<F>, C extends CTConstraint>
     List<ITestCase> createAssumptions(@NonNull FeatureModel<F, R, C> fm) {
         // void feature model - inconsistent(CF ∪ { c0 })
         String testcase = fm.getFeature(0).getName() + " = true";
@@ -36,7 +35,7 @@ public class VoidFMAssumption implements IFMAnalysisAssumptionCreatable {
                 .variable(fm.getFeature(0).getName())
                 .value("true")
                 .build();
-        AnomalyAwareFeature f0 = (AnomalyAwareFeature) fm.getFeature(0);
+        F f0 = fm.getFeature(0);
 
         return Collections.singletonList(AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                 .testcase(testcase)

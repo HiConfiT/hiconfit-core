@@ -12,7 +12,6 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
@@ -30,15 +29,15 @@ import java.util.stream.IntStream;
  */
 public class DeadFeatureAssumptions implements IFMAnalysisAssumptionCreatable {
     @Override
-    public <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+    public <F extends AnomalyAwareFeature, R extends AbstractRelationship<F>, C extends CTConstraint>
     List<ITestCase> createAssumptions(@NonNull FeatureModel<F, R, C> fm) {
         // dead feature - inconsistent(CF ∪ { c0 } U {fi = true})
-        List<AnomalyAwareFeature> candidateFeatures = IntStream.range(1, fm.getNumOfFeatures())
-                .mapToObj(i -> (AnomalyAwareFeature) fm.getFeature(i))
+        List<F> candidateFeatures = IntStream.range(1, fm.getNumOfFeatures())
+                .mapToObj(fm::getFeature)
                 .collect(Collectors.toCollection(LinkedList::new));
 
         List<ITestCase> testCases = new LinkedList<>();
-        for (AnomalyAwareFeature feature : candidateFeatures) {
+        for (F feature : candidateFeatures) {
             String testcase = fm.getFeature(0).getName() + " = true & " + feature.getName() + " = true";
             List<Assignment> assignments = new LinkedList<>();
             assignments.add(Assignment.builder()

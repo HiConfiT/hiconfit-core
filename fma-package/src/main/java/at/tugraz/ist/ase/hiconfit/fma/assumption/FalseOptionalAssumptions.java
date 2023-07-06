@@ -31,19 +31,18 @@ import java.util.stream.IntStream;
  */
 public class FalseOptionalAssumptions implements IFMAnalysisAssumptionCreatable {
     @Override
-    @SuppressWarnings("unchecked")
-    public <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+    public <F extends AnomalyAwareFeature, R extends AbstractRelationship<F>, C extends CTConstraint>
     List<ITestCase> createAssumptions(@NonNull FeatureModel<F, R, C> fm) {
         // get candidate features
-        List<AnomalyAwareFeature> candidateFeatures = IntStream.range(1, fm.getNumOfFeatures())
-                .mapToObj(i -> (AnomalyAwareFeature) fm.getFeature(i))
+        List<F> candidateFeatures = IntStream.range(1, fm.getNumOfFeatures())
+                .mapToObj(fm::getFeature)
                 .filter(this::isFalseOptionalCandidate)
                 .collect(Collectors.toCollection(LinkedList::new));
 
         List<ITestCase> testCases = new LinkedList<>();
-        for (AnomalyAwareFeature feature : candidateFeatures) {
+        for (F feature : candidateFeatures) {
             ArrayList<F> parents;
-            parents = new ArrayList<>(fm.getMandatoryParents((F) feature));
+            parents = new ArrayList<>(fm.getMandatoryParents(feature));
             if (parents.isEmpty()) {
                 continue;
             }
@@ -77,7 +76,7 @@ public class FalseOptionalAssumptions implements IFMAnalysisAssumptionCreatable 
         return testCases;
     }
 
-    private boolean isFalseOptionalCandidate(AnomalyAwareFeature feature) {
+    private <F extends AnomalyAwareFeature> boolean isFalseOptionalCandidate(F feature) {
         // a feature is not DEAD and has to be optional
         // Only optional features can be false optional (believe it or not) - dead features are dead anyway
         return feature.isOptional() && !feature.isAnomalyType(AnomalyType.DEAD);

@@ -25,9 +25,11 @@ public class AnalysisUtils {
      * @param analyses the list of analyses
      * @return the list of anomaly features
      */
-    public List<AnomalyAwareFeature> getAnomalyFeatures(List<AbstractFMAnalysis<?>> analyses) {
+    @SuppressWarnings("unchecked")
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    List<F> getAnomalyFeatures(List<AbstractFMAnalysis<T, F>> analyses) {
         return analyses.parallelStream()
-                .flatMap(analysis -> ((AssumptionAwareTestCase) analysis.getAssumption()).getAssumptions().stream())
+                .flatMap(analysis -> ((AssumptionAwareTestCase<F>) analysis.getAssumption()).getAssumptions().stream())
                 .distinct()
                 .collect(Collectors.toCollection(LinkedList::new));
     }
@@ -37,7 +39,8 @@ public class AnalysisUtils {
      * @param analyses the list of analyses
      * @return the list of violated analyses
      */
-    public List<AbstractFMAnalysis<?>> getViolatedAnalyses(List<AbstractFMAnalysis<?>> analyses) {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    List<AbstractFMAnalysis<T, F>> getViolatedAnalyses(List<AbstractFMAnalysis<T, F>> analyses) {
         return analyses.parallelStream().filter(analysis -> !analysis.isNon_violated()).collect(Collectors.toList());
     }
 
@@ -46,23 +49,27 @@ public class AnalysisUtils {
      * @param analyses list of analyses
      * @return a list of DeadFeatureAnalysis
      */
-    public List<AbstractFMAnalysis<?>> getAnalyses(@NonNull List<AbstractFMAnalysis<?>> analyses, @NonNull Class<?> clazz) {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    List<AbstractFMAnalysis<T, F>> getAnalyses(@NonNull List<AbstractFMAnalysis<T, F>> analyses, @NonNull Class<?> clazz) {
         return analyses.parallelStream().filter(clazz::isInstance).toList();
     }
 
-    public List<AbstractFMAnalysis<?>> getDoneAnalyses(@NonNull List<AbstractFMAnalysis<?>> analyses, @NonNull Class<?> clazz) {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    List<AbstractFMAnalysis<T, F>> getDoneAnalyses(@NonNull List<AbstractFMAnalysis<T, F>> analyses, @NonNull Class<?> clazz) {
         return analyses.parallelStream().filter(analysis -> clazz.isInstance(analysis) && analysis.isDone())
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    public List<AbstractFMAnalysis<?>> getNotExecutedAnalyses(@NonNull List<AbstractFMAnalysis<?>> analyses) {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    List<AbstractFMAnalysis<T, F>> getNotExecutedAnalyses(@NonNull List<AbstractFMAnalysis<T, F>> analyses) {
         return analyses.parallelStream().filter(analysis -> !analysis.isDone()).toList();
     }
 
-    public List<ITestCase> getTestcases(List<AbstractFMAnalysis<?>> analyses) {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    List<T> getTestcases(List<AbstractFMAnalysis<T, F>> analyses) {
         return analyses.parallelStream()
-                .filter(analysis -> analysis.getAssumption() instanceof ITestCase)
-                .map(analysis -> (ITestCase) analysis.getAssumption())
+//                .filter(analysis -> analysis.getAssumption() instanceof ITestCase)
+                .map(AbstractFMAnalysis::getAssumption)
                 .collect(Collectors.toCollection(LinkedList::new));
     }
 }

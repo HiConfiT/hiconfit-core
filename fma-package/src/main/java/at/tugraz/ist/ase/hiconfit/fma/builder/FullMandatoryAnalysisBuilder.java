@@ -31,8 +31,9 @@ public class FullMandatoryAnalysisBuilder implements IAnalysisBuildable {
      * @param analyzer the FMAnalyzer
      */
     @Override
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
         /// FULL MANDATORY
         // create a test case/assumption
         // check full mandatory features - inconsistent( CF ∪ { c0 } U { fi = false })
@@ -45,20 +46,21 @@ public class FullMandatoryAnalysisBuilder implements IAnalysisBuildable {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull TestSuite testSuite,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull TestSuite testSuite,
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
+        FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
                 debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analyses and the corresponding explanators
         for (ITestCase testCase : testSuite.getTestCases()) {
-            FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
-                    clonedDebuggingModel = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
+            FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
+                    clonedDebuggingModel = (FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>) debuggingModel.clone();
             clonedDebuggingModel.initialize();
 
-            FullMandatoryAnalysis analysis = new FullMandatoryAnalysis(clonedDebuggingModel, testCase);
+            FullMandatoryAnalysis<T, F> analysis = new FullMandatoryAnalysis<>(clonedDebuggingModel, (T) testCase);
 
             analyzer.addAnalysis(analysis);
         }

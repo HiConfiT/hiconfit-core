@@ -24,16 +24,16 @@ import java.util.Set;
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
-public abstract class AbstractAnomalyExplanator {
-    protected FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel;
+public abstract class AbstractAnomalyExplanator<T extends ITestCase, F extends AnomalyAwareFeature> {
+    protected FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint> debuggingModel;
 
-    protected ITestCase assumption;
+    protected T assumption;
 
     @Getter
     protected List<Set<Constraint>> diagnoses = null;
 
-    public AbstractAnomalyExplanator(@NonNull FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel,
-                                     ITestCase assumption) {
+    public AbstractAnomalyExplanator(@NonNull FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint> debuggingModel,
+                                     T assumption) {
         this.debuggingModel = debuggingModel;
         this.assumption = assumption;
     }

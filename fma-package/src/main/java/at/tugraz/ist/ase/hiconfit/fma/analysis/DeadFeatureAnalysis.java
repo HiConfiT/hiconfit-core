@@ -27,10 +27,11 @@ import lombok.extern.slf4j.Slf4j;
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
 @Slf4j
-public class DeadFeatureAnalysis extends AbstractFMAnalysis<ITestCase> {
+public class DeadFeatureAnalysis<T extends ITestCase, F extends AnomalyAwareFeature>
+        extends AbstractFMAnalysis<T, F> {
 
-    public DeadFeatureAnalysis(@NonNull FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel,
-                               ITestCase assumption) {
+    public DeadFeatureAnalysis(@NonNull FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint> debuggingModel,
+                               @NonNull T assumption) {
         super(debuggingModel, assumption);
     }
 
@@ -52,7 +53,7 @@ public class DeadFeatureAnalysis extends AbstractFMAnalysis<ITestCase> {
         }
 
         if (withDiagnosis && !non_violated) { // create an explanator and execute it
-            explanator = new DeadFeatureExplanator((FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) model, assumption);
+            explanator = new DeadFeatureExplanator((FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>) model, assumption);
 
             explanator.identify();
             log.trace("{}Identified diagnoses for [assumption=[{}]]", LoggerUtils.tab(), assumption);

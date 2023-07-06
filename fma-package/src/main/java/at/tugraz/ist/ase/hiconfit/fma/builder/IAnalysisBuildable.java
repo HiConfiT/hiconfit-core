@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.builder;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -17,10 +18,14 @@ import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import lombok.NonNull;
 
 public interface IAnalysisBuildable {
-    void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-               @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException;
 
-    void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+    <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException;
+
+    <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
                @NonNull TestSuite testSuite,
-               @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException;
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException;
+
 }

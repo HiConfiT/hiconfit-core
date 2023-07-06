@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
@@ -31,21 +32,21 @@ import java.util.concurrent.ForkJoinPool;
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
-public class FMAnalyzer {
+public class FMAnalyzer<T extends ITestCase, F extends AnomalyAwareFeature> {
     @Getter
-    protected final FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fm;
+    protected final FeatureModel<F, AbstractRelationship<F>, CTConstraint> fm;
 
     @Getter
-    protected final List<AbstractFMAnalysis<?>> analyses = new LinkedList<>();
+    protected final List<AbstractFMAnalysis<T, F>> analyses = new LinkedList<>();
 
     @Setter
     protected IAnalysisMonitor monitor = null;
 
-    public FMAnalyzer(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> fm) {
+    public FMAnalyzer(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> fm) {
         this.fm = fm;
     }
 
-    public void addAnalysis(@NonNull AbstractFMAnalysis<?> analysis) {
+    public void addAnalysis(@NonNull AbstractFMAnalysis<T, F> analysis) {
         analyses.add(analysis);
     }
 
@@ -62,7 +63,7 @@ public class FMAnalyzer {
         execute(withDiagnosis);
 
         // if VoidFMAnalysis is violated, then no need to run other analyses
-        AbstractFMAnalysis<?> voidFMAnalysis = getVoidFMAnalysis();
+        AbstractFMAnalysis<T, F> voidFMAnalysis = getVoidFMAnalysis();
         if (voidFMAnalysis != null && !voidFMAnalysis.isNon_violated()) {
             return;
         }
@@ -91,14 +92,14 @@ public class FMAnalyzer {
             monitor.setNumberOfTasks(analyses.size());
         }
 
-        List<AbstractFMAnalysis<?>> notExecutedAnalyses = AnalysisUtils.getNotExecutedAnalyses(analyses);
+        List<AbstractFMAnalysis<T, F>> notExecutedAnalyses = AnalysisUtils.getNotExecutedAnalyses(analyses);
 
-        for (AbstractFMAnalysis<?> analysis : notExecutedAnalyses) {
+        for (AbstractFMAnalysis<T, F> analysis : notExecutedAnalyses) {
             analysis.setWithDiagnosis(withDiagnosis);
             pool.execute(analysis);
         }
 
-        for (AbstractFMAnalysis<?> analysis : notExecutedAnalyses) {
+        for (AbstractFMAnalysis<T, F> analysis : notExecutedAnalyses) {
             analysis.join();
 
             if (monitor != null) {
@@ -117,7 +118,7 @@ public class FMAnalyzer {
     public void run(boolean withDiagnosis) {
         // run the VoidFMAnalysis first
         boolean isNotVoid = true;
-        AbstractFMAnalysis<?> voidFMAnalysis = getVoidFMAnalysis();
+        AbstractFMAnalysis<T, F> voidFMAnalysis = getVoidFMAnalysis();
         if (voidFMAnalysis != null) {
             ForkJoinPool pool = ForkJoinPool.commonPool();
 
@@ -147,8 +148,8 @@ public class FMAnalyzer {
         analyses.clear();
     }
 
-    private AbstractFMAnalysis<?> getVoidFMAnalysis() {
-        List<AbstractFMAnalysis<?>> voidFMAnalysis = AnalysisUtils.getAnalyses(analyses, VoidFMAnalysis.class);
+    private AbstractFMAnalysis<T, F> getVoidFMAnalysis() {
+        List<AbstractFMAnalysis<T, F>> voidFMAnalysis = AnalysisUtils.getAnalyses(analyses, VoidFMAnalysis.class);
 
         if (voidFMAnalysis.isEmpty()) {
             return null;

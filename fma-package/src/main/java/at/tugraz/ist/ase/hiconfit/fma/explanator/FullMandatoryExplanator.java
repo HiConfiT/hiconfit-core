@@ -28,10 +28,11 @@ import java.util.Set;
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
-public class FullMandatoryExplanator extends AbstractAnomalyExplanator {
+public class FullMandatoryExplanator<T extends ITestCase, F extends AnomalyAwareFeature>
+        extends AbstractAnomalyExplanator<T, F> {
 
-    public FullMandatoryExplanator(@NonNull FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel,
-                                   ITestCase assumption) {
+    public FullMandatoryExplanator(@NonNull FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint> debuggingModel,
+                                   T assumption) {
         super(debuggingModel, assumption);
     }
 

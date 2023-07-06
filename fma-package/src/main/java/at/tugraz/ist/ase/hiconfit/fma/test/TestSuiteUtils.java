@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class TestSuiteUtils {
     public EnumSet<AnomalyType> getAnomalyTypes(TestSuite testSuite) {
         return testSuite.getTestCases().parallelStream()
-                .map(TC -> (AnomalyType) ((AssumptionAwareTestCase) TC).getAnomalyType())
+                .map(TC -> (AnomalyType) ((AssumptionAwareTestCase<?>) TC).getAnomalyType())
                 .collect(Collectors.toCollection(() -> EnumSet.noneOf(AnomalyType.class)));
     }
 
@@ -30,7 +30,7 @@ public class TestSuiteUtils {
         List<ITestCase> testCases = new LinkedList<>();
 
         for (ITestCase TC : testSuite.getTestCases()) {
-            AssumptionAwareTestCase testCase = (AssumptionAwareTestCase) TC;
+            AssumptionAwareTestCase<?> testCase = (AssumptionAwareTestCase<?>) TC;
             if (testCase.getAnomalyType() == anomalyType) {
                 testCases.add(TC);
             }

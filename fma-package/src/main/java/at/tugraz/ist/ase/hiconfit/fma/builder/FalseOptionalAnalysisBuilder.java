@@ -25,10 +25,11 @@ import java.util.List;
 
 public class FalseOptionalAnalysisBuilder implements IAnalysisBuildable {
     @Override
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
         // create a test case/assumption
-        // check false optional features  - inconsistent( CF ∪ { c0 } U { fpar = true ^ fopt = false } )
+        // check false optional features - inconsistent( CF ∪ { c0 } U { fpar = true ^ fopt = false } )
         FalseOptionalAssumptions falseOptionalAssumptions = new FalseOptionalAssumptions();
         List<ITestCase> testCases = falseOptionalAssumptions.createAssumptions(featureModel);
         TestSuite testSuite = TestSuite.builder().testCases(testCases).build();
@@ -38,20 +39,21 @@ public class FalseOptionalAnalysisBuilder implements IAnalysisBuildable {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull TestSuite testSuite,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull TestSuite testSuite,
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
+        FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
                 debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analyses and the corresponding explanators
         for (ITestCase testCase : testSuite.getTestCases()) {
-            FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
-                    debuggingModelClone = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
+            FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
+                    debuggingModelClone = (FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>) debuggingModel.clone();
             debuggingModelClone.initialize();
 
-            FalseOptionalAnalysis analysis = new FalseOptionalAnalysis(debuggingModelClone, testCase);
+            FalseOptionalAnalysis<T, F> analysis = new FalseOptionalAnalysis<>(debuggingModelClone, (T) testCase);
 
             analyzer.addAnalysis(analysis); // add the analysis to the analyzer
         }

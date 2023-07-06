@@ -28,9 +28,10 @@ import java.util.Set;
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
-public class ConditionallyDeadExplanator extends AbstractAnomalyExplanator {
-    public ConditionallyDeadExplanator(@NonNull FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel,
-                                       ITestCase assumption) {
+public class ConditionallyDeadExplanator<T extends ITestCase, F extends AnomalyAwareFeature>
+        extends AbstractAnomalyExplanator<T, F> {
+    public ConditionallyDeadExplanator(@NonNull FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint> debuggingModel,
+                                       T assumption) {
         super(debuggingModel, assumption);
     }
 

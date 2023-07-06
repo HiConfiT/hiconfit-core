@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.explanation;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.common.ConstraintUtils;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AbstractFMAnalysis;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AnalysisUtils;
@@ -30,12 +31,13 @@ public class RawExplanation {
      * @param anomalyType the type of the anomaly
      * @return a list of parts of descriptive explanations, to be assembled together
      */
-    public Pair<String, List<Pair<String, String>>> getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<?>> allAnalyses,
-                                                                                @NonNull Class<? extends AbstractFMAnalysis<?>> analysisClass,
-                                                                                @NonNull AnomalyType anomalyType) {
-        List<AbstractFMAnalysis<?>> filteredAnalyses = AnalysisUtils.getDoneAnalyses(allAnalyses, analysisClass);
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    Pair<String, List<Pair<String, String>>> getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<T, F>> allAnalyses,
+                                                                       @NonNull Class<?> analysisClass,
+                                                                       @NonNull AnomalyType anomalyType) {
+        List<AbstractFMAnalysis<T, F>> filteredAnalyses = AnalysisUtils.getDoneAnalyses(allAnalyses, analysisClass);
 
-        List<AbstractFMAnalysis<?>> violatedAnalyses = AnalysisUtils.getViolatedAnalyses(filteredAnalyses);
+        List<AbstractFMAnalysis<T, F>> violatedAnalyses = AnalysisUtils.getViolatedAnalyses(filteredAnalyses);
 
         StringBuilder title = new StringBuilder();
         List<Pair<String, String>> explanationList = null;
@@ -43,7 +45,7 @@ public class RawExplanation {
         if (violatedAnalyses.isEmpty()) {
             title.append(anomalyType.getRawNonViolatedDescription());
         } else {
-            List<AnomalyAwareFeature> anomalyFeatures = AnalysisUtils.getAnomalyFeatures(violatedAnalyses);
+            List<F> anomalyFeatures = AnalysisUtils.getAnomalyFeatures(violatedAnalyses);
 
             title.append(anomalyType.getRawViolatedDescription())
                     .append((anomalyFeatures.size() > 1) ? "s" : "")
@@ -56,12 +58,12 @@ public class RawExplanation {
             if (hasExplanations) {
                 explanationList = new LinkedList<>();
 
-                for (AbstractFMAnalysis<?> analysis : violatedAnalyses) {
+                for (AbstractFMAnalysis<T, F> analysis : violatedAnalyses) {
                     if (analysis.getExplanator() != null && analysis.getExplanator().getDiagnoses() != null) {
-                        String featuresEx = Joiner.on(", ").join(((AssumptionAwareTestCase) analysis.getAssumption()).getAssumptions());
+                        String featuresEx = Joiner.on(", ").join(((AssumptionAwareTestCase<?>) analysis.getAssumption()).getAssumptions());
 
                         if (analysis instanceof FalseOptionalAnalysis) {
-                            String parent = ((AssumptionAwareTestCase) analysis.getAssumption()).getAssignments().get(1).getVariable();
+                            String parent = analysis.getAssumption().getAssignments().get(1).getVariable();
                             featuresEx = featuresEx + " (parent=[" + parent + "])";
                         }
 

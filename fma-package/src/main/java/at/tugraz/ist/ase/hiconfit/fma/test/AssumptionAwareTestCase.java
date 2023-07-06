@@ -20,27 +20,28 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Getter
-public class AssumptionAwareTestCase extends TestCase {
+public class AssumptionAwareTestCase<F extends AnomalyAwareFeature> extends TestCase {
 
     private final IAnomalyType anomalyType;
-    private List<AnomalyAwareFeature> assumptions = new LinkedList<>();
+    private List<F> assumptions = new LinkedList<>();
 
     @Builder(builderMethodName = "assumptionAwareTestCaseBuilder")
     public AssumptionAwareTestCase(@NonNull String testcase,
                                    @NonNull IAnomalyType anomalyType,
                                    @NonNull List<Assignment> assignments,
-                                   @NonNull List<AnomalyAwareFeature> assumptions) {
+                                   @NonNull List<F> assumptions) {
         super(testcase, assignments);
         this.anomalyType = anomalyType;
         this.assumptions.addAll(assumptions);
     }
 
+    @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
-        AssumptionAwareTestCase clone = (AssumptionAwareTestCase) super.clone();
+        AssumptionAwareTestCase<F> clone = (AssumptionAwareTestCase<F>) super.clone();
         // copy assumptions
-        List<AnomalyAwareFeature> assumptions = new LinkedList<>();
-        for (AnomalyAwareFeature ass : this.assumptions) {
-            AnomalyAwareFeature cloneAss = (AnomalyAwareFeature) ass.clone();
+        List<F> assumptions = new LinkedList<>();
+        for (F ass : this.assumptions) {
+            F cloneAss = (F) ass.clone();
             assumptions.add(cloneAss);
         }
         clone.assumptions = assumptions;

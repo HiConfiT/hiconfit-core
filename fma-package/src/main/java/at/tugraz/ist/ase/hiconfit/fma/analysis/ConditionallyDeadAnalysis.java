@@ -25,14 +25,14 @@ import lombok.extern.slf4j.Slf4j;
  * @author: Tamim Burgstaller (tamim.burgstaller@student.tugraz.at)
  */
 @Slf4j
-public class ConditionallyDeadAnalysis extends AbstractFMAnalysis<ITestCase> {
-    public ConditionallyDeadAnalysis(@NonNull FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> debuggingModel,
-                                     @NonNull ITestCase assumption) {
+public class ConditionallyDeadAnalysis<T extends ITestCase, F extends AnomalyAwareFeature>
+        extends AbstractFMAnalysis<T, F> {
+    public ConditionallyDeadAnalysis(@NonNull FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint> debuggingModel,
+                                     @NonNull T assumption) {
         super(debuggingModel, assumption);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     protected Boolean analyze() {
         log.trace("{}Analyzing Conditionally dead feature with [assumption={}]", LoggerUtils.tab(), assumption);
         LoggerUtils.indent();
@@ -49,7 +49,7 @@ public class ConditionallyDeadAnalysis extends AbstractFMAnalysis<ITestCase> {
         }
 
         if (withDiagnosis && !non_violated) { // create an explanator and execute it
-            explanator = new ConditionallyDeadExplanator((FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) model, assumption);
+            explanator = new ConditionallyDeadExplanator<>((FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>) model, assumption);
 
             explanator.identify();
             log.trace("{}Identified diagnoses for [assumption=[{}]]", LoggerUtils.tab(), assumption);
