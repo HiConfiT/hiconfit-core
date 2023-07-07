@@ -18,12 +18,14 @@ import lombok.*;
  * + a preference of a user requirement, e.g., Modell = limousine.
  */
 @Builder
-@Getter @Setter
+@Getter
 @EqualsAndHashCode
 @AllArgsConstructor
-public class Assignment implements Cloneable {
-    private @NonNull String variable;
-    private @NonNull String value;
+public class Assignment implements Cloneable, Comparable<Assignment> {
+    @With
+    protected final @NonNull String variable;
+    @With
+    protected final @NonNull String value;
 
     @Override
     public String toString() {
@@ -32,5 +34,11 @@ public class Assignment implements Cloneable {
 
     public Object clone() throws CloneNotSupportedException {
         return super.clone();
+    }
+
+    // khong can thiet lam
+    @Override
+    public int compareTo(Assignment o) {
+        return this.toString().compareTo(o.toString());
     }
 }
