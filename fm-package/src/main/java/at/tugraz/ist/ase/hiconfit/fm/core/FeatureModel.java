@@ -20,6 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static com.google.common.base.Preconditions.*;
 
@@ -36,6 +39,7 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
     protected String name;
 
     protected List<F> bfFeatures = new LinkedList<>(); // breadth-first order
+    protected List<F> dfFeatures = new LinkedList<>(); // depth-first order
     protected List<R> relationships = new LinkedList<>();
     protected List<C> constraints = new LinkedList<>();
 
@@ -414,6 +418,26 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
      */
     public int getNumOfExcludes() {
         return (int) constraints.parallelStream().filter(c -> c.getFormula().isExcludes()).count();
+    }
+
+    public void buildDepthFirstFeatures() {
+        // Use a stack to store features
+        Stack<F> stack = new Stack<>();
+
+        // Push root feature to stack
+        stack.push(root);
+
+        while (!stack.empty()) {
+            F feature = stack.pop();
+            if (!dfFeatures.contains(feature)) {
+                dfFeatures.add(feature);
+            }
+
+            // get the children of the feature
+            List<F> children = relationships.stream().filter(r -> r.isParent(feature)).flatMap(r -> r.getChildren().stream()).collect(Collectors.toCollection(LinkedList::new));
+
+            IntStream.iterate(children.size() - 1, i -> i >= 0, i -> i - 1).mapToObj(children::get).forEach(stack::push);
+        }
     }
 
     @Override
