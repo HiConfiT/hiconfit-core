@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.explanation;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.common.ConsoleColors;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AbstractFMAnalysis;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AnalysisUtils;
@@ -34,19 +35,20 @@ public class CompactExplanation implements IAnalysisExplanable {
      * @param anomalyType the type of the anomaly
      * @return a descriptive explanation, or "" if the analysis is not found
      */
-    public String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<?>> allAnalyses,
-                                            @NonNull Class<? extends AbstractFMAnalysis<?>> analysisClass,
-                                            @NonNull AnomalyType anomalyType) {
-        List<AbstractFMAnalysis<?>> filteredAnalyses = AnalysisUtils.getDoneAnalyses(allAnalyses, analysisClass);
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<T, F>> allAnalyses,
+                                     @NonNull Class<?> analysisClass,
+                                     @NonNull AnomalyType anomalyType) {
+        List<AbstractFMAnalysis<T, F>> filteredAnalyses = AnalysisUtils.getDoneAnalyses(allAnalyses, analysisClass);
 
-        List<AbstractFMAnalysis<?>> violatedAnalyses = AnalysisUtils.getViolatedAnalyses(filteredAnalyses);
+        List<AbstractFMAnalysis<T, F>> violatedAnalyses = AnalysisUtils.getViolatedAnalyses(filteredAnalyses);
 
         StringBuilder sb = new StringBuilder();
         ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
         if (violatedAnalyses.isEmpty()) {
             sb.append(ExplanationColors.OK).append(anomalyType.getNonViolatedDescription()).append("\n");
         } else {
-            List<AnomalyAwareFeature> anomalyFeatures = AnalysisUtils.getAnomalyFeatures(violatedAnalyses);
+            List<F> anomalyFeatures = AnalysisUtils.getAnomalyFeatures(violatedAnalyses);
 
             sb.append(ExplanationColors.ANOMALY)
                     .append(anomalyType.getViolatedDescription())
@@ -60,7 +62,7 @@ public class CompactExplanation implements IAnalysisExplanable {
 
             if (hasExplanations) {
                 boolean firstExplanation = true;
-                for (AbstractFMAnalysis<?> analysis : violatedAnalyses) {
+                for (AbstractFMAnalysis<T, F> analysis : violatedAnalyses) {
                     if (analysis.getExplanator() != null && analysis.getExplanator().getDiagnoses() != null) {
                         if (firstExplanation) {
                             firstExplanation = false;
@@ -68,10 +70,10 @@ public class CompactExplanation implements IAnalysisExplanable {
                             sb.append("\n");
                         }
 
-                        String featuresEx = Joiner.on(", ").join(((AssumptionAwareTestCase) analysis.getAssumption()).getAssumptions());
+                        String featuresEx = Joiner.on(", ").join(((AssumptionAwareTestCase<?>) analysis.getAssumption()).getAssumptions());
 
                         if (analysis instanceof FalseOptionalAnalysis) {
-                            String parent = ((AssumptionAwareTestCase) analysis.getAssumption()).getAssignments().get(1).getVariable();
+                            String parent = analysis.getAssumption().getAssignments().get(1).getVariable();
                             featuresEx = featuresEx + ExplanationColors.ASSUMPTION + " (parent=[" + parent + "])" + ConsoleColors.WHITE;
                         }
 

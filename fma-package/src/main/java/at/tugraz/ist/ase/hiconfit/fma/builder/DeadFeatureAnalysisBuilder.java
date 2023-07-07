@@ -25,8 +25,9 @@ import java.util.List;
 
 public class DeadFeatureAnalysisBuilder implements IAnalysisBuildable {
     @Override
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
         // create a test case/assumption
         // check dead features - inconsistent( CF ∪ { c0 } U { fi = true })
         DeadFeatureAssumptions deadFeatureAssumptions = new DeadFeatureAssumptions();
@@ -38,20 +39,21 @@ public class DeadFeatureAnalysisBuilder implements IAnalysisBuildable {
 
     @Override
     @SuppressWarnings("unchecked")
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull TestSuite testSuite,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
-        FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+               @NonNull TestSuite testSuite,
+               @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
+        FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
                 debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator
         for (ITestCase testCase : testSuite.getTestCases()) {
-            FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>
-                    clonedDebuggingModel = (FMDebuggingModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint>) debuggingModel.clone();
+            FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
+                    clonedDebuggingModel = (FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>) debuggingModel.clone();
             clonedDebuggingModel.initialize();
 
-            DeadFeatureAnalysis analysis = new DeadFeatureAnalysis(clonedDebuggingModel, testCase);
+            DeadFeatureAnalysis<T, F> analysis = new DeadFeatureAnalysis<>(clonedDebuggingModel, (T) testCase);
 
             analyzer.addAnalysis(analysis);
         }

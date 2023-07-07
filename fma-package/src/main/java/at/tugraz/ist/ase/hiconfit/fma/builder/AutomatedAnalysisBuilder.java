@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.builder;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -31,14 +32,16 @@ public class AutomatedAnalysisBuilder {
      * @param featureModel the feature model
      * @param analyzer where generated analyses are stored
      */
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
+                      @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
         build(featureModel, EnumSet.allOf(AnomalyType.class), analyzer);
     }
 
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
                       @NonNull EnumSet<AnomalyType> anomalyTypes,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+                      @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
         IAnalysisBuildable builder;
         for (AnomalyType anomalyType : anomalyTypes) {
             switch (anomalyType) {
@@ -70,9 +73,10 @@ public class AutomatedAnalysisBuilder {
         }
     }
 
-    public void build(@NonNull FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel,
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    void build(@NonNull FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel,
                       @NonNull TestSuite testSuite,
-                      @NonNull FMAnalyzer analyzer) throws CloneNotSupportedException {
+                      @NonNull FMAnalyzer<T, F> analyzer) throws CloneNotSupportedException {
 
         EnumSet<AnomalyType> anomalyTypes = TestSuiteUtils.getAnomalyTypes(testSuite);
         IAnalysisBuildable builder;
@@ -112,7 +116,7 @@ public class AutomatedAnalysisBuilder {
 //        // print the result
 //        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
 //        if (analysis.get()) {
-//            System.out.println(ExplanationColors.OK + "\u2713 Consistency: ok");
+//            System.out.println(ExplanationColors.OK + "✓ Consistency: ok");
 //        } else {
 //            System.out.println(ExplanationColors.ANOMALY + "X Void feature model");
 //            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(explanator.get(), "void feature model"));
@@ -328,7 +332,7 @@ public class AutomatedAnalysisBuilder {
 //        // print the result
 //        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
 //        if (analysis.get()) {
-//            System.out.println(ExplanationColors.OK + "\u2713 Consistency: ok");
+//            System.out.println(ExplanationColors.OK + "✓ Consistency: ok");
 //        } else {
 //            System.out.println(ExplanationColors.ANOMALY + "X Void feature model");
 //            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(explanator.get(), "void feature model"));
@@ -510,7 +514,7 @@ public class AutomatedAnalysisBuilder {
 //        }
 //
 //        if (!anomalyFound) {
-//            System.out.println(ConsoleColors.GREEN + "\u2713 No anomaly found" + ConsoleColors.RESET);
+//            System.out.println(ConsoleColors.GREEN + "✓ No anomaly found" + ConsoleColors.RESET);
 //        }
 //    }
 }

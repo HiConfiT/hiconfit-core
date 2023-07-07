@@ -11,13 +11,13 @@ package at.tugraz.ist.ase.hiconfit.fma.assumption;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
+import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import lombok.NonNull;
 
 import java.util.List;
 
 public interface IFMAnalysisAssumptionCreatable {
-    <F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+    <F extends AnomalyAwareFeature, R extends AbstractRelationship<F>, C extends CTConstraint>
     List<ITestCase> createAssumptions(@NonNull FeatureModel<F, R, C> fm);
 }

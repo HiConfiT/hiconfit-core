@@ -28,13 +28,13 @@ import java.util.List;
 import java.util.Set;
 
 @Slf4j
-public class RedundancyAnalysis extends AbstractFMAnalysis<ITestCase> {
+public class RedundancyAnalysis<T extends ITestCase, F extends AnomalyAwareFeature> extends AbstractFMAnalysis<T, F> {
 
     @Getter
     private Set<Constraint> redundantConstraints;
 
-    public RedundancyAnalysis(@NonNull FMCdrModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> model,
-                              @NonNull ITestCase assumption) {
+    public RedundancyAnalysis(@NonNull FMCdrModel<F, AbstractRelationship<F>, CTConstraint> model,
+                              @NonNull T assumption) {
         super(model, assumption);
 
         redundantConstraints = new LinkedHashSet<>();

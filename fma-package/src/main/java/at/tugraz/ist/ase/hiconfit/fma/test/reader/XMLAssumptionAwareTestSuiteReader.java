@@ -14,11 +14,6 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.ITestCaseBuildable;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.ITestSuiteReadable;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
-import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
-import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
-import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.w3c.dom.Document;
@@ -40,14 +35,15 @@ import java.util.stream.Stream;
 import static com.google.common.base.Preconditions.checkState;
 
 @Slf4j
-public class XMLAssumptionAwareTestSuiteReader implements ITestSuiteReadable {
+public class XMLAssumptionAwareTestSuiteReader
+        implements ITestSuiteReadable {
 
-    @Getter
-    private final FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel;
-
-    public XMLAssumptionAwareTestSuiteReader(FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel) {
-        this.featureModel = featureModel;
-    }
+//    @Getter
+//    private final FeatureModel<F, R, C> featureModel;
+//
+//    public XMLAssumptionAwareTestSuiteReader(FeatureModel<F, R, C> featureModel) {
+//        this.featureModel = featureModel;
+//    }
 
     @Override
     public TestSuite read(@NonNull InputStream is, @NonNull ITestCaseBuildable testCaseBuilder) throws IOException {

@@ -8,7 +8,11 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.analysis;
 
-import at.tugraz.ist.ase.hiconfit.cdrmodel.AbstractCDRModel;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMCdrModel;
+import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
+import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
+import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.IAnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.explanator.AbstractAnomalyExplanator;
 import at.tugraz.ist.ase.hiconfit.fma.test.AssumptionAwareTestCase;
@@ -30,9 +34,9 @@ import java.util.concurrent.RecursiveTask;
  */
 @Slf4j
 @Getter
-public abstract class AbstractFMAnalysis<T> extends RecursiveTask<Boolean> {
+public abstract class AbstractFMAnalysis<T extends ITestCase, F extends AnomalyAwareFeature> extends RecursiveTask<Boolean> {
 
-	protected AbstractCDRModel model;
+	protected FMCdrModel<F, AbstractRelationship<F>, CTConstraint> model;
 
 	protected T assumption; // could be ITestCase or Constraint
 	@Setter
@@ -40,7 +44,7 @@ public abstract class AbstractFMAnalysis<T> extends RecursiveTask<Boolean> {
 
 	protected boolean non_violated;
 
-	protected AbstractAnomalyExplanator explanator = null;
+	protected AbstractAnomalyExplanator<T, F> explanator = null;
 
 //	@Getter
 //	private boolean timeoutOccurred = false;
@@ -50,7 +54,7 @@ public abstract class AbstractFMAnalysis<T> extends RecursiveTask<Boolean> {
 //	@Setter
 //	protected IAnalysisMonitor monitor = null;
 
-	public AbstractFMAnalysis(@NonNull AbstractCDRModel model, T assumption) {
+	public AbstractFMAnalysis(@NonNull FMCdrModel<F, AbstractRelationship<F>, CTConstraint> model, T assumption) {
 		this.model = model;
 		this.assumption = assumption;
 	}
@@ -71,9 +75,15 @@ public abstract class AbstractFMAnalysis<T> extends RecursiveTask<Boolean> {
 
 	protected abstract Boolean analyze();
 
+//	public Class<T> getParameterClass() {
+//		return (Class<T>) ((ParameterizedType) getClass()
+//				.getGenericSuperclass()).getActualTypeArguments()[0];
+//	}
+
+	@SuppressWarnings("unchecked")
 	protected void setAnomalyType(IAnomalyType anomalyType) {
 		if (assumption instanceof AssumptionAwareTestCase) {
-			((AssumptionAwareTestCase)assumption).getAssumptions().forEach(feature -> feature.setAnomalyType(anomalyType));
+			((AssumptionAwareTestCase<F>)assumption).getAssumptions().forEach(feature -> feature.setAnomalyType(anomalyType));
 		}
 	}
 

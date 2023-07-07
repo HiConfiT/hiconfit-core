@@ -8,10 +8,12 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.explanation;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.common.ConsoleColors;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AbstractFMAnalysis;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AnalysisUtils;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.VoidFMAnalysis;
+import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.explanator.ExplanationColors;
 import at.tugraz.ist.ase.hiconfit.fma.explanator.ExplanationUtils;
@@ -25,10 +27,11 @@ public class VoidFMExplanation implements IAnalysisExplanable {
      * @param analyses the list of analyses
      * @return a descriptive explanation, or "" if the VoidFMAnalysis is not found
      */
-    public String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<?>> analyses,
-                                            @NonNull Class<? extends AbstractFMAnalysis<?>> analysisClass,
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<T, F>> analyses,
+                                            @NonNull Class<?> analysisClass,
                                             @NonNull AnomalyType anomalyType) {
-        VoidFMAnalysis analysis = (VoidFMAnalysis) AnalysisUtils.getAnalyses(analyses, analysisClass).get(0);
+        VoidFMAnalysis<T, F> analysis = (VoidFMAnalysis<T, F>) AnalysisUtils.getAnalyses(analyses, analysisClass).get(0);
 
         StringBuilder sb = new StringBuilder();
         if (analysis != null) {

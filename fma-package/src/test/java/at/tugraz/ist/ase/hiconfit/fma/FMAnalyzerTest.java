@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.AbstractCDRModel;
 import at.tugraz.ist.ase.hiconfit.fm.builder.*;
@@ -66,7 +67,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // generates analyses and add them to the analyzer
         // USING the VoidFMAnalysisBuilder
@@ -82,11 +83,11 @@ class FMAnalyzerTest {
         System.out.println(explanation);
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis voidAnalysis = (VoidFMAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> voidAnalysis = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(voidAnalysis.get());
-        assertTrue(((AssumptionAwareTestCase)voidAnalysis.getAssumption()).getAssumptions().get(0).isAnomalyType(AnomalyType.VOID));
+        assertTrue(((AssumptionAwareTestCase<AnomalyAwareFeature>)voidAnalysis.getAssumption()).getAssumptions().get(0).isAnomalyType(AnomalyType.VOID));
 
         List<Set<Constraint>> allDiagnoses = voidAnalysis.getExplanator().getDiagnoses();
 
@@ -130,7 +131,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD); // DeadFeatureAnalysis won't be executed because VoidFMAnalysis is violated
@@ -147,11 +148,11 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis voidAnalysis = (VoidFMAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> voidAnalysis = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(voidAnalysis.get());
-        assertTrue(((AssumptionAwareTestCase)voidAnalysis.getAssumption()).getAssumptions().get(0).isAnomalyType(AnomalyType.VOID));
+        assertTrue(((AssumptionAwareTestCase<AnomalyAwareFeature>)voidAnalysis.getAssumption()).getAssumptions().get(0).isAnomalyType(AnomalyType.VOID));
 
         List<Set<Constraint>> allDiagnoses = voidAnalysis.getExplanator().getDiagnoses();
 
@@ -193,7 +194,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD); // DeadFeatureAnalysis won't be executed because VoidFMAnalysis is violated
@@ -206,11 +207,11 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis voidAnalysis = (VoidFMAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> voidAnalysis = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(voidAnalysis.get());
-        assertTrue(((AssumptionAwareTestCase)voidAnalysis.getAssumption()).getAssumptions().get(0).isAnomalyType(AnomalyType.VOID));
+        assertTrue(((AssumptionAwareTestCase<AnomalyAwareFeature>)voidAnalysis.getAssumption()).getAssumptions().get(0).isAnomalyType(AnomalyType.VOID));
 
         List<Set<Constraint>> allDiagnoses = voidAnalysis.getExplanator().getDiagnoses();
 
@@ -248,7 +249,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // generates analyses and add them to the analyzer
         // USING the DeadFeatureAnalysisBuilder
@@ -263,8 +264,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), DeadFeatureAnalysis.class, AnomalyType.DEAD));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        DeadFeatureAnalysis analysis = (DeadFeatureAnalysis) analyses.get(6);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(6);
 
         assertFalse(analysis.get());
 
@@ -303,7 +304,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD);
@@ -319,9 +320,9 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
-        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(7);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> analysis1 = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(7);
 
         assertTrue(analysis1.get());
         assertFalse(analysis2.get());
@@ -361,7 +362,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD);
@@ -374,9 +375,9 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
-        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(7);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> analysis1 = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(7);
 
         assertTrue(analysis1.get());
         assertFalse(analysis2.get());
@@ -415,7 +416,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                                                          AnomalyType.DEAD);
@@ -430,10 +431,10 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
-        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(5);
-        DeadFeatureAnalysis analysis3 = (DeadFeatureAnalysis) analyses.get(7);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> analysis1 = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(5);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis3 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(7);
 
         assertTrue(analysis1.get());
         assertFalse(analysis2.get());
@@ -483,7 +484,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD);
@@ -495,10 +496,10 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
-        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(5);
-        DeadFeatureAnalysis analysis3 = (DeadFeatureAnalysis) analyses.get(7);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> analysis1 = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(5);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis3 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(7);
 
         assertTrue(analysis1.get());
         assertFalse(analysis2.get());
@@ -545,7 +546,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -556,10 +557,10 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
-        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(5);
-        DeadFeatureAnalysis analysis3 = (DeadFeatureAnalysis) analyses.get(7);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> analysis1 = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(5);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis3 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(7);
 
         assertTrue(analysis1.get());
         assertFalse(analysis2.get());
@@ -609,7 +610,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD);
@@ -625,9 +626,9 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
-        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(4);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> analysis1 = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(4);
 
         assertTrue(analysis1.get());
         assertFalse(analysis2.get());
@@ -672,7 +673,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID,
                 AnomalyType.DEAD);
@@ -685,9 +686,9 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        VoidFMAnalysis analysis1 = (VoidFMAnalysis) analyses.get(0);
-        DeadFeatureAnalysis analysis2 = (DeadFeatureAnalysis) analyses.get(4);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        VoidFMAnalysis<ITestCase, AnomalyAwareFeature> analysis1 = (VoidFMAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
+        DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (DeadFeatureAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(4);
 
         assertTrue(analysis1.get());
         assertFalse(analysis2.get());
@@ -728,7 +729,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // generates analyses and add them to the analyzer
         // USING the FullMandatoryAnalysisBuilder
@@ -743,8 +744,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), FullMandatoryAnalysis.class, AnomalyType.FULLMANDATORY));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        FullMandatoryAnalysis analysis = (FullMandatoryAnalysis) analyses.get(2);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        FullMandatoryAnalysis<ITestCase, AnomalyAwareFeature> analysis = (FullMandatoryAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(2);
 
         assertFalse(analysis.get());
 
@@ -781,7 +782,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FULLMANDATORY);
         // generates analyses and add them to the analyzer
@@ -796,8 +797,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        FullMandatoryAnalysis analysis = (FullMandatoryAnalysis) analyses.get(2);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        FullMandatoryAnalysis<ITestCase, AnomalyAwareFeature> analysis = (FullMandatoryAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(2);
 
         assertFalse(analysis.get());
 
@@ -834,7 +835,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FULLMANDATORY);
 
@@ -847,8 +848,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        FullMandatoryAnalysis analysis = (FullMandatoryAnalysis) analyses.get(6);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        FullMandatoryAnalysis<ITestCase, AnomalyAwareFeature> analysis = (FullMandatoryAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(6);
 
         assertFalse(analysis.get());
 
@@ -882,7 +883,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // generates analyses and add them to the analyzer
         FalseOptionalAnalysisBuilder analysisBuilder = new FalseOptionalAnalysisBuilder();
@@ -896,8 +897,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), FalseOptionalAnalysis.class, AnomalyType.FALSEOPTIONAL));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        FalseOptionalAnalysis analysis = (FalseOptionalAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        FalseOptionalAnalysis<ITestCase, AnomalyAwareFeature> analysis = (FalseOptionalAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(analysis.get());
 
@@ -930,7 +931,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FALSEOPTIONAL);
         // generates analyses and add them to the analyzer
@@ -945,8 +946,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        FalseOptionalAnalysis analysis = (FalseOptionalAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        FalseOptionalAnalysis<ITestCase, AnomalyAwareFeature> analysis = (FalseOptionalAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(analysis.get());
 
@@ -979,7 +980,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FALSEOPTIONAL);
 
@@ -992,8 +993,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        FalseOptionalAnalysis analysis = (FalseOptionalAnalysis) analyses.get(3);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        FalseOptionalAnalysis<ITestCase, AnomalyAwareFeature> analysis = (FalseOptionalAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(3);
 
         assertFalse(analysis.get());
 
@@ -1027,7 +1028,7 @@ class FMAnalyzerTest {
         featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // generates analyses and add them to the analyzer
         ConditionallyDeadAnalysisBuilder analysisBuilder = new ConditionallyDeadAnalysisBuilder();
@@ -1041,8 +1042,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), ConditionallyDeadAnalysis.class, AnomalyType.CONDITIONALLYDEAD));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        ConditionallyDeadAnalysis analysis = (ConditionallyDeadAnalysis) analyses.get(4);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature> analysis = (ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(4);
 
         assertFalse(analysis.get());
 
@@ -1074,7 +1075,7 @@ class FMAnalyzerTest {
         featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
         // generates analyses and add them to the analyzer
@@ -1089,8 +1090,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        ConditionallyDeadAnalysis analysis = (ConditionallyDeadAnalysis) analyses.get(4);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature> analysis = (ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(4);
 
         assertFalse(analysis.get());
 
@@ -1122,7 +1123,7 @@ class FMAnalyzerTest {
 //        featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
 
@@ -1134,8 +1135,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        ConditionallyDeadAnalysis analysis = (ConditionallyDeadAnalysis) analyses.get(15);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature> analysis = (ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(15);
 
         assertFalse(analysis.get());
 
@@ -1163,7 +1164,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
         // generates analyses and add them to the analyzer
@@ -1178,9 +1179,9 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        ConditionallyDeadAnalysis analysis2 = (ConditionallyDeadAnalysis) analyses.get(1);
-        ConditionallyDeadAnalysis analysis3 = (ConditionallyDeadAnalysis) analyses.get(3);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(1);
+        ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature> analysis3 = (ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(3);
 
         assertFalse(analysis2.get());
         assertFalse(analysis3.get());
@@ -1211,7 +1212,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
 
@@ -1223,9 +1224,9 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        ConditionallyDeadAnalysis analysis2 = (ConditionallyDeadAnalysis) analyses.get(6);
-        ConditionallyDeadAnalysis analysis3 = (ConditionallyDeadAnalysis) analyses.get(8);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature> analysis2 = (ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(6);
+        ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature> analysis3 = (ConditionallyDeadAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(8);
 
         assertFalse(analysis2.get());
         assertFalse(analysis3.get());
@@ -1256,7 +1257,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generates analyses and add them to the analyzer
@@ -1290,7 +1291,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1321,13 +1322,13 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generates analyses and add them to the analyzer
         // read pre-generated test cases from a file
-        XMLAssumptionAwareTestSuiteReader reader = new XMLAssumptionAwareTestSuiteReader(featureModel);
-        XMLAssumptionAwareTestCaseBuilder builder = new XMLAssumptionAwareTestCaseBuilder(featureModel);
+        XMLAssumptionAwareTestSuiteReader reader = new XMLAssumptionAwareTestSuiteReader();
+        XMLAssumptionAwareTestCaseBuilder<AnomalyAwareFeature> builder = new XMLAssumptionAwareTestCaseBuilder<>(featureModel);
         @Cleanup InputStream is = getInputStream(FMAnalyzerTest.class.getClassLoader(), "testsuite_multiple1.xml");
         TestSuite testSuite = reader.read(is, builder);
 
@@ -1361,7 +1362,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generate analyses and run the analyzer
@@ -1391,7 +1392,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generate analyses and run the analyzer
@@ -1422,7 +1423,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generate analyses and run the analyzer
@@ -1453,7 +1454,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generate analyses and run the analyzer
@@ -1484,7 +1485,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generate analyses and run the analyzer
@@ -1514,7 +1515,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1545,7 +1546,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1576,7 +1577,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1589,7 +1590,7 @@ class FMAnalyzerTest {
     }
 
     @Test
-    void testRedundancy_0() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+    void testRedundancy_0() throws FeatureModelParserException, ExecutionException, InterruptedException {
         // load the feature model
         File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
 
@@ -1605,7 +1606,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // generates analyses and add them to the analyzer
         RedundancyAnalysisBuilder analysisBuilder = new RedundancyAnalysisBuilder();
@@ -1619,8 +1620,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), RedundancyAnalysis.class, AnomalyType.REDUNDANT));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        RedundancyAnalysis analysis = (RedundancyAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        RedundancyAnalysis<ITestCase, AnomalyAwareFeature> analysis = (RedundancyAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(analysis.get());
 
@@ -1649,7 +1650,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.REDUNDANT);
         // generates analyses and add them to the analyzer
@@ -1664,8 +1665,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        RedundancyAnalysis analysis = (RedundancyAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        RedundancyAnalysis<ITestCase, AnomalyAwareFeature> analysis = (RedundancyAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(analysis.get());
 
@@ -1708,7 +1709,7 @@ class FMAnalyzerTest {
         fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey")); // should be redundant
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(fm);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(fm);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.REDUNDANT);
         // generates analyses and add them to the analyzer
@@ -1723,8 +1724,8 @@ class FMAnalyzerTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // Assertions
-        List<AbstractFMAnalysis<?>> analyses = analyzer.getAnalyses();
-        RedundancyAnalysis analysis = (RedundancyAnalysis) analyses.get(0);
+        List<AbstractFMAnalysis<ITestCase, AnomalyAwareFeature>> analyses = analyzer.getAnalyses();
+        RedundancyAnalysis<ITestCase, AnomalyAwareFeature> analysis = (RedundancyAnalysis<ITestCase, AnomalyAwareFeature>) analyses.get(0);
 
         assertFalse(analysis.get());
 
@@ -1769,7 +1770,7 @@ class FMAnalyzerTest {
         fm.addRequires(fm.getFeature("ABtesting"), fm.getFeature("survey")); // should be redundant
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(fm);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(fm);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1797,7 +1798,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1827,7 +1828,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1857,7 +1858,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1887,7 +1888,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
 
@@ -1917,7 +1918,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.REDUNDANT);
 
@@ -1945,7 +1946,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD);
 
@@ -1973,7 +1974,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FULLMANDATORY);
 
@@ -2001,7 +2002,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
 
@@ -2029,7 +2030,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FALSEOPTIONAL);
 
@@ -2057,7 +2058,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD,
                 AnomalyType.REDUNDANT);
@@ -2086,7 +2087,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD,
                 AnomalyType.FULLMANDATORY,
@@ -2116,7 +2117,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.DEAD,
                 AnomalyType.FULLMANDATORY);
@@ -2147,7 +2148,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.VOID);
 
@@ -2175,7 +2176,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generate analyses and run the analyzer
@@ -2184,7 +2185,7 @@ class FMAnalyzerTest {
         // print the result
         RawExplanation explanation = new RawExplanation();
         for (AnomalyType option : options) {
-            Class<? extends AbstractFMAnalysis<?>> analysisClass =
+            Class<?> analysisClass =
             switch(option) {
                 case VOID -> VoidFMAnalysis.class;
                 case DEAD -> DeadFeatureAnalysis.class;

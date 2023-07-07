@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.test.writer;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fm.builder.IFeatureBuildable;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -47,7 +48,7 @@ class XMLAssumptionAwareTestSuiteWriterTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.allOf(AnomalyType.class);
         // generate analyses and run the analyzer
@@ -58,12 +59,12 @@ class XMLAssumptionAwareTestSuiteWriterTest {
         System.out.println(explanation.getDescriptiveExplanation(analyzer.getAnalyses(), options));
 
         // print out all test cases
-        for (AbstractFMAnalysis<?> analysis : analyzer.getAnalyses()) {
+        for (AbstractFMAnalysis<ITestCase, AnomalyAwareFeature> analysis : analyzer.getAnalyses()) {
             System.out.println(analysis);
         }
 
         // write the test suite
-        XMLAssumptionAwareTestSuiteWriter writer = new XMLAssumptionAwareTestSuiteWriter();
+        XMLAssumptionAwareTestSuiteWriter<AnomalyAwareFeature> writer = new XMLAssumptionAwareTestSuiteWriter<>();
         writer.write(AnalysisUtils.getTestcases(analyzer.getAnalyses()), "src/test/resources/testsuite_multiple1.xml");
     }
 }

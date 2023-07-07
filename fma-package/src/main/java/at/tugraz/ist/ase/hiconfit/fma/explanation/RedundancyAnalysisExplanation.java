@@ -8,11 +8,13 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.explanation;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.common.ConsoleColors;
 import at.tugraz.ist.ase.hiconfit.common.ConstraintUtils;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AbstractFMAnalysis;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.AnalysisUtils;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.RedundancyAnalysis;
+import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.explanator.ExplanationColors;
 import lombok.NonNull;
@@ -21,10 +23,11 @@ import java.util.List;
 
 public class RedundancyAnalysisExplanation implements IAnalysisExplanable {
     @Override
-    public String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<?>> analyses,
-                                            @NonNull Class<? extends AbstractFMAnalysis<?>> analysisClass,
-                                            @NonNull AnomalyType anomalyType) {
-        RedundancyAnalysis analysis = (RedundancyAnalysis) AnalysisUtils.getAnalyses(analyses, analysisClass).get(0);
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<T, F>> analyses,
+                                     @NonNull Class<?> analysisClass,
+                                     @NonNull AnomalyType anomalyType) {
+        RedundancyAnalysis<T, F> analysis = (RedundancyAnalysis<T, F>) AnalysisUtils.getAnalyses(analyses, analysisClass).get(0);
 
         StringBuilder sb = new StringBuilder();
         if (analysis != null) {

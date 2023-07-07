@@ -33,11 +33,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Slf4j
-public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
+public class XMLAssumptionAwareTestCaseBuilder<F extends AnomalyAwareFeature>
+        implements ITestCaseBuildable {
     @Getter
-    private final FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel;
+    private final FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel;
 
-    public XMLAssumptionAwareTestCaseBuilder(FeatureModel<AnomalyAwareFeature, AbstractRelationship<AnomalyAwareFeature>, CTConstraint> featureModel) {
+    public XMLAssumptionAwareTestCaseBuilder(FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel) {
         this.featureModel = featureModel;
     }
 
@@ -52,13 +53,13 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
         String anomalyString = testcaseEle.getAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ANOMALY);
         IAnomalyType anomalyType = AnomalyType.valueOf(anomalyString);
 
-        Pair<List<Assignment>, List<AnomalyAwareFeature>> splitTestCases = splitTestCase(testcaseEle);
+        Pair<List<Assignment>, List<F>> splitTestCases = splitTestCase(testcaseEle);
 
-        AssumptionAwareTestCase testCase = AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
+        AssumptionAwareTestCase<F> testCase = (AssumptionAwareTestCase<F>) AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                 .testcase(anomalyString.equals("REDUNDANT") ? "RedundancyAnalysis" : testCaseNodeToString(testcaseEle))
                 .anomalyType(anomalyType)
                 .assignments(splitTestCases.getValue0())
-                .assumptions(splitTestCases.getValue1())
+                .assumptions((List<AnomalyAwareFeature>) splitTestCases.getValue1())
                 .build();
 
         LoggerUtils.outdent();
@@ -67,8 +68,8 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
         return testCase;
     }
 
-    private Pair<List<Assignment>, List<AnomalyAwareFeature>> splitTestCase(Element testcase) {
-        List<AnomalyAwareFeature> assumptions = new LinkedList<>();
+    private Pair<List<Assignment>, List<F>> splitTestCase(Element testcase) {
+        List<F> assumptions = new LinkedList<>();
         for (int assumptionIndex = 0; assumptionIndex  < testcase.getElementsByTagName(XMLAssumptionAwareTestSuiteFormat.TAG_ASSUMPTION).getLength(); assumptionIndex ++) {
             Element assumptionEle = (Element) testcase.getElementsByTagName(XMLAssumptionAwareTestSuiteFormat.TAG_ASSUMPTION).item(assumptionIndex);
 
@@ -76,7 +77,7 @@ public class XMLAssumptionAwareTestCaseBuilder implements ITestCaseBuildable {
             String id = assumptionEle.getAttribute(XMLAssumptionAwareTestSuiteFormat.ATT_ID);
 
             try {
-                AnomalyAwareFeature feature = featureModel.getFeature(id);
+                F feature = featureModel.getFeature(id);
                 if (!feature.getName().equals(name)) {
                     throw new RuntimeException("Feature has different name in feature model and test cases!");
                 }

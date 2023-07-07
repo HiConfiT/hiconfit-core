@@ -8,6 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.test.reader;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.fm.builder.IFeatureBuildable;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
@@ -51,13 +52,13 @@ class XMLAssumptionAwareTestSuiteReaderTest {
                 featureModel = parser.parse(fileFM);
 
         // write the test suite
-        XMLAssumptionAwareTestSuiteReader reader = new XMLAssumptionAwareTestSuiteReader(featureModel);
-        XMLAssumptionAwareTestCaseBuilder testCaseFactory = new XMLAssumptionAwareTestCaseBuilder(featureModel);
+        XMLAssumptionAwareTestSuiteReader reader = new XMLAssumptionAwareTestSuiteReader();
+        XMLAssumptionAwareTestCaseBuilder<AnomalyAwareFeature> testCaseFactory = new XMLAssumptionAwareTestCaseBuilder<>(featureModel);
         @Cleanup InputStream is = getInputStream(XMLAssumptionAwareTestSuiteReader.class.getClassLoader(), "testsuite_multiple1.xml");
         TestSuite testSuite = reader.read(is, testCaseFactory);
 
         // create an analyzer
-        FMAnalyzer analyzer = new FMAnalyzer(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // get anomaly types from test suite
         EnumSet<AnomalyType> options = TestSuiteUtils.getAnomalyTypes(testSuite);

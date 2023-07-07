@@ -23,11 +23,11 @@ import lombok.NonNull;
  */
 public class FMParserFactory<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> {
 
-    private final IFeatureBuildable featureBuilder; // Builder for creating features
-    private final IRelationshipBuildable relationshipBuilder; // Builder for creating relationships
-    private final IConstraintBuildable constraintBuilder; // Builder for creating constraints
+    protected final IFeatureBuildable featureBuilder; // Builder for creating features
+    protected final IRelationshipBuildable relationshipBuilder; // Builder for creating relationships
+    protected final IConstraintBuildable constraintBuilder; // Builder for creating constraints
 
-    private FMParserFactory(@NonNull IFeatureBuildable featureBuilder,
+    protected FMParserFactory(@NonNull IFeatureBuildable featureBuilder,
                             @NonNull IRelationshipBuildable relationshipBuilder,
                             @NonNull IConstraintBuildable constraintBuilder) {
         this.featureBuilder = featureBuilder;

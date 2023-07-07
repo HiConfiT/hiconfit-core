@@ -8,7 +8,9 @@
 
 package at.tugraz.ist.ase.hiconfit.fma.explanation;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.fma.analysis.*;
+import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
 import lombok.NonNull;
 
@@ -16,8 +18,9 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class AutomatedAnalysisExplanation {
-    public String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<?>> analyses,
-                                            @NonNull EnumSet<AnomalyType> anomalyTypes) {
+    public <T extends ITestCase, F extends AnomalyAwareFeature>
+    String getDescriptiveExplanation(@NonNull List<AbstractFMAnalysis<T, F>> analyses,
+                                     @NonNull EnumSet<AnomalyType> anomalyTypes) {
         StringBuilder sb = new StringBuilder();
         IAnalysisExplanable explanable;
         for (AnomalyType anomalyType : anomalyTypes) {
@@ -26,7 +29,7 @@ public class AutomatedAnalysisExplanation {
                     explanable = new VoidFMExplanation();
                     sb.append(explanable.getDescriptiveExplanation(analyses, VoidFMAnalysis.class, anomalyType));
 
-                    VoidFMAnalysis analysis = (VoidFMAnalysis) AnalysisUtils.getAnalyses(analyses, VoidFMAnalysis.class).get(0);
+                    VoidFMAnalysis<T, F> analysis = (VoidFMAnalysis<T, F>) AnalysisUtils.getAnalyses(analyses, VoidFMAnalysis.class).get(0);
                     if (analysis != null && !analysis.isNon_violated()) {
                         return sb.toString();
                     }

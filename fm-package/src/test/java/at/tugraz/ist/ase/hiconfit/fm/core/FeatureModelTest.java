@@ -64,6 +64,8 @@ public class FeatureModelTest {
         fm.addRequires(ABtesting, statistics);
         fm.addExcludes(ABtesting, nonlicense);
         fm.addExcludes(ABtesting, root);
+
+        fm.buildDepthFirstFeatures();
     }
 
     @Test
@@ -123,6 +125,20 @@ public class FeatureModelTest {
                 """;
 
         assertEquals(expected, fm.toString());
+    }
+
+    @Test
+    void testDfFeatures() {
+        List<Feature> dfFeatures = fm.getDfFeatures();
+        assertEquals(dfFeatures.get(0), root);
+        assertEquals(dfFeatures.get(1), pay);
+        assertEquals(dfFeatures.get(2), license);
+        assertEquals(dfFeatures.get(3), nonlicense);
+        assertEquals(dfFeatures.get(4), ABtesting);
+        assertEquals(dfFeatures.get(5), statistics);
+        assertEquals(dfFeatures.get(6), qa);
+        assertEquals(dfFeatures.get(7), multiplechoice);
+        assertEquals(dfFeatures.get(8), singlechoice);
     }
 
     @Test
