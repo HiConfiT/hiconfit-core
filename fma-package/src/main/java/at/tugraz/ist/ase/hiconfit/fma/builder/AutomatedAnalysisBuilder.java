@@ -116,7 +116,7 @@ public class AutomatedAnalysisBuilder {
 //        // print the result
 //        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
 //        if (analysis.get()) {
-//            System.out.println(ExplanationColors.OK + "\u2713 Consistency: ok");
+//            System.out.println(ExplanationColors.OK + "✓ Consistency: ok");
 //        } else {
 //            System.out.println(ExplanationColors.ANOMALY + "X Void feature model");
 //            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(explanator.get(), "void feature model"));
@@ -332,7 +332,7 @@ public class AutomatedAnalysisBuilder {
 //        // print the result
 //        ExplanationColors.EXPLANATION = ConsoleColors.WHITE;
 //        if (analysis.get()) {
-//            System.out.println(ExplanationColors.OK + "\u2713 Consistency: ok");
+//            System.out.println(ExplanationColors.OK + "✓ Consistency: ok");
 //        } else {
 //            System.out.println(ExplanationColors.ANOMALY + "X Void feature model");
 //            System.out.println(ExplanationUtils.convertToDescriptiveExplanation(explanator.get(), "void feature model"));
@@ -514,7 +514,7 @@ public class AutomatedAnalysisBuilder {
 //        }
 //
 //        if (!anomalyFound) {
-//            System.out.println(ConsoleColors.GREEN + "\u2713 No anomaly found" + ConsoleColors.RESET);
+//            System.out.println(ConsoleColors.GREEN + "✓ No anomaly found" + ConsoleColors.RESET);
 //        }
 //    }
 }

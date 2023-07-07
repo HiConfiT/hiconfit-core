@@ -54,7 +54,6 @@ public class XMLAssumptionAwareTestCaseBuilder<F extends AnomalyAwareFeature>
         IAnomalyType anomalyType = AnomalyType.valueOf(anomalyString);
 
         Pair<List<Assignment>, List<F>> splitTestCases = splitTestCase(testcaseEle);
-        List<F> assumptions = splitTestCases.getValue1();
 
         AssumptionAwareTestCase<F> testCase = (AssumptionAwareTestCase<F>) AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
                 .testcase(anomalyString.equals("REDUNDANT") ? "RedundancyAnalysis" : testCaseNodeToString(testcaseEle))

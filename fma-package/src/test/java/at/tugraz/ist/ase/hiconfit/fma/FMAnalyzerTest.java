@@ -249,7 +249,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<ITestCase, AnomalyAwareFeature>(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         // generates analyses and add them to the analyzer
         // USING the DeadFeatureAnalysisBuilder
@@ -835,7 +835,7 @@ class FMAnalyzerTest {
                 featureModel = parser.parse(fileFM);
 
         // create an analyzer
-        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<ITestCase, AnomalyAwareFeature>(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.FULLMANDATORY);
 
@@ -1123,7 +1123,7 @@ class FMAnalyzerTest {
 //        featureModel.getFeature("Step-through").setAnomalyType(AnomalyType.DEAD);
 
         // create an analyzer
-        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<ITestCase, AnomalyAwareFeature>(featureModel);
+        FMAnalyzer<ITestCase, AnomalyAwareFeature> analyzer = new FMAnalyzer<>(featureModel);
 
         EnumSet<AnomalyType> options = EnumSet.of(AnomalyType.CONDITIONALLYDEAD);
 
@@ -1590,7 +1590,7 @@ class FMAnalyzerTest {
     }
 
     @Test
-    void testRedundancy_0() throws FeatureModelParserException, ExecutionException, InterruptedException, CloneNotSupportedException {
+    void testRedundancy_0() throws FeatureModelParserException, ExecutionException, InterruptedException {
         // load the feature model
         File fileFM = new File("src/test/resources/bamboobike_featureide_deadfeature2.xml");
 

@@ -53,7 +53,7 @@ public class DeadFeatureAnalysis<T extends ITestCase, F extends AnomalyAwareFeat
         }
 
         if (withDiagnosis && !non_violated) { // create an explanator and execute it
-            explanator = new DeadFeatureExplanator((FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>) model, assumption);
+            explanator = new DeadFeatureExplanator<>((FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>) model, assumption);
 
             explanator.identify();
             log.trace("{}Identified diagnoses for [assumption=[{}]]", LoggerUtils.tab(), assumption);
