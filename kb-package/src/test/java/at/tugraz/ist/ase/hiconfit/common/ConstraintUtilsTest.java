@@ -34,6 +34,7 @@ class ConstraintUtilsTest {
     static Set<Constraint> diag7;
 
     static List<Set<Constraint>> allDiag;
+    static List<Set<Constraint>> allDiag1;
 
     @BeforeAll
     static void setUp() {
@@ -46,6 +47,7 @@ class ConstraintUtilsTest {
         diag2 = Set.of(c2, c3);
 
         allDiag = List.of(diag1, diag2);
+        allDiag1 = List.of(diag1);
 
         diag3 = Set.of(c2, c3);
         diag4 = Set.of(c1, c3); // no way
@@ -69,8 +71,9 @@ class ConstraintUtilsTest {
 
         assertAll(() -> Assertions.assertTrue(ConstraintUtils.containsAll(allDiag, diag1), "[containsAll] allDiag doesn't contain diag1"),
                 () -> Assertions.assertTrue(ConstraintUtils.containsAll(allDiag, diag2), "[containsAll] allDiag doesn't contain diag2"),
-                () -> Assertions.assertTrue(ConstraintUtils.containsAll(allDiag, diag3), "[containsAll] allDiag contains diag3"),
-                () -> Assertions.assertTrue(ConstraintUtils.containsAll(allDiag, diag4), "[containsAll] allDiag doesn't contain diag4"),
+                () -> Assertions.assertTrue(ConstraintUtils.containsAll(allDiag, diag3), "[containsAll] allDiag doesn't contains diag3"),
+                () -> Assertions.assertFalse(ConstraintUtils.containsAll(allDiag1, diag3), "[containsAll] allDiag1 doesn't contains diag3"),
+                () -> Assertions.assertFalse(ConstraintUtils.containsAll(allDiag, diag4), "[containsAll] allDiag doesn't contain diag4"),
                 () -> Assertions.assertFalse(ConstraintUtils.containsAll(allDiag, diag5), "[containsAll] allDiag contains diag5"),
                 () -> Assertions.assertFalse(ConstraintUtils.containsAll(allDiag, diag6), "[containsAll] allDiag contains diag6"),
 
@@ -85,7 +88,7 @@ class ConstraintUtilsTest {
         assertAll(() -> Assertions.assertFalse(ConstraintUtils.isMinimal(diag3, allDiag)),
                 () -> Assertions.assertTrue(ConstraintUtils.isMinimal(diag4, allDiag)));
 
-        assertAll(() -> Assertions.assertTrue(ConstraintUtils.containsAll(allDiag, diag4)), // no way
+        assertAll(() -> Assertions.assertFalse(ConstraintUtils.containsAll(allDiag, diag4)), // no way
                 () -> Assertions.assertTrue(ConstraintUtils.isMinimal(diag4, allDiag)));
 
         assertAll(() -> Assertions.assertFalse(ConstraintUtils.containsAll(allDiag, diag5)), // new diagnosis, new conflict set

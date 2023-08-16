@@ -218,8 +218,9 @@ public final class ConstraintUtils {
     }
 
     // TODO: generic method - T needs to have equals and hashCode methods
+    // TODO:
     public boolean containsAll(List<Set<Constraint>> allCstrSets, Set<Constraint> cstrSet) {
-        return allCstrSets.parallelStream().anyMatch(adiag -> adiag.containsAll(cstrSet));
+        return allCstrSets.parallelStream().anyMatch(adiag -> adiag.size() == cstrSet.size() && adiag.containsAll(cstrSet));
     }
 
     // TODO: generic method - T needs to have equals and hashCode methods
