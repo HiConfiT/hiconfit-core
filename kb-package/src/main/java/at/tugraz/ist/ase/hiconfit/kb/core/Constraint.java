@@ -52,6 +52,13 @@ public class Constraint {
         return chocoConstraints.contains(constraint);
     }
 
+    public Constraint withConstraint(@NonNull String constraint) {
+        Constraint cstr = Constraint.builder().constraint(constraint).build();
+        cstr.chocoConstraints = chocoConstraints;
+        cstr.negChocoConstraints = negChocoConstraints;
+        return cstr;
+    }
+
     @Override
     public String toString() {
         return constraint;
