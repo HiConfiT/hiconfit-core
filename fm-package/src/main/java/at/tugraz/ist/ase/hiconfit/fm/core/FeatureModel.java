@@ -18,6 +18,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
@@ -66,6 +67,12 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         this.featureBuilder = featureBuilder;
         this.relationshipBuilder = relationshipBuilder;
         this.constraintBuilder = constraintBuilder;
+    }
+
+    // TODO: test
+    public int getDepth() {
+        // max(len(get_feature_ancestors(f)) for f in get_leaf_features(feature_model))
+        return getLeafFeatures().parallelStream().mapToInt(f -> getAncestors(f).size()).max().orElse(0);
     }
 
     public boolean hasRoot() {
@@ -181,6 +188,27 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
      */
     public int getNumOfLeaf() {
         return (int) bfFeatures.parallelStream().filter(F::isLeaf).count();
+    }
+
+    // TODO: test
+    public List<Feature> getLeafFeatures() {
+        return bfFeatures.stream().filter(Feature::isLeaf).collect(Collectors.toList());
+    }
+
+    // TODO: test
+    public List<Feature> getAncestors(Feature feature) {
+        List<Feature> ancestors = new ArrayList<>();
+        Feature parent = feature.getParent();
+        while (!parent.isRoot()) {
+            if (!ancestors.contains(parent)) {
+                ancestors.add(parent);
+            }
+
+            parent = parent.getParent();
+        }
+        // add the root feature
+        ancestors.add(parent);
+        return ancestors;
     }
 
     /**

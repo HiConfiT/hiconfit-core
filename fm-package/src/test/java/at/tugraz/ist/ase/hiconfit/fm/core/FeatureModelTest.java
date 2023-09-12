@@ -128,6 +128,46 @@ public class FeatureModelTest {
     }
 
     @Test
+    void testGetDepth() {
+        assertEquals(2, fm.getDepth());
+    }
+
+    @Test
+    void testLeafFeatures() {
+        List<Feature> leafFeatures = fm.getLeafFeatures();
+        assertEquals(5, leafFeatures.size());
+//        assertEquals(leafFeatures.get(0), ABtesting); // due to the optional(ABtesting, statistics)
+        assertEquals(leafFeatures.get(1), statistics);
+        assertEquals(leafFeatures.get(2), license);
+        assertEquals(leafFeatures.get(3), nonlicense);
+        assertEquals(leafFeatures.get(4), multiplechoice);
+        assertEquals(leafFeatures.get(5), singlechoice);
+    }
+
+    @Test
+    void testGetAncestors() {
+        List<Feature> ancestors = fm.getAncestors(singlechoice);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), qa);
+        assertEquals(ancestors.get(1), root);
+
+        ancestors = fm.getAncestors(multiplechoice);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), qa);
+        assertEquals(ancestors.get(1), root);
+
+        ancestors = fm.getAncestors(statistics);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), ABtesting);
+        assertEquals(ancestors.get(1), root);
+
+        ancestors = fm.getAncestors(license);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), pay);
+        assertEquals(ancestors.get(1), root);
+    }
+
+    @Test
     void testDfFeatures() {
         List<Feature> dfFeatures = fm.getDfFeatures();
         assertEquals(dfFeatures.get(0), root);
