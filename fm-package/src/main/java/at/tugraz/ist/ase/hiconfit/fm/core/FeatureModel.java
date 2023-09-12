@@ -214,8 +214,9 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         List<Feature> ancestors = getAncestors(feature);
         Collections.reverse(ancestors);
 
-        if (level < 0 || ancestors.size() < level) return null;
-        if (level == this.getFeatureLevel(feature)) return feature;
+        if (level < 0) return null;
+//        || ancestors.size() < level
+        if (level >= this.getFeatureLevel(feature)) return feature;
         return ancestors.get(level);
     }
 
