@@ -168,6 +168,19 @@ public class FeatureModelTest {
     }
 
     @Test
+    void testGetFeatureLevel() {
+        assertEquals(2, fm.getFeatureLevel(singlechoice));
+        assertEquals(2, fm.getFeatureLevel(multiplechoice));
+        assertEquals(2, fm.getFeatureLevel(statistics)); // due to the optional(ABtesting, statistics)
+        assertEquals(1, fm.getFeatureLevel(ABtesting));
+        assertEquals(2, fm.getFeatureLevel(license));
+        assertEquals(2, fm.getFeatureLevel(nonlicense));
+        assertEquals(1, fm.getFeatureLevel(qa));
+        assertEquals(1, fm.getFeatureLevel(pay));
+        assertEquals(0, fm.getFeatureLevel(root));
+    }
+
+    @Test
     void testDfFeatures() {
         List<Feature> dfFeatures = fm.getDfFeatures();
         assertEquals(dfFeatures.get(0), root);

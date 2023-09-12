@@ -69,10 +69,12 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         this.constraintBuilder = constraintBuilder;
     }
 
-    // TODO: test
     public int getDepth() {
-        // max(len(get_feature_ancestors(f)) for f in get_leaf_features(feature_model))
         return getLeafFeatures().parallelStream().mapToInt(f -> getAncestors(f).size()).max().orElse(0);
+    }
+
+    public int getFeatureLevel(Feature feature) {
+        return this.getAncestors(feature).size();
     }
 
     public boolean hasRoot() {
@@ -190,15 +192,15 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return (int) bfFeatures.parallelStream().filter(F::isLeaf).count();
     }
 
-    // TODO: test
     public List<Feature> getLeafFeatures() {
         return bfFeatures.stream().filter(Feature::isLeaf).collect(Collectors.toList());
     }
 
-    // TODO: test
     public List<Feature> getAncestors(Feature feature) {
         List<Feature> ancestors = new ArrayList<>();
         Feature parent = feature.getParent();
+        if (parent == null) return ancestors;
+
         while (!parent.isRoot()) {
             if (!ancestors.contains(parent)) {
                 ancestors.add(parent);
