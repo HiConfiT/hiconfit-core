@@ -213,7 +213,7 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         log.trace("{}<<< Created constraints", LoggerUtils.tab());
     }
 
-    private LogOp convertToLopOp(ASTNode cnf, boolean isNot) {
+    protected LogOp convertToLopOp(ASTNode cnf, boolean isNot) {
         LogOp logOp;
         ASTNode left = cnf.getLeft();
         ASTNode right = cnf.getRight();
@@ -368,7 +368,7 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
      * @return the corresponding ChocoSolver variable in the model or null
      * @throws IllegalArgumentException when couldn't find the variable in the model
      */
-    private BoolVar getVarWithName(String name) throws IllegalArgumentException {
+    protected BoolVar getVarWithName(String name) throws IllegalArgumentException {
         for (Variable v : this.getVariableList()) {
             if (v.getName().equals(name)) {
                 return ((BoolVariable) v).getChocoVar();

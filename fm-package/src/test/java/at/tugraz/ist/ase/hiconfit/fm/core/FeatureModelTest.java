@@ -168,6 +168,25 @@ public class FeatureModelTest {
     }
 
     @Test
+    void testGetSuccessor() {
+        assertNull(fm.getSuccessor(singlechoice, 2));
+        assertEquals(qa, fm.getSuccessor(singlechoice, 1));
+        assertEquals(root, fm.getSuccessor(singlechoice, 0));
+
+        assertNull(fm.getSuccessor(ABtesting, 2));
+        assertNull(fm.getSuccessor(ABtesting, 1));
+        assertEquals(root, fm.getSuccessor(ABtesting, 0));
+
+        assertNull(fm.getSuccessor(root, 2));
+        assertNull(fm.getSuccessor(root, 1));
+        assertNull(fm.getSuccessor(root, 0));
+
+        assertNull(fm.getSuccessor(pay, 2));
+        assertNull(fm.getSuccessor(pay, 1));
+        assertEquals(root, fm.getSuccessor(pay, 0));
+    }
+
+    @Test
     void testGetFeatureLevel() {
         assertEquals(2, fm.getFeatureLevel(singlechoice));
         assertEquals(2, fm.getFeatureLevel(multiplechoice));

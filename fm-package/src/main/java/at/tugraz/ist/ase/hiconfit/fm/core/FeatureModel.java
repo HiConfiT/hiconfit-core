@@ -18,10 +18,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -211,6 +208,14 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         // add the root feature
         ancestors.add(parent);
         return ancestors;
+    }
+
+    public Feature getSuccessor(Feature feature, int level) {
+        List<Feature> ancestors = getAncestors(feature);
+        Collections.reverse(ancestors);
+
+        if (level < 0 || ancestors.size() <= level) return null;
+        return ancestors.get(level);
     }
 
     /**
