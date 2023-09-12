@@ -137,11 +137,11 @@ public class FeatureModelTest {
         List<Feature> leafFeatures = fm.getLeafFeatures();
         assertEquals(5, leafFeatures.size());
 //        assertEquals(leafFeatures.get(0), ABtesting); // due to the optional(ABtesting, statistics)
-        assertEquals(leafFeatures.get(1), statistics);
-        assertEquals(leafFeatures.get(2), license);
-        assertEquals(leafFeatures.get(3), nonlicense);
-        assertEquals(leafFeatures.get(4), multiplechoice);
-        assertEquals(leafFeatures.get(5), singlechoice);
+        assertEquals(leafFeatures.get(0), statistics);
+        assertEquals(leafFeatures.get(1), license);
+        assertEquals(leafFeatures.get(2), nonlicense);
+        assertEquals(leafFeatures.get(3), multiplechoice);
+        assertEquals(leafFeatures.get(4), singlechoice);
     }
 
     @Test
