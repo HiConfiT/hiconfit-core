@@ -31,7 +31,13 @@ public class FMSolutionTranslator implements ISolutionTranslatable {
     @Override
     public Constraint translate(@NonNull Solution solution, @NonNull KB kb) {
         log.trace("{}Translating solution [solution={}] >>>", LoggerUtils.tab(), solution);
-        Constraint constraint = new Constraint(solution.toString());
+
+        // gets List<String> variables from solution
+        List<String> variables = solution.getAssignments().stream()
+                .map(Assignment::getVariable)
+                .toList();
+
+        Constraint constraint = new Constraint(solution.toString(), variables);
 
         translator.translate(solution.getAssignments(), kb,
                 constraint.getChocoConstraints(), constraint.getNegChocoConstraints());
@@ -57,7 +63,7 @@ public class FMSolutionTranslator implements ISolutionTranslatable {
         List<Constraint> constraints = new LinkedList<>();
 
         for (Assignment assign: solution.getAssignments()) {
-            Constraint constraint = new Constraint(assign.toString());
+            Constraint constraint = new Constraint(assign.toString(), List.of(assign.getVariable()));
 
             translator.translate(assign, kb,
                     constraint.getChocoConstraints(), constraint.getNegChocoConstraints());

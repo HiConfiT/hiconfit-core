@@ -16,10 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -547,7 +544,7 @@ public class PCKB extends KB implements IIntVarKB {
                 configurationList.get(11), configurationList.get(12));
 
 //        addConstraint("constraint 1", chocoConstraint, startIdx, hasNegativeConstraints);
-        Constraint constraint = IntVarConstraintBuilder.build("constraint 1", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        Constraint constraint = IntVarConstraintBuilder.build("constraint 1", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 2
@@ -563,7 +560,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(16)).getChocoVar(),"=", 5), this.modelKB.arithm(((IntVariable)variableList.get(17)).getChocoVar(),"=", 0), this.modelKB.arithm(((IntVariable)variableList.get(18)).getChocoVar(),"=", 800)));
 
 //        addConstraint("constraint 2", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 2", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 2", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 3
@@ -579,7 +576,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(19)).getChocoVar(),"=", 4), this.modelKB.arithm(((IntVariable)variableList.get(20)).getChocoVar(),"=", 0), this.modelKB.arithm(((IntVariable)variableList.get(21)).getChocoVar(),"=", 4096)));
 
 //        addConstraint("constraint 3", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 3", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 3", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 4
@@ -595,7 +592,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(22)).getChocoVar(),"=", 4), this.modelKB.arithm(((IntVariable)variableList.get(23)).getChocoVar(),"=", 0), this.modelKB.arithm(((IntVariable)variableList.get(24)).getChocoVar(),"=", 4096)));
 
 //        addConstraint("constraint 4", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 4", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 4", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 5
@@ -611,7 +608,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(25)).getChocoVar(),"=", 1), this.modelKB.arithm(((IntVariable)variableList.get(26)).getChocoVar(),"=", 2), this.modelKB.arithm(((IntVariable)variableList.get(27)).getChocoVar(),"=", 8)));
 
 //        addConstraint("constraint 5", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 5", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 5", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 6
@@ -627,7 +624,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(28)).getChocoVar(),"=", 1), this.modelKB.arithm(((IntVariable)variableList.get(29)).getChocoVar(),"=", 2), this.modelKB.arithm(((IntVariable)variableList.get(30)).getChocoVar(),"=", 8)));
 
 //        addConstraint("constraint 6", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 6", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 6", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 7
@@ -643,7 +640,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(31)).getChocoVar(),"=", 1), this.modelKB.arithm(((IntVariable)variableList.get(32)).getChocoVar(),"=", 2), this.modelKB.arithm(((IntVariable)variableList.get(33)).getChocoVar(),"=", 8)));
 
 //        addConstraint("constraint 7", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 7", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 7", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 8
@@ -659,7 +656,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(34)).getChocoVar(),"=", 1), this.modelKB.arithm(((IntVariable)variableList.get(35)).getChocoVar(),"=", 2), this.modelKB.arithm(((IntVariable)variableList.get(36)).getChocoVar(),"=", 8)));
 
 //        addConstraint("constraint 8", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 8", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 8", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 9
@@ -674,7 +671,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(37)).getChocoVar(),"=", 1), this.modelKB.arithm(((IntVariable)variableList.get(38)).getChocoVar(),"=", 3)));
 
 //        addConstraint("constraint 9", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 9", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 9", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 10
@@ -682,7 +679,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.and(this.modelKB.arithm(((IntVariable)variableList.get(1)).getChocoVar(),"=", ((IntVariable)variableList.get(17)).getChocoVar()), this.modelKB.arithm(((IntVariable)variableList.get(18)).getChocoVar(),">=", ((IntVariable)variableList.get(12)).getChocoVar()), this.modelKB.arithm(((IntVariable)variableList.get(18)).getChocoVar(),"<=", ((IntVariable)variableList.get(13)).getChocoVar()));
 
 //        addConstraint("constraint 10", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 10", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 10", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 11
@@ -690,7 +687,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(2)).getChocoVar(),"=", ((IntVariable)variableList.get(20)).getChocoVar());
 
 //        addConstraint("constraint 11", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 11", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 11", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 12
@@ -698,7 +695,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(2)).getChocoVar(),"=", ((IntVariable)variableList.get(23)).getChocoVar());
 
 //        addConstraint("constraint 12", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 12", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 12", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 13
@@ -706,7 +703,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(14)).getChocoVar(),"=", ((IntVariable)variableList.get(26)).getChocoVar());
 
 //        addConstraint("constraint 13", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 13", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 13", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 14
@@ -714,7 +711,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(14)).getChocoVar(),"=", ((IntVariable)variableList.get(29)).getChocoVar());
 
 //        addConstraint("constraint 14", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 14", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 14", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 15
@@ -722,7 +719,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(14)).getChocoVar(),"=", ((IntVariable)variableList.get(32)).getChocoVar());
 
 //        addConstraint("constraint 15", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 15", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 15", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 16
@@ -730,7 +727,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(14)).getChocoVar(),"=", ((IntVariable)variableList.get(35)).getChocoVar());
 
 //        addConstraint("constraint 16", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 16", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 16", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 17
@@ -738,7 +735,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(41)).getChocoVar(),"=", 512), this.modelKB.arithm(((IntVariable)variableList.get(25)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 17", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 17", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 17", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 18
@@ -746,7 +743,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(41)).getChocoVar(),"=", 1024), this.modelKB.arithm(((IntVariable)variableList.get(25)).getChocoVar(),"<", 1));
 
 //        addConstraint("constraint 18", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 18", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 18", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 19
@@ -754,7 +751,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(42)).getChocoVar(),"=", 512), this.modelKB.arithm(((IntVariable)variableList.get(28)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 19", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 19", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 19", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 20
@@ -762,7 +759,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(42)).getChocoVar(),"=", 1024), this.modelKB.arithm(((IntVariable)variableList.get(28)).getChocoVar(),"<", 1));
 
 //        addConstraint("constraint 20", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 20", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 20", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 21
@@ -770,7 +767,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(43)).getChocoVar(),"=", 512), this.modelKB.arithm(((IntVariable)variableList.get(31)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 21", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 21", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 21", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 22
@@ -778,7 +775,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(43)).getChocoVar(),"=", 1024), this.modelKB.arithm(((IntVariable)variableList.get(31)).getChocoVar(),"<", 1));
 
 //        addConstraint("constraint 22", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 22", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 22", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 23
@@ -786,7 +783,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(44)).getChocoVar(),"=", 512), this.modelKB.arithm(((IntVariable)variableList.get(34)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 23", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 23", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 23", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 24
@@ -794,7 +791,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.arithm(((IntVariable)variableList.get(44)).getChocoVar(),"=", 1024), this.modelKB.arithm(((IntVariable)variableList.get(34)).getChocoVar(),"<", 1));
 
 //        addConstraint("constraint 24", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 24", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 24", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 25
@@ -809,7 +806,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(15)).getChocoVar(), ">=", sum);
 
 //        addConstraint("constraint 25", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 25", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 25", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 26
@@ -817,7 +814,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.not(this.modelKB.arithm(((IntVariable)variableList.get(28)).getChocoVar(),">", 0)), this.modelKB.arithm(((IntVariable)variableList.get(25)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 26", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 26", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 26", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 27
@@ -825,7 +822,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.not(this.modelKB.arithm(((IntVariable)variableList.get(31)).getChocoVar(),">", 0)), this.modelKB.arithm(((IntVariable)variableList.get(25)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 27", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 27", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 27", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 28
@@ -833,7 +830,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.not(this.modelKB.arithm(((IntVariable)variableList.get(31)).getChocoVar(),">", 0)), this.modelKB.arithm(((IntVariable)variableList.get(28)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 28", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 28", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 28", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 29
@@ -841,7 +838,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.not(this.modelKB.arithm(((IntVariable)variableList.get(34)).getChocoVar(),">", 0)), this.modelKB.arithm(((IntVariable)variableList.get(25)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 29", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 29", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 29", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 30
@@ -849,7 +846,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.not(this.modelKB.arithm(((IntVariable)variableList.get(34)).getChocoVar(),">", 0)), this.modelKB.arithm(((IntVariable)variableList.get(28)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 30", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 30", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 30", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 31
@@ -857,7 +854,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.or(this.modelKB.not(this.modelKB.arithm(((IntVariable)variableList.get(34)).getChocoVar(),">", 0)), this.modelKB.arithm(((IntVariable)variableList.get(31)).getChocoVar(),">", 0));
 
 //        addConstraint("constraint 31", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 31", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 31", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 32
@@ -868,7 +865,7 @@ public class PCKB extends KB implements IIntVarKB {
                 this.modelKB.arithm(((IntVariable)variableList.get(9)).getChocoVar(),"=", ((IntVariable)variableList.get(38)).getChocoVar()), this.modelKB.arithm(((IntVariable)variableList.get(10)).getChocoVar(),"=", ((IntVariable)variableList.get(38)).getChocoVar()));
 
 //        addConstraint("constraint 32", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 32", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 32", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 33
@@ -876,7 +873,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(19)).getChocoVar(), ">", 0);
 
 //        addConstraint("constraint 33", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 33", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 33", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 34
@@ -884,7 +881,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(25)).getChocoVar(), ">", 0);
 
 //        addConstraint("constraint 34", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 34", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 34", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 35
@@ -892,7 +889,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(39)).getChocoVar(), ">", ((IntVariable)variableList.get(18)).getChocoVar());
 
 //        addConstraint("constraint 35", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 35", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 35", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         // Constraint 36
@@ -907,7 +904,7 @@ public class PCKB extends KB implements IIntVarKB {
         chocoConstraint = this.modelKB.arithm(((IntVariable)variableList.get(40)).getChocoVar(), "=", sum2);
 
 //        addConstraint("constraint 36", chocoConstraint, startIdx, hasNegativeConstraints);
-        constraint = IntVarConstraintBuilder.build("constraint 36", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        constraint = IntVarConstraintBuilder.build("constraint 36", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         LoggerUtils.outdent();

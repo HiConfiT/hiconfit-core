@@ -18,6 +18,7 @@ import at.tugraz.ist.ase.hiconfit.kb.core.KB;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class CameraSolutionTranslator implements ISolutionTranslatable {
         CameraKB cameraKB = (CameraKB) kb;
 
         log.trace("{}Translating solution [solution={}] >>>", LoggerUtils.tab(), solution);
-        Constraint constraint = new Constraint(solution.toString());
+        Constraint constraint = new Constraint(solution.toString(), Collections.emptyList());
 
         translator.translate(solution.getAssignments(), cameraKB,
                 constraint.getChocoConstraints(), constraint.getNegChocoConstraints());
@@ -68,7 +69,7 @@ public class CameraSolutionTranslator implements ISolutionTranslatable {
         List<Constraint> constraints = new LinkedList<>();
 
         for (Assignment assign: solution.getAssignments()) {
-            Constraint constraint = new Constraint(assign.toString());
+            Constraint constraint = new Constraint(assign.toString(), Collections.emptyList());
 
             translator.translate(assign, cameraKB,
                     constraint.getChocoConstraints(), constraint.getNegChocoConstraints());

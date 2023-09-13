@@ -129,6 +129,19 @@ class FMKBTest {
                 List.of("ARITHM ([Analog = 1])", "ARITHM ([not(Cellular) = 1])", "ARITHM ([not(Wifi) = 1])")
                 );
 
+        List<List<String>> expectedVariables = List.of(
+                List.of("Smartwatch", "Connector"),
+                List.of("Smartwatch", "Screen"),
+                List.of("Smartwatch", "Camera"),
+                List.of("Smartwatch", "Compass"),
+                List.of("Connector", "GPS", "Cellular", "Wifi", "Bluetooth"),
+                List.of("Screen", "Analog", "High Resolution", "E-ink"),
+                List.of("Camera", "High Resolution"),
+                List.of("Compass", "GPS"),
+                List.of("Analog", "Cellular"),
+                List.of("Analog", "Cellular", "Wifi")
+        );
+
         Assertions.assertEquals(10, kb.getNumConstraints());
 
         assertAll(() -> {
@@ -143,6 +156,13 @@ class FMKBTest {
                 List<String> expectedNeg = expectedNegConstraints.get(i);
                 for (int j = 0; j < expectedNeg.size(); j++) {
                     Assertions.assertEquals(expectedNeg.get(j), kb.getConstraint(i).getNegChocoConstraints().get(j).toString());
+                }
+            }},
+                () -> {
+            for (int i = 0; i < expectedVariables.size(); i++) {
+                List<String> expected = expectedVariables.get(i);
+                for (int j = 0; j < expected.size(); j++) {
+                    Assertions.assertEquals(expected.get(j), kb.getConstraint(i).getVariables().get(j));
                 }
             }}
         );

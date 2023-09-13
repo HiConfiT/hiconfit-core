@@ -14,6 +14,8 @@ import org.chocosolver.solver.Model;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestModel1Test {
@@ -29,11 +31,11 @@ class TestModel1Test {
         testModel = new TestModel1();
         testModel.initialize();
 
-        c1 = new Constraint("ARITHM ([x >= 2])");
-        c2 = new Constraint("ARITHM ([y >= x + 1])");
-        c3 = new Constraint("ARITHM ([x <= 0])");
-        c4 = new Constraint("ARITHM ([y = -10])");
-        c5 = new Constraint("ARITHM ([y = 10])");
+        c1 = new Constraint("ARITHM ([x >= 2])", List.of("x"));
+        c2 = new Constraint("ARITHM ([y >= x + 1])", List.of("x", "y"));
+        c3 = new Constraint("ARITHM ([x <= 0])", List.of("x"));
+        c4 = new Constraint("ARITHM ([y = -10])", List.of("y"));
+        c5 = new Constraint("ARITHM ([y = 10])", List.of("y"));
     }
 
     @Test

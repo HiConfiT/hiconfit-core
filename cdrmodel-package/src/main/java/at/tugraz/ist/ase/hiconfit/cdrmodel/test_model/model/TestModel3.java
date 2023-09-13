@@ -46,7 +46,7 @@ public class TestModel3 extends AbstractCDRModel implements IChocoModel, ITestMo
         // sets possibly faulty constraints to super class
         List<Constraint> C = new ArrayList<>();
         for (org.chocosolver.solver.constraints.Constraint c: model.getCstrs()) {
-            Constraint constraint = new Constraint(c.toString());
+            Constraint constraint = new Constraint(c.toString(), Collections.emptyList());
             constraint.addChocoConstraint(c);
 
             C.add(constraint);

@@ -20,6 +20,8 @@ import lombok.experimental.UtilityClass;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.nary.cnf.LogOp;
 
+import java.util.List;
+
 @UtilityClass
 public class BoolVarConstraintBuilder {
     /**
@@ -35,12 +37,14 @@ public class BoolVarConstraintBuilder {
      * @param hasNegativeConstraints Whether the constraint has negative constraints.
      * @return The {@link Constraint} object.
      */
-    public <F extends Feature> Constraint build(@NonNull AbstractRelationship<F> relationship, @NonNull Model modelKB,
+    public <F extends Feature> Constraint build(@NonNull AbstractRelationship<F> relationship,
+                                                @NonNull List<String> variables,
+                                                @NonNull Model modelKB,
                                                 @NonNull LogOp logOp, LogOp negLogOp,
                                                 int startIdx, boolean hasNegativeConstraints) {
         modelKB.addClauses(logOp);
 
-        Constraint constraint = new Constraint(relationship.toString());
+        Constraint constraint = new Constraint(relationship.toString(), variables);
 
         ConstraintUtils.addChocoConstraintsToConstraint(false, constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);
 
@@ -76,12 +80,14 @@ public class BoolVarConstraintBuilder {
      * @param hasNegativeConstraints Whether the constraint has negative constraints.
      * @return The {@link Constraint} object.
      */
-    public <C extends CTConstraint> Constraint build(@NonNull C cstr, @NonNull Model modelKB,
+    public <C extends CTConstraint> Constraint build(@NonNull C cstr,
+                                                     @NonNull List<String> variables,
+                                                     @NonNull Model modelKB,
                                                      @NonNull LogOp logOp, LogOp negLogOp,
                                                      int startIdx, boolean hasNegativeConstraints) {
         modelKB.addClauses(logOp);
 
-        Constraint constraint = new Constraint(cstr.toString());
+        Constraint constraint = new Constraint(cstr.toString(), variables);
 
         ConstraintUtils.addChocoConstraintsToConstraint(false, constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1);
 
