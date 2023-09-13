@@ -14,7 +14,7 @@
     <parent>
         <groupId>at.tugraz.ist.ase.hiconfit</groupId>
         <artifactId>hiconfit-core</artifactId>
-        <version>1.0.1-alpha-19</version>
+        <version>1.0.1-alpha-20</version>
     </parent>
 
     <artifactId>configurator</artifactId>

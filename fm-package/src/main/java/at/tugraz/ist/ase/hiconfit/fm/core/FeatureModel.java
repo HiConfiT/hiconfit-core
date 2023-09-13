@@ -210,7 +210,7 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         return ancestors;
     }
 
-    public Feature getSuccessor(Feature feature, int level) {
+    public Feature getAncestor(Feature feature, int level) {
         List<Feature> ancestors = getAncestors(feature);
         Collections.reverse(ancestors);
 
@@ -218,6 +218,21 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
 //        || ancestors.size() < level
         if (level >= this.getFeatureLevel(feature)) return feature;
         return ancestors.get(level);
+    }
+
+    public List<Feature> getSuccessors(Feature feature) {
+        List<Feature> successors = new ArrayList<>();
+        List<Feature> children = feature.getChildren();
+        if (children.isEmpty()) return successors;
+
+        for (Feature child : children) {
+            if (!successors.contains(child)) {
+                successors.add(child);
+            }
+
+            successors.addAll(getSuccessors(child));
+        }
+        return successors;
     }
 
     /**

@@ -145,6 +145,25 @@ public class FeatureModelTest {
     }
 
     @Test
+    void testGetSuccessors() {
+        List<Feature> successors = fm.getSuccessors(root);
+        assertEquals(successors.size(), 8);
+        assertEquals(successors.get(0), pay);
+        assertEquals(successors.get(1), license);
+        assertEquals(successors.get(2), nonlicense);
+        assertEquals(successors.get(3), ABtesting);
+        assertEquals(successors.get(4), statistics);
+        assertEquals(successors.get(5), qa);
+        assertEquals(successors.get(6), multiplechoice);
+        assertEquals(successors.get(7), singlechoice);
+
+        successors = fm.getSuccessors(pay);
+        assertEquals(successors.size(), 2);
+        assertEquals(successors.get(0), license);
+        assertEquals(successors.get(1), nonlicense);
+    }
+
+    @Test
     void testGetAncestors() {
         List<Feature> ancestors = fm.getAncestors(singlechoice);
         assertEquals(ancestors.size(), 2);
@@ -168,24 +187,24 @@ public class FeatureModelTest {
     }
 
     @Test
-    void testGetSuccessor() {
-        assertNull(fm.getSuccessor(singlechoice, -1));
-        assertEquals(singlechoice, fm.getSuccessor(singlechoice, 3));
-        assertEquals(singlechoice, fm.getSuccessor(singlechoice, 2));
-        assertEquals(qa, fm.getSuccessor(singlechoice, 1));
-        assertEquals(root, fm.getSuccessor(singlechoice, 0));
+    void testGetAncestor() {
+        assertNull(fm.getAncestor(singlechoice, -1));
+        assertEquals(singlechoice, fm.getAncestor(singlechoice, 3));
+        assertEquals(singlechoice, fm.getAncestor(singlechoice, 2));
+        assertEquals(qa, fm.getAncestor(singlechoice, 1));
+        assertEquals(root, fm.getAncestor(singlechoice, 0));
 
-        assertEquals(ABtesting, fm.getSuccessor(ABtesting, 2));
-        assertEquals(ABtesting, fm.getSuccessor(ABtesting, 1));
-        assertEquals(root, fm.getSuccessor(ABtesting, 0));
+        assertEquals(ABtesting, fm.getAncestor(ABtesting, 2));
+        assertEquals(ABtesting, fm.getAncestor(ABtesting, 1));
+        assertEquals(root, fm.getAncestor(ABtesting, 0));
 
-        assertEquals(root, fm.getSuccessor(root, 2));
-        assertEquals(root, fm.getSuccessor(root, 1));
-        assertEquals(root, fm.getSuccessor(root, 0));
+        assertEquals(root, fm.getAncestor(root, 2));
+        assertEquals(root, fm.getAncestor(root, 1));
+        assertEquals(root, fm.getAncestor(root, 0));
 
-        assertEquals(pay, fm.getSuccessor(pay, 2));
-        assertEquals(pay, fm.getSuccessor(pay, 1));
-        assertEquals(root, fm.getSuccessor(pay, 0));
+        assertEquals(pay, fm.getAncestor(pay, 2));
+        assertEquals(pay, fm.getAncestor(pay, 1));
+        assertEquals(root, fm.getAncestor(pay, 0));
     }
 
     @Test
