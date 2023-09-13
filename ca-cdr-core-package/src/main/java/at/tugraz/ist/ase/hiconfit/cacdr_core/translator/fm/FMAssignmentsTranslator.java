@@ -50,12 +50,15 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
     private static void post(LogOp logOp, Model model, List<Constraint> chocoCstrs, int startIdx) {
         model.addClauses(logOp); // add the translated constraints to the Choco kb
 
-        List<Constraint> postedCstrs = ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1);
+        int endIdx = model.getNbCstrs() - 1;
+        if (startIdx <= endIdx) {
+            List<Constraint> postedCstrs = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
 
-        chocoCstrs.addAll(postedCstrs);
+            chocoCstrs.addAll(postedCstrs);
 
-        // remove the posted constraints from the Choco model
-        postedCstrs.forEach(model::unpost);
+            // remove the posted constraints from the Choco model
+            postedCstrs.forEach(model::unpost);
+        }
     }
 
     /**

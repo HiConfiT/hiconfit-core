@@ -51,11 +51,15 @@ public class CameraAssignmentsTranslator implements IAssignmentsTranslatable {
 
     private static void afterPostingAndUnpost(List<Constraint> chocoCstrs, CameraKB cameraKB, int startIdx) {
         Model model = cameraKB.getModelKB();
-        List<Constraint> postedCstrs = ChocoSolverUtils.getConstraints(model, startIdx, model.getNbCstrs() - 1);
-        chocoCstrs.addAll(postedCstrs);
 
-        // remove the posted constraints from the Choco model
-        postedCstrs.forEach(model::unpost);
+        int endIdx = model.getNbCstrs() - 1;
+        if (startIdx <= endIdx) {
+            List<Constraint> postedCstrs = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
+            chocoCstrs.addAll(postedCstrs);
+
+            // remove the posted constraints from the Choco model
+            postedCstrs.forEach(model::unpost);
+        }
     }
 
     /**
