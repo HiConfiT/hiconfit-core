@@ -20,6 +20,7 @@ import org.chocosolver.solver.Model;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class TestModel8 extends AbstractCDRModel implements IChocoModel, IKBRedu
         // sets possibly faulty constraints to super class
         List<Constraint> C = new ArrayList<>();
         for (org.chocosolver.solver.constraints.Constraint c: model.getCstrs()) {
-            Constraint constraint = new Constraint(c.toString());
+            Constraint constraint = new Constraint(c.toString(), Collections.emptyList());
             constraint.addChocoConstraint(c);
 
             org.chocosolver.solver.constraints.Constraint opC = c.getOpposite(); // get negation of constraint

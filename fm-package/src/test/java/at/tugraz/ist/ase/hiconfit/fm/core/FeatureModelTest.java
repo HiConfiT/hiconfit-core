@@ -128,6 +128,99 @@ public class FeatureModelTest {
     }
 
     @Test
+    void testGetDepth() {
+        assertEquals(2, fm.getDepth());
+    }
+
+    @Test
+    void testLeafFeatures() {
+        List<Feature> leafFeatures = fm.getLeafFeatures();
+        assertEquals(5, leafFeatures.size());
+//        assertEquals(leafFeatures.get(0), ABtesting); // due to the optional(ABtesting, statistics)
+        assertEquals(leafFeatures.get(0), statistics);
+        assertEquals(leafFeatures.get(1), license);
+        assertEquals(leafFeatures.get(2), nonlicense);
+        assertEquals(leafFeatures.get(3), multiplechoice);
+        assertEquals(leafFeatures.get(4), singlechoice);
+    }
+
+    @Test
+    void testGetSuccessors() {
+        List<Feature> successors = fm.getSuccessors(root);
+        assertEquals(successors.size(), 8);
+        assertEquals(successors.get(0), pay);
+        assertEquals(successors.get(1), license);
+        assertEquals(successors.get(2), nonlicense);
+        assertEquals(successors.get(3), ABtesting);
+        assertEquals(successors.get(4), statistics);
+        assertEquals(successors.get(5), qa);
+        assertEquals(successors.get(6), multiplechoice);
+        assertEquals(successors.get(7), singlechoice);
+
+        successors = fm.getSuccessors(pay);
+        assertEquals(successors.size(), 2);
+        assertEquals(successors.get(0), license);
+        assertEquals(successors.get(1), nonlicense);
+    }
+
+    @Test
+    void testGetAncestors() {
+        List<Feature> ancestors = fm.getAncestors(singlechoice);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), qa);
+        assertEquals(ancestors.get(1), root);
+
+        ancestors = fm.getAncestors(multiplechoice);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), qa);
+        assertEquals(ancestors.get(1), root);
+
+        ancestors = fm.getAncestors(statistics);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), ABtesting);
+        assertEquals(ancestors.get(1), root);
+
+        ancestors = fm.getAncestors(license);
+        assertEquals(ancestors.size(), 2);
+        assertEquals(ancestors.get(0), pay);
+        assertEquals(ancestors.get(1), root);
+    }
+
+    @Test
+    void testGetAncestor() {
+        assertNull(fm.getAncestor(singlechoice, -1));
+        assertEquals(singlechoice, fm.getAncestor(singlechoice, 3));
+        assertEquals(singlechoice, fm.getAncestor(singlechoice, 2));
+        assertEquals(qa, fm.getAncestor(singlechoice, 1));
+        assertEquals(root, fm.getAncestor(singlechoice, 0));
+
+        assertEquals(ABtesting, fm.getAncestor(ABtesting, 2));
+        assertEquals(ABtesting, fm.getAncestor(ABtesting, 1));
+        assertEquals(root, fm.getAncestor(ABtesting, 0));
+
+        assertEquals(root, fm.getAncestor(root, 2));
+        assertEquals(root, fm.getAncestor(root, 1));
+        assertEquals(root, fm.getAncestor(root, 0));
+
+        assertEquals(pay, fm.getAncestor(pay, 2));
+        assertEquals(pay, fm.getAncestor(pay, 1));
+        assertEquals(root, fm.getAncestor(pay, 0));
+    }
+
+    @Test
+    void testGetFeatureLevel() {
+        assertEquals(2, fm.getFeatureLevel(singlechoice));
+        assertEquals(2, fm.getFeatureLevel(multiplechoice));
+        assertEquals(2, fm.getFeatureLevel(statistics)); // due to the optional(ABtesting, statistics)
+        assertEquals(1, fm.getFeatureLevel(ABtesting));
+        assertEquals(2, fm.getFeatureLevel(license));
+        assertEquals(2, fm.getFeatureLevel(nonlicense));
+        assertEquals(1, fm.getFeatureLevel(qa));
+        assertEquals(1, fm.getFeatureLevel(pay));
+        assertEquals(0, fm.getFeatureLevel(root));
+    }
+
+    @Test
     void testDfFeatures() {
         List<Feature> dfFeatures = fm.getDfFeatures();
         assertEquals(dfFeatures.get(0), root);

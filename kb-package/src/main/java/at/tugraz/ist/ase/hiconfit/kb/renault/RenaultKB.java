@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -720,7 +721,7 @@ public class RenaultKB extends KB implements IIntVarKB {
                 int startIdx = modelKB.getNbCstrs();
                 org.chocosolver.solver.constraints.Constraint chocoConstraint = readRule(reader);
 
-                Constraint constraint = IntVarConstraintBuilder.build(ruleFile, modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+                Constraint constraint = IntVarConstraintBuilder.build(ruleFile, Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
 //                modelKB.post(chocoConstraint);
 //
 //                org.chocosolver.solver.constraints.Constraint negChocoConstraint = null;

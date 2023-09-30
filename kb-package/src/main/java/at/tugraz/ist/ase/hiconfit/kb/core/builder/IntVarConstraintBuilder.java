@@ -17,6 +17,8 @@ import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.chocosolver.solver.Model;
 
+import java.util.List;
+
 /**
  * This builder is used by {@link CameraKB},
  * {@link PCKB}, and {@link RenaultKB}
@@ -33,7 +35,9 @@ public class IntVarConstraintBuilder {
      * @param hasNegativeConstraints Whether the constraint has negative constraints.
      * @return The {@link Constraint} object.
      */
-    public Constraint build(@NonNull String constraintName, @NonNull Model modelKB,
+    public Constraint build(@NonNull String constraintName,
+                            @NonNull List<String> variables,
+                            @NonNull Model modelKB,
                               @NonNull org.chocosolver.solver.constraints.Constraint chocoConstraint,
                               int startIdx, boolean hasNegativeConstraints) {
         modelKB.post(chocoConstraint);
@@ -51,7 +55,7 @@ public class IntVarConstraintBuilder {
         // c1, c2, c3, c5 will be added to the list of negChocoConstraints in the Constraint object
 
         // create the Constraint object
-        Constraint constraint = new Constraint(constraintName);
+        Constraint constraint = new Constraint(constraintName, variables);
         ConstraintUtils.addChocoConstraintsToConstraint(constraint, modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
 //        constraint.addChocoConstraints(modelKB, startIdx, modelKB.getNbCstrs() - 1, hasNegativeConstraints);
 //        constraintList.add(constraint);

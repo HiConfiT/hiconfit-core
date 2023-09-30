@@ -24,12 +24,16 @@ import java.util.List;
 public class Constraint {
     @EqualsAndHashCode.Include
     private final String constraint;
+    private final List<String> variables;
+
     private List<org.chocosolver.solver.constraints.Constraint> chocoConstraints;
     private List<org.chocosolver.solver.constraints.Constraint> negChocoConstraints;
 
     @Builder
-    public Constraint(@NonNull String constraint) {
+    public Constraint(@NonNull String constraint, @NonNull List<String> variables) {
         this.constraint = constraint;
+        this.variables = variables;
+
         chocoConstraints = new LinkedList<>();
         negChocoConstraints = new LinkedList<>();
 
@@ -50,6 +54,16 @@ public class Constraint {
 
     public boolean contains(@NonNull org.chocosolver.solver.constraints.Constraint constraint) {
         return chocoConstraints.contains(constraint);
+    }
+
+    public Constraint withConstraint(@NonNull String constraint) {
+        Constraint cstr = Constraint.builder()
+                .constraint(constraint)
+                .variables(variables)
+                .build();
+        cstr.chocoConstraints = chocoConstraints;
+        cstr.negChocoConstraints = negChocoConstraints;
+        return cstr;
     }
 
     @Override

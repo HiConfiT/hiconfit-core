@@ -13,6 +13,8 @@ import org.chocosolver.solver.variables.IntVar;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ConstraintTest {
@@ -36,14 +38,17 @@ class ConstraintTest {
         chocoCstr3 = model.arithm(x, "=", 3);
         chocoCstr4 = model.arithm(x, "=", 4);
 
-        c1 = new Constraint("c1"); // create a constraint using the constructor
+        c1 = new Constraint("c1", List.of(x.getName())); // create a constraint using the constructor
         c1.addChocoConstraint(chocoCstr1);
         c1.addChocoConstraint(chocoCstr2);
         c1.addNegChocoConstraint(chocoCstr3);
         c1.addNegChocoConstraint(chocoCstr4);
 
-        c2 = new Constraint("c1");
-        c3 = Constraint.builder().constraint("c2").build(); // create a constraint using the builder
+        c2 = new Constraint("c1", List.of(x.getName()));
+        c3 = Constraint.builder()
+                .constraint("c2")
+                .variables(List.of(x.getName()))
+                .build(); // create a constraint using the builder
     }
 
     @Test

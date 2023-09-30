@@ -18,9 +18,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -66,6 +64,14 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
         this.featureBuilder = featureBuilder;
         this.relationshipBuilder = relationshipBuilder;
         this.constraintBuilder = constraintBuilder;
+    }
+
+    public int getDepth() {
+        return getLeafFeatures().parallelStream().mapToInt(f -> getAncestors(f).size()).max().orElse(0);
+    }
+
+    public int getFeatureLevel(Feature feature) {
+        return this.getAncestors(feature).size();
     }
 
     public boolean hasRoot() {
@@ -181,6 +187,52 @@ public class FeatureModel<F extends Feature, R extends AbstractRelationship<F>, 
      */
     public int getNumOfLeaf() {
         return (int) bfFeatures.parallelStream().filter(F::isLeaf).count();
+    }
+
+    public List<Feature> getLeafFeatures() {
+        return bfFeatures.stream().filter(Feature::isLeaf).collect(Collectors.toList());
+    }
+
+    public List<Feature> getAncestors(Feature feature) {
+        List<Feature> ancestors = new ArrayList<>();
+        Feature parent = feature.getParent();
+        if (parent == null) return ancestors;
+
+        while (!parent.isRoot()) {
+            if (!ancestors.contains(parent)) {
+                ancestors.add(parent);
+            }
+
+            parent = parent.getParent();
+        }
+        // add the root feature
+        ancestors.add(parent);
+        return ancestors;
+    }
+
+    public Feature getAncestor(Feature feature, int level) {
+        List<Feature> ancestors = getAncestors(feature);
+        Collections.reverse(ancestors);
+
+        if (level < 0) return null;
+//        || ancestors.size() < level
+        if (level >= this.getFeatureLevel(feature)) return feature;
+        return ancestors.get(level);
+    }
+
+    public List<Feature> getSuccessors(Feature feature) {
+        List<Feature> successors = new ArrayList<>();
+        List<Feature> children = feature.getChildren();
+        if (children.isEmpty()) return successors;
+
+        for (Feature child : children) {
+            if (!successors.contains(child)) {
+                successors.add(child);
+            }
+
+            successors.addAll(getSuccessors(child));
+        }
+        return successors;
     }
 
     /**

@@ -16,10 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.variables.IntVar;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.stream.IntStream;
 
 @Slf4j
@@ -388,7 +385,7 @@ public class CameraKB extends KB implements IIntVarKB {
                 configurationList.get(17), configurationList.get(18), configurationList.get(19));
 
 //        addConstraint("kb", chocoConstraint, startIdx, hasNegativeConstraints);
-        Constraint constraint = IntVarConstraintBuilder.build("kb", modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
+        Constraint constraint = IntVarConstraintBuilder.build("kb", Collections.emptyList(), modelKB, chocoConstraint, startIdx, hasNegativeConstraints);
         constraintList.add(constraint);
 
         LoggerUtils.outdent();

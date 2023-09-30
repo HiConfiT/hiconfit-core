@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -38,10 +39,10 @@ class ConstraintUtilsTest {
 
     @BeforeAll
     static void setUp() {
-        c1 = new Constraint("c1");
-        c2 = new Constraint("c2");
-        c3 = new Constraint("c3");
-        c4 = new Constraint("c4");
+        c1 = new Constraint("c1", Collections.emptyList());
+        c2 = new Constraint("c2", Collections.emptyList());
+        c3 = new Constraint("c3", Collections.emptyList());
+        c4 = new Constraint("c4", Collections.emptyList());
 
         diag1 = Set.of(c1, c2, c3);
         diag2 = Set.of(c2, c3);

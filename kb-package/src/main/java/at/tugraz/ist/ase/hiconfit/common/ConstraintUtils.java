@@ -101,12 +101,15 @@ public final class ConstraintUtils {
 //
 //            index++;
 //        }
-        List<org.chocosolver.solver.constraints.Constraint> cstrs = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
+        ;
+        if (startIdx <= endIdx) {
+            List<org.chocosolver.solver.constraints.Constraint> cstrs = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
 
-        if (negative) {
-            cstrs.forEach(constraint::addNegChocoConstraint);
-        } else {
-            cstrs.forEach(constraint::addChocoConstraint);
+            if (negative) {
+                cstrs.forEach(constraint::addNegChocoConstraint);
+            } else {
+                cstrs.forEach(constraint::addChocoConstraint);
+            }
         }
     }
 
