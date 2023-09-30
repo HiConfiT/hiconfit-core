@@ -40,7 +40,7 @@ public class Domain implements Cloneable {
     }
 
     /**
-     * Constructor for a integer domain with a list of values
+     * Constructor for an integer domain with a list of values
      *
      * @param name name of the domain
      * @param values list of values
