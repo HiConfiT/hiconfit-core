@@ -29,6 +29,10 @@ OR : 'or';
 REQUIRES : 'requires';
 EXCLUDES : 'excludes';
 
+NOT_OPT : '~';
+AND_OPT : '/\\';
+OR_OPT : '\\/';
+
 //DD:'..';
 //DO:'.';
 CM:',';
@@ -63,8 +67,8 @@ WS  :   ( ' '
  **********************************************/
 
 fragment ID : ID_HEAD ID_TAIL* ;
-fragment ID_HEAD : LETTER ;
-fragment ID_TAIL : LETTER | DIGIT;
+fragment ID_HEAD : LETTER | DIGIT | '_' ;
+fragment ID_TAIL : LETTER | DIGIT | SPACE | '_' | '-' | '.';
 fragment LETTER : [a-zA-Z_-] ;
 fragment DIGIT : [0-9] ;
 fragment SPACE : ' '+ ;
