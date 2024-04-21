@@ -215,11 +215,7 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
     @Override
     public void exitCnf(FM4ConfParser.CnfContext ctx) {
         try {
-            System.out.println("CNF: " + ctx.getText());
-
             ASTNode formula = examineCNFRule(ctx.cnfrule());
-
-            System.out.println("Formula: " + formula.toString());
             fm.addConstraint(constraintBuilder.buildConstraint(formula));
         } catch (Exception e) {
             log.error("{}Error while adding CNF rule [constraint={}]", LoggerUtils.tab(), ctx.getText());
