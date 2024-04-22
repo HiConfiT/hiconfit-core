@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -196,6 +196,8 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
         // convert relationships
         if (!node.getNodeName().equals(TAG_STRUCT)) {
             // relationships
+            F leftSide;
+            List<F> rightSides;
             switch (node.getNodeName()) {
                 case TAG_AND:
                     for (int i = 0; i < children.getLength(); i++) {
@@ -204,7 +206,7 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
                         if (isCorrectNode(child)) {
                             Element childElement = (Element) child;
 
-                            F leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
+                            leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
                             F rightSide = fm.getFeature(childElement.getAttribute(ATTRIB_NAME));
 
                             if (childElement.getAttribute(ATTRIB_MANDATORY).equals(VALUE_TRUE)) {
@@ -219,20 +221,22 @@ public class FeatureIDEParser<F extends Feature, R extends AbstractRelationship<
 
                     break;
                 case TAG_OR:
-                    checkState(childrenFeatures.size() > 0, "OR node must have at least one child feature!");
+                    checkState(!childrenFeatures.isEmpty(), "OR node must have at least one child feature!");
 
-                    F leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
-                    List<F> rightSide = childrenFeatures;
-
-                    fm.addOrRelationship(leftSide, rightSide);
-                    break;
-                case TAG_ALT:
-                    checkState(childrenFeatures.size() > 0, "ALT node must have at least one child feature!");
 
                     leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
-                    rightSide = childrenFeatures;
 
-                    fm.addAlternativeRelationship(leftSide, rightSide);
+                    rightSides = childrenFeatures;
+
+                    fm.addOrRelationship(leftSide, rightSides);
+                    break;
+                case TAG_ALT:
+                    checkState(!childrenFeatures.isEmpty(), "ALT node must have at least one child feature!");
+
+                    leftSide = fm.getFeature(parentElement.getAttribute(ATTRIB_NAME));
+                    rightSides = childrenFeatures;
+
+                    fm.addAlternativeRelationship(leftSide, rightSides);
                     break;
             }
         }

@@ -31,4 +31,21 @@ relationshiprule : MANDATORY LP identifier CM identifier RP         # mandatory
 
 constraintrule : REQUIRES LP identifier CM identifier RP            # requires
                  | EXCLUDES LP identifier CM identifier RP          # excludes
+                 | cnfrule                                         # cnf
                  ;
+
+cnfrule : LP cnfrule logic_operator cnfrule RP
+        | element
+        ;
+
+element : identifier
+        | NOT_OPT identifier
+        ;
+
+logic_operator : AND_OPT
+               | OR_OPT
+               ;
+
+//oneormore
+//    : RP* identifier (CM identifier)* LP*
+//    ;

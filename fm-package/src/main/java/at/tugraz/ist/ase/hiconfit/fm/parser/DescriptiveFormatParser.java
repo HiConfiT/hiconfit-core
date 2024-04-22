@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -210,6 +210,44 @@ public class DescriptiveFormatParser<F extends Feature, R extends AbstractRelati
         } catch (Exception e) {
             log.error("{}Error while adding excludes constraint [constraint={}]", LoggerUtils.tab(), ctx.getText());
         }
+    }
+
+    @Override
+    public void exitCnf(FM4ConfParser.CnfContext ctx) {
+        try {
+            ASTNode formula = examineCNFRule(ctx.cnfrule());
+            fm.addConstraint(constraintBuilder.buildConstraint(formula));
+        } catch (Exception e) {
+            log.error("{}Error while adding CNF rule [constraint={}]", LoggerUtils.tab(), ctx.getText());
+        }
+    }
+
+    private ASTNode examineCNFRule(FM4ConfParser.CnfruleContext ctx) {
+        ASTNode ast;
+
+//        System.out.println(ctx.getText());
+
+        if (ctx.element() != null) {
+//            System.out.println(ctx.element().getText());
+//            System.out.println(ctx.element().getChildCount());
+            // only one element
+            if (ctx.element().NOT_OPT() != null) {
+                ast = constraintBuilder.buildNot(fm.getFeature(ctx.element().identifier().getChild(0).getText().trim()));
+            } else {
+                ast = constraintBuilder.buildOperand(fm.getFeature(ctx.element().identifier().getChild(0).getText().trim()));
+            }
+        } else {
+            ASTNode left = examineCNFRule(ctx.cnfrule(0));
+            ASTNode right = examineCNFRule(ctx.cnfrule(1));
+
+            if (ctx.logic_operator().AND_OPT() != null) {
+                ast = constraintBuilder.buildAnd(left, right);
+            } else {
+                ast = constraintBuilder.buildOr(left, right);
+            }
+        }
+
+        return ast;
     }
 
     private F getParent(List<FM4ConfParser.IdentifierContext> ids) {
