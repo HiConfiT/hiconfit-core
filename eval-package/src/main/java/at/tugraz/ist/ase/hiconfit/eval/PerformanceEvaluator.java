@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -176,7 +176,9 @@ public class PerformanceEvaluator {
     public static long totalCommonTimer(String name) {
         AtomicLong total = new AtomicLong();
         timers.forEach((key, timer) -> {
-            if (key.contains(name)) {
+            String nameWithThread = name + "[thread=";
+            // check this string helps to get rid of timers with the same starting 'name'
+            if (key.contains(nameWithThread)) {
                 total.addAndGet(timer.total());
             }
         });
