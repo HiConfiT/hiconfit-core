@@ -18,6 +18,44 @@ CTC ratio: 0.027972027972027972
 #REQUIRES: 4
 #EXCLUDES: 0
 2
+Name: REAL-FM-7.splx
+Source: SPLOT
+#variables: 14
+#constraints: 13
+#Choco variables: 32
+#Choco constraints: 23
+Consistency: true
+
+CTC ratio: 0.15384615384615385
+#features: 14
+#relationships: 11
+#constraints: 2
+#MANDATORY: 3
+#OPTIONAL: 6
+#ALTERNATIVE: 1
+#OR: 1
+#REQUIRES: 1
+#EXCLUDES: 1
+3
+Name: REAL-FM-16.splx
+Source: SPLOT
+#variables: 26
+#constraints: 28
+#Choco variables: 54
+#Choco constraints: 35
+Consistency: true
+
+CTC ratio: 0.10714285714285714
+#features: 26
+#relationships: 25
+#constraints: 3
+#MANDATORY: 7
+#OPTIONAL: 18
+#ALTERNATIVE: 0
+#OR: 0
+#REQUIRES: 3
+#EXCLUDES: 0
+4
 Name: ubuntu.sxfm
 Source: SPLOT
 #variables: 263
@@ -36,7 +74,7 @@ CTC ratio: 0.3218390804597701
 #OR: 1
 #REQUIRES: 65
 #EXCLUDES: 0
-3
+5
 Name: windows8.sxfm
 Source: SPLOT
 #variables: 451
@@ -55,7 +93,26 @@ CTC ratio: 0.34074074074074073
 #OR: 12
 #REQUIRES: 102
 #EXCLUDES: 0
-4
+6
+Name: REAL-FM-11.splx
+Source: SPLOT
+#variables: 67
+#constraints: 64
+#Choco variables: 148
+#Choco constraints: 138
+Consistency: true
+
+CTC ratio: 0.0625
+#features: 67
+#relationships: 60
+#constraints: 4
+#MANDATORY: 44
+#OPTIONAL: 10
+#ALTERNATIVE: 6
+#OR: 0
+#REQUIRES: 4
+#EXCLUDES: 0
+7
 Name: investment.sxfm
 Source: SPLOT
 #variables: 366
@@ -74,7 +131,26 @@ CTC ratio: 0.8240343347639485
 #OR: 9
 #REQUIRES: 1
 #EXCLUDES: 0
-5
+8
+Name: web-arch.splx
+Source: SPLOT
+#variables: 77
+#constraints: 65
+#Choco variables: 170
+#Choco constraints: 135
+Consistency: true
+
+CTC ratio: 0.0
+#features: 77
+#relationships: 65
+#constraints: 0
+#MANDATORY: 27
+#OPTIONAL: 27
+#ALTERNATIVE: 7
+#OR: 4
+#REQUIRES: 0
+#EXCLUDES: 0
+9
 Name: android.sxfm
 Source: SPLOT
 #variables: 210
@@ -93,7 +169,7 @@ CTC ratio: 0.2375
 #OR: 0
 #REQUIRES: 27
 #EXCLUDES: 0
-6
+10
 Name: fqa.sxfm
 Source: SPLOT
 #variables: 178
@@ -112,7 +188,7 @@ CTC ratio: 0.0891089108910891
 #OR: 14
 #REQUIRES: 8
 #EXCLUDES: 1
-7
+11
 Name: REAL-FM-4.sxfm
 Source: SPLOT
 #variables: 290
@@ -131,7 +207,7 @@ CTC ratio: 0.0963302752293578
 #OR: 40
 #REQUIRES: 20
 #EXCLUDES: 0
-8
+12
 Name: subseaCS.sxfm
 Source: SPLOT
 #variables: 142
@@ -150,7 +226,64 @@ CTC ratio: 0.1566265060240964
 #OR: 5
 #REQUIRES: 13
 #EXCLUDES: 0
-9
+13
+Name: DELL.splx
+Source: SPLOT
+#variables: 47
+#constraints: 121
+#Choco variables: 112
+#Choco constraints: 212
+Consistency: true
+
+CTC ratio: 0.8677685950413223
+#features: 47
+#relationships: 16
+#constraints: 105
+#MANDATORY: 7
+#OPTIONAL: 1
+#ALTERNATIVE: 8
+#OR: 0
+#REQUIRES: 0
+#EXCLUDES: 105
+14
+Name: fame_dbms.splx
+Source: SPLOT
+#variables: 21
+#constraints: 15
+#Choco variables: 54
+#Choco constraints: 46
+Consistency: true
+
+CTC ratio: 0.0
+#features: 21
+#relationships: 15
+#constraints: 0
+#MANDATORY: 6
+#OPTIONAL: 4
+#ALTERNATIVE: 5
+#OR: 0
+#REQUIRES: 0
+#EXCLUDES: 0
+15
+Name: REAL-FM-1.splx
+Source: SPLOT
+#variables: 88
+#constraints: 54
+#Choco variables: 200
+#Choco constraints: 167
+Consistency: true
+
+CTC ratio: 0.0
+#features: 88
+#relationships: 54
+#constraints: 0
+#MANDATORY: 17
+#OPTIONAL: 12
+#ALTERNATIVE: 11
+#OR: 14
+#REQUIRES: 0
+#EXCLUDES: 0
+16
 Name: bigdata.sxfm
 Source: SPLOT
 #variables: 625
@@ -169,7 +302,7 @@ CTC ratio: 0.0
 #OR: 31
 #REQUIRES: 0
 #EXCLUDES: 0
-10
+17
 Name: printers.sxfm
 Source: SPLOT
 #variables: 172
@@ -188,7 +321,26 @@ CTC ratio: 0.0
 #OR: 18
 #REQUIRES: 0
 #EXCLUDES: 0
-11
+18
+Name: REAL-FM-3.splx
+Source: SPLOT
+#variables: 43
+#constraints: 37
+#Choco variables: 94
+#Choco constraints: 72
+Consistency: true
+
+CTC ratio: 0.16216216216216217
+#features: 43
+#relationships: 31
+#constraints: 6
+#MANDATORY: 8
+#OPTIONAL: 17
+#ALTERNATIVE: 3
+#OR: 3
+#REQUIRES: 5
+#EXCLUDES: 1
+19
 Name: windows7.sxfm
 Source: SPLOT
 #variables: 329
@@ -206,4 +358,42 @@ CTC ratio: 0.31671554252199413
 #ALTERNATIVE: 26
 #OR: 10
 #REQUIRES: 80
+#EXCLUDES: 0
+20
+Name: REAL-FM-18.splx
+Source: SPLOT
+#variables: 44
+#constraints: 27
+#Choco variables: 98
+#Choco constraints: 80
+Consistency: true
+
+CTC ratio: 0.2962962962962963
+#features: 44
+#relationships: 19
+#constraints: 8
+#MANDATORY: 7
+#OPTIONAL: 3
+#ALTERNATIVE: 4
+#OR: 5
+#REQUIRES: 6
+#EXCLUDES: 2
+21
+Name: arcade-game.splx
+Source: SPLOT
+#variables: 61
+#constraints: 66
+#Choco variables: 124
+#Choco constraints: 121
+Consistency: true
+
+CTC ratio: 0.5151515151515151
+#features: 61
+#relationships: 32
+#constraints: 34
+#MANDATORY: 18
+#OPTIONAL: 5
+#ALTERNATIVE: 0
+#OR: 9
+#REQUIRES: 34
 #EXCLUDES: 0

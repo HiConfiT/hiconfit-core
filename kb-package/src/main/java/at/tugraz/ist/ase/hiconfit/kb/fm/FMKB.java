@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -64,8 +64,8 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         // create the root constraint, remove created Choco constraints after this step
         defineRootConstraint();
 
-        // TODO - implement notKB
-        defineNotKB();
+        // no support notKB
+//        defineNotKB();
 
         LoggerUtils.outdent();
         log.debug("{}<<< Created FMKB for [fm={}]", LoggerUtils.tab(), name);

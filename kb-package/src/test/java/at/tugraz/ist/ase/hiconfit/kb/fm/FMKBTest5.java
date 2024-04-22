@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -20,7 +20,6 @@ import at.tugraz.ist.ase.hiconfit.kb.core.Variable;
 import lombok.Cleanup;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
-import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.search.loop.monitors.IMonitorSolution;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +45,7 @@ class FMKBTest5 {
         Model model = kb.getModelKB();
 
         model.unpost(model.getCstrs());
-        model.post(kb.getNotKB().getChocoConstraints().toArray(new Constraint[0]));
+//        model.post(kb.getNotKB().getChocoConstraints().toArray(new Constraint[0]));
 
         Solver solver = kb.getModelKB().getSolver();
 

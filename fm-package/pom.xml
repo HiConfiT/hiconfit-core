@@ -2,7 +2,7 @@
 <!--
   ~ High Performance Knowledge Based Configuration Techniques
   ~
-  ~ Copyright (c) 2022-2023
+  ~ Copyright (c) 2022-2024
   ~
   ~ @author: Viet-Man Le (vietman.le@ist.tugraz.at)
   -->
@@ -13,7 +13,7 @@
     <parent>
         <artifactId>hiconfit-core</artifactId>
         <groupId>at.tugraz.ist.ase.hiconfit</groupId>
-        <version>1.0.1-alpha-21</version>
+        <version>1.0.1-alpha-31</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -43,7 +43,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-maven-plugin</artifactId>
-            <version>4.12.0</version>
+            <version>4.13.1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-simple</artifactId>

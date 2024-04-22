@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -23,11 +23,11 @@ import java.util.List;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Constraint {
     @EqualsAndHashCode.Include
-    private final String constraint;
-    private final List<String> variables;
+    protected final String constraint;
+    protected final List<String> variables;
 
-    private List<org.chocosolver.solver.constraints.Constraint> chocoConstraints;
-    private List<org.chocosolver.solver.constraints.Constraint> negChocoConstraints;
+    protected List<org.chocosolver.solver.constraints.Constraint> chocoConstraints;
+    protected List<org.chocosolver.solver.constraints.Constraint> negChocoConstraints;
 
     @Builder
     public Constraint(@NonNull String constraint, @NonNull List<String> variables) {

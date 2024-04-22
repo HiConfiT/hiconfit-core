@@ -1,12 +1,12 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2023
+ * Copyright (c) 2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-// Generated from /Users/manleviet/Development/GitHub/hiconfit-core/fm-package/src/main/java/at/tugraz/ist/ase/hiconfit/fm/parser/fm4conf/FM4Conf.g4 by ANTLR 4.12.0
+// Generated from /Users/manleviet/Development/HiConfiT/hiconfit-core/fm-package/src/main/java/at/tugraz/ist/ase/hiconfit/fm/parser/fm4conf/FM4Conf.g4 by ANTLR 4.13.1
 package at.tugraz.ist.ase.hiconfit.fm.parser.fm4conf;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -102,4 +102,29 @@ public interface FM4ConfVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExcludes(FM4ConfParser.ExcludesContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code cnf}
+	 * labeled alternative in {@link FM4ConfParser#constraintrule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCnf(FM4ConfParser.CnfContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FM4ConfParser#cnfrule}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCnfrule(FM4ConfParser.CnfruleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FM4ConfParser#element}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElement(FM4ConfParser.ElementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link FM4ConfParser#logic_operator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLogic_operator(FM4ConfParser.Logic_operatorContext ctx);
 }

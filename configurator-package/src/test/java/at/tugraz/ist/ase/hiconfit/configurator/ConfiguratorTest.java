@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -287,105 +287,106 @@ class ConfiguratorTest {
         }
     }
 
-    @Test
-    void testFindWithNotKB() throws FeatureModelParserException {
-        // read the feature model
-        val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
-
-        // convert the feature model into FMKB
-        kb = new FMKB<>(featureModel, true);
-
-        val checkKB = new FMKB<>(featureModel, true);
-
-//        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
-        val configurationModel = new ConfigurationModel(checkKB, true);
-        configurationModel.initialize();
-        val checker = Configurator.builder()
-                .kb(checkKB)
-                .configurationModel(configurationModel)
-                .translator(new FMSolutionTranslator())
-                .build();
-
-//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
-        val configurationModel2 = new ConfigurationModel(kb, true);
-        configurationModel2.initialize();
-        val configurator = Configurator.builder()
-                .kb(kb)
-                .configurationModel(configurationModel2)
-                .translator(new FMSolutionTranslator())
-                .build();
-        configurator.initializeWithNotKB();
-
-        while (configurator.find(1, 0)) {
-
-        }
-
-        configurator.reset();
-        assert configurator.getNumberSolutions() == 2560;
-
-//        int counter = 0;
-        for (Solution s : configurator.getSolutions()) {
-//            System.out.print(++counter + " " + s + " - ");
-
-            assertFalse(checker.isConsistent(s));
-//            if (checker.isConsistent(s)) {
-//                System.out.println("Consistent");
-//            } else {
-//                System.out.println("Inconsistent");
-//            }
-        }
-//        System.out.println("Number of solutions: " + configurator.getNumberSolutions());
-    }
-
-    @Test
-    void testFindWithNotKBInCompactMode() throws FeatureModelParserException {
-        // read the feature model
-        val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
-
-        // convert the feature model into FMKB
-        kb = new FMKB<>(featureModel, true);
-
-        val checkKB = new FMKB<>(featureModel, true);
-
-//        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
-        val configurationModel = new ConfigurationModel(checkKB, true);
-        configurationModel.initialize();
-        val checker = Configurator.builder()
-                .kb(checkKB)
-                .configurationModel(configurationModel)
-                .translator(new FMSolutionTranslator())
-                .build();
-
-//        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
-        val configurationModel2 = new ConfigurationModel(kb, true);
-        configurationModel2.initialize();
-        val configurator = Configurator.builder()
-                .kb(kb)
-                .configurationModel(configurationModel2)
-                .translator(new FMSolutionTranslator())
-                .build();
-
-        configurator.findAllSolutions(true,0);
-        assert configurator.getNumberSolutions() == 2560;
-
-//        int counter = 0;
-        for (Solution s : configurator.getSolutions()) {
-//            System.out.print(++counter + " " + s + " - ");
-
-            assertFalse(checker.isConsistent(s));
-//            if (checker.isConsistent(s)) {
-//                System.out.println("Consistent");
-//            } else {
-//                System.out.println("Inconsistent");
-//            }
-        }
-    }
+    // no support notKB
+//    @Test
+//    void testFindWithNotKB() throws FeatureModelParserException {
+//        // read the feature model
+//        val fileFM = new File("src/test/resources/pizzas.xml");
+//
+//        @Cleanup("dispose")
+//        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+//        featureModel = parser.parse(fileFM);
+//
+//        // convert the feature model into FMKB
+//        kb = new FMKB<>(featureModel, true);
+//
+//        val checkKB = new FMKB<>(featureModel, true);
+//
+////        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+//        val configurationModel = new ConfigurationModel(checkKB, true);
+//        configurationModel.initialize();
+//        val checker = Configurator.builder()
+//                .kb(checkKB)
+//                .configurationModel(configurationModel)
+//                .translator(new FMSolutionTranslator())
+//                .build();
+//
+////        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        val configurationModel2 = new ConfigurationModel(kb, true);
+//        configurationModel2.initialize();
+//        val configurator = Configurator.builder()
+//                .kb(kb)
+//                .configurationModel(configurationModel2)
+//                .translator(new FMSolutionTranslator())
+//                .build();
+//        configurator.initializeWithNotKB();
+//
+//        while (configurator.find(1, 0)) {
+//
+//        }
+//
+//        configurator.reset();
+//        assert configurator.getNumberSolutions() == 2560;
+//
+////        int counter = 0;
+//        for (Solution s : configurator.getSolutions()) {
+////            System.out.print(++counter + " " + s + " - ");
+//
+//            assertFalse(checker.isConsistent(s));
+////            if (checker.isConsistent(s)) {
+////                System.out.println("Consistent");
+////            } else {
+////                System.out.println("Inconsistent");
+////            }
+//        }
+////        System.out.println("Number of solutions: " + configurator.getNumberSolutions());
+//    }
+//
+//    @Test
+//    void testFindWithNotKBInCompactMode() throws FeatureModelParserException {
+//        // read the feature model
+//        val fileFM = new File("src/test/resources/pizzas.xml");
+//
+//        @Cleanup("dispose")
+//        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
+//        featureModel = parser.parse(fileFM);
+//
+//        // convert the feature model into FMKB
+//        kb = new FMKB<>(featureModel, true);
+//
+//        val checkKB = new FMKB<>(featureModel, true);
+//
+////        Configurator checker = new Configurator(checkKB, true, new FMSolutionTranslator());
+//        val configurationModel = new ConfigurationModel(checkKB, true);
+//        configurationModel.initialize();
+//        val checker = Configurator.builder()
+//                .kb(checkKB)
+//                .configurationModel(configurationModel)
+//                .translator(new FMSolutionTranslator())
+//                .build();
+//
+////        Configurator configurator = new Configurator(kb, true, new FMSolutionTranslator());
+//        val configurationModel2 = new ConfigurationModel(kb, true);
+//        configurationModel2.initialize();
+//        val configurator = Configurator.builder()
+//                .kb(kb)
+//                .configurationModel(configurationModel2)
+//                .translator(new FMSolutionTranslator())
+//                .build();
+//
+//        configurator.findAllSolutions(true,0);
+//        assert configurator.getNumberSolutions() == 2560;
+//
+////        int counter = 0;
+//        for (Solution s : configurator.getSolutions()) {
+////            System.out.print(++counter + " " + s + " - ");
+//
+//            assertFalse(checker.isConsistent(s));
+////            if (checker.isConsistent(s)) {
+////                System.out.println("Consistent");
+////            } else {
+////                System.out.println("Inconsistent");
+////            }
+//        }
+//    }
 }
