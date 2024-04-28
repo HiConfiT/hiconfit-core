@@ -9,6 +9,7 @@ Consistency: true
 
 CTC ratio: 0.027972027972027972
 #features: 176
+#leaf features: 148
 #relationships: 139
 #constraints: 4
 #MANDATORY: 46
@@ -28,6 +29,7 @@ Consistency: true
 
 CTC ratio: 0.15384615384615385
 #features: 14
+#leaf features: 9
 #relationships: 11
 #constraints: 2
 #MANDATORY: 3
@@ -47,6 +49,7 @@ Consistency: true
 
 CTC ratio: 0.10714285714285714
 #features: 26
+#leaf features: 16
 #relationships: 25
 #constraints: 3
 #MANDATORY: 7
@@ -60,12 +63,13 @@ Name: ubuntu.sxfm
 Source: SPLOT
 #variables: 263
 #constraints: 261
-#Choco variables: 601
+#Choco variables: 602
 #Choco constraints: 608
 Consistency: true
 
 CTC ratio: 0.3218390804597701
 #features: 263
+#leaf features: 160
 #relationships: 177
 #constraints: 84
 #MANDATORY: 67
@@ -79,12 +83,13 @@ Name: windows8.sxfm
 Source: SPLOT
 #variables: 451
 #constraints: 405
-#Choco variables: 973
+#Choco variables: 974
 #Choco constraints: 921
 Consistency: true
 
 CTC ratio: 0.34074074074074073
 #features: 451
+#leaf features: 340
 #relationships: 267
 #constraints: 138
 #MANDATORY: 56
@@ -104,6 +109,7 @@ Consistency: true
 
 CTC ratio: 0.0625
 #features: 67
+#leaf features: 36
 #relationships: 60
 #constraints: 4
 #MANDATORY: 44
@@ -123,6 +129,7 @@ Consistency: true
 
 CTC ratio: 0.8240343347639485
 #features: 366
+#leaf features: 344
 #relationships: 41
 #constraints: 192
 #MANDATORY: 20
@@ -142,6 +149,7 @@ Consistency: true
 
 CTC ratio: 0.0
 #features: 77
+#leaf features: 46
 #relationships: 65
 #constraints: 0
 #MANDATORY: 27
@@ -161,6 +169,7 @@ Consistency: true
 
 CTC ratio: 0.2375
 #features: 210
+#leaf features: 161
 #relationships: 122
 #constraints: 38
 #MANDATORY: 52
@@ -180,6 +189,7 @@ Consistency: true
 
 CTC ratio: 0.0891089108910891
 #features: 178
+#leaf features: 124
 #relationships: 92
 #constraints: 9
 #MANDATORY: 32
@@ -199,6 +209,7 @@ Consistency: true
 
 CTC ratio: 0.0963302752293578
 #features: 290
+#leaf features: 194
 #relationships: 197
 #constraints: 21
 #MANDATORY: 75
@@ -218,6 +229,7 @@ Consistency: true
 
 CTC ratio: 0.1566265060240964
 #features: 142
+#leaf features: 94
 #relationships: 70
 #constraints: 13
 #MANDATORY: 35
@@ -237,6 +249,7 @@ Consistency: true
 
 CTC ratio: 0.8677685950413223
 #features: 47
+#leaf features: 38
 #relationships: 16
 #constraints: 105
 #MANDATORY: 7
@@ -256,6 +269,7 @@ Consistency: true
 
 CTC ratio: 0.0
 #features: 21
+#leaf features: 13
 #relationships: 15
 #constraints: 0
 #MANDATORY: 6
@@ -275,6 +289,7 @@ Consistency: true
 
 CTC ratio: 0.0
 #features: 88
+#leaf features: 55
 #relationships: 54
 #constraints: 0
 #MANDATORY: 17
@@ -294,6 +309,7 @@ Consistency: true
 
 CTC ratio: 0.0
 #features: 625
+#leaf features: 447
 #relationships: 381
 #constraints: 0
 #MANDATORY: 79
@@ -313,6 +329,7 @@ Consistency: true
 
 CTC ratio: 0.0
 #features: 172
+#leaf features: 136
 #relationships: 77
 #constraints: 0
 #MANDATORY: 48
@@ -332,6 +349,7 @@ Consistency: true
 
 CTC ratio: 0.16216216216216217
 #features: 43
+#leaf features: 28
 #relationships: 31
 #constraints: 6
 #MANDATORY: 8
@@ -345,12 +363,13 @@ Name: windows7.sxfm
 Source: SPLOT
 #variables: 329
 #constraints: 341
-#Choco variables: 711
+#Choco variables: 712
 #Choco constraints: 652
 Consistency: true
 
 CTC ratio: 0.31671554252199413
 #features: 329
+#leaf features: 234
 #relationships: 233
 #constraints: 108
 #MANDATORY: 50
@@ -370,6 +389,7 @@ Consistency: true
 
 CTC ratio: 0.2962962962962963
 #features: 44
+#leaf features: 32
 #relationships: 19
 #constraints: 8
 #MANDATORY: 7
@@ -389,6 +409,7 @@ Consistency: true
 
 CTC ratio: 0.5151515151515151
 #features: 61
+#leaf features: 47
 #relationships: 32
 #constraints: 34
 #MANDATORY: 18
