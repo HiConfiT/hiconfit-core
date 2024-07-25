@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -35,7 +35,7 @@ public class RedundancyAnalysis<T extends ITestCase, F extends AnomalyAwareFeatu
 
     public RedundancyAnalysis(@NonNull FMCdrModel<F, AbstractRelationship<F>, CTConstraint> model,
                               @NonNull T assumption) {
-        super(model, assumption);
+        super("Redundancy Analysis", model, assumption);
 
         redundantConstraints = new LinkedHashSet<>();
     }
