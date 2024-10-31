@@ -11,8 +11,8 @@ package at.tugraz.ist.ase.hiconfit.configurator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.camera.CameraSolutionTranslator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMSolutionTranslator;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.kb.KBSolutionTranslator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer.TxtSolutionWriter;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
@@ -57,7 +57,7 @@ class ConfiguratorTest {
         val configurator = Configurator.builder()
                 .kb(cameraKB)
                 .configurationModel(configurationModel)
-                .translator(new CameraSolutionTranslator())
+                .translator(new KBSolutionTranslator())
                 .build();
 
         // identify first 5 solutions without the given VVO
