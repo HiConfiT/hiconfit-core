@@ -14,8 +14,8 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.TestSuiteReader;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMDebuggingModel;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.test_model.model.*;
 import at.tugraz.ist.ase.hiconfit.common.ConstraintUtils;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
@@ -350,10 +350,7 @@ public class TestCloneable {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         // cloneable
         FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();
@@ -396,10 +393,7 @@ public class TestCloneable {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         // cloneable
         FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();
@@ -445,10 +439,7 @@ public class TestCloneable {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         // cloneable
         FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel1 = (FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint>) debuggingModel.clone();

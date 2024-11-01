@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -18,9 +18,9 @@ import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import at.tugraz.ist.ase.hiconfit.kb.fm.FMKB;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,15 +34,14 @@ import java.util.List;
  *     + B = { f0 = true } + CF - rootConstraints = true
  * + reversedConstraintsOrder = false
  * + hasNegativeConstraints = false
- *
- * TODO - migrated to CECore
  */
 @Slf4j
-public class FMModelWithRequirement<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+public class FMRequirementCdrModel<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
         extends FMCdrModel<F, R, C> {
 
-    private Requirement requirement;
-    private FMSolutionTranslator solutionTranslator = new FMSolutionTranslator();
+    protected Requirement requirement;
+    @Setter
+    protected FMSolutionTranslator solutionTranslator = new FMSolutionTranslator();
 
     public FMKB<F, R, C> getKB() {
         return fmkb;
@@ -55,12 +54,12 @@ public class FMModelWithRequirement<F extends Feature, R extends AbstractRelatio
      *
      * @param fm a {@link FeatureModel}
      */
-    public FMModelWithRequirement(@NonNull FeatureModel<F, R, C> fm,
-                                  Requirement requirement,
-                                  boolean hasNegativeConstraints,
-                                  boolean rootConstraints,
-                                  boolean cfInConflicts,
-                                  boolean reversedConstraintsOrder) {
+    public FMRequirementCdrModel(@NonNull FeatureModel<F, R, C> fm,
+                                 @NonNull Requirement requirement,
+                                 boolean hasNegativeConstraints,
+                                 boolean rootConstraints,
+                                 boolean cfInConflicts,
+                                 boolean reversedConstraintsOrder) {
         super(fm, hasNegativeConstraints, rootConstraints, cfInConflicts, reversedConstraintsOrder);
         this.requirement = requirement;
     }
@@ -80,19 +79,17 @@ public class FMModelWithRequirement<F extends Feature, R extends AbstractRelatio
         initializeConstraintSets();
 
         List<Constraint> C = new LinkedList<>(this.getPossiblyFaultyConstraints());
-        if (isReversedConstraintsOrder()) {
-            Collections.reverse(C); // in default, this shouldn't happen
-        }
+//        if (isReversedConstraintsOrder()) {
+//            Collections.reverse(C); // in default, this shouldn't happen
+//        }
         // translates user requirements to Choco constraints
         log.trace("{}Translating user requirements to Choco constraints", LoggerUtils.tab());
-        if (requirement != null) {
-            List<Constraint> constraints = solutionTranslator.translateToList(requirement, fmkb);
-            // add user requirements to C
-            C.addAll(constraints);
-        }
-        if (isReversedConstraintsOrder()) {
-            Collections.reverse(C); // in default, this shouldn't happen
-        }
+        List<Constraint> constraints = solutionTranslator.translateToList(requirement, fmkb);
+        // add user requirements to C
+        C.addAll(constraints);
+//        if (isReversedConstraintsOrder()) {
+//            Collections.reverse(C); // in default, this shouldn't happen
+//        }
         this.setPossiblyFaultyConstraints(C);
 
         // remove all Choco constraints
@@ -105,7 +102,7 @@ public class FMModelWithRequirement<F extends Feature, R extends AbstractRelatio
     @Override
     @SuppressWarnings("unchecked")
     public Object clone() throws CloneNotSupportedException {
-        FMModelWithRequirement<F, R, C> clone = (FMModelWithRequirement<F, R, C>) super.clone();
+        FMRequirementCdrModel<F, R, C> clone = (FMRequirementCdrModel<F, R, C>) super.clone();
 
         clone.requirement = (Requirement) requirement.clone();
 

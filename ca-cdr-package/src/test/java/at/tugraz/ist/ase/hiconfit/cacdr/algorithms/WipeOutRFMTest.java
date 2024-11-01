@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -9,7 +9,7 @@
 package at.tugraz.ist.ase.hiconfit.cacdr.algorithms;
 
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMCdrModel;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.test_model.model.TestModel7;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.test_model.model.TestModel8;
 import at.tugraz.ist.ase.hiconfit.common.ConstraintUtils;
@@ -23,6 +23,7 @@ import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import at.tugraz.ist.ase.hiconfit.fm.translator.ConfRuleTranslator;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -112,8 +113,7 @@ class WipeOutRFMTest {
         fm.addExcludes(ABtesting, nonlicense);
         fm.addRequires(ABtesting, survey);
 
-        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> testCaseModel = new FMCdrModel<>(fm, true, false, true, true);
-        testCaseModel.initialize();
+        val testCaseModel = FMCdrModels.createRedundancyDetectionModel(fm);
 
         System.out.println("=========================================");
         System.out.println("Constraints translated from the text file:");

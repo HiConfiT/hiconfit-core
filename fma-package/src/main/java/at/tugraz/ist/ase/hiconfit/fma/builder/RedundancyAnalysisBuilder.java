@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -49,6 +49,7 @@ public class RedundancyAnalysisBuilder implements IAnalysisBuildable {
                @NonNull FMAnalyzer<T, F> analyzer) {
         FMCdrModel<F, AbstractRelationship<F>, CTConstraint>
                 model = new FMCdrModel<>(featureModel, true, false, true, true);
+//        val model = FMCdrModels.createRedundancyDetectionModel(featureModel);
         model.initialize();
 
         // create the redundancy analysis

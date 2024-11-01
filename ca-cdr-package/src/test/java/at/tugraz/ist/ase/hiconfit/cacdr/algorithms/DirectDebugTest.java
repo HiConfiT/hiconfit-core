@@ -18,12 +18,8 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.TestSuiteReader;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMDebuggingModel;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
-import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
-import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
@@ -56,10 +52,7 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
 
@@ -99,10 +92,7 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
 
@@ -160,10 +150,7 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
 
@@ -205,10 +192,7 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
 
@@ -272,10 +256,7 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
 
@@ -317,10 +298,7 @@ class DirectDebugTest {
 
         TestSuite testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        val debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
 
         ChocoConsistencyChecker checker = new ChocoConsistencyChecker(debuggingModel);
 

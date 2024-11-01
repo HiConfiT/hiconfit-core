@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -11,7 +11,7 @@ package at.tugraz.ist.ase.hiconfit.cdrmodel.fm;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.ITestCaseTranslatable;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.AbstractCDRModel;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.IDebuggingModel;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
@@ -20,28 +20,35 @@ import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * An extension class of {@link AbstractCDRModel} for a debugging task of feature models, in which:
+ * An extension class of {@link FMCdrModel} for a debugging task of feature models, in which:
  * + C = CF
  * + B = { f0 = true }
  * + Test cases
+ * + hasNegativeConstraints = false
+ * + rootConstraints = true
+ * + cfInConflicts = true
+ * + reversedConstraintsOrder = false
  */
 @Slf4j
-public class FMDebuggingModel<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint> extends FMCdrModel<F, R, C> implements IDebuggingModel {
+public class FMDebuggingModel<F extends Feature, R extends AbstractRelationship<F>, C extends CTConstraint>
+        extends FMCdrModel<F, R, C> implements IDebuggingModel {
 
-    private TestSuite testSuite;
-    private ITestCaseTranslatable translator;
+    protected TestSuite testSuite;
+    @Setter
+    protected ITestCaseTranslatable translator = new FMTestCaseTranslator();
 
     /**
      * The set of test cases.
      */
     @Getter
-    private Set<ITestCase> testcases = new LinkedHashSet<>();
+    protected Set<ITestCase> testcases = new LinkedHashSet<>();
 
     /**
      * A constructor
@@ -50,17 +57,12 @@ public class FMDebuggingModel<F extends Feature, R extends AbstractRelationship<
      *
      * @param fm a {@link FeatureModel}
      * @param testSuite a {@link TestSuite}
-     * @param translator an implementation of {@link ITestCaseTranslatable} which translates test cases to Choco constraints
-     * @param hasNegativeConstraints generate negative constraints if true
-     * @param rootConstraints true if the root constraint (f0 = true) should be added
-     * @param reversedConstraintsOrder true if the order of constraints should be reversed before adding to the possibly faulty constraints
      */
-    public FMDebuggingModel(@NonNull FeatureModel<F, R, C> fm, @NonNull TestSuite testSuite, @NonNull ITestCaseTranslatable translator,
-                            boolean hasNegativeConstraints, boolean rootConstraints, boolean reversedConstraintsOrder) {
-        super(fm, hasNegativeConstraints, rootConstraints, true, reversedConstraintsOrder);
+    public FMDebuggingModel(@NonNull FeatureModel<F, R, C> fm,
+                            @NonNull TestSuite testSuite) {
+        super(fm, false, true, true, false);
 
         this.testSuite = testSuite;
-        this.translator = translator;
     }
 
     /**
@@ -78,12 +80,9 @@ public class FMDebuggingModel<F extends Feature, R extends AbstractRelationship<
 
         // translates test cases to Choco constraints
         log.trace("{}Translating test cases to Choco constraints", LoggerUtils.tab());
-        if (testSuite != null) {
-            createTestCases();
-
-            // sets the translated constraints
-            testcases.addAll(testSuite.getTestCases());
-        }
+        createTestCases();
+        // sets the translated constraints
+        testcases.addAll(testSuite.getTestCases());
 
         // remove all Choco constraints, because we just need variables and test cases
         model.unpost(model.getCstrs());

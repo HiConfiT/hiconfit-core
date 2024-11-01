@@ -12,7 +12,7 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.TestSuiteReader;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -53,10 +53,7 @@ class FMDebuggingModelTest1 {
 
         testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
     }
 
     @Test

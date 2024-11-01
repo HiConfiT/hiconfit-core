@@ -1,16 +1,14 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2023
+ * Copyright (c) 2023-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
 package at.tugraz.ist.ase.hiconfit.cdrmodel.fm;
 
-import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
-import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import lombok.val;
@@ -29,8 +27,7 @@ class FMCdrModelTest {
         val fileFM = new File("src/test/resources/FM_10_0.splx");
         val featureModel = FeatureModels.fromFile(fileFM);
 
-        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, true, true, true);
-        model.initialize();
+        val model = FMCdrModels.createCdrModel(featureModel, true, true, true, true);
 
         assertAll(() -> assertEquals(1, model.getCorrectConstraints().size()),
                 () -> {
@@ -74,8 +71,7 @@ class FMCdrModelTest {
         val fileFM = new File("src/test/resources/FM_10_0.splx");
         val featureModel = FeatureModels.fromFile(fileFM);
 
-        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, true, false, true);
-        model.initialize();
+        val model = FMCdrModels.createCdrModel(featureModel, true, true, false, true);
 
         assertAll(() -> assertEquals(9, model.getCorrectConstraints().size()),
 //                () -> {
@@ -121,8 +117,7 @@ class FMCdrModelTest {
         val fileFM = new File("src/test/resources/FM_10_0.splx");
         val featureModel = FeatureModels.fromFile(fileFM);
 
-        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, false, true, true);
-        model.initialize();
+        val model = FMCdrModels.createCdrModel(featureModel, true, false, true, true);
 
         assertAll(() -> assertEquals(0, model.getCorrectConstraints().size()),
 //                () -> {
@@ -166,8 +161,7 @@ class FMCdrModelTest {
         val fileFM = new File("src/test/resources/FM_10_0.splx");
         val featureModel = FeatureModels.fromFile(fileFM);
 
-        FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, false, false, true);
-        model.initialize();
+        val model = FMCdrModels.createCdrModel(featureModel, true, false, false, true);
 
         assertAll(() -> assertEquals(0, model.getPossiblyFaultyConstraints().size()),
 //                () -> {

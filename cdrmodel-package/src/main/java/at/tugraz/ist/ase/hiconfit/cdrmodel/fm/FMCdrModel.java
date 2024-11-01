@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * An extension class of {@link AbstractCDRModel} for diagnosis tasks as well as
  * analysis operations of feature models, in which:
- * 1. Diagnosis tasks (rootConstraints = true):
+ * 1. Diagnosis/Conflict detection tasks (rootConstraints = true):
  *    If cfInConflicts, then:
  *        + C = CF
  *        + B = { f0 = true } - rootConstraints = true

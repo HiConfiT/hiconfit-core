@@ -11,10 +11,7 @@ package at.tugraz.ist.ase.hiconfit.cacdr.algorithms;
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.RequirementBuilder;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMRequirementCdrModel;
-import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
-import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
@@ -42,9 +39,7 @@ class FMModelWithRequirementTest {
         Requirement userRequirement = builder.build(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMRequirementCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMRequirementCdrModel<>(featureModel, userRequirement, false, true, true,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -91,9 +86,7 @@ class FMModelWithRequirementTest {
         Requirement userRequirement = builder.build(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMRequirementCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMRequirementCdrModel<>(featureModel, userRequirement, false, true, true,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -143,9 +136,7 @@ class FMModelWithRequirementTest {
         Requirement userRequirement = builder.build(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMRequirementCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMRequirementCdrModel<>(featureModel, userRequirement, false, true, true,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -189,9 +180,7 @@ class FMModelWithRequirementTest {
         Requirement userRequirement = builder.build(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMRequirementCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMRequirementCdrModel<>(featureModel, userRequirement, false, true, false, false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -238,9 +227,7 @@ class FMModelWithRequirementTest {
         Requirement userRequirement = builder.build(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMRequirementCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMRequirementCdrModel<>(featureModel, userRequirement, false, true, false, false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -290,9 +277,7 @@ class FMModelWithRequirementTest {
         Requirement userRequirement = builder.build(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMRequirementCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMRequirementCdrModel<>(featureModel, userRequirement, false, true, false,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
