@@ -11,12 +11,9 @@ package at.tugraz.ist.ase.hiconfit.cdrmodel.fm;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
-import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
-import lombok.Cleanup;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -28,11 +25,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FMCdrModelTest {
 
     @Test
-    void testRootTrue_CFInConflictsTrue() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/FM_10_0.splx");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+    void testRootTrue_CFInConflictsTrue() throws Exception {
+        val fileFM = new File("src/test/resources/FM_10_0.splx");
+        val featureModel = FeatureModels.fromFile(fileFM);
 
         FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, true, true, true);
         model.initialize();
@@ -75,11 +70,9 @@ class FMCdrModelTest {
     }
 
     @Test
-    void testRootTrue_CFInConflictsFalse() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/FM_10_0.splx");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+    void testRootTrue_CFInConflictsFalse() throws Exception {
+        val fileFM = new File("src/test/resources/FM_10_0.splx");
+        val featureModel = FeatureModels.fromFile(fileFM);
 
         FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, true, false, true);
         model.initialize();
@@ -124,11 +117,9 @@ class FMCdrModelTest {
     }
 
     @Test
-    void testRootFalse_CFInConflictsTrue() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/FM_10_0.splx");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+    void testRootFalse_CFInConflictsTrue() throws Exception {
+        val fileFM = new File("src/test/resources/FM_10_0.splx");
+        val featureModel = FeatureModels.fromFile(fileFM);
 
         FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, false, true, true);
         model.initialize();
@@ -171,11 +162,9 @@ class FMCdrModelTest {
     }
 
     @Test
-    void testRootFalse_CFInConflictsFalse() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/FM_10_0.splx");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+    void testRootFalse_CFInConflictsFalse() throws Exception {
+        val fileFM = new File("src/test/resources/FM_10_0.splx");
+        val featureModel = FeatureModels.fromFile(fileFM);
 
         FMCdrModel<Feature, AbstractRelationship<Feature>, CTConstraint> model = new FMCdrModel<>(featureModel, true, false, false, true);
         model.initialize();

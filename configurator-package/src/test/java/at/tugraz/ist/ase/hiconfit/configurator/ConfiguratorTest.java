@@ -19,13 +19,12 @@ import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.heuristics.io.ValueVariableOrderingReader;
 import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
 import at.tugraz.ist.ase.hiconfit.kb.fm.FMKB;
 import com.opencsv.exceptions.CsvValidationException;
-import lombok.Cleanup;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
@@ -71,10 +70,7 @@ class ConfiguratorTest {
     void testFMKB() throws FeatureModelParserException, IOException, CsvValidationException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
@@ -107,10 +103,7 @@ class ConfiguratorTest {
     void testConsistency() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/camera.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, false);
@@ -144,10 +137,7 @@ class ConfiguratorTest {
     void testFindSolutions() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
@@ -183,10 +173,7 @@ class ConfiguratorTest {
     void testFind() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
@@ -234,10 +221,7 @@ class ConfiguratorTest {
     void testFindWithRequirement() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);

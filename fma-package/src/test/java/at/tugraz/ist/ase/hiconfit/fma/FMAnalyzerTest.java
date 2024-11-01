@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -32,6 +32,7 @@ import at.tugraz.ist.ase.hiconfit.fma.test.reader.XMLAssumptionAwareTestSuiteRea
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import com.google.common.collect.Iterators;
 import lombok.Cleanup;
+import lombok.val;
 import org.javatuples.Pair;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -52,7 +53,7 @@ class FMAnalyzerTest {
     @Test
     void testVoidFM_0() throws FeatureModelParserException, ExecutionException, InterruptedException {
         // load the feature model
-        File fileFM = new File("src/test/resources/bamboobike_featureide_void.xml");
+        val fileFM = new File("src/test/resources/bamboobike_featureide_void.xml");
 
         // create the factory for anomaly feature models
         IFeatureBuildable featureBuilder = new AnomalyAwareFeatureBuilder();

@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -13,14 +13,13 @@ import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.heuristics.ValueVariableOrdering;
 import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
 import at.tugraz.ist.ase.hiconfit.kb.fm.FMKB;
 import com.opencsv.exceptions.CsvValidationException;
-import lombok.Cleanup;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -78,11 +77,8 @@ class ValueVariableOrderingReaderTest {
     @Test
     void testFMKB() throws FeatureModelParserException, IOException, CsvValidationException {
         // read the feature model
-        File fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/pizzas.xml");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);

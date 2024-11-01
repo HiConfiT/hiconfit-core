@@ -1,26 +1,22 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
 package at.tugraz.ist.ase.hiconfit.kb.fm;
 
-import at.tugraz.ist.ase.hiconfit.fm.builder.ConstraintBuilder;
-import at.tugraz.ist.ase.hiconfit.fm.builder.FeatureBuilder;
-import at.tugraz.ist.ase.hiconfit.fm.builder.RelationshipBuilder;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
-import at.tugraz.ist.ase.hiconfit.fm.translator.ConfRuleTranslator;
 import at.tugraz.ist.ase.hiconfit.kb.core.BoolVariable;
 import at.tugraz.ist.ase.hiconfit.kb.core.Variable;
+import lombok.val;
 import org.chocosolver.solver.variables.BoolVar;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,16 +34,8 @@ class FMKBTest3 {
 
     @BeforeAll
     static void setUp() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/survey.fm4conf");
-
-        FeatureBuilder featureBuilder = new FeatureBuilder();
-        ConfRuleTranslator confRuleTranslator = new ConfRuleTranslator();
-        RelationshipBuilder relationshipBuilder = new RelationshipBuilder(confRuleTranslator);
-        ConstraintBuilder constraintBuilder = new ConstraintBuilder(confRuleTranslator);
-
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance(featureBuilder, relationshipBuilder, constraintBuilder);
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/survey.fm4conf");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         kb = new FMKB<>(featureModel, false);
 

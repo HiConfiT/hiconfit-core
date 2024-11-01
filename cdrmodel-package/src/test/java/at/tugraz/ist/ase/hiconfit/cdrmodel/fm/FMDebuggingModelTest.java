@@ -16,9 +16,7 @@ import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
-import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import com.google.common.collect.Iterators;
 import lombok.Cleanup;
@@ -55,14 +53,10 @@ class FMDebuggingModelTest {
             List.of("ARITHM ([not(ABtesting) + not(nonlicense) >= 1])")
     );
 
-    static FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-
     @BeforeAll
     static void init() throws FeatureModelParserException, IOException {
-        File fileFM = new File("src/test/resources/survey.fm4conf");
-
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/survey.fm4conf");
+        val fm = FeatureModels.fromFile(fileFM);
 
         TestSuiteReader builder = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
