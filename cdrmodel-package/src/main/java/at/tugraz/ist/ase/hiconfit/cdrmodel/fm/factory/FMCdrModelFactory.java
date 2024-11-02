@@ -9,7 +9,7 @@
 package at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory;
 
 import at.tugraz.ist.ase.hiconfit.cdrmodel.AbstractCDRModel;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.ICDRModelFactory;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.ICdrModelFactory;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMCdrModel;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -33,7 +33,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class FMCdrModelFactory implements ICDRModelFactory {
+public class FMCdrModelFactory implements ICdrModelFactory {
 
     protected @NonNull FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel;
 

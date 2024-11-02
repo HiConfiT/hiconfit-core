@@ -13,7 +13,7 @@
     <parent>
         <artifactId>hiconfit-core</artifactId>
         <groupId>at.tugraz.ist.ase.hiconfit</groupId>
-        <version>1.0.1-alpha-33</version>
+        <version>1.0.1-alpha-40</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-maven-plugin</artifactId>
-            <version>4.12.0</version>
+            <version>4.13.1</version>
             <exclusions>
                 <exclusion>
                     <artifactId>slf4j-simple</artifactId>
@@ -50,5 +50,12 @@
             <version>1.2</version>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>maven_central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

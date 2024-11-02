@@ -8,7 +8,7 @@
 
 package at.tugraz.ist.ase.hiconfit.cdrmodel;
 
-public interface ICDRModelFactory {
+public interface ICdrModelFactory {
 
     AbstractCDRModel createModel();
 

@@ -15,7 +15,11 @@ import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
+import lombok.Getter;
 import lombok.NonNull;
+import lombok.Setter;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 /**
  * Factory for creating a CDR model for debugging task
@@ -28,23 +32,27 @@ import lombok.NonNull;
  * + reversedConstraintsOrder = false
  * Output model can be used for the following algorithms: DirectDebug
  */
+@Getter
+@Setter
 public class FMDebuggingModelFactory extends FMCdrModelFactory {
 
     protected TestSuite testSuite;
 
     public FMDebuggingModelFactory(@NonNull FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel,
-                                   @NonNull TestSuite testSuite) {
+                                   TestSuite testSuite) {
         super(featureModel, true);
         this.testSuite = testSuite;
     }
 
     public static FMDebuggingModelFactory getInstance(@NonNull FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel,
-                                                      @NonNull TestSuite testSuite) {
+                                                      TestSuite testSuite) {
         return new FMDebuggingModelFactory(featureModel, testSuite);
     }
 
     @Override
     public AbstractCDRModel createModel() {
+        checkArgument(testSuite != null, "Test suite must not be null");
+
         FMDebuggingModel<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
                 = new FMDebuggingModel<>(featureModel, testSuite);
         diagModel.initialize();

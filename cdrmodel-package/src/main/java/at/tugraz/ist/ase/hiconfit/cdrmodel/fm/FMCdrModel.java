@@ -56,6 +56,10 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
     protected FeatureModel<F, R, C> featureModel;
     protected FMKB<F, R, C> fmkb;
 
+    public FMKB<F, R, C> getKB() {
+        return fmkb;
+    }
+
     @Getter
     protected final boolean hasNegativeConstraints;
 
@@ -138,7 +142,7 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
      */
     @Override
     public void initialize() {
-        log.debug("{}Initializing FMDiagnosisModel for {} >>>", LoggerUtils.tab(), getName());
+        log.debug("{}Initializing FMCdrModel for {} >>>", LoggerUtils.tab(), getName());
         LoggerUtils.indent();
 
         // sets possibly faulty constraints to super class

@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -32,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.search.strategy.Search;
-import org.chocosolver.solver.search.strategy.strategy.AbstractStrategy;
 import org.chocosolver.solver.variables.IntVar;
 
 import java.io.IOException;
@@ -61,7 +60,7 @@ public class Configurator {
     @Getter
     protected Constraint requirement = null;
 
-    protected AbstractStrategy<?> defaultSearch;
+    protected boolean defaultSearch;
     protected Model model;
     protected Solver solver;
 
@@ -77,7 +76,7 @@ public class Configurator {
         this.configurationModel = configurationModel;
         this.checker = new ChocoConsistencyChecker(configurationModel);
 
-        this.defaultSearch = Search.defaultSearch(kb.getModelKB());
+        this.defaultSearch = true;
         this.model = kb.getModelKB();
         this.solver = this.model.getSolver();
 
@@ -136,6 +135,7 @@ public class Configurator {
         log.trace("{}Add value variable heuristic", LoggerUtils.tab());
         IntVar[] vars = kb.getVariableList().stream().map(v -> v instanceof IntVariable ? ((IntVariable) v).getChocoVar() : ((BoolVariable) v).getChocoVar()).toArray(IntVar[]::new);
 
+        this.defaultSearch = false;
         solver.setSearch(intVarSearch(
                 new MFVVOVariableSelector(vvo.getIntVarOrdering()),
                 new MFVVOValueSelector(vvo.getValueOrdering()),
@@ -147,7 +147,8 @@ public class Configurator {
     public void clearVVO() {
         log.trace("{}Clear value variable heuristic", LoggerUtils.tab());
 
-        solver.setSearch(defaultSearch);
+        this.defaultSearch = true;
+//        solver.setSearch(defaultSearch);
     }
 
     public boolean find(int maxNumConf, long timeout) {
@@ -155,6 +156,11 @@ public class Configurator {
         if (timeout > 0) {
             solver.limitTime(timeout);
             log.trace("{}Set timeout: {} ms", LoggerUtils.tab(), timeout);
+        }
+
+        // set default search
+        if (defaultSearch) {
+            Search.defaultSearch(kb.getModelKB());
         }
 
         // solver
