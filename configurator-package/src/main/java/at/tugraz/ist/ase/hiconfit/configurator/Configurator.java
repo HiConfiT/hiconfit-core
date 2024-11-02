@@ -14,7 +14,7 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.ISolutionTranslatable;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer.SolutionWriter;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.SolutionWriter;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.heuristics.ValueVariableOrdering;
 import at.tugraz.ist.ase.hiconfit.heuristics.selector.MFVVOValueSelector;

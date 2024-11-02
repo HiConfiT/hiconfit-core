@@ -1,14 +1,13 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer;
+package at.tugraz.ist.ase.hiconfit.cacdr_core.writer;
 
-import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import com.google.common.base.Joiner;
 import lombok.Cleanup;
@@ -17,8 +16,8 @@ import lombok.NonNull;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TxtSolutionWriter extends SolutionWriter {
 
@@ -32,14 +31,9 @@ public class TxtSolutionWriter extends SolutionWriter {
 
         @Cleanup BufferedWriter writer = new BufferedWriter(fileWriter);
 
-        List<String> assignments = new ArrayList<>();
-        for (int i = 0; i < solution.size(); i++) {
-            Assignment assignment = solution.getAssignment(i);
-            String var = assignment.getVariable();
-            String value = assignment.getValue();
-
-            assignments.add(String.format("%s=%s", var, value));
-        }
+        List<String> assignments = solution.getAssignments().stream()
+                .map(assignment -> String.format("%s=%s", assignment.getVariable(), assignment.getValue()))
+                .collect(Collectors.toList());
 
         Joiner.on(",").appendTo(writer, assignments);
     }

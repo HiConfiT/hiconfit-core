@@ -13,7 +13,7 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMSolutionTranslator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.kb.KBSolutionTranslator;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer.TxtSolutionWriter;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.TxtSolutionWriter;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;

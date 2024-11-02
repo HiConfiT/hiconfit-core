@@ -1,12 +1,12 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer;
+package at.tugraz.ist.ase.hiconfit.cacdr_core.writer;
 
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import lombok.NonNull;
