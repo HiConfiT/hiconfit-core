@@ -1,13 +1,14 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
 package at.tugraz.ist.ase.hiconfit.common;
 
+import at.tugraz.ist.ase.hiconfit.common.cli.CmdLineOptionsBase;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -25,19 +26,19 @@ class CmdLineOptionsBaseTest {
         @Option(name = "-i",
                 aliases="--input",
                 usage = "The dataset.")
-        private String dataModelFile = null;
+        private final String dataModelFile = null;
 
         @Getter
         @Option(name = "-p",
                 aliases="--parameters",
                 usage = "Parameters for the matrix factorization.")
-        private String confFile = null;
+        private final String confFile = null;
 
         @Getter
         @Option(name = "-u",
                 aliases="--user",
                 usage = "User id.")
-        private int userId = -1;
+        private final int userId = -1;
 
         public CmdLineOptions(String banner, @NonNull String programTitle, String subtitle, @NonNull String usage) {
             super(banner, programTitle, subtitle, usage);
