@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -41,7 +41,7 @@ class TestCaseTest {
         // Read all test cases
         String line;
         while ((line = br.readLine()) != null) {
-            TestCase testCase = builder.buildTestCase(line);
+            TestCase testCase = (TestCase) builder.buildTestCase(line);
             testsuite.add(testCase);
         }
     }

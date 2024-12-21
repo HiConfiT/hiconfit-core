@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -10,7 +10,8 @@ package at.tugraz.ist.ase.hiconfit.fma.test.builder;
 
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.ITestCaseBuildable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.fm.XMLTestCaseBuilder;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.Assignments;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
@@ -20,6 +21,7 @@ import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyAwareFeature;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.AnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.anomaly.IAnomalyType;
 import at.tugraz.ist.ase.hiconfit.fma.test.AssumptionAwareTestCase;
+import at.tugraz.ist.ase.hiconfit.fma.test.factory.AssumptionAwareTestCases;
 import at.tugraz.ist.ase.hiconfit.fma.test.format.XMLAssumptionAwareTestSuiteFormat;
 import com.google.common.base.Preconditions;
 import lombok.Getter;
@@ -27,15 +29,16 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.javatuples.Pair;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@Getter
 @Slf4j
 public class XMLAssumptionAwareTestCaseBuilder<F extends AnomalyAwareFeature>
-        implements ITestCaseBuildable {
-    @Getter
+//        implements ITestCaseBuildable {
+        extends XMLTestCaseBuilder {
+
     private final FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel;
 
     public XMLAssumptionAwareTestCaseBuilder(FeatureModel<F, AbstractRelationship<F>, CTConstraint> featureModel) {
@@ -55,12 +58,17 @@ public class XMLAssumptionAwareTestCaseBuilder<F extends AnomalyAwareFeature>
 
         Pair<List<Assignment>, List<F>> splitTestCases = splitTestCase(testcaseEle);
 
-        AssumptionAwareTestCase<F> testCase = (AssumptionAwareTestCase<F>) AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
-                .testcase(anomalyString.equals("REDUNDANT") ? "RedundancyAnalysis" : testCaseNodeToString(testcaseEle))
-                .anomalyType(anomalyType)
-                .assignments(splitTestCases.getValue0())
-                .assumptions((List<AnomalyAwareFeature>) splitTestCases.getValue1())
-                .build();
+//        AssumptionAwareTestCase<F> testCase = (AssumptionAwareTestCase<F>) AssumptionAwareTestCase.assumptionAwareTestCaseBuilder()
+//                .testcase(anomalyString.equals("REDUNDANT") ? "RedundancyAnalysis" : testCaseNodeToString(testcaseEle))
+//                .anomalyType(anomalyType)
+//                .assignments(splitTestCases.getValue0())
+//                .assumptions((List<AnomalyAwareFeature>) splitTestCases.getValue1())
+//                .build();
+        AssumptionAwareTestCase<F> testCase = (AssumptionAwareTestCase<F>) AssumptionAwareTestCases.from(
+                anomalyString.equals("REDUNDANT") ? "RedundancyAnalysis" : xmlToString(testcaseEle),
+                anomalyType,
+                splitTestCases.getValue0(),
+                (List<AnomalyAwareFeature>) splitTestCases.getValue1());
 
         LoggerUtils.outdent();
         log.debug("{}<<< Built test case [testcase={}]", LoggerUtils.tab(), testCase);
@@ -98,10 +106,11 @@ public class XMLAssumptionAwareTestCaseBuilder<F extends AnomalyAwareFeature>
                 throw new RuntimeException("Assignment to a variable must be boolean!");
             }
 
-            Assignment assignment = Assignment.builder()
-                    .variable(variable)
-                    .value(value)
-                    .build();
+//            Assignment assignment = Assignment.builder()
+//                    .variable(variable)
+//                    .value(value)
+//                    .build();
+            Assignment assignment = Assignments.fromVariableValue(variable, value);
             assignments.add(assignment);
 
             log.trace("{}Parsed assignment [clause={}, assignment={}]", LoggerUtils.tab(), variable, assignment);
@@ -110,31 +119,31 @@ public class XMLAssumptionAwareTestCaseBuilder<F extends AnomalyAwareFeature>
         return new Pair<>(assignments, assumptions);
     }
 
-    private String testCaseNodeToString(Element testcase) {
-        NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE);
-
-        Element clause = (Element) clauses.item(0);
-        String variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
-        String value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
-
-        StringBuilder sb = new StringBuilder();
-        if (value.equals("false")) {
-            sb.append("~");
-        }
-        sb.append(variable);
-
-        for (int clauseIndex = 1; clauseIndex < clauses.getLength(); clauseIndex++) {
-            clause = (Element) clauses.item(clauseIndex);
-            variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
-            value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
-
-            sb.append(" & ");
-            if (value.equals("false")) {
-                sb.append("~");
-            }
-            sb.append(variable);
-        }
-
-        return sb.toString();
-    }
+//    private String xmlToString(Element testcase) {
+//        NodeList clauses = testcase.getElementsByTagName(XMLTestSuiteFormat.TAG_CLAUSE);
+//
+//        Element clause = (Element) clauses.item(0);
+//        String variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+//        String value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
+//
+//        StringBuilder sb = new StringBuilder();
+//        if (value.equals("false")) {
+//            sb.append("~");
+//        }
+//        sb.append(variable);
+//
+//        for (int clauseIndex = 1; clauseIndex < clauses.getLength(); clauseIndex++) {
+//            clause = (Element) clauses.item(clauseIndex);
+//            variable = clause.getAttribute(XMLTestSuiteFormat.TAG_VARIABLE);
+//            value = clause.getAttribute(XMLTestSuiteFormat.TAG_VALUE);
+//
+//            sb.append(" & ");
+//            if (value.equals("false")) {
+//                sb.append("~");
+//            }
+//            sb.append(variable);
+//        }
+//
+//        return sb.toString();
+//    }
 }

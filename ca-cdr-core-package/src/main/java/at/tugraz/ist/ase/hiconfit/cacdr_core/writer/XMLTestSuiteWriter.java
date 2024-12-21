@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -39,17 +39,15 @@ public class XMLTestSuiteWriter implements ITestSuiteWritable {
         for (ITestCase testCase : testCases) {
             Element testCaseEle = doc.createElement(XMLTestSuiteFormat.TAG_TESTCASE);
 
-            for (Assignment assignment : testCase.getAssignments()) {
-                Element clauseEle = doc.createElement(XMLTestSuiteFormat.TAG_CLAUSE);
-                clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VARIABLE,  assignment.getVariable());
-                clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VALUE, assignment.getValue());
-
-                testCaseEle.appendChild(clauseEle);
-            }
+            addChild(testCase, doc, testCaseEle);
 
             rootEle.appendChild(testCaseEle);
         }
 
+        transformToFile(path, doc);
+    }
+
+    protected void transformToFile(String path, Document doc) throws TransformerException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         transformerFactory.setAttribute("indent-number", 4);
         Transformer transformer = transformerFactory.newTransformer();
@@ -58,5 +56,15 @@ public class XMLTestSuiteWriter implements ITestSuiteWritable {
         StreamResult streamResult = new StreamResult(new File(path));
 
         transformer.transform(domSource, streamResult);
+    }
+
+    protected void addChild(ITestCase testCase, Document doc, Element testCaseEle) {
+        for (Assignment assignment : testCase.getAssignments()) {
+            Element clauseEle = doc.createElement(XMLTestSuiteFormat.TAG_CLAUSE);
+            clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VARIABLE,  assignment.getVariable());
+            clauseEle.setAttribute(XMLTestSuiteFormat.TAG_VALUE, assignment.getValue());
+
+            testCaseEle.appendChild(clauseEle);
+        }
     }
 }

@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.hiconfit.cacdr_core.reader;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.ITestCaseBuildable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.TestSuites;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import lombok.Cleanup;
 import lombok.NonNull;
@@ -46,9 +47,10 @@ public class TestSuiteReader implements ITestSuiteReadable {
             testCases.add(testCase);
         }*/
 
-        TestSuite testSuite = TestSuite.builder()
-                .testCases(testCases)
-                .build();
+//        TestSuite testSuite = TestSuite.builder()
+//                .testCases(testCases)
+//                .build();
+        TestSuite testSuite = TestSuites.fromTestCases(testCases);
 
         LoggerUtils.outdent();
         log.debug("{}<<< Built test suite [testsuite={}]", LoggerUtils.tab(), testSuite);
