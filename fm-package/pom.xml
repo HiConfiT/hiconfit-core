@@ -13,7 +13,7 @@
     <parent>
         <artifactId>hiconfit-core</artifactId>
         <groupId>at.tugraz.ist.ase.hiconfit</groupId>
-        <version>1.0.1-alpha-40</version>
+        <version>1.0.1-alpha-43</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -48,6 +48,10 @@
                 <exclusion>
                     <artifactId>slf4j-simple</artifactId>
                     <groupId>org.slf4j</groupId>
+                </exclusion>
+                <exclusion>  <!-- declare the exclusion here -->
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
