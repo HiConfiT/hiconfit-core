@@ -14,7 +14,7 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.ISolutionTranslatable;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.SolutionWriter;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.SolutionWriterWithCounter;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.heuristics.ValueVariableOrdering;
 import at.tugraz.ist.ase.hiconfit.heuristics.selector.MFVVOValueSelector;
@@ -52,7 +52,7 @@ public class Configurator {
     @Setter
     protected ISolutionTranslatable translator;
     @Setter
-    protected SolutionWriter writer;
+    protected SolutionWriterWithCounter writer;
 
     @Getter
     protected final List<Solution> solutions = new LinkedList<>();
@@ -66,7 +66,7 @@ public class Configurator {
 
     @Builder
     public Configurator(@NonNull KB kb, @NonNull ConfigurationModel configurationModel, // boolean rootConstraints,
-                        ISolutionTranslatable translator, SolutionWriter writer) {
+                        ISolutionTranslatable translator, SolutionWriterWithCounter writer) {
         this.kb = kb;
 //        this.rootConstraints = rootConstraints;
 
@@ -236,13 +236,13 @@ public class Configurator {
         }
     }
 
-    public void findAllSolutions(boolean notKB, long timeout, @NonNull SolutionWriter writer) {
+    public void findAllSolutions(boolean notKB, long timeout, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findAllSolutions(notKB, timeout);
     }
 
-    public void findAllSolutions(boolean notKB, @NonNull SolutionWriter writer) {
+    public void findAllSolutions(boolean notKB, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findAllSolutions(notKB,0);
@@ -257,7 +257,7 @@ public class Configurator {
         reset();
     }
 
-    public void findSolutions(boolean notKB, int maxNumConf, @NonNull SolutionWriter writer) {
+    public void findSolutions(boolean notKB, int maxNumConf, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findSolutions(notKB, maxNumConf);
@@ -275,7 +275,7 @@ public class Configurator {
         reset();
     }
 
-    public void findSolutions(boolean notKB, int maxNumConf, @NonNull Requirement requirement, @NonNull SolutionWriter writer) {
+    public void findSolutions(boolean notKB, int maxNumConf, @NonNull Requirement requirement, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findSolutions(notKB, maxNumConf, requirement);
@@ -307,7 +307,7 @@ public class Configurator {
         reset();
     }
 
-    public void findSolutions(boolean notKB, int maxNumConf, @NonNull ValueVariableOrdering vvo, @NonNull SolutionWriter writer) {
+    public void findSolutions(boolean notKB, int maxNumConf, @NonNull ValueVariableOrdering vvo, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findSolutions(notKB, maxNumConf, vvo);
@@ -338,5 +338,15 @@ public class Configurator {
     // TODO: migrate to common-package and generic method - T needs to have equals and hashCode methods
     private boolean contains(Solution solution) {
         return solutions.stream().anyMatch(s -> s.equals(solution));
+    }
+
+    public void dispose() {
+        kb.dispose();
+        configurationModel.dispose();
+        checker.dispose();
+        solutions.clear();
+        requirement = null;
+        model = null;
+        solver = null;
     }
 }

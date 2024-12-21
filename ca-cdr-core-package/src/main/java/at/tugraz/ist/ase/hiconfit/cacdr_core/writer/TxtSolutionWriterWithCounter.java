@@ -19,10 +19,16 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TxtSolutionWriter extends SolutionWriter {
+public class TxtSolutionWriterWithCounter extends SolutionWriterWithCounter {
 
-    public TxtSolutionWriter(String folder) {
+    public TxtSolutionWriterWithCounter(String folder) {
         super(folder);
+    }
+
+    @Override
+    public void write(@NonNull Solution solution, String filename) throws IOException {
+        this.fileWriter = new FileWriter(this.folder + filename);
+        write(solution);
     }
 
     @Override
@@ -40,7 +46,7 @@ public class TxtSolutionWriter extends SolutionWriter {
 
     @Override
     protected void createFileWriter() throws IOException {
-        ++SolutionWriter.counter;
-        this.fileWriter = new FileWriter(String.format(this.folder + "conf_%s.txt", SolutionWriter.counter));
+        ++SolutionWriterWithCounter.counter;
+        this.fileWriter = new FileWriter(String.format(this.folder + "conf_%s.txt", SolutionWriterWithCounter.counter));
     }
 }

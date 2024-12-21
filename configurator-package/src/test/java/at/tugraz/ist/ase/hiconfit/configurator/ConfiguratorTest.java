@@ -13,7 +13,7 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMSolutionTranslator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.kb.KBSolutionTranslator;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.TxtSolutionWriter;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.TxtSolutionWriterWithCounter;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -25,6 +25,7 @@ import at.tugraz.ist.ase.hiconfit.heuristics.io.ValueVariableOrderingReader;
 import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
 import at.tugraz.ist.ase.hiconfit.kb.fm.FMKB;
 import com.opencsv.exceptions.CsvValidationException;
+import lombok.Cleanup;
 import lombok.val;
 import org.junit.jupiter.api.Test;
 
@@ -51,8 +52,10 @@ class ConfiguratorTest {
         System.out.println(vvo);
 
 //        Configurator configurator = new Configurator(cameraKB, false, new CameraSolutionTranslator());
+        @Cleanup("dispose")
         val configurationModel = new ConfigurationModel(cameraKB, false);
         configurationModel.initialize();
+        @Cleanup("dispose")
         val configurator = Configurator.builder()
                 .kb(cameraKB)
                 .configurationModel(configurationModel)
@@ -60,10 +63,10 @@ class ConfiguratorTest {
                 .build();
 
         // identify first 5 solutions without the given VVO
-        configurator.findSolutions(false, 5, new TxtSolutionWriter("./conf/camera_withoutVVO/"));
+        configurator.findSolutions(false, 5, new TxtSolutionWriterWithCounter("./conf/camera_withoutVVO/"));
 
         // identify first 5 solutions with the given VVO
-        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriter("./conf/camera_withVVO/"));
+        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriterWithCounter("./conf/camera_withVVO/"));
     }
 
     @Test
@@ -93,10 +96,10 @@ class ConfiguratorTest {
                 .build();
 
         // identify first 5 solutions without the given VVO
-        configurator.findSolutions(false, 5, new TxtSolutionWriter("./conf/pizzas_withoutVVO/"));
+        configurator.findSolutions(false, 5, new TxtSolutionWriterWithCounter("./conf/pizzas_withoutVVO/"));
 
         // identify first 5 solutions with the given VVO
-        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriter("./conf/pizzas_withVVO/"));
+        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriterWithCounter("./conf/pizzas_withVVO/"));
     }
 
     @Test

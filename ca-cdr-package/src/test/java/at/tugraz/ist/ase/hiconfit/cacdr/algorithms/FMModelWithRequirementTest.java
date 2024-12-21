@@ -10,7 +10,7 @@ package at.tugraz.ist.ase.hiconfit.cacdr.algorithms;
 
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.RequirementBuilder;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.Requirements;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
@@ -35,8 +35,9 @@ class FMModelWithRequirementTest {
         val file = new File("src/test/resources/ubuntu.sxfm");
         val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
         val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
@@ -82,8 +83,9 @@ class FMModelWithRequirementTest {
         val file = new File("src/test/resources/ubuntu.sxfm");
         val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
         val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
@@ -132,8 +134,9 @@ class FMModelWithRequirementTest {
         val file = new File("src/test/resources/ubuntu.sxfm");
         val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
         val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
@@ -176,8 +179,9 @@ class FMModelWithRequirementTest {
         val file = new File("src/test/resources/ubuntu.sxfm");
         val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
         val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
@@ -223,8 +227,9 @@ class FMModelWithRequirementTest {
         val file = new File("src/test/resources/ubuntu.sxfm");
         val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
         val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
@@ -273,8 +278,9 @@ class FMModelWithRequirementTest {
         val file = new File("src/test/resources/ubuntu.sxfm");
         val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
         val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);

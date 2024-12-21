@@ -1,0 +1,38 @@
+/*
+ * High Performance Knowledge Based Configuration Techniques
+ *
+ * Copyright (c) 2022-2024
+ *
+ * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
+ */
+
+package at.tugraz.ist.ase.hiconfit.cacdr_core.writer;
+
+import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
+import lombok.NonNull;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+public abstract class SolutionWriterWithCounter extends SolutionWriter {
+
+    protected static int counter = 0;
+
+    protected FileWriter fileWriter;
+
+    public SolutionWriterWithCounter(String folder) {
+        super(folder);
+    }
+
+    public abstract void write(@NonNull Solution solution) throws IOException;
+
+    protected void createFileWriter() throws IOException {
+        counter++;
+        fileWriter = new FileWriter(String.format(folder + "conf_%s.xml", counter));
+    }
+
+    // close
+    public void close() throws IOException {
+        fileWriter.close();
+    }
+}
