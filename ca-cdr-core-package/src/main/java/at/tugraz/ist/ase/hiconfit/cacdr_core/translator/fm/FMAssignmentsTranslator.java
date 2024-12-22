@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -9,11 +9,14 @@
 package at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm;
 
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.CONNECTION_TYPE;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.ILogOpCreatable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.LogOpCreator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.IAssignmentsTranslatable;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.ILogOpCreatable;
 import at.tugraz.ist.ase.hiconfit.common.ChocoSolverUtils;
 import at.tugraz.ist.ase.hiconfit.kb.core.KB;
 import lombok.NonNull;
+import lombok.Setter;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.constraints.Constraint;
 import org.chocosolver.solver.constraints.nary.cnf.LogOp;
@@ -23,7 +26,11 @@ import java.util.List;
 /**
  * No remove the translated constraints from the Choco model
  */
-public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOpCreatable {
+public class FMAssignmentsTranslator implements IAssignmentsTranslatable {
+
+    @Setter
+    private static ILogOpCreatable logOpCreator = new LogOpCreator();
+    private static final CONNECTION_TYPE AND_CONNECTION_TYPE = CONNECTION_TYPE.AND;
 
     /**
      * Translates {@link Assignment}s to Choco constraints.
@@ -38,7 +45,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
         int startIdx = kb.getNumChocoConstraints();
         Model model = kb.getModelKB();
 
-        LogOp logOp = create(assignments, kb);
+        LogOp logOp = logOpCreator.create(assignments, kb, AND_CONNECTION_TYPE);
         post(logOp, model, chocoCstrs, startIdx);
 
         // Negation of the translated constraints
@@ -74,7 +81,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
         int startIdx = kb.getNumChocoConstraints();
         Model model = kb.getModelKB();
 
-        LogOp logOp = create(assignment, kb);
+        LogOp logOp = logOpCreator.create(assignment, kb, AND_CONNECTION_TYPE);
         post(logOp, model, chocoCstrs, startIdx);
 
         // Negation of the translated constraints
@@ -85,28 +92,7 @@ public class FMAssignmentsTranslator implements IAssignmentsTranslatable, ILogOp
 
     private void translateToNegation(LogOp logOp, Model model, List<Constraint> negChocoCstrs) {
         int startIdx = model.getNbCstrs();
-        LogOp negLogOp = createNegation(logOp);
+        LogOp negLogOp = logOpCreator.createNegation(logOp, AND_CONNECTION_TYPE);
         post(negLogOp, model, negChocoCstrs, startIdx);
-    }
-
-    @Override
-    public LogOp create(@NonNull List<Assignment> assignments, @NonNull KB kb) {
-        LogOp logOp = LogOp.and(); // creates a AND LogOp
-        for (Assignment assignment : assignments) { // get each clause
-            ChocoSolverUtils.addAssignmentToLogOp(logOp, kb.getModelKB(), assignment.getVariable(), assignment.getValue());
-        }
-        return logOp;
-    }
-
-    @Override
-    public LogOp create(@NonNull Assignment assignment, @NonNull KB kb) {
-        LogOp logOp = LogOp.and(); // creates a AND LogOp
-        ChocoSolverUtils.addAssignmentToLogOp(logOp, kb.getModelKB(), assignment.getVariable(), assignment.getValue());
-        return logOp;
-    }
-
-    @Override
-    public LogOp createNegation(@NonNull LogOp logOp) {
-        return LogOp.nand(logOp);
     }
 }

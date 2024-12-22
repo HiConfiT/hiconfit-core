@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -10,6 +10,8 @@ package at.tugraz.ist.ase.hiconfit.cacdr_core.builder;
 
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.Assignments;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.Requirements;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -35,19 +37,18 @@ public class RequirementBuilder implements IRequirementBuildable {
         String[] tokens = stringUR.split(",");
 
         for (String token : tokens) {
-            String[] items = token.split("=");
-
-            String variable = items[0];
-            String value = items[1];
-
-            Assignment ur = Assignment.builder().variable(variable).value(value).build();
+//            String[] items = token.split("=");
+//
+//            String variable = items[0];
+//            String value = items[1];
+//
+//            Assignment ur = Assignment.builder().variable(variable).value(value).build();
+            Assignment ur = Assignments.fromString(token, "=");
 
             assignments.add(ur);
         }
 
-        Requirement requirement = Requirement.requirementBuilder()
-                .assignments(assignments)
-                .build();
+        Requirement requirement = Requirements.fromAssignments(assignments);
 
         LoggerUtils.outdent();
         log.trace("{}Built a user requirement [ur={}]", LoggerUtils.tab(), assignments);

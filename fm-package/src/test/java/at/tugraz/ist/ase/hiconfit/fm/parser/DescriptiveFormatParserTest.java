@@ -25,9 +25,6 @@ class DescriptiveFormatParserTest {
     @Test
     void test() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike.fm4conf");
-//        @Cleanup("dispose")
-//        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-//        featureModel = parser.parse(fileFM);
         featureModel = FeatureModels.fromFile(fileFM);
 
         System.out.println(featureModel);

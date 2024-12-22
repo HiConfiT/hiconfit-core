@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -12,7 +12,8 @@ import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import lombok.Cleanup;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -24,10 +25,8 @@ class GLENCOEParserTest {
 
     @Test
     void test() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/bamboobike.gfm.json");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/bamboobike.gfm.json");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         String expected = """
                 FEATURES:

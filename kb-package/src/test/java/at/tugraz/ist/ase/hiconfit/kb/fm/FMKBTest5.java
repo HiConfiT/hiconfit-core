@@ -12,12 +12,11 @@ import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.kb.core.BoolVariable;
 import at.tugraz.ist.ase.hiconfit.kb.core.Variable;
-import lombok.Cleanup;
+import lombok.val;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.search.loop.monitors.IMonitorSolution;
@@ -35,10 +34,8 @@ class FMKBTest5 {
 
     @Test
     void test() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/pizzas.xml");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/pizzas.xml");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         kb = new FMKB<>(featureModel, true);
 

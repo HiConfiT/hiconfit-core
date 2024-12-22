@@ -1,17 +1,17 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.hiconfit.cacdr_core.translator.camera;
+package at.tugraz.ist.ase.hiconfit.cacdr_core.translator.kb;
 
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.IAssignmentsTranslatable;
 import at.tugraz.ist.ase.hiconfit.common.ChocoSolverUtils;
-import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
+import at.tugraz.ist.ase.hiconfit.kb.core.IIntVarKB;
 import at.tugraz.ist.ase.hiconfit.kb.core.KB;
 import com.google.common.base.Preconditions;
 import lombok.NonNull;
@@ -22,9 +22,9 @@ import org.chocosolver.solver.variables.IntVar;
 import java.util.List;
 
 /**
- * No remove the translated constraints from the Choco model
+ * DON'T remove the translated constraints from the Choco model
  */
-public class CameraAssignmentsTranslator implements IAssignmentsTranslatable {
+public class KBAssignmentsTranslator implements IAssignmentsTranslatable {
 
     /**
      * Translates {@link Assignment}s to Choco constraints.
@@ -35,12 +35,14 @@ public class CameraAssignmentsTranslator implements IAssignmentsTranslatable {
      */
     @Override
     public void translate(@NonNull List<Assignment> assignments, @NonNull KB kb, @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs) {
-        CameraKB cameraKB = checkAndGetCameraKB(kb);
+//        CameraKB cameraKB = checkAndGetCameraKB(kb);
+        // check if the KB is a IIntVarKB
+        Preconditions.checkArgument(kb instanceof IIntVarKB, "The KB must be a IIntVarKB");
 
-        int startIdx = cameraKB.getNumChocoConstraints();
-        createAndPost(assignments, cameraKB);
+        int startIdx = kb.getNumChocoConstraints();
+        createAndPost(assignments, kb);
 
-        afterPostingAndUnpost(chocoCstrs, cameraKB, startIdx);
+        afterPostingAndUnpost(chocoCstrs, kb, startIdx);
 
         // TODO - negation
         // Negation of the translated constraints
@@ -49,8 +51,8 @@ public class CameraAssignmentsTranslator implements IAssignmentsTranslatable {
 //        }
     }
 
-    private static void afterPostingAndUnpost(List<Constraint> chocoCstrs, CameraKB cameraKB, int startIdx) {
-        Model model = cameraKB.getModelKB();
+    private static void afterPostingAndUnpost(List<Constraint> chocoCstrs, KB kb, int startIdx) {
+        Model model = kb.getModelKB();
 
         int endIdx = model.getNbCstrs() - 1;
         if (startIdx <= endIdx) {
@@ -72,12 +74,14 @@ public class CameraAssignmentsTranslator implements IAssignmentsTranslatable {
     @Override
     public void translate(@NonNull Assignment assignment, @NonNull KB kb, @NonNull List<Constraint> chocoCstrs, List<Constraint> negChocoCstrs) {
         // check if the KB is a CameraKB
-        CameraKB cameraKB = checkAndGetCameraKB(kb);
+//        CameraKB cameraKB = checkAndGetCameraKB(kb);
+        // check if the KB is a IIntVarKB
+        Preconditions.checkArgument(kb instanceof IIntVarKB, "The KB must be a IIntVarKB");
 
-        int startIdx = cameraKB.getNumChocoConstraints();
-        createAndPost(assignment, cameraKB); // add the translated constraints to the Choco model
+        int startIdx = kb.getNumChocoConstraints();
+        createAndPost(assignment, kb); // add the translated constraints to the Choco model
 
-        afterPostingAndUnpost(chocoCstrs, cameraKB, startIdx);
+        afterPostingAndUnpost(chocoCstrs, kb, startIdx);
 
         // TODO - negation
         // Negation of the translated constraints
@@ -86,28 +90,28 @@ public class CameraAssignmentsTranslator implements IAssignmentsTranslatable {
 //        }
     }
 
-    private static CameraKB checkAndGetCameraKB(KB kb) {
-        // check if the KB is a CameraKB
-        Preconditions.checkArgument(kb instanceof CameraKB, "The KB must be a CameraKB");
-        return (CameraKB) kb;
-    }
+//    private static CameraKB checkAndGetCameraKB(KB kb) {
+//        // check if the KB is a CameraKB
+//        Preconditions.checkArgument(kb instanceof CameraKB, "The KB must be a CameraKB");
+//        return (CameraKB) kb;
+//    }
 
     private boolean isCorrectAssignment(String varName, IntVar var, String value, int chocoValue) {
         return var != null && (!value.equals("NULL"))
                 && (chocoValue != -1);
     }
 
-    private void createAndPost(@NonNull List<Assignment> assignments, @NonNull CameraKB kb) {
+    private void createAndPost(@NonNull List<Assignment> assignments, @NonNull KB kb) {
         for (Assignment assign: assignments) {
             createAndPost(assign, kb);
         }
     }
 
-    private void createAndPost(@NonNull Assignment assignment, @NonNull CameraKB kb) {
+    private void createAndPost(@NonNull Assignment assignment, @NonNull KB kb) {
         String varName = assignment.getVariable();
-        IntVar var = kb.getIntVar(varName);
+        IntVar var = ((IIntVarKB)kb).getIntVar(varName);
         String value = assignment.getValue();
-        int chocoValue = kb.getIntValue(varName, value);
+        int chocoValue = ((IIntVarKB)kb).getIntValue(varName, value);
 
         if (isCorrectAssignment(varName, var, value, chocoValue)) {
             kb.getModelKB().arithm(var, "=", chocoValue).post();

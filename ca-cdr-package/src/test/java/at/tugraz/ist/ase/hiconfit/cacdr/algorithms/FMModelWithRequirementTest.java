@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2023
+ * Copyright (c) 2023-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -10,18 +10,13 @@ package at.tugraz.ist.ase.hiconfit.cacdr.algorithms;
 
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.RequirementBuilder;
-import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMModelWithRequirement;
-import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
-import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
-import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
-import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.Requirements;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import com.google.common.collect.Iterators;
-import lombok.Cleanup;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -35,21 +30,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class FMModelWithRequirementTest {
     @Test
     void shouldInconsistent_CFinC() throws FeatureModelParserException {
-        String var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=true";
+        val var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=true";
 
-        File file = new File("src/test/resources/ubuntu.sxfm");
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(file.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(file);
+        val file = new File("src/test/resources/ubuntu.sxfm");
+        val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMModelWithRequirement<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMModelWithRequirement<>(featureModel, userRequirement, false, true, true,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -87,21 +78,17 @@ class FMModelWithRequirementTest {
 
     @Test
     void shouldInconsistent1_CFinC() throws FeatureModelParserException {
-        String var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=true,UniversalAccess1=false,Displays=false,Low=true,Normal=true,High=true,AcceptanceDelay=true,Short=false";
+        val var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=true,UniversalAccess1=false,Displays=false,Low=true,Normal=true,High=true,AcceptanceDelay=true,Short=false";
 
-        File file = new File("src/test/resources/ubuntu.sxfm");
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(file.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(file);
+        val file = new File("src/test/resources/ubuntu.sxfm");
+        val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMModelWithRequirement<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMModelWithRequirement<>(featureModel, userRequirement, false, true, true,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -142,21 +129,17 @@ class FMModelWithRequirementTest {
 
     @Test
     void shouldConsistent_CFinC() throws FeatureModelParserException {
-        String var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=false,Low=false,Normal=false,High=false,AcceptanceDelay=false,Short=false";
+        val var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=false,Low=false,Normal=false,High=false,AcceptanceDelay=false,Short=false";
 
-        File file = new File("src/test/resources/ubuntu.sxfm");
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(file.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(file);
+        val file = new File("src/test/resources/ubuntu.sxfm");
+        val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMModelWithRequirement<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMModelWithRequirement<>(featureModel, userRequirement, false, true, true,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement, true);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -191,21 +174,17 @@ class FMModelWithRequirementTest {
 
     @Test
     void shouldInconsistent_CFnotinC() throws FeatureModelParserException {
-        String var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=true";
+        val var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=true";
 
-        File file = new File("src/test/resources/ubuntu.sxfm");
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(file.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(file);
+        val file = new File("src/test/resources/ubuntu.sxfm");
+        val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMModelWithRequirement<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMModelWithRequirement<>(featureModel, userRequirement, false, true, false, false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -243,21 +222,17 @@ class FMModelWithRequirementTest {
 
     @Test
     void shouldInconsistent1() throws FeatureModelParserException {
-        String var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=true,UniversalAccess1=false,Displays=false,Low=true,Normal=true,High=true,AcceptanceDelay=true,Short=false";
+        val var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=true,UniversalAccess1=false,Displays=false,Low=true,Normal=true,High=true,AcceptanceDelay=true,Short=false";
 
-        File file = new File("src/test/resources/ubuntu.sxfm");
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(file.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(file);
+        val file = new File("src/test/resources/ubuntu.sxfm");
+        val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMModelWithRequirement<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMModelWithRequirement<>(featureModel, userRequirement, false, true, false, false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 
@@ -298,21 +273,17 @@ class FMModelWithRequirementTest {
 
     @Test
     void shouldConsistent() throws FeatureModelParserException {
-        String var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=false,Low=false,Normal=false,High=false,AcceptanceDelay=false,Short=false";
+        val var_value_combination = "Appearance=false,BrightnessAndLock=false,Displays1=false,UniversalAccess1=false,Displays=false,Low=false,Normal=false,High=false,AcceptanceDelay=false,Short=false";
 
-        File file = new File("src/test/resources/ubuntu.sxfm");
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(file.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(file);
+        val file = new File("src/test/resources/ubuntu.sxfm");
+        val featureModel = FeatureModels.fromFile(file);
 
-        RequirementBuilder builder = new RequirementBuilder();
-        Requirement userRequirement = builder.build(var_value_combination);
+//        RequirementBuilder builder = new RequirementBuilder();
+//        Requirement userRequirement = builder.build(var_value_combination);
+        Requirement userRequirement = Requirements.fromString(var_value_combination);
 
         // CHECK CONSISTENCY
-        FMModelWithRequirement<Feature, AbstractRelationship<Feature>, CTConstraint> diagModel
-                = new FMModelWithRequirement<>(featureModel, userRequirement, false, true, false,  false);
-        diagModel.initialize();
+        val diagModel = FMCdrModels.createRequirementCdrModel(featureModel, userRequirement);
 
         System.out.println("\tNumber of constraints: " + diagModel.getAllConstraints().size());
 

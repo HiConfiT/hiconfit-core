@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.hiconfit.fma.test.reader;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.ITestCaseBuildable;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.TestSuites;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.format.XMLTestSuiteFormat;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.ITestSuiteReadable;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
@@ -71,9 +72,10 @@ public class XMLAssumptionAwareTestSuiteReader
                     .mapToObj(rootEle.getElementsByTagName(XMLTestSuiteFormat.TAG_TESTCASE)::item);
             testCases = nodeStream.map(testCaseBuilder::buildTestCase).collect(Collectors.toCollection(LinkedList::new));
 
-            TestSuite testSuite = TestSuite.builder()
-                    .testCases(testCases)
-                    .build();
+//            TestSuite testSuite = TestSuite.builder()
+//                    .testCases(testCases)
+//                    .build();
+            TestSuite testSuite = TestSuites.fromTestCases(testCases);
 
             LoggerUtils.outdent();
             log.debug("{}<<< Built test suite [testsuite={}]", LoggerUtils.tab(), testSuite);

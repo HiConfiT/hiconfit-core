@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -52,8 +52,6 @@ public class RenaultKB extends KB implements IIntVarKB {
         defineDomains();
         defineVariables();
         defineConstraints(hasNegativeConstraints);
-
-        // TODO - implement notKB
 
         LoggerUtils.outdent();
         log.debug("{}<<< Created RenaultKB", LoggerUtils.tab());

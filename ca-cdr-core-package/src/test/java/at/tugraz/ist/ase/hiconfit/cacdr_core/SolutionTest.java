@@ -1,13 +1,14 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
 package at.tugraz.ist.ase.hiconfit.cacdr_core;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.Solutions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -37,7 +38,25 @@ class SolutionTest {
 
         assertEquals(s1, s2);
         assertEquals(s2, s1);
-        assertEquals(s1, s1);
+        assertNotEquals(s1, s3);
+        assertNotEquals(s3, s1);
+        assertNotEquals(s2, s3);
+    }
+
+    @Test
+    void testEquals1() {
+        Assignment a1 = Assignment.builder().variable("a1").value("a1").build();
+        Assignment a2 = Assignment.builder().variable("a2").value("a2").build();
+
+//        Solution s1 = Solution.builder().assignments(List.of(a1, a2)).build();
+        Solution s1 = Solutions.fromAssignments(List.of(a1, a2));
+//        Solution s2 = Solution.builder().assignments(List.of(a1, a2)).build();
+        Solution s2 = Solutions.fromAssignments(List.of(a1, a2));
+//        Solution s3 = Solution.builder().assignments(List.of(a2, a1)).build();
+        Solution s3 = Solutions.fromAssignments(List.of(a2, a1));
+
+        assertEquals(s1, s2);
+        assertEquals(s2, s1);
         assertNotEquals(s1, s3);
         assertNotEquals(s3, s1);
         assertNotEquals(s2, s3);

@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -12,17 +12,17 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.TestSuiteReader;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import lombok.Cleanup;
 import lombok.SneakyThrows;
+import lombok.val;
 import org.chocosolver.solver.Model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -44,9 +44,8 @@ class FMDebuggingModelTest1 {
     @SneakyThrows
     @BeforeAll
     static void setUp() {
-        File fileFM = new File("src/test/resources/FM_10_0.splx");
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/FM_10_0.splx");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         TestSuiteReader factory = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -54,10 +53,7 @@ class FMDebuggingModelTest1 {
 
         testSuite = factory.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, translator,
-                false, true, false);
-        debuggingModel.initialize();
+        debuggingModel = FMCdrModels.createDebuggingModel(featureModel, testSuite);
     }
 
     @Test

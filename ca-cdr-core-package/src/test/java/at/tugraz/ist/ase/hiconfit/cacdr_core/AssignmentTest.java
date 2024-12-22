@@ -1,13 +1,14 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
 package at.tugraz.ist.ase.hiconfit.cacdr_core;
 
+import at.tugraz.ist.ase.hiconfit.cacdr_core.factory.Assignments;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class AssignmentTest {
     @Test
     void testAssignment() {
-        Assignment assignment = new Assignment("F1", "true");
+//        Assignment assignment = new Assignment("F1", "true");
+        Assignment assignment = Assignments.fromVariableValue("F1", "true");
 
         System.out.println(assignment);
 

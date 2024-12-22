@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -12,7 +12,8 @@ import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import lombok.Cleanup;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -25,9 +26,7 @@ public class SXFMParserTest {
     @Test
     void testBamboo() throws FeatureModelParserException {
         File fileFM = new File("src/test/resources/bamboobike_splot.sxfm");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         String expected = """
                 FEATURES:
@@ -64,10 +63,8 @@ public class SXFMParserTest {
 
     @Test
     void testSmartwatch() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/smartwatch.sxfm");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/smartwatch.sxfm");
+        val featureModel = FeatureModels.fromFile(fileFM);
 
         String st = "FEATURES:\n" +
                 String.format("\t%s\n", "Smartwatch") +
@@ -103,10 +100,8 @@ public class SXFMParserTest {
 
     @Test
     public void testFM_10_0() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/FM_10_0.splx");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/FM_10_0.splx");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         String st = "FEATURES:\n" +
                 String.format("\t%s\n", "FM_10_0") +

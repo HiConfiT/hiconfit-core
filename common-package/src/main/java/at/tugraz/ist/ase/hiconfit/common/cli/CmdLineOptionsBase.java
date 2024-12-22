@@ -1,13 +1,14 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.hiconfit.common;
+package at.tugraz.ist.ase.hiconfit.common.cli;
 
+import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +24,7 @@ public class CmdLineOptionsBase {
     @Option(name = "-h",
             aliases="--help",
             usage = "Prints usage info.")
-    private boolean help = false;
+    private final boolean help = false;
 
     protected CmdLineParser parser;
     private final String banner;
