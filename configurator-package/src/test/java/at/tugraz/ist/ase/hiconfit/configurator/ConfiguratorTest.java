@@ -11,15 +11,15 @@ package at.tugraz.ist.ase.hiconfit.configurator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.camera.CameraSolutionTranslator;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMSolutionTranslator;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer.TxtSolutionWriter;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.kb.KBSolutionTranslator;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.TxtSolutionWriterWithCounter;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import at.tugraz.ist.ase.hiconfit.heuristics.io.ValueVariableOrderingReader;
 import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
@@ -52,29 +52,28 @@ class ConfiguratorTest {
         System.out.println(vvo);
 
 //        Configurator configurator = new Configurator(cameraKB, false, new CameraSolutionTranslator());
+        @Cleanup("dispose")
         val configurationModel = new ConfigurationModel(cameraKB, false);
         configurationModel.initialize();
+        @Cleanup("dispose")
         val configurator = Configurator.builder()
                 .kb(cameraKB)
                 .configurationModel(configurationModel)
-                .translator(new CameraSolutionTranslator())
+                .translator(new KBSolutionTranslator())
                 .build();
 
         // identify first 5 solutions without the given VVO
-        configurator.findSolutions(false, 5, new TxtSolutionWriter("./conf/camera_withoutVVO/"));
+        configurator.findSolutions(false, 5, new TxtSolutionWriterWithCounter("./conf/camera_withoutVVO/"));
 
         // identify first 5 solutions with the given VVO
-        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriter("./conf/camera_withVVO/"));
+        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriterWithCounter("./conf/camera_withVVO/"));
     }
 
     @Test
     void testFMKB() throws FeatureModelParserException, IOException, CsvValidationException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
@@ -97,20 +96,17 @@ class ConfiguratorTest {
                 .build();
 
         // identify first 5 solutions without the given VVO
-        configurator.findSolutions(false, 5, new TxtSolutionWriter("./conf/pizzas_withoutVVO/"));
+        configurator.findSolutions(false, 5, new TxtSolutionWriterWithCounter("./conf/pizzas_withoutVVO/"));
 
         // identify first 5 solutions with the given VVO
-        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriter("./conf/pizzas_withVVO/"));
+        configurator.findSolutions(false, 5, vvo, new TxtSolutionWriterWithCounter("./conf/pizzas_withVVO/"));
     }
 
     @Test
     void testConsistency() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/camera.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, false);
@@ -144,10 +140,7 @@ class ConfiguratorTest {
     void testFindSolutions() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
@@ -183,10 +176,7 @@ class ConfiguratorTest {
     void testFind() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);
@@ -234,10 +224,7 @@ class ConfiguratorTest {
     void testFindWithRequirement() throws FeatureModelParserException {
         // read the feature model
         val fileFM = new File("src/test/resources/pizzas.xml");
-
-        @Cleanup("dispose")
-        val parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        featureModel = FeatureModels.fromFile(fileFM);
 
         // convert the feature model into FMKB
         kb = new FMKB<>(featureModel, true);

@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -10,7 +10,6 @@ package at.tugraz.ist.ase.hiconfit.fma.builder;
 
 import at.tugraz.ist.ase.hiconfit.cacdr_core.ITestCase;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
 import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.FMDebuggingModel;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
@@ -49,7 +48,7 @@ public class VoidFMAnalysisBuilder implements IAnalysisBuildable {
               @NonNull TestSuite testSuite,
               @NonNull FMAnalyzer<T, F> analyzer) {
         FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint>
-                debuggingModel = new FMDebuggingModel<>(featureModel, testSuite, new FMTestCaseTranslator(), false, false, false);
+                debuggingModel = new FMDebuggingModel<>(featureModel, testSuite);
         debuggingModel.initialize();
 
         // create the specified analysis and the corresponding explanator

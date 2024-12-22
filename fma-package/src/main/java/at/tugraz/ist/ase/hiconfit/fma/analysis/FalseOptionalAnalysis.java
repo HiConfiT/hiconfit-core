@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -30,7 +30,7 @@ public class FalseOptionalAnalysis<T extends ITestCase, F extends AnomalyAwareFe
 
     public FalseOptionalAnalysis(@NonNull FMDebuggingModel<F, AbstractRelationship<F>, CTConstraint> debuggingModel,
                                  @NonNull T assumption) {
-        super(debuggingModel, assumption);
+        super("False Optional Analysis", debuggingModel, assumption);
     }
 
     @Override

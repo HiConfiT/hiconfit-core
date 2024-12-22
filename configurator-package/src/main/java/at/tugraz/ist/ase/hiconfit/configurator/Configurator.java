@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -14,7 +14,7 @@ import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Requirement;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.ISolutionTranslatable;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.writer.SolutionWriter;
+import at.tugraz.ist.ase.hiconfit.cacdr_core.writer.SolutionWriterWithCounter;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
 import at.tugraz.ist.ase.hiconfit.heuristics.ValueVariableOrdering;
 import at.tugraz.ist.ase.hiconfit.heuristics.selector.MFVVOValueSelector;
@@ -32,7 +32,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
 import org.chocosolver.solver.search.strategy.Search;
-import org.chocosolver.solver.search.strategy.strategy.AbstractStrategy;
 import org.chocosolver.solver.variables.IntVar;
 
 import java.io.IOException;
@@ -53,7 +52,7 @@ public class Configurator {
     @Setter
     protected ISolutionTranslatable translator;
     @Setter
-    protected SolutionWriter writer;
+    protected SolutionWriterWithCounter writer;
 
     @Getter
     protected final List<Solution> solutions = new LinkedList<>();
@@ -61,13 +60,13 @@ public class Configurator {
     @Getter
     protected Constraint requirement = null;
 
-    protected AbstractStrategy<?> defaultSearch;
+    protected boolean defaultSearch;
     protected Model model;
     protected Solver solver;
 
     @Builder
     public Configurator(@NonNull KB kb, @NonNull ConfigurationModel configurationModel, // boolean rootConstraints,
-                        ISolutionTranslatable translator, SolutionWriter writer) {
+                        ISolutionTranslatable translator, SolutionWriterWithCounter writer) {
         this.kb = kb;
 //        this.rootConstraints = rootConstraints;
 
@@ -77,7 +76,7 @@ public class Configurator {
         this.configurationModel = configurationModel;
         this.checker = new ChocoConsistencyChecker(configurationModel);
 
-        this.defaultSearch = Search.defaultSearch(kb.getModelKB());
+        this.defaultSearch = true;
         this.model = kb.getModelKB();
         this.solver = this.model.getSolver();
 
@@ -136,6 +135,7 @@ public class Configurator {
         log.trace("{}Add value variable heuristic", LoggerUtils.tab());
         IntVar[] vars = kb.getVariableList().stream().map(v -> v instanceof IntVariable ? ((IntVariable) v).getChocoVar() : ((BoolVariable) v).getChocoVar()).toArray(IntVar[]::new);
 
+        this.defaultSearch = false;
         solver.setSearch(intVarSearch(
                 new MFVVOVariableSelector(vvo.getIntVarOrdering()),
                 new MFVVOValueSelector(vvo.getValueOrdering()),
@@ -147,7 +147,8 @@ public class Configurator {
     public void clearVVO() {
         log.trace("{}Clear value variable heuristic", LoggerUtils.tab());
 
-        solver.setSearch(defaultSearch);
+        this.defaultSearch = true;
+//        solver.setSearch(defaultSearch);
     }
 
     public boolean find(int maxNumConf, long timeout) {
@@ -155,6 +156,11 @@ public class Configurator {
         if (timeout > 0) {
             solver.limitTime(timeout);
             log.trace("{}Set timeout: {} ms", LoggerUtils.tab(), timeout);
+        }
+
+        // set default search
+        if (defaultSearch) {
+            Search.defaultSearch(kb.getModelKB());
         }
 
         // solver
@@ -230,13 +236,13 @@ public class Configurator {
         }
     }
 
-    public void findAllSolutions(boolean notKB, long timeout, @NonNull SolutionWriter writer) {
+    public void findAllSolutions(boolean notKB, long timeout, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findAllSolutions(notKB, timeout);
     }
 
-    public void findAllSolutions(boolean notKB, @NonNull SolutionWriter writer) {
+    public void findAllSolutions(boolean notKB, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findAllSolutions(notKB,0);
@@ -251,7 +257,7 @@ public class Configurator {
         reset();
     }
 
-    public void findSolutions(boolean notKB, int maxNumConf, @NonNull SolutionWriter writer) {
+    public void findSolutions(boolean notKB, int maxNumConf, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findSolutions(notKB, maxNumConf);
@@ -269,7 +275,7 @@ public class Configurator {
         reset();
     }
 
-    public void findSolutions(boolean notKB, int maxNumConf, @NonNull Requirement requirement, @NonNull SolutionWriter writer) {
+    public void findSolutions(boolean notKB, int maxNumConf, @NonNull Requirement requirement, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findSolutions(notKB, maxNumConf, requirement);
@@ -301,7 +307,7 @@ public class Configurator {
         reset();
     }
 
-    public void findSolutions(boolean notKB, int maxNumConf, @NonNull ValueVariableOrdering vvo, @NonNull SolutionWriter writer) {
+    public void findSolutions(boolean notKB, int maxNumConf, @NonNull ValueVariableOrdering vvo, @NonNull SolutionWriterWithCounter writer) {
         setWriter(writer);
 
         findSolutions(notKB, maxNumConf, vvo);
@@ -332,5 +338,15 @@ public class Configurator {
     // TODO: migrate to common-package and generic method - T needs to have equals and hashCode methods
     private boolean contains(Solution solution) {
         return solutions.stream().anyMatch(s -> s.equals(solution));
+    }
+
+    public void dispose() {
+        kb.dispose();
+        configurationModel.dispose();
+        checker.dispose();
+        solutions.clear();
+        requirement = null;
+        model = null;
+        solver = null;
     }
 }

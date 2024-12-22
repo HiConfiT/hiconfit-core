@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * An extension class of {@link AbstractCDRModel} for diagnosis tasks as well as
  * analysis operations of feature models, in which:
- * 1. Diagnosis tasks (rootConstraints = true):
+ * 1. Diagnosis/Conflict detection tasks (rootConstraints = true):
  *    If cfInConflicts, then:
  *        + C = CF
  *        + B = { f0 = true } - rootConstraints = true
@@ -55,6 +55,10 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
     protected Model model;
     protected FeatureModel<F, R, C> featureModel;
     protected FMKB<F, R, C> fmkb;
+
+    public FMKB<F, R, C> getKB() {
+        return fmkb;
+    }
 
     @Getter
     protected final boolean hasNegativeConstraints;
@@ -138,7 +142,7 @@ public class FMCdrModel<F extends Feature, R extends AbstractRelationship<F>, C 
      */
     @Override
     public void initialize() {
-        log.debug("{}Initializing FMDiagnosisModel for {} >>>", LoggerUtils.tab(), getName());
+        log.debug("{}Initializing FMCdrModel for {} >>>", LoggerUtils.tab(), getName());
         LoggerUtils.indent();
 
         // sets possibly faulty constraints to super class

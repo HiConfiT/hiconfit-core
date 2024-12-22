@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -11,17 +11,16 @@ package at.tugraz.ist.ase.hiconfit.cdrmodel.fm;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.TestSuite;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.builder.fm.FMTestCaseBuilder;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.reader.TestSuiteReader;
-import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.fm.FMTestCaseTranslator;
+import at.tugraz.ist.ase.hiconfit.cdrmodel.fm.factory.FMCdrModels;
 import at.tugraz.ist.ase.hiconfit.common.IOUtils;
 import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
-import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FMParserFactory;
-import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParser;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
 import at.tugraz.ist.ase.hiconfit.fm.parser.FeatureModelParserException;
 import com.google.common.collect.Iterators;
 import lombok.Cleanup;
+import lombok.val;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -55,14 +54,10 @@ class FMDebuggingModelTest {
             List.of("ARITHM ([not(ABtesting) + not(nonlicense) >= 1])")
     );
 
-    static FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-
     @BeforeAll
     static void init() throws FeatureModelParserException, IOException {
-        File fileFM = new File("src/test/resources/survey.fm4conf");
-
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        FeatureModel<Feature, AbstractRelationship<Feature>, CTConstraint> fm = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/survey.fm4conf");
+        val fm = FeatureModels.fromFile(fileFM);
 
         TestSuiteReader builder = new TestSuiteReader();
         FMTestCaseBuilder testCaseFactory = new FMTestCaseBuilder();
@@ -70,9 +65,7 @@ class FMDebuggingModelTest {
 
         testSuite = builder.read(is, testCaseFactory);
 
-        FMTestCaseTranslator translator = new FMTestCaseTranslator();
-        model = new FMDebuggingModel<>(fm, testSuite, translator, false, true, false);
-        model.initialize();
+        model = FMCdrModels.createDebuggingModel(fm, testSuite);
     }
 
     @Test

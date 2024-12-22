@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -36,6 +36,7 @@ import java.util.concurrent.RecursiveTask;
 @Getter
 public abstract class AbstractFMAnalysis<T extends ITestCase, F extends AnomalyAwareFeature> extends RecursiveTask<Boolean> {
 
+	protected String name;
 	protected FMCdrModel<F, AbstractRelationship<F>, CTConstraint> model;
 
 	protected T assumption; // could be ITestCase or Constraint
@@ -54,7 +55,8 @@ public abstract class AbstractFMAnalysis<T extends ITestCase, F extends AnomalyA
 //	@Setter
 //	protected IAnalysisMonitor monitor = null;
 
-	public AbstractFMAnalysis(@NonNull FMCdrModel<F, AbstractRelationship<F>, CTConstraint> model, T assumption) {
+	public AbstractFMAnalysis(@NonNull String name, @NonNull FMCdrModel<F, AbstractRelationship<F>, CTConstraint> model, T assumption) {
+		this.name = name;
 		this.model = model;
 		this.assumption = assumption;
 	}

@@ -1,47 +1,51 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
 
-package at.tugraz.ist.ase.hiconfit.cacdr_core.translator.camera;
+package at.tugraz.ist.ase.hiconfit.cacdr_core.translator.kb;
 
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Assignment;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.Solution;
 import at.tugraz.ist.ase.hiconfit.cacdr_core.translator.ISolutionTranslatable;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
-import at.tugraz.ist.ase.hiconfit.kb.camera.CameraKB;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
+import at.tugraz.ist.ase.hiconfit.kb.core.IIntVarKB;
 import at.tugraz.ist.ase.hiconfit.kb.core.KB;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
 @Slf4j
-public class CameraSolutionTranslator implements ISolutionTranslatable {
+public class KBSolutionTranslator implements ISolutionTranslatable {
 
-    protected CameraAssignmentsTranslator translator = new CameraAssignmentsTranslator();
+    protected KBAssignmentsTranslator translator = new KBAssignmentsTranslator();
 
     /**
-     * Translates a Camera solution to Constraint
+     * Translates a IIntVarKB solution to Constraint
      */
     @Override
     public Constraint translate(@NonNull Solution solution, @NonNull KB kb) {
-        // check if the KB is a CameraKB
-        checkArgument(kb instanceof CameraKB, "The KB must be a CameraKB");
-        CameraKB cameraKB = (CameraKB) kb;
+        // check if the KB is a IIntVarKB
+        checkArgument(kb instanceof IIntVarKB, "The KB must be a IIntVarKB");
+//        CameraKB cameraKB = (CameraKB) kb;
 
         log.trace("{}Translating solution [solution={}] >>>", LoggerUtils.tab(), solution);
-        Constraint constraint = new Constraint(solution.toString(), Collections.emptyList());
 
-        translator.translate(solution.getAssignments(), cameraKB,
+        // gets List<String> variables from solution
+        List<String> variables = solution.getAssignments().stream()
+                .map(Assignment::getVariable)
+                .toList();
+        Constraint constraint = new Constraint(solution.toString(), variables);
+
+        translator.translate(solution.getAssignments(), kb,
                 constraint.getChocoConstraints(), constraint.getNegChocoConstraints());
 
         // copy the generated constraints to Solution
@@ -57,21 +61,25 @@ public class CameraSolutionTranslator implements ISolutionTranslatable {
     }
 
     /**
-     * Translates a Camera solution to a list of Constraints
+     * Translates a IIntVarKB solution to a list of Constraints
      */
     @Override
     public List<Constraint> translateToList(@NonNull Solution solution, @NonNull KB kb) {
-        // check if the KB is a CameraKB
-        checkArgument(kb instanceof CameraKB, "The KB must be a CameraKB");
-        CameraKB cameraKB = (CameraKB) kb;
+        // check if the KB is a IIntVarKB
+        checkArgument(kb instanceof IIntVarKB, "The KB must be a IIntVarKB");
+//        CameraKB cameraKB = (CameraKB) kb;
 
         log.trace("{}Translating solution [solution={}] >>>", LoggerUtils.tab(), solution);
         List<Constraint> constraints = new LinkedList<>();
 
         for (Assignment assign: solution.getAssignments()) {
-            Constraint constraint = new Constraint(assign.toString(), Collections.emptyList());
+            // gets List<String> variables from solution
+            List<String> variables = solution.getAssignments().stream()
+                    .map(Assignment::getVariable)
+                    .toList();
+            Constraint constraint = new Constraint(assign.toString(), variables);
 
-            translator.translate(assign, cameraKB,
+            translator.translate(assign, kb,
                     constraint.getChocoConstraints(), constraint.getNegChocoConstraints());
 
             // copy the generated constraints to Solution

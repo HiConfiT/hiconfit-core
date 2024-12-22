@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2022-2023
+ * Copyright (c) 2022-2024
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -12,7 +12,8 @@ import at.tugraz.ist.ase.hiconfit.fm.core.AbstractRelationship;
 import at.tugraz.ist.ase.hiconfit.fm.core.CTConstraint;
 import at.tugraz.ist.ase.hiconfit.fm.core.Feature;
 import at.tugraz.ist.ase.hiconfit.fm.core.FeatureModel;
-import lombok.Cleanup;
+import at.tugraz.ist.ase.hiconfit.fm.factory.FeatureModels;
+import lombok.val;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -24,12 +25,8 @@ class FeatureIDEParserTest {
 
     @Test
     void test() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/bamboobike_featureide.xml");
-        FMParserFactory<Feature, AbstractRelationship<Feature>, CTConstraint> factory = FMParserFactory.getInstance();
-
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = factory.getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/bamboobike_featureide.xml");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         String expected = """
                 FEATURES:
@@ -62,30 +59,24 @@ class FeatureIDEParserTest {
 
     @Test
     void test1() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/linux-2.6.33.3_simple.xml");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/linux-2.6.33.3_simple.xml");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
     }
 
     @Test
     void test2() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/linux-2.6.33.3.xml");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/linux-2.6.33.3.xml");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         assertAll(() -> assertNotNull(featureModel));
     }
 
     @Test
     void test3() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/model1.xml");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/model1.xml");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         String expected = """
                 FEATURES:
@@ -124,10 +115,8 @@ class FeatureIDEParserTest {
 
     @Test
     void test4() throws FeatureModelParserException {
-        File fileFM = new File("src/test/resources/complex_featureide_model.xml");
-        @Cleanup("dispose")
-        FeatureModelParser<Feature, AbstractRelationship<Feature>, CTConstraint> parser = FMParserFactory.getInstance().getParser(fileFM.getName());
-        featureModel = parser.parse(fileFM);
+        val fileFM = new File("src/test/resources/complex_featureide_model.xml");
+        featureModel = FeatureModels.fromFile(fileFM);
 
         String expected = """
                 FEATURES:
