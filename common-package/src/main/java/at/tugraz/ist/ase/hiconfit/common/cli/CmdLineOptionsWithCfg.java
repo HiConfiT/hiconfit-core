@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2023-2024
+ * Copyright (c) 2023-2025
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
