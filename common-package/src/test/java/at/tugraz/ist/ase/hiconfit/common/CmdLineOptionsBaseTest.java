@@ -26,19 +26,19 @@ class CmdLineOptionsBaseTest {
         @Option(name = "-i",
                 aliases="--input",
                 usage = "The dataset.")
-        private final String dataModelFile = null;
+        private String dataModelFile = null;
 
         @Getter
         @Option(name = "-p",
                 aliases="--parameters",
                 usage = "Parameters for the matrix factorization.")
-        private final String confFile = null;
+        private String confFile = null;
 
         @Getter
         @Option(name = "-u",
                 aliases="--user",
                 usage = "User id.")
-        private final int userId = -1;
+        private int userId = -1;
 
         public CmdLineOptions(String banner, @NonNull String programTitle, String subtitle, @NonNull String usage) {
             super(banner, programTitle, subtitle, usage);

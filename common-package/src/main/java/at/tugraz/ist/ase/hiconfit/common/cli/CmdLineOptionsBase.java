@@ -24,7 +24,7 @@ public class CmdLineOptionsBase {
     @Option(name = "-h",
             aliases="--help",
             usage = "Prints usage info.")
-    private final boolean help = false;
+    private boolean help = false;
 
     protected CmdLineParser parser;
     private final String banner;
