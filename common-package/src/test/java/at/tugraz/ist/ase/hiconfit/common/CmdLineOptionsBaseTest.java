@@ -58,9 +58,7 @@ class CmdLineOptionsBaseTest {
 
         assertTrue(cmdLineOptions.isHelp());
 
-        if (cmdLineOptions.isHelp()) {
-            cmdLineOptions.printUsage();
-        }
+        cmdLineOptions.printUsage();
     }
 
     @Test
