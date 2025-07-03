@@ -22,7 +22,7 @@ public class CmdLineOptionsWithCfg extends CmdLineOptionsBase {
     @Option(name = "-cfg",
             aliases="--configuration-file",
             usage = "Specify the configuration file.")
-    private final String confFile = null;
+    private String confFile = null;
 
     public CmdLineOptionsWithCfg(String banner, @NonNull String programTitle, String subtitle, @NonNull String usage) {
         super(banner, programTitle, subtitle, usage);
