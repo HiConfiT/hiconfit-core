@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2024
+ * Copyright (c) 2021-2025
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -77,7 +77,7 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         // add to support List<String> variables in Constraint
         List<String> variables = Arrays.stream(modelKB.getVars()).map(org.chocosolver.solver.variables.Variable::getName).toList();
 
-        notKB = new Constraint("not(KB)", variables);
+        notKB = new Constraint("not(KB)", variables); // not correct - missing
 
         ConstraintUtils.addChocoConstraintsToConstraint(false, notKB, modelKB, startIdx, modelKB.getNbCstrs() - 1);
 
