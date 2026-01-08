@@ -4,4 +4,4 @@ The library provides an implementation of Matrix Factorization Based Variable an
 
 Please refer to the [Documentation] for further details about the library.
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io

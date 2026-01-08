@@ -4,4 +4,4 @@ This package provides a performance evaluator, i.e., counters and timers, which 
 
 Please refer to the [Documentation] for further details about the library.
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io

@@ -13,6 +13,6 @@ Please refer to the [Documentation] for further details about the library.
 - Test case and test suite reading
 - Translation of test cases into Choco constraints
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io
 [consistency-based algorithms]: https://github.com/HiConfiT/hiconfit-core/tree/main/ca-cdr-package
 [test cases]: https://github.com/HiConfiT/hiconfit-core/tree/main/ca-cdr-core-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr_core
