@@ -2,7 +2,7 @@
 
 A set of Maven-based libraries for High-Performance Knowledge Based Configuration Techniques.
 
-Documentation: https://hiconfit.manleviet.info
+Documentation: https://hiconfit.github.io
 
 *If our implementations are utilized in your research, kindly cite the corresponding papers listed in the [References](#references).*
 
