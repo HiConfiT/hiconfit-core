@@ -15,7 +15,7 @@ Please refer to the [Documentation] for further details about the library.
     4. [Glencoe format]. The file extension should be “json.”
     5. [Descriptive format]. Our feature model format. The file extension should be “fm4conf”.
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io
 [basic feature models]: https://apps.dtic.mil/sti/pdfs/ADA235785.pdf
 [SPLOT feature models]: https://splot-research.org
 [FeatureIDE format]: https://featureide.github.io

@@ -15,4 +15,4 @@ Please refer to the [Documentation] for further details about the library.
 - A feature model analysis engine (FMAnalyzer) for analyzing feature models
 - A mechanism to monitor the analysis process
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io

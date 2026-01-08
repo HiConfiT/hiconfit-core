@@ -47,7 +47,7 @@ For further details about the library, please refer to the [Documentation].
 15. V.M. Le, C.V. Silva, A. Felfernig, T.N.T. Tran, J. Galindo, D. Benavides. 2023. FastDiagP: An Algorithm for Parallelized Direct Diagnosis. *In 37th AAAI Conference on Artificial Intelligence*. AAAI’23, Washington, DC, USA. [[arXiv](https://arxiv.org/pdf/2305.06951.pdf)]
 16. An evaluation of FastDiagP algorithm in [GitHub](https://github.com/AIG-ist-tugraz/FastDiagP).
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io
 [QuickXPlain]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/QuickXPlain.java
 [FastDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FastDiagV2.java
 [MSS-based FastDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/FastDiagV3.java

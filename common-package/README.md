@@ -13,4 +13,4 @@ Please refer to the [Documentation] for further details about the library.
 - Utility functions for parsing command line arguments
 - Utility functions for a mail service
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io

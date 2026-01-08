@@ -15,7 +15,7 @@ Please refer to the [Documentation] for further details about the library.
   4. **RenaultKB** - an implementation of [Renault Configuration Knowledge Base].
 - Provides utility functions for constraints
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io
 [PC Configuration Knowledge Base]: https://www.itu.dk/research/cla/externals/clib/
 [Renault Configuration Knowledge Base]: https://www.itu.dk/research/cla/externals/clib/
 [fm-package]: https://github.com/HiConfiT/hiconfit-core/tree/main/fm-package
