@@ -9,4 +9,4 @@ Please refer to the [Documentation] for further details about the library.
 - A CDRModel class for configuration tasks
 - A compact knowledge-based configurator
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io

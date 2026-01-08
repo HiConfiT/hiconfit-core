@@ -10,4 +10,4 @@ Please refer to the [Documentation] for further details about the library.
 - Support IntVar variables (either positive or negative)
 - Support comparative operators: =, !=, >, >=, <, <=
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io

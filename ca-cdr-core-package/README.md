@@ -9,4 +9,4 @@ Please refer to the [Documentation] for further details about the library.
 - Core classes representing user requirements and solutions of a configurator
 - Core classes representing test cases and test suites
 
-[Documentation]: https://hiconfit.manleviet.info
+[Documentation]: https://hiconfit.github.io
