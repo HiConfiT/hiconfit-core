@@ -2,7 +2,9 @@
 
 A set of Maven-based libraries for High-Performance Knowledge Based Configuration Techniques.
 
-Documentation: https://hiconfit.manleviet.info
+Documentation: https://hiconfit.github.io
+
+Developer documentation lives in [`./docs`](./docs): [project overview](./docs/project-overview-pdr.md) · [system architecture](./docs/system-architecture.md) · [codebase summary](./docs/codebase-summary.md) · [code standards](./docs/code-standards.md) · [build & release](./docs/deployment-guide.md) · [roadmap](./docs/project-roadmap.md)
 
 *If our implementations are utilized in your research, kindly cite the corresponding papers listed in the [References](#references).*
 
@@ -36,7 +38,7 @@ which can be applied throughout all phases of KBE, i.e., _design_, _testing and 
 6. [HSDAG] [9]
 7. [DirectDebug] [4, 5, 6, 7]
 8. [DirectDiag]
-9. WipeOutR_T [12, 13]
+9. WipeOutR_T [12, 13] - published separately in [AIG-ist-tugraz/WipeOutR]
 10. [WipeOutR_FM] [12, 13]
 11. (coming soon) AggregatedTest [14]
 12. (coming soon) LevelWiseParallelHSDAG [10, 11]
@@ -137,19 +139,19 @@ Add the library dependencies to the `dependencies` element of your project `pom.
 
 Replacing `ARTIFACT_ID` and `VERSION` with the corresponding information from the following table.
 
-| *ARTIFACT_ID*  | *VERSION* |
-|:---------------|:-----------|
-| common       | 1.0        |
-| csp2choco    | 1.0        |
-| eval         | 1.0        |
-| fm           | 1.0        |
-| kb           | 1.0        |
-| ca-cdr-core  | 1.0        |
-| cdrmodel     | 1.0        |
-| ca-cdr       | 1.0        |
-| heuristics   | 1.0        |
-| configurator | 1.0        |
-| fma          | 1.0        |
+| *ARTIFACT_ID*  | *VERSION*        |
+|:---------------|:-----------------|
+| common       | 1.0.1-alpha-48     |
+| csp2choco    | 1.0.1-alpha-48     |
+| eval         | 1.0.1-alpha-48     |
+| fm           | 1.0.1-alpha-48     |
+| kb           | 1.0.1-alpha-48     |
+| ca-cdr-core  | 1.0.1-alpha-48     |
+| cdrmodel     | 1.0.1-alpha-48     |
+| ca-cdr       | 1.0.1-alpha-48     |
+| heuristics   | 1.0.1-alpha-48     |
+| configurator | 1.0.1-alpha-48     |
+| fma          | 1.0.1-alpha-48     |
 
 ## References
 1. U. Junker. 2004. QuickXPlain: preferred explanations and relaxations for over-constrained problems. *In Proceedings of the 19th national conference on Artificial intelligence (AAAI'04)*. AAAI Press, 167–172. [[ACM](https://dl.acm.org/doi/abs/10.5555/1597148.1597177)]
@@ -197,6 +199,7 @@ Replacing `ARTIFACT_ID` and `VERSION` with the corresponding information from th
 [DirectDiag]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/DirectDiag.java
 [WipeOutR_FM]: https://github.com/HiConfiT/hiconfit-core/blob/main/ca-cdr-package/src/main/java/at/tugraz/ist/ase/hiconfit/cacdr/algorithms/WipeOutR_FM.java
 [Python implementation]: https://github.com/AIG-ist-tugraz/FastDiagP
+[AIG-ist-tugraz/WipeOutR]: https://github.com/AIG-ist-tugraz/WipeOutR
 
 [Creating a personal access token]: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 [GitHub Packages]: https://github.com/features/packages
