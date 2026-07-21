@@ -197,6 +197,33 @@ public final class ConstraintUtils {
     }
 
     /**
+     * Split a set of {@link Constraint}s into two sets at a given split point k.
+     * <p>
+     * The incoming iteration order is preserved; k is applied positionally.
+     * <p>
+     * When a real split is possible (size >= 2), k is clamped to [1, size-1] so that both halves
+     * are non-empty and divide-and-conquer recursion terminates. Below that no split exists, and
+     * the historical behaviour is preserved exactly.
+     *
+     * @param C an input set of {@link Constraint}s
+     * @param C1 the first output set - needs to be initialized
+     * @param C2 the second output set - needs to be initialized
+     * @param k the split point
+     */
+    public void split(Set<Constraint> C, Set<Constraint> C1, Set<Constraint> C2, int k) {
+        int n = C.size();
+        // keep both halves non-empty where a split exists; below that, preserve legacy behaviour
+        k = (n >= 2) ? Math.max(1, Math.min(k, n - 1)) : Math.max(0, Math.min(k, n));
+
+        // C1 = {c1..ck}; C2 = {ck+1..cn};
+        List<Constraint> list = new ArrayList<>(C);
+        C1.addAll(list.subList(0, k));
+        C2.addAll(list.subList(k, n));
+
+        incrementCounter(COUNTER_SPLIT_SET);
+    }
+
+    /**
      * Split a set of {@link Constraint}s into two sets
      *
      * @param C an input set of {@link Constraint}s
@@ -204,15 +231,7 @@ public final class ConstraintUtils {
      * @param C2 the second output set - needs to be initialized
      */
     public void split(Set<Constraint> C, Set<Constraint> C1, Set<Constraint> C2) {
-        int k = C.size() / 2; // k = sizeC/2;
-        // C1 = {c1..ck}; C2 = {ck+1..cn};
-        List<Constraint> firstSubList = new ArrayList<>(C).subList(0, k);
-        List<Constraint> secondSubList = new ArrayList<>(C).subList(k, C.size());
-
-        C1.addAll(firstSubList);
-        C2.addAll(secondSubList);
-
-        incrementCounter(COUNTER_SPLIT_SET);
+        split(C, C1, C2, C.size() / 2); // k = sizeC/2;
     }
 
     // TODO: generic method - T needs to have equals and hashCode methods

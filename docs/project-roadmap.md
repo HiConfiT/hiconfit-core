@@ -1,6 +1,6 @@
 # HiConfiT-Core: Development Roadmap
 
-**Current Version:** 1.0.1-alpha-48 | **Branch:** dev | **Last Updated:** 2026-07-21
+**Current Version:** 1.0.1-alpha-49 | **Branch:** dev | **Last Updated:** 2026-07-21
 
 ## Current State Summary
 
@@ -58,7 +58,7 @@
 
 1. ~~**WipeOutR_T marked "implemented", but does not exist.**~~ **RESOLVED 2026-07-21** — maintainer confirmed the algorithm ships from the separate [AIG-ist-tugraz/WipeOutR](https://github.com/AIG-ist-tugraz/WipeOutR) repo, not this one. README entry now carries that pointer. The in-repo hook (`ChocoConsistencyChecker.isConsistent(tc, neg_tc)`, line 142) remains, with no in-repo consumer — see Open Questions.
 
-2. ~~**Version table claims `1.0` for all 11 artifacts.**~~ **RESOLVED 2026-07-21** — table updated to `1.0.1-alpha-48`. Note this table must now be re-edited on every release, since `artifact.version` is already duplicated with `<version>` in the root pom (see P1.5).
+2. ~~**Version table claims `1.0` for all 11 artifacts.**~~ **RESOLVED 2026-07-21** — table corrected, now at `1.0.1-alpha-49`. Note this table must be re-edited on every release, since `artifact.version` is already duplicated with `<version>` in the root pom (see P1.5).
 
 3. ~~**Documentation URL conflict.**~~ **RESOLVED 2026-07-21** — `https://hiconfit.github.io` confirmed canonical; README updated, docs aligned.
 

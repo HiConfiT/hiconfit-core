@@ -91,7 +91,10 @@ public class QuickXPlainLabeler extends QuickXPlain implements IHSLabelable {
     }
 
     public IHSLabelable getInstance(@NonNull ChocoConsistencyChecker checker) {
-        return new QuickXPlainLabeler(checker, this.initialParameters);
+        QuickXPlainLabeler instance = new QuickXPlainLabeler(checker, this.initialParameters);
+        // clones must inherit the split policy, otherwise they silently revert to midpoint
+        instance.setSplitStrategy(getSplitStrategy(), isApplyAtAllLevels());
+        return instance;
     }
 
     @Override

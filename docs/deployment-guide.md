@@ -2,7 +2,7 @@
 
 Build, test, and publish procedures for the 11-module Maven library suite. **This is a LIBRARY set, not a deployed service** — "deployment" means releasing to Maven Central / GitHub Packages.
 
-Current version: `1.0.1-alpha-48`
+Current version: `1.0.1-alpha-49`
 
 ---
 
@@ -171,13 +171,13 @@ Activate with: `mvn <command> -Pgithub-maven-repository`
 <dependency>
     <groupId>at.tugraz.ist.ase.hiconfit</groupId>
     <artifactId>ARTIFACT_ID</artifactId>
-    <version>1.0.1-alpha-48</version>
+    <version>1.0.1-alpha-49</version>
 </dependency>
 ```
 
 Available artifact IDs: `common`, `eval`, `fm`, `csp2choco`, `kb`, `ca-cdr-core`, `cdrmodel`, `ca-cdr`, `heuristics`, `configurator`, `fma`.
 
-**KNOWN ISSUE:** README.md version table says `1.0` for all 11 artifacts, but the actual current version is `1.0.1-alpha-48`. The README is stale — use the version from `pom.xml` or release tags.
+**Note:** the README install table lists the same version explicitly per artifact, so it must be re-edited on every release. `pom.xml` is the source of truth if the two ever disagree.
 
 ---
 

@@ -141,17 +141,17 @@ Replacing `ARTIFACT_ID` and `VERSION` with the corresponding information from th
 
 | *ARTIFACT_ID*  | *VERSION*        |
 |:---------------|:-----------------|
-| common       | 1.0.1-alpha-48     |
-| csp2choco    | 1.0.1-alpha-48     |
-| eval         | 1.0.1-alpha-48     |
-| fm           | 1.0.1-alpha-48     |
-| kb           | 1.0.1-alpha-48     |
-| ca-cdr-core  | 1.0.1-alpha-48     |
-| cdrmodel     | 1.0.1-alpha-48     |
-| ca-cdr       | 1.0.1-alpha-48     |
-| heuristics   | 1.0.1-alpha-48     |
-| configurator | 1.0.1-alpha-48     |
-| fma          | 1.0.1-alpha-48     |
+| common       | 1.0.1-alpha-49     |
+| csp2choco    | 1.0.1-alpha-49     |
+| eval         | 1.0.1-alpha-49     |
+| fm           | 1.0.1-alpha-49     |
+| kb           | 1.0.1-alpha-49     |
+| ca-cdr-core  | 1.0.1-alpha-49     |
+| cdrmodel     | 1.0.1-alpha-49     |
+| ca-cdr       | 1.0.1-alpha-49     |
+| heuristics   | 1.0.1-alpha-49     |
+| configurator | 1.0.1-alpha-49     |
+| fma          | 1.0.1-alpha-49     |
 
 ## References
 1. U. Junker. 2004. QuickXPlain: preferred explanations and relaxations for over-constrained problems. *In Proceedings of the 19th national conference on Artificial intelligence (AAAI'04)*. AAAI Press, 167–172. [[ACM](https://dl.acm.org/doi/abs/10.5555/1597148.1597177)]

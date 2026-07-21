@@ -1,6 +1,6 @@
 # HiConfiT-Core: Project Overview & Requirements
 
-**Version:** 1.0.1-alpha-48 | **License:** MIT | **Language:** Java 23
+**Version:** 1.0.1-alpha-49 | **License:** MIT | **Language:** Java 23
 
 ## What is HiConfiT-Core
 
@@ -102,7 +102,7 @@ Every `Constraint` maintains:
 
 **Documentation accuracy issues (README vs. code):**
 - README lists `WipeOutR_T` as implemented; no such class exists (only a Javadoc trace in ChocoConsistencyChecker.java:142)
-- README version table claims `1.0` for all artifacts; actual published version is `1.0.1-alpha-48`
+- README version table is maintained by hand per artifact, so it must be re-edited on every release (currently `1.0.1-alpha-49`)
 - Documentation URL: `https://hiconfit.github.io` (canonical; README updated 2026-07-21)
 
 ## Build & Test Metrics

@@ -1,6 +1,6 @@
 # HiConfiT-Core System Architecture
 
-**Version:** 1.0.1-alpha-48 | **Date:** 2026-07-21 | **Branch:** dev | **Java:** 23 | **Build:** Maven
+**Version:** 1.0.1-alpha-49 | **Date:** 2026-07-21 | **Branch:** dev | **Java:** 23 | **Build:** Maven
 
 ## Module Dependency Graph
 
@@ -364,7 +364,7 @@ private static Semaphore semaphore = new Semaphore(1);
 
 ## Build & Deployment
 
-**Root pom.xml:** `at.tugraz.ist.ase.hiconfit:hiconfit-core:1.0.1-alpha-48`
+**Root pom.xml:** `at.tugraz.ist.ase.hiconfit:hiconfit-core:1.0.1-alpha-49`
 
 - **No CI/CD automation** — releases are manual: bump `<version>` + `<artifact.version>` → `mvn deploy` with GitHub Packages credentials
 - **No Maven Wrapper** — build depends on system JDK 23 + Maven

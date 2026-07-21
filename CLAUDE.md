@@ -284,4 +284,4 @@ When working on specific features:
 
 The project publishes to GitHub Packages. Authentication requires GitHub credentials in Maven `settings.xml` as documented in README.md.
 
-Current version: `1.0.1-alpha-48` (see root pom.xml `<artifact.version>`)
+Current version: `1.0.1-alpha-49` (see root pom.xml `<artifact.version>`)

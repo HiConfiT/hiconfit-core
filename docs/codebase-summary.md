@@ -1,6 +1,6 @@
 # HiConfiT-Core Codebase Summary
 
-**Version:** 1.0.1-alpha-48 | **Date:** 2026-07-21 | **Java:** 23 | **Total:** 11 modules, 249 main files, ~27.8k LOC
+**Version:** 1.0.1-alpha-49 | **Date:** 2026-07-21 | **Java:** 23 | **Total:** 11 modules, 249 main files, ~27.8k LOC
 
 ---
 

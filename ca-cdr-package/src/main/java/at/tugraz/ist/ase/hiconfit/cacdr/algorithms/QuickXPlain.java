@@ -11,6 +11,7 @@ package at.tugraz.ist.ase.hiconfit.cacdr.algorithms;
 import at.tugraz.ist.ase.hiconfit.cacdr.checker.ChocoConsistencyChecker;
 import at.tugraz.ist.ase.hiconfit.common.ConstraintUtils;
 import at.tugraz.ist.ase.hiconfit.common.LoggerUtils;
+import at.tugraz.ist.ase.hiconfit.common.SplitPointStrategy;
 import at.tugraz.ist.ase.hiconfit.kb.core.Constraint;
 import com.google.common.collect.Sets;
 import lombok.NonNull;
@@ -56,8 +57,32 @@ public class QuickXPlain extends IConsistencyAlgorithm {
     public static final String TIMER_QUICKXPLAIN = "Timer for QX";
     public static final String COUNTER_QUICKXPLAIN_CALLS = "The number of QX calls";
 
+    // MIDPOINT + applyAtAllLevels = true  =>  identical to the historical midpoint QuickXPlain
+    private SplitPointStrategy splitStrategy = SplitPointStrategy.MIDPOINT;
+    private boolean applyAtAllLevels = true;
+
     public QuickXPlain(@NonNull ChocoConsistencyChecker checker) {
         super(checker);
+    }
+
+    /**
+     * Sets the split-point strategy used when partitioning the consideration set.
+     *
+     * @param splitStrategy the strategy; {@link SplitPointStrategy#MIDPOINT} restores the default behaviour
+     * @param applyAtAllLevels if true, the strategy drives every recursion level;
+     *                         if false, only the top-level split, midpoint below
+     */
+    public void setSplitStrategy(@NonNull SplitPointStrategy splitStrategy, boolean applyAtAllLevels) {
+        this.splitStrategy = splitStrategy;
+        this.applyAtAllLevels = applyAtAllLevels;
+    }
+
+    public SplitPointStrategy getSplitStrategy() {
+        return splitStrategy;
+    }
+
+    public boolean isApplyAtAllLevels() {
+        return applyAtAllLevels;
     }
 
     /**
@@ -86,7 +111,7 @@ public class QuickXPlain extends IConsistencyAlgorithm {
         } else { //ELSE return QX(Φ, C, B)
             incrementCounter(COUNTER_QUICKXPLAIN_CALLS);
             start(TIMER_QUICKXPLAIN);
-            Set<Constraint> cs = qx(Collections.emptySet(), C, B);
+            Set<Constraint> cs = qx(Collections.emptySet(), C, B, splitStrategy);
             stop(TIMER_QUICKXPLAIN);
 
             LoggerUtils.outdent();
@@ -109,9 +134,11 @@ public class QuickXPlain extends IConsistencyAlgorithm {
      * @param D check to skip redundant consistency checks
      * @param C a consideration set of constraints
      * @param B a background knowledge
+     * @param strategy the split-point strategy for this recursion level
      * @return a conflict set or an empty set
      */
-    private Set<Constraint> qx(Set<Constraint> D, Set<Constraint> C, Set<Constraint> B) {
+    private Set<Constraint> qx(Set<Constraint> D, Set<Constraint> C, Set<Constraint> B,
+                               SplitPointStrategy strategy) {
         log.debug("{}QX [D={}, C={}, B={}] >>>", LoggerUtils.tab(), D, C, B);
         LoggerUtils.indent();
 
@@ -138,20 +165,23 @@ public class QuickXPlain extends IConsistencyAlgorithm {
         // C1 = {c1..ck}; C2 = {ck+1..cq};
         Set<Constraint> C1 = new LinkedHashSet<>();
         Set<Constraint> C2 = new LinkedHashSet<>();
-        ConstraintUtils.split(C, C1, C2);
+        int k = strategy.computeK(q); // split() clamps to [1, q-1]
+        ConstraintUtils.split(C, C1, C2, k);
         log.trace("{}Split C into [C1={}, C2={}]", LoggerUtils.tab(), C1, C2);
+
+        SplitPointStrategy childStrategy = applyAtAllLevels ? strategy : SplitPointStrategy.MIDPOINT;
 
         // CS1 <-- QX(C2, C1, B ∪ C2);
         Set<Constraint> BwithC2 = Sets.union(B, C2); incrementCounter(COUNTER_UNION_OPERATOR);
         incrementCounter(COUNTER_LEFT_BRANCH_CALLS);
         incrementCounter(COUNTER_QUICKXPLAIN_CALLS);
-        Set<Constraint> CS1 = qx(C2, C1, BwithC2);
+        Set<Constraint> CS1 = qx(C2, C1, BwithC2, childStrategy);
 
         // CS2 <-- QX(CS1, C2, B ∪ CS1);
         Set<Constraint> BwithCS1 = Sets.union(B, CS1); incrementCounter(COUNTER_UNION_OPERATOR);
         incrementCounter(COUNTER_RIGHT_BRANCH_CALLS);
         incrementCounter(COUNTER_QUICKXPLAIN_CALLS);
-        Set<Constraint> CS2 = qx(CS1, C2, BwithCS1);
+        Set<Constraint> CS2 = qx(CS1, C2, BwithCS1, childStrategy);
 
         LoggerUtils.outdent();
         log.debug("{}<<< return [CS1={} ∪ CS2={}]", LoggerUtils.tab(), CS1, CS2);
