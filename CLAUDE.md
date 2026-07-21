@@ -55,25 +55,27 @@ mvn clean install -DskipTests
 The project consists of 11 Maven modules organized in a layered dependency structure:
 
 ### Layer 1: Foundation
-- **common**: Core utilities, Choco Solver integration, CLI tools (args4j), CSV/email utilities
+- **common** (no intra-project deps): Core utilities, Choco Solver integration, CLI tools (args4j), CSV/email utilities
+
+### Layer 2: Representation (all depend only on `common`)
 - **eval**: Performance evaluation framework with counters and timers
-
-### Layer 2: Representation
 - **fm**: Feature model representation with features, relationships, and cross-tree constraints. Supports multiple parsers (SXFM, FeatureIDE, GLENCOE, XMI)
-- **csp2choco**: CSP constraint expression parser (ANTLR-based) that translates to Choco Model
-- **kb**: Abstract knowledge base model with variables, domains, and constraints. Includes FMKB (feature model specific KB)
+- **csp2choco**: CSP constraint expression parser (ANTLR-based) that translates to Choco Model. Note: this does *not* feed `kb` — it enters at the `cdrmodel` layer
 
-### Layer 3: Core CDR
-- **ca-cdr-core**: Test cases, solutions, assignments, and translator interfaces for CDR
-- **cdrmodel**: CDR model abstractions and FM-specific implementations (FMCdrModel, FMRequirementCdrModel)
+### Layer 3: Knowledge Base
+- **kb** (deps: `fm`, `eval`): Abstract knowledge base model with variables, domains, and constraints. Includes FMKB (feature model specific KB)
 
-### Layer 4: Algorithms & Configuration
-- **ca-cdr**: Implementations of CDR algorithms (QuickXPlain, FastDiag, FlexDiag, DirectDebug, HSDAG, WipeOutR_FM, etc.)
-- **heuristics**: Variable/value ordering heuristics using Matrix Factorization (MFVVO)
-- **configurator**: Knowledge-based configurator supporting Matrix Factorization-based configuration
+### Layer 4: Core CDR
+- **ca-cdr-core** (deps: `kb`): Test cases, solutions, assignments, and translator interfaces for CDR
+- **cdrmodel** (deps: `ca-cdr-core`, `csp2choco`): CDR model abstractions and FM-specific implementations (FMCdrModel, FMRequirementCdrModel)
+- **heuristics** (deps: `ca-cdr-core`): Variable/value ordering heuristics using Matrix Factorization (MFVVO). Branches off `ca-cdr-core` directly, bypassing `cdrmodel`/`ca-cdr`
 
-### Layer 5: Extended Analysis
-- **fma**: Feature model anomaly detection and debugging (dead features, false optionals, redundant constraints)
+### Layer 5: Algorithms
+- **ca-cdr** (deps: `cdrmodel`): Implementations of CDR algorithms (QuickXPlain, FastDiag, FlexDiag, DirectDebug, HSDAG, WipeOutR_FM, etc.)
+
+### Layer 6: Applications & Extended Analysis
+- **configurator** (deps: `ca-cdr`, `heuristics`): Knowledge-based configurator supporting Matrix Factorization-based configuration
+- **fma** (deps: `ca-cdr`): Feature model anomaly detection and debugging (dead features, false optionals, redundant constraints)
 
 ## Key Architectural Patterns
 
@@ -96,7 +98,11 @@ Each `Constraint` object maintains both:
 - `correctConstraints`: Background knowledge (always true)
 - `possiblyFaultyConstraints`: Knowledge base to diagnose
 
-`FMCdrModel` extends this for feature models with configurable root constraints and cross-product with test cases.
+`FMCdrModel` extends this for feature models, configured by four constructor flags
+(`hasNegativeConstraints`, `rootConstraints`, `cfInConflicts`, `reversedConstraintsOrder`)
+with two canonical presets: diagnosis/conflict detection, and WipeOutR_FM redundancy
+detection. `FMDebuggingModel` adds a test suite and translates each test case 1:1 into
+the KB — there is no cross-product between constraints and test cases.
 
 ### 4. Translator Pattern
 Translators bridge domain representations to solver constraints:
@@ -209,25 +215,38 @@ Domain → Feature Model → FMKB → Choco Model → Solutions → Output:
 
 When adding features or fixing bugs, be aware of the dependency flow:
 
+This is a DAG, not a linear cascade. `common` is the only module with no
+intra-project dependencies; `csp2choco` and `heuristics` sit on side branches.
+
 ```
-common, eval (foundation, no deps within project)
-    ↓
-fm, csp2choco (depend on common)
-    ↓
-kb (depends on fm, eval)
-    ↓
-ca-cdr-core (depends on kb)
-    ↓
-cdrmodel (depends on ca-cdr-core, csp2choco)
-    ↓
-ca-cdr (depends on cdrmodel)
-    ↓
-heuristics (depends on ca-cdr-core)
-configurator (depends on ca-cdr, heuristics)
-fma (depends on ca-cdr)
+common ──┬──► csp2choco ─────────────────────────┐
+         ├──► fm ──┐                             │
+         └──► eval ┴──► kb ──► ca-cdr-core ──┬───┴──► cdrmodel ──► ca-cdr ──┬──► configurator
+                                             │                              │         ▲
+                                             └──► heuristics ───────────────┼─────────┘
+                                                                            └──► fma
 ```
 
-Changes to lower layers affect all modules above them.
+Declared first-party dependencies, verified against each module's `pom.xml`:
+
+| Module | Depends on |
+|---|---|
+| common | — |
+| eval | common |
+| csp2choco | common |
+| fm | common |
+| kb | fm, eval |
+| ca-cdr-core | kb |
+| cdrmodel | ca-cdr-core, csp2choco |
+| ca-cdr | cdrmodel |
+| heuristics | ca-cdr-core |
+| configurator | ca-cdr, heuristics |
+| fma | ca-cdr |
+
+Changes to a module affect every module downstream of it in this graph.
+Longest chain (6 levels): `fma → ca-cdr → cdrmodel → ca-cdr-core → kb → fm → common`.
+
+See `docs/system-architecture.md` for the full architectural reference.
 
 ## Package Naming Convention
 
