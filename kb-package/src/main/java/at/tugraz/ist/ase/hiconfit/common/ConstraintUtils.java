@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2023
+ * Copyright (c) 2021-2026
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -101,7 +101,6 @@ public final class ConstraintUtils {
 //
 //            index++;
 //        }
-        ;
         if (startIdx <= endIdx) {
             List<org.chocosolver.solver.constraints.Constraint> cstrs = ChocoSolverUtils.getConstraints(model, startIdx, endIdx);
 
@@ -186,6 +185,7 @@ public final class ConstraintUtils {
     }
 
     public void postConstraint(Constraint cstr, Model toModel, boolean negative) {
+        // Posts constraints based on sign; increments counter
         if (negative) {
             cstr.getNegChocoConstraints().forEach(toModel::post);
             incrementCounter(COUNTER_POST_CONSTRAINT, cstr.getNegChocoConstraints().size());

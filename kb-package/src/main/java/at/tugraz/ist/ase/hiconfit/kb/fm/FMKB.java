@@ -1,7 +1,7 @@
 /*
  * High Performance Knowledge Based Configuration Techniques
  *
- * Copyright (c) 2021-2025
+ * Copyright (c) 2021-2026
  *
  * @author: Viet-Man Le (vietman.le@ist.tugraz.at)
  */
@@ -233,6 +233,7 @@ public class FMKB<F extends Feature, R extends AbstractRelationship<F>, C extend
         LogOp logOp;
         ASTNode left = cnf.getLeft();
         ASTNode right = cnf.getRight();
+        // Recursively converts AST node to logical operation
         if (cnf instanceof AndOperator) {
             if (isNot) {
                 logOp = LogOp.or();
